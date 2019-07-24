@@ -14,8 +14,8 @@ var log = {
 };
 
 var proto_man = {
-	PROTO_JSON: 1,  
-	PROTO_BUF: 2,
+	PROTO_JSON: 0,  
+	PROTO_BUF: 1,
 	encode_cmd: encode_cmd,
 	decode_cmd: decode_cmd,
 };

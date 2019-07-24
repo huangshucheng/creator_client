@@ -1,9 +1,17 @@
 var event_mgr = require("event_mgr");
+var proto_man = require("proto_man");
+
 var State = {
     Disconnected: 0, // 断开连接
     Connecting: 1, // 正在连接
     Connected: 2, // 已经连接;
 };
+
+// var net_event = {
+//     net_connect: "net_connect",
+//     net_message: "net_message",
+//     net_disconnect: "net_disconnect",
+// }
 
 var net_mgr = cc.Class({
     extends: cc.Component,
@@ -14,6 +22,7 @@ var net_mgr = cc.Class({
 
     properties: {
         url: "ws://127.0.0.1:6081/ws",
+        proto_type: 0, //0:json , 1:protobuf
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -29,7 +38,6 @@ var net_mgr = cc.Class({
         }
 
         this.state = State.Disconnected;
-        console.log('hcc>>net_mgr>>onLoad')
     },
 
     _on_opened(event) {
@@ -39,7 +47,13 @@ var net_mgr = cc.Class({
     },
 
     _on_recv_data(event) {
-        event_mgr.dispatch_event("net_message", event.data);
+        var str_or_buf = event.data;
+        var msg_data = proto_man.decode_cmd(this.proto_type, str_or_buf);
+        if (!msg_data) {
+            return;
+        }
+        event_mgr.dispatch_event("net_message", msg_data);
+        console.log("-----recv_data: " + msg_data[2]);
     },
 
     close_socket() {
@@ -68,7 +82,6 @@ var net_mgr = cc.Class({
             return;
         }
 
-
         this.state = State.Connecting;
         this.sock = new WebSocket(this.url); // H5标准，底层做好了;
         this.sock.binaryType = "arraybuffer";
@@ -83,10 +96,12 @@ var net_mgr = cc.Class({
 
     },
 
-    send_data(data_arraybuf) {
-        if (this.state == State.Connected && this.sock) {
-            this.sock.send(data_arraybuf);
+    send_msg(stype, ctype, msg) {
+        if (this.state !== State.Connected || !this.sock) {
+            return;
         }
+        var buf = proto_man.encode_cmd(this.proto_type, stype, ctype, msg);
+        this.sock.send(buf);
     },
 
     update (dt) {
