@@ -1,0 +1,406 @@
+syntax = "proto2"; 
+
+enum Stype {
+	INVALIDI_STYPE = 0;
+	Auth = 1;
+	System = 2;
+	Logic = 3;
+}
+
+enum Cmd {
+	INVALID_CMD = 0;
+	
+	eGuestLoginReq = 1;
+	eGuestLoginRes = 2;
+	eRelogin = 3;
+	eUserLostConn = 4;
+	eEditProfileReq = 5;
+	eEditProfileRes = 6;
+
+	eAccountUpgradeReq = 7;
+	eAccountUpgradeRes = 8;
+
+	eUnameLoginReq = 9;
+	eUnameLoginRes = 10;
+
+	eLoginOutReq = 11;
+	eLoginOutRes = 12;
+
+	eUserRegistReq = 13;
+	eUserRegistRes = 14;
+
+	eGetUgameInfoReq = 15;
+	eGetUgameInfoRes = 16;
+
+	eRecvLoginBonuesReq = 17;
+	eRecvLoginBonuesRes = 18;
+
+	eGetWorldRankUchipReq = 19;
+	eGetWorldRankUchipRes = 20;
+
+	eGetSysMsgReq = 21;
+	eGetSysMsgRes = 22;
+
+	eLoginLogicReq = 23;
+	eLoginLogicRes = 24;
+
+	eEnterZoneReq = 25;
+	eEnterZoneRes = 26;
+
+	eEnterMatch = 27;
+	eUserArrived = 28;
+
+	eExitMatchReq = 29;
+	eExitMatchRes = 30;
+	eUserExitMatch = 31;
+
+	eCreateRoomReq = 32;
+	eCreateRoomRes = 33;
+
+	eJoinRoomReq = 34;
+	eJoinRoomRes = 35;
+
+	eExitRoomReq = 36;
+	eExitRoomRes = 37;
+
+	eDessolveReq = 38;
+	eDessolveRes = 39;
+
+	eGetCreateStatusReq = 40;
+	eGetCreateStatusRes = 41;
+	
+	eBackRoomReq = 42;
+	eBackRoomRes = 43;
+	
+	eUserOffLine = 44;
+
+	eHeartBeatReq = 45;
+	eHeartBeatRes = 46;
+	
+	eUserReconnectedReq = 47;
+	eUserReconnectedRes = 48;
+
+	eUserReadyReq = 49;
+	eUserReadyRes = 50;
+	eGameStart = 51;
+	eUdpTest = 52;
+	eLogicFrame = 53;
+	eNextFrameOpts = 54;
+	
+	eCheckLinkGameReq = 55;
+	eCheckLinkGameRes = 56;
+
+	eRoomInfoRes = 57;
+	eRoomIdRes = 58;
+	ePlayCountRes = 59;
+	eUserArrivedInfos = 60;
+	eUserState = 61;
+	eAllUserState = 62;
+	eGameResult = 63;
+	eGameTotalResult = 64;
+
+	eClickTouZiNumReq = 65;
+	eTouZiNumRes = 66;
+	eClickTouZiBombRes = 67;
+}
+
+message GuestLoginReq {
+	required string guest_key = 1;
+}
+
+message UnameLoginReq {
+	required string uname = 1;
+	required string upwd = 2;
+}
+
+message UserCenterInfo {
+	required string unick = 1;
+	required sint32 uface = 2;
+	required sint32 usex = 3;
+	required sint32 uvip = 4;
+	required sint32 uid = 5;
+	optional string brandid = 6;
+	optional string numberid = 7;
+	optional string areaid = 8;
+}
+
+message GuestLoginRes {
+	required sint32 status = 1;
+	optional UserCenterInfo uinfo = 2; 
+}
+
+message UnameLoginRes {
+	required sint32 status = 1;
+	optional UserCenterInfo uinfo = 2; 
+}
+
+message EditProfileReq {
+	required string unick = 1;
+	required sint32 uface = 2;
+	required sint32 usex = 3;
+}
+
+message EditProfileRes {
+	required sint32 status = 1;
+}
+
+message AccountUpgradeReq {
+	required string uname = 1;
+	required string upwd_md5 = 2;
+}
+
+message AccountUpgradeRes {
+	required sint32 status = 1;
+}
+
+message LoginOutRes {
+	required sint32 status = 1;
+}
+
+message UserGameInfo {
+	required sint32 uchip = 1;
+	required sint32 uexp = 2;
+	required sint32 uvip = 3;
+	required sint32 uchip2 = 4;
+	required sint32 uchip3 = 5;
+	required sint32 udata1 = 6;
+	required sint32 udata2 = 7;
+	required sint32 udata3 = 8;
+
+	required sint32 bonues_status = 9;
+	required sint32 bonues = 10;
+	required sint32 days = 11;
+}
+
+message GetUgameInfoRes {
+	required sint32 status = 1;
+	optional UserGameInfo uinfo = 2; 
+}
+
+message RecvLoginBonuesRes {
+	required sint32 status = 1;	
+}
+
+message WorldChipRankInfo {
+	required string unick = 1;
+	required sint32 uface = 2;
+	required sint32 usex = 3;
+	required sint32 uvip = 4;
+	required sint32 uchip = 5;
+}
+
+message GetWorldRankUchipRes {
+	required sint32 status = 1; 
+	repeated WorldChipRankInfo rank_info = 2;
+}
+
+message GetSysMsgReq {
+	required sint32 ver_num = 1;
+}
+
+message GetSysMsgRes {
+	required sint32 status = 1;
+	required sint32 ver_num = 2;
+	repeated string sys_msgs = 3;
+}
+
+message LoginLogicRes {
+	required sint32 status = 1;
+}
+
+message EnterZoneReq {
+	required sint32 zid = 1;
+}
+
+message EnterZoneRes {
+	required sint32 status = 1;
+}
+
+message EnterMatch {
+	required sint32 zid = 1;
+	required sint32 matchid = 2;
+	required sint32 seatid = 3;
+	required sint32 side = 4;
+}
+
+message UserArrived {
+	required string unick = 1;
+	required sint32 uface = 2;
+	required sint32 usex = 3;
+	required sint32 seatid = 4;
+	required sint32 side = 5;
+	required string roomid = 6;
+	required bool  ishost = 7;
+	required bool  isoffline = 8;
+	optional string brandid = 9;
+	optional string numberid = 10;
+	optional string areaid = 11;
+	optional sint32 user_state = 12;
+}
+
+message ExitMatchRes {
+	required sint32 status = 1;
+}
+
+message UserExitMatch {
+	required sint32 seatid = 1;	
+}
+
+message UserRegistReq {
+	required string uname = 1;
+	required string upwd_md5 = 2;	
+}
+
+message UserRegistRes {
+	required sint32 status = 1;
+}
+
+message CreateRoomReq {
+	required string room_info = 1;
+}
+
+message CreateRoomRes {
+	required sint32 status = 1;
+}
+
+message JoinRoomReq {
+	required string room_id = 1;
+}
+
+message JoinRoomRes {
+	required sint32 status = 1;
+}
+
+message ExitRoomReq {
+	required bool is_force_exit = 1;
+}
+
+message ExitRoomRes {
+	required sint32 status = 1;
+	optional UserArrived user_info = 2;
+}
+
+message DessolveRes {
+	required sint32 status = 1;
+}
+
+message GetCreateStatusRes {
+	required sint32 status = 1;
+}
+
+message BackRoomRes {
+	required sint32 status = 1;
+}
+
+message UserOffLine {
+	required UserArrived user_info = 1;
+}
+
+message UserReconnectedRes {	
+	required sint32 status = 1;
+}
+
+message HeartBeatRes {
+	optional sint32 status = 1;
+}
+
+message UserReadyReq {
+	required sint32 ready_state = 1;
+}
+
+message UserReadyRes {
+	required sint32 status 	= 1;
+	optional sint32 seatid  = 2;
+	optional string brandid = 3;
+	optional string numberid = 4;
+	optional sint32 user_state = 5;
+}
+
+message GameStart {
+	required sint32 status = 1;
+}
+
+message UdpTest {
+	required string content = 1;
+}
+
+message LoginLogicReq {
+	required string udp_ip = 1;
+	required sint32 udp_port = 2;
+}
+
+message OptionEvent {
+	required sint32 seatid = 1;
+	required sint32 opt_type = 2;
+	optional sint32 x = 3;
+	optional sint32 y = 4;  	
+}
+
+message FrameOpts {
+	required sint32 frameid = 1;
+	repeated OptionEvent opts = 2;
+}
+
+message LogicFrame {
+	required sint32 frameid = 1;
+	repeated FrameOpts unsync_frames = 2;
+}
+
+message NextFrameOpts {
+	required sint32 frameid = 1;
+	required string roomid = 2;
+	required sint32 seatid = 3;
+	repeated OptionEvent opts = 4;
+}
+
+message CheckLinkGameRes {
+	required sint32 status = 1;
+}
+
+message RoomInfoRes {
+	required string room_info = 1;
+}
+
+message RoomIdRes {
+	required string room_id = 1;
+}
+
+message PlayCountRes {
+	required string play_count = 1;
+	required string total_play_count = 2;
+}
+
+message UserArrivedInfos {
+	repeated UserArrived user_info = 1;
+}
+
+message UserState {
+	required sint32 seatid = 1;
+	required string user_state = 2;
+}
+
+message AllUserState {
+	repeated UserState users_state = 1;	
+}
+
+message GameResult {
+	repeated string score = 1;
+}
+
+message GameTotalResult {
+	repeated string score = 1;	
+}
+
+message ClickTouZiNumReq {
+	required sint32 seatid = 1;
+	required sint32 touzi_num = 2;	
+}
+
+message TouZiNumRes {
+	repeated sint32 touzi_nums = 1;
+	repeated sint32 bomb_nums = 2;
+}
+
+message ClickTouZiBombRes {
+	required sint32 seatid = 1;
+}

@@ -4,6 +4,7 @@ var res_mgr = require("res_mgr");
 var sound_mgr = require("sound_mgr");
 
 var login_scene = require("login_scene");
+var proto_file_path = "protos/game.proto";
 
 var game_app = cc.Class({
 	extends: game_mgr,
@@ -13,6 +14,7 @@ var game_app = cc.Class({
 	},
 
 	properties: {
+		protobufRoot: null,
 	},
 
 	onLoad() {
@@ -24,9 +26,27 @@ var game_app = cc.Class({
 			this.destroy();
 			return;
 		}
-		game_mgr.prototype.onLoad.call(this);
 
+		game_mgr.prototype.onLoad.call(this);
 		
+		// local proto file
+		var self = this
+		cc.loader.loadRes(proto_file_path, function (err, protos) {
+		    if (err) {
+		       console.log("load proto error ==> ", err)
+		        return
+		    }
+		    self.protobufRoot = protobuf.parse(protos).root
+		    //TEST
+		    // var rs = root.lookup("GuestLoginReq")
+		    // var msg = rs.create({guestKey:"hccfuck222"})
+		    // cc.log("hcc>> " + "msg ", msg)
+		    // var buf = rs.encode(msg).finish()
+		   	// cc.log("hcc>> " + "buf ", buf)
+		    // var decode = rs.decode(new Uint8Array(buf))
+		    // cc.log("hcc>> " + "decode ", decode)
+		    // cc.log("hcc>> " + "decode json: ",JSON.stringify(decode))
+		})   
 	},
 
 	start() {
@@ -36,5 +56,7 @@ var game_app = cc.Class({
 		}.bind(this), 5);
 	},
 
-	
+	get_protobuf_root(){
+		return this.protobufRoot;
+	},
 });

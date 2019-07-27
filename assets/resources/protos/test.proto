@@ -1,0 +1,5 @@
+syntax = "proto2"; 
+
+message GuestLoginReq {
+	required string guestKey = 1;
+}

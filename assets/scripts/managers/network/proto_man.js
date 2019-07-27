@@ -14,8 +14,8 @@ var log = {
 };
 
 var proto_man = {
-	PROTO_JSON: 0,  
-	PROTO_BUF: 1,
+	PROTO_JSON: 1,  
+	PROTO_BUF: 2,
 	encode_cmd: encode_cmd,
 	decode_cmd: decode_cmd,
 };
@@ -30,6 +30,29 @@ function decrypt_cmd(str_of_buf) {
 	return str_of_buf;
 }
 
+function _protobuf_encode(stype, ctype, body){
+	var cmd_buf = proto_tools.encode_protobuf_cmd(stype, ctype, body)
+	return cmd_buf;
+}
+
+function _protobuf_decode(cmd_buf){
+	var cmd = proto_tools.decode_protobuf_cmd(cmd_buf, cmd_buf.byteLength)
+	var cmd_protobuf = cmd.body;
+	if (cmd_protobuf !== null){
+		try {
+			cmd.body = cmd_protobuf.toJSON();
+		}
+		catch(e) {
+			console.log(e);
+			return null;
+		}
+	}
+	if (!cmd || typeof(cmd.stype)=="undefined" || typeof(cmd.ctype)=="undefined"){
+		return null;
+	}
+	return cmd;
+}
+
 function _json_encode(stype, ctype, body) {
 	var str = JSON.stringify(body);
 	var cmd_buf = proto_tools.encode_json_cmd(stype, ctype, str);
@@ -38,11 +61,11 @@ function _json_encode(stype, ctype, body) {
 
 function _json_decode(cmd_buf) {
 	var cmd = proto_tools.decode_json_cmd(cmd_buf, cmd_buf.byteLength);
-	var cmd_json = cmd[2];
+	var cmd_json = cmd.body;
 	
 	if (cmd_json !== null) {
 		try {
-			cmd[2] = JSON.parse(cmd_json);
+			cmd.body = JSON.parse(cmd_json);
 		}
 		catch(e) {
 			console.log(e);
@@ -50,14 +73,9 @@ function _json_decode(cmd_buf) {
 		}
 	}
 	
-	
-	if (!cmd || 
-		typeof(cmd[0])=="undefined" ||
-		typeof(cmd[1])=="undefined" ||
-		typeof(cmd[2])=="undefined") {
+	if (!cmd || typeof(cmd.stype)=="undefined" || typeof(cmd.ctype)=="undefined"){
 		return null;
 	}
-
 	return cmd;
 } 
 
@@ -73,7 +91,7 @@ function encode_cmd(proto_type, stype, ctype, body) {
 		dataview = _json_encode(stype, ctype, body);
 	}
 	else { // buf协议
-		return null;
+		dataview = _protobuf_encode(stype, ctype, body)
 	}
 
 	buf = dataview.buffer;
@@ -98,13 +116,10 @@ function decode_cmd(proto_type, str_or_buf) {
 
 	if (proto_type == proto_man.PROTO_JSON) {
 		return _json_decode(dataview);
+	}else{//buf 协议
+		return _protobuf_decode(dataview);
 	}
 
-	/*if (str_or_buf.length < 4) {
-		return null;
-	}*/
-
-	
 	return null;
 }
 

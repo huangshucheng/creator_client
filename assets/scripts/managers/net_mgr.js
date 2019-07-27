@@ -7,11 +7,11 @@ var State = {
     Connected: 2, // 已经连接;
 };
 
-// var net_event = {
-//     net_connect: "net_connect",
-//     net_message: "net_message",
-//     net_disconnect: "net_disconnect",
-// }
+var net_event = {
+    net_connect: "net_connect",
+    net_message: "net_message",
+    net_disconnect: "net_disconnect",
+}
 
 var net_mgr = cc.Class({
     extends: cc.Component,
@@ -22,7 +22,7 @@ var net_mgr = cc.Class({
 
     properties: {
         url: "ws://127.0.0.1:6081/ws",
-        proto_type: 0, //0:json , 1:protobuf
+        proto_type: 2, //1:json , 2:protobuf
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -43,7 +43,7 @@ var net_mgr = cc.Class({
     _on_opened(event) {
         this.state = State.Connected;
         cc.log("connect to server: " + this.url + " sucess!");
-        event_mgr.dispatch_event("net_connect", null);
+        event_mgr.dispatch_event(net_event.net_connect, null);
     },
 
     _on_recv_data(event) {
@@ -52,8 +52,8 @@ var net_mgr = cc.Class({
         if (!msg_data) {
             return;
         }
-        event_mgr.dispatch_event("net_message", msg_data);
-        console.log("-----recv_data: " + msg_data[2]);
+        event_mgr.dispatch_event(net_event.net_message, msg_data);
+        console.log("hcc>>recv_data: " + "stype: " + msg_data.stype + " ,ctype: " + msg_data.ctype + " ,body: " + msg_data.body);
     },
 
     close_socket() {
@@ -62,7 +62,7 @@ var net_mgr = cc.Class({
                 this.sock.close();
                 this.sock = null;
             }
-            event_mgr.dispatch_event("net_disconnect", null);
+            event_mgr.dispatch_event(net_event.net_disconnect, null);
         }
         
         this.state = State.Disconnected;

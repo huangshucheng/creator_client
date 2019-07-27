@@ -1,3 +1,5 @@
+var Cmd = require("Cmd")
+var cmd_name_map = require("cmd_name_map")
 // cmd_buf dataview
 function read_int8(cmd_buf, offset) {
 	// return cmd_buf.readInt8(offset);
@@ -7,6 +9,14 @@ function read_int8(cmd_buf, offset) {
 function write_int8(cmd_buf, offset, value) {
 	// cmd_buf.writeInt8(value, offset);
 	cmd_buf.setInt8(offset, value);
+}
+
+function read_uint8(cmd_buf,offset){
+	return cmd_buf.getUint8(offset)
+}
+
+function write_uint8(cmd_buf, offset, value){
+	cmd_buf.setUint8(offset,value)
 }
 
 function read_int16(cmd_buf, offset) {
@@ -44,6 +54,14 @@ function read_str(cmd_buf, offset, byte_len) {
 function write_str(cmd_buf, offset, str) {
 	// cmd_buf.write(str, offset);
 	cmd_buf.write_utf8(offset, str);
+}
+
+function write_uint8_array(cmd_buf, offset, uint8array){
+	cmd_buf.write_uint8_array(offset, uint8array)
+}
+
+function read_uint8_array(cmd_buf, offset, byte_len){
+	return cmd_buf.read_uint8_array(offset,byte_len)
 }
 
 function read_float(cmd_buf, offset) {
@@ -84,13 +102,55 @@ function encode_json_cmd(stype, ctype, str) {
 
 function decode_json_cmd(cmd_buf, buf_len) {
 	var cmd = {};
-	cmd[0] = read_int16(cmd_buf, 0);
-	cmd[1] = read_int16(cmd_buf, 2);
-	cmd[2] = null;
+	cmd.stype = read_int16(cmd_buf, 0);
+	cmd.ctype = read_int16(cmd_buf, 2);
+	cmd.utag  = read_int32(cmd_buf, 4);
 	if (buf_len > proto_tools.header_size) {
-		cmd[2] = read_str(cmd_buf, proto_tools.header_size, buf_len - proto_tools.header_size);
+		cmd.body = read_str(cmd_buf, proto_tools.header_size, buf_len - proto_tools.header_size);
 	}
+	return cmd;
+}
+/*
+stype: int 服务号
+ctype: int 命令号
+str: 表对象转成的string对象,和protobuf对应，如：
+{
+	guestKey:"hcc"
+}
+ */
+function encode_protobuf_cmd(stype, ctype, body){
+	if (cmd_name_map[ctype] == null){
+		return null
+	}
+	var game_app = require("game_app");
+	var rs = game_app.Instance.get_protobuf_root().lookup(cmd_name_map[ctype])
+	var msg = rs.create(body)
+	var uint8_array_buf = rs.encode(msg).finish()// buf: {Uint8Array}
 
+	///////////
+	var byte_len 	= uint8_array_buf.length;
+	var total_len 	= proto_tools.header_size + byte_len;
+	var cmd_buf 	= alloc_buffer(total_len);
+
+	var offset = write_cmd_header_inbuf(cmd_buf, stype, ctype);
+	// write_str(cmd_buf, offset, buf);
+	write_uint8_array(cmd_buf, offset, uint8_array_buf);
+	return cmd_buf;
+}
+
+function decode_protobuf_cmd(cmd_buf, buf_len){
+	var cmd = {};
+	cmd.stype = read_int16(cmd_buf, 0);
+	cmd.ctype = read_int16(cmd_buf, 2);
+	cmd.utag = read_int32(cmd_buf, 4);
+	if (buf_len > proto_tools.header_size) {
+		var buf = read_uint8_array(cmd_buf, proto_tools.header_size, buf_len - proto_tools.header_size);
+		if (cmd_name_map[cmd.ctype]){
+			var game_app = require("game_app");
+			var rs = game_app.Instance.get_protobuf_root().lookup(cmd_name_map[cmd.ctype])
+			cmd.body = rs.decode(new Uint8Array(buf))
+		}
+	}
 	return cmd;
 }
 
@@ -114,8 +174,11 @@ var proto_tools = {
 
 	alloc_buffer: alloc_buffer,
 
-	decode_json_cmd: decode_json_cmd,
 	encode_json_cmd: encode_json_cmd,
+	decode_json_cmd: decode_json_cmd,
+
+	encode_protobuf_cmd: encode_protobuf_cmd,
+	decode_protobuf_cmd: decode_protobuf_cmd,
 };
 
 module.exports = proto_tools;

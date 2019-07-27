@@ -17,6 +17,11 @@ var res_pkg = {
     ],
     
     sprite_atlases: [],
+    text_assets:[
+        // "protos/game.proto",
+        // "protos/awesome.proto",
+    ],
+    other_file:[],
 };
 
 var scene = {
