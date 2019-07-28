@@ -3,7 +3,7 @@ var proto_man = require("proto_man");
 var network = {
     sock: null, 
     serivces_handler: null,
-    proto_type: 0,
+    proto_type: 1,  //0:json, 1 protobuf
     is_connected: false,
 
     _on_opened: function(event) {

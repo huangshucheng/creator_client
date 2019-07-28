@@ -10,8 +10,6 @@ cc.Class({
         
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
         cc.log("init game framework ... ...");
         // 初始化，框架里面的每个管理模块，所以这个是通用的;
@@ -41,7 +39,7 @@ cc.Class({
     },
 
     preload_scene(scene, on_process, on_finished) {
-        scene.preload();
+        scene.preload(on_process, on_finished);
     },
     // update (dt) {},
 });

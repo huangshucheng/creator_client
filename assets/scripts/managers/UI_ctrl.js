@@ -21,7 +21,7 @@ cc.Class({
 
     },
 
-    add_button_listen(view_name, caller, func) {
+    add_button_listener(view_name, caller, func) {
         var view_node = this.view[view_name];
         if (!view_node) {
             return;

@@ -1,5 +1,8 @@
 var event_mgr = require("event_mgr");
 var proto_man = require("proto_man");
+var Cmd = require("Cmd")
+var cmd_name_map = require("cmd_name_map")
+var Stype = require("Stype")
 
 var State = {
     Disconnected: 0, // 断开连接
@@ -22,10 +25,8 @@ var net_mgr = cc.Class({
 
     properties: {
         url: "ws://127.0.0.1:6081/ws",
-        proto_type: 2, //1:json , 2:protobuf
+        proto_type: 1, //0:json , 1:protobuf
     },
-
-    // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         if (net_mgr.Instance === null) {
@@ -52,8 +53,19 @@ var net_mgr = cc.Class({
         if (!msg_data) {
             return;
         }
-        event_mgr.dispatch_event(net_event.net_message, msg_data);
-        console.log("hcc>>recv_data: " + "stype: " + msg_data.stype + " ,ctype: " + msg_data.ctype + " ,body: " + msg_data.body);
+        //event_mgr.dispatch_event(net_event.net_message, msg_data);
+        var cmd_name = cmd_name_map[msg_data.ctype];
+        if (cmd_name){
+            event_mgr.dispatch_event(cmd_name, msg_data.body);    
+        }
+        cc.log("###########################>>>start")
+        console.log("hcc>>recv_data: " + "stype: " + Stype.name[msg_data.stype] + " ,ctype: " + cmd_name_map[msg_data.ctype]);
+        if (msg_data.body){
+            for(var key in msg_data.body){
+                cc.log( key + ": " + msg_data.body[key])
+            }
+            cc.log("###########################>>>end")
+        }
     },
 
     close_socket() {
