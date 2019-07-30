@@ -102,20 +102,30 @@ function decode_json_cmd(cmd_buf, buf_len) {
 /*
 stype: int 服务号
 ctype: int 命令号
-str: 表对象转成的string对象,和protobuf对应，如：
+body: 表对象转成的string对象,和protobuf对应，如：
 {
 	guestKey:"hcc"
 }
  */
 function encode_protobuf_cmd(stype, ctype, body){
 	if (cmd_name_map[ctype] == null){
-		return null
+		return null;
 	}
 	var GameApp = require("GameApp");
 	var cmd_name = cmd_name_map[ctype];
-	var rs = GameApp.Instance.get_protobuf_root().lookupTypeOrEnum(cmd_name)
-	var msg = rs.create(body)
-	var uint8_array_buf = rs.encode(msg).finish()// buf: {Uint8Array}
+	var msgType = GameApp.Instance.get_protobuf_root().lookupTypeOrEnum(cmd_name)
+	if(!msgType){
+		cc.error("protobuf type is null");
+		return null;
+	}
+	var error = msgType.verify(body == null ? {} : body)
+	if(error){
+		cc.error("protobuf msg verify failed: " + error);
+		return null;
+	}
+
+	var msg = msgType.create(body)
+	var uint8_array_buf = msgType.encode(msg).finish()// buf: {Uint8Array}
 	///////////
 	var byte_len 	= uint8_array_buf.length;
 	var total_len 	= proto_tools.header_size + byte_len;
@@ -135,8 +145,12 @@ function decode_protobuf_cmd(cmd_buf, buf_len){
 		var buf = read_uint8_array(cmd_buf, proto_tools.header_size, buf_len - proto_tools.header_size);
 		if (cmd_name_map[cmd.ctype]){
 			var GameApp = require("GameApp");
-			var rs = GameApp.Instance.get_protobuf_root().lookup(cmd_name_map[cmd.ctype])
-			cmd.body = rs.decode(new Uint8Array(buf))
+			var msgType = GameApp.Instance.get_protobuf_root().lookupTypeOrEnum(cmd_name_map[cmd.ctype])
+			if(!msgType){
+				cc.error("msgType is null");
+				return null;
+			}
+			cmd.body = msgType.decode(new Uint8Array(buf))
 		}
 	}
 	return cmd;

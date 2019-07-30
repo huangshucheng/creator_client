@@ -16,7 +16,14 @@
   ],
   "design-resolution-height": 640,
   "design-resolution-width": 960,
-  "excluded-modules": [],
+  "excluded-modules": [
+    "TiledMap",
+    "Physics",
+    "StudioComponent",
+    "3D",
+    "3D Primitive",
+    "Mesh"
+  ],
   "facebook": {
     "appID": "",
     "audience": {
@@ -27,8 +34,8 @@
       "enable": false
     }
   },
-  "fit-height": true,
-  "fit-width": false,
+  "fit-height": false,
+  "fit-width": true,
   "group-list": [
     "default",
     "NAV_MAP",
@@ -40,7 +47,6 @@
     "height": 640,
     "width": 960
   },
-  "start-scene": "current",
   "use-customize-simulator": true,
   "use-project-simulator-setting": false
 }

@@ -196,6 +196,23 @@ String.prototype.utf8_byte_len = function() {
     return totalLength; 
 }
 
+var string_to_uint8_array = function(bstr){
+    var len = bstr.length
+    var uint8_array = new Uint8Array();
+    for(var i = 0; i < len; i++){
+        uint8_array[i] = bstr.charCodeAt(i);
+    }
+    return uint8_array;
+}
+
+var uint8_array_to_string = function(arr){
+    var str = new String();
+    for(var i = 0; i< arr.length; i++){
+        str += String.fromCharCode(arr[i]);
+    }
+    return str;
+}
+
 // var str = "你好";
 // // var str = "abc";
 // var len = str.utf8_byte_len()

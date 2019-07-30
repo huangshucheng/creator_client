@@ -59,8 +59,6 @@ cc.Class({
 		GameApp.Instance.preload_scene(LoginScene,on_process,on_finished)
     },
 
-
-
     onDestroy(){
         cc.log("loobbyUI>>destory....")
         this.remove_event_listenner();
