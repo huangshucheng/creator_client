@@ -1,5 +1,15 @@
 syntax = "proto2"; 
 
-message GuestLoginReq {
-	required string guestKey = 1;
+message UserGameInfo {
+	required sint32 uchip = 1;
+	required sint32 uexp = 2;
+	required sint32 uvip = 3;
+	required sint32 uchip2 = 4;
+	required sint32 uchip3 = 5;
+	required sint32 udata1 = 6;
+	required sint32 udata2 = 7;
+	required sint32 udata3 = 8;
+	required sint32 bonuesstatus = 9;
+	required sint32 bonues = 10;
+	required sint32 days = 11;
 }
