@@ -33,11 +33,12 @@ cc.Class({
         this.view[KW_TEXT_VERSION].getComponent(cc.Label).string = "3.0.0"; // test
 
         this.add_net_event_listener();
-        this.add_button_event_listener();
+		this.add_button_event_listener();
+		
+		net_mgr.Instance.send_msg(Stype.System,Cmd.eGetUgameInfoReq);
     },
     
 	start() {
-		
 		this.init_UI();
 	},
 
@@ -157,8 +158,31 @@ cc.Class({
 	},
 	
 	on_set_click_login_logic(sender){
-		// net_mgr.Instance.send_msg(Stype.Logic,Cmd.eLoginLogicReq)
-		net_mgr.Instance.send_msg(Stype.System,Cmd.eGetUgameInfoReq)
+		net_mgr.Instance.send_msg(Stype.Logic,Cmd.eLoginLogicReq)
+		//test
+		/*
+		var str = "hcc>>begin:"
+		for (var i = 0;i < 1000;i++){
+			str = str + i;
+		}
+
+		cc.log("client: " + str)
+		str = str + "hcc>>end"
+		var msg = { 
+			uchip : str,
+			uexp : "黄塾城,uexp",
+			// uexp : "string,uexp",
+			uvip  : 102,
+			uchip2  : 103,
+			uchip3 : 104, 
+			udata1  : 105,
+			udata2  : true,
+			udata3 : false,
+		}
+		net_mgr.Instance.send_msg(Stype.Auth,Cmd.eUserGameInfo,msg)
+		*/
+		// net_mgr.Instance.send_msg(Stype.System,Cmd.eGetSysMsgReq,{versionnum : 1})
+		// net_mgr.Instance.send_msg(Stype.System,Cmd.eGetWorldRankUchipReq)
 		/////test
 		// var proto_file_path = "protos/test.proto";
 		// cc.loader.loadRes(proto_file_path, function (err, protos) {
@@ -190,13 +214,22 @@ cc.Class({
 		//     cc.log("hcc>> " + "decode ", decode)
 		//     cc.log("hcc>> " + "decode json: ",JSON.stringify(decode))
 		// });
+
+		///////////////
+		// var login_msg = JSON.parse(cc.sys.localStorage.getItem(LocalStorageName.user_login_msg))
+		// 	var uname = login_msg.uname
+		// 	var upwd = login_msg.upwd
+		// 	var msg = {
+		// 		uname:String(uname),
+		// 		upwd:String(upwd),
+		// 	}
+		// 	net_mgr.Instance.send_msg(Stype.Auth,Cmd.eUnameLoginReq,msg)
 	},
 	/////////////////////////
 	init_UI(){
 		var uinfo = JSON.parse(cc.sys.localStorage.getItem(LocalStorageName.user_info_self)); 
 		this.view[TEXT_USER_NAME].getComponent(cc.Label).string	= uinfo.unick;
 		this.view[TEXT_USER_ID].getComponent(cc.Label).string = uinfo.brandid;
-
 	},
 
     onDestroy(){

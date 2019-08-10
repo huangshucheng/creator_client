@@ -65,6 +65,23 @@ function write_float(cmd_buf, offset, value) {
 	cmd_buf.setFloat32(offset, value, true);
 }
 
+var string_to_uint8_array = function(bstr){
+    var len = bstr.length
+    var uint8_array = new Uint8Array();
+    for(var i = 0; i < len; i++){
+        uint8_array[i] = bstr.charCodeAt(i);
+    }
+    return uint8_array;
+}
+
+var uint8_array_to_string = function(arr){
+    var str = new String();
+    for(var i = 0; i< arr.length; i++){
+        str += String.fromCharCode(arr[i]);
+    }
+    return str;
+}
+
 function alloc_buffer(total_len) {
 	var buf = new ArrayBuffer(total_len);
 	var dataview = new DataView(buf);
@@ -99,6 +116,28 @@ function decode_json_cmd(cmd_buf, buf_len) {
 	}
 	return cmd;
 }
+//解码protobuf
+function decode_protobuf_cmd(cmd_buf, buf_len){
+	var cmd = {};
+	cmd.stype = read_int16(cmd_buf, 0);
+	cmd.ctype = read_int16(cmd_buf, 2);
+	cmd.utag = read_int32(cmd_buf, 4);
+	if (buf_len > proto_tools.header_size) {
+		var buf = read_uint8_array(cmd_buf, proto_tools.header_size, buf_len - proto_tools.header_size);
+		if (cmd_name_map[cmd.ctype]){
+			var GameApp = require("GameApp");
+			var msgType = GameApp.Instance.get_protobuf_root().lookupTypeOrEnum(cmd_name_map[cmd.ctype])
+			if(!msgType){
+				cc.error("msgType is null");
+				return null;
+            }
+            var uint8arr = new Uint8Array(buf)
+			cmd.body = msgType.decode(uint8arr)
+		}
+	}
+	return cmd;
+}
+
 /*
 stype: int 服务号
 ctype: int 命令号
@@ -125,38 +164,15 @@ function encode_protobuf_cmd(stype, ctype, body){
 	}
 
 	var msg = msgType.create(body)
-	var uint8_array_buf = msgType.encode(msg).finish()// buf: {Uint8Array}
-	///////////
-	var byte_len 	= uint8_array_buf.length;
+	var uint8_array_buf = msgType.encode(msg).finish()// uint8_array_buf: {Uint8Array}
+	var byte_len 	= uint8_array_buf.byteLength;
 	var total_len 	= proto_tools.header_size + byte_len;
 	var cmd_buf 	= alloc_buffer(total_len);
-
 	var offset = write_cmd_header_inbuf(cmd_buf, stype, ctype);
 	write_uint8_array(cmd_buf, offset, uint8_array_buf);
+	//test
+	// var decode_cmd = decode_protobuf_cmd(cmd_buf,cmd_buf.byteLength)
 	return cmd_buf;
-}
-
-function decode_protobuf_cmd(cmd_buf, buf_len){
-	var cmd = {};
-	cmd.stype = read_int16(cmd_buf, 0);
-	cmd.ctype = read_int16(cmd_buf, 2);
-	cmd.utag = read_int32(cmd_buf, 4);
-	if (buf_len > proto_tools.header_size) {
-		var buf = read_uint8_array(cmd_buf, proto_tools.header_size, buf_len - proto_tools.header_size);
-		if (cmd_name_map[cmd.ctype]){
-			var GameApp = require("GameApp");
-			var msgType = GameApp.Instance.get_protobuf_root().lookupTypeOrEnum(cmd_name_map[cmd.ctype])
-			if(!msgType){
-				cc.error("msgType is null");
-				return null;
-            }
-            cc.log("hcc>>buf: " + buf)
-            var uint8arr = new Uint8Array(buf)
-            cc.log("hcc>>buf111: " + uint8arr)
-			cmd.body = msgType.decode(uint8arr)
-		}
-	}
-	return cmd;
 }
 
 var proto_tools = {

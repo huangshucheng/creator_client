@@ -90,6 +90,7 @@ var Cmd = {
 	eClickTouZiNumReq 			: 65,
 	eTouZiNumRes 				: 66,
 	eClickTouZiBombRes 			: 67,
+	eUserGameInfo 				: 68,
 }
 
 module.exports = Cmd;

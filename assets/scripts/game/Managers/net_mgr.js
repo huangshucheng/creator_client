@@ -60,6 +60,7 @@ var net_mgr = cc.Class({
 
     _on_recv_data(event) {
         var str_or_buf = event.data;
+        // cc.log("len: " + str_or_buf.length)
         var msg_data = proto_man.decode_cmd(this.proto_type, str_or_buf);
         if (!msg_data) {
             return;
@@ -84,6 +85,14 @@ var net_mgr = cc.Class({
         }
     },
 
+    _on_socket_close(event) {
+        this.close_socket(event.type);
+    },
+
+    _on_socket_err(event) {
+        this.close_socket(event.type);
+    },
+
     close_socket(eventType) {
         if (this.state == State.Connected) {
             if (this.sock !== null) {
@@ -94,14 +103,6 @@ var net_mgr = cc.Class({
         }
         
         this.state = State.Disconnected;
-    },
-
-    _on_socket_close(event) {
-        this.close_socket(event.type);
-    },
-
-    _on_socket_err(event) {
-        this.close_socket(event.type);
     },
 
     // 发起连接;

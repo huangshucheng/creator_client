@@ -65,7 +65,7 @@ function _json_decode(cmd_buf) {
 	
 	if (cmd_json !== null) {
 		try {
-			// cmd.body = JSON.parse(cmd_json);
+			cmd.body = JSON.parse(cmd_json);
 		}
 		catch(e) {
 			console.log(e);

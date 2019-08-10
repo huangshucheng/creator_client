@@ -1,5 +1,8 @@
-syntax = "proto2"; 
-//注意字段不能使用下划线
+syntax = "proto2";
+
+//不能用下划线 ,js那边下划线会自动去掉，导致某些问题
+//enum js那边找不到类型，定义的时候要加上message定义
+
 enum Stype {
 	InvalidStype = 0;
 	Auth = 1;
@@ -102,6 +105,7 @@ enum Cmd {
 	eClickTouZiNumReq = 65;
 	eTouZiNumRes = 66;
 	eClickTouZiBombRes = 67;
+	eUserGameInfo = 68;
 }
 
 message GuestLoginReq {
@@ -178,9 +182,6 @@ message UserGameInfo {
 	required sint32 udata1 = 6;
 	required sint32 udata2 = 7;
 	required sint32 udata3 = 8;
-	required sint32 bonuesstatus = 9;
-	required sint32 bonues = 10;
-	required sint32 days = 11;
 }
 
 message GetUgameInfoReq {
@@ -206,6 +207,10 @@ message WorldChipRankInfo {
 	required sint32 usex = 3;
 	required sint32 uvip = 4;
 	required sint32 uchip = 5;
+}
+
+message GetWorldRankUchipReq {
+	
 }
 
 message GetWorldRankUchipRes {

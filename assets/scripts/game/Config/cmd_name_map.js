@@ -69,6 +69,7 @@ var cmd_name_map = {
 	[65] : "ClickTouZiNumReq",
 	[66] : "TouZiNumRes",
 	[67] : "ClickTouZiBombRes",
+	[68] : "UserGameInfo",
 }
 
 module.exports = cmd_name_map;
