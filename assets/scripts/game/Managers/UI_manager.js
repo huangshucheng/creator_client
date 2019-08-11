@@ -14,4 +14,3 @@ var UI_manager = {
 };
 
 module.exports = UI_manager;
-

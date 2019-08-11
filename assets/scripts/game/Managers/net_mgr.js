@@ -1,9 +1,9 @@
 var event_mgr       = require("event_mgr");
 var proto_man       = require("proto_man");
-var Cmd             = require("../ui_ctrls/node_modules/Cmd")
-var cmd_name_map    = require("../ui_ctrls/node_modules/cmd_name_map")
-var Stype           = require("../ui_ctrls/node_modules/Stype")
-var event_name      = require("../ui_ctrls/node_modules/event_name")
+var Cmd             = require("Cmd")
+var cmd_name_map    = require("cmd_name_map")
+var Stype           = require("Stype")
+var event_name      = require("event_name")
 var ConfigKeyWord   = require("ConfigKeyWord")
 
 var State = {
@@ -71,17 +71,13 @@ var net_mgr = cc.Class({
         }
 
         if(msg_data.ctype != Cmd.eHeartBeatRes){
-            cc.log("###########################>>>start")
-            console.log("hcc>>recv_data: " + "stype: " + Stype.name[msg_data.stype] + " ,ctype: " + cmd_name_map[msg_data.ctype]);
+            cc.log("###########################>>>recvstart")
+            console.log("stype: " + Stype.name[msg_data.stype] + " ,ctype: " + cmd_name_map[msg_data.ctype]);
             if (msg_data.body){
-                for(var key in msg_data.body){
-                    var type = String(typeof(msg_data.body[key]))
-                    if (type != "function" && type != "object"){
-                        cc.log( key + ": " + msg_data.body[key])
-                    }
-                }
-                cc.log("###########################>>>end")
+                var jsonBody = JSON.stringify(msg_data.body);
+                cc.log(jsonBody);
             }
+            cc.log("###########################>>>recvend")
         }
     },
 

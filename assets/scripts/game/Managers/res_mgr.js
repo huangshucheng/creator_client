@@ -29,7 +29,6 @@ var res_mgr = cc.Class({
     },
 
     // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
         if (res_mgr.Instance === null) {
             res_mgr.Instance = this;

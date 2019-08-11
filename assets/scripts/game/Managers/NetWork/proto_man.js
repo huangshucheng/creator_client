@@ -7,11 +7,6 @@ var proto_tools = require("proto_tools");
 (5) 服务号命令号二进制中都用小尾存储
 (6) 所有的文本，都使用utf8
 */
-var log = {
-	info: console.log,
-	warn: console.log,
-	error: console.log,
-};
 
 var proto_man = {
 	PROTO_JSON: 0,  
@@ -37,16 +32,6 @@ function _protobuf_encode(stype, ctype, body){
 
 function _protobuf_decode(cmd_buf){
 	var cmd = proto_tools.decode_protobuf_cmd(cmd_buf, cmd_buf.byteLength)
-	var cmd_protobuf = cmd.body;
-	if (cmd_protobuf !== null){
-		try {
-			// cmd.body = cmd_protobuf.toJSON();
-		}
-		catch(e) {
-			console.log(e);
-			return null;
-		}
-	}
 	if (!cmd || typeof(cmd.stype)=="undefined" || typeof(cmd.ctype)=="undefined"){
 		return null;
 	}
@@ -97,7 +82,6 @@ function encode_cmd(proto_type, stype, ctype, body) {
 	if (buf) {
 		buf = encrypt_cmd(buf); // 加密	
 	}
-	
 	return buf;
 }
 

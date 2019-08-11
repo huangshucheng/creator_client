@@ -1,27 +1,27 @@
 var UI_ctrl 		= require("UI_ctrl");
 var net_mgr 		= require("net_mgr")
-var GameApp 		= require("../game/managers/network/node_modules/GameApp");
-var Stype 			= require("../game/managers/node_modules/Stype");
+var GameApp 		= require("GameApp");
+var Stype 			= require("Stype");
 var LobbyScene  	= require("LobbyScene");
-var cmd_name_map 	= require("../game/managers/node_modules/cmd_name_map")
-var Cmd 			= require("../game/managers/node_modules/Cmd");
+var cmd_name_map 	= require("cmd_name_map")
+var Cmd 			= require("Cmd");
 var event_mgr 		= require("event_mgr");
-var event_name 		= require("../game/managers/node_modules/event_name")
+var event_name 		= require("event_name")
 var Respones 		= require("Respones")
 var LocalStorageName = require("LocalStorageName")
 
 var KW_IMG_LOGIN_BG 	= "KW_IMG_LOGIN_BG"
-var KW_BTN_LOGIN 		= "KW_IMG_LOGIN_BG/KW_BTN_LOGIN"
-var KW_INPUT_ACCOUNT 	= "KW_IMG_LOGIN_BG/KW_INPUT_ACCOUNT"
-var KW_INPUT_PWD 		= "KW_IMG_LOGIN_BG/KW_INPUT_PWD"
-var KW_BTN_GOTO_REGIST 	= "KW_IMG_LOGIN_BG/KW_BTN_GOTO_REGIST"
+var KW_BTN_LOGIN 		= KW_IMG_LOGIN_BG + "/" + "KW_BTN_LOGIN"
+var KW_INPUT_ACCOUNT 	= KW_IMG_LOGIN_BG + "/" + "KW_INPUT_ACCOUNT"
+var KW_INPUT_PWD 		= KW_IMG_LOGIN_BG + "/" + "KW_INPUT_PWD"
+var KW_BTN_GOTO_REGIST 	= KW_IMG_LOGIN_BG + "/" + "KW_BTN_GOTO_REGIST"
 
 var KW_IMG_GUEST_LOGIN_BG 	= "KW_IMG_GUEST_LOGIN_BG"
-var KW_BTN_REGIST 		  	= "KW_IMG_GUEST_LOGIN_BG/KW_BTN_REGIST"
-var KW_BTN_CLOSE 			= "KW_IMG_GUEST_LOGIN_BG/KW_BTN_CLOSE" 
-var KW_INPUT_ACCOUNT_REGIST = "KW_IMG_GUEST_LOGIN_BG/KW_INPUT_ACCOUNT"
-var KW_INPUT_PWD_REGIST 	= "KW_IMG_GUEST_LOGIN_BG/KW_INPUT_PWD"
-var KW_INPUT_PWD_COF 		= "KW_IMG_GUEST_LOGIN_BG/KW_INPUT_PWD_COF"
+var KW_BTN_REGIST 		  	= KW_IMG_GUEST_LOGIN_BG + "/" + "KW_BTN_REGIST"
+var KW_BTN_CLOSE 			= KW_IMG_GUEST_LOGIN_BG + "/" + "KW_BTN_CLOSE" 
+var KW_INPUT_ACCOUNT_REGIST = KW_IMG_GUEST_LOGIN_BG + "/" + "KW_INPUT_ACCOUNT"
+var KW_INPUT_PWD_REGIST 	= KW_IMG_GUEST_LOGIN_BG + "/" + "KW_INPUT_PWD"
+var KW_INPUT_PWD_COF 		= KW_IMG_GUEST_LOGIN_BG + "/" + "KW_INPUT_PWD_COF"
 
 var KW_BTN_GUEST_LOGIN 		= "KW_BTN_GUEST_LOGIN"
 var KW_TEXT_VERSION 		= "KW_TEXT_VERSION"
@@ -36,8 +36,8 @@ cc.Class({
 
 	onLoad() {
 		UI_ctrl.prototype.onLoad.call(this);
-		this.view[KW_TEXT_VERSION].getComponent(cc.Label).string = "2.0.0"; //test
-		this.view[KW_TEXT_NET_STATUS].getComponent(cc.Label).string = "正在连接。。。"; //test
+		this.set_visible(KW_TEXT_VERSION,"2.0.0")
+		this.set_visible(KW_TEXT_NET_STATUS,"正在连接...")
 		
 		this.add_net_event_listener();
 		this.add_button_event_listener();
@@ -73,10 +73,10 @@ cc.Class({
 			if(udata.uinfo){
 				cc.sys.localStorage.setItem(LocalStorageName.user_info_self,JSON.stringify(udata.uinfo));
 			}
-			var self = this
+			// var self = this
 			var on_process = function(percent){
 				cc.log("Lobby>>on_process>> " + percent);
-				//self.view[KW_TEXT_VERSION].getComponent(cc.Label).string = "loading: " + percent * 100 + "%"
+				// self.set_string(KW_TEXT_VERSION,"loading: " + percent * 100 + "%");
 			};
 	
 			var on_finished = function(){
@@ -85,7 +85,7 @@ cc.Class({
 			};
 			GameApp.Instance.preload_scene(LobbyScene,on_process,on_finished)
 		}else{
-			this.view[KW_TEXT_NET_STATUS].getComponent(cc.Label).string = "账号或密码错误";
+			this.set_string(KW_TEXT_NET_STATUS,"账号或密码错误")
 		}
 	},
 	//游客登录
@@ -97,8 +97,8 @@ cc.Class({
 			}
 			var self = this
 			var on_process = function(percent){
-				cc.log("Lobby>>on_process>> " + percent);
-				//self.view[KW_TEXT_VERSION].getComponent(cc.Label).string = "loading: " + percent * 100 + "%"
+				// cc.log("Lobby>>on_process>> " + percent);
+				// self.set_string(KW_TEXT_VERSION,"loading: " + percent * 100 + "%");
 			};
 	
 			var on_finished = function(){
@@ -113,7 +113,7 @@ cc.Class({
 		if(udata.status == Respones.OK){
 			this.init_UI()
 		}else{
-			this.view[KW_TEXT_NET_STATUS].getComponent(cc.Label).string = "账号或密码错误";
+			this.set_string(KW_TEXT_NET_STATUS,"账号或密码错误");
 		}
 	},
 	//心跳
@@ -126,17 +126,17 @@ cc.Class({
 	//
 	on_event_net_connect(udata){
 		this._connect_count = 0;
-		this.view[KW_TEXT_NET_STATUS].getComponent(cc.Label).string = "连接成功...."
+		this.set_string(KW_TEXT_NET_STATUS,"连接成功....");
 	},
 
 	on_event_net_disconnect(udata){
 		this._connect_count += 1; 
-		this.view[KW_TEXT_NET_STATUS].getComponent(cc.Label).string = "连接失败: " + udata + " ," + this._connect_count
+		this.set_string(KW_TEXT_NET_STATUS,"连接失败: " + udata + " ," + this._connect_count);
 	},
 
 	on_event_net_connecting(udata){
 		this._connect_count += 1; 
-		this.view[KW_TEXT_NET_STATUS].getComponent(cc.Label).string = "正在连接.... " + this._connect_count;
+		this.set_string(KW_TEXT_NET_STATUS,"正在连接.... " + this._connect_count);
 	},
 //////////////////////////////// button事件
 	//账号登录
@@ -145,7 +145,7 @@ cc.Class({
 		var upwd = this.view[KW_INPUT_PWD].getComponent(cc.EditBox).string;
 		cc.log("uname: " + uname + " ,upwd: " + upwd);
 		if(uname.length < 6 || upwd.length < 6){
-			this.view[KW_TEXT_NET_STATUS].getComponent(cc.Label).string = "账号或者密码错误，不能小于6位数"
+			this.set_string(KW_TEXT_NET_STATUS,"账号或者密码错误，不能小于6位数");
 			return
 		}
 		var msg = {
@@ -162,7 +162,7 @@ cc.Class({
 		var upwd = this.view[KW_INPUT_PWD_REGIST].getComponent(cc.EditBox).string;
 		var upwdconf = this.view[KW_INPUT_PWD_COF].getComponent(cc.EditBox).string;
 		if(upwd !== upwdconf || upwd.length < 6 || upwdconf.length < 6){
-			this.view[KW_TEXT_NET_STATUS].getComponent(cc.Label).string = "账号或密码错误...";
+			this.set_string(KW_TEXT_NET_STATUS,"账号或密码错误...");
 			return;
 		}
 		cc.log("regist>> uname: " + uname + " ,upwd: " + upwd);
@@ -174,7 +174,7 @@ cc.Class({
 		net_mgr.Instance.send_msg(Stype.Auth,Cmd.eUserRegistReq,msg)
 	},
 	on_close_click_event(sender){
-		this.view[KW_IMG_GUEST_LOGIN_BG].active = false;
+		this.set_visible(KW_IMG_GUEST_LOGIN_BG,false);
 	},
 	//游客登录
 	on_guest_login_click_event(sender){
@@ -194,7 +194,7 @@ cc.Class({
 	},
 	//去注册
 	on_gotoregist_click_event(sender){
-		this.view[KW_IMG_GUEST_LOGIN_BG].active = true;
+		this.set_visible(KW_IMG_GUEST_LOGIN_BG,true);
 	},
 ///////////////////////////
 	init_UI(){

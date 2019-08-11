@@ -35,6 +35,7 @@ cc.Class({
         }
 
         this.cur_scene = scene;
+        cc.log("cur_scene: " + this.cur_scene.getUIName())
         scene.enter();
     },
 
