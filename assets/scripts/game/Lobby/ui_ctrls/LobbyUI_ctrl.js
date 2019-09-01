@@ -8,9 +8,11 @@ var Respones 		= require("Respones")
 var LoginScene      = require("LoginScene");
 var event_mgr 		= require("event_mgr");
 var event_name 		= require("event_name");
+var UI_manager 		= require("UI_manager")
 
 var GameScene 		= require("GameScene");
 var LocalStorageName = require("LocalStorageName");
+var GameFunction 	= require("GameFunction")
 
 var KW_LOBBY_TOP_BG 		= "KW_LOBBY_TOP_BG";
 var KW_BTN_SET 		    	= KW_LOBBY_TOP_BG + "/KW_BTN_SET";
@@ -242,15 +244,15 @@ cc.Class({
 		net_mgr.Instance.send_msg(Stype.Logic,Cmd.eGetCreateStatusReq);
 		cc.log("create status....")
 		// net_mgr.Instance.send_msg(Stype.Logic,Cmd.eLoginLogicReq)
-		//test
-		// net_mgr.Instance.send_msg(Stype.System,Cmd.eGetSysMsgReq,{versionnum : 1})
-		// net_mgr.Instance.send_msg(Stype.System,Cmd.eGetWorldRankUchipReq)
-		// var node = this.seekWidgetByName(this.node,"BTN_CREATE_ROOM");
-		// cc.log("name: " + node.name);
+		// test
+		net_mgr.Instance.send_msg(Stype.System,Cmd.eGetSysMsgReq,{versionnum : 1})
+		net_mgr.Instance.send_msg(Stype.System,Cmd.eGetWorldRankUchipReq)
+		var node = this.seekWidgetByName(this.node,"BTN_CREATE_ROOM");
+		cc.log("name: " + node.name);
 	},
 
 	on_click_create_room(sender){
-		var playerNum = 2
+		var playerNum = 3
 		var playCount = 10
 		var isAAPay = 1
 		var baseScore = 1
@@ -259,7 +261,11 @@ cc.Class({
 		var msg = {
 			roominfo:String(gamerule),
 		}
-		net_mgr.Instance.send_msg(Stype.Logic,Cmd.eCreateRoomReq,msg)
+		 net_mgr.Instance.send_msg(Stype.Logic,Cmd.eCreateRoomReq,msg)
+		//test
+		// var playc = GameFunction.getStrValue(gamerule,"playCount")
+		// cc.log("playc: " + playc)
+		
 	},
 
 	on_click_back_room(sender){
@@ -267,10 +273,7 @@ cc.Class({
 	},
 
 	on_click_join_room(sender){
-		var msg = {
-			roomid : "123456",
-		}
-		net_mgr.Instance.send_msg(Stype.Logic,Cmd.eJoinRoomReq,msg)
+		UI_manager.show_dialog("DialogJoinRoom")
 	},
 	/////////////////////////
 	init_UI(){

@@ -10,7 +10,7 @@ var LobbyScene 		= require("LobbyScene")
 var event_mgr 		= require("event_mgr");
 var event_name 		= require("event_name");
 var GameFunction 	= require("GameFunction")
-
+var RoomData 		= require("RoomData")
 var LocalStorageName = require("LocalStorageName");
 
 var KW_TEXT_VERSION 	= "KW_TEXT_VERSION";
@@ -78,6 +78,7 @@ cc.Class({
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.ePlayCountRes],this,this.on_event_play_count)
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eUserArrivedInfos],this,this.on_event_user_arrive_infos)
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eExitRoomRes],this,this.on_event_user_exit_room)
+		event_mgr.add_event_listenner(cmd_name_map[Cmd.eAllUserState],this,this.on_event_all_use_state)
 
 		///////////////////////
 		event_mgr.add_event_listenner(event_name.net_connect,this,this.on_event_net_connect)
@@ -198,7 +199,15 @@ cc.Class({
 
 	on_event_room_info(udata){
 		var roominfo = udata.roominfo;
-		this.set_string(KW_TEXT_RULE,roominfo);
+		var playerNum = GameFunction.getStrValue(roominfo,"playerNum")
+		var playCount = GameFunction.getStrValue(roominfo,"playCount")
+		var isAAPay = GameFunction.getStrValue(roominfo,"isAAPay")
+		var baseScore = GameFunction.getStrValue(roominfo,"baseScore")
+		cc.log( "hcc>>rule: " , playerNum , playCount , isAAPay , baseScore)
+		var rule = ""
+		rule = playerNum + "人," + playCount + "局," + baseScore + "分"
+		this.set_string(KW_TEXT_RULE,rule);
+		RoomData.setGameRule(roominfo);
 	},
 
 	on_event_room_id(udata){
@@ -225,6 +234,33 @@ cc.Class({
 
 	on_event_user_exit_room(udata){
 		//TODO
+		var status = udata.status
+		if (status == Respones.OK){
+			var userinfo = udata.userinfo
+			var ishost = userinfo.ishost
+			var isoffline = userinfo.isoffline
+			var seatid = userinfo.seatid
+			if (ishost || isoffline){
+				cc.sys.localStorage.setItem(LocalStorageName.game_user_arrive_info + seatid , JSON.stringify(userinfo))
+			}else{
+				cc.sys.localStorage.setItem(LocalStorageName.game_user_arrive_info + seatid , null)
+			}
+			this.update_user_info();
+		}else{
+			cc.log("exit room failed...")
+		}
+	},
+
+	on_event_all_use_state(udata){
+		var state = udata.userstate
+		for(var index in state){
+			var seatid = state[index].seatid
+			var userstate = state[index].userstate
+			var uinfoJson =  JSON.parse(cc.sys.localStorage.getItem(LocalStorageName.game_user_arrive_info + seatid))
+			uinfoJson.userstate = userstate
+			cc.sys.localStorage.setItem(LocalStorageName.game_user_arrive_info + seatid , JSON.stringify(uinfoJson))
+		}
+		this.update_user_info();
 	},
 	///////////////////////////////// 网络链接
 	//网络连接成功
@@ -262,12 +298,12 @@ cc.Class({
     ///////////////////////// button 事件
 	
 	on_click_back(sender){
+		net_mgr.Instance.send_msg(Stype.Logic,Cmd.eExitRoomReq);
 		var on_process = function(percent){};
 		var on_finished = function(){
 			GameApp.Instance.enter_scene(LobbyScene);
 		};
 		GameApp.Instance.preload_scene(LobbyScene,on_process,on_finished)
-		net_mgr.Instance.send_msg(Stype.Logic,Cmd.eExitRoomReq);
 	},
 
 	on_click_dessolve(sender){
@@ -297,8 +333,14 @@ cc.Class({
 				this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_OFFINLE,localInfo.isoffline);
 				this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_MASTER,localInfo.ishost);
 				this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_READY,localInfo.userstate == 2);
+				//self ready
 				if (localInfo.seatid == GameFunction.getSelfServerSeat()){
 					this.set_visible(KW_BTN_READY,localInfo.userstate < 2 ? true : false)
+				}
+				//gamestart
+				if (localInfo.userstate == 3){
+					this.set_visible(KW_BTN_READY, false)
+					this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_READY,false);
 				}
 				var url =  "rectheader/" + (10 + localInfo.uface) + ".png";
 				this.load_texture(KW_PANEL_USER_INFO + localSeat + "/" + KW_IMG_HEAD,url);
@@ -316,6 +358,7 @@ cc.Class({
 	},
     
 	remove_event_listenner(){
+		
 		event_mgr.remove_event_listenner(cmd_name_map[Cmd.eHeartBeatRes],this,this.on_event_heartbeat)
 		event_mgr.remove_event_listenner(cmd_name_map[Cmd.eLoginOutRes],this,this.on_event_login_out)
 		event_mgr.remove_event_listenner(cmd_name_map[Cmd.eGuestLoginRes],this,this.on_event_guest_login)

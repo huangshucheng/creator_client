@@ -360,9 +360,7 @@
     },
     "_enabled": true,
     "lancher_prefabs": [
-      {
-        "__uuid__": "de850bf9-d885-4234-ad70-b60f95d2648a"
-      }
+      null
     ],
     "lancher_sprite_frames": [],
     "lancher_audio_clips": [],

@@ -19,8 +19,7 @@ var res_pkg = {
     
     sprite_atlases: [],
     text_assets:[],
-    fonts_assets: [
-    ],
+    fonts_assets: [],
     other_file:[],
 };
 

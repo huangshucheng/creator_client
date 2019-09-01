@@ -60,7 +60,6 @@ var net_mgr = cc.Class({
 
     _on_recv_data(event) {
         var str_or_buf = event.data;
-        // cc.log("len: " + str_or_buf.length)
         var msg_data = proto_man.decode_cmd(this.proto_type, str_or_buf);
         if (!msg_data) {
             return;
@@ -108,7 +107,7 @@ var net_mgr = cc.Class({
         }
 
         this.state = State.Connecting;
-        this.sock = new WebSocket(this.url); // H5标准，底层做好了;
+        this.sock = new WebSocket(this.url); // H5标准
         this.sock.binaryType = "arraybuffer";
 
         this.sock.onopen = this._on_opened.bind(this);

@@ -46,6 +46,9 @@ cc.Class({
     },
 
     add_button_listener(view_name, caller, func) {
+        if(view_name == null){
+            return;
+        }
         var view_node = this.view[view_name];
         if (!view_node) {
             return;

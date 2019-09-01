@@ -6,7 +6,7 @@ var MAX_PLAYER_COUNT      = 4;
 var GameFunction = {
     serverSeatToLocal(serverSeat){
         var localSeat = INVALID_SEAT;
-        var chairCount =  MAX_PLAYER_COUNT;  //TODO
+        var chairCount =  this.getMaxPlayerCount(); 
         var selfServerSeat = this.getSelfServerSeat();
         if (selfServerSeat == INVALID_SEAT){
             return INVALID_SEAT;
@@ -22,7 +22,7 @@ var GameFunction = {
     
     localSeatToServer(localSeat){
         var serverSeat = INVALID_SEAT
-        var chairCount =  MAX_PLAYER_COUNT;  //TODO
+        var chairCount =  this.getMaxPlayerCount();
         var selfServerSeat = this.getSelfServerSeat();
         if (selfServerSeat == INVALID_SEAT){
             return INVALID_SEAT;
@@ -57,11 +57,10 @@ var GameFunction = {
     },
 
     getMaxPlayerCount(){
-        return MAX_PLAYER_COUNT;
-    },
-
-    getChairs(){
-        return MAX_PLAYER_COUNT;
+        var count = MAX_PLAYER_COUNT;
+        var RoomData = require("RoomData")
+        count = RoomData.getChars();
+        return count;
     },
 
     clearSeatInfo(){
@@ -73,6 +72,30 @@ var GameFunction = {
     clearSeatInfoBySeat(serverSeat){
         cc.sys.localStorage.setItem(LocalStorageName.game_user_arrive_info + serverSeat,null);
     },
+
+    getStrValue(luaString, variable){
+		var value = ""
+		var vs = {}
+		vs = luaString.split(";")
+		for(var str in vs){
+			var vss =  {}
+			vss = vs[str].split("=")
+			if (vss.length >= 2 && vss[0] == variable){
+				value = vss[1]
+				if (value.length >= 2){
+					if(value[0] == "'" && value[value.length - 1] == "'"){
+						var tmpvalue = ""
+						for(var i = 1;i < value.length - 1;i++){
+							tmpvalue = tmpvalue +  String(value[i]);
+						}
+						value = tmpvalue;
+					}
+				}
+				return value;
+			}
+		}
+		return value;
+	},
 };
 
 module.exports = GameFunction;
