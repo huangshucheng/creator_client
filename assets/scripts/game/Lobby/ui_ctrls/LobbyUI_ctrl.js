@@ -8,7 +8,7 @@ var Respones 		= require("Respones")
 var LoginScene      = require("LoginScene");
 var event_mgr 		= require("event_mgr");
 var event_name 		= require("event_name");
-var UI_manager 		= require("UI_manager")
+var UI_manager 		= require("UI_manager");
 
 var GameScene 		= require("GameScene");
 var LocalStorageName = require("LocalStorageName");
@@ -186,6 +186,8 @@ cc.Class({
 				GameApp.Instance.enter_scene(GameScene);
 			};
 			GameApp.Instance.preload_scene(GameScene,on_process,on_finished)
+		}else{
+			net_mgr.Instance.send_msg(Stype.Logic,Cmd.eGetCreateStatusReq);
 		}
 	},
 	//加入房间
@@ -247,12 +249,12 @@ cc.Class({
 		// test
 		net_mgr.Instance.send_msg(Stype.System,Cmd.eGetSysMsgReq,{versionnum : 1})
 		net_mgr.Instance.send_msg(Stype.System,Cmd.eGetWorldRankUchipReq)
-		var node = this.seekWidgetByName(this.node,"BTN_CREATE_ROOM");
-		cc.log("name: " + node.name);
+		// var node = this.seekWidgetByName(this.node,"BTN_CREATE_ROOM");
+		// cc.log("name: " + node.name);
 	},
 
 	on_click_create_room(sender){
-		var playerNum = 3
+		var playerNum = 2
 		var playCount = 10
 		var isAAPay = 1
 		var baseScore = 1

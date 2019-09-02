@@ -12,6 +12,7 @@ var event_name 		= require("event_name");
 var GameFunction 	= require("GameFunction")
 var RoomData 		= require("RoomData")
 var LocalStorageName = require("LocalStorageName");
+var UI_manager 		= require("UI_manager");
 
 var KW_TEXT_VERSION 	= "KW_TEXT_VERSION";
 var KW_TEXT_NET_STATUS 	= "KW_TEXT_NET_STATUS";
@@ -79,6 +80,7 @@ cc.Class({
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eUserArrivedInfos],this,this.on_event_user_arrive_infos)
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eExitRoomRes],this,this.on_event_user_exit_room)
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eAllUserState],this,this.on_event_all_use_state)
+		event_mgr.add_event_listenner(cmd_name_map[Cmd.eGameStart],this,this.on_event_game_start)
 
 		///////////////////////
 		event_mgr.add_event_listenner(event_name.net_connect,this,this.on_event_net_connect)
@@ -262,6 +264,12 @@ cc.Class({
 		}
 		this.update_user_info();
 	},
+
+	on_event_game_start(udata){
+		if (udata.status == Respones.OK){
+			cc.log("start game...")
+		}
+	},
 	///////////////////////////////// 网络链接
 	//网络连接成功
 	on_event_net_connect(udata){
@@ -317,6 +325,7 @@ cc.Class({
 	/////////////////////////
 	init_UI(){
 		// var uinfo = JSON.parse(cc.sys.localStorage.getItem(LocalStorageName.user_info_self));
+		UI_manager.show_dialog("DialogGame")
 	},
 
 	update_user_info(){
@@ -355,6 +364,7 @@ cc.Class({
         cc.log("GameSceneUI>>destory....")
 		this.remove_event_listenner();
 		GameFunction.clearSeatInfo();
+		UI_manager.hide_dialog("DialogGame")
 	},
     
 	remove_event_listenner(){
@@ -377,6 +387,7 @@ cc.Class({
 		event_mgr.remove_event_listenner(cmd_name_map[Cmd.ePlayCountRes],this,this.on_event_play_count)
 		event_mgr.remove_event_listenner(cmd_name_map[Cmd.eUserArrivedInfos],this,this.on_event_user_arrive_infos)
 		event_mgr.remove_event_listenner(cmd_name_map[Cmd.eExitRoomRes],this,this.on_event_user_exit_room)
+		event_mgr.remove_event_listenner(cmd_name_map[Cmd.eGameStart],this,this.on_event_game_start)
 
 		/////////////////////
 		event_mgr.remove_event_listenner(event_name.net_connect,this,this.on_event_net_connect)
