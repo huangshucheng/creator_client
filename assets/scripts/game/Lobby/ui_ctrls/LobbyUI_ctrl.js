@@ -101,7 +101,6 @@ cc.Class({
 	//退出登陆
 	on_event_login_out(udata){
 		if(udata.status == Respones.OK){
-			var self = this
 			var on_process = function(percent){};
 			var on_finished = function(){
 				GameApp.Instance.enter_scene(LoginScene);

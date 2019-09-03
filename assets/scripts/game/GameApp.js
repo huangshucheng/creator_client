@@ -24,9 +24,7 @@ var GameApp = cc.Class({
 			this.destroy();
 			return;
 		}
-
 		game_mgr.prototype.onLoad.call(this);
-		this.protobufRoot =  null;
 		//connect to websocket server
 		net_mgr.Instance.connect_to_server();
 	},
@@ -37,15 +35,11 @@ var GameApp = cc.Class({
 			cc.log("on_process>> " + percent);
 		};
 
-		var self = this;
+		var _this = this;
 		var on_finished = function(){
 			cc.log("on_finished>> ");
-			self.enter_scene(LoginScene);
+			_this.enter_scene(LoginScene);
 		};
 		this.preload_scene(LoginScene,on_process,on_finished)
-	},
-
-	get_protobuf_root(){
-		return this.protobufRoot;
 	},
 });

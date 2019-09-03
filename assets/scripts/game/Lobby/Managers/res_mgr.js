@@ -61,7 +61,7 @@ var res_mgr = cc.Class({
             return;
         }
 
-        var self = this;
+        var _this = this;
         for(key in res_set) {
             for(var i = 0; i < res_set[key].length; i ++) {
                 var url = res_set[key][i];
@@ -70,12 +70,12 @@ var res_mgr = cc.Class({
                         cc.error("[res_mgr]", err);
                     }
 
-                    self.now_loaded ++;
+                    _this.now_loaded ++;
                     if (on_progress) {
-                        on_progress(self.now_loaded / self.total_num);
+                        on_progress(_this.now_loaded / _this.total_num);
                     }
 
-                    if (self.now_loaded >= self.total_num) {
+                    if (_this.now_loaded >= _this.total_num) {
                         if (on_load_finished) {
                             on_load_finished();
                         }

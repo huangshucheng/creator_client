@@ -36,7 +36,7 @@ cc.Class({
         if (root.name == view_name){
             return root;
         }
-        for(let i = 0; i < root.childrenCount; i ++) {
+        for(let i = 0; i < root.childrenCount; i++) {
             var node = this.seekWidgetByName(root.children[i],view_name);
             if(node){
                 return node;

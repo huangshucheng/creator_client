@@ -1,4 +1,5 @@
 var LocalStorageName    = require("LocalStorageName")
+var RoomData            = require("RoomData")
 var LCOAL_SEAT_SELF     = 2;
 var INVALID_SEAT        = -1;
 var MAX_PLAYER_COUNT      = 4;
@@ -42,12 +43,19 @@ var GameFunction = {
         }
         
         for(var i = 1 ; i <= this.getMaxPlayerCount(); i++){
-            var info = JSON.parse(cc.sys.localStorage.getItem(LocalStorageName.game_user_arrive_info + i));
-            if (info){
-                if(selfbid == info.brandid){
-                    return info.seatid
+            var player = RoomData.getInstance().get_player_by_seatid(i);
+            if (player)
+            {
+                var info = player.get_uinfo()
+                if (info)
+                {
+                    if(selfbid == info.brandid)
+                    {
+                        return info.seatid
+                    }
                 }
             }
+
         }
         return INVALID_SEAT;
     },
@@ -57,22 +65,9 @@ var GameFunction = {
     },
 
     getMaxPlayerCount(){
-        var count = MAX_PLAYER_COUNT;
-        var RoomData = require("RoomData")
-        count = RoomData.getChars();
-        return count;
-    },
-
-    clearSeatInfo(){
-        for(var i = 1 ; i <= this.getMaxPlayerCount(); i++){
-            cc.sys.localStorage.setItem(LocalStorageName.game_user_arrive_info + i,null);
-        }
+        return RoomData.getInstance().get_chairs();
     },
     
-    clearSeatInfoBySeat(serverSeat){
-        cc.sys.localStorage.setItem(LocalStorageName.game_user_arrive_info + serverSeat,null);
-    },
-
     getStrValue(luaString, variable){
 		var value = ""
 		var vs = {}

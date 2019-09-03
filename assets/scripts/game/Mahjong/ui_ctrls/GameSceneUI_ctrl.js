@@ -103,7 +103,6 @@ cc.Class({
 	//退出登陆
 	on_event_login_out(udata){
 		if(udata.status == Respones.OK){
-			var self = this
 			var on_process = function(percent){};
 			var on_finished = function(){
 				GameApp.Instance.enter_scene(LoginScene);
@@ -185,11 +184,11 @@ cc.Class({
 			var brandid = udata.brandid
 			var seatid = udata.seatid
 			var userstate = udata.userstate
-			var userinfo = cc.sys.localStorage.getItem(LocalStorageName.game_user_arrive_info + seatid);
-			if (userinfo){
-				var jsonInfo = JSON.parse(userinfo);
-				jsonInfo.userstate = userstate;
-				cc.sys.localStorage.setItem(LocalStorageName.game_user_arrive_info + seatid ,JSON.stringify(jsonInfo));
+			var player = RoomData.getInstance().get_player_by_seatid(seatid)
+			var uinfo = player.get_uinfo()
+			if (uinfo){
+				uinfo.userstate = userstate
+				player.set_uinfo(uinfo);
 				this.update_user_info();
 			}
 		}
@@ -209,7 +208,7 @@ cc.Class({
 		var rule = ""
 		rule = playerNum + "人," + playCount + "局," + baseScore + "分"
 		this.set_string(KW_TEXT_RULE,rule);
-		RoomData.setGameRule(roominfo);
+		RoomData.getInstance().set_game_rule(roominfo)
 	},
 
 	on_event_room_id(udata){
@@ -227,9 +226,7 @@ cc.Class({
 			var brandid = userinfo[i].brandid;
 			var seatid = userinfo[i].seatid;
 			var info = userinfo[i];
-			cc.sys.localStorage.setItem(LocalStorageName.game_user_arrive_info + seatid ,JSON.stringify(info));
-			// var jsoninfo = JSON.parse(cc.sys.localStorage.getItem(LocalStorageName.game_user_arrive_info + seatid)); 
-			// cc.log("hcc>>jsoninfo: " + jsoninfo);
+			RoomData.getInstance().update_player_by_uinfo(info)
 		}
 		this.update_user_info();
 	},
@@ -243,9 +240,9 @@ cc.Class({
 			var isoffline = userinfo.isoffline
 			var seatid = userinfo.seatid
 			if (ishost || isoffline){
-				cc.sys.localStorage.setItem(LocalStorageName.game_user_arrive_info + seatid , JSON.stringify(userinfo))
+				RoomData.getInstance().update_player_by_uinfo(userinfo)
 			}else{
-				cc.sys.localStorage.setItem(LocalStorageName.game_user_arrive_info + seatid , null)
+				RoomData.getInstance().remove_player_by_uinfo(userinfo)
 			}
 			this.update_user_info();
 		}else{
@@ -258,9 +255,12 @@ cc.Class({
 		for(var index in state){
 			var seatid = state[index].seatid
 			var userstate = state[index].userstate
-			var uinfoJson =  JSON.parse(cc.sys.localStorage.getItem(LocalStorageName.game_user_arrive_info + seatid))
-			uinfoJson.userstate = userstate
-			cc.sys.localStorage.setItem(LocalStorageName.game_user_arrive_info + seatid , JSON.stringify(uinfoJson))
+			var player = RoomData.getInstance().get_player_by_seatid(seatid)
+			var uinfo = player.get_uinfo()
+			if (uinfo){
+				uinfo.userstate = userstate
+				player.set_uinfo(uinfo)
+			}
 		}
 		this.update_user_info();
 	},
@@ -324,7 +324,6 @@ cc.Class({
 	},
 	/////////////////////////
 	init_UI(){
-		// var uinfo = JSON.parse(cc.sys.localStorage.getItem(LocalStorageName.user_info_self));
 		UI_manager.show_dialog("DialogGame")
 	},
 
@@ -333,29 +332,32 @@ cc.Class({
 		var maxPlayer = GameFunction.getMaxPlayerCount();
 		for(var serverSeat = 1; serverSeat <= maxPlayer; serverSeat++){
 			var localSeat = GameFunction.serverSeatToLocal(serverSeat)
-			var localInfo = JSON.parse(cc.sys.localStorage.getItem(LocalStorageName.game_user_arrive_info + serverSeat));
-			if(localInfo != null){
-				cc.log("localInfo: " + localInfo);
-				this.set_visible(KW_PANEL_USER_INFO + localSeat,true);
-				this.set_string(KW_PANEL_USER_INFO + localSeat + "/" +  KW_TEXT_NAME,localInfo.unick);
-				this.set_string(KW_PANEL_USER_INFO + localSeat + "/" +  KW_TEXT_SCORE,1000);
-				this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_OFFINLE,localInfo.isoffline);
-				this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_MASTER,localInfo.ishost);
-				this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_READY,localInfo.userstate == 2);
-				//self ready
-				if (localInfo.seatid == GameFunction.getSelfServerSeat()){
-					this.set_visible(KW_BTN_READY,localInfo.userstate < 2 ? true : false)
+			var player = RoomData.getInstance().get_player_by_seatid(serverSeat)
+			if (player){
+				var localInfo = player.get_uinfo();
+				if(localInfo != null){
+					cc.log("localInfo: " + localInfo);
+					this.set_visible(KW_PANEL_USER_INFO + localSeat,true);
+					this.set_string(KW_PANEL_USER_INFO + localSeat + "/" +  KW_TEXT_NAME,localInfo.unick);
+					this.set_string(KW_PANEL_USER_INFO + localSeat + "/" +  KW_TEXT_SCORE,1000);
+					this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_OFFINLE,localInfo.isoffline);
+					this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_MASTER,localInfo.ishost);
+					this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_READY,localInfo.userstate == 2);
+					//self ready
+					if (localInfo.seatid == GameFunction.getSelfServerSeat()){
+						this.set_visible(KW_BTN_READY,localInfo.userstate < 2 ? true : false)
+					}
+					//gamestart
+					if (localInfo.userstate == 3){
+						this.set_visible(KW_BTN_READY, false)
+						this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_READY,false);
+					}
+					var url =  "rectheader/" + (10 + localInfo.uface) + ".png";
+					this.load_texture(KW_PANEL_USER_INFO + localSeat + "/" + KW_IMG_HEAD,url);
+				}else{
+					cc.log("user not exist: " + localSeat)
+					this.set_visible(KW_PANEL_USER_INFO + localSeat,false);
 				}
-				//gamestart
-				if (localInfo.userstate == 3){
-					this.set_visible(KW_BTN_READY, false)
-					this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_READY,false);
-				}
-				var url =  "rectheader/" + (10 + localInfo.uface) + ".png";
-				this.load_texture(KW_PANEL_USER_INFO + localSeat + "/" + KW_IMG_HEAD,url);
-			}else{
-				cc.log("user not exist: " + localSeat)
-				this.set_visible(KW_PANEL_USER_INFO + localSeat,false);
 			}
 		}
 	},
@@ -363,8 +365,8 @@ cc.Class({
     onDestroy(){
         cc.log("GameSceneUI>>destory....")
 		this.remove_event_listenner();
-		GameFunction.clearSeatInfo();
 		UI_manager.hide_dialog("DialogGame")
+		RoomData.getInstance().clear()
 	},
     
 	remove_event_listenner(){
