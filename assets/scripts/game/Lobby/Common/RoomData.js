@@ -84,7 +84,6 @@ var RoomData = cc.Class({
     get_player_count(){
         var count = 0;
         this._players.forEach(element => {
-            cc.log("hcc>>element: " + element)
             count += 1;
         });
         return count;

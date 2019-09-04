@@ -14,6 +14,7 @@ var KW_SHOW_NUM     = "KW_SHOW_NUM"
 var KW_BUTTON_NUM   = 32
 
 cc.Class({
+    name:"DialogGame_ctrl",
     extends: UI_ctrl,
 
     properties: {
@@ -34,6 +35,9 @@ cc.Class({
     add_net_event_listener(){
         event_mgr.add_event_listenner(cmd_name_map[Cmd.eGameStart],this,this.on_event_game_start)
         event_mgr.add_event_listenner(cmd_name_map[Cmd.eTouZiNumRes],this,this.on_event_touzi_nums)
+        event_mgr.add_event_listenner(cmd_name_map[Cmd.eClickTouZiBombRes],this,this.on_event_bomb_seat)
+        event_mgr.add_event_listenner(cmd_name_map[Cmd.eGameResult],this,this.on_event_result)
+        event_mgr.add_event_listenner(cmd_name_map[Cmd.eGameTotalResult],this,this.on_event_total_result)
     },
 
     add_button_event_listener(){
@@ -48,11 +52,6 @@ cc.Class({
     },
 
     init_UI(){
-        for(var index = 1 ;index <= KW_BUTTON_NUM ;index++){
-            var textName = KW_SHOW_NUM_BG  + index + "/" + KW_SHOW_NUM
-            this.set_string(textName,index)
-            this.set_visible(KW_SHOW_NUM_BG  + index , true)
-        }
         this.node.active = false;
     },
 
@@ -70,17 +69,35 @@ cc.Class({
         cc.log("hcc>> nums: " + nums)
         cc.log("hcc>> bombs: " + bombs)
         for(var index = 0 ;index < nums.length ;index++){
-            if (nums[index] == 0){
-                var btnName = KW_SHOW_NUM_BG  + (index + 1)
-                this.set_visible(btnName , false)
-            }
+            var btnName = KW_SHOW_NUM_BG  + (index + 1)
+            var textName = KW_SHOW_NUM_BG  + (index + 1) + "/" + KW_SHOW_NUM
+            this.set_visible(btnName , nums[index] != 0)
+            this.set_string(textName,nums[index])
+            this.view[textName].color = cc.color(0,0,0)
             for(var j = 0;j< bombs.length;j++){
                 if(bombs[j] == nums[index]){
-                    var textName = KW_SHOW_NUM_BG  + (index + 1) + "/" + KW_SHOW_NUM
                     this.view[textName].color = cc.color(255,0,0)
                 }
             }
         }
+    },
+
+    on_event_bomb_seat(udata){
+        var seatid = udata.seatid;
+        cc.log("bombseat: " + seatid)
+    },
+
+    on_event_result(udata){
+        var scorelist = udata.score
+        cc.log("on_event_result: " + scorelist)
+        this.scheduleOnce(function(dt){
+            this.node.active = false
+        }.bind(this),2)
+    },
+
+    on_event_total_result(udata){
+        var scorelist = udata.score
+        cc.log("on_event_total_result: " + scorelist)
     },
 
     /////////////////////////
@@ -105,7 +122,8 @@ cc.Class({
     remove_event_listenner(){
         event_mgr.remove_event_listenner(cmd_name_map[Cmd.eGameStart],this,this.on_event_game_start)
         event_mgr.remove_event_listenner(cmd_name_map[Cmd.eTouZiNumRes],this,this.on_event_touzi_nums)
+        event_mgr.remove_event_listenner(cmd_name_map[Cmd.eClickTouZiBombRes],this,this.on_event_bomb_seat)
+        event_mgr.remove_event_listenner(cmd_name_map[Cmd.eGameResult],this,this.on_event_result)
+        event_mgr.remove_event_listenner(cmd_name_map[Cmd.eGameTotalResult],this,this.on_event_total_result)
     },
-
-    // update (dt) {},
 });

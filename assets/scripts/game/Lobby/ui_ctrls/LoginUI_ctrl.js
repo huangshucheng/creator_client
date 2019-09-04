@@ -28,6 +28,7 @@ var KW_TEXT_VERSION 		= "KW_TEXT_VERSION"
 var KW_TEXT_NET_STATUS 		= "KW_TEXT_NET_STATUS"
 
 cc.Class({
+	name:"LoginUI_ctrl",
 	extends: UI_ctrl,
 
 	properties: {

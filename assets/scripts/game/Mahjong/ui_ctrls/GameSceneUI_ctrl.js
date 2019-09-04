@@ -11,8 +11,8 @@ var event_mgr 		= require("event_mgr");
 var event_name 		= require("event_name");
 var GameFunction 	= require("GameFunction")
 var RoomData 		= require("RoomData")
-var LocalStorageName = require("LocalStorageName");
 var UI_manager 		= require("UI_manager");
+var LocalStorageName 	= require("LocalStorageName");
 
 var KW_TEXT_VERSION 	= "KW_TEXT_VERSION";
 var KW_TEXT_NET_STATUS 	= "KW_TEXT_NET_STATUS";
@@ -42,6 +42,7 @@ onEnable
 onDisable
 */ 
 cc.Class({
+	name:"GameSceneUI_ctrl",
 	extends: UI_ctrl,
 
 	properties: {
@@ -70,7 +71,6 @@ cc.Class({
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eLoginLogicRes],this,this.on_event_login_logic)
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eGetUgameInfoRes],this,this.on_event_ugame_info)
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eBackRoomRes],this,this.on_event_back_box_room)
-		event_mgr.add_event_listenner(cmd_name_map[Cmd.eExitRoomRes],this,this.on_event_exit_box_room)
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eDessolveRes],this,this.on_event_dessolve_box_room)
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eUserReadyRes],this,this.on_event_ready)
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eCheckLinkGameRes],this,this.on_event_check_link_game)
@@ -79,6 +79,7 @@ cc.Class({
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.ePlayCountRes],this,this.on_event_play_count)
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eUserArrivedInfos],this,this.on_event_user_arrive_infos)
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eExitRoomRes],this,this.on_event_user_exit_room)
+		event_mgr.add_event_listenner(cmd_name_map[Cmd.eUserOffLine],this,this.on_event_user_off_line)
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eAllUserState],this,this.on_event_all_use_state)
 		event_mgr.add_event_listenner(cmd_name_map[Cmd.eGameStart],this,this.on_event_game_start)
 
@@ -143,10 +144,11 @@ cc.Class({
 	//登陆逻辑服
 	on_event_login_logic(udata){
 		if(udata.status == Respones.OK){
-			cc.log("on_event_login_logic>> OK")			
+			cc.log("on_event_login_logic>> OK")
+			net_mgr.Instance.send_msg(Stype.Logic,Cmd.eBackRoomReq)
 		}
 	},
-	//玩家信息
+	//玩家信息 TODO
 	on_event_ugame_info(udata){
 		var uchip = udata.uinfo.uchip;
 		var uchip2 = udata.uinfo.uchip2;
@@ -155,16 +157,8 @@ cc.Class({
 	on_event_back_box_room(udata){
 		var status = udata.status
 		if (status == Respones.OK){
-			// var on_process = function(percent){};
-			// var on_finished = function(){
-			// 	GameApp.Instance.enter_scene(GameScene);
-			// };
-			// GameApp.Instance.preload_scene(GameScene,on_process,on_finished)
+			cc.log("hcc>>back room success!")
 		}
-	},
-	//退出房间
-	on_event_exit_box_room(udata){
-		cc.log("exit box room " + udata);
 	},
 	//解散房间
 	on_event_dessolve_box_room(udata){
@@ -192,6 +186,9 @@ cc.Class({
 				this.update_user_info();
 			}
 		}
+
+		var count =  RoomData.getInstance().get_player_count()
+		cc.log(count)
 	},
 
 	on_event_check_link_game(udata){
@@ -213,12 +210,15 @@ cc.Class({
 
 	on_event_room_id(udata){
 		var roomid = udata.roomid;
+		RoomData.getInstance().set_room_id(roomid)
 		this.set_string(KW_TEXT_ROOM_NUM,"房间号:" + roomid);
 	},
 	on_event_play_count(udata){
 		var playcount = udata.playcount;
 		var totalplaycount = udata.totalplaycount;
 		this.set_string(KW_TEXT_PLAY_COUNT,"局数:" + playcount + "/" + totalplaycount);
+		RoomData.getInstance().set_play_count(playcount)
+		RoomData.getInstance().set_total_play_count(totalplaycount)
 	},
 	on_event_user_arrive_infos(udata){
 		var userinfo = udata.userinfo
@@ -232,7 +232,6 @@ cc.Class({
 	},
 
 	on_event_user_exit_room(udata){
-		//TODO
 		var status = udata.status
 		if (status == Respones.OK){
 			var userinfo = udata.userinfo
@@ -248,6 +247,12 @@ cc.Class({
 		}else{
 			cc.log("exit room failed...")
 		}
+	},
+
+	on_event_user_off_line(udata){
+		var info = udata.userinfo
+		RoomData.getInstance().update_player_by_uinfo(info)
+		this.update_user_info();
 	},
 
 	on_event_all_use_state(udata){
@@ -273,8 +278,8 @@ cc.Class({
 	///////////////////////////////// 网络链接
 	//网络连接成功
 	on_event_net_connect(udata){
+		this._connect_count = 0; 
 		this.view[KW_TEXT_NET_STATUS].getComponent(cc.Label).string = "连接成功...."
-
 		var loginType = cc.sys.localStorage.getItem(LocalStorageName.user_login_type)
 		if (loginType == "uname"){
 			var login_msg = JSON.parse(cc.sys.localStorage.getItem(LocalStorageName.user_login_msg))
@@ -332,32 +337,31 @@ cc.Class({
 		var maxPlayer = GameFunction.getMaxPlayerCount();
 		for(var serverSeat = 1; serverSeat <= maxPlayer; serverSeat++){
 			var localSeat = GameFunction.serverSeatToLocal(serverSeat)
+			cc.log("localseat: " + localSeat)
 			var player = RoomData.getInstance().get_player_by_seatid(serverSeat)
 			if (player){
 				var localInfo = player.get_uinfo();
-				if(localInfo != null){
-					cc.log("localInfo: " + localInfo);
-					this.set_visible(KW_PANEL_USER_INFO + localSeat,true);
-					this.set_string(KW_PANEL_USER_INFO + localSeat + "/" +  KW_TEXT_NAME,localInfo.unick);
-					this.set_string(KW_PANEL_USER_INFO + localSeat + "/" +  KW_TEXT_SCORE,1000);
-					this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_OFFINLE,localInfo.isoffline);
-					this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_MASTER,localInfo.ishost);
-					this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_READY,localInfo.userstate == 2);
-					//self ready
-					if (localInfo.seatid == GameFunction.getSelfServerSeat()){
-						this.set_visible(KW_BTN_READY,localInfo.userstate < 2 ? true : false)
-					}
-					//gamestart
-					if (localInfo.userstate == 3){
-						this.set_visible(KW_BTN_READY, false)
-						this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_READY,false);
-					}
-					var url =  "rectheader/" + (10 + localInfo.uface) + ".png";
-					this.load_texture(KW_PANEL_USER_INFO + localSeat + "/" + KW_IMG_HEAD,url);
-				}else{
-					cc.log("user not exist: " + localSeat)
-					this.set_visible(KW_PANEL_USER_INFO + localSeat,false);
+				cc.log("localInfo: " + JSON.stringify(localInfo));
+				this.set_visible(KW_PANEL_USER_INFO + localSeat,true);
+				this.set_string(KW_PANEL_USER_INFO + localSeat + "/" +  KW_TEXT_NAME,localInfo.unick);
+				this.set_string(KW_PANEL_USER_INFO + localSeat + "/" +  KW_TEXT_SCORE,1000);
+				this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_OFFINLE,localInfo.isoffline);
+				this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_MASTER,localInfo.ishost);
+				this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_READY,localInfo.userstate == 2);
+				//self ready
+				if (localInfo.seatid == GameFunction.getSelfServerSeat()){
+					this.set_visible(KW_BTN_READY,localInfo.userstate < 2 ? true : false)
 				}
+				//gamestart
+				if (localInfo.userstate == 3){
+					this.set_visible(KW_BTN_READY, false)
+					this.set_visible(KW_PANEL_USER_INFO + localSeat + "/" +  KW_IMG_READY,false);
+				}
+				var url =  "rectheader/" + (10 + localInfo.uface) + ".png";
+				this.load_texture(KW_PANEL_USER_INFO + localSeat + "/" + KW_IMG_HEAD,url);
+			}else{
+				cc.log("user not exist: " + localSeat)
+				this.set_visible(KW_PANEL_USER_INFO + localSeat,false);
 			}
 		}
 	},
@@ -379,7 +383,6 @@ cc.Class({
 		event_mgr.remove_event_listenner(cmd_name_map[Cmd.eLoginLogicRes],this,this.on_event_login_logic)
 		event_mgr.remove_event_listenner(cmd_name_map[Cmd.eGetUgameInfoRes],this,this.on_event_ugame_info)
 		event_mgr.remove_event_listenner(cmd_name_map[Cmd.eBackRoomRes],this,this.on_event_back_box_room)
-		event_mgr.remove_event_listenner(cmd_name_map[Cmd.eExitRoomRes],this,this.on_event_exit_box_room)
 		event_mgr.remove_event_listenner(cmd_name_map[Cmd.eDessolveRes],this,this.on_event_dessolve_box_room)
 		event_mgr.remove_event_listenner(cmd_name_map[Cmd.eUserReadyRes],this,this.on_event_ready)
 		event_mgr.remove_event_listenner(cmd_name_map[Cmd.eCheckLinkGameRes],this,this.on_event_check_link_game)

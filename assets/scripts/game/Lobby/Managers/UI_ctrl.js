@@ -1,5 +1,6 @@
 
 cc.Class({
+    name:"UI_ctrl",
     extends: cc.Component,
 
     properties: {
@@ -15,6 +16,7 @@ cc.Class({
     onLoad () {
         this.view = {};
         this.load_all_object(this.node, "");
+        cc.log("hcc>>class name: " , this.name);
     },
 
     start () {
@@ -23,6 +25,10 @@ cc.Class({
     //view_name: 节点路径+名称， 可带 '/'
     //root :开始查找的节点, 可为null,从根节点开始查找
     ui_find(view_name,root){
+        if (!this.view){
+            cc.error(this.name + " view is null")
+            return
+        }
         if(this.view[view_name]){
             return this.view[view_name];
         }
@@ -30,6 +36,10 @@ cc.Class({
     },
     //view_name, 不带 '/'
     seekWidgetByName(view_name,root){
+        if (!this.view){
+            cc.error(this.name + " view is null")
+            return
+        }
         if(root == null){
             root = this.node
         }
@@ -46,6 +56,10 @@ cc.Class({
     },
 
     add_button_listener(view_name, caller, func) {
+        if (!this.view){
+            cc.error(this.name + " view is null")
+            return
+        }
         if(view_name == null){
             return;
         }
@@ -63,6 +77,10 @@ cc.Class({
     },
 
     set_string(view_name,str){
+        if (!this.view){
+            cc.error(this.name + " view is null")
+            return
+        }
         var view_node = this.view[view_name];
         if (!view_node) {
             return;
@@ -77,6 +95,10 @@ cc.Class({
     },
 
     get_string(view_name){
+        if (!this.view){
+            cc.error(this.name + " view is null")
+            return
+        }
         var view_node = this.view[view_name];
         if (!view_node) {
             return;
@@ -90,6 +112,10 @@ cc.Class({
     },
 
     set_visible(view_name,visible){
+        if (!this.view){
+            cc.error(this.name + " view is null")
+            return
+        }
         var view_node = this.view[view_name];
         if (!view_node) {
             return;
@@ -98,6 +124,10 @@ cc.Class({
     },
 
     get_visible(view_name){
+        if (!this.view){
+            cc.error(this.name + " view is null")
+            return
+        }
         var view_node = this.view[view_name];
         if (!view_node) {
             return;
@@ -106,6 +136,10 @@ cc.Class({
     },
 
     load_texture(view_name,url){
+        if (!this.view){
+            cc.error(this.name + " view is null")
+            return
+        }
         var view_node = this.view[view_name];
         if (!view_node) {
             return;

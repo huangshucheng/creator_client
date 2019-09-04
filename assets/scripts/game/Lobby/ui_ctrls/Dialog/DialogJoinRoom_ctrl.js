@@ -19,6 +19,7 @@ var Respones 		= require("Respones")
 var KW_TOTAL_ROOM_NUM_COUNT = 6
 
 cc.Class({
+    name:"DialogJoinRoom_ctrl",
     extends: UI_ctrl,
 
     properties: {
@@ -108,17 +109,15 @@ cc.Class({
                 var num = this.get_string(numName)
                 roomid = roomid + num;
             }
-            cc.log("roomid:" + roomid)
             var msg = {
                 roomid : roomid,
             }
             net_mgr.Instance.send_msg(Stype.Logic,Cmd.eJoinRoomReq,msg)
         }
-        this._text_index +=1;
+        this._text_index += 1;
     },
     ////////////////////////
     onDestroy(){
-        cc.log("DialogJoinRoom>>destory....")
         this.remove_event_listenner();
     },
     
