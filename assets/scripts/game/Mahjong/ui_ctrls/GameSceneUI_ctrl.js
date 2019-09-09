@@ -42,7 +42,6 @@ onEnable
 onDisable
 */ 
 cc.Class({
-	name:"GameSceneUI_ctrl",
 	extends: UI_ctrl,
 
 	properties: {

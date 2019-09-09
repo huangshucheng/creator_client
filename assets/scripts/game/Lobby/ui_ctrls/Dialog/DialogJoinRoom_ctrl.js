@@ -19,7 +19,6 @@ var Respones 		= require("Respones")
 var KW_TOTAL_ROOM_NUM_COUNT = 6
 
 cc.Class({
-    name:"DialogJoinRoom_ctrl",
     extends: UI_ctrl,
 
     properties: {

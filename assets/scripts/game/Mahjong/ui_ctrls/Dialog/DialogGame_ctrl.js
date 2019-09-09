@@ -14,7 +14,6 @@ var KW_SHOW_NUM     = "KW_SHOW_NUM"
 var KW_BUTTON_NUM   = 32
 
 cc.Class({
-    name:"DialogGame_ctrl",
     extends: UI_ctrl,
 
     properties: {
