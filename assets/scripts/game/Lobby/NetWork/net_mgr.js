@@ -1,10 +1,10 @@
 var event_mgr       = require("event_mgr");
 var proto_man       = require("proto_man");
 var Cmd             = require("Cmd")
-var cmd_name_map    = require("cmd_name_map")
 var Stype           = require("Stype")
 var event_name      = require("event_name")
 var ConfigKeyWord   = require("ConfigKeyWord")
+var ProtoCmd        = require("ProtoCmd")
 
 var State = {
     Disconnected: 0, // 断开连接
@@ -35,8 +35,10 @@ var net_mgr = cc.Class({
 
     properties: {
         // url: "ws://192.168.2.130:6081/ws",
-        url: "ws://" + ConfigKeyWord.remoteip + ":" + ConfigKeyWord.remoteport + "/ws",
-        proto_type: 1, //0:json , 1:protobuf
+        url: "ws://" + ConfigKeyWord.localip + ":" + ConfigKeyWord.remoteport + "/ws",
+        // url: "ws://" + ConfigKeyWord.remoteip + ":" + ConfigKeyWord.remoteport + "/ws",
+        proto_type: proto_man.PROTO_BUF, //1:json , 2:protobuf
+        // proto_type: proto_man.PROTO_JSON, //1:json , 2:protobuf
     },
 
     onLoad () {
@@ -64,20 +66,20 @@ var net_mgr = cc.Class({
         if (!msg_data) {
             return;
         }
-        var cmd_name = cmd_name_map[msg_data.ctype];
+        var cmd_name = ProtoCmd.default.getCmdName(msg_data.stype, msg_data.ctype)
         if (cmd_name){
             event_mgr.dispatch_event(cmd_name, msg_data.body);    
         }
 
-        if(msg_data.ctype != Cmd.eHeartBeatRes){
+        // if(msg_data.ctype != Cmd.eHeartBeatRes){
             cc.log("###########################>>>recvstart")
-            console.log("stype: " + Stype.name[msg_data.stype] + " ,ctype: " + cmd_name_map[msg_data.ctype]);
+            console.log("stype:" , Stype.StypeName[msg_data.stype] + " ,ctype:",cmd_name);
             if (msg_data.body){
                 var jsonBody = JSON.stringify(msg_data.body);
                 cc.log(jsonBody);
             }
             cc.log("###########################>>>recvend")
-        }
+        // }
     },
 
     _on_socket_close(event) {

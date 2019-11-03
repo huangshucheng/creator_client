@@ -9,8 +9,8 @@ var proto_tools = require("proto_tools");
 */
 
 var proto_man = {
-	PROTO_JSON: 0,  
-	PROTO_BUF: 1,
+	PROTO_JSON: 1,  
+	PROTO_BUF: 2,
 	encode_cmd: encode_cmd,
 	decode_cmd: decode_cmd,
 };
@@ -25,9 +25,8 @@ function decrypt_cmd(str_of_buf) {
 	return str_of_buf;
 }
 
-function _protobuf_encode(stype, ctype, body){
-	var cmd_buf = proto_tools.encode_protobuf_cmd(stype, ctype, body)
-	return cmd_buf;
+function _protobuf_encode(stype, ctype, proto_type, body){
+	return proto_tools.encode_protobuf_cmd(stype, ctype, proto_type, body)
 }
 
 function _protobuf_decode(cmd_buf){
@@ -38,9 +37,9 @@ function _protobuf_decode(cmd_buf){
 	return cmd;
 }
 
-function _json_encode(stype, ctype, body) {
+function _json_encode(stype, ctype, proto_type, body) {
 	var str = JSON.stringify(body);
-	var cmd_buf = proto_tools.encode_json_cmd(stype, ctype, str);
+	var cmd_buf = proto_tools.encode_json_cmd(stype, ctype, proto_type,str);
 	return cmd_buf;
 }
 
@@ -71,13 +70,18 @@ function _json_decode(cmd_buf) {
 // 返回是一段编码后的数据;
 function encode_cmd(proto_type, stype, ctype, body) {
 	var buf = null;
-	var dataview;
+	var dataview = null;
 	if (proto_type == proto_man.PROTO_JSON) {
-		dataview = _json_encode(stype, ctype, body);
+		dataview = _json_encode(stype, ctype, proto_man.PROTO_JSON, body);
 	}
 	else { // buf协议
-		dataview = _protobuf_encode(stype, ctype, body)
+		dataview = _protobuf_encode(stype, ctype, proto_man.PROTO_BUF,body)
 	}
+
+	if(!dataview){
+		return null
+	}
+	
 	buf = dataview.buffer;
 	if (buf) {
 		buf = encrypt_cmd(buf); // 加密	
@@ -90,13 +94,10 @@ function encode_cmd(proto_type, stype, ctype, body) {
 // 返回: {0: stype, 1, ctype, 2: body}
 function decode_cmd(proto_type, str_or_buf) {
 	str_or_buf = decrypt_cmd(str_or_buf); // 解密
-	var cmd = null;
-	
 	var dataview = new DataView(str_or_buf);
 	if (dataview.byteLength < proto_tools.header_size) {
 		return null;
 	}
-
 	if (proto_type == proto_man.PROTO_JSON) {
 		return _json_decode(dataview);
 	}else{//buf 协议

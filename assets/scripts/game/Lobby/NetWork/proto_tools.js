@@ -1,5 +1,7 @@
-var Cmd = require("Cmd")
-var cmd_name_map = require("cmd_name_map")
+var ProtoCmd 	= require("ProtoCmd")
+var protobufMsg = require("protobufMsg")
+console.log("hcc>>tool>>protobufMsg: " , protobufMsg)
+
 // cmd_buf dataview
 function read_int8(cmd_buf, offset) {
 	return cmd_buf.getInt8(offset);
@@ -88,21 +90,20 @@ function alloc_buffer(total_len) {
 	return dataview;
 }
 
-function write_cmd_header_inbuf(cmd_buf, stype, ctype) {
+function write_cmd_header_inbuf(cmd_buf, stype, ctype, proto_type) {
 	write_int16(cmd_buf, 0, stype);
 	write_int16(cmd_buf, 2, ctype);
 	write_uint32(cmd_buf, 4, 0);
+	write_int16(cmd_buf, 8, proto_type);
 	return proto_tools.header_size;
 }
 
-function encode_json_cmd(stype, ctype, str) {
+function encode_json_cmd(stype, ctype, proto_type, str) {
 	var byte_len = str.utf8_byte_len();
 	var total_len = proto_tools.header_size + byte_len;
 	var cmd_buf = alloc_buffer(total_len);
-
-	var offset = write_cmd_header_inbuf(cmd_buf, stype, ctype);
+	var offset = write_cmd_header_inbuf(cmd_buf, stype, ctype, proto_type);
 	write_str(cmd_buf, offset, str);
-
 	return cmd_buf;
 }
 
@@ -111,6 +112,7 @@ function decode_json_cmd(cmd_buf, buf_len) {
 	cmd.stype = read_int16(cmd_buf, 0);
 	cmd.ctype = read_int16(cmd_buf, 2);
 	cmd.utag  = read_int32(cmd_buf, 4);
+	cmd.proto_type = read_int16(cmd_buf, 8);
 	if (buf_len > proto_tools.header_size) {
 		cmd.body = read_str(cmd_buf, proto_tools.header_size, buf_len - proto_tools.header_size);
 	}
@@ -120,22 +122,44 @@ function decode_json_cmd(cmd_buf, buf_len) {
 //解码protobuf
 function decode_protobuf_cmd(cmd_buf, buf_len){
 	var cmd = {};
-	cmd.stype = read_int16(cmd_buf, 0);
-	cmd.ctype = read_int16(cmd_buf, 2);
-	cmd.utag = read_int32(cmd_buf, 4);
+	cmd.stype 		= read_int16(cmd_buf, 0);
+	cmd.ctype 		= read_int16(cmd_buf, 2);
+	cmd.utag 		= read_int32(cmd_buf, 4);
+	cmd.proto_type 	= read_int16(cmd_buf,8)
 	if (buf_len > proto_tools.header_size) {
-		var buf = read_uint8_array(cmd_buf, proto_tools.header_size, buf_len - proto_tools.header_size);
-		var cmd_name = cmd_name_map[cmd.ctype]
-		if (cmd_name){
-			var gameprotocol = require("gameprotocol");
-			var msgType = gameprotocol[cmd_name] // no namespace
-			if(!msgType){
-				cc.error("msgType is null");
-				return null;
-            }
-            var uint8arr = new Uint8Array(buf)
-			cmd.body = msgType.decode(uint8arr)
+		var bodyBuf 	= read_uint8_array(cmd_buf, proto_tools.header_size, buf_len - proto_tools.header_size);
+		var styp_name 	= ProtoCmd.default.getProtoName(cmd.stype)
+		var cmd_name 	= ProtoCmd.default.getCmdName(cmd.stype, cmd.ctype)
+		if (!styp_name || !cmd_name){
+			cc.error("msgType stype_name or cmd_name null");
+			return cmd;
 		}
+
+		if (!protobufMsg[styp_name]) {
+			cc.error("msgType stype_name null");
+			return cmd;
+		}
+
+		let msgType = protobufMsg[styp_name][cmd_name]
+		if(!msgType){
+			cc.error("msgType is null");
+			return cmd;
+		}
+
+		let error = msgType.verify(bodyBuf)
+		if(error){
+			cc.error(error)
+			return cmd;
+		}
+		let decodeMsg = null;
+		try {
+			 decodeMsg = msgType.decode(new Uint8Array(bodyBuf))
+		}
+		catch(e) {
+			cc.error(e)
+			return cmd;
+		}
+		cmd.body = decodeMsg;
 	}
 	return cmd;
 }
@@ -148,34 +172,52 @@ body: 表对象转成的string对象,和protobuf对应，如：
 	guestKey:"hcc"
 }
  */
-function encode_protobuf_cmd(stype, ctype, body){
-	var gameprotocol = require("gameprotocol");
-	var cmd_name = cmd_name_map[ctype] // no namespace
-	if (gameprotocol[cmd_name] == null){
-		cc.error("protobuf type is null");
+function encode_protobuf_cmd(stype, ctype, proto_type, body){
+	var styp_name 	= ProtoCmd.default.getProtoName(stype)
+	var cmd_name 	= ProtoCmd.default.getCmdName(stype, ctype)
+	if (!styp_name || !cmd_name){
+		cc.error("encode_protobuf stype_name or cmd_name null");
 		return null;
 	}
-	var msgType = gameprotocol[cmd_name]
-	var error = msgType.verify(body == null ? {} : body)
+	
+	if (!protobufMsg[styp_name]) {
+		cc.error("encode_protobuf stype_name null");
+		return null;
+	}
+
+	let msgType = protobufMsg[styp_name][cmd_name]
+	if(!msgType){
+		cc.error("encode_protobuf msgType is null");
+		return null;
+	}
+
+	let error = msgType.verify(body)
 	if(error){
-		cc.error("protobuf msg verify failed: " + error);
+		cc.error("encode_protobuf error: ", error);
 		return null;
 	}
-	var msg = msgType.create(body)
-	var uint8_array_buf = msgType.encode(msg).finish()// uint8_array_buf: {Uint8Array}
-	var byte_len 	= uint8_array_buf.byteLength;
-	var total_len 	= proto_tools.header_size + byte_len;
-	var cmd_buf 	= alloc_buffer(total_len);
-	var offset = write_cmd_header_inbuf(cmd_buf, stype, ctype);
-	write_uint8_array(cmd_buf, offset, uint8_array_buf);
-	//test
-	// var decode_cmd = decode_protobuf_cmd(cmd_buf,cmd_buf.byteLength)
-	return cmd_buf;
+
+	var message = msgType.create(body)
+	if (message){
+		try {
+			var emcode_msg 	= msgType.encode(message).finish()// uint8_array_buf: {Uint8Array}
+			var byte_len 	= emcode_msg.byteLength;
+			var total_len 	= proto_tools.header_size + byte_len;
+			var cmd_buf 	= alloc_buffer(total_len);
+			var offset 		= write_cmd_header_inbuf(cmd_buf, stype, ctype, proto_type);
+			write_uint8_array(cmd_buf, offset, emcode_msg);
+			//test
+			// var decode_cmd = decode_protobuf_cmd(cmd_buf,cmd_buf.byteLength)
+			return cmd_buf;
+		} catch (error) {
+			cc.error(error)
+		}
+	}
 }
 
 var proto_tools = {
-	header_size: 8,
-	// 原操作
+	header_size: 10,
+	
 	read_int8: read_int8,
 	write_int8: write_int8,
 

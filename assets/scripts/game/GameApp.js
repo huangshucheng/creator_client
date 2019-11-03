@@ -27,6 +27,28 @@ var GameApp = cc.Class({
 		game_mgr.prototype.onLoad.call(this);
 		//connect to websocket server
 		net_mgr.Instance.connect_to_server();
+
+		/////test
+		/*
+		// var AuthProto = require("game.Lobby.NetWork.Protocol.AuthProto")
+		var AuthProto = require("AuthProto")
+		var ProtoCmd = require("ProtoCmd")
+		var dft = ProtoCmd.default
+		var protoName = dft.getProtoName(2)
+		var cmdName = dft.getCmdName(2,1)
+		console.log("hcc>>>>>>>>>" , ProtoCmd)
+		console.log("hcc>>>>>>>>>" , protoName, cmdName)
+		*/
+
+		// console.log("hcc>> AuthProto: " , AuthProto)
+		// console.log("hcc>> cmd: " , AuthProto.Cmd)
+		// console.log("hcc>> cmdName: " , AuthProto.CmdName)
+		// console.log("hcc>> protoName: " , AuthProto.protoName)
+		var protobuf = require("protobuf")
+		console.log("hcc>>protobuf: " , protobuf)
+
+		var protobugMsg = require("protobufMsg")
+		console.log("hcc>>protobufMsg: " , protobugMsg)
 	},
 
 	start() {

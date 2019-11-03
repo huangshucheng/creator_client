@@ -9,6 +9,7 @@ var event_mgr 		= require("event_mgr");
 var event_name 		= require("event_name")
 var Respones 		= require("Respones")
 var LocalStorageName = require("LocalStorageName")
+var AuthProto 		= require("AuthProto")
 
 var KW_IMG_LOGIN_BG 	= "KW_IMG_LOGIN_BG"
 var KW_BTN_LOGIN 		= KW_IMG_LOGIN_BG + "/" + "KW_BTN_LOGIN"
@@ -170,19 +171,26 @@ cc.Class({
 	},
 	//游客登录
 	on_guest_login_click_event(sender){
-		//Math.floor((Math.random()*100));  1-100 ,不包含100
-		var keystr = cc.sys.localStorage.getItem(LocalStorageName.user_login_guest_msg)
-		if (keystr == null){
-			keystr = Math.floor(Math.random()*1000000) + "8JvrDstUNDuTNnnCKFEw" + Math.floor(Math.random()*1000000);
-			cc.log("guest login reborn: " + keystr + " ,len: " + keystr.length)
-			cc.sys.localStorage.setItem(LocalStorageName.user_login_guest_msg,keystr)
+		// //Math.floor((Math.random()*100));  1-100 ,不包含100
+		// var keystr = cc.sys.localStorage.getItem(LocalStorageName.user_login_guest_msg)
+		// if (keystr == null){
+		// 	keystr = Math.floor(Math.random()*1000000) + "8JvrDstUNDuTNnnCKFEw" + Math.floor(Math.random()*1000000);
+		// 	cc.log("guest login reborn: " + keystr + " ,len: " + keystr.length)
+		// 	cc.sys.localStorage.setItem(LocalStorageName.user_login_guest_msg,keystr)
+		// }
+		// cc.log("guest login: " + keystr)
+		// if (keystr.length != 32){
+		// 	return
+		// }
+		// cc.sys.localStorage.setItem(LocalStorageName.user_login_type, "guest");
+		// net_mgr.Instance.send_msg(Stype.Auth,Cmd.eGuestLoginReq,{guestkey : String(keystr)})
+		var body = {
+			name: "huangshucheng websocket",
+			age: 27,
+			email : "827773271@qq.com",
 		}
-		cc.log("guest login: " + keystr)
-		if (keystr.length != 32){
-			return
-		}
-		cc.sys.localStorage.setItem(LocalStorageName.user_login_type, "guest");
-		net_mgr.Instance.send_msg(Stype.Auth,Cmd.eGuestLoginReq,{guestkey : String(keystr)})
+
+		net_mgr.Instance.send_msg(2,AuthProto.Cmd.eEmptyReq,body)
 	},
 	//去注册
 	on_gotoregist_click_event(sender){
