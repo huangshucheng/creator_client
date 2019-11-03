@@ -2,6 +2,10 @@ var ProtoCmd 	= require("ProtoCmd")
 var protobufMsg = require("protobufMsg")
 console.log("hcc>>tool>>protobufMsg: " , protobufMsg)
 
+//protobuf 导入
+// var $protobuf = require("protobuf");
+
+
 // cmd_buf dataview
 function read_int8(cmd_buf, offset) {
 	return cmd_buf.getInt8(offset);
@@ -145,12 +149,6 @@ function decode_protobuf_cmd(cmd_buf, buf_len){
 			cc.error("msgType is null");
 			return cmd;
 		}
-
-		let error = msgType.verify(bodyBuf)
-		if(error){
-			cc.error(error)
-			return cmd;
-		}
 		let decodeMsg = null;
 		try {
 			 decodeMsg = msgType.decode(new Uint8Array(bodyBuf))
@@ -206,8 +204,6 @@ function encode_protobuf_cmd(stype, ctype, proto_type, body){
 			var cmd_buf 	= alloc_buffer(total_len);
 			var offset 		= write_cmd_header_inbuf(cmd_buf, stype, ctype, proto_type);
 			write_uint8_array(cmd_buf, offset, emcode_msg);
-			//test
-			// var decode_cmd = decode_protobuf_cmd(cmd_buf,cmd_buf.byteLength)
 			return cmd_buf;
 		} catch (error) {
 			cc.error(error)

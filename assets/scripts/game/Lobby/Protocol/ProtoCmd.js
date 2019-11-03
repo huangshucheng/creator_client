@@ -32,10 +32,10 @@ var ProtoCmd = /** @class */ (function () {
     };
     //服务器下标->协议脚本
     ProtoCmd.StypeProtos = (_a = {},
-        _a[Stype_1.Stype.TalkRoom] = TalkRoom,
         _a[Stype_1.Stype.Auth] = Auth,
         _a[Stype_1.Stype.GameSystem] = GameSystem,
         _a[Stype_1.Stype.Game] = GameProto,
+        _a[Stype_1.Stype.TalkRoom] = TalkRoom,
         _a);
     return ProtoCmd;
 }());

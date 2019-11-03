@@ -1,7 +1,7 @@
 var UI_ctrl 		= require("UI_ctrl");
 var net_mgr 		= require("net_mgr")
 var GameApp 		= require("GameApp");
-var Stype 			= require("Stype");
+var StypeClass 			= require("Stype");
 var LobbyScene  	= require("LobbyScene");
 var cmd_name_map 	= require("cmd_name_map")
 var Cmd 			= require("Cmd");
@@ -10,6 +10,7 @@ var event_name 		= require("event_name")
 var Respones 		= require("Respones")
 var LocalStorageName = require("LocalStorageName")
 var AuthProto 		= require("AuthProto")
+var Storage 		= require("Storage")
 
 var KW_IMG_LOGIN_BG 	= "KW_IMG_LOGIN_BG"
 var KW_BTN_LOGIN 		= KW_IMG_LOGIN_BG + "/" + "KW_BTN_LOGIN"
@@ -72,7 +73,7 @@ cc.Class({
 		console.log('on_event_uname_login ' + udata);
 		if(udata.status === Respones.OK){
 			if(udata.uinfo){
-				cc.sys.localStorage.setItem(LocalStorageName.user_info_self,JSON.stringify(udata.uinfo));
+				Storage.set(LocalStorageName.user_info_self,udata.uinfo);
 			}
 			var on_process = function(percent){
 				cc.log("Lobby>>on_process>> " + percent);
@@ -145,9 +146,9 @@ cc.Class({
 			uname:String(uname),
 			upwd:String(upwd),
 		}
-		cc.sys.localStorage.setItem(LocalStorageName.user_login_msg, JSON.stringify(msg));
-		cc.sys.localStorage.setItem(LocalStorageName.user_login_type, "uname");
-		net_mgr.Instance.send_msg(Stype.Auth,Cmd.eUnameLoginReq,msg)
+		Storage.set(LocalStorageName.user_login_msg, msg)
+		Storage.set(LocalStorageName.user_login_type, "uname")
+		net_mgr.Instance.send_msg(StypeClass.Stype.Auth,AuthProto.Cmd.eUnameLoginReq,msg)
 	},
 	//注册
 	on_regist_click_event(sender){
@@ -184,13 +185,11 @@ cc.Class({
 		// }
 		// cc.sys.localStorage.setItem(LocalStorageName.user_login_type, "guest");
 		// net_mgr.Instance.send_msg(Stype.Auth,Cmd.eGuestLoginReq,{guestkey : String(keystr)})
-		var body = {
-			name: "huangshucheng websocket",
-			age: 27,
-			email : "827773271@qq.com",
-		}
-
-		net_mgr.Instance.send_msg(2,AuthProto.Cmd.eEmptyReq,body)
+		// var body = {
+		// 	uname: "test1111",
+		// 	upwd: "111111",
+		// }
+		// net_mgr.Instance.send_msg(Stype.Stype.Auth,AuthProto.Cmd.eUnameLoginReq,body)
 	},
 	//去注册
 	on_gotoregist_click_event(sender){

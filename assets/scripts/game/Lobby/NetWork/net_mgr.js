@@ -1,7 +1,6 @@
 var event_mgr       = require("event_mgr");
 var proto_man       = require("proto_man");
-var Cmd             = require("Cmd")
-var Stype           = require("Stype")
+var StypeClass      = require("Stype")
 var event_name      = require("event_name")
 var ConfigKeyWord   = require("ConfigKeyWord")
 var ProtoCmd        = require("ProtoCmd")
@@ -35,8 +34,8 @@ var net_mgr = cc.Class({
 
     properties: {
         // url: "ws://192.168.2.130:6081/ws",
-        url: "ws://" + ConfigKeyWord.localip + ":" + ConfigKeyWord.remoteport + "/ws",
-        // url: "ws://" + ConfigKeyWord.remoteip + ":" + ConfigKeyWord.remoteport + "/ws",
+        // url: "ws://" + ConfigKeyWord.localip + ":" + ConfigKeyWord.remoteport + "/ws",
+        url: "ws://" + ConfigKeyWord.remoteip + ":" + ConfigKeyWord.remoteport + "/ws",
         proto_type: proto_man.PROTO_BUF, //1:json , 2:protobuf
         // proto_type: proto_man.PROTO_JSON, //1:json , 2:protobuf
     },
@@ -73,7 +72,7 @@ var net_mgr = cc.Class({
 
         // if(msg_data.ctype != Cmd.eHeartBeatRes){
             cc.log("###########################>>>recvstart")
-            console.log("stype:" , Stype.StypeName[msg_data.stype] + " ,ctype:",cmd_name);
+            console.log("stype:" , StypeClass.StypeName[msg_data.stype] + " ,ctype:",cmd_name);
             if (msg_data.body){
                 var jsonBody = JSON.stringify(msg_data.body);
                 cc.log(jsonBody);
