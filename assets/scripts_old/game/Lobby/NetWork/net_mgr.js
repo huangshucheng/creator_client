@@ -33,9 +33,8 @@ var net_mgr = cc.Class({
     },
 
     properties: {
-        // url: "ws://192.168.2.130:6081/ws",
-        // url: "ws://" + ConfigKeyWord.localip + ":" + ConfigKeyWord.remoteport + "/ws",
-        url: "ws://" + ConfigKeyWord.remoteip + ":" + ConfigKeyWord.remoteport + "/ws",
+        url: "ws://" + ConfigKeyWord.localip + ":" + ConfigKeyWord.remoteport + "/ws",
+        // url: "wss://" + ConfigKeyWord.remoteip + ":" + ConfigKeyWord.remoteport + "/wss",
         proto_type: proto_man.PROTO_BUF, //1:json , 2:protobuf
         // proto_type: proto_man.PROTO_JSON, //1:json , 2:protobuf
     },
@@ -106,7 +105,7 @@ var net_mgr = cc.Class({
         if (this.state != State.Disconnected) {
             return;
         }
-
+        cc.log("connect_to_server: " , this.url)
         this.state = State.Connecting;
         this.sock = new WebSocket(this.url); // H5标准
         this.sock.binaryType = "arraybuffer";
@@ -120,7 +119,12 @@ var net_mgr = cc.Class({
     },
 
     start () {
-
+        setInterval(() => {
+            if (this.state != State.Disconnected) {
+                return;
+            }
+            this.connect_to_server();
+        }, 3000);
     },
 
     send_msg(stype, ctype, msg) {
@@ -133,9 +137,9 @@ var net_mgr = cc.Class({
 
     update (dt) {
         // cc.log("hcc>>readystate: " + this.sock.readyState + " ,state: " + W_STATE[this.sock.readyState])
-        if (this.state != State.Disconnected) {
-            return;
-        }
-        this.connect_to_server();
+        // if (this.state != State.Disconnected) {
+        //     return;
+        // }
+        // this.connect_to_server();
     },
 });

@@ -25,8 +25,6 @@ var GameApp = cc.Class({
 			return;
 		}
 		game_mgr.prototype.onLoad.call(this);
-		//connect to websocket server
-		net_mgr.Instance.connect_to_server();
 
 		/////test
 		/*
@@ -44,11 +42,11 @@ var GameApp = cc.Class({
 		// console.log("hcc>> cmd: " , AuthProto.Cmd)
 		// console.log("hcc>> cmdName: " , AuthProto.CmdName)
 		// console.log("hcc>> protoName: " , AuthProto.protoName)
-		var protobuf = require("protobuf")
-		console.log("hcc>>protobuf: " , protobuf)
-
-		var protobugMsg = require("protobufMsg")
-		console.log("hcc>>protobufMsg: " , protobugMsg)
+		
+		// var protobuf = require("protobuf")
+		// console.log("hcc>>protobuf: " , protobuf)
+		// var protobugMsg = require("protobufMsg")
+		// console.log("hcc>>protobufMsg: " , protobugMsg)
 	},
 
 	start() {
@@ -61,6 +59,9 @@ var GameApp = cc.Class({
 		var on_finished = function(){
 			cc.log("on_finished>> ");
 			_this.enter_scene(LoginScene);
+
+			//connect to websocket server
+			net_mgr.Instance.connect_to_server();
 		};
 		this.preload_scene(LoginScene,on_process,on_finished)
 	},
