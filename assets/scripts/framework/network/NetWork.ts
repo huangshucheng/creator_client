@@ -1,4 +1,4 @@
-import { SocketDelegate } from './SocketDelegate';
+import { SocketDelegate, ISocketDelegate } from './SocketDelegate';
 import AppConfig from '../config/AppConfig';
 
 class NetWork {
@@ -16,20 +16,6 @@ class NetWork {
     }
 
     connect(){
-        this.safe_connect()
-    }
-    
-    close() {
-        this.safe_close()
-    }
-
-    send_msg(stype:number, ctype:number, msg:any){
-        if (this._socketDelegate != null) {
-            this._socketDelegate.send_msg(stype,ctype,msg);
-        }
-    }
-
-    safe_connect(){
         if (this._socketDelegate != null) {
             this._socketDelegate.close_connect();
         }
@@ -41,14 +27,19 @@ class NetWork {
         this._socketDelegate = new SocketDelegate();
         this._socketDelegate.connect(this._url);
     }
-
-    safe_close(){
+    
+    close() {
         if (this._socketDelegate != null) {
             this._socketDelegate.close_connect();
         }
         this._socketDelegate = null;
     }
-    
+
+    send_msg(msg:any){
+        if (this._socketDelegate != null) {
+            this._socketDelegate.send_msg(msg);
+        }
+    }
 }
 
 export default NetWork;

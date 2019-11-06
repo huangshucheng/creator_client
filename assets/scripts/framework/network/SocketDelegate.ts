@@ -1,4 +1,8 @@
 import { WSocket, ISocket, SocketState } from './Socket';
+import ProtoTools from './ProtoTools';
+import ProtoManater from './ProtoManager';
+
+import Log from '../utils/Log';
 
 export interface ISocketDelegate {
     on_socket_open();
@@ -12,11 +16,21 @@ export class SocketDelegate implements ISocketDelegate {
 
     ///////////////////////////////////
     on_socket_open(){
-
+        Log.info("hcc>> on_socket_open")
+        let body = {
+            uname: "hccfundd",
+            upwd: "111222",
+        }
+         let en_cmd = ProtoManater.encode_cmd(1,1,2,body)
+         Log.info('en_cmd: ')
+         Log.info(en_cmd)
+         this.send_msg(en_cmd)
     }
 
     on_socket_message(data:string | ArrayBuffer){
         //TODO  decode data
+        let decode_cmd = ProtoManater.decode_cmd(2,data)
+        console.log("decode_cmd: " , JSON.stringify(decode_cmd))
     }
 
     on_socket_error(errMsg:any){
@@ -44,7 +58,7 @@ export class SocketDelegate implements ISocketDelegate {
         }
     }
 
-    send_msg(stype:number, ctype:number, msg:any){
+    send_msg(msg:any){
         if(!this._socket || this._socket.get_state() != SocketState.OPEN){
             return
         }

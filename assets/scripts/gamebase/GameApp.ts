@@ -19,7 +19,7 @@ export default class GameApp extends cc.Component {
     onLoad () {
         Log.info("onload")
         let net = new NetWork()
-        net.safe_connect()
+        net.connect()
     }
 
     start () {
