@@ -181,6 +181,10 @@ class ProtoTools {
             return null;
         }
 
+        if(!body){
+            body = {}
+        }
+
         let error = msgType.verify(body)
         if(error){
             cc.error("encode_protobuf error: ", error);

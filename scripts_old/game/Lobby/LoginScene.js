@@ -13,10 +13,7 @@ var res_pkg = {
     sprite_frames:[],
     
     audio_clips: [
-        // "sounds/bgm_scene2",
-        // "sounds/sfx_box_appear",
     ],
-    
     sprite_atlases: [],
     text_assets:[],
     fonts_assets: [],

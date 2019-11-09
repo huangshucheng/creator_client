@@ -33,8 +33,6 @@ export class WSocket implements ISocket {
             this._delegate.on_socket_open();
         };
         webSocket.onmessage = (event) => {
-            Log.info('ws.onmessage: ')
-            Log.info(event.data)
             this._delegate.on_socket_message(event.data);
         };
         webSocket.onerror = (event) => {

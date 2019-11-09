@@ -1,1 +1,0 @@
-pbjs -t static-module -w commonjs -o gameprotocol.js gameprotocol.proto

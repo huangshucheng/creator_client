@@ -1,1 +1,0 @@
-protoc.exe --cpp_out=./ gameprotocol.proto

@@ -1,1 +1,0 @@
-protoc.exe --descriptor_set_out=./gameprotocol.pb ./gameprotocol.proto

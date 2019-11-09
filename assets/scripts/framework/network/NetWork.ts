@@ -1,14 +1,11 @@
 import { SocketDelegate, ISocketDelegate } from './SocketDelegate';
-import AppConfig from '../config/AppConfig';
+import { AppConfig } from '../config/AppConfig';
 
 class NetWork {
     private _socketDelegate: SocketDelegate = null;
     private _url: string = null;
 
     constructor(){
-        // proto_type: proto_man.PROTO_BUF, //1:json , 2:protobuf
-        // proto_type: proto_man.PROTO_JSON, //1:json , 2:protobuf
-
         // connect remote
         // this._url = "wss://" + AppConfig.remoteip + ":" + AppConfig.remoteport + "/wss"
         // connect lcoal
@@ -35,9 +32,9 @@ class NetWork {
         this._socketDelegate = null;
     }
 
-    send_msg(msg:any){
+    send_msg(stype:number, ctype:number, body?:any){
         if (this._socketDelegate != null) {
-            this._socketDelegate.send_msg(msg);
+            this._socketDelegate.send_msg(stype, ctype, body);
         }
     }
 }

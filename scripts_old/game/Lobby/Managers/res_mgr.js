@@ -38,8 +38,6 @@ var res_mgr = cc.Class({
             cc.error("[error]:res_mgr has multi instances");
             return;
         }
-
-
     },
 
     // res_set:  {prefabs: [], sprite_frames:[], audio_clips: [], sprite_atlases: []}

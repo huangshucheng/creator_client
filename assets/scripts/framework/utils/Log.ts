@@ -8,10 +8,29 @@ export default class Log {
         black: "color:#000000;",
     }
 
-    log(msg?: string) {
-        var backLog = cc.log || console.log || window["log"];
-        backLog.call(this, "%s%s " + cc.js.formatStr.apply(cc, arguments), Log._getDateString(), Log._stack(2));
-    };
+    static info(message?: any, ...optionalParams: any[]){
+        if(this._logLevel > 1){
+            return
+        }
+        console.info(Log._stack(2), Log._getDateString(),message, ...optionalParams);
+    }
+
+    static debug(message?: any, ...optionalParams: any[]){
+        if (this._logLevel > 0) {
+            return;
+        }
+        console.debug(Log._getDateString(),message, ...optionalParams);
+    }
+
+    static error(message?: any, ...optionalParams: any[]){
+        console.error(Log._getDateString(),message, ...optionalParams)
+    }
+
+    static warn(message?: any, ...optionalParams: any[]){
+        console.warn(Log._getDateString(), message , optionalParams)
+    }
+
+    /*
     //green
     static info(msg?: string) {
         if (this._logLevel > 1) {
@@ -33,6 +52,7 @@ export default class Log {
         var backLog = cc.log || console.log || window["log"];
         backLog.call(this, "%c%s%s " + cc.js.formatStr.apply(cc, arguments), Log._colors.red, Log._getDateString(), Log._stack(2));
     };
+    */
 
     private static _getDateString() {
         var d = new Date();
