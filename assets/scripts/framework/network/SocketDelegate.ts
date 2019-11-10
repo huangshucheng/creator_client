@@ -2,17 +2,18 @@ import { WSocket, ISocket, SocketState } from './Socket';
 import ProtoTools from './ProtoTools';
 import ProtoManater from '../manager/ProtoManager';
 import EventManager from '../manager/EventManager';
-import { ProtoType } from '../config/AppConfig';
 import Log from '../utils/Log';
 import ProtoCmd from '../protocol/ProtoCmd';
 import { Stype,StypeName } from '../protocol/Stype';
 import EventDefine from '../config/EventDefine';
+import AppConfig from '../config/AppConfig';
 
 export interface ISocketDelegate {
     on_socket_open();
     on_socket_message(data:string | ArrayBuffer);
     on_socket_error(errMsg:any);
     on_socket_closed(msg:any);
+    get_socket_state();
 }
 
 export class SocketDelegate implements ISocketDelegate {
@@ -24,7 +25,7 @@ export class SocketDelegate implements ISocketDelegate {
     }
 
     on_socket_message(data:string | ArrayBuffer){
-        let decode_cmd = ProtoManater.decode_cmd(ProtoType,data)
+        let decode_cmd = ProtoManater.decode_cmd(AppConfig.PROTO_TYPE,data)
         if(!decode_cmd){
             return
         }
@@ -66,11 +67,18 @@ export class SocketDelegate implements ISocketDelegate {
         }
     }
 
+    get_socket_state(){
+        if(this._socket){
+            return this._socket.get_state()
+        }
+        return SocketState.CLOSED
+    }
+
     send_msg(stype:number, ctype:number, body?:any){
         if(!this._socket || this._socket.get_state() != SocketState.OPEN){
             return
         }
-        let encode_msg = ProtoManater.encode_cmd(stype,ctype,ProtoType,body)
+        let encode_msg = ProtoManater.encode_cmd(stype,ctype,AppConfig.PROTO_TYPE,body)
         this._socket.send(encode_msg)
     }
 }

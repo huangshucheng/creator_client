@@ -19,7 +19,7 @@ export class ResourceManager {
 
     private constructor() {
         // setInterval(function(){
-        //     console.log("-----------------cc.loader._cache.length-------------------",    cc.loader.getResCount());
+            // console.log("-----------------cc.loader._cache.length-------------------",    cc.loader.getResCount());
         // }, 2000)
     }
     //
@@ -81,7 +81,36 @@ export class ResourceManager {
         }
         return res
     }
-   //载入单个资源
+    //载入单个资源
+    // loadRes<T extends typeof cc.Asset>(path: string, type: T) {
+    //     let key = path + type.name
+    //     if (this._resMap.has(key)) {
+    //         return;
+    //     }
+    //     if (this._loadingMap.has(key)) {
+    //          return;
+    //     }
+
+    //     this._loadingMap.set(key, [])
+
+    //     cc.loader.loadRes(path, type, (error, resource) => {
+    //         if (error) {
+    //             cc.warn(`load res fail, path=${path}, err=${error}`)
+    //             this._loadingMap.get(key).forEach(element => {
+    //                 element(null)
+    //             });
+    //         } else {
+    //             this._resMap.set(key, resource)
+    //             this._loadingMap.get(key).forEach(element => {
+    //                 element(resource)
+    //             });
+    //         }
+    //         this._loadingMap.delete(key)
+    //     })
+    // }
+
+    //载入单个资源
+    //  TODO 小程序编译不通过
     loadRes<T extends typeof cc.Asset>(path: string, type: T): Promise<InstanceType<T>> {
         let key = path + type.name
         if (this._resMap.has(key)) {

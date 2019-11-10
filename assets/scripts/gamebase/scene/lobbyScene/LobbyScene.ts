@@ -5,13 +5,9 @@ export default class LobbyScene extends BaseScene {
 
     constructor(){
         super();
-        this._prefab_name   = "ui_prefabs/LobbyUI"
+        this._prefab_name   = "ui_prefabs/lobby/LobbyUI"
         this._script_name   = "LobbySceneCtrl"
         this._scene_name    = "LobbyScene";
-    }
-
-    async preload(process_callfunc:Function, finished_callfunc:Function){
-
     }
 
     async enter(){
@@ -21,10 +17,6 @@ export default class LobbyScene extends BaseScene {
     destroy(is_release_res:boolean){
         if(this._scene_ui){
             this._scene_ui.destroy()
-        }
-
-        if(is_release_res){
-
         }
     }
 }

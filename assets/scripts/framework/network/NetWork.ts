@@ -1,27 +1,43 @@
 import { SocketDelegate, ISocketDelegate } from './SocketDelegate';
-import { AppConfig } from '../config/AppConfig';
+import { SocketState } from './Socket';
+import Log from '../utils/Log';
+import AppConfig from '../config/AppConfig';
 
 class NetWork {
+    public static readonly instance: NetWork = new NetWork();
     private _socketDelegate: SocketDelegate = null;
     private _url: string = null;
 
     constructor(){
-        // connect remote
-        // this._url = "wss://" + AppConfig.remoteip + ":" + AppConfig.remoteport + "/wss"
-        // connect lcoal
-        this._url = "ws://" + AppConfig.localip + ":" + AppConfig.remoteport + "/ws"
+        if(AppConfig.IS_LOCAL_DEBUG){
+            this._url = "ws://" + AppConfig.LOCAL_IP + ":" + AppConfig.REMOTE_PORT + "/ws"
+        }else{
+            this._url = "wss://" + AppConfig.REMOTE_IP + ":" + AppConfig.REMOTE_PORT + "/wss"
+        }
+        this._socketDelegate = new SocketDelegate()
+    }
+    
+    public static getInstance(){
+        return NetWork.instance;
     }
 
     connect(){
-        if (this._socketDelegate != null) {
-            this._socketDelegate.close_connect();
-        }
-
-        if (!this._url){
+        if (!this._url || !this._socketDelegate){
             return
         }
+        this._socketDelegate.connect(this._url);
+    }
 
-        this._socketDelegate = new SocketDelegate();
+    reconnect(){
+        if (!this._url || !this._socketDelegate){
+            return;
+        }
+        let state = this._socketDelegate.get_socket_state()
+        Log.info("socket state: " , state)
+        if(state == SocketState.OPEN || state == SocketState.CONNECTING){
+            Log.info("socket is opend or connecting")
+            return
+        }
         this._socketDelegate.connect(this._url);
     }
     
@@ -29,7 +45,6 @@ class NetWork {
         if (this._socketDelegate != null) {
             this._socketDelegate.close_connect();
         }
-        this._socketDelegate = null;
     }
 
     send_msg(stype:number, ctype:number, body?:any){

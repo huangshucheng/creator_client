@@ -29,7 +29,7 @@ export class WSocket implements ISocket {
         let webSocket = this._webSocket = new WebSocket(this._url);
         webSocket.binaryType = 'arraybuffer';
         webSocket.onopen = (event) => {
-            Log.info("websocket connect " + this._url + " success!!")
+            Log.info("WSocket websocket connect " + this._url + " success!!")
             this._delegate.on_socket_open();
         };
         webSocket.onmessage = (event) => {
@@ -37,11 +37,11 @@ export class WSocket implements ISocket {
         };
         webSocket.onerror = (event) => {
             this._delegate.on_socket_error(null);
-            Log.error("websocket connect " + this._url + " error")
+            Log.error("WSocket websocket connect " + this._url + " error")
         };
         webSocket.onclose = (event) => {
             this._delegate.on_socket_closed(event.reason);
-            Log.info("websocket connect " + this._url + " closed")
+            Log.info("WSocket websocket connect " + this._url + " closed")
         }
     }
 

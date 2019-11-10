@@ -10,10 +10,6 @@ export default class GameScene extends BaseScene {
         this._scene_name  = "GameScene"
     }
 
-    async preload(process_callfunc:Function, finished_callfunc:Function){
-
-    }
-
     async enter(){
         this._scene_ui = await UIFunction.getInstance().add_prefab_to_scene_async(this._prefab_name,this._script_name);
     }

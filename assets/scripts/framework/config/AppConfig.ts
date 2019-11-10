@@ -1,10 +1,9 @@
 import ProtoManater from '../manager/ProtoManager';
 
-export let AppConfig = {
-    // localip : "192.168.2.131",
-    localip : "127.0.0.1",
-    remoteip : "www.hccfun.com",
-    remoteport : "6081",
+export default class AppConfig {
+    static IS_LOCAL_DEBUG   = false; //本地调试
+    static LOCAL_IP         = "127.0.0.1";
+    static REMOTE_IP        = "www.hccfun.com";
+    static REMOTE_PORT      = "6081";
+    static PROTO_TYPE       = ProtoManater.PROTO_BUF;
 }
-
-export let ProtoType = ProtoManater.PROTO_BUF;

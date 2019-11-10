@@ -1,4 +1,4 @@
-class DataUtil {
+export default class DataViewUtil {
     // 扩展DataView 读/写字符串 -->utf8的
     static write_utf8(dataview:DataView,offset:number, str:string) {
         let now = offset;
@@ -105,5 +105,3 @@ class DataUtil {
         return out;
     }
 }
-
-export default DataUtil;

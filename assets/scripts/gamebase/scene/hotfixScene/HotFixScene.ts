@@ -5,13 +5,9 @@ export default class HotFixScene extends BaseScene {
 
     constructor(){
         super();
-        this._prefab_name   = "ui_prefabs/HotFixUI"
+        this._prefab_name   = "ui_prefabs/hotfix/HotFixUI"
         this._script_name   = "HotFixSceneCtrl"
         this._scene_name    = "HotFixScene";
-    }
-
-    async preload(process_callfunc:Function, finished_callfunc:Function){
-
     }
 
     async enter(){
@@ -21,10 +17,6 @@ export default class HotFixScene extends BaseScene {
     destroy(is_release_res:boolean){
         if(this._scene_ui){
             this._scene_ui.destroy()
-        }
-
-        if(is_release_res){
-
         }
     }
 }

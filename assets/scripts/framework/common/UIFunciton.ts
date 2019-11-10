@@ -38,8 +38,11 @@ export default class UIFunction {
     }
 
     public node_exist(node: cc.Node) {
-        cc.error("node is null")
-        return (node && cc.isValid(node));
+        let isExist = (node && cc.isValid(node));
+        if(isExist == false){
+            cc.error(node.name , "is null")
+        }
+        return isExist;
     }
 
     public add_click_event(target: cc.Node, callback: Function, obj: any) {
@@ -87,6 +90,18 @@ export default class UIFunction {
         }
         
         return label.string;
+    }
+
+    set_editbox_string(target: cc.Node, str:string){
+        if (!this.node_exist(target)){
+            return
+        }
+        let editBox = target.getComponent(cc.EditBox)
+        if (!editBox) {
+            return;
+        }
+        str = str == null ? "" : str;
+        editBox.string = String(str);
     }
 
     get_editbox_string(view_node: cc.Node): string {
@@ -318,7 +333,7 @@ export default class UIFunction {
         });
     }
 
-    seak_widget_by_name(root: cc.Node, name: string): cc.Node {
+    seek_widget_by_name(root: cc.Node, name: string): cc.Node {
         if (!root) {
             return null;
         }
@@ -328,7 +343,7 @@ export default class UIFunction {
         let arrayRootChildren = root.children;
         for (let child of arrayRootChildren) {
             if (child) {
-                let res = this.seak_widget_by_name(child, name);
+                let res = this.seek_widget_by_name(child, name);
                 if (res != null) {
                     return res;
                 }

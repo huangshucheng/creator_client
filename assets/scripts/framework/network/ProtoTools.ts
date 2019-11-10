@@ -1,5 +1,5 @@
 import StringUtil from '../utils/StringUtil';
-import DataUtil from '../utils/DataUtil';
+import DataViewUtil from '../utils/DataViewUtil';
 import ProtoCmd from '../protocol/ProtoCmd';
 
 let protobufMsg = require("../protocol/protobufMsg")
@@ -54,19 +54,19 @@ class ProtoTools {
     }
     
     static read_str(cmd_buf:DataView, offset:number, byte_len:number) {
-        return DataUtil.read_utf8(cmd_buf,offset,byte_len);
+        return DataViewUtil.read_utf8(cmd_buf,offset,byte_len);
     }
     
     static write_str(cmd_buf:DataView, offset:number, str:string) {
-        DataUtil.write_utf8(cmd_buf,offset,str);
+        DataViewUtil.write_utf8(cmd_buf,offset,str);
     }
     
     static write_uint8_array(cmd_buf:DataView, offset:number, uint8array:Uint8Array){
-        DataUtil.write_uint8_array(cmd_buf,offset,uint8array);
+        DataViewUtil.write_uint8_array(cmd_buf,offset,uint8array);
     }
     
     static read_uint8_array(cmd_buf:DataView, offset:number, byte_len:number){
-        return DataUtil.read_uint8_array(cmd_buf,offset,byte_len);
+        return DataViewUtil.read_uint8_array(cmd_buf,offset,byte_len);
     }
     
     static read_float(cmd_buf:DataView, offset:number) {

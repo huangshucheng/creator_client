@@ -26,10 +26,5 @@ export default class SceneManager {
         scene.enter();
         Log.info("enter scene: ", this._curScene.get_name())
     }
-
-    enter_scene_asyc(scene:any, process_callfunc:Function, finished_callfunc:Function){
-        if(scene){
-            scene.preload(process_callfunc,finished_callfunc)
-        }
-    }
+    
 }

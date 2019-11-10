@@ -1,17 +1,17 @@
 import UIController from '../../../framework/uibase/UIController';
-import Log from '../../../framework/utils/Log';
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class LobbySceneCtrl extends UIController {
+export default class LoginSceneShowUI extends UIController {
 
-    onLoad () {
+    onLoad() {
         super.onLoad()
-        Log.info("LobbySceneCtrl onLoad()")
+        console.log("LoginSceneShowUI onload")
     }
 
     start () {
-
+        console.log("LoginSceneShowUI>>start")
     }
+
 }

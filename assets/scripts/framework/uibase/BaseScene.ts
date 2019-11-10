@@ -1,5 +1,4 @@
 interface ISceneBase {
-    preload(process_callfunc:Function, finished_callfunc:Function)
     enter();
     destroy(is_release_res:boolean);
     get_name();
@@ -16,19 +15,15 @@ export default class BaseScene implements ISceneBase {
     constructor(){
         this._canvas = cc.find("Canvas")
     }
-
-    async preload(process_callfunc:Function, finished_callfunc:Function){
-
-    }
-
+    //进入场景
     async enter(){
 
     }
-
+    //销毁场景和资源
     destroy(is_release_res:boolean){
 
     }
-
+    //场景名称
     get_name(){
         return this._scene_name;
     }
