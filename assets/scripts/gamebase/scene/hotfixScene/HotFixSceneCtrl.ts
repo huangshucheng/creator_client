@@ -22,7 +22,7 @@ export default class HotFixSceneCtrl extends UIController {
                             "textures/dialog", 
                             "config/",
                           ]
-    _progressMap: Map<string, number> = new Map
+    // _progressMap: Map<string, number> = new Map
     _completedFlag: boolean[] = []
     _tryTimes = 0;
 

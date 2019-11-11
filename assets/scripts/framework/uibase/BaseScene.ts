@@ -16,7 +16,7 @@ export default class BaseScene implements ISceneBase {
         this._canvas = cc.find("Canvas")
     }
     //进入场景
-    async enter(){
+    enter(){
 
     }
     //销毁场景和资源
