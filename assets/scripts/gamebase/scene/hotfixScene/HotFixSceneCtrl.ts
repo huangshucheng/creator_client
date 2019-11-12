@@ -22,26 +22,27 @@ export default class HotFixSceneCtrl extends UIController {
                             "textures/dialog", 
                             "config/",
                           ]
-    // _progressMap: Map<string, number> = new Map
+
     _completedFlag: boolean[] = []
     _tryTimes = 0;
+
+    _resourceMap: number[] = []
 
     onLoad () {
         // cc.debug.setDisplayStats(false)
         super.onLoad()
         Log.info("HotFixSceneCtrl onLoad()")
         // Log.info("hcc>>hotfixScenen",this.view)
+        let progressNode = this.view["KW_PROGRESS_BAR"]
+        if(progressNode){
+            this._progressbar = progressNode.getComponent(cc.ProgressBar);
+            this._progressbar.progress = 0;
+        }
 
-        this._progressbar = this.view["KW_PROGRESS_BAR"].getComponent(cc.ProgressBar)
-        this._progressbar.progress = 0
+        for (let index = 0; index < this._urlArray.length; index++) {
+            this.preloadRes(this._urlArray[index])
+        }
 
-        // for (let index = 0; index < this._urlArray.length; index++) {
-        //     this._progressMap.set(this._urlArray[index], 0)
-        // }
-        // for (let index = 0; index < this._urlArray.length; index++) {
-        //     this.preloadRes(this._urlArray[index])
-        // }
-        this.enter_login_scene()
     }
 
     start () {
@@ -49,33 +50,34 @@ export default class HotFixSceneCtrl extends UIController {
     }
 
     preloadRes(url: string) {
-        let self = this
-        let progress = 0
-        ResourceManager.getInstance().loadResDir(url, function (completedCount, totalCount, item) {
+        let _this = this
+        let progress = 0;
+        ResourceManager.getInstance().loadResDirAsyc(url, function (completedCount, totalCount, item) {
             progress = completedCount / totalCount;
-            self._progressbar.progress = progress
+            _this._progressbar.progress = progress
             let num = Math.max(1, progress * 100)
             let pstr = `${StringUtil.format("%2d", num)}%`
             let tipstr  = "正在载入资源中... " + completedCount + "/" + totalCount
-            self.set_visible(self.view["KW_TEXT_PERCENT"],true)
-            self.set_string(self.view["KW_TEXT_PERCENT"],pstr)
-            self.set_string(self.view["KW_TEXT_PROGRESS_TIP"],tipstr)
-            // cc.log("percent: " , num , " ,total: " , totalCount)
+            _this.set_visible(_this.view["KW_TEXT_PERCENT"],true)
+            // _this.set_string(_this.view["KW_TEXT_PERCENT"],pstr)
+            _this.set_string(_this.view["KW_TEXT_PROGRESS_TIP"],tipstr)
+            // cc.log("percent: " , num , " ,total: " , totalCount , tipstr)
         }, function (error: Error, resource: any[], urls: string[]) {
             if (error) {
                 console.warn(error)
-                if (self._tryTimes < 3) {
-                    self._tryTimes++
-                    self.preloadRes(url)
+                if (_this._tryTimes < 3) {
+                    _this._tryTimes++
+                    _this.preloadRes(url)
                 } else {
-                    self.set_visible(self.view["KW_TEXT_PERCENT"],false)
+                    _this.set_visible(_this.view["KW_TEXT_PERCENT"],false)
                     console.warn("res load failed!")
                 }
             } else {
-                self._completedFlag.push(true)
-                if (self._completedFlag.length >= self._urlArray.length){
-                    self.set_string(self.view["KW_TEXT_PROGRESS_TIP"],"资源加载完成!")
-                    self.enter_login_scene()
+                _this._completedFlag.push(true)
+                // cc.log("lennnnnn: " ,_this._completedFlag.length)
+                if (_this._completedFlag.length >= _this._urlArray.length){
+                    _this.set_string(_this.view["KW_TEXT_PROGRESS_TIP"],"资源加载完成!")
+                    _this.enter_login_scene()
                 }
             }
         })

@@ -19,7 +19,9 @@ export default class SceneManager {
         }
 
         if(this._curScene){
-            this._curScene.destroy(this._curScene.get_name() != scene.get_name())
+            let isDestroy = this._curScene.get_name() != scene.get_name()
+            this._curScene.destroy(isDestroy)
+            cc.log("destroy: " , isDestroy)
         }
 
         this._curScene = scene;

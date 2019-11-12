@@ -1,4 +1,3 @@
-import UIFunction from '../../../framework/common/UIFunciton';
 import BaseScene from '../../../framework/uibase/BaseScene';
 
 export default class LobbyScene extends BaseScene {
@@ -10,13 +9,11 @@ export default class LobbyScene extends BaseScene {
         this._scene_name    = "LobbyScene";
     }
 
-    async enter(){
-        this._scene_ui = UIFunction.getInstance().add_prefab_to_scene_async(this._prefab_name,this._script_name);
+    enter(){
+        super.enter()
     }
 
     destroy(is_release_res:boolean){
-        if(this._scene_ui){
-            this._scene_ui.destroy()
-        }
+        super.destroy(is_release_res)
     }
 }

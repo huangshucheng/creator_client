@@ -1,4 +1,3 @@
-import UIFunction from '../../../framework/common/UIFunciton';
 import BaseScene from '../../../framework/uibase/BaseScene';
 
 export default class LoginScene extends BaseScene {
@@ -11,15 +10,10 @@ export default class LoginScene extends BaseScene {
     }
 
     enter(){
-        //异步加载，可不提前加载资源
-        this._scene_ui = UIFunction.getInstance().add_prefab_to_scene_async(this._prefab_name,this._script_name);
-        //同步加载，需要提前加载资源
-        // this._scene_ui =  UIFunction.getInstance().add_prefab_to_scene(this._prefab_name,this._script_name);
+        super.enter()
     }
 
     destroy(is_release_res:boolean){
-        if(this._scene_ui){
-            this._scene_ui.destroy()
-        }
+        super.destroy(is_release_res)
     }
 }
