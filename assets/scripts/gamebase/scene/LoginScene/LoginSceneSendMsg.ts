@@ -23,4 +23,12 @@ export default class LoginSceneSendMsg {
         LoginSceneSendMsg.send(Cmd.eUnameLoginReq,body)
     }
 
+    static send_uname_regist(uname:string, upwdmd5:string){
+        let body = {
+            uname: String(uname),
+            upwdmd5: String(upwdmd5),
+        }
+        LoginSceneSendMsg.send(Cmd.eUnameRegistReq,body);
+    }
+
 }

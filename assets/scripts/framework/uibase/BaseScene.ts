@@ -21,18 +21,24 @@ export default class BaseScene implements ISceneBase {
     //进入场景
     enter(){
         let _this = this;
-        ResourceManager.getInstance().loadResAsyc(this._prefab_name,cc.Prefab,function (error: Error, resource: any) {
+        ResourceManager.getInstance().loadResAsyc(this._prefab_name, cc.Prefab, function(error: Error, resource: any){
             if(!error){
                 _this._scene_ui = UIFunction.getInstance().add_to_scene(resource, _this._script_name)
             }
-        },function (completedCount: number, totalCount: number, item: any) {
-            cc.log("completeCount: " , completedCount," totalCount: ", totalCount)
+        },function (completedCount: number, totalCount: number, item: any){
         })
     }
     //销毁场景和资源
     destroy(is_release_res:boolean){
         if(this._scene_ui){
             this._scene_ui.destroy()
+        }
+
+        if(is_release_res){
+            cc.loader.releaseRes(this._prefab_name);
+            //暂时不删除依赖资源
+            // let deps = cc.loader.getDependsRecursively(this._prefab_name);
+            // cc.loader.release(deps);
         }
     }
     //场景名称

@@ -2197,7 +2197,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "KW_IMG_GUEST_LOGIN_BG",
+    "_name": "KW_IMG_REGIST_BG",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -2491,7 +2491,7 @@
       "__id__": 61
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [
       {
