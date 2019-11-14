@@ -2,7 +2,6 @@ import { WSocket, ISocket, SocketState } from './Socket';
 import ProtoTools from './ProtoTools';
 import ProtoManater from '../manager/ProtoManager';
 import EventManager from '../manager/EventManager';
-import Log from '../utils/Log';
 import ProtoCmd from '../protocol/ProtoCmd';
 import { Stype,StypeName } from '../protocol/Stype';
 import EventDefine from '../config/EventDefine';
@@ -35,11 +34,11 @@ export class SocketDelegate implements ISocketDelegate {
             EventManager.emit(cmd_name,decode_cmd.body)
         }
 
-        Log.info("###########################>>>recvstart")
+        cc.log("###########################>>>recvstart")
         if (decode_cmd.body){
-            Log.info(StypeName[decode_cmd.stype],cmd_name,JSON.stringify(decode_cmd.body));
+            cc.log(StypeName[decode_cmd.stype],cmd_name,JSON.stringify(decode_cmd.body));
         }
-        Log.info("###########################>>>recvend")
+        cc.log("###########################>>>recvend\n\n")
     }
 
     on_socket_error(errMsg:any){
@@ -56,7 +55,7 @@ export class SocketDelegate implements ISocketDelegate {
 
     ///////////////////////////////////
     connect(url: string) {
-        Log.info("socket connecting address: " + url)
+        cc.log("socket is connecting address:", url)
         this._socket = new WSocket(url, this);
         this._socket.connect();
     }

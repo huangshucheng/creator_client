@@ -1,5 +1,3 @@
-import Log from '../utils/Log';
-
 export default class SceneManager {
     public static readonly instance: SceneManager = new SceneManager();
 
@@ -9,8 +7,12 @@ export default class SceneManager {
         return SceneManager.instance;
     }
 
-    constructor(){
+    private constructor(){
         this._curScene == null;
+    }
+
+    enter_scene_asyc(scene:any){
+        
     }
 
     enter_scene(scene:any){
@@ -21,12 +23,11 @@ export default class SceneManager {
         if(this._curScene){
             let isDestroy = this._curScene.get_name() != scene.get_name()
             this._curScene.destroy(isDestroy)
-            cc.log("destroy: " , isDestroy)
         }
 
         this._curScene = scene;
         scene.enter();
-        Log.info("enter scene: ", this._curScene.get_name())
+        cc.log("enter scene: ", this._curScene.get_name())
     }
     
 }

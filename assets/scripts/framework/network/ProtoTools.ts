@@ -135,18 +135,18 @@ class ProtoTools {
             let styp_name 	= ProtoCmd.getProtoName(cmd.stype)
             let cmd_name 	= ProtoCmd.getCmdName(cmd.stype, cmd.ctype)
             if (!styp_name || !cmd_name){
-                cc.error("msgType stype_name or cmd_name null");
+                cc.error("decode_protobuf stype_name or cmd_name null");
                 return cmd;
             }
 
             if (!protobufMsg[styp_name]) {
-                cc.error("msgType stype_name null");
+                cc.error("decode_protobuf stype_name null");
                 return cmd;
             }
 
             let msgType = protobufMsg[styp_name][cmd_name]
             if(!msgType){
-                cc.error("msgType is null");
+                cc.error("decode_protobuf msgType is null");
                 return cmd;
             }
             let decodeMsg = null;

@@ -6,9 +6,7 @@ export class ResourceManager {
     }
 
     private constructor() {
-        // setInterval(function(){
-            // console.log("-----------------cc.loader._cache.length-------------------",    cc.loader.getResCount());
-        // }, 2000)
+       
     }
 
     //载入整个文件夹

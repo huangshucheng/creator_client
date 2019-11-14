@@ -1,5 +1,4 @@
 import { ISocketDelegate } from "./SocketDelegate";
-import Log from '../utils/Log';
 
 export enum SocketState {
     CONNECTING = 1,
@@ -29,7 +28,7 @@ export class WSocket implements ISocket {
         let webSocket = this._webSocket = new WebSocket(this._url);
         webSocket.binaryType = 'arraybuffer';
         webSocket.onopen = (event) => {
-            Log.info("WSocket websocket connect " + this._url + " success!!")
+            cc.log("WSocket websocket connect " + this._url + " success!!")
             this._delegate.on_socket_open();
         };
         webSocket.onmessage = (event) => {
@@ -37,11 +36,11 @@ export class WSocket implements ISocket {
         };
         webSocket.onerror = (event) => {
             this._delegate.on_socket_error(null);
-            Log.error("WSocket websocket connect " + this._url + " error")
+            cc.error("WSocket websocket connect " + this._url + " error")
         };
         webSocket.onclose = (event) => {
             this._delegate.on_socket_closed(event.reason);
-            Log.info("WSocket websocket connect " + this._url + " closed")
+            cc.error("WSocket websocket connect " + this._url + " closed")
         }
     }
 
@@ -58,7 +57,7 @@ export class WSocket implements ISocket {
         try {
             this._webSocket.close();
         } catch (err) {
-            Log.error('error while closing webSocket ' + err.toString());
+            cc.error('error while closing webSocket ' , err.toString());
         }
         this._webSocket = null;
     }

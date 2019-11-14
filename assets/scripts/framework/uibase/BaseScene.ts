@@ -26,6 +26,7 @@ export default class BaseScene implements ISceneBase {
                 _this._scene_ui = UIFunction.getInstance().add_to_scene(resource, _this._script_name)
             }
         },function (completedCount: number, totalCount: number, item: any){
+            cc.log("load scene: " + _this._scene_name + " ,percent: " + completedCount + "/" + totalCount);
         })
     }
     //销毁场景和资源

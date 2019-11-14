@@ -1,6 +1,5 @@
 import { SocketDelegate, ISocketDelegate } from './SocketDelegate';
 import { SocketState } from './Socket';
-import Log from '../utils/Log';
 import AppConfig from '../config/AppConfig';
 
 class NetWork {
@@ -33,9 +32,8 @@ class NetWork {
             return;
         }
         let state = this._socketDelegate.get_socket_state()
-        Log.info("socket state: " , state)
         if(state == SocketState.OPEN || state == SocketState.CONNECTING){
-            Log.info("socket is opend or connecting")
+            cc.warn("socket is opend or connecting")
             return
         }
         this._socketDelegate.connect(this._url);
