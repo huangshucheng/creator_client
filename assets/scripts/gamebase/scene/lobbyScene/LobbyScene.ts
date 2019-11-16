@@ -9,10 +9,6 @@ export default class LobbyScene extends BaseScene {
         this._scene_name    = "LobbyScene";
     }
 
-    enter(){
-        super.enter()
-    }
-
     destroy(is_release_res:boolean){
         super.destroy(is_release_res)
     }

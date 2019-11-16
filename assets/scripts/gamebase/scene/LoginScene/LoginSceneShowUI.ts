@@ -7,7 +7,6 @@ export default class LoginSceneShowUI extends UIController {
 
     onLoad() {
         super.onLoad()
-        console.log("LoginSceneShowUI onload")
     }
 
     start () {

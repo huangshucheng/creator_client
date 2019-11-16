@@ -78,6 +78,8 @@ export class SocketDelegate implements ISocketDelegate {
             return
         }
         let encode_msg = ProtoManater.encode_cmd(stype,ctype,AppConfig.PROTO_TYPE,body)
-        this._socket.send(encode_msg)
+        if(encode_msg){
+            this._socket.send(encode_msg)
+        }
     }
 }

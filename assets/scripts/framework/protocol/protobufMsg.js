@@ -1,7 +1,6 @@
 /*eslint-disable block-scoped-var, no-redeclare, no-control-regex, no-prototype-builtins*/
 "use strict";
 
-// var $protobuf = require("protobufjs/minimal");
 var $protobuf = require("protobuf");
 
 // Common aliases
@@ -296,6 +295,8 @@ $root.AuthProto = (function() {
          * @memberof AuthProto
          * @interface IUnameLoginRes
          * @property {number|null} [status] UnameLoginRes status
+         * @property {number|null} [uid] UnameLoginRes uid
+         * @property {string|null} [userLoginInfo] UnameLoginRes userLoginInfo
          */
 
         /**
@@ -320,6 +321,22 @@ $root.AuthProto = (function() {
          * @instance
          */
         UnameLoginRes.prototype.status = 0;
+
+        /**
+         * UnameLoginRes uid.
+         * @member {number} uid
+         * @memberof AuthProto.UnameLoginRes
+         * @instance
+         */
+        UnameLoginRes.prototype.uid = 0;
+
+        /**
+         * UnameLoginRes userLoginInfo.
+         * @member {string} userLoginInfo
+         * @memberof AuthProto.UnameLoginRes
+         * @instance
+         */
+        UnameLoginRes.prototype.userLoginInfo = "";
 
         /**
          * Creates a new UnameLoginRes instance using the specified properties.
@@ -347,6 +364,10 @@ $root.AuthProto = (function() {
                 writer = $Writer.create();
             if (message.status != null && message.hasOwnProperty("status"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.uid);
+            if (message.userLoginInfo != null && message.hasOwnProperty("userLoginInfo"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.userLoginInfo);
             return writer;
         };
 
@@ -383,6 +404,12 @@ $root.AuthProto = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.status = reader.int32();
+                    break;
+                case 2:
+                    message.uid = reader.int32();
+                    break;
+                case 3:
+                    message.userLoginInfo = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -422,6 +449,12 @@ $root.AuthProto = (function() {
             if (message.status != null && message.hasOwnProperty("status"))
                 if (!$util.isInteger(message.status))
                     return "status: integer expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.userLoginInfo != null && message.hasOwnProperty("userLoginInfo"))
+                if (!$util.isString(message.userLoginInfo))
+                    return "userLoginInfo: string expected";
             return null;
         };
 
@@ -439,6 +472,10 @@ $root.AuthProto = (function() {
             var message = new $root.AuthProto.UnameLoginRes();
             if (object.status != null)
                 message.status = object.status | 0;
+            if (object.uid != null)
+                message.uid = object.uid | 0;
+            if (object.userLoginInfo != null)
+                message.userLoginInfo = String(object.userLoginInfo);
             return message;
         };
 
@@ -455,10 +492,17 @@ $root.AuthProto = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.status = 0;
+                object.uid = 0;
+                object.userLoginInfo = "";
+            }
             if (message.status != null && message.hasOwnProperty("status"))
                 object.status = message.status;
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            if (message.userLoginInfo != null && message.hasOwnProperty("userLoginInfo"))
+                object.userLoginInfo = message.userLoginInfo;
             return object;
         };
 
@@ -670,6 +714,8 @@ $root.AuthProto = (function() {
          * @memberof AuthProto
          * @interface IGuestLoginRes
          * @property {number} status GuestLoginRes status
+         * @property {number|null} [uid] GuestLoginRes uid
+         * @property {string|null} [userLoginInfo] GuestLoginRes userLoginInfo
          */
 
         /**
@@ -696,6 +742,22 @@ $root.AuthProto = (function() {
         GuestLoginRes.prototype.status = 0;
 
         /**
+         * GuestLoginRes uid.
+         * @member {number} uid
+         * @memberof AuthProto.GuestLoginRes
+         * @instance
+         */
+        GuestLoginRes.prototype.uid = 0;
+
+        /**
+         * GuestLoginRes userLoginInfo.
+         * @member {string} userLoginInfo
+         * @memberof AuthProto.GuestLoginRes
+         * @instance
+         */
+        GuestLoginRes.prototype.userLoginInfo = "";
+
+        /**
          * Creates a new GuestLoginRes instance using the specified properties.
          * @function create
          * @memberof AuthProto.GuestLoginRes
@@ -719,7 +781,11 @@ $root.AuthProto = (function() {
         GuestLoginRes.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.uid);
+            if (message.userLoginInfo != null && message.hasOwnProperty("userLoginInfo"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.userLoginInfo);
             return writer;
         };
 
@@ -755,7 +821,13 @@ $root.AuthProto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.status = reader.sint32();
+                    message.status = reader.int32();
+                    break;
+                case 2:
+                    message.uid = reader.int32();
+                    break;
+                case 3:
+                    message.userLoginInfo = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -796,6 +868,12 @@ $root.AuthProto = (function() {
                 return "object expected";
             if (!$util.isInteger(message.status))
                 return "status: integer expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
+            if (message.userLoginInfo != null && message.hasOwnProperty("userLoginInfo"))
+                if (!$util.isString(message.userLoginInfo))
+                    return "userLoginInfo: string expected";
             return null;
         };
 
@@ -813,6 +891,10 @@ $root.AuthProto = (function() {
             var message = new $root.AuthProto.GuestLoginRes();
             if (object.status != null)
                 message.status = object.status | 0;
+            if (object.uid != null)
+                message.uid = object.uid | 0;
+            if (object.userLoginInfo != null)
+                message.userLoginInfo = String(object.userLoginInfo);
             return message;
         };
 
@@ -829,10 +911,17 @@ $root.AuthProto = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.status = 0;
+                object.uid = 0;
+                object.userLoginInfo = "";
+            }
             if (message.status != null && message.hasOwnProperty("status"))
                 object.status = message.status;
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
+            if (message.userLoginInfo != null && message.hasOwnProperty("userLoginInfo"))
+                object.userLoginInfo = message.userLoginInfo;
             return object;
         };
 
@@ -1116,7 +1205,7 @@ $root.AuthProto = (function() {
         UnameRegistRes.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
             return writer;
         };
 
@@ -1152,7 +1241,7 @@ $root.AuthProto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.status = reader.sint32();
+                    message.status = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2743,7 +2832,7 @@ $root.AuthProto = (function() {
         LoginOutRes.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
             return writer;
         };
 
@@ -2779,7 +2868,7 @@ $root.AuthProto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.status = reader.sint32();
+                    message.status = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2949,8 +3038,8 @@ $root.AuthProto = (function() {
             if (!writer)
                 writer = $Writer.create();
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.unick);
-            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.uface);
-            writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.usex);
+            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.uface);
+            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.usex);
             return writer;
         };
 
@@ -2989,10 +3078,10 @@ $root.AuthProto = (function() {
                     message.unick = reader.string();
                     break;
                 case 2:
-                    message.uface = reader.sint32();
+                    message.uface = reader.int32();
                     break;
                 case 3:
-                    message.usex = reader.sint32();
+                    message.usex = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3162,7 +3251,7 @@ $root.AuthProto = (function() {
         EditProfileRes.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
             return writer;
         };
 
@@ -3198,7 +3287,7 @@ $root.AuthProto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.status = reader.sint32();
+                    message.status = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3300,7 +3389,7 @@ $root.AuthProto = (function() {
          * @memberof AuthProto
          * @interface IAccountUpgradeReq
          * @property {string} uname AccountUpgradeReq uname
-         * @property {string} upwdMd5 AccountUpgradeReq upwdMd5
+         * @property {string} upwdmd5 AccountUpgradeReq upwdmd5
          */
 
         /**
@@ -3327,12 +3416,12 @@ $root.AuthProto = (function() {
         AccountUpgradeReq.prototype.uname = "";
 
         /**
-         * AccountUpgradeReq upwdMd5.
-         * @member {string} upwdMd5
+         * AccountUpgradeReq upwdmd5.
+         * @member {string} upwdmd5
          * @memberof AuthProto.AccountUpgradeReq
          * @instance
          */
-        AccountUpgradeReq.prototype.upwdMd5 = "";
+        AccountUpgradeReq.prototype.upwdmd5 = "";
 
         /**
          * Creates a new AccountUpgradeReq instance using the specified properties.
@@ -3359,7 +3448,7 @@ $root.AuthProto = (function() {
             if (!writer)
                 writer = $Writer.create();
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.uname);
-            writer.uint32(/* id 2, wireType 2 =*/18).string(message.upwdMd5);
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.upwdmd5);
             return writer;
         };
 
@@ -3398,7 +3487,7 @@ $root.AuthProto = (function() {
                     message.uname = reader.string();
                     break;
                 case 2:
-                    message.upwdMd5 = reader.string();
+                    message.upwdmd5 = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3407,8 +3496,8 @@ $root.AuthProto = (function() {
             }
             if (!message.hasOwnProperty("uname"))
                 throw $util.ProtocolError("missing required 'uname'", { instance: message });
-            if (!message.hasOwnProperty("upwdMd5"))
-                throw $util.ProtocolError("missing required 'upwdMd5'", { instance: message });
+            if (!message.hasOwnProperty("upwdmd5"))
+                throw $util.ProtocolError("missing required 'upwdmd5'", { instance: message });
             return message;
         };
 
@@ -3441,8 +3530,8 @@ $root.AuthProto = (function() {
                 return "object expected";
             if (!$util.isString(message.uname))
                 return "uname: string expected";
-            if (!$util.isString(message.upwdMd5))
-                return "upwdMd5: string expected";
+            if (!$util.isString(message.upwdmd5))
+                return "upwdmd5: string expected";
             return null;
         };
 
@@ -3460,8 +3549,8 @@ $root.AuthProto = (function() {
             var message = new $root.AuthProto.AccountUpgradeReq();
             if (object.uname != null)
                 message.uname = String(object.uname);
-            if (object.upwdMd5 != null)
-                message.upwdMd5 = String(object.upwdMd5);
+            if (object.upwdmd5 != null)
+                message.upwdmd5 = String(object.upwdmd5);
             return message;
         };
 
@@ -3480,12 +3569,12 @@ $root.AuthProto = (function() {
             var object = {};
             if (options.defaults) {
                 object.uname = "";
-                object.upwdMd5 = "";
+                object.upwdmd5 = "";
             }
             if (message.uname != null && message.hasOwnProperty("uname"))
                 object.uname = message.uname;
-            if (message.upwdMd5 != null && message.hasOwnProperty("upwdMd5"))
-                object.upwdMd5 = message.upwdMd5;
+            if (message.upwdmd5 != null && message.hasOwnProperty("upwdmd5"))
+                object.upwdmd5 = message.upwdmd5;
             return object;
         };
 
@@ -3559,7 +3648,7 @@ $root.AuthProto = (function() {
         AccountUpgradeRes.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
             return writer;
         };
 
@@ -3595,7 +3684,7 @@ $root.AuthProto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.status = reader.sint32();
+                    message.status = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3696,6 +3785,8 @@ $root.AuthProto = (function() {
          * Properties of a GetUserCenterInfoReq.
          * @memberof AuthProto
          * @interface IGetUserCenterInfoReq
+         * @property {string} uname GetUserCenterInfoReq uname
+         * @property {string} upwdmd5 GetUserCenterInfoReq upwdmd5
          */
 
         /**
@@ -3712,6 +3803,22 @@ $root.AuthProto = (function() {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+
+        /**
+         * GetUserCenterInfoReq uname.
+         * @member {string} uname
+         * @memberof AuthProto.GetUserCenterInfoReq
+         * @instance
+         */
+        GetUserCenterInfoReq.prototype.uname = "";
+
+        /**
+         * GetUserCenterInfoReq upwdmd5.
+         * @member {string} upwdmd5
+         * @memberof AuthProto.GetUserCenterInfoReq
+         * @instance
+         */
+        GetUserCenterInfoReq.prototype.upwdmd5 = "";
 
         /**
          * Creates a new GetUserCenterInfoReq instance using the specified properties.
@@ -3737,6 +3844,8 @@ $root.AuthProto = (function() {
         GetUserCenterInfoReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.uname);
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.upwdmd5);
             return writer;
         };
 
@@ -3771,11 +3880,21 @@ $root.AuthProto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
+                case 1:
+                    message.uname = reader.string();
+                    break;
+                case 2:
+                    message.upwdmd5 = reader.string();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
+            if (!message.hasOwnProperty("uname"))
+                throw $util.ProtocolError("missing required 'uname'", { instance: message });
+            if (!message.hasOwnProperty("upwdmd5"))
+                throw $util.ProtocolError("missing required 'upwdmd5'", { instance: message });
             return message;
         };
 
@@ -3806,6 +3925,10 @@ $root.AuthProto = (function() {
         GetUserCenterInfoReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (!$util.isString(message.uname))
+                return "uname: string expected";
+            if (!$util.isString(message.upwdmd5))
+                return "upwdmd5: string expected";
             return null;
         };
 
@@ -3820,7 +3943,12 @@ $root.AuthProto = (function() {
         GetUserCenterInfoReq.fromObject = function fromObject(object) {
             if (object instanceof $root.AuthProto.GetUserCenterInfoReq)
                 return object;
-            return new $root.AuthProto.GetUserCenterInfoReq();
+            var message = new $root.AuthProto.GetUserCenterInfoReq();
+            if (object.uname != null)
+                message.uname = String(object.uname);
+            if (object.upwdmd5 != null)
+                message.upwdmd5 = String(object.upwdmd5);
+            return message;
         };
 
         /**
@@ -3832,8 +3960,19 @@ $root.AuthProto = (function() {
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        GetUserCenterInfoReq.toObject = function toObject() {
-            return {};
+        GetUserCenterInfoReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.uname = "";
+                object.upwdmd5 = "";
+            }
+            if (message.uname != null && message.hasOwnProperty("uname"))
+                object.uname = message.uname;
+            if (message.upwdmd5 != null && message.hasOwnProperty("upwdmd5"))
+                object.upwdmd5 = message.upwdmd5;
+            return object;
         };
 
         /**
@@ -3856,7 +3995,8 @@ $root.AuthProto = (function() {
          * Properties of a GetUserCenterInfoRes.
          * @memberof AuthProto
          * @interface IGetUserCenterInfoRes
-         * @property {string} userCenterInfoString GetUserCenterInfoRes userCenterInfoString
+         * @property {number} status GetUserCenterInfoRes status
+         * @property {string|null} [userCenterInfoString] GetUserCenterInfoRes userCenterInfoString
          */
 
         /**
@@ -3873,6 +4013,14 @@ $root.AuthProto = (function() {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+
+        /**
+         * GetUserCenterInfoRes status.
+         * @member {number} status
+         * @memberof AuthProto.GetUserCenterInfoRes
+         * @instance
+         */
+        GetUserCenterInfoRes.prototype.status = 0;
 
         /**
          * GetUserCenterInfoRes userCenterInfoString.
@@ -3906,7 +4054,9 @@ $root.AuthProto = (function() {
         GetUserCenterInfoRes.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.userCenterInfoString);
+            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
+            if (message.userCenterInfoString != null && message.hasOwnProperty("userCenterInfoString"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.userCenterInfoString);
             return writer;
         };
 
@@ -3942,6 +4092,9 @@ $root.AuthProto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
+                    message.status = reader.int32();
+                    break;
+                case 2:
                     message.userCenterInfoString = reader.string();
                     break;
                 default:
@@ -3949,8 +4102,8 @@ $root.AuthProto = (function() {
                     break;
                 }
             }
-            if (!message.hasOwnProperty("userCenterInfoString"))
-                throw $util.ProtocolError("missing required 'userCenterInfoString'", { instance: message });
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
             return message;
         };
 
@@ -3981,8 +4134,11 @@ $root.AuthProto = (function() {
         GetUserCenterInfoRes.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (!$util.isString(message.userCenterInfoString))
-                return "userCenterInfoString: string expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.userCenterInfoString != null && message.hasOwnProperty("userCenterInfoString"))
+                if (!$util.isString(message.userCenterInfoString))
+                    return "userCenterInfoString: string expected";
             return null;
         };
 
@@ -3998,6 +4154,8 @@ $root.AuthProto = (function() {
             if (object instanceof $root.AuthProto.GetUserCenterInfoRes)
                 return object;
             var message = new $root.AuthProto.GetUserCenterInfoRes();
+            if (object.status != null)
+                message.status = object.status | 0;
             if (object.userCenterInfoString != null)
                 message.userCenterInfoString = String(object.userCenterInfoString);
             return message;
@@ -4016,8 +4174,12 @@ $root.AuthProto = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
+                object.status = 0;
                 object.userCenterInfoString = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
             if (message.userCenterInfoString != null && message.hasOwnProperty("userCenterInfoString"))
                 object.userCenterInfoString = message.userCenterInfoString;
             return object;

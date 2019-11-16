@@ -13,7 +13,6 @@ export default class LoginSceneCtrl extends UIController {
 
     onLoad() {
         super.onLoad()
-        console.log("LoginSceneCtrl onload")
         this.add_script("LoginSceneTouchEvent")
         this.add_script("LoginSceneInit")
         this.add_script("LoginSceneRecvMsg")
@@ -21,6 +20,5 @@ export default class LoginSceneCtrl extends UIController {
     }
 
     start () {
-        console.log("LoginSceneCtrl")
     }
 }

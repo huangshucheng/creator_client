@@ -29,7 +29,7 @@ export default class GameApp extends cc.Component {
         // let scene = new LobbyScene()
         // let scene = new GameScene();
         let scene = new HotFixScene();
-        SceneManager.getInstance().enter_scene(scene);
+        SceneManager.getInstance().enter_scene_asyc(scene);
     }
 
     on_net_connected(event:cc.Event.EventCustom){

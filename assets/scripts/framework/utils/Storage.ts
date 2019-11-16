@@ -6,7 +6,7 @@ export default class Storage {
     
     static get(key:string){
         let res = cc.sys.localStorage.getItem(key,JSON.stringify(key));
-        if(res){
+        if(res && res != "undefined" && res != undefined){
             return JSON.parse(res);
         }
         return null;

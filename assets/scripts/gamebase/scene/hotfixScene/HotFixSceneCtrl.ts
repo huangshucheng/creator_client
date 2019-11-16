@@ -32,7 +32,6 @@ export default class HotFixSceneCtrl extends UIController {
     onLoad () {
         // cc.debug.setDisplayStats(false)
         super.onLoad()
-        Log.info("HotFixSceneCtrl onLoad()")
         let progressNode = this.view["KW_PROGRESS_BAR"]
         if(progressNode){
             this._progressbar = progressNode.getComponent(cc.ProgressBar);
@@ -40,12 +39,13 @@ export default class HotFixSceneCtrl extends UIController {
         }
 
         for (let index = 0; index < this._urlArray.length; index++) {
-            this.preloadRes(this._urlArray[index])
+            // this.preloadRes(this._urlArray[index])
         }
+
     }
 
     start () {
-        
+        this.enter_login_scene()        
     }
 
     preloadRes(url: string) {
@@ -80,6 +80,6 @@ export default class HotFixSceneCtrl extends UIController {
 
     enter_login_scene() {
         let scene = new LoginScene();
-        SceneManager.getInstance().enter_scene(scene)
+        SceneManager.getInstance().enter_scene_asyc(scene)
     }
 }

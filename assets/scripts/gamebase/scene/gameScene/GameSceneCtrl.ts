@@ -10,7 +10,6 @@ export default class GameSceneCtrl extends UIController {
 
     onLoad () {
         super.onLoad()
-        Log.info("GameSceneCtrl onLoad()")
     }
 
     start () {
@@ -18,6 +17,6 @@ export default class GameSceneCtrl extends UIController {
     }
 
     on_click_back(sender:cc.Node){
-        SceneManager.getInstance().enter_scene(new LobbyScene())
+        SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
     }
 }

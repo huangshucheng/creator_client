@@ -12,22 +12,23 @@ export default class SceneManager {
     }
 
     enter_scene_asyc(scene:any){
-        
-    }
-
-    enter_scene(scene:any){
-        if(scene == null){
+        if(!scene || !scene.preload){
             return;
         }
-
-        if(this._curScene){
-            let isDestroy = this._curScene.get_name() != scene.get_name()
-            this._curScene.destroy(isDestroy)
-        }
-
-        this._curScene = scene;
-        scene.enter();
-        cc.log("enter scene: ", this._curScene.get_name())
+        let _this = this;
+        scene.preload(function (error: Error, resource: any) {
+            if(error){
+                cc.error("enter_scene_asyc error: " , error)
+                return;
+            }
+            if(_this._curScene){
+                let isDestroy = _this._curScene.get_name() != scene.get_name()
+                _this._curScene.destroy(isDestroy)
+            }
+            _this._curScene = scene;
+            cc.log("enter scene:", _this._curScene.get_name())
+        },function (completedCount: number, totalCount: number, item: any) {
+            cc.log("preload scene: %" + completedCount / totalCount * 100)            
+        })
     }
-    
 }

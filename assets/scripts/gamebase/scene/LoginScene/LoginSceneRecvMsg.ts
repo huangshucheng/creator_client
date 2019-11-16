@@ -6,6 +6,8 @@ import { Cmd, CmdName } from "./../../../framework/protocol/AuthProto";
 import Response from '../../../framework/config/Response';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LobbyScene from '../lobbyScene/LobbyScene';
+import Storage from '../../../framework/utils/Storage';
+import LSDefine from '../../../framework/config/LSDefine';
 
 const {ccclass, property} = cc._decorator;
 
@@ -14,7 +16,6 @@ export default class LoginSceneRecvMsg extends UIController {
 
     onLoad() {
         super.onLoad()
-        console.log("LoginSceneRecvMsg onload")
     }
 
     start () {
@@ -26,8 +27,8 @@ export default class LoginSceneRecvMsg extends UIController {
         EventManager.on(EventDefine.EVENT_NET_CONNECTED,this.on_net_connected.bind(this),this);
         EventManager.on(EventDefine.EVENT_NET_CLOSED,this.on_net_closed.bind(this),this);
         EventManager.on(EventDefine.EVENT_NET_ERROR,this.on_net_error.bind(this),this);
-        EventManager.on(CmdName[Cmd.eGuestLoginRes],this.on_event_guest_login,this)
         EventManager.on(CmdName[Cmd.eUnameLoginRes],this.on_event_uname_login,this)
+        EventManager.on(CmdName[Cmd.eGuestLoginRes],this.on_event_guest_login,this)
     }
 
     on_net_connected(event:cc.Event.EventCustom){
@@ -47,15 +48,23 @@ export default class LoginSceneRecvMsg extends UIController {
         let udata =  event.getUserData()
         cc.log("guestlogin udata: " , udata)
         if(udata.status == Response.OK){
-            SceneManager.getInstance().enter_scene(new LobbyScene())
+            SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
+            let resbody = JSON.parse(udata.userLoginInfo)
+            Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
+            Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,resbody.guest_key)
+            cc.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
         }
     }
 
     on_event_uname_login(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("unamelogin detail: " , udata)
+        cc.log("unamelogin udata: " , udata)
         if(udata.status == Response.OK){
-            SceneManager.getInstance().enter_scene(new LobbyScene())
+            SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
+            let resbody = JSON.parse(udata.userLoginInfo)
+            Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
+            Storage.set(LSDefine.USER_LOGIN_MSG,{uname: resbody.uname, upwd: resbody.upwd})
+            cc.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG) )
         }
     }
 }

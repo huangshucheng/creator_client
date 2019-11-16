@@ -9,11 +9,9 @@ export default class LoginSceneInit extends UIController {
 
     onLoad() {
         super.onLoad()
-        console.log("LoginSceneInit onload")
     }
 
     start () {
-        console.log("LoginSceneInit>>start")
         this.initUI();
     }
 
@@ -22,7 +20,7 @@ export default class LoginSceneInit extends UIController {
         let loginMsg = Storage.get(LSDefine.USER_LOGIN_MSG)
         let loginType = Storage.get(LSDefine.USER_LOGIN_TYPE)
         if(loginType == LSDefine.LOGIN_TYPE_GUEST){
-            cc.log("logintype guest,key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
+            // cc.log("logintype guest,key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
         }else if(loginType == LSDefine.LOGIN_TYPE_UNAME){
             if(loginMsg){
                 cc.log("logintype uname: " , loginMsg.uname , ", upwd: " , loginMsg.upwd)

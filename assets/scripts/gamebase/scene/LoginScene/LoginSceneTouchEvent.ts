@@ -14,7 +14,6 @@ export default class LoginSceneTouchEvent extends UIController {
 
     onLoad() {
         super.onLoad()
-        console.log("LoginSceneTouchEvent onload")
     }
 
     start () {
@@ -32,10 +31,13 @@ export default class LoginSceneTouchEvent extends UIController {
 
     on_click_guest_login(sender:cc.Node){
         let guestkey:string = Storage.get(LSDefine.USER_LOGIN_GUEST_KEY)
+        //cYC8E6BQBHjTc5ka55H5hj3wKbJHN5hf
+        //iWwPcdGCmhSJtCd3bXbmtZyk5Dhnd7Jh
+        // let guestkey:string = StringUtil.random_string(32)
         if(!guestkey){
             guestkey = StringUtil.random_string(32)
             cc.log("guest login reborn: " + guestkey + " ,len: " + guestkey.length)
-            Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,guestkey)
+            // Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,guestkey)
         }
 
         if(guestkey.length != 32){
@@ -44,7 +46,7 @@ export default class LoginSceneTouchEvent extends UIController {
 
         LoginSceneSendMsg.send_guest_login(guestkey)
         cc.log("guestkey:" , guestkey)
-        Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
+        // Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
     }
 
     on_click_uname_login(sender:cc.Node){
@@ -57,10 +59,10 @@ export default class LoginSceneTouchEvent extends UIController {
             return
         }
         LoginSceneSendMsg.send_uname_login(_uname,_upwd)
-        Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
-        Storage.set(LSDefine.USER_LOGIN_MSG,{uname:_uname,upwd:_upwd})
+        // Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
+        // Storage.set(LSDefine.USER_LOGIN_MSG,{uname:_uname,upwd:_upwd})
 
-        cc.log("LSDefine.USER_LOGIN_MSG" , Storage.get(LSDefine.USER_LOGIN_MSG))
+        // cc.log("LSDefine.USER_LOGIN_MSG" , Storage.get(LSDefine.USER_LOGIN_MSG))
     }
 
     on_click_goto_regist(sender: cc.Node){
