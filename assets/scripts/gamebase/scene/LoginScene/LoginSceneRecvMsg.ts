@@ -55,6 +55,8 @@ export default class LoginSceneRecvMsg extends UIController {
             Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,resbody.guest_key)
             cc.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
             DialogManager.getInstance().show_weak_hint("登录成功!")
+        }else{
+            DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)
         }
     }
 
@@ -68,6 +70,8 @@ export default class LoginSceneRecvMsg extends UIController {
             Storage.set(LSDefine.USER_LOGIN_MSG,{uname: resbody.uname, upwd: resbody.upwd})
             cc.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG) )
             DialogManager.getInstance().show_weak_hint("登录成功!")
+        }else{
+            DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)
         }
     }
 }
