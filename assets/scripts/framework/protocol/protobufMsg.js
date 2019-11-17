@@ -3785,8 +3785,6 @@ $root.AuthProto = (function() {
          * Properties of a GetUserCenterInfoReq.
          * @memberof AuthProto
          * @interface IGetUserCenterInfoReq
-         * @property {string} uname GetUserCenterInfoReq uname
-         * @property {string} upwdmd5 GetUserCenterInfoReq upwdmd5
          */
 
         /**
@@ -3803,22 +3801,6 @@ $root.AuthProto = (function() {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
-
-        /**
-         * GetUserCenterInfoReq uname.
-         * @member {string} uname
-         * @memberof AuthProto.GetUserCenterInfoReq
-         * @instance
-         */
-        GetUserCenterInfoReq.prototype.uname = "";
-
-        /**
-         * GetUserCenterInfoReq upwdmd5.
-         * @member {string} upwdmd5
-         * @memberof AuthProto.GetUserCenterInfoReq
-         * @instance
-         */
-        GetUserCenterInfoReq.prototype.upwdmd5 = "";
 
         /**
          * Creates a new GetUserCenterInfoReq instance using the specified properties.
@@ -3844,8 +3826,6 @@ $root.AuthProto = (function() {
         GetUserCenterInfoReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.uname);
-            writer.uint32(/* id 2, wireType 2 =*/18).string(message.upwdmd5);
             return writer;
         };
 
@@ -3880,21 +3860,11 @@ $root.AuthProto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.uname = reader.string();
-                    break;
-                case 2:
-                    message.upwdmd5 = reader.string();
-                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
-            if (!message.hasOwnProperty("uname"))
-                throw $util.ProtocolError("missing required 'uname'", { instance: message });
-            if (!message.hasOwnProperty("upwdmd5"))
-                throw $util.ProtocolError("missing required 'upwdmd5'", { instance: message });
             return message;
         };
 
@@ -3925,10 +3895,6 @@ $root.AuthProto = (function() {
         GetUserCenterInfoReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (!$util.isString(message.uname))
-                return "uname: string expected";
-            if (!$util.isString(message.upwdmd5))
-                return "upwdmd5: string expected";
             return null;
         };
 
@@ -3943,12 +3909,7 @@ $root.AuthProto = (function() {
         GetUserCenterInfoReq.fromObject = function fromObject(object) {
             if (object instanceof $root.AuthProto.GetUserCenterInfoReq)
                 return object;
-            var message = new $root.AuthProto.GetUserCenterInfoReq();
-            if (object.uname != null)
-                message.uname = String(object.uname);
-            if (object.upwdmd5 != null)
-                message.upwdmd5 = String(object.upwdmd5);
-            return message;
+            return new $root.AuthProto.GetUserCenterInfoReq();
         };
 
         /**
@@ -3960,19 +3921,8 @@ $root.AuthProto = (function() {
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        GetUserCenterInfoReq.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.uname = "";
-                object.upwdmd5 = "";
-            }
-            if (message.uname != null && message.hasOwnProperty("uname"))
-                object.uname = message.uname;
-            if (message.upwdmd5 != null && message.hasOwnProperty("upwdmd5"))
-                object.upwdmd5 = message.upwdmd5;
-            return object;
+        GetUserCenterInfoReq.toObject = function toObject() {
+            return {};
         };
 
         /**

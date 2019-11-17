@@ -24,7 +24,7 @@ export default class HotFixSceneCtrl extends UIController {
                             "config/",
                           ]
 
-    _completedFlag: boolean[] = []
+    _completedFlag:any = []
     _tryTimes = 0;
 
     _resourceMap: number[] = []
@@ -39,26 +39,27 @@ export default class HotFixSceneCtrl extends UIController {
         }
 
         for (let index = 0; index < this._urlArray.length; index++) {
-            // this.preloadRes(this._urlArray[index])
+            this.preloadRes(this._urlArray[index])
         }
 
     }
 
     start () {
-        this.enter_login_scene()        
     }
 
     preloadRes(url: string) {
         let _this = this
-        let progress = 0;
+        let progressNumber = 0;
         ResourceManager.getInstance().loadResDirAsyc(url, function (completedCount, totalCount, item) {
-            progress = completedCount / totalCount;
-            _this._progressbar.progress = progress
-            let num = Math.max(1, progress * 100)
-            let pstr = `${StringUtil.format("%2d", num)}%`
-            let tipstr  = "正在载入资源中... " + completedCount + "/" + totalCount
-            // _this.set_string(_this.view["KW_TEXT_PERCENT"],pstr)
-            _this.set_string(_this.view["KW_TEXT_PROGRESS_TIP"],tipstr)
+            if(totalCount != 0){
+                progressNumber = completedCount / totalCount;
+                _this._progressbar.progress = progressNumber
+                let num = Math.max(1, progressNumber * 100)
+                let pstr = `${StringUtil.format("%2d", num)}%`
+                let tipstr  = "正在载入资源中... " + completedCount + "/" + totalCount
+                // _this.set_string(_this.view["KW_TEXT_PERCENT"],pstr)
+                _this.set_string(_this.view["KW_TEXT_PROGRESS_TIP"],tipstr)
+            }
         }, function (error: Error, resource: any[], urls: string[]) {
             if (error) {
                 console.warn(error)

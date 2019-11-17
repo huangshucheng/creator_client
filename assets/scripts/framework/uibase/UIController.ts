@@ -54,6 +54,11 @@ export default abstract class UIController extends cc.Component {
         UIFunction.getInstance().set_sprite(target, texturePath);
     }
 
+    set_sprite_asyc(target: cc.Node, str: string){
+        let texturePath = "textures/" + str
+        UIFunction.getInstance().set_sprite_async(target, texturePath);
+    }
+
     set_sprite_from_atlas(target: cc.Node, strAtlas: string, str: string) {
         let texturePath = "textures/" + strAtlas
         UIFunction.getInstance().set_sprite_from_atlas(target, texturePath, str);

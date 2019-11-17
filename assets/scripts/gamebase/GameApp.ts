@@ -7,6 +7,7 @@ import HotFixScene from './scene/hotfixScene/HotFixScene';
 import EventManager from '../framework/manager/EventManager';
 import EventDefine from '../framework/config/EventDefine';
 import NetWork from '../framework/network/NetWork';
+import DialogManager from '../framework/manager/DialogManager';
 
 const {ccclass, property} = cc._decorator;
 
@@ -25,27 +26,35 @@ export default class GameApp extends cc.Component {
 
     start () {
         console.log("GameApp start.......")
-        // let scene = new LoginScene()
-        // let scene = new LobbyScene()
-        // let scene = new GameScene();
         let scene = new HotFixScene();
         SceneManager.getInstance().enter_scene_asyc(scene);
+
+        //test
+        let teststring = "hcctest"
+        let testarray = {}
+        testarray[teststring] = 123
+        // cc.log("tstarray: ",testarray)
+        // for(let key in testarray){
+        //     console.log("ccccc" , key , testarray[key])
+        // }
     }
 
     on_net_connected(event:cc.Event.EventCustom){
         Log.info("GameApp hcc>>>on_net_connected")
+        DialogManager.getInstance().show_weak_hint("网络连接成功!")
     }
 
     on_net_closed(event:cc.Event.EventCustom){
-        event.detail
         Log.info("GameApp hcc>>>on_net_closed")
         setTimeout(() => {
             NetWork.getInstance().reconnect();
         }, 2000);
+        DialogManager.getInstance().show_weak_hint("网络断开,正在连接中。。。")
     }
 
     on_net_error(event:cc.Event.EventCustom){
         Log.info("GameApp hcc>>>on_net_error")
+        DialogManager.getInstance().show_weak_hint("网络断开!")
     }
 
 }

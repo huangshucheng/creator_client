@@ -3,7 +3,7 @@ import Log from '../../../framework/utils/Log';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LoginScene from '../LoginScene/LoginScene';
 import GameScene from '../gameScene/GameScene';
-import LobbySceneSendMsg from './LobbySceneSendMsg';
+import LobbySceneSendMsg from './LobbySceneSendAuthMsg';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 
@@ -16,6 +16,8 @@ export default class LobbySceneCtrl extends UIController {
         super.onLoad()
         this.add_script("LobbySceneInit")
         this.add_script("LobbySceneTouchEvent")
+        this.add_script("LobbySceneRecvAuthMsg")
+        this.add_script("LobbySceneShowUI")
     }
 
     start () {

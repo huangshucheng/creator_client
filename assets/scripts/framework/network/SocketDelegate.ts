@@ -35,8 +35,16 @@ export class SocketDelegate implements ISocketDelegate {
         }
 
         cc.log("###########################>>>recvstart")
-        if (decode_cmd.body){
-            cc.log(StypeName[decode_cmd.stype],cmd_name,JSON.stringify(decode_cmd.body));
+        if (cmd_name){
+            cc.log(StypeName[decode_cmd.stype],cmd_name);
+            let cmdbody = ""
+            try {
+                cmdbody = JSON.stringify(decode_cmd.body)    
+            } catch (error) {
+            }
+            if(cmdbody){
+                cc.log(cmdbody)
+            }
         }
         cc.log("###########################>>>recvend\n\n")
     }

@@ -1,4 +1,5 @@
 import { ResourceManager } from '../manager/ResourceManager';
+import { isValid } from '../../../../creator';
 
 export default class UIFunction {
     private static readonly instance: UIFunction = new UIFunction();
@@ -126,7 +127,13 @@ export default class UIFunction {
         }
         let spriteFrame = ResourceManager.getInstance().getRes(str, cc.SpriteFrame);
         if (spriteFrame) {
-            sprite.spriteFrame = spriteFrame
+            try {
+                if(spriteFrame.isValid == true){
+                    sprite.spriteFrame = spriteFrame  
+                }
+            } catch (error) {
+                cc.error(error)
+            }   
         } else {
             console.warn(`load SpriteFrame ${str} failed`)
         }
@@ -143,7 +150,13 @@ export default class UIFunction {
         }
         ResourceManager.getInstance().loadResAsyc(str, cc.SpriteFrame,function (error:Error, spriteFrame:any) {
             if (spriteFrame) {
-                sprite.spriteFrame = spriteFrame
+                try {
+                    if(spriteFrame.isValid == true){
+                        sprite.spriteFrame = spriteFrame  
+                    }
+                } catch (error) {
+                    cc.error(error)
+                }                
             } else {
                 console.warn(`load SpriteFrame ${str} failed`)
             }
@@ -309,11 +322,14 @@ export default class UIFunction {
     };
 
     //添加prefab到场景中 异步函数 TODO
-   add_prefab_to_scene_async(path: string, scriptName: string = null) {
+   add_prefab_to_scene_async(path: string, scriptName: string = null, successCallback?:Function) {
         let _this = this;
         ResourceManager.getInstance().loadResAsyc(path, cc.Prefab, function(error: Error, resource: any) {
             if(!error){
-                 _this.add_to_scene(resource,scriptName)
+                 let resnode = _this.add_to_scene(resource,scriptName)
+                 if(successCallback){
+                    successCallback(resnode)
+                 }
             }            
         })
     }
