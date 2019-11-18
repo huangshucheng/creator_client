@@ -30,6 +30,7 @@ export default class LoginSceneRecvMsg extends UIController {
         EventManager.on(EventDefine.EVENT_NET_ERROR,this.on_net_error.bind(this),this);
         EventManager.on(CmdName[Cmd.eUnameLoginRes],this.on_event_uname_login,this)
         EventManager.on(CmdName[Cmd.eGuestLoginRes],this.on_event_guest_login,this)
+        EventManager.on(CmdName[Cmd.eUnameRegistRes],this.on_event_uname_regist,this)
     }
 
     on_net_connected(event:cc.Event.EventCustom){
@@ -72,6 +73,15 @@ export default class LoginSceneRecvMsg extends UIController {
             DialogManager.getInstance().show_weak_hint("登录成功!")
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)
+        }
+    }
+
+    on_event_uname_regist(event:cc.Event.EventCustom){
+        let udata =  event.getUserData()
+        if(udata.status == Response.OK){
+            DialogManager.getInstance().show_weak_hint("注册成功!")
+        }else{
+            DialogManager.getInstance().show_weak_hint("注册失败! " + udata.status)
         }
     }
 }

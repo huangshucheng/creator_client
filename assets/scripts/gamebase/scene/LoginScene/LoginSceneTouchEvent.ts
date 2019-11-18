@@ -6,6 +6,7 @@ import LoginSceneSendMsg from './LoginSceneSendMsg';
 import StringUtil from '../../../framework/utils/StringUtil';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
+import DialogManager from '../../../framework/manager/DialogManager';
 
 const {ccclass, property} = cc._decorator;
 
@@ -85,6 +86,7 @@ export default class LoginSceneTouchEvent extends UIController {
         cc.log(_uname , _upwd , _upwdok)
         if(_uname.length < 6 || _upwd.length < 6 || _upwdok.length < 6 || (_upwd != _upwdok)){
             cc.error("regist error!!!")
+            DialogManager.getInstance().show_weak_hint("账号或密码错误!(不能少于6位)")
             return
         }
         LoginSceneSendMsg.send_uname_regist(_uname, _upwd)
