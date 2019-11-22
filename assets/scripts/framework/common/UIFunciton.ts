@@ -1,5 +1,4 @@
 import { ResourceManager } from '../manager/ResourceManager';
-import { isValid } from '../../../../creator';
 
 export default class UIFunction {
     private static readonly instance: UIFunction = new UIFunction();
@@ -303,7 +302,7 @@ export default class UIFunction {
         }
     }
 
-    // 加载预制体到节点上 异步方法 //TODO
+    // 加载预制体到节点上 异步方法
      add_prefab_to_node_async(parent: cc.Node, path: string, scriptName: string = null) {
         let _this = this;
         ResourceManager.getInstance().loadResAsyc(path, cc.Prefab,function(error: Error, resource: any) {
