@@ -27,12 +27,20 @@ export default class LobbySceneTouchEvent extends UIController {
         this.add_click_event(this.view["BTN_CREATE_ROOM"],this.on_click_create_room.bind(this))
         this.add_click_event(this.view["KW_BTN_LOGIN_LOGIC"],this.on_click_login_logic.bind(this))
         this.add_click_event(this.view["BTN_JOIN_ROOM"],this.on_click_join_room.bind(this))
+        this.add_click_event(this.view["IMG_HEAD"],this.on_click_head.bind(this))
         
     }
 
     on_click_set(sender:cc.Node) {
-        LobbySceneSendAuthMsg.send_login_out()
-        SceneManager.getInstance().enter_scene_asyc(new LoginScene())
+        // LobbySceneSendAuthMsg.send_login_out()
+        // SceneManager.getInstance().enter_scene_asyc(new LoginScene())
+
+        //test
+        DialogManager.getInstance().show_common_dialog(2,function (resComp:any) {
+            if(resComp){
+                resComp.set_content_text("你好你好，在干啥呢？？？？,你好你好，在干啥呢？？？？,,,你好你好，在干啥呢？？？？,,,你好你好，在干啥呢？？？？")
+            }
+        })
     }
 
     on_click_create_room(sender:cc.Node){
@@ -49,11 +57,11 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_join_room(sender: cc.Node){
-        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogJoinRoom","JoinRoomDialog",function(resNode:cc.Node) {
-            if(resNode){
-                cc.log("load dialogjoinroom success...")
-            }
-        })
+        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogJoinRoom","JoinRoomDialog")
+    }
+
+    on_click_head(sender: cc.Node){
+        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogMyCenter","MyCenterDialog")
     }
 
 }

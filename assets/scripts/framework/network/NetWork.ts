@@ -13,6 +13,7 @@ class NetWork {
         }else{
             this._url = "wss://" + AppConfig.REMOTE_IP + ":" + AppConfig.REMOTE_PORT + "/wss"
         }
+
         this._socketDelegate = new SocketDelegate()
     }
     

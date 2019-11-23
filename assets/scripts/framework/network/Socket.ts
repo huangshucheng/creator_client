@@ -61,6 +61,7 @@ export class WSocket implements ISocket {
         }
         this._webSocket = null;
     }
+
     get_state(){
         if (this._webSocket) {
             switch (this._webSocket.readyState) {

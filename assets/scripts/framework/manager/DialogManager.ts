@@ -16,7 +16,7 @@ export default class DialogManager{
         return DialogManager.instance;
     }
 
-    show_dialog_asyc(path: string, scriptName: string, successCallback:Function){
+    show_dialog_asyc(path: string, scriptName: string, successCallback?:Function){
         let _this = this;
         UIFunction.getInstance().add_prefab_to_scene_async(path, scriptName ,function (resNode:any) {
             if(successCallback){
@@ -103,4 +103,24 @@ export default class DialogManager{
             _this._weakhint.enqueue(hint);
         })
     }
+
+    show_common_dialog(btnNum?: number, succeCallfunc?: Function){
+        if(!btnNum){
+            btnNum = 1;
+        }
+
+        this.show_dialog_asyc("ui_prefabs/dialog/DialogCommon", "CommonDialog",function (resNode:any) {
+           if(resNode){
+                let component =  resNode.getComponent("CommonDialog")
+                if(component){
+                    component.set_btn_num(btnNum)
+                    if(succeCallfunc){
+                        succeCallfunc(component)
+                    }
+                }
+           }
+        })
+
+    }
+
 }

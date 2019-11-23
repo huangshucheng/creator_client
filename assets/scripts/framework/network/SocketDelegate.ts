@@ -66,6 +66,8 @@ export class SocketDelegate implements ISocketDelegate {
         cc.log("socket is connecting address:", url)
         this._socket = new WSocket(url, this);
         this._socket.connect();
+
+        cc.sys.WECHAT_GAME
     }
 
     close_connect() {

@@ -8,11 +8,9 @@ export default class JoinRoomDialog extends UIDialog {
 
     onLoad(){
         super.onLoad()
-        cc.log("JoinRoomDialog")
     }
 
     start () {
-        console.log("LoginSceneTouchEvent>>start")
         this.add_button_event_listener()
     }
 

@@ -30,13 +30,16 @@ export default class GameApp extends cc.Component {
         SceneManager.getInstance().enter_scene_asyc(scene);
 
         //test
-        let teststring = "hcctest"
-        let testarray = {}
-        testarray[teststring] = 123
+        // let teststring = "hcctest"
+        // let testarray = {}
+        // testarray[teststring] = 123
         // cc.log("tstarray: ",testarray)
         // for(let key in testarray){
         //     console.log("ccccc" , key , testarray[key])
         // }
+
+        cc.log("hcc>> os platform: " + cc.sys.os)
+
     }
 
     on_net_connected(event:cc.Event.EventCustom){
