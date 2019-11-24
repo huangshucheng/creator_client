@@ -39,13 +39,13 @@ export default class HotFixSceneCtrl extends UIController {
         }
 
         for (let index = 0; index < this._urlArray.length; index++) {
-            // this.preloadRes(this._urlArray[index])
+            this.preloadRes(this._urlArray[index])
         }
 
     }
 
     start () {
-        this.enter_login_scene()
+        // this.enter_login_scene()
     }
 
     preloadRes(url: string) {

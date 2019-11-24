@@ -10,7 +10,6 @@ export default class LoginSceneShowUI extends UIController {
     }
 
     start () {
-        console.log("LoginSceneShowUI>>start")
     }
 
 }

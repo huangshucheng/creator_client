@@ -1,6 +1,7 @@
 import { SocketDelegate, ISocketDelegate } from './SocketDelegate';
 import { SocketState } from './Socket';
 import AppConfig from '../config/AppConfig';
+import PlatForm from '../config/PlatForm';
 
 class NetWork {
     public static readonly instance: NetWork = new NetWork();
@@ -9,9 +10,13 @@ class NetWork {
 
     constructor(){
         if(AppConfig.IS_LOCAL_DEBUG){
-            this._url = "ws://" + AppConfig.LOCAL_IP + ":" + AppConfig.REMOTE_PORT + "/ws"
+            this._url = "ws://" + AppConfig.LOCAL_IP + ":" + AppConfig.REMOTE_WECHAT_PORT + "/ws"
         }else{
-            this._url = "wss://" + AppConfig.REMOTE_IP + ":" + AppConfig.REMOTE_PORT + "/wss"
+            if(PlatForm.isNative()){
+                this._url = "ws://" + AppConfig.REMOTE_IP + ":" + AppConfig.NATIVE_PLATFORM_PORT + "/ws"
+            }else{
+                this._url = "wss://" + AppConfig.REMOTE_IP + ":" + AppConfig.REMOTE_WECHAT_PORT + "/wss"
+            }
         }
 
         this._socketDelegate = new SocketDelegate()

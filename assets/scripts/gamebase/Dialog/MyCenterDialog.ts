@@ -37,11 +37,11 @@ export default class MyCenterDialog extends UIDialog {
 
     }
 
-    on_click_close(sender: cc.Node){
+    on_click_close(sender: cc.Component){
         this.close()
     }
 
-    on_click_exit(sender: cc.Node){
+    on_click_exit(sender: cc.Component){
         LobbySceneSendAuthMsg.send_login_out()
         SceneManager.getInstance().enter_scene_asyc(new LoginScene())
         this.close()

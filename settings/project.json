@@ -14,8 +14,8 @@
       false
     ]
   ],
-  "design-resolution-height": 640,
-  "design-resolution-width": 960,
+  "design-resolution-height": 1920,
+  "design-resolution-width": 1080,
   "excluded-modules": [
     "TiledMap",
     "Physics",
@@ -34,7 +34,7 @@
       "enable": false
     }
   },
-  "fit-height": false,
+  "fit-height": true,
   "fit-width": true,
   "group-list": [
     "default",

@@ -24,10 +24,10 @@
   "mergeStartScene": false,
   "optimizeHotUpdate": false,
   "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
+    "landscapeLeft": false,
+    "landscapeRight": false,
+    "portrait": true,
+    "upsideDown": true
   },
   "packageName": "org.cocos2d.creator_client",
   "qqplay": {
@@ -41,7 +41,7 @@
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
     "appid": "wxb03d15124f396116",
-    "orientation": "landscapeRight",
+    "orientation": "portrait",
     "subContext": ""
   },
   "xxteaKey": "956a8aa2-0849-4b",

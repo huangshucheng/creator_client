@@ -8,6 +8,7 @@ import EventManager from '../framework/manager/EventManager';
 import EventDefine from '../framework/config/EventDefine';
 import NetWork from '../framework/network/NetWork';
 import DialogManager from '../framework/manager/DialogManager';
+import PlatForm from '../framework/config/PlatForm';
 
 const {ccclass, property} = cc._decorator;
 
@@ -28,22 +29,11 @@ export default class GameApp extends cc.Component {
         console.log("GameApp start.......")
         let scene = new HotFixScene();
         SceneManager.getInstance().enter_scene_asyc(scene);
-
-        //test
-        // let teststring = "hcctest"
-        // let testarray = {}
-        // testarray[teststring] = 123
-        // cc.log("tstarray: ",testarray)
-        // for(let key in testarray){
-        //     console.log("ccccc" , key , testarray[key])
-        // }
-
-        cc.log("hcc>> os platform: " + cc.sys.os)
-
+        PlatForm.printPlatForm()
     }
 
     on_net_connected(event:cc.Event.EventCustom){
-        Log.info("GameApp hcc>>>on_net_connected")
+        Log.info("GameApp hcc>>>on_net_connected success")
         DialogManager.getInstance().show_weak_hint("网络连接成功!")
     }
 

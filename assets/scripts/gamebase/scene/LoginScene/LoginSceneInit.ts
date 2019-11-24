@@ -33,6 +33,9 @@ export default class LoginSceneInit extends UIController {
             this.set_editbox_string(unameEditBox,loginMsg.uname)
             this.set_editbox_string(upwdEditBox,loginMsg.upwd)
         }
+        
+        this.set_string(this.view['KW_TEXT_PLATFORM'], "platform:" + String(cc.sys.os)+ "  ,isnative:" + cc.sys.isNative);
+        this.set_string(this.view['KW_TEXT_VERSION'], "1.0.0")
     }
 
 }

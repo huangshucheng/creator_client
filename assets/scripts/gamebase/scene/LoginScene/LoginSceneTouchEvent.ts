@@ -7,6 +7,7 @@ import StringUtil from '../../../framework/utils/StringUtil';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
+import UIFunction from '../../../framework/common/UIFunciton';
 
 const {ccclass, property} = cc._decorator;
 
@@ -18,7 +19,6 @@ export default class LoginSceneTouchEvent extends UIController {
     }
 
     start () {
-        console.log("LoginSceneTouchEvent>>start")
         this.add_button_event_listener()
     }
 
@@ -30,53 +30,44 @@ export default class LoginSceneTouchEvent extends UIController {
         this.add_click_event(this.view["KW_BTN_REGIST"],this.on_click_regist.bind(this))
     }
 
-    on_click_guest_login(sender:cc.Node){
+    on_click_guest_login(sender:cc.Component){
         let guestkey:string = Storage.get(LSDefine.USER_LOGIN_GUEST_KEY)
-        //cYC8E6BQBHjTc5ka55H5hj3wKbJHN5hf
-        //iWwPcdGCmhSJtCd3bXbmtZyk5Dhnd7Jh
-        // let guestkey:string = StringUtil.random_string(32)
         if(!guestkey){
             guestkey = StringUtil.random_string(32)
             cc.log("guest login reborn: " + guestkey + " ,len: " + guestkey.length)
-            // Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,guestkey)
         }
 
         if(guestkey.length != 32){
+            DialogManager.getInstance().show_weak_hint("登陆失败，guestkey生成错误!")
             return
         }
-
         LoginSceneSendMsg.send_guest_login(guestkey)
-        cc.log("guestkey:" , guestkey)
-        // Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
     }
 
-    on_click_uname_login(sender:cc.Node){
+    on_click_uname_login(sender:cc.Component){
         let unameEditBox = this.seek_child_by_name(this.view["KW_IMG_LOGIN_BG"],"KW_INPUT_ACCOUNT")
         let upwdEditBox = this.seek_child_by_name(this.view["KW_IMG_LOGIN_BG"],"KW_INPUT_PWD")
         let _uname = this.get_editbox_string(unameEditBox)
         let _upwd = this.get_editbox_string(upwdEditBox)
         cc.log("uname: ",_uname , " ,upwd: " , _upwd)
         if(_uname.length < 6 || _upwd.length < 6){
+            DialogManager.getInstance().show_weak_hint("用户名或密码错误，不能少于六位!");
             return
         }
         LoginSceneSendMsg.send_uname_login(_uname,_upwd)
-        // Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
-        // Storage.set(LSDefine.USER_LOGIN_MSG,{uname:_uname,upwd:_upwd})
-
-        // cc.log("LSDefine.USER_LOGIN_MSG" , Storage.get(LSDefine.USER_LOGIN_MSG))
     }
 
-    on_click_goto_regist(sender: cc.Node){
+    on_click_goto_regist(sender: cc.Component){
         this.set_visible(this.view['KW_IMG_LOGIN_BG'],false)
         this.set_visible(this.view['KW_IMG_REGIST_BG'],true)
     }
 
-    on_click_regist_close(sender: cc.Node){
+    on_click_regist_close(sender: cc.Component){
         this.set_visible(this.view['KW_IMG_LOGIN_BG'],true)
         this.set_visible(this.view['KW_IMG_REGIST_BG'],false)
     }
 
-    on_click_regist(sender: cc.Node){
+    on_click_regist(sender: cc.Component){
         let unameEditBox = this.seek_child_by_name(this.view["KW_IMG_REGIST_BG"],"KW_INPUT_ACCOUNT")
         let upwdEditBox = this.seek_child_by_name(this.view["KW_IMG_REGIST_BG"],"KW_INPUT_PWD")
         let upwdEditConf = this.seek_child_by_name(this.view["KW_IMG_REGIST_BG"],"KW_INPUT_PWD_COF")

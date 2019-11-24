@@ -67,21 +67,21 @@ export default class CommonDialog extends UIDialog {
 
     }
 
-    on_click_close(sender: cc.Node){
+    on_click_close(sender: cc.Component){
         if (this._closeFunc) {
             this._closeFunc()
         }
         this.close()
     }
 
-    on_click_left(sender: cc.Node){
+    on_click_left(sender: cc.Component){
         if (this._leftBtnCallback) {
             this._leftBtnCallback()
         }
         this.close()
     }
 
-    on_click_right(sender: cc.Node){
+    on_click_right(sender: cc.Component){
         if (this._rightBtnCallback) {
             this._rightBtnCallback()
         }

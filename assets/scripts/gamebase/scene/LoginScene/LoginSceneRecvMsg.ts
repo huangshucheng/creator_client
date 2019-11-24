@@ -20,7 +20,6 @@ export default class LoginSceneRecvMsg extends UIController {
     }
 
     start () {
-        console.log("LoginSceneRecvMsg>>start")
         this.add_event_dispatcher()
     }
 
@@ -51,9 +50,13 @@ export default class LoginSceneRecvMsg extends UIController {
         cc.log("guestlogin udata: " , udata)
         if(udata.status == Response.OK){
             SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
-            let resbody = JSON.parse(udata.userLoginInfo)
-            Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
-            Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,resbody.guest_key)
+            try {
+                let resbody = JSON.parse(udata.userLoginInfo)
+                Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
+                Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,resbody.guest_key)
+            } catch (error) {
+                cc.error(error)
+            }
             cc.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
             DialogManager.getInstance().show_weak_hint("登录成功!")
         }else{
@@ -66,9 +69,13 @@ export default class LoginSceneRecvMsg extends UIController {
         cc.log("unamelogin udata: " , udata)
         if(udata.status == Response.OK){
             SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
-            let resbody = JSON.parse(udata.userLoginInfo)
-            Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
-            Storage.set(LSDefine.USER_LOGIN_MSG,{uname: resbody.uname, upwd: resbody.upwd})
+            try {
+                let resbody = JSON.parse(udata.userLoginInfo)
+                Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
+                Storage.set(LSDefine.USER_LOGIN_MSG,{uname: resbody.uname, upwd: resbody.upwd})
+            } catch (error) {
+                cc.error(error)
+            }
             cc.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG) )
             DialogManager.getInstance().show_weak_hint("登录成功!")
         }else{

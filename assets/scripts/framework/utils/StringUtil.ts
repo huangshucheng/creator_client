@@ -97,12 +97,12 @@ export default class StringUtil {
     }
 
     //查找字符串中结尾数字
-   public getNumberSuffixByString(str: string): number {
+   static getNumberSuffixByString(str: string): number {
         let len = str.length;
         let lastNumber = -1;
         for (let i = 1; i < len; ++i) {
             let tempNumber = Number(str.substr(-i));
-            if (tempNumber) {
+            if (tempNumber || tempNumber == 0) {
                 lastNumber = tempNumber
             } else {
                 return lastNumber
@@ -111,7 +111,7 @@ export default class StringUtil {
         return lastNumber;
     }
 
-    public uint8ArrayToString(uint8Array): string {
+    static uint8ArrayToString(uint8Array): string {
         var dataString = "";
         for (var i = 0; i < uint8Array.length; i++) {
             dataString += String.fromCharCode(uint8Array[i]);
@@ -119,7 +119,7 @@ export default class StringUtil {
         return dataString
     }
 
-    public stringToUint8Array(str): Uint8Array {
+    static stringToUint8Array(str): Uint8Array {
         var arr = [];
         for (var i = 0, j = str.length; i < j; ++i) {
             arr.push(str.charCodeAt(i));
