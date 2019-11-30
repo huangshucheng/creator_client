@@ -1,7 +1,7 @@
 import * as TalkRoom from "./TalkProto"
 import * as Auth from "./AuthProto"
 import * as GameSystem from "./SystemProto"
-import * as GameProto from "./GameProto"
+import * as GameHoodleProto from "./GameHoodleProto"
 import { Stype,StypeName } from './Stype';
 
 class ProtoCmd {
@@ -9,7 +9,7 @@ class ProtoCmd {
 	  static StypeProtos:any = {
 		  [Stype.Auth] : Auth,
 		  [Stype.GameSystem] : GameSystem,
-		  [Stype.Game] : GameProto,
+		  [Stype.GameHoodle] : GameHoodleProto,
 		  [Stype.TalkRoom] : TalkRoom,
 	}
 	

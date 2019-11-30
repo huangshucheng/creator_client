@@ -15,7 +15,7 @@ class EventManager extends cc.EventTarget {
         EventManager.getInstance()._emit(eventName,data);
     }
 
-    static on(type:string, callback:any, target?:any, useCapture?:boolean){
+    static on(type:string, target:any, callback:any, useCapture?:boolean){
         EventManager.getInstance()._on(type, callback, target, useCapture);
     }
 

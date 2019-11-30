@@ -1,6 +1,10 @@
 import UIDialog from '../../framework/uibase/UIDialog';
 import DialogManager from '../../framework/manager/DialogManager';
 import StringUtil from '../../framework/utils/StringUtil';
+import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
+import EventManager from '../../framework/manager/EventManager';
+import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
+import Response from '../../framework/config/Response';
 
 const { ccclass, property } = cc._decorator;
 
@@ -16,7 +20,12 @@ export default class JoinRoomDialog extends UIDialog {
 
     start () {
         this.initUI()
+        this.add_event_dispatcher()
         this.add_button_event_listener()
+    }
+
+    add_event_dispatcher(){
+        EventManager.on(CmdName[Cmd.eJoinRoomRes], this, this.on_event_join_room)
     }
 
     add_button_event_listener(){
@@ -72,7 +81,7 @@ export default class JoinRoomDialog extends UIDialog {
         // cc.log(btnName , btnNumStr)
         let textName = 'KW_SHOW_NUM_' + this._text_index
         this.set_string(this.view[textName],String(btnNumStr))
-        /*
+        
         if(this._text_index == this.KW_TOTAL_ROOM_NUM_COUNT){
             var roomid = ""
             for (var index = 1 ;index <= this.KW_TOTAL_ROOM_NUM_COUNT; index ++){
@@ -80,13 +89,20 @@ export default class JoinRoomDialog extends UIDialog {
                 var num = this.get_string(this.view[numName])
                 roomid = roomid + num;
             }
-            var msg = {
-                roomid : roomid,
-            }
             cc.log("roomid: " , roomid)
-            //TODO send roomid to server
+            LobbySendGameHoodleMsg.send_join_room(roomid)
         }
-        */
         this._text_index++;
+    }
+    
+    ////////////////
+    on_event_join_room(event:cc.Event.EventCustom){
+        let udata =  event.getUserData()
+        if(udata){
+            let status = udata.status
+            if(status == Response.OK){
+                this.close()
+            }
+        }
     }
 }

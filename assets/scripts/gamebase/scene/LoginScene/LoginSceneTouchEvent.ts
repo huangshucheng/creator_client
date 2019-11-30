@@ -2,7 +2,7 @@ import UIController from '../../../framework/uibase/UIController';
 import NetWork from '../../../framework/network/NetWork';
 import { Cmd, CmdName } from '../../../framework/protocol/AuthProto';
 import { Stype,StypeName } from '../../../framework/protocol/Stype';
-import LoginSceneSendMsg from './LoginSceneSendMsg';
+import LoginSceneSendMsg from './sendMsg/LoginSendAuthMsg';
 import StringUtil from '../../../framework/utils/StringUtil';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';

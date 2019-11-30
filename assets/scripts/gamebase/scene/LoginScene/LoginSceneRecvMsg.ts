@@ -24,12 +24,12 @@ export default class LoginSceneRecvMsg extends UIController {
     }
 
     add_event_dispatcher(){
-        EventManager.on(EventDefine.EVENT_NET_CONNECTED,this.on_net_connected.bind(this),this);
-        EventManager.on(EventDefine.EVENT_NET_CLOSED,this.on_net_closed.bind(this),this);
-        EventManager.on(EventDefine.EVENT_NET_ERROR,this.on_net_error.bind(this),this);
-        EventManager.on(CmdName[Cmd.eUnameLoginRes],this.on_event_uname_login,this)
-        EventManager.on(CmdName[Cmd.eGuestLoginRes],this.on_event_guest_login,this)
-        EventManager.on(CmdName[Cmd.eUnameRegistRes],this.on_event_uname_regist,this)
+        EventManager.on(EventDefine.EVENT_NET_CONNECTED, this, this.on_net_connected);
+        EventManager.on(EventDefine.EVENT_NET_CLOSED, this, this.on_net_closed);
+        EventManager.on(EventDefine.EVENT_NET_ERROR, this, this.on_net_error);
+        EventManager.on(CmdName[Cmd.eUnameLoginRes], this, this.on_event_uname_login)
+        EventManager.on(CmdName[Cmd.eGuestLoginRes], this, this.on_event_guest_login)
+        EventManager.on(CmdName[Cmd.eUnameRegistRes], this, this.on_event_uname_regist)
     }
 
     on_net_connected(event:cc.Event.EventCustom){

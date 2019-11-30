@@ -1,6 +1,6 @@
 import UIController from '../../../framework/uibase/UIController';
 import Log from '../../../framework/utils/Log';
-import LobbySceneSendMsg from './LobbySceneSendAuthMsg';
+import LobbySceneSendMsg from './sendMsg/LobbySendAuthMsg';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 

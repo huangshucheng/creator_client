@@ -18,7 +18,9 @@ export default class UIDialog extends UIController {
 
     close() {
         DialogManager.getInstance().remove_dialog_from_map(this.node)
-        this.node.destroy();
+        if(this.node){
+            this.node.destroy();
+        }
     }
 
     onKeyDown(event) {

@@ -1840,7 +1840,7 @@
         "__id__": 49
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 3,
     "_components": [
       {
@@ -1874,7 +1874,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 155.307,
-      "y": 0,
+      "y": 373.73,
       "z": 0
     },
     "_scale": {
@@ -1925,7 +1925,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 120,
+      "width": 200,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1967,7 +1967,11 @@
       "__id__": 49
     },
     "_enabled": true,
-    "_materials": [],
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
     "_useOriginalSize": false,
     "_string": "返回房间",
     "_N$string": "返回房间",

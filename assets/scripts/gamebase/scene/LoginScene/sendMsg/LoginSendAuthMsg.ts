@@ -1,8 +1,8 @@
-import NetWork from '../../../framework/network/NetWork';
-import { Stype } from '../../../framework/protocol/Stype';
-import { Cmd } from "./../../../framework/protocol/AuthProto";
+import NetWork from '../../../../framework/network/NetWork';
+import { Stype } from '../../../../framework/protocol/Stype';
+import { Cmd } from "../../../../framework/protocol/AuthProto";
 
-export default class LoginSceneSendMsg {
+export default class LoginSendAuthMsg {
     
     static send(ctype:number, body:any){
         NetWork.getInstance().send_msg(Stype.Auth,ctype,body)
@@ -12,7 +12,7 @@ export default class LoginSceneSendMsg {
         let body = {
             guestkey : String(guest_key),
         }
-         LoginSceneSendMsg.send(Cmd.eGuestLoginReq,body)
+        LoginSendAuthMsg.send(Cmd.eGuestLoginReq,body)
     }
 
     static send_uname_login(uname:string, upwd:string){
@@ -20,7 +20,7 @@ export default class LoginSceneSendMsg {
             uname:String(uname),
 			upwd:String(upwd),
         }
-        LoginSceneSendMsg.send(Cmd.eUnameLoginReq,body)
+        LoginSendAuthMsg.send(Cmd.eUnameLoginReq,body)
     }
 
     static send_uname_regist(uname:string, upwdmd5:string){
@@ -28,7 +28,7 @@ export default class LoginSceneSendMsg {
             uname: String(uname),
             upwdmd5: String(upwdmd5),
         }
-        LoginSceneSendMsg.send(Cmd.eUnameRegistReq,body);
+        LoginSendAuthMsg.send(Cmd.eUnameRegistReq,body);
     }
 
 }

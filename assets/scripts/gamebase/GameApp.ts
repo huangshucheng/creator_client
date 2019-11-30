@@ -20,9 +20,9 @@ export default class GameApp extends cc.Component {
         
         NetWork.getInstance().connect()
 
-        EventManager.on(EventDefine.EVENT_NET_CONNECTED,this.on_net_connected.bind(this),this);
-        EventManager.on(EventDefine.EVENT_NET_CLOSED,this.on_net_closed.bind(this),this);
-        EventManager.on(EventDefine.EVENT_NET_ERROR,this.on_net_error.bind(this),this);
+        EventManager.on(EventDefine.EVENT_NET_CONNECTED, this, this.on_net_connected.bind(this));
+        EventManager.on(EventDefine.EVENT_NET_CLOSED, this, this.on_net_closed.bind(this));
+        EventManager.on(EventDefine.EVENT_NET_ERROR, this, this.on_net_error.bind(this));
     }
 
     start () {

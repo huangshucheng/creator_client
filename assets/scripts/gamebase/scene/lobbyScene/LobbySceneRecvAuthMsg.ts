@@ -12,7 +12,7 @@ import DialogManager from '../../../framework/manager/DialogManager';
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class LobbySceneRecvMsg extends UIController {
+export default class LobbySceneRecvAuthMsg extends UIController {
 
     onLoad () {
         super.onLoad()
@@ -23,9 +23,9 @@ export default class LobbySceneRecvMsg extends UIController {
     }
 
     add_event_dispatcher(){
-        EventManager.on(CmdName[Cmd.eGetUserCenterInfoRes],this.on_event_center_info,this)
-        EventManager.on(CmdName[Cmd.eLoginOutRes],this.on_event_login_out,this)
-        EventManager.on(CmdName[Cmd.eReloginRes],this.on_event_relogin,this)
+        EventManager.on(CmdName[Cmd.eGetUserCenterInfoRes], this, this.on_event_center_info)
+        EventManager.on(CmdName[Cmd.eLoginOutRes], this, this.on_event_login_out)
+        EventManager.on(CmdName[Cmd.eReloginRes], this, this.on_event_relogin)
     }
 
     on_event_center_info(event:cc.Event.EventCustom){

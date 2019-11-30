@@ -1,13 +1,6 @@
 import UIController from '../../../framework/uibase/UIController';
-import SceneManager from '../../../framework/manager/SceneManager';
-import GameScene from '../gameScene/GameScene';
-import LoginScene from '../LoginScene/LoginScene';
-import LSDefine from '../../../framework/config/LSDefine';
-import LobbySceneSendMsg from './LobbySceneSendAuthMsg';
-import Storage from '../../../framework/utils/Storage';
-import LobbySceneSendAuthMsg from './LobbySceneSendAuthMsg';
 import DialogManager from '../../../framework/manager/DialogManager';
-import { Base64 } from '../../../framework/utils/Base64';
+import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 
 const {ccclass, property} = cc._decorator;
 
@@ -28,6 +21,7 @@ export default class LobbySceneTouchEvent extends UIController {
         this.add_click_event(this.view["BTN_CREATE_ROOM"],this.on_click_create_room.bind(this))
         this.add_click_event(this.view["KW_BTN_LOGIN_LOGIC"],this.on_click_login_logic.bind(this))
         this.add_click_event(this.view["BTN_JOIN_ROOM"],this.on_click_join_room.bind(this))
+        this.add_click_event(this.view["BTN_BACK_ROOM"],this.on_click_back_room.bind(this))
         this.add_click_event(this.view["IMG_HEAD"],this.on_click_head.bind(this))
         
     }
@@ -56,7 +50,8 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_create_room(sender:cc.Component){
-        SceneManager.getInstance().enter_scene_asyc(new GameScene())
+        // SceneManager.getInstance().enter_scene_asyc(new GameScene())
+        LobbySendGameHoodleMsg.send_create_room("roominfo:hcc>>room rule/////////////////////////////");
     }
 
     on_click_login_logic(sender:cc.Component){
@@ -74,6 +69,10 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_head(sender: cc.Component){
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogMyCenter","MyCenterDialog")
+    }
+
+    on_click_back_room(sender: cc.Component){
+        LobbySendGameHoodleMsg.send_back_room();
     }
 
 }

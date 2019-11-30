@@ -2,6 +2,10 @@ import UIDialog from '../../framework/uibase/UIDialog';
 import DialogManager from '../../framework/manager/DialogManager';
 import LobbyScene from '../scene/lobbyScene/LobbyScene';
 import SceneManager from '../../framework/manager/SceneManager';
+import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
+import EventManager from '../../framework/manager/EventManager';
+import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
+import Response from '../../framework/config/Response';
 
 const { ccclass, property } = cc._decorator;
 
@@ -13,7 +17,12 @@ export default class SettingDialog extends UIDialog {
     }
 
     start () {
+        this.add_event_dispatcher()
         this.add_button_event_listener()
+    }
+
+    add_event_dispatcher(){
+        EventManager.on(CmdName[Cmd.eJoinRoomRes], this, this.on_event_exit_room)
     }
 
     add_button_event_listener(){
@@ -31,7 +40,20 @@ export default class SettingDialog extends UIDialog {
     }
 
     on_click_back(sender: cc.Component){
+        LobbySendGameHoodleMsg.send_exit_room();
         SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
         this.close()
     }
+
+    ////////////
+    on_event_exit_room(event:cc.Event.EventCustom){
+        let udata =  event.getUserData()
+        if(udata){
+            let status = udata.status
+            if(status == Response.OK){
+                this.close()
+            }
+        }
+    }
+
 }
