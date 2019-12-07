@@ -25,7 +25,6 @@ export enum Cmd {
 	eGetUserCenterInfoReq = 21,//获取用户信息
 	eGetUserCenterInfoRes = 22,
 	eReloginRes = 23,//用户被挤号
-	eUserLostConnectRes = 24//用户丢失链接
 }
 
 export let CmdName = {
@@ -53,5 +52,4 @@ export let CmdName = {
 	[21] : "GetUserCenterInfoReq",
 	[22] : "GetUserCenterInfoRes",
 	[23] : "ReloginRes",
-	[24] : "UserLostConnectRes",
 }

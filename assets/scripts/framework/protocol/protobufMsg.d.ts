@@ -28,8 +28,7 @@ export namespace AuthProto {
         eAccountUpgradeRes = 20,
         eGetUserCenterInfoReq = 21,
         eGetUserCenterInfoRes = 22,
-        eReloginRes = 23,
-        eUserLostConnectRes = 24
+        eReloginRes = 23
     }
 
     /** Properties of an UnameLoginReq. */
@@ -2095,90 +2094,6 @@ export namespace AuthProto {
          */
         public toJSON(): [ 'object' ].<string, any>;
     }
-
-    /** Properties of a UserLostConnectRes. */
-    interface IUserLostConnectRes {
-    }
-
-    /** Represents a UserLostConnectRes. */
-    class UserLostConnectRes implements IUserLostConnectRes {
-
-        /**
-         * Constructs a new UserLostConnectRes.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: AuthProto.IUserLostConnectRes);
-
-        /**
-         * Creates a new UserLostConnectRes instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns UserLostConnectRes instance
-         */
-        public static create(properties?: AuthProto.IUserLostConnectRes): AuthProto.UserLostConnectRes;
-
-        /**
-         * Encodes the specified UserLostConnectRes message. Does not implicitly {@link AuthProto.UserLostConnectRes.verify|verify} messages.
-         * @param message UserLostConnectRes message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: AuthProto.IUserLostConnectRes, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified UserLostConnectRes message, length delimited. Does not implicitly {@link AuthProto.UserLostConnectRes.verify|verify} messages.
-         * @param message UserLostConnectRes message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: AuthProto.IUserLostConnectRes, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a UserLostConnectRes message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns UserLostConnectRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): AuthProto.UserLostConnectRes;
-
-        /**
-         * Decodes a UserLostConnectRes message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns UserLostConnectRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): AuthProto.UserLostConnectRes;
-
-        /**
-         * Verifies a UserLostConnectRes message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: [ 'object' ].<string, any>): (string|null);
-
-        /**
-         * Creates a UserLostConnectRes message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns UserLostConnectRes
-         */
-        public static fromObject(object: [ 'object' ].<string, any>): AuthProto.UserLostConnectRes;
-
-        /**
-         * Creates a plain object from a UserLostConnectRes message. Also converts values to other types if specified.
-         * @param message UserLostConnectRes
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: AuthProto.UserLostConnectRes, options?: $protobuf.IConversionOptions): [ 'object' ].<string, any>;
-
-        /**
-         * Converts this UserLostConnectRes to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): [ 'object' ].<string, any>;
-    }
 }
 
 /** Namespace TalkProto. */
@@ -3049,7 +2964,8 @@ export namespace GameHoodleProto {
         eUserReadyRes = 20,
         eGameStartRes = 21,
         eGameResultRes = 22,
-        eGameTotalResultRes = 23
+        eLoginLogicReq = 23,
+        eLoginLogicRes = 24
     }
 
     /** Properties of a CreateRoomReq. */

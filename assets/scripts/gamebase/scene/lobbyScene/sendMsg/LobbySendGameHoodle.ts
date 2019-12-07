@@ -8,6 +8,10 @@ export default class LobbySendGameHoodleMsg {
         NetWork.getInstance().send_msg(Stype.GameHoodle,ctype,body)
     }
 
+    static send_login_logic(){
+        LobbySendGameHoodleMsg.send(Cmd.eLoginLogicReq);
+    }
+
     static send_create_room(roominfo: string){
         if (roominfo == null || roominfo == ''){
             return;

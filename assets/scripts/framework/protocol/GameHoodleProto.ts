@@ -38,7 +38,9 @@ export enum Cmd {
 	
 	eGameStartRes = 21,	//游戏开始
 	eGameResultRes = 22,	//游戏结束
-	eGameTotalResultRes = 23, 	//大结算
+
+	eLoginLogicReq = 23,	//登录游戏服
+	eLoginLogicRes = 24,
 }
 
 export let CmdName = {
@@ -71,7 +73,7 @@ export let CmdName = {
 	[15] :"UserInfoRes",		//玩家信息
 
 	[16] :"RoomInfoRes", 	//房间规则
-	[17] :"RoomIdRes", 	//房间号
+	[17] :"RoomIdRes", 		//房间号
 	[18] :"PlayCountRes", 	//局数
 
 	[19] :"UserReadyReq",	//玩家准备
@@ -79,5 +81,7 @@ export let CmdName = {
 	
 	[21] :"GameStartRes",	//游戏开始
 	[22] :"GameResultRes",	//游戏结束
-	[23] :"GameTotalResultRes", 	//大结算
+
+	[23] :"LoginLogicReq", 	//登录逻辑服务
+	[24] :"LoginLogicRes",
 }

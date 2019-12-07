@@ -2,7 +2,7 @@ import UIController from '../../../framework/uibase/UIController';
 import NetWork from '../../../framework/network/NetWork';
 import { Cmd, CmdName } from '../../../framework/protocol/AuthProto';
 import { Stype,StypeName } from '../../../framework/protocol/Stype';
-import LoginSceneSendMsg from './sendMsg/LoginSendAuthMsg';
+import LoginSendAuthMsg from './sendMsg/LoginSendAuthMsg';
 import StringUtil from '../../../framework/utils/StringUtil';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
@@ -41,7 +41,7 @@ export default class LoginSceneTouchEvent extends UIController {
             DialogManager.getInstance().show_weak_hint("登陆失败，guestkey生成错误!")
             return
         }
-        LoginSceneSendMsg.send_guest_login(guestkey)
+        LoginSendAuthMsg.send_guest_login(guestkey)
     }
 
     on_click_uname_login(sender:cc.Component){
@@ -54,7 +54,7 @@ export default class LoginSceneTouchEvent extends UIController {
             DialogManager.getInstance().show_weak_hint("用户名或密码错误，不能少于六位!");
             return
         }
-        LoginSceneSendMsg.send_uname_login(_uname,_upwd)
+        LoginSendAuthMsg.send_uname_login(_uname,_upwd)
     }
 
     on_click_goto_regist(sender: cc.Component){
@@ -80,7 +80,7 @@ export default class LoginSceneTouchEvent extends UIController {
             DialogManager.getInstance().show_weak_hint("账号或密码错误!(不能少于6位)")
             return
         }
-        LoginSceneSendMsg.send_uname_regist(_uname, _upwd)
+        LoginSendAuthMsg.send_uname_regist(_uname, _upwd)
         Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
         Storage.set(LSDefine.USER_LOGIN_MSG,{uname:_uname,upwd:_upwd})
     }

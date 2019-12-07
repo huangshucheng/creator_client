@@ -46,7 +46,6 @@ $root.AuthProto = (function() {
      * @property {number} eGetUserCenterInfoReq=21 eGetUserCenterInfoReq value
      * @property {number} eGetUserCenterInfoRes=22 eGetUserCenterInfoRes value
      * @property {number} eReloginRes=23 eReloginRes value
-     * @property {number} eUserLostConnectRes=24 eUserLostConnectRes value
      */
     AuthProto.Cmd = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -74,7 +73,6 @@ $root.AuthProto = (function() {
         values[valuesById[21] = "eGetUserCenterInfoReq"] = 21;
         values[valuesById[22] = "eGetUserCenterInfoRes"] = 22;
         values[valuesById[23] = "eReloginRes"] = 23;
-        values[valuesById[24] = "eUserLostConnectRes"] = 24;
         return values;
     })();
 
@@ -4309,166 +4307,6 @@ $root.AuthProto = (function() {
         return ReloginRes;
     })();
 
-    AuthProto.UserLostConnectRes = (function() {
-
-        /**
-         * Properties of a UserLostConnectRes.
-         * @memberof AuthProto
-         * @interface IUserLostConnectRes
-         */
-
-        /**
-         * Constructs a new UserLostConnectRes.
-         * @memberof AuthProto
-         * @classdesc Represents a UserLostConnectRes.
-         * @implements IUserLostConnectRes
-         * @constructor
-         * @param {AuthProto.IUserLostConnectRes=} [properties] Properties to set
-         */
-        function UserLostConnectRes(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * Creates a new UserLostConnectRes instance using the specified properties.
-         * @function create
-         * @memberof AuthProto.UserLostConnectRes
-         * @static
-         * @param {AuthProto.IUserLostConnectRes=} [properties] Properties to set
-         * @returns {AuthProto.UserLostConnectRes} UserLostConnectRes instance
-         */
-        UserLostConnectRes.create = function create(properties) {
-            return new UserLostConnectRes(properties);
-        };
-
-        /**
-         * Encodes the specified UserLostConnectRes message. Does not implicitly {@link AuthProto.UserLostConnectRes.verify|verify} messages.
-         * @function encode
-         * @memberof AuthProto.UserLostConnectRes
-         * @static
-         * @param {AuthProto.IUserLostConnectRes} message UserLostConnectRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        UserLostConnectRes.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified UserLostConnectRes message, length delimited. Does not implicitly {@link AuthProto.UserLostConnectRes.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof AuthProto.UserLostConnectRes
-         * @static
-         * @param {AuthProto.IUserLostConnectRes} message UserLostConnectRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        UserLostConnectRes.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a UserLostConnectRes message from the specified reader or buffer.
-         * @function decode
-         * @memberof AuthProto.UserLostConnectRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {AuthProto.UserLostConnectRes} UserLostConnectRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        UserLostConnectRes.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.AuthProto.UserLostConnectRes();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a UserLostConnectRes message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof AuthProto.UserLostConnectRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {AuthProto.UserLostConnectRes} UserLostConnectRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        UserLostConnectRes.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a UserLostConnectRes message.
-         * @function verify
-         * @memberof AuthProto.UserLostConnectRes
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        UserLostConnectRes.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        /**
-         * Creates a UserLostConnectRes message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof AuthProto.UserLostConnectRes
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {AuthProto.UserLostConnectRes} UserLostConnectRes
-         */
-        UserLostConnectRes.fromObject = function fromObject(object) {
-            if (object instanceof $root.AuthProto.UserLostConnectRes)
-                return object;
-            return new $root.AuthProto.UserLostConnectRes();
-        };
-
-        /**
-         * Creates a plain object from a UserLostConnectRes message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof AuthProto.UserLostConnectRes
-         * @static
-         * @param {AuthProto.UserLostConnectRes} message UserLostConnectRes
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        UserLostConnectRes.toObject = function toObject() {
-            return {};
-        };
-
-        /**
-         * Converts this UserLostConnectRes to JSON.
-         * @function toJSON
-         * @memberof AuthProto.UserLostConnectRes
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        UserLostConnectRes.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return UserLostConnectRes;
-    })();
-
     return AuthProto;
 })();
 
@@ -6270,7 +6108,8 @@ $root.GameHoodleProto = (function() {
      * @property {number} eUserReadyRes=20 eUserReadyRes value
      * @property {number} eGameStartRes=21 eGameStartRes value
      * @property {number} eGameResultRes=22 eGameResultRes value
-     * @property {number} eGameTotalResultRes=23 eGameTotalResultRes value
+     * @property {number} eLoginLogicReq=23 eLoginLogicReq value
+     * @property {number} eLoginLogicRes=24 eLoginLogicRes value
      */
     GameHoodleProto.Cmd = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -6297,7 +6136,8 @@ $root.GameHoodleProto = (function() {
         values[valuesById[20] = "eUserReadyRes"] = 20;
         values[valuesById[21] = "eGameStartRes"] = 21;
         values[valuesById[22] = "eGameResultRes"] = 22;
-        values[valuesById[23] = "eGameTotalResultRes"] = 23;
+        values[valuesById[23] = "eLoginLogicReq"] = 23;
+        values[valuesById[24] = "eLoginLogicRes"] = 24;
         return values;
     })();
 
@@ -9015,6 +8855,2073 @@ $root.GameHoodleProto = (function() {
         };
 
         return CheckLinkGameRes;
+    })();
+
+    GameHoodleProto.UserInfoRes = (function() {
+
+        /**
+         * Properties of a UserInfoRes.
+         * @memberof GameHoodleProto
+         * @interface IUserInfoRes
+         * @property {Array.<GameHoodleProto.IUserInfo>|null} [userinfo] UserInfoRes userinfo
+         */
+
+        /**
+         * Constructs a new UserInfoRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserInfoRes.
+         * @implements IUserInfoRes
+         * @constructor
+         * @param {GameHoodleProto.IUserInfoRes=} [properties] Properties to set
+         */
+        function UserInfoRes(properties) {
+            this.userinfo = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserInfoRes userinfo.
+         * @member {Array.<GameHoodleProto.IUserInfo>} userinfo
+         * @memberof GameHoodleProto.UserInfoRes
+         * @instance
+         */
+        UserInfoRes.prototype.userinfo = $util.emptyArray;
+
+        /**
+         * Creates a new UserInfoRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserInfoRes
+         * @static
+         * @param {GameHoodleProto.IUserInfoRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserInfoRes} UserInfoRes instance
+         */
+        UserInfoRes.create = function create(properties) {
+            return new UserInfoRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserInfoRes message. Does not implicitly {@link GameHoodleProto.UserInfoRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserInfoRes
+         * @static
+         * @param {GameHoodleProto.IUserInfoRes} message UserInfoRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserInfoRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.userinfo != null && message.userinfo.length)
+                for (var i = 0; i < message.userinfo.length; ++i)
+                    $root.GameHoodleProto.UserInfo.encode(message.userinfo[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserInfoRes message, length delimited. Does not implicitly {@link GameHoodleProto.UserInfoRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserInfoRes
+         * @static
+         * @param {GameHoodleProto.IUserInfoRes} message UserInfoRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserInfoRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserInfoRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserInfoRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserInfoRes} UserInfoRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserInfoRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserInfoRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.userinfo && message.userinfo.length))
+                        message.userinfo = [];
+                    message.userinfo.push($root.GameHoodleProto.UserInfo.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserInfoRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserInfoRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserInfoRes} UserInfoRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserInfoRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserInfoRes message.
+         * @function verify
+         * @memberof GameHoodleProto.UserInfoRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserInfoRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.userinfo != null && message.hasOwnProperty("userinfo")) {
+                if (!Array.isArray(message.userinfo))
+                    return "userinfo: array expected";
+                for (var i = 0; i < message.userinfo.length; ++i) {
+                    var error = $root.GameHoodleProto.UserInfo.verify(message.userinfo[i]);
+                    if (error)
+                        return "userinfo." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a UserInfoRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserInfoRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserInfoRes} UserInfoRes
+         */
+        UserInfoRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserInfoRes)
+                return object;
+            var message = new $root.GameHoodleProto.UserInfoRes();
+            if (object.userinfo) {
+                if (!Array.isArray(object.userinfo))
+                    throw TypeError(".GameHoodleProto.UserInfoRes.userinfo: array expected");
+                message.userinfo = [];
+                for (var i = 0; i < object.userinfo.length; ++i) {
+                    if (typeof object.userinfo[i] !== "object")
+                        throw TypeError(".GameHoodleProto.UserInfoRes.userinfo: object expected");
+                    message.userinfo[i] = $root.GameHoodleProto.UserInfo.fromObject(object.userinfo[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserInfoRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserInfoRes
+         * @static
+         * @param {GameHoodleProto.UserInfoRes} message UserInfoRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserInfoRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.userinfo = [];
+            if (message.userinfo && message.userinfo.length) {
+                object.userinfo = [];
+                for (var j = 0; j < message.userinfo.length; ++j)
+                    object.userinfo[j] = $root.GameHoodleProto.UserInfo.toObject(message.userinfo[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this UserInfoRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserInfoRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserInfoRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserInfoRes;
+    })();
+
+    GameHoodleProto.RoomInfoRes = (function() {
+
+        /**
+         * Properties of a RoomInfoRes.
+         * @memberof GameHoodleProto
+         * @interface IRoomInfoRes
+         * @property {string} roominfo RoomInfoRes roominfo
+         */
+
+        /**
+         * Constructs a new RoomInfoRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a RoomInfoRes.
+         * @implements IRoomInfoRes
+         * @constructor
+         * @param {GameHoodleProto.IRoomInfoRes=} [properties] Properties to set
+         */
+        function RoomInfoRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * RoomInfoRes roominfo.
+         * @member {string} roominfo
+         * @memberof GameHoodleProto.RoomInfoRes
+         * @instance
+         */
+        RoomInfoRes.prototype.roominfo = "";
+
+        /**
+         * Creates a new RoomInfoRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.RoomInfoRes
+         * @static
+         * @param {GameHoodleProto.IRoomInfoRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.RoomInfoRes} RoomInfoRes instance
+         */
+        RoomInfoRes.create = function create(properties) {
+            return new RoomInfoRes(properties);
+        };
+
+        /**
+         * Encodes the specified RoomInfoRes message. Does not implicitly {@link GameHoodleProto.RoomInfoRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.RoomInfoRes
+         * @static
+         * @param {GameHoodleProto.IRoomInfoRes} message RoomInfoRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomInfoRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.roominfo);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified RoomInfoRes message, length delimited. Does not implicitly {@link GameHoodleProto.RoomInfoRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.RoomInfoRes
+         * @static
+         * @param {GameHoodleProto.IRoomInfoRes} message RoomInfoRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomInfoRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a RoomInfoRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.RoomInfoRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.RoomInfoRes} RoomInfoRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomInfoRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.RoomInfoRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.roominfo = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("roominfo"))
+                throw $util.ProtocolError("missing required 'roominfo'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a RoomInfoRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.RoomInfoRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.RoomInfoRes} RoomInfoRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomInfoRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a RoomInfoRes message.
+         * @function verify
+         * @memberof GameHoodleProto.RoomInfoRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        RoomInfoRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isString(message.roominfo))
+                return "roominfo: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a RoomInfoRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.RoomInfoRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.RoomInfoRes} RoomInfoRes
+         */
+        RoomInfoRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.RoomInfoRes)
+                return object;
+            var message = new $root.GameHoodleProto.RoomInfoRes();
+            if (object.roominfo != null)
+                message.roominfo = String(object.roominfo);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a RoomInfoRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.RoomInfoRes
+         * @static
+         * @param {GameHoodleProto.RoomInfoRes} message RoomInfoRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        RoomInfoRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.roominfo = "";
+            if (message.roominfo != null && message.hasOwnProperty("roominfo"))
+                object.roominfo = message.roominfo;
+            return object;
+        };
+
+        /**
+         * Converts this RoomInfoRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.RoomInfoRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        RoomInfoRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RoomInfoRes;
+    })();
+
+    GameHoodleProto.RoomIdRes = (function() {
+
+        /**
+         * Properties of a RoomIdRes.
+         * @memberof GameHoodleProto
+         * @interface IRoomIdRes
+         * @property {string} roomid RoomIdRes roomid
+         */
+
+        /**
+         * Constructs a new RoomIdRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a RoomIdRes.
+         * @implements IRoomIdRes
+         * @constructor
+         * @param {GameHoodleProto.IRoomIdRes=} [properties] Properties to set
+         */
+        function RoomIdRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * RoomIdRes roomid.
+         * @member {string} roomid
+         * @memberof GameHoodleProto.RoomIdRes
+         * @instance
+         */
+        RoomIdRes.prototype.roomid = "";
+
+        /**
+         * Creates a new RoomIdRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.RoomIdRes
+         * @static
+         * @param {GameHoodleProto.IRoomIdRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.RoomIdRes} RoomIdRes instance
+         */
+        RoomIdRes.create = function create(properties) {
+            return new RoomIdRes(properties);
+        };
+
+        /**
+         * Encodes the specified RoomIdRes message. Does not implicitly {@link GameHoodleProto.RoomIdRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.RoomIdRes
+         * @static
+         * @param {GameHoodleProto.IRoomIdRes} message RoomIdRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomIdRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.roomid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified RoomIdRes message, length delimited. Does not implicitly {@link GameHoodleProto.RoomIdRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.RoomIdRes
+         * @static
+         * @param {GameHoodleProto.IRoomIdRes} message RoomIdRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomIdRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a RoomIdRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.RoomIdRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.RoomIdRes} RoomIdRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomIdRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.RoomIdRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.roomid = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("roomid"))
+                throw $util.ProtocolError("missing required 'roomid'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a RoomIdRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.RoomIdRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.RoomIdRes} RoomIdRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomIdRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a RoomIdRes message.
+         * @function verify
+         * @memberof GameHoodleProto.RoomIdRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        RoomIdRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isString(message.roomid))
+                return "roomid: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a RoomIdRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.RoomIdRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.RoomIdRes} RoomIdRes
+         */
+        RoomIdRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.RoomIdRes)
+                return object;
+            var message = new $root.GameHoodleProto.RoomIdRes();
+            if (object.roomid != null)
+                message.roomid = String(object.roomid);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a RoomIdRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.RoomIdRes
+         * @static
+         * @param {GameHoodleProto.RoomIdRes} message RoomIdRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        RoomIdRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.roomid = "";
+            if (message.roomid != null && message.hasOwnProperty("roomid"))
+                object.roomid = message.roomid;
+            return object;
+        };
+
+        /**
+         * Converts this RoomIdRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.RoomIdRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        RoomIdRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RoomIdRes;
+    })();
+
+    GameHoodleProto.PlayCountRes = (function() {
+
+        /**
+         * Properties of a PlayCountRes.
+         * @memberof GameHoodleProto
+         * @interface IPlayCountRes
+         * @property {string} playcount PlayCountRes playcount
+         * @property {string} totalplaycount PlayCountRes totalplaycount
+         */
+
+        /**
+         * Constructs a new PlayCountRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a PlayCountRes.
+         * @implements IPlayCountRes
+         * @constructor
+         * @param {GameHoodleProto.IPlayCountRes=} [properties] Properties to set
+         */
+        function PlayCountRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PlayCountRes playcount.
+         * @member {string} playcount
+         * @memberof GameHoodleProto.PlayCountRes
+         * @instance
+         */
+        PlayCountRes.prototype.playcount = "";
+
+        /**
+         * PlayCountRes totalplaycount.
+         * @member {string} totalplaycount
+         * @memberof GameHoodleProto.PlayCountRes
+         * @instance
+         */
+        PlayCountRes.prototype.totalplaycount = "";
+
+        /**
+         * Creates a new PlayCountRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.PlayCountRes
+         * @static
+         * @param {GameHoodleProto.IPlayCountRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.PlayCountRes} PlayCountRes instance
+         */
+        PlayCountRes.create = function create(properties) {
+            return new PlayCountRes(properties);
+        };
+
+        /**
+         * Encodes the specified PlayCountRes message. Does not implicitly {@link GameHoodleProto.PlayCountRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.PlayCountRes
+         * @static
+         * @param {GameHoodleProto.IPlayCountRes} message PlayCountRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayCountRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.playcount);
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.totalplaycount);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PlayCountRes message, length delimited. Does not implicitly {@link GameHoodleProto.PlayCountRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.PlayCountRes
+         * @static
+         * @param {GameHoodleProto.IPlayCountRes} message PlayCountRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayCountRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PlayCountRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.PlayCountRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.PlayCountRes} PlayCountRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayCountRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.PlayCountRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.playcount = reader.string();
+                    break;
+                case 2:
+                    message.totalplaycount = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("playcount"))
+                throw $util.ProtocolError("missing required 'playcount'", { instance: message });
+            if (!message.hasOwnProperty("totalplaycount"))
+                throw $util.ProtocolError("missing required 'totalplaycount'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a PlayCountRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.PlayCountRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.PlayCountRes} PlayCountRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayCountRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PlayCountRes message.
+         * @function verify
+         * @memberof GameHoodleProto.PlayCountRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PlayCountRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isString(message.playcount))
+                return "playcount: string expected";
+            if (!$util.isString(message.totalplaycount))
+                return "totalplaycount: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a PlayCountRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.PlayCountRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.PlayCountRes} PlayCountRes
+         */
+        PlayCountRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.PlayCountRes)
+                return object;
+            var message = new $root.GameHoodleProto.PlayCountRes();
+            if (object.playcount != null)
+                message.playcount = String(object.playcount);
+            if (object.totalplaycount != null)
+                message.totalplaycount = String(object.totalplaycount);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PlayCountRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.PlayCountRes
+         * @static
+         * @param {GameHoodleProto.PlayCountRes} message PlayCountRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PlayCountRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.playcount = "";
+                object.totalplaycount = "";
+            }
+            if (message.playcount != null && message.hasOwnProperty("playcount"))
+                object.playcount = message.playcount;
+            if (message.totalplaycount != null && message.hasOwnProperty("totalplaycount"))
+                object.totalplaycount = message.totalplaycount;
+            return object;
+        };
+
+        /**
+         * Converts this PlayCountRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.PlayCountRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PlayCountRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PlayCountRes;
+    })();
+
+    GameHoodleProto.UserReadyReq = (function() {
+
+        /**
+         * Properties of a UserReadyReq.
+         * @memberof GameHoodleProto
+         * @interface IUserReadyReq
+         */
+
+        /**
+         * Constructs a new UserReadyReq.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserReadyReq.
+         * @implements IUserReadyReq
+         * @constructor
+         * @param {GameHoodleProto.IUserReadyReq=} [properties] Properties to set
+         */
+        function UserReadyReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new UserReadyReq instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserReadyReq
+         * @static
+         * @param {GameHoodleProto.IUserReadyReq=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserReadyReq} UserReadyReq instance
+         */
+        UserReadyReq.create = function create(properties) {
+            return new UserReadyReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserReadyReq message. Does not implicitly {@link GameHoodleProto.UserReadyReq.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserReadyReq
+         * @static
+         * @param {GameHoodleProto.IUserReadyReq} message UserReadyReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserReadyReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserReadyReq message, length delimited. Does not implicitly {@link GameHoodleProto.UserReadyReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserReadyReq
+         * @static
+         * @param {GameHoodleProto.IUserReadyReq} message UserReadyReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserReadyReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserReadyReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserReadyReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserReadyReq} UserReadyReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserReadyReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserReadyReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserReadyReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserReadyReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserReadyReq} UserReadyReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserReadyReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserReadyReq message.
+         * @function verify
+         * @memberof GameHoodleProto.UserReadyReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserReadyReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserReadyReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserReadyReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserReadyReq} UserReadyReq
+         */
+        UserReadyReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserReadyReq)
+                return object;
+            return new $root.GameHoodleProto.UserReadyReq();
+        };
+
+        /**
+         * Creates a plain object from a UserReadyReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserReadyReq
+         * @static
+         * @param {GameHoodleProto.UserReadyReq} message UserReadyReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserReadyReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this UserReadyReq to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserReadyReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserReadyReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserReadyReq;
+    })();
+
+    GameHoodleProto.UserReadyRes = (function() {
+
+        /**
+         * Properties of a UserReadyRes.
+         * @memberof GameHoodleProto
+         * @interface IUserReadyRes
+         * @property {number} status UserReadyRes status
+         * @property {string|null} [numberid] UserReadyRes numberid
+         */
+
+        /**
+         * Constructs a new UserReadyRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserReadyRes.
+         * @implements IUserReadyRes
+         * @constructor
+         * @param {GameHoodleProto.IUserReadyRes=} [properties] Properties to set
+         */
+        function UserReadyRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserReadyRes status.
+         * @member {number} status
+         * @memberof GameHoodleProto.UserReadyRes
+         * @instance
+         */
+        UserReadyRes.prototype.status = 0;
+
+        /**
+         * UserReadyRes numberid.
+         * @member {string} numberid
+         * @memberof GameHoodleProto.UserReadyRes
+         * @instance
+         */
+        UserReadyRes.prototype.numberid = "";
+
+        /**
+         * Creates a new UserReadyRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserReadyRes
+         * @static
+         * @param {GameHoodleProto.IUserReadyRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserReadyRes} UserReadyRes instance
+         */
+        UserReadyRes.create = function create(properties) {
+            return new UserReadyRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserReadyRes message. Does not implicitly {@link GameHoodleProto.UserReadyRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserReadyRes
+         * @static
+         * @param {GameHoodleProto.IUserReadyRes} message UserReadyRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserReadyRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.numberid != null && message.hasOwnProperty("numberid"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.numberid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserReadyRes message, length delimited. Does not implicitly {@link GameHoodleProto.UserReadyRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserReadyRes
+         * @static
+         * @param {GameHoodleProto.IUserReadyRes} message UserReadyRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserReadyRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserReadyRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserReadyRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserReadyRes} UserReadyRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserReadyRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserReadyRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.numberid = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserReadyRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserReadyRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserReadyRes} UserReadyRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserReadyRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserReadyRes message.
+         * @function verify
+         * @memberof GameHoodleProto.UserReadyRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserReadyRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.numberid != null && message.hasOwnProperty("numberid"))
+                if (!$util.isString(message.numberid))
+                    return "numberid: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserReadyRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserReadyRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserReadyRes} UserReadyRes
+         */
+        UserReadyRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserReadyRes)
+                return object;
+            var message = new $root.GameHoodleProto.UserReadyRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.numberid != null)
+                message.numberid = String(object.numberid);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserReadyRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserReadyRes
+         * @static
+         * @param {GameHoodleProto.UserReadyRes} message UserReadyRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserReadyRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.numberid = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.numberid != null && message.hasOwnProperty("numberid"))
+                object.numberid = message.numberid;
+            return object;
+        };
+
+        /**
+         * Converts this UserReadyRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserReadyRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserReadyRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserReadyRes;
+    })();
+
+    GameHoodleProto.GameStart = (function() {
+
+        /**
+         * Properties of a GameStart.
+         * @memberof GameHoodleProto
+         * @interface IGameStart
+         * @property {number} status GameStart status
+         */
+
+        /**
+         * Constructs a new GameStart.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a GameStart.
+         * @implements IGameStart
+         * @constructor
+         * @param {GameHoodleProto.IGameStart=} [properties] Properties to set
+         */
+        function GameStart(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GameStart status.
+         * @member {number} status
+         * @memberof GameHoodleProto.GameStart
+         * @instance
+         */
+        GameStart.prototype.status = 0;
+
+        /**
+         * Creates a new GameStart instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.GameStart
+         * @static
+         * @param {GameHoodleProto.IGameStart=} [properties] Properties to set
+         * @returns {GameHoodleProto.GameStart} GameStart instance
+         */
+        GameStart.create = function create(properties) {
+            return new GameStart(properties);
+        };
+
+        /**
+         * Encodes the specified GameStart message. Does not implicitly {@link GameHoodleProto.GameStart.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.GameStart
+         * @static
+         * @param {GameHoodleProto.IGameStart} message GameStart message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameStart.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GameStart message, length delimited. Does not implicitly {@link GameHoodleProto.GameStart.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.GameStart
+         * @static
+         * @param {GameHoodleProto.IGameStart} message GameStart message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameStart.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GameStart message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.GameStart
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.GameStart} GameStart
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameStart.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.GameStart();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a GameStart message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.GameStart
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.GameStart} GameStart
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameStart.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GameStart message.
+         * @function verify
+         * @memberof GameHoodleProto.GameStart
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GameStart.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a GameStart message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.GameStart
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.GameStart} GameStart
+         */
+        GameStart.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.GameStart)
+                return object;
+            var message = new $root.GameHoodleProto.GameStart();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GameStart message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.GameStart
+         * @static
+         * @param {GameHoodleProto.GameStart} message GameStart
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GameStart.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this GameStart to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.GameStart
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GameStart.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameStart;
+    })();
+
+    GameHoodleProto.GameResultRes = (function() {
+
+        /**
+         * Properties of a GameResultRes.
+         * @memberof GameHoodleProto
+         * @interface IGameResultRes
+         * @property {Array.<number>|null} [scores] GameResultRes scores
+         */
+
+        /**
+         * Constructs a new GameResultRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a GameResultRes.
+         * @implements IGameResultRes
+         * @constructor
+         * @param {GameHoodleProto.IGameResultRes=} [properties] Properties to set
+         */
+        function GameResultRes(properties) {
+            this.scores = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GameResultRes scores.
+         * @member {Array.<number>} scores
+         * @memberof GameHoodleProto.GameResultRes
+         * @instance
+         */
+        GameResultRes.prototype.scores = $util.emptyArray;
+
+        /**
+         * Creates a new GameResultRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.GameResultRes
+         * @static
+         * @param {GameHoodleProto.IGameResultRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.GameResultRes} GameResultRes instance
+         */
+        GameResultRes.create = function create(properties) {
+            return new GameResultRes(properties);
+        };
+
+        /**
+         * Encodes the specified GameResultRes message. Does not implicitly {@link GameHoodleProto.GameResultRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.GameResultRes
+         * @static
+         * @param {GameHoodleProto.IGameResultRes} message GameResultRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameResultRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.scores != null && message.scores.length) {
+                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                for (var i = 0; i < message.scores.length; ++i)
+                    writer.sint32(message.scores[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GameResultRes message, length delimited. Does not implicitly {@link GameHoodleProto.GameResultRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.GameResultRes
+         * @static
+         * @param {GameHoodleProto.IGameResultRes} message GameResultRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameResultRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GameResultRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.GameResultRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.GameResultRes} GameResultRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameResultRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.GameResultRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.scores && message.scores.length))
+                        message.scores = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.scores.push(reader.sint32());
+                    } else
+                        message.scores.push(reader.sint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a GameResultRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.GameResultRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.GameResultRes} GameResultRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameResultRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GameResultRes message.
+         * @function verify
+         * @memberof GameHoodleProto.GameResultRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GameResultRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.scores != null && message.hasOwnProperty("scores")) {
+                if (!Array.isArray(message.scores))
+                    return "scores: array expected";
+                for (var i = 0; i < message.scores.length; ++i)
+                    if (!$util.isInteger(message.scores[i]))
+                        return "scores: integer[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates a GameResultRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.GameResultRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.GameResultRes} GameResultRes
+         */
+        GameResultRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.GameResultRes)
+                return object;
+            var message = new $root.GameHoodleProto.GameResultRes();
+            if (object.scores) {
+                if (!Array.isArray(object.scores))
+                    throw TypeError(".GameHoodleProto.GameResultRes.scores: array expected");
+                message.scores = [];
+                for (var i = 0; i < object.scores.length; ++i)
+                    message.scores[i] = object.scores[i] | 0;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GameResultRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.GameResultRes
+         * @static
+         * @param {GameHoodleProto.GameResultRes} message GameResultRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GameResultRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.scores = [];
+            if (message.scores && message.scores.length) {
+                object.scores = [];
+                for (var j = 0; j < message.scores.length; ++j)
+                    object.scores[j] = message.scores[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this GameResultRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.GameResultRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GameResultRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameResultRes;
+    })();
+
+    GameHoodleProto.UserLostConnectRes = (function() {
+
+        /**
+         * Properties of a UserLostConnectRes.
+         * @memberof GameHoodleProto
+         * @interface IUserLostConnectRes
+         */
+
+        /**
+         * Constructs a new UserLostConnectRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserLostConnectRes.
+         * @implements IUserLostConnectRes
+         * @constructor
+         * @param {GameHoodleProto.IUserLostConnectRes=} [properties] Properties to set
+         */
+        function UserLostConnectRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new UserLostConnectRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserLostConnectRes
+         * @static
+         * @param {GameHoodleProto.IUserLostConnectRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserLostConnectRes} UserLostConnectRes instance
+         */
+        UserLostConnectRes.create = function create(properties) {
+            return new UserLostConnectRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserLostConnectRes message. Does not implicitly {@link GameHoodleProto.UserLostConnectRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserLostConnectRes
+         * @static
+         * @param {GameHoodleProto.IUserLostConnectRes} message UserLostConnectRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserLostConnectRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserLostConnectRes message, length delimited. Does not implicitly {@link GameHoodleProto.UserLostConnectRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserLostConnectRes
+         * @static
+         * @param {GameHoodleProto.IUserLostConnectRes} message UserLostConnectRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserLostConnectRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserLostConnectRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserLostConnectRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserLostConnectRes} UserLostConnectRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserLostConnectRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserLostConnectRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserLostConnectRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserLostConnectRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserLostConnectRes} UserLostConnectRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserLostConnectRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserLostConnectRes message.
+         * @function verify
+         * @memberof GameHoodleProto.UserLostConnectRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserLostConnectRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserLostConnectRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserLostConnectRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserLostConnectRes} UserLostConnectRes
+         */
+        UserLostConnectRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserLostConnectRes)
+                return object;
+            return new $root.GameHoodleProto.UserLostConnectRes();
+        };
+
+        /**
+         * Creates a plain object from a UserLostConnectRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserLostConnectRes
+         * @static
+         * @param {GameHoodleProto.UserLostConnectRes} message UserLostConnectRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserLostConnectRes.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this UserLostConnectRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserLostConnectRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserLostConnectRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserLostConnectRes;
+    })();
+
+    GameHoodleProto.LoginLogicReq = (function() {
+
+        /**
+         * Properties of a LoginLogicReq.
+         * @memberof GameHoodleProto
+         * @interface ILoginLogicReq
+         */
+
+        /**
+         * Constructs a new LoginLogicReq.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a LoginLogicReq.
+         * @implements ILoginLogicReq
+         * @constructor
+         * @param {GameHoodleProto.ILoginLogicReq=} [properties] Properties to set
+         */
+        function LoginLogicReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new LoginLogicReq instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.LoginLogicReq
+         * @static
+         * @param {GameHoodleProto.ILoginLogicReq=} [properties] Properties to set
+         * @returns {GameHoodleProto.LoginLogicReq} LoginLogicReq instance
+         */
+        LoginLogicReq.create = function create(properties) {
+            return new LoginLogicReq(properties);
+        };
+
+        /**
+         * Encodes the specified LoginLogicReq message. Does not implicitly {@link GameHoodleProto.LoginLogicReq.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.LoginLogicReq
+         * @static
+         * @param {GameHoodleProto.ILoginLogicReq} message LoginLogicReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        LoginLogicReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified LoginLogicReq message, length delimited. Does not implicitly {@link GameHoodleProto.LoginLogicReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.LoginLogicReq
+         * @static
+         * @param {GameHoodleProto.ILoginLogicReq} message LoginLogicReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        LoginLogicReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a LoginLogicReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.LoginLogicReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.LoginLogicReq} LoginLogicReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        LoginLogicReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.LoginLogicReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a LoginLogicReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.LoginLogicReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.LoginLogicReq} LoginLogicReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        LoginLogicReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a LoginLogicReq message.
+         * @function verify
+         * @memberof GameHoodleProto.LoginLogicReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        LoginLogicReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a LoginLogicReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.LoginLogicReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.LoginLogicReq} LoginLogicReq
+         */
+        LoginLogicReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.LoginLogicReq)
+                return object;
+            return new $root.GameHoodleProto.LoginLogicReq();
+        };
+
+        /**
+         * Creates a plain object from a LoginLogicReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.LoginLogicReq
+         * @static
+         * @param {GameHoodleProto.LoginLogicReq} message LoginLogicReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        LoginLogicReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this LoginLogicReq to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.LoginLogicReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        LoginLogicReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LoginLogicReq;
+    })();
+
+    GameHoodleProto.LoginLogicRes = (function() {
+
+        /**
+         * Properties of a LoginLogicRes.
+         * @memberof GameHoodleProto
+         * @interface ILoginLogicRes
+         * @property {number} status LoginLogicRes status
+         */
+
+        /**
+         * Constructs a new LoginLogicRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a LoginLogicRes.
+         * @implements ILoginLogicRes
+         * @constructor
+         * @param {GameHoodleProto.ILoginLogicRes=} [properties] Properties to set
+         */
+        function LoginLogicRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * LoginLogicRes status.
+         * @member {number} status
+         * @memberof GameHoodleProto.LoginLogicRes
+         * @instance
+         */
+        LoginLogicRes.prototype.status = 0;
+
+        /**
+         * Creates a new LoginLogicRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.LoginLogicRes
+         * @static
+         * @param {GameHoodleProto.ILoginLogicRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.LoginLogicRes} LoginLogicRes instance
+         */
+        LoginLogicRes.create = function create(properties) {
+            return new LoginLogicRes(properties);
+        };
+
+        /**
+         * Encodes the specified LoginLogicRes message. Does not implicitly {@link GameHoodleProto.LoginLogicRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.LoginLogicRes
+         * @static
+         * @param {GameHoodleProto.ILoginLogicRes} message LoginLogicRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        LoginLogicRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified LoginLogicRes message, length delimited. Does not implicitly {@link GameHoodleProto.LoginLogicRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.LoginLogicRes
+         * @static
+         * @param {GameHoodleProto.ILoginLogicRes} message LoginLogicRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        LoginLogicRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a LoginLogicRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.LoginLogicRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.LoginLogicRes} LoginLogicRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        LoginLogicRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.LoginLogicRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a LoginLogicRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.LoginLogicRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.LoginLogicRes} LoginLogicRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        LoginLogicRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a LoginLogicRes message.
+         * @function verify
+         * @memberof GameHoodleProto.LoginLogicRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        LoginLogicRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a LoginLogicRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.LoginLogicRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.LoginLogicRes} LoginLogicRes
+         */
+        LoginLogicRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.LoginLogicRes)
+                return object;
+            var message = new $root.GameHoodleProto.LoginLogicRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a LoginLogicRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.LoginLogicRes
+         * @static
+         * @param {GameHoodleProto.LoginLogicRes} message LoginLogicRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        LoginLogicRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this LoginLogicRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.LoginLogicRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        LoginLogicRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LoginLogicRes;
     })();
 
     return GameHoodleProto;

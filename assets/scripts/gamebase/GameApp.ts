@@ -30,6 +30,7 @@ export default class GameApp extends cc.Component {
         let scene = new HotFixScene();
         SceneManager.getInstance().enter_scene_asyc(scene);
         PlatForm.printPlatForm()
+        this.test_func()
     }
 
     on_net_connected(event:cc.Event.EventCustom){
@@ -48,6 +49,22 @@ export default class GameApp extends cc.Component {
     on_net_error(event:cc.Event.EventCustom){
         Log.info("GameApp hcc>>>on_net_error")
         DialogManager.getInstance().show_weak_hint("网络断开!")
+    }
+
+    test_func(){
+        //array test
+        let array = {
+            [0]: 1,
+            [1]: "222222",
+            [3]: "sdfsdfds",
+            [9]: 9999,
+        }
+        let count = 0;
+        for(let key in array){
+            count ++;
+            cc.log("key: " , key , " ,value: " , array[key])
+        }
+        cc.log("count: " , count)
     }
 
 }

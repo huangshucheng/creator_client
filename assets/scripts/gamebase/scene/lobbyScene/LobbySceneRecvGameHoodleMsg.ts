@@ -22,12 +22,23 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
     }
 
     add_event_dispatcher(){
+        EventManager.on(CmdName[Cmd.eLoginLogicRes], this, this.on_event_login_logic)
         EventManager.on(CmdName[Cmd.eCreateRoomRes], this, this.on_event_create_room)
         EventManager.on(CmdName[Cmd.eJoinRoomRes], this, this.on_event_join_room)
         EventManager.on(CmdName[Cmd.eExitRoomRes], this, this.on_event_exit_room)
         EventManager.on(CmdName[Cmd.eDessolveRes], this, this.on_event_dessolve_room)
         EventManager.on(CmdName[Cmd.eGetRoomStatusReq], this, this.on_event_get_room_status)
         EventManager.on(CmdName[Cmd.eBackRoomRes], this, this.on_event_back_room)
+    }
+
+    on_event_login_logic(event:cc.Event.EventCustom){
+        let udata =  event.getUserData()
+        cc.log("on_event_login_logic",udata)
+        if(udata){
+            if(udata.status == Response.OK){
+                DialogManager.getInstance().show_weak_hint("登录游戏服务成功!")
+            }
+        }
     }
 
     on_event_create_room(event:cc.Event.EventCustom){

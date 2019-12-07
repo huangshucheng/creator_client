@@ -9,6 +9,7 @@ import LobbyScene from '../lobbyScene/LobbyScene';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
+import LobbySendGameHoodleMsg from '../lobbyScene/sendMsg/LobbySendGameHoodle';
 
 const {ccclass, property} = cc._decorator;
 
@@ -58,7 +59,8 @@ export default class LoginSceneRecvMsg extends UIController {
                 cc.error(error)
             }
             cc.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
-            DialogManager.getInstance().show_weak_hint("登录成功!")
+            LobbySendGameHoodleMsg.send_login_logic()
+            DialogManager.getInstance().show_weak_hint("游客登录成功!")
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)
         }
@@ -77,6 +79,7 @@ export default class LoginSceneRecvMsg extends UIController {
                 cc.error(error)
             }
             cc.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG) )
+            LobbySendGameHoodleMsg.send_login_logic()
             DialogManager.getInstance().show_weak_hint("登录成功!")
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)

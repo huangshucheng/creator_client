@@ -1,6 +1,6 @@
 import UIController from '../../../framework/uibase/UIController';
 import Log from '../../../framework/utils/Log';
-import LobbySceneSendMsg from './sendMsg/LobbySendAuthMsg';
+import LobbySendAuthMsg from './sendMsg/LobbySendAuthMsg';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 
@@ -14,7 +14,7 @@ export default class LobbySceneInit extends UIController {
     }
 
     start () {
-        LobbySceneSendMsg.send_get_center_info();
+        LobbySendAuthMsg.send_get_center_info();
     }
 
 }
