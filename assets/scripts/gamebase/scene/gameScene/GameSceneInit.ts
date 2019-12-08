@@ -1,17 +1,17 @@
 import UIController from '../../../framework/uibase/UIController';
-import LobbySendAuthMsg from './sendMsg/LobbySendAuthMsg';
+import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class LobbySceneInit extends UIController {
+export default class GameSceneInit extends UIController {
 
     onLoad () {
         super.onLoad()
     }
 
     start () {
-        LobbySendAuthMsg.send_get_center_info();
+        GameSendGameHoodleMsg.send_check_link_game()
     }
-
+    
 }

@@ -1,6 +1,4 @@
 import BaseScene from '../../../framework/uibase/BaseScene';
-import { ResourceManager } from '../../../framework/manager/ResourceManager';
-import UIFunction from '../../../framework/common/UIFunciton';
 
 export default class GameScene extends BaseScene {
 

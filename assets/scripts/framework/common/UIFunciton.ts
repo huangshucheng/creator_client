@@ -62,7 +62,7 @@ export default class UIFunction {
             obj.isBtnClick = true
             setTimeout(function () {
                 obj.isBtnClick = false
-            }, 300)
+            }, 1)
             callback.call(obj, component)
         }
         target.on("click", func, obj);

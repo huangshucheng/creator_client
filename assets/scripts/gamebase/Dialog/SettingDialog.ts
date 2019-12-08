@@ -28,7 +28,7 @@ export default class SettingDialog extends UIDialog {
     add_button_event_listener(){
         this.add_click_event(this.view["KW_BTN_CLOSE"],this.on_click_close.bind(this))
         this.add_click_event(this.view["KW_BTN_EXIT"],this.on_click_back.bind(this))
-        
+        this.add_click_event(this.view["KW_BTN_DESSOLVE"],this.on_click_dessolve.bind(this))
     }
 
     onDestroy(){
@@ -41,8 +41,13 @@ export default class SettingDialog extends UIDialog {
 
     on_click_back(sender: cc.Component){
         LobbySendGameHoodleMsg.send_exit_room();
-        SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
         this.close()
+        SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
+    }
+
+    on_click_dessolve(sender:cc.Component){
+        LobbySendGameHoodleMsg.send_dessolve_room();
+        this.close();
     }
 
     ////////////
