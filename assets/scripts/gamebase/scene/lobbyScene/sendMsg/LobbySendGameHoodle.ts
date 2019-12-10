@@ -12,11 +12,11 @@ export default class LobbySendGameHoodleMsg {
         LobbySendGameHoodleMsg.send(Cmd.eLoginLogicReq);
     }
 
-    static send_create_room(roominfo: string){
-        if (roominfo == null || roominfo == ''){
+    static send_create_room(gamerule: string){
+        if (gamerule == null || gamerule == ''){
             return;
         }
-        LobbySendGameHoodleMsg.send(Cmd.eCreateRoomReq,{roominfo: roominfo});
+        LobbySendGameHoodleMsg.send(Cmd.eCreateRoomReq,{gamerule: gamerule});
     }
 
     static send_join_room(roomid: string){

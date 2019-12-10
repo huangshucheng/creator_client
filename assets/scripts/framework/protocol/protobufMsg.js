@@ -6101,7 +6101,7 @@ $root.GameHoodleProto = (function() {
      * @property {number} eCheckLinkGameReq=13 eCheckLinkGameReq value
      * @property {number} eCheckLinkGameRes=14 eCheckLinkGameRes value
      * @property {number} eUserInfoRes=15 eUserInfoRes value
-     * @property {number} eRoomInfoRes=16 eRoomInfoRes value
+     * @property {number} eGameRuleRes=16 eGameRuleRes value
      * @property {number} eRoomIdRes=17 eRoomIdRes value
      * @property {number} ePlayCountRes=18 ePlayCountRes value
      * @property {number} eUserReadyReq=19 eUserReadyReq value
@@ -6129,7 +6129,7 @@ $root.GameHoodleProto = (function() {
         values[valuesById[13] = "eCheckLinkGameReq"] = 13;
         values[valuesById[14] = "eCheckLinkGameRes"] = 14;
         values[valuesById[15] = "eUserInfoRes"] = 15;
-        values[valuesById[16] = "eRoomInfoRes"] = 16;
+        values[valuesById[16] = "eGameRuleRes"] = 16;
         values[valuesById[17] = "eRoomIdRes"] = 17;
         values[valuesById[18] = "ePlayCountRes"] = 18;
         values[valuesById[19] = "eUserReadyReq"] = 19;
@@ -6147,7 +6147,7 @@ $root.GameHoodleProto = (function() {
          * Properties of a CreateRoomReq.
          * @memberof GameHoodleProto
          * @interface ICreateRoomReq
-         * @property {string} roominfo CreateRoomReq roominfo
+         * @property {string} gamerule CreateRoomReq gamerule
          */
 
         /**
@@ -6166,12 +6166,12 @@ $root.GameHoodleProto = (function() {
         }
 
         /**
-         * CreateRoomReq roominfo.
-         * @member {string} roominfo
+         * CreateRoomReq gamerule.
+         * @member {string} gamerule
          * @memberof GameHoodleProto.CreateRoomReq
          * @instance
          */
-        CreateRoomReq.prototype.roominfo = "";
+        CreateRoomReq.prototype.gamerule = "";
 
         /**
          * Creates a new CreateRoomReq instance using the specified properties.
@@ -6197,7 +6197,7 @@ $root.GameHoodleProto = (function() {
         CreateRoomReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.roominfo);
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.gamerule);
             return writer;
         };
 
@@ -6233,15 +6233,15 @@ $root.GameHoodleProto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.roominfo = reader.string();
+                    message.gamerule = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
-            if (!message.hasOwnProperty("roominfo"))
-                throw $util.ProtocolError("missing required 'roominfo'", { instance: message });
+            if (!message.hasOwnProperty("gamerule"))
+                throw $util.ProtocolError("missing required 'gamerule'", { instance: message });
             return message;
         };
 
@@ -6272,8 +6272,8 @@ $root.GameHoodleProto = (function() {
         CreateRoomReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (!$util.isString(message.roominfo))
-                return "roominfo: string expected";
+            if (!$util.isString(message.gamerule))
+                return "gamerule: string expected";
             return null;
         };
 
@@ -6289,8 +6289,8 @@ $root.GameHoodleProto = (function() {
             if (object instanceof $root.GameHoodleProto.CreateRoomReq)
                 return object;
             var message = new $root.GameHoodleProto.CreateRoomReq();
-            if (object.roominfo != null)
-                message.roominfo = String(object.roominfo);
+            if (object.gamerule != null)
+                message.gamerule = String(object.gamerule);
             return message;
         };
 
@@ -6308,9 +6308,9 @@ $root.GameHoodleProto = (function() {
                 options = {};
             var object = {};
             if (options.defaults)
-                object.roominfo = "";
-            if (message.roominfo != null && message.hasOwnProperty("roominfo"))
-                object.roominfo = message.roominfo;
+                object.gamerule = "";
+            if (message.gamerule != null && message.hasOwnProperty("gamerule"))
+                object.gamerule = message.gamerule;
             return object;
         };
 
@@ -9065,24 +9065,24 @@ $root.GameHoodleProto = (function() {
         return UserInfoRes;
     })();
 
-    GameHoodleProto.RoomInfoRes = (function() {
+    GameHoodleProto.GameRuleRes = (function() {
 
         /**
-         * Properties of a RoomInfoRes.
+         * Properties of a GameRuleRes.
          * @memberof GameHoodleProto
-         * @interface IRoomInfoRes
-         * @property {string} roominfo RoomInfoRes roominfo
+         * @interface IGameRuleRes
+         * @property {string} gamerule GameRuleRes gamerule
          */
 
         /**
-         * Constructs a new RoomInfoRes.
+         * Constructs a new GameRuleRes.
          * @memberof GameHoodleProto
-         * @classdesc Represents a RoomInfoRes.
-         * @implements IRoomInfoRes
+         * @classdesc Represents a GameRuleRes.
+         * @implements IGameRuleRes
          * @constructor
-         * @param {GameHoodleProto.IRoomInfoRes=} [properties] Properties to set
+         * @param {GameHoodleProto.IGameRuleRes=} [properties] Properties to set
          */
-        function RoomInfoRes(properties) {
+        function GameRuleRes(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -9090,166 +9090,166 @@ $root.GameHoodleProto = (function() {
         }
 
         /**
-         * RoomInfoRes roominfo.
-         * @member {string} roominfo
-         * @memberof GameHoodleProto.RoomInfoRes
+         * GameRuleRes gamerule.
+         * @member {string} gamerule
+         * @memberof GameHoodleProto.GameRuleRes
          * @instance
          */
-        RoomInfoRes.prototype.roominfo = "";
+        GameRuleRes.prototype.gamerule = "";
 
         /**
-         * Creates a new RoomInfoRes instance using the specified properties.
+         * Creates a new GameRuleRes instance using the specified properties.
          * @function create
-         * @memberof GameHoodleProto.RoomInfoRes
+         * @memberof GameHoodleProto.GameRuleRes
          * @static
-         * @param {GameHoodleProto.IRoomInfoRes=} [properties] Properties to set
-         * @returns {GameHoodleProto.RoomInfoRes} RoomInfoRes instance
+         * @param {GameHoodleProto.IGameRuleRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.GameRuleRes} GameRuleRes instance
          */
-        RoomInfoRes.create = function create(properties) {
-            return new RoomInfoRes(properties);
+        GameRuleRes.create = function create(properties) {
+            return new GameRuleRes(properties);
         };
 
         /**
-         * Encodes the specified RoomInfoRes message. Does not implicitly {@link GameHoodleProto.RoomInfoRes.verify|verify} messages.
+         * Encodes the specified GameRuleRes message. Does not implicitly {@link GameHoodleProto.GameRuleRes.verify|verify} messages.
          * @function encode
-         * @memberof GameHoodleProto.RoomInfoRes
+         * @memberof GameHoodleProto.GameRuleRes
          * @static
-         * @param {GameHoodleProto.IRoomInfoRes} message RoomInfoRes message or plain object to encode
+         * @param {GameHoodleProto.IGameRuleRes} message GameRuleRes message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        RoomInfoRes.encode = function encode(message, writer) {
+        GameRuleRes.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.roominfo);
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.gamerule);
             return writer;
         };
 
         /**
-         * Encodes the specified RoomInfoRes message, length delimited. Does not implicitly {@link GameHoodleProto.RoomInfoRes.verify|verify} messages.
+         * Encodes the specified GameRuleRes message, length delimited. Does not implicitly {@link GameHoodleProto.GameRuleRes.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof GameHoodleProto.RoomInfoRes
+         * @memberof GameHoodleProto.GameRuleRes
          * @static
-         * @param {GameHoodleProto.IRoomInfoRes} message RoomInfoRes message or plain object to encode
+         * @param {GameHoodleProto.IGameRuleRes} message GameRuleRes message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        RoomInfoRes.encodeDelimited = function encodeDelimited(message, writer) {
+        GameRuleRes.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a RoomInfoRes message from the specified reader or buffer.
+         * Decodes a GameRuleRes message from the specified reader or buffer.
          * @function decode
-         * @memberof GameHoodleProto.RoomInfoRes
+         * @memberof GameHoodleProto.GameRuleRes
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {GameHoodleProto.RoomInfoRes} RoomInfoRes
+         * @returns {GameHoodleProto.GameRuleRes} GameRuleRes
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        RoomInfoRes.decode = function decode(reader, length) {
+        GameRuleRes.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.RoomInfoRes();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.GameRuleRes();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.roominfo = reader.string();
+                    message.gamerule = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
-            if (!message.hasOwnProperty("roominfo"))
-                throw $util.ProtocolError("missing required 'roominfo'", { instance: message });
+            if (!message.hasOwnProperty("gamerule"))
+                throw $util.ProtocolError("missing required 'gamerule'", { instance: message });
             return message;
         };
 
         /**
-         * Decodes a RoomInfoRes message from the specified reader or buffer, length delimited.
+         * Decodes a GameRuleRes message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof GameHoodleProto.RoomInfoRes
+         * @memberof GameHoodleProto.GameRuleRes
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {GameHoodleProto.RoomInfoRes} RoomInfoRes
+         * @returns {GameHoodleProto.GameRuleRes} GameRuleRes
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        RoomInfoRes.decodeDelimited = function decodeDelimited(reader) {
+        GameRuleRes.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a RoomInfoRes message.
+         * Verifies a GameRuleRes message.
          * @function verify
-         * @memberof GameHoodleProto.RoomInfoRes
+         * @memberof GameHoodleProto.GameRuleRes
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        RoomInfoRes.verify = function verify(message) {
+        GameRuleRes.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (!$util.isString(message.roominfo))
-                return "roominfo: string expected";
+            if (!$util.isString(message.gamerule))
+                return "gamerule: string expected";
             return null;
         };
 
         /**
-         * Creates a RoomInfoRes message from a plain object. Also converts values to their respective internal types.
+         * Creates a GameRuleRes message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof GameHoodleProto.RoomInfoRes
+         * @memberof GameHoodleProto.GameRuleRes
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {GameHoodleProto.RoomInfoRes} RoomInfoRes
+         * @returns {GameHoodleProto.GameRuleRes} GameRuleRes
          */
-        RoomInfoRes.fromObject = function fromObject(object) {
-            if (object instanceof $root.GameHoodleProto.RoomInfoRes)
+        GameRuleRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.GameRuleRes)
                 return object;
-            var message = new $root.GameHoodleProto.RoomInfoRes();
-            if (object.roominfo != null)
-                message.roominfo = String(object.roominfo);
+            var message = new $root.GameHoodleProto.GameRuleRes();
+            if (object.gamerule != null)
+                message.gamerule = String(object.gamerule);
             return message;
         };
 
         /**
-         * Creates a plain object from a RoomInfoRes message. Also converts values to other types if specified.
+         * Creates a plain object from a GameRuleRes message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof GameHoodleProto.RoomInfoRes
+         * @memberof GameHoodleProto.GameRuleRes
          * @static
-         * @param {GameHoodleProto.RoomInfoRes} message RoomInfoRes
+         * @param {GameHoodleProto.GameRuleRes} message GameRuleRes
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        RoomInfoRes.toObject = function toObject(message, options) {
+        GameRuleRes.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults)
-                object.roominfo = "";
-            if (message.roominfo != null && message.hasOwnProperty("roominfo"))
-                object.roominfo = message.roominfo;
+                object.gamerule = "";
+            if (message.gamerule != null && message.hasOwnProperty("gamerule"))
+                object.gamerule = message.gamerule;
             return object;
         };
 
         /**
-         * Converts this RoomInfoRes to JSON.
+         * Converts this GameRuleRes to JSON.
          * @function toJSON
-         * @memberof GameHoodleProto.RoomInfoRes
+         * @memberof GameHoodleProto.GameRuleRes
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        RoomInfoRes.prototype.toJSON = function toJSON() {
+        GameRuleRes.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return RoomInfoRes;
+        return GameRuleRes;
     })();
 
     GameHoodleProto.RoomIdRes = (function() {

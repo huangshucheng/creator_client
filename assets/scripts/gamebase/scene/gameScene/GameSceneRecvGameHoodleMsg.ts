@@ -20,17 +20,23 @@ export default class GameSceneRecvGameHoodleMsg extends UIController {
     }
 
     add_event_dispatcher(){
+        EventManager.on(CmdName[Cmd.eLoginLogicRes], this, this.on_event_login_logic)
         EventManager.on(CmdName[Cmd.eDessolveRes], this, this.on_event_dessolve)
         EventManager.on(CmdName[Cmd.eJoinRoomRes], this, this.on_event_exit_room)
         EventManager.on(CmdName[Cmd.eCheckLinkGameRes], this, this.on_event_check_link)
         EventManager.on(CmdName[Cmd.eUserInfoRes], this, this.on_event_user_info)
-        EventManager.on(CmdName[Cmd.eRoomInfoRes], this, this.on_event_room_info)
+        EventManager.on(CmdName[Cmd.eGameRuleRes], this, this.on_event_game_rule)
         EventManager.on(CmdName[Cmd.eRoomIdRes], this, this.on_event_room_id)
         EventManager.on(CmdName[Cmd.ePlayCountRes], this, this.on_event_play_count)
         EventManager.on(CmdName[Cmd.eUserReadyRes], this, this.on_event_user_ready)
         EventManager.on(CmdName[Cmd.eGameStartRes], this, this.on_event_game_start)
         EventManager.on(CmdName[Cmd.eGameResultRes], this, this.on_event_game_result)
 
+    }
+
+    on_event_login_logic(event:cc.Event.EventCustom){
+        let udata =  event.getUserData()
+        cc.log("hcc>>on_event_login_logic>>udata: " , udata)
     }
 
     on_event_dessolve(event:cc.Event.EventCustom){
@@ -70,11 +76,32 @@ export default class GameSceneRecvGameHoodleMsg extends UIController {
     }
 
     on_event_user_info(event: cc.Event.EventCustom){
-
+        let udata =  event.getUserData()
+        if(udata){
+            cc.log("hcc>>userinfostr: " , udata)
+            try {
+                if(udata.userinfo){
+                    udata.userinfo.forEach(value => {
+                        let numberid = value.numberid;
+                        let infostr = value.userInfoString;
+                        // let obj = JSON.parse(infostr);
+                        cc.log("hcc>>userinfo numid: " , numberid , " ,info: " , infostr);
+                    });
+                }
+            } catch (error) {
+                cc.log("hcc>>error: " , error)
+            }
+        }
     }
 
-    on_event_room_info(event: cc.Event.EventCustom){
-
+    on_event_game_rule(event: cc.Event.EventCustom){
+        let udata =  event.getUserData()
+        if(udata){
+          let gamerule = udata.gamerule;
+          if(gamerule){
+            this.set_string(this.view['KW_TEXT_RULE'],String(gamerule));
+          }
+        }
     }
 
     on_event_room_id(event: cc.Event.EventCustom){
