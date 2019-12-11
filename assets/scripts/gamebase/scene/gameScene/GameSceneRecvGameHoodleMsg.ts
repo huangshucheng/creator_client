@@ -31,7 +31,6 @@ export default class GameSceneRecvGameHoodleMsg extends UIController {
         EventManager.on(CmdName[Cmd.eUserReadyRes], this, this.on_event_user_ready)
         EventManager.on(CmdName[Cmd.eGameStartRes], this, this.on_event_game_start)
         EventManager.on(CmdName[Cmd.eGameResultRes], this, this.on_event_game_result)
-
     }
 
     on_event_login_logic(event:cc.Event.EventCustom){
@@ -43,7 +42,7 @@ export default class GameSceneRecvGameHoodleMsg extends UIController {
         let udata =  event.getUserData()
         if(udata){
             if(udata.status == Response.OK){
-                DialogManager.getInstance().show_weak_hint("解散房间成功!")
+                DialogManager.getInstance().show_weak_hint("房间已解散!")
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
             }else{
                 DialogManager.getInstance().show_weak_hint("解散房间失败!")
@@ -87,6 +86,10 @@ export default class GameSceneRecvGameHoodleMsg extends UIController {
                         // let obj = JSON.parse(infostr);
                         cc.log("hcc>>userinfo numid: " , numberid , " ,info: " , infostr);
                     });
+                }
+                let script = this.get_script("GameSceneShowUI")
+                if(script){
+                    script.show_user_info(udata)
                 }
             } catch (error) {
                 cc.log("hcc>>error: " , error)

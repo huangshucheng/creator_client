@@ -1,6 +1,8 @@
 import UIController from '../../../framework/uibase/UIController';
 import UserInfo from '../../../framework/common/UserInfo';
 
+let HEAD_PATH = "lobby/rectheader/1";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -19,7 +21,7 @@ export default class LobbySceneShowUI extends UIController {
         if(user_info_bg){
             this.set_string(this.view['TEXT_USER_NAME'],UserInfo.get_unick())
             this.set_string(this.view['TEXT_USER_ID'],UserInfo.get_numberid())
-            let ufaceImg = "lobby/rectheader/1" + UserInfo.get_uface();
+            let ufaceImg = HEAD_PATH + UserInfo.get_uface();
             this.set_sprite_asyc(this.view["IMG_HEAD"],ufaceImg)
             this.set_string(this.view['TEXT_COIN'],"0")
         }

@@ -11,6 +11,7 @@ export default class GameSceneCtrl extends UIController {
         this.add_script("GameSceneRecvGameHoodleMsg")
         this.add_script("GameSceneRecvAuthMsg")
         this.add_script("GameSceneInit")
+        this.add_script("GameSceneShowUI")
     }
 
     start () {
