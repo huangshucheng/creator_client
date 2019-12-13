@@ -51,7 +51,7 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_create_room(sender:cc.Component){
         // SceneManager.getInstance().enter_scene_asyc(new GameScene())
-        LobbySendGameHoodleMsg.send_create_room("【游戏规则】");
+        LobbySendGameHoodleMsg.send_create_room("<<gamerule>>");
     }
 
     on_click_login_logic(sender:cc.Component){

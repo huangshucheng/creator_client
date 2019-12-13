@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.1",
+  "uuid": "eaead9a9-dddc-431a-8ea8-5c685628a940",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "joinroom_atlas_9": {
+      "ver": "1.0.4",
+      "uuid": "04b16c1e-5df4-4413-85cd-0e48d9395fa9",
+      "rawTextureUuid": "eaead9a9-dddc-431a-8ea8-5c685628a940",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 29,
+      "height": 42,
+      "rawWidth": 29,
+      "rawHeight": 42,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
