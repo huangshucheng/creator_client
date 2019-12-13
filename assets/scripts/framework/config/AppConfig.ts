@@ -1,7 +1,7 @@
 import ProtoManater from '../manager/ProtoManager';
 
 export default class AppConfig {
-    static IS_LOCAL_DEBUG   = true;        //是否启用本地调试
+    static IS_LOCAL_DEBUG   = false;        //是否启用本地调试
     static LOCAL_IP         = "127.0.0.1";
     static REMOTE_IP        = "www.hccfun.com";
     static REMOTE_WECHAT_PORT   = "6081";   //小程序wss端口，nginx转发到6061
