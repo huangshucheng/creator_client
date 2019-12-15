@@ -5,6 +5,8 @@ import Response from '../../../framework/config/Response';
 import SceneManager from '../../../framework/manager/SceneManager';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbyScene from '../lobbyScene/LobbyScene';
+import RoomData from '../../common/RoomData';
+import { UserState } from '../../common/State';
 
 const {ccclass, property} = cc._decorator;
 
@@ -31,6 +33,7 @@ export default class GameSceneRecvGameHoodleMsg extends UIController {
         EventManager.on(CmdName[Cmd.eUserReadyRes], this, this.on_event_user_ready)
         EventManager.on(CmdName[Cmd.eGameStartRes], this, this.on_event_game_start)
         EventManager.on(CmdName[Cmd.eGameResultRes], this, this.on_event_game_result)
+        EventManager.on(CmdName[Cmd.eUserOfflineRes], this, this.on_event_user_offline)
     }
 
     on_event_login_logic(event:cc.Event.EventCustom){
@@ -83,7 +86,8 @@ export default class GameSceneRecvGameHoodleMsg extends UIController {
                     udata.userinfo.forEach(value => {
                         let numberid = value.numberid;
                         let infostr = value.userInfoString;
-                        // let obj = JSON.parse(infostr);
+                        let infoObj = JSON.parse(infostr);
+                        RoomData.getInstance().add_player_by_uinfo(infoObj);
                         cc.log("hcc>>userinfo numid: " , numberid , " ,info: " , infostr);
                     });
                 }
@@ -128,15 +132,46 @@ export default class GameSceneRecvGameHoodleMsg extends UIController {
         }
     }    
 
-    on_event_user_ready(event: cc.Event.EventCustom){
+    on_event_user_offline(event: cc.Event.EventCustom){
+        let udata =  event.getUserData()
+        cc.log("on_event_user_offline" , udata)
+        let seatid = udata.seatid;
+        if(seatid){
+            let player = RoomData.getInstance().get_player(seatid);
+            if(player){
+                player.set_offline(true);
+            }
+        }
+    }
 
+    on_event_user_ready(event: cc.Event.EventCustom){
+        let udata =  event.getUserData()
+        cc.log("on_event_user_ready" , udata)
+        if(udata){
+            let status = udata.status;
+            let seatid = udata.seatid;
+            let userstate = udata.userstate;
+            if(status == Response.OK){
+                let player = RoomData.getInstance().get_player(seatid);
+                if(player){
+                    player.set_user_state(UserState.Ready);
+                    let script = this.get_script("GameSceneShowUI")
+                    if(script){
+                        script.set_user_ready(seatid)
+                    }
+                }
+            }
+        }
     }
 
     on_event_game_start(event: cc.Event.EventCustom){
-
+        let udata =  event.getUserData()
+        cc.log("on_event_game_start" , udata)
+        
     }
 
     on_event_game_result(event: cc.Event.EventCustom){
-
+        let udata =  event.getUserData()
+        cc.log("on_event_game_result" , udata)
     }
 }

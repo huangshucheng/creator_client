@@ -28,4 +28,8 @@ export default class GameSendGameHoodleMsg {
         GameSendGameHoodleMsg.send(Cmd.eBackRoomReq);
     }
 
+    static send_user_ready(){
+        GameSendGameHoodleMsg.send(Cmd.eUserReadyReq)
+    }
+
 }

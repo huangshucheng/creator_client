@@ -41,6 +41,7 @@ export enum Cmd {
 
 	eLoginLogicReq = 23,	//登录游戏服
 	eLoginLogicRes = 24,
+	eUserOfflineRes = 25,  //玩家掉线 
 }
 
 export let CmdName = {
@@ -84,4 +85,6 @@ export let CmdName = {
 
 	[23] :"LoginLogicReq", 	//登录游戏服
 	[24] :"LoginLogicRes",
+
+	[25] :"UserOfflineRes", //玩家掉线
 }

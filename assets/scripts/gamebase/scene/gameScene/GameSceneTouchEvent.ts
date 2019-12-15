@@ -18,6 +18,7 @@ export default class GameSceneTouchEvent extends UIController {
     add_button_event_listener(){
         this.add_click_event(this.view["BTN_SETTING"],this.on_click_setting)
         this.add_click_event(this.view["BTN_SETTING_2"],this.on_click_setting2)
+        this.add_click_event(this.view["KW_BTN_READY"],this.on_click_ready)
     }
 
     on_click_setting(sender:cc.Component){
@@ -28,6 +29,10 @@ export default class GameSceneTouchEvent extends UIController {
     on_click_setting2(sender:cc.Component){
         GameSendGameHoodleMsg.send_login_logic();
         GameSendGameHoodleMsg.send_check_link_game();
+    }
+
+    on_click_ready(sender: cc.Component){
+        GameSendGameHoodleMsg.send_user_ready()
     }
 
 }

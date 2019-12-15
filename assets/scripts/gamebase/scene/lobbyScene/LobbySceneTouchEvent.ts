@@ -1,6 +1,7 @@
 import UIController from '../../../framework/uibase/UIController';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
+import GameHoodleConfig from '../../../framework/config/GameHoodleConfig';
 
 const {ccclass, property} = cc._decorator;
 
@@ -51,7 +52,13 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_create_room(sender:cc.Component){
         // SceneManager.getInstance().enter_scene_asyc(new GameScene())
-        LobbySendGameHoodleMsg.send_create_room("<<gamerule>>");
+        let gamerule = {
+            playerCount : GameHoodleConfig.playerCount,
+            playCount : GameHoodleConfig.playCount,
+        }
+
+        let ruleStr = JSON.stringify(gamerule);
+        LobbySendGameHoodleMsg.send_create_room(ruleStr);
     }
 
     on_click_login_logic(sender:cc.Component){
