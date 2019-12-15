@@ -167,7 +167,11 @@ export default class GameSceneRecvGameHoodleMsg extends UIController {
     on_event_game_start(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
         cc.log("on_event_game_start" , udata)
-        
+        DialogManager.getInstance().show_weak_hint("游戏开始!")
+        let script = this.get_script("GameSceneShowUI")
+        if(script){
+            script.set_all_player_ready_visible(false);
+        }
     }
 
     on_event_game_result(event: cc.Event.EventCustom){

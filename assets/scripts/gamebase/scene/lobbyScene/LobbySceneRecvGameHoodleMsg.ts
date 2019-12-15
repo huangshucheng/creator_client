@@ -121,7 +121,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
                 SceneManager.getInstance().enter_scene_asyc(new GameScene())
                 DialogManager.getInstance().show_weak_hint("返回房间成功!")
             }else{
-                DialogManager.getInstance().show_weak_hint("返回解散房间失败!")
+                DialogManager.getInstance().show_weak_hint("返回房间失败!")
             }
         }
     }
