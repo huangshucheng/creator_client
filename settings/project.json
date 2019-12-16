@@ -6,12 +6,13 @@
     ],
     [
       false,
-      false
+      false,
+      true
     ],
     [
       false,
-      false,
-      false
+      true,
+      true
     ]
   ],
   "design-resolution-height": 1920,
@@ -38,8 +39,8 @@
   "fit-width": true,
   "group-list": [
     "default",
-    "NAV_MAP",
-    "MAP_OBSTACLE"
+    "edge",
+    "ball"
   ],
   "last-module-event-record-time": 1576428730397,
   "simulator-orientation": false,

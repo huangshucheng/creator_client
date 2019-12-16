@@ -223,7 +223,7 @@ export default class UIFunction {
         return target.active;
     }
     //
-    add_to_node(parent: cc.Node, prefab: cc.Prefab, scriptName: string = null): cc.Node {
+    add_to_node(parent: cc.Node, prefab: cc.Prefab, scriptName?: string): cc.Node {
         if (prefab) {
             var item = cc.instantiate(prefab);
             if (item) {
@@ -303,11 +303,14 @@ export default class UIFunction {
     }
 
     // 加载预制体到节点上 异步方法
-     add_prefab_to_node_async(parent: cc.Node, path: string, scriptName: string = null) {
+     add_prefab_to_node_async(parent: cc.Node, path: string, scriptName?: string , successCallback?:Function) {
         let _this = this;
         ResourceManager.getInstance().loadResAsyc(path, cc.Prefab,function(error: Error, resource: any) {
             if(!error){
-                 _this.add_to_node(parent,resource,scriptName)
+                 let resnode = _this.add_to_node(parent,resource,scriptName)
+                if(successCallback){
+                    successCallback(resnode);
+                }
             }            
         })
     };

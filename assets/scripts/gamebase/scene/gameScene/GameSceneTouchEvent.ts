@@ -33,6 +33,9 @@ export default class GameSceneTouchEvent extends UIController {
 
     on_click_ready(sender: cc.Component){
         GameSendGameHoodleMsg.send_user_ready()
+        //test
+        // let script = this.get_script("GameSceneShowUI")
+        // script.show_gamehoodle(true)
     }
 
 }

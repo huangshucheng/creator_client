@@ -3,6 +3,7 @@ import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
 import UserInfo from '../../../framework/common/UserInfo';
 import { UserState } from '../../common/State';
 import RoomData from '../../common/RoomData';
+import UIFunction from '../../../framework/common/UIFunciton';
 
 const {ccclass, property} = cc._decorator;
 
@@ -11,6 +12,8 @@ let MAX_PLAYER = 4;
 
 @ccclass
 export default class GameSceneShowUI extends UIController {
+
+    _gamehoodle = null;
 
     onLoad () {
         super.onLoad()
@@ -23,6 +26,14 @@ export default class GameSceneShowUI extends UIController {
     initUI(){
        this.set_all_player_head_visible(false);
        this.set_all_player_ready_visible(false);
+        let _this = this;
+       UIFunction.getInstance().add_prefab_to_node_async(this.view["KW_GAME_NODE"],"ui_prefabs/games/GameHoodle","GameHoodleCtrl",function(resNode:cc.Node){
+            if(resNode){
+                resNode.setPosition(cc.v2(0,0))
+                _this._gamehoodle = resNode;
+                resNode.active = false;
+            }
+        })
     }
 
     show_user_info(udata:any){
@@ -88,6 +99,12 @@ export default class GameSceneShowUI extends UIController {
         if(seatid == RoomData.getInstance().get_self_seatid()){
             this.set_visible(this.view["KW_BTN_READY"], false);           
         }
+    }
+
+    show_gamehoodle(is_show:boolean){
+       if(this._gamehoodle){
+        this._gamehoodle.active = true;
+       }
     }
 
 }
