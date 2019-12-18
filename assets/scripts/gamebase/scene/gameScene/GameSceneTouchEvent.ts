@@ -27,15 +27,17 @@ export default class GameSceneTouchEvent extends UIController {
     }
 
     on_click_setting2(sender:cc.Component){
-        GameSendGameHoodleMsg.send_login_logic();
-        GameSendGameHoodleMsg.send_check_link_game();
+        //test
+        // GameSendGameHoodleMsg.send_login_logic();
+        // GameSendGameHoodleMsg.send_check_link_game();
+
+        //test
+        let script = this.get_script("GameSceneShowUI")
+        script.show_gamehoodle(true)
     }
 
     on_click_ready(sender: cc.Component){
         GameSendGameHoodleMsg.send_user_ready()
-        //test
-        // let script = this.get_script("GameSceneShowUI")
-        // script.show_gamehoodle(true)
     }
 
 }

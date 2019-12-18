@@ -76,4 +76,6 @@ export default abstract class UIController extends cc.Component {
         return UIFunction.getInstance().seek_widget_by_name(target,name)
     }
 
+    add_
+
 }

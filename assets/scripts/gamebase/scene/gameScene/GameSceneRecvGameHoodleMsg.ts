@@ -157,7 +157,7 @@ export default class GameSceneRecvGameHoodleMsg extends UIController {
                     player.set_user_state(UserState.Ready);
                     let script = this.get_script("GameSceneShowUI")
                     if(script){
-                        script.set_user_ready(seatid)
+                        script.show_user_ready(seatid)
                     }
                 }
             }
@@ -170,7 +170,7 @@ export default class GameSceneRecvGameHoodleMsg extends UIController {
         DialogManager.getInstance().show_weak_hint("游戏开始!")
         let script = this.get_script("GameSceneShowUI")
         if(script){
-            script.set_all_player_ready_visible(false);
+            script.clear_table()
         }
     }
 

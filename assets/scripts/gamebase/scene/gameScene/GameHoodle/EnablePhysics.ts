@@ -1,3 +1,5 @@
+//开启物理引擎
+
 import UIController from "../../../../framework/uibase/UIController";
 
 const {ccclass, property} = cc._decorator;
@@ -9,8 +11,6 @@ export default class EnablePhysics extends UIController {
     _gravity = cc.v2(0, 0); // 重力加速度是一个向量, 有方向的,2D, Vec重力加速度的大小;
 
     onLoad () {
-        super.onLoad()
-
         cc.director.getPhysicsManager().enabled = true;
         // 独立的形状，打开一个调试区域,游戏图像的，逻辑区域;
         // 开始调试模式:

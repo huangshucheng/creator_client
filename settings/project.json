@@ -19,11 +19,9 @@
   "design-resolution-width": 1080,
   "excluded-modules": [
     "TiledMap",
-    "Physics",
     "StudioComponent",
     "3D",
-    "3D Primitive",
-    "Mesh"
+    "3D Primitive"
   ],
   "facebook": {
     "appID": "",

@@ -24,20 +24,12 @@ export default class GameSceneShowUI extends UIController {
     }
 
     initUI(){
-       this.set_all_player_head_visible(false);
-       this.set_all_player_ready_visible(false);
-        let _this = this;
-       UIFunction.getInstance().add_prefab_to_node_async(this.view["KW_GAME_NODE"],"ui_prefabs/games/GameHoodle","GameHoodleCtrl",function(resNode:cc.Node){
-            if(resNode){
-                resNode.setPosition(cc.v2(0,0))
-                _this._gamehoodle = resNode;
-                resNode.active = false;
-            }
-        })
+       this.show_all_player_head_visible(false);
+       this.show_all_player_ready_visible(false);
     }
 
     show_user_info(udata:any){
-        this.set_all_player_head_visible(false)
+        this.show_all_player_head_visible(false)
         if(udata.userinfo){
             udata.userinfo.forEach(value => {
                 let numberid = value.numberid;
@@ -46,13 +38,13 @@ export default class GameSceneShowUI extends UIController {
                 let seatid = infoObj.seatid;
                 if(seatid){
                     let headNodeStr = "KW_PANEL_USER_INFO_" + seatid;
-                    this.update_one_user_info(this.view[headNodeStr],infoObj);
+                    this.show_one_user_info(this.view[headNodeStr],infoObj);
                 }
             });
         }
     }
 
-    update_one_user_info(info_node:cc.Node,infoObj:any){
+    show_one_user_info(info_node:cc.Node,infoObj:any){
         if(!cc.isValid(info_node)){
             return;
         }
@@ -72,14 +64,14 @@ export default class GameSceneShowUI extends UIController {
         }
     }
 
-    set_all_player_head_visible(visible:boolean){
+    show_all_player_head_visible(visible:boolean){
         for(let i = 1; i <= MAX_PLAYER; i++){
             let viewstr = "KW_PANEL_USER_INFO_" + i;
             this.set_visible(this.view[viewstr], visible)
         }
     }
 
-    set_all_player_ready_visible(visible:boolean){
+    show_all_player_ready_visible(visible:boolean){
         for(let seatid = 1; seatid <= MAX_PLAYER; seatid++){
             let headNodeStr = "KW_PANEL_USER_INFO_" + seatid;
             let headNode = this.view[headNodeStr];
@@ -89,7 +81,7 @@ export default class GameSceneShowUI extends UIController {
         }
     }
 
-    set_user_ready(seatid:number){
+    show_user_ready(seatid:number){
         let headNodeStr = "KW_PANEL_USER_INFO_" + seatid;
         let headNode = this.view[headNodeStr];
         if(headNode){
@@ -103,8 +95,19 @@ export default class GameSceneShowUI extends UIController {
 
     show_gamehoodle(is_show:boolean){
        if(this._gamehoodle){
-        this._gamehoodle.active = true;
-       }
+            this._gamehoodle.active = is_show;
+       }else{
+            this._gamehoodle = UIFunction.getInstance().add_prefab_to_node(this.view["KW_GAME_NODE"],"ui_prefabs/games/GameHoodle","GameHoodleCtrl");
+            if(this._gamehoodle){
+                this._gamehoodle.active = is_show;
+            }
+        }
+    }
+
+    clear_table(){
+        this.show_all_player_head_visible(false);
+        this.show_all_player_ready_visible(false);
+        this.set_visible(this.view["KW_BTN_READY"], false);
     }
 
 }

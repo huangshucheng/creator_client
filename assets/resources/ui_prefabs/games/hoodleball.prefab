@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "hoodleball",
+    "_name": "HoodleBall",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -237,7 +237,7 @@
       "y": 0
     },
     "_angularVelocity": 0,
-    "_fixedRotation": false,
+    "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
     "awakeOnLoad": true,

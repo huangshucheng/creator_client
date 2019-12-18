@@ -1,36 +1,37 @@
+//游戏界面
+
 import UIController from "../../../../framework/uibase/UIController";
+import UIFunction from "../../../../framework/common/UIFunciton";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class GameHoodleCtrl extends UIController {
 
-    // _is_debug = true; // 是否显示调试信息;
-    // _gravity = cc.v2(0, 0); // 重力加速度是一个向量, 有方向的,2D, Vec重力加速度的大小;
+    _hoodleBall = null;
 
     onLoad () {
         super.onLoad();
-        this.enable_phy();
-        // this.add_script("EnablePhysics")
+        this.add_script("GameHoodleTouchEvent")
     }
 
     start () {
-      
+      this.initUI()
     }
 
-    enable_phy(){
-    //     cc.director.getPhysicsManager().enabled = true;
-    //     // 独立的形状，打开一个调试区域,游戏图像的，逻辑区域;
-    //     // 开始调试模式:
-    //    if (this._is_debug) { // 开启调试信息
-    //        var Bits = cc.PhysicsManager.DrawBits; // 这个是我们要显示的类型
-    //        cc.director.getPhysicsManager().debugDrawFlags = Bits.e_jointBit | Bits.e_shapeBit;
-    //    }
-    //    else { // 关闭调试信息
-    //        cc.director.getPhysicsManager().debugDrawFlags = 0;
-    //    }
-    //    // 重力加速度的配置
-    //    cc.director.getPhysicsManager().gravity = this._gravity;
+    showBall(){
+        let ball2 = UIFunction.getInstance().add_prefab_to_node(this.view["KW_GAME_TABLE"],"ui_prefabs/games/HoodleBall","HoodleBallCtrl");
+        ball2.setPosition(cc.v2(0,0))
+        this._hoodleBall = UIFunction.getInstance().add_prefab_to_node(this.view["KW_GAME_TABLE"],"ui_prefabs/games/HoodleBall","HoodleBallCtrl");
+        this._hoodleBall.setPosition(cc.v2(100,100))
+    }
+
+    initUI(){
+        this.showBall()
+    }
+
+    get_self_ball(){
+        return this._hoodleBall;
     }
 
 }
