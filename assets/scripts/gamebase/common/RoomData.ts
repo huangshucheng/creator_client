@@ -77,6 +77,10 @@ class  RoomData {
         return this._player_set[seatid];
     }
 
+    get_all_player(){
+        return this._player_set;
+    }
+
     get_self_seatid(){
         for(let seatid in this._player_set){
             let player:Player = this._player_set[seatid];

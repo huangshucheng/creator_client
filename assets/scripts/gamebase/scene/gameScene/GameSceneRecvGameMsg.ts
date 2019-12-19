@@ -11,7 +11,7 @@ import { UserState } from '../../common/State';
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class GameSceneRecvGameHoodleMsg extends UIController {
+export default class GameSceneRecvGameMsg extends UIController {
 
     onLoad () {
         super.onLoad()
@@ -171,6 +171,7 @@ export default class GameSceneRecvGameHoodleMsg extends UIController {
         let script = this.get_script("GameSceneShowUI")
         if(script){
             script.clear_table()
+            // script.show_gamehoodle(true)
         }
     }
 

@@ -19,23 +19,23 @@
     "_children": [
       {
         "__id__": 2
+      },
+      {
+        "__id__": 5
       }
     ],
     "_active": true,
     "_level": 1,
     "_components": [
       {
-        "__id__": 5
+        "__id__": 8
       },
       {
-        "__id__": 6
-      },
-      {
-        "__id__": 7
+        "__id__": 9
       }
     ],
     "_prefab": {
-      "__id__": 8
+      "__id__": 10
     },
     "_opacity": 255,
     "_color": {
@@ -47,8 +47,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 100
+      "width": 0,
+      "height": 0
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -83,7 +83,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "text_name",
+    "_name": "KW_TEXT_NAME",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -109,7 +109,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 77.81,
+      "width": 125.07,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -157,8 +157,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "hcc",
-    "_N$string": "hcc",
+    "_string": "name",
+    "_N$string": "name",
     "_fontSize": 50,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -185,11 +185,73 @@
     "sync": false
   },
   {
+    "__type__": "cc.Node",
+    "_name": "KW_IMG_HEAD",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": true,
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 6
+      }
+    ],
+    "_prefab": {
+      "__id__": 7
+    },
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 93,
+      "height": 93
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "groupIndex": 0,
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_id": ""
+  },
+  {
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 1
+      "__id__": 5
     },
     "_enabled": true,
     "_materials": [
@@ -200,10 +262,10 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "915116a3-b167-4d43-bfe7-16d1ff5928dd"
+      "__uuid__": "c60ab916-f21f-45c4-a75b-c9ec15f7947e"
     },
-    "_type": 1,
-    "_sizeMode": 0,
+    "_type": 0,
+    "_sizeMode": 1,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -213,10 +275,19 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_atlas": {
-      "__uuid__": "ac2a7a4b-b56b-4680-87d6-0091762aa8b9"
-    },
+    "_atlas": null,
     "_id": ""
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "ba992d4b-d5fd-45a4-b4f9-359ceeeffce1"
+    },
+    "fileId": "c8GlczX11IX59vB7qVCWrX",
+    "sync": false
   },
   {
     "__type__": "cc.RigidBody",
@@ -229,7 +300,7 @@
     "_type": 2,
     "_allowSleep": true,
     "_gravityScale": 1,
-    "_linearDamping": 1,
+    "_linearDamping": 2,
     "_angularDamping": 1,
     "_linearVelocity": {
       "__type__": "cc.Vec2",
@@ -240,7 +311,7 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "awakeOnLoad": true,
+    "awakeOnLoad": false,
     "_id": ""
   },
   {
@@ -254,7 +325,7 @@
     "tag": 0,
     "_density": 1,
     "_sensor": false,
-    "_friction": 0.2,
+    "_friction": 1,
     "_restitution": 1,
     "body": null,
     "_offset": {
@@ -262,7 +333,7 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 46,
+    "_radius": 47,
     "_id": ""
   },
   {

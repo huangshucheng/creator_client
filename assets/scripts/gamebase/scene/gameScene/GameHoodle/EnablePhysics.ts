@@ -29,4 +29,7 @@ export default class EnablePhysics extends UIController {
 
     }
 
+    onDestroy(){
+    }
+
 }

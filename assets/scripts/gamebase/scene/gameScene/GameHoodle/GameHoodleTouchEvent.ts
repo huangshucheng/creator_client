@@ -1,6 +1,9 @@
+//界面点击事件
+
 import UIController from "../../../../framework/uibase/UIController";
 
 const AIM_LINE_MAX_LENGTH = 1440;
+// const AIM_LINE_MAX_LENGTH = 2000;
 
 const {ccclass, property} = cc._decorator;
 
@@ -12,37 +15,68 @@ export default class gameHoodleTouchEvent extends UIController {
 
     onLoad () {
        super.onLoad()
-       this._graphic_line = this.view["GRAPHICS"].getComponent(cc.Graphics);
+       if(this.view["GRAPHICS"]){
+           this._graphic_line = this.view["GRAPHICS"].getComponent(cc.Graphics);
+       }
     }
 
     start () {
-        this._graphic_line.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
-        this._graphic_line.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
-        this._graphic_line.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
-        this._graphic_line.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
+        if(this._graphic_line){
+            this._graphic_line.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+            this._graphic_line.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+            this._graphic_line.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+            this._graphic_line.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
+        }
     }
 
     private onTouchStart(touch: cc.Event.EventTouch) {
-        // cc.log("onTouchStart ", touch.getStartLocation() , touch.getLocation())
+        if(!this._graphic_line){
+            return;
+        }
         this._graphic_line.clear();
-    }
+        const startLocation = this.get_self_ball_pos()
+        if(!startLocation){
+            return;
+        }
 
-    private onTouchMove(touch: cc.Event.EventTouch) {
-        this._graphic_line.clear();
-        this._cur_length = 0;
-        const startLocation = touch.getStartLocation();
-        // const startLocation = this.get_self_ball_pos()
         const location = touch.getLocation();
         // 计算射线
         this.drawRayCast(startLocation, location.subSelf(startLocation).normalizeSelf());
         this._graphic_line.stroke();
-        // cc.log("startlocation:", startLocation)
-        // cc.log("location: ", location)
+    }
+
+    private onTouchMove(touch: cc.Event.EventTouch) {
+        if(!this._graphic_line){
+            return;
+        }
+        this._graphic_line.clear();
+        this._cur_length = 0;
+        // const startLocation = touch.getStartLocation();
+        const startLocation = this.get_self_ball_pos()
+        if(!startLocation){
+            return;
+        }
+
+        // 计算射线
+        const location = touch.getLocation();
+        this.drawRayCast(startLocation, location.subSelf(startLocation).normalizeSelf());
+        this._graphic_line.stroke();
     }
 
     private onTouchEnd(touch: cc.Event.EventTouch) {
+        if(!this._graphic_line){
+            return;
+        }
         this._graphic_line.clear();
-        // cc.log("onTouchEnd ", touch.getStartLocation() , touch.getLocation())
+
+        const location = touch.getLocation();
+        let ball = this.get_self_ball();
+        if(ball){
+            let script = ball.getComponent("HoodleBallCtrl")
+            if(script){
+                script.shoot_at(location);
+            }
+        }
     }
 
     /**
@@ -90,13 +124,13 @@ export default class gameHoodleTouchEvent extends UIController {
      */
     private drawAimLine(startLocation: cc.Vec2, endLocation: cc.Vec2) {
         // 转换坐标
-        let graphic_startLocation = this.node.parent.convertToNodeSpaceAR(startLocation);
-        graphic_startLocation = new cc.Vec2(graphic_startLocation.x + 540 , graphic_startLocation.y + 960);
-        // const graphic_startLocation = startLocation;
-        this._graphic_line.moveTo(graphic_startLocation.x, graphic_startLocation.y);
-        // 画小圆圆
-        // 间隔
-        const delta = 20;
+        let graphic_startLocation = startLocation.clone();
+        if(this._graphic_line){
+            this._graphic_line.moveTo(graphic_startLocation.x, graphic_startLocation.y);
+        }
+
+        // 画小圆圆,间隔
+        const delta = 15;
         // 方向
         const vector_dir = endLocation.sub(startLocation);
         // 数量
@@ -105,18 +139,28 @@ export default class gameHoodleTouchEvent extends UIController {
         vector_dir.normalizeSelf().mulSelf(delta);
         for (let index = 0; index < total_count; index++) {
             graphic_startLocation.addSelf(vector_dir)
-            this._graphic_line.circle(graphic_startLocation.x, graphic_startLocation.y, 2);
+            if(this._graphic_line){
+                this._graphic_line.circle(graphic_startLocation.x, graphic_startLocation.y, 2);
+            }
         }
     }
 
     get_self_ball(){
-        return this.get_script("GameHoodleCtrl").get_self_ball()
+        let script = this.get_script("GameHoodleShowUI")
+        if(script){
+            let ball = script.get_self_ball()
+            return ball;
+        } 
+        return null;
     }
 
     get_self_ball_pos(){
-        // this.node.convertToWorldSpaceAR
-        return this.get_self_ball().convertToWorldSpaceAR(0,0)
-        // return this.get_self_ball().getPosition();
+        let ball = this.get_self_ball();
+        if(ball){
+            let w_pos = ball.convertToWorldSpaceAR(cc.v2(0,0))
+            return w_pos;
+        }
+        return null;
     }
 
 }

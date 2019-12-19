@@ -38,6 +38,7 @@ export default class BaseScene implements ISceneBase {
     destroy(is_release_res:boolean){
         if(this._scene_ui){
             this._scene_ui.destroy()
+            // this._scene_ui.active = false;
         }
 
         if(is_release_res){
