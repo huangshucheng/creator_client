@@ -16,8 +16,7 @@ const {ccclass, property} = cc._decorator;
 export default class GameApp extends cc.Component {
     //onload >> start
     onLoad () {
-        Log.info("onload")
-        
+        this.node.addComponent("EnablePhysics"); //开启物理引擎
         NetWork.getInstance().connect()
 
         EventManager.on(EventDefine.EVENT_NET_CONNECTED, this, this.on_net_connected.bind(this));
@@ -26,11 +25,10 @@ export default class GameApp extends cc.Component {
     }
 
     start () {
-        console.log("GameApp start.......")
         let scene = new HotFixScene();
         SceneManager.getInstance().enter_scene_asyc(scene);
         PlatForm.printPlatForm()
-        this.test_func()
+        // this.test_func()
     }
 
     on_net_connected(event:cc.Event.EventCustom){
@@ -65,6 +63,9 @@ export default class GameApp extends cc.Component {
             cc.log("key: " , key , " ,value: " , array[key])
         }
         cc.log("count: " , count)
+        //
+        this.node.convertToNodeSpaceAR(cc.v2(100,100)); //将世界坐标ccv2(100,100)转换成node下的节点坐标系  
+        this.node.convertToWorldSpaceAR(cc.v2(100,100)); // 将节点坐标系node下的一个点cc.v2(100,100)转换到世界空间坐标系。
     }
 
 }

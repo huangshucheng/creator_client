@@ -31,7 +31,6 @@ export default class GameSceneTouchEvent extends UIController {
         // GameSendGameHoodleMsg.send_login_logic();
         // GameSendGameHoodleMsg.send_check_link_game();
 
-        //test
         let script = this.get_script("GameSceneShowUI")
         script.show_gamehoodle(true)
     }

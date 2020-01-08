@@ -16,7 +16,9 @@ export default class GameHoodleCtrl extends UIController {
     }
 
     start () {
-
+        //test
+        // let showUI = this.get_script("GameHoodleShowUI");
+        // showUI.test_boarn_ball()
     }
 
 }

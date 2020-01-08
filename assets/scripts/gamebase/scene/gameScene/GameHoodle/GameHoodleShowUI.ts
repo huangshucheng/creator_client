@@ -48,4 +48,15 @@ export default class GameHoodleShowUI extends UIController {
     get_self_ball(){
         return this._ball_set[RoomData.getInstance().get_self_seatid()];
     }
+    
+    //test
+    test_boarn_ball(){
+        let ball = UIFunction.getInstance().add_prefab_to_node(this.view["KW_GAME_TABLE"],"ui_prefabs/games/HoodleBall","HoodleBallCtrl");
+        if(ball){
+            let randNum = Math.random();
+            let randNum2 = Math.random();
+            ball.setPosition(randNum * 100 , randNum2 * 100) 
+            this._ball_set[RoomData.getInstance().get_self_seatid()] = ball;
+        }
+    }
 }
