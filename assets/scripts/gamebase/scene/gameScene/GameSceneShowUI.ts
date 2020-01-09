@@ -26,7 +26,7 @@ export default class GameSceneShowUI extends UIController {
     initUI(){
        this.show_all_player_head_visible(false);
        this.show_all_player_ready_visible(false);
-    //    this.show_gamehoodle(true);
+       this.show_gamehoodle(true);
     }
 
     show_user_info(udata:any){

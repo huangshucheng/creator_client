@@ -21,7 +21,7 @@ export default class HoodleBallCtrl extends UIController {
 
     //往inDest发射
     shoot_at(inDst: cc.Vec2){
-        // 冲量: 给这个球杆一个方向的冲量，矢量，大小，有方向;
+        // 冲量: 给这个球一个方向的冲量，矢量，大小，有方向;
         // 方向问题:  src---> dst;
         let dst = this.node.parent.convertToNodeSpaceAR(inDst);
         var src = cc.v2(this.node.x,this.node.y);
@@ -31,7 +31,7 @@ export default class HoodleBallCtrl extends UIController {
         var power_x = distance * SHOOT_POWER * dir.x;
         var power_y = distance * SHOOT_POWER * dir.y;
 
-        // applyLinearImpulse(冲量大小向量, 球杆的原点转成世界坐标, true)
+        // applyLinearImpulse(冲量大小向量, 原点转成世界坐标, true)
         if(this._rigid_body){
             this._rigid_body.applyLinearImpulse(cc.v2(power_x, power_y), this.node.convertToWorldSpaceAR(cc.v2(0, 0)), true);
         }
@@ -44,6 +44,27 @@ export default class HoodleBallCtrl extends UIController {
     set_img_face(uface: number){
         let ufaceImg = ROUND_HEAD_PATH + String(uface);
         this.set_sprite_asyc(this.view["KW_IMG_HEAD"],ufaceImg)
+    }
+
+    // 物理碰撞
+    // 只在两个碰撞体开始接触时被调用一次
+    onBeginContact(contact:cc.PhysicsContact, selfCollider:cc.PhysicsCollider, otherCollider:cc.PhysicsCollider) {
+        console.log("onBeginContact")
+    }
+
+    // 只在两个碰撞体结束接触时被调用一次
+    onEndContact(contact:cc.PhysicsContact, selfCollider:cc.PhysicsCollider, otherCollider:cc.PhysicsCollider) {
+        console.log("onEndContact")
+    }
+
+    // 每次将要处理碰撞体接触逻辑时被调用
+    onPreSolve(contact:cc.PhysicsContact, selfCollider:cc.PhysicsCollider, otherCollider:cc.PhysicsCollider) {
+        console.log("onPreSolve")
+    }
+
+    //  每次处理完碰撞体接触逻辑时被调用
+    onPostSolve(contact:cc.PhysicsContact, selfCollider:cc.PhysicsCollider, otherCollider:cc.PhysicsCollider) {
+        console.log("onPostSolve")
     }
 
 }
