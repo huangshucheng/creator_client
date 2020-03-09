@@ -147,6 +147,7 @@ export default class UIFunction {
         if (!sprite) {
             return;
         }
+        
         ResourceManager.getInstance().loadResAsyc(str, cc.SpriteFrame,function (error:Error, spriteFrame:any) {
             if (spriteFrame) {
                 try {

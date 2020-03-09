@@ -53,7 +53,8 @@ export default class GameSceneShowUI extends UIController {
         this.set_visible(info_node, true)
         this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.unick)
         let ufaceImg = HEAD_PATH + infoObj.uface;
-        this.set_sprite_asyc(info_node.getChildByName("KW_IMG_HEAD"),ufaceImg)
+        // this.set_sprite_asyc(info_node.getChildByName("KW_IMG_HEAD"),ufaceImg)
+        console.log("hcc>>GameSceneShowUI>>show_one_user_info")
         this.set_visible(info_node.getChildByName("KW_IMG_OFFINLE"), infoObj.isoffline)
         this.set_visible(info_node.getChildByName("KW_IMG_MASTER"), infoObj.ishost == true) // 房主
         this.set_visible(info_node.getChildByName("KW_IMG_READY"), infoObj.userstate == UserState.Ready);

@@ -24,6 +24,7 @@ export default class LobbySceneShowUI extends UIController {
             let ufaceImg = HEAD_PATH + UserInfo.get_uface();
             this.set_sprite_asyc(this.view["IMG_HEAD"],ufaceImg)
             this.set_string(this.view['TEXT_COIN'],"0")
+            console.log("hcc>>LobbySceneShowUI>>show_user_info " , ufaceImg)
         }
     }
 }

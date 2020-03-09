@@ -1,6 +1,7 @@
 import UIController from '../../../framework/uibase/UIController';
 import DialogManager from '../../../framework/manager/DialogManager';
 import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
+import RoomData from '../../common/RoomData';
 
 const {ccclass, property} = cc._decorator;
 

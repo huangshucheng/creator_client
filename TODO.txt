@@ -6,3 +6,35 @@
 3）小球可以累积，累积可以合成
 4) 小球有属性
 5）断线，重连
+
+协议：
+
+gameStart:  s->c 游戏开始
+seatid,
+posx,
+posy,
+power, //是否可打击权限，0不行，1可以
+
+playerPower: s->c  玩家权限
+seatid,
+power,
+
+playershoot: c->s->c  玩家射击
+seatid,
+posx, x方向
+posy, y方向
+
+playerballendpos: c->s->c 小球移动结束
+seatid,
+posx, 结束位置x
+posy, 结束位置y
+
+shooted: c->s->c 打中了
+srcseatid,
+desseatid,
+
+gameresult: s->c 小结算
+resultscore,
+
+totalresult: s->c 大结算
+totalscore,

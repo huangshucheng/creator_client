@@ -13,7 +13,7 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     start () {
-        console.log("LoginSceneTouchEvent>>start")
+        console.log("LobbySceneTouchEvent>>start")
         this.add_button_event_listener()
     }
 

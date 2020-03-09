@@ -1,6 +1,7 @@
 //界面点击事件
 
 import UIController from "../../../../framework/uibase/UIController";
+import RoomData from "../../../common/RoomData";
 
 const AIM_LINE_MAX_LENGTH = 1440;
 // const AIM_LINE_MAX_LENGTH = 2000;
@@ -148,17 +149,15 @@ export default class gameHoodleTouchEvent extends UIController {
     get_self_ball(){
         let script = this.get_script("GameHoodleShowUI")
         if(script){
-            let ball = script.get_self_ball()
-            return ball;
-        } 
+            return script.get_self_ball()
+        }
         return null;
     }
 
     get_self_ball_pos(){
         let ball = this.get_self_ball();
         if(ball){
-            let w_pos = ball.convertToWorldSpaceAR(cc.v2(0,0))
-            return w_pos;
+            return ball.convertToWorldSpaceAR(cc.v2(0,0));
         }
         return null;
     }

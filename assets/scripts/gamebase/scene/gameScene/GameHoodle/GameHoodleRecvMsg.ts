@@ -23,7 +23,7 @@ export default class GameHoodleRecvMsg extends UIController {
 
     on_event_game_start(event: cc.Event.EventCustom){
         let showUI = this.get_script("GameHoodleShowUI");
-        showUI.showBall();
+        showUI.show_all_ball();
     }
 
 }

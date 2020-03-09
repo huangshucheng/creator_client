@@ -1,3 +1,4 @@
+//保存本地字段，localStorage define
 export default class LSDefine {
     static USER_LOGIN_TYPE             = "user_login_type"            //登录类型，uname, guest
     static USER_LOGIN_MSG              = "user_login_msg"             //登录信息，uname,upwd

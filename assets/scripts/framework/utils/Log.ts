@@ -71,7 +71,7 @@ export default class Log {
         return timeStr;
     };
 
-    private static _stack(index) {
+    public static _stack(index) {
         var e = new Error();
         var lines = e.stack.split("");
         lines.shift();
