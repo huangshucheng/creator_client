@@ -62,7 +62,7 @@ export default class HoodleBallCtrl extends UIController {
     onBeginContact(contact:cc.PhysicsContact, selfCollider:cc.PhysicsCollider, otherCollider:cc.PhysicsCollider) {
         console.log("onBeginContact ball: " + this._ball_name);
         if(!this._is_active_ball){
-            this.node.removeFromParent();
+            this.node.destroy();
         }
     }
 

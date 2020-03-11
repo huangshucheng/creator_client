@@ -46,16 +46,6 @@ export default class GameHoodleShowUI extends UIController {
         }
         return false;
     }
-    //删掉小球
-    kill_ball(seatid:number):boolean{
-        let ballNode:cc.Node = this._ball_set[seatid];
-        if (ballNode){
-            ballNode.removeFromParent()
-            delete this._ball_set[seatid];
-            return true;
-        }
-        return false;
-    }
     //获得自己小球
     get_self_ball(){
         return this._ball_set[RoomData.getInstance().get_self_seatid()];
