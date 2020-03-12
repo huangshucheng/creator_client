@@ -2,6 +2,9 @@
 
 import UIController from "../../../../framework/uibase/UIController";
 import RoomData from "../../../common/RoomData";
+import GameHoodleData from './GameHoodleData';
+import HoodleManager from "./HoodleManager";
+import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
 
 const AIM_LINE_MAX_LENGTH = 1440;
 // const AIM_LINE_MAX_LENGTH = 2000;
@@ -76,6 +79,7 @@ export default class gameHoodleTouchEvent extends UIController {
             let script = ball.getComponent("HoodleBallCtrl")
             if(script){
                 script.shoot_at(location);
+                GameSendGameHoodleMsg.send_player_shoot(RoomData.getInstance().get_self_seatid(),location.x, location.y);
             }
         }
     }
@@ -147,11 +151,7 @@ export default class gameHoodleTouchEvent extends UIController {
     }
 
     get_self_ball(){
-        let script = this.get_script("GameHoodleShowUI")
-        if(script){
-            return script.get_self_ball()
-        }
-        return null;
+        return HoodleManager.getInstance().get_self_ball();
     }
 
     get_self_ball_pos(){

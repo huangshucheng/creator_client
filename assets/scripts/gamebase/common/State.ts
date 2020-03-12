@@ -12,3 +12,9 @@ export let GameState = {
     Gameing:2,  //游戏中
     CheckOut:3, //结算状态
 }
+
+//玩家权限
+export let PlayerPower = {
+	canNotPlay : 0,   	//不能玩
+	canPlay : 1, 		//可以玩
+}

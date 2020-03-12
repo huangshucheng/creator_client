@@ -1,5 +1,4 @@
 //小球控制器
-
 import UIController from "../../../../framework/uibase/UIController";
 
 let SHOOT_POWER = 0.1;
@@ -50,7 +49,6 @@ export default class HoodleBallCtrl extends UIController {
         console.log("hcc>>HoodleBallCtrl>>set_img_face")
     }
 
-
     ////////////////////////////////碰撞事件
     //是否当前我的回合
     set_is_active_turn(flag:boolean){
@@ -62,7 +60,7 @@ export default class HoodleBallCtrl extends UIController {
     onBeginContact(contact:cc.PhysicsContact, selfCollider:cc.PhysicsCollider, otherCollider:cc.PhysicsCollider) {
         console.log("onBeginContact ball: " + this._ball_name);
         if(!this._is_active_ball){
-            this.node.destroy();
+            // this.node.destroy();
         }
     }
 

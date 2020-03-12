@@ -32,7 +32,7 @@ export default class GameSceneRecvGameMsg extends UIController {
         EventManager.on(CmdName[Cmd.ePlayCountRes], this, this.on_event_play_count)
         EventManager.on(CmdName[Cmd.eUserReadyRes], this, this.on_event_user_ready)
         EventManager.on(CmdName[Cmd.eGameStartRes], this, this.on_event_game_start)
-        EventManager.on(CmdName[Cmd.eGameResultRes], this, this.on_event_game_result)
+        EventManager.on(CmdName[Cmd.eGameEndRes], this, this.on_event_game_end)
         EventManager.on(CmdName[Cmd.eUserOfflineRes], this, this.on_event_user_offline)
     }
 
@@ -174,8 +174,8 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }
 
-    on_event_game_result(event: cc.Event.EventCustom){
+    on_event_game_end(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_game_result" , udata)
+        cc.log("on_event_game_end" , udata)
     }
 }
