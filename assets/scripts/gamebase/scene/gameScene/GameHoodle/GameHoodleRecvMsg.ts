@@ -4,6 +4,9 @@ import EventManager from "../../../../framework/manager/EventManager";
 import { Cmd, CmdName } from "../../../../framework/protocol/GameHoodleProto";
 import GameHoodleData from './GameHoodleData';
 import Response from '../../../../framework/config/Response';
+import RoomData from '../../../common/RoomData';
+import { PlayerPower } from '../../../common/State';
+import HoodleBallManager from './HoodleBallManager';
 
 const {ccclass, property} = cc._decorator;
 
@@ -30,11 +33,16 @@ export default class GameHoodleRecvMsg extends UIController {
         EventManager.on(CmdName[Cmd.eTotalGameResultRes], this, this.on_event_game_total_result)
     }
 
+    //游戏开始
     on_event_game_start(event: cc.Event.EventCustom){
         let showUIScript = this.get_script("GameHoodleShowUI");
+        showUIScript.clear_all_ball();
         showUIScript.show_all_ball();
+        //test
+        // showUIScript.show_ball_shooted_animation(RoomData.getInstance().get_self_seatid());
     }
-
+    
+    //玩家初始位置
     on_event_first_ball_pos(event: cc.Event.EventCustom){
         let udata =  event.getUserData();
         if(udata){
@@ -50,6 +58,7 @@ export default class GameHoodleRecvMsg extends UIController {
         }
     }
 
+    //玩家权限
     on_event_player_power(event: cc.Event.EventCustom){
         let udata =  event.getUserData();
         if(udata){
@@ -59,10 +68,19 @@ export default class GameHoodleRecvMsg extends UIController {
                 let seatid = info.seatid;
                 let power = info.power;
                 GameHoodleData.getInstance().set_power(seatid, power);
+
+                let ball: cc.Node = HoodleBallManager.getInstance().get_ball(seatid);
+                if(ball){
+                    let script = ball.getComponent("HoodleBallCtrl");
+                    if(script){
+                        script.set_shoot_power_ui(power);
+                    }
+                }
             }
         }
     }
 
+    //玩家射击
     on_event_player_shoot(event: cc.Event.EventCustom){
         let udata =  event.getUserData();
         if(udata){
@@ -77,20 +95,51 @@ export default class GameHoodleRecvMsg extends UIController {
         }
     }
 
+    //同步小球位置
     on_event_ball_pos(event: cc.Event.EventCustom){
-        let showUI = this.get_script("GameHoodleShowUI");
+        let udata = event.getUserData();
+        if(udata){
+            let status = udata.status;
+            if(status == Response.OK){
+                let positions = udata.positions;
+                for(let key in positions){
+                    let posinfo = positions[key];
+                    let seatid = posinfo.seatid;
+                    let posx = Number(posinfo.posx);
+                    let posy = Number(posinfo.posy);
+                    let showUI = this.get_script("GameHoodleShowUI");
+                    showUI.set_ball_pos(seatid,posx,posy);
+                }
+            }
+        }
     }
 
+    //玩家被击中
     on_event_player_is_shooted(event: cc.Event.EventCustom){
-        let showUI = this.get_script("GameHoodleShowUI");
+        // let showUI = this.get_script("GameHoodleShowUI");
+        console.log("hcc>>on_event_player_is_shooted" , event.getUserData());
+        let udata = event.getUserData();
+        if(udata){
+            let status = udata.status;
+            if(status == Response.OK){
+                let src_seatid = udata.srcseatid;
+                let des_seatid = udata.desseatid;
+                let showUI = this.get_script("GameHoodleShowUI");
+                showUI.show_ball_shooted_animation(src_seatid);
+            }
+        }
     }
 
+    //小结算
     on_event_game_result(event: cc.Event.EventCustom){
-        let showUI = this.get_script("GameHoodleShowUI");
+        // let showUI = this.get_script("GameHoodleShowUI");
+        console.log("hcc>>on_event_game_result",event.getUserData());
     }
 
+    //大结算
     on_event_game_total_result(event: cc.Event.EventCustom){
-        let showUI = this.get_script("GameHoodleShowUI");
+        // let showUI = this.get_script("GameHoodleShowUI");
+        console.log("hcc>>on_event_game_total_result" , event.getUserData());
     }
 
 }

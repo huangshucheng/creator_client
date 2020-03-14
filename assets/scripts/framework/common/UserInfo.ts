@@ -20,7 +20,7 @@ export default class UserInfo {
     static get_uinfo(){
         return this._uinfo;
     }
-    
+    //玩家昵称
     static get_unick(){
         return this._uinfo.unick;
     }
@@ -35,6 +35,10 @@ export default class UserInfo {
 
     static get_usex(){
         return this._uinfo.usex;
+    }
+    //登录账号
+    static get_uname(){
+        return this._uinfo.uname
     }
 
 }

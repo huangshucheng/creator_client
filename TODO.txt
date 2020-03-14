@@ -7,37 +7,10 @@
 4) 小球有属性
 5）断线，重连
 
-协议：
+问题：
+1.小球在不同分辨率手机上的位置不同，怎么同步？ 考虑世界坐标，比例
+2.怎么知道小球停止运动了 OK
+3.停下来之后才有射击权限
 
-gameStart:  s->c 游戏开始
-
-//玩家开局位置
-firstBallPos: s->c
-seatid,
-posx,
-posy,
-
-//玩家权限
-playerPower: s->c  
-seatid,
-power, //是否可射击权限，0不行，1可以
-
-playerShoot: c->s->c  玩家射击
-seatid,
-posx, x方向
-posy, y方向
-
-playerBallPos: c->s->c 所有小球移动结束位置
-seatid,
-posx, 结束位置x
-posy, 结束位置y
-
-playerShooted: c->s->c 打中了
-srcseatid,
-desseatid,
-
-gameResult: s->c 小结算
-resultscore,
-
-totalResult: s->c 大结算
-totalscore,
+服务端：
+1.游戏开始之后，非房主玩家退出后进不来，只能输入房间号进来

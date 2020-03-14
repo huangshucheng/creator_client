@@ -1,10 +1,12 @@
 //界面点击事件
 
 import UIController from "../../../../framework/uibase/UIController";
-import RoomData from "../../../common/RoomData";
+import RoomData from '../../../common/RoomData';
 import GameHoodleData from './GameHoodleData';
-import HoodleManager from "./HoodleManager";
 import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
+import { PlayerPower } from '../../../common/State';
+import DialogManager from "../../../../framework/manager/DialogManager";
+import HoodleBallManager from './HoodleBallManager';
 
 const AIM_LINE_MAX_LENGTH = 1440;
 // const AIM_LINE_MAX_LENGTH = 2000;
@@ -72,6 +74,11 @@ export default class gameHoodleTouchEvent extends UIController {
             return;
         }
         this._graphic_line.clear();
+        let self_power = GameHoodleData.getInstance().get_power(RoomData.getInstance().get_self_seatid());
+        if(self_power != PlayerPower.canPlay){
+            DialogManager.getInstance().show_weak_hint("还未轮到你操作!")
+            return;
+        }
 
         const location = touch.getLocation();
         let ball = this.get_self_ball();
@@ -151,7 +158,7 @@ export default class gameHoodleTouchEvent extends UIController {
     }
 
     get_self_ball(){
-        return HoodleManager.getInstance().get_self_ball();
+        return HoodleBallManager.getInstance().get_self_ball();
     }
 
     get_self_ball_pos(){

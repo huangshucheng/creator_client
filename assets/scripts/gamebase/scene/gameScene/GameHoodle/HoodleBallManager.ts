@@ -1,8 +1,8 @@
 import RoomData from "../../../common/RoomData";
 
 //小球管理
-class HoodleManager {
-    public static readonly instance: HoodleManager = new HoodleManager();
+class HoodleBallManager {
+    public static readonly instance: HoodleBallManager = new HoodleBallManager();
 
     _ball_set = {}; //seatid-->ball
 
@@ -10,7 +10,7 @@ class HoodleManager {
     }
 
     public static getInstance(){
-        return HoodleManager.instance;
+        return HoodleBallManager.instance;
     }
 
     public get_ball(seatid:number){
@@ -36,4 +36,4 @@ class HoodleManager {
 
 }
 
-export default HoodleManager
+export default HoodleBallManager

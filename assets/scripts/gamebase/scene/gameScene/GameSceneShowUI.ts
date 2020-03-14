@@ -51,7 +51,8 @@ export default class GameSceneShowUI extends UIController {
         }
 
         this.set_visible(info_node, true)
-        this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.unick)
+//        this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.unick)
+        this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.uname) //TODO 暂时先显示玩家账号
         let ufaceImg = HEAD_PATH + infoObj.uface;
         // this.set_sprite_asyc(info_node.getChildByName("KW_IMG_HEAD"),ufaceImg)
         console.log("hcc>>GameSceneShowUI>>show_one_user_info")
@@ -62,6 +63,8 @@ export default class GameSceneShowUI extends UIController {
             let userstate = infoObj.userstate
             if(userstate == UserState.Ready || userstate == UserState.Playing){
                 this.set_visible(this.view["KW_BTN_READY"], false);
+            }else{
+                this.set_visible(this.view["KW_BTN_READY"], true);
             }
         }
     }

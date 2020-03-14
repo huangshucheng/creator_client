@@ -5,14 +5,14 @@ import { Cmd, CmdName } from "../../../../framework/protocol/GameHoodleProto";
 import UIFunction from "../../../../framework/common/UIFunciton";
 import RoomData from '../../../common/RoomData';
 import Player from '../../../common/Player';
-import HoodleManager from './HoodleManager';
+import HoodleBallManager from "./HoodleBallManager";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class GameHoodleShowUI extends UIController {
 
-    _hoodleManager = HoodleManager.getInstance()
+    _hoodleManager = HoodleBallManager.getInstance()
 
     onLoad () {
         super.onLoad();
@@ -29,15 +29,28 @@ export default class GameHoodleShowUI extends UIController {
         }
     }
 
+    clear_all_ball(){
+        let all_player = RoomData.getInstance().get_all_player()
+        for(let key in all_player){
+            let player:Player = all_player[key];
+            if(player){
+                this._hoodleManager.delete_ball(player.get_seatid());
+            }
+        }
+    }
+
     //根据服务消息，显示小球
     boarn_ball(player:Player):boolean{
         let ball = UIFunction.getInstance().add_prefab_to_node(this.view["KW_GAME_TABLE"],"ui_prefabs/games/HoodleBall","HoodleBallCtrl");
         if(ball){
             let script = ball.getComponent("HoodleBallCtrl")
             if(script){
-                script.set_name(player.get_uinfo().unick)
+                // script.set_name(player.get_uinfo().unick)
+                script.set_name(player.get_uinfo().uname) //TODO 暂时先显示玩家账号
+                script.set_ball_id(player.get_uinfo().seatid);
                 script.set_img_face(player.get_uinfo().uface)
-                this._hoodleManager.set_ball(player.get_uinfo().seatid,ball);
+                this._hoodleManager.set_ball(player.get_uinfo().seatid, ball);
+                ball.active = false;
                 return true;
             }
         }
@@ -50,6 +63,7 @@ export default class GameHoodleShowUI extends UIController {
         if(!ball || !cc.isValid(ball)){
             return false;
         }
+        ball.active = true;
         ball.setPosition(posx, posy);
         return true;
     }
@@ -67,6 +81,21 @@ export default class GameHoodleShowUI extends UIController {
         return true;
     }
 
+    //玩家被击中动画
+    show_ball_shooted_animation(seatid:number){
+        let ball: cc.Node = this._hoodleManager.get_ball(seatid);
+        if(!ball || !cc.isValid(ball)){
+            return;
+        }
+        let delay_1 = cc.delayTime(2.0);
+        let blink = cc.blink(1.5, 10);
+        let delay_2 = cc.delayTime(0.4);
+        let hide = cc.callFunc(function(){
+            ball.active = false;
+        })
+        ball.runAction(cc.sequence(delay_1 ,blink, delay_2, hide));
+    }
+
     //////////////////////////////////
     //////////////////////////////////
     //test
@@ -79,15 +108,17 @@ export default class GameHoodleShowUI extends UIController {
             let script = ball.getComponent("HoodleBallCtrl")
             script.set_is_active_turn(true)
             script.set_name("ball1")
+            script.set_ball_id(1);
         }
         let ball2 = UIFunction.getInstance().add_prefab_to_node(this.view["KW_GAME_TABLE"],"ui_prefabs/games/HoodleBall","HoodleBallCtrl");
         if(ball2){
             let ballPos = cc.v2(0,200)
             ball2.setPosition(ballPos) 
-            this._hoodleManager.set_ball(4,ball2);
+            this._hoodleManager.set_ball(2,ball2);
             let script = ball2.getComponent("HoodleBallCtrl")
             script.set_is_active_turn(false)
             script.set_name("ball2")
+            script.set_ball_id(2);
         }
     }
 }

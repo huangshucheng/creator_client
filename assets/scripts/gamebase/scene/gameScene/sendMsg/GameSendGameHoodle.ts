@@ -33,9 +33,10 @@ export default class GameSendGameHoodleMsg {
     }
 
     ////////////////////////
-    //
+    //游戏具体逻辑
     ////////////////////////
 
+    //玩家射击
     static send_player_shoot(seatid:number, posx:number, posy:number){
         let body = {
             seatid:seatid,
@@ -45,4 +46,29 @@ export default class GameSendGameHoodleMsg {
         GameSendGameHoodleMsg.send(Cmd.ePlayerShootReq,body);
     }
 
+    //玩家位置发送到服务端，保持各个玩家位置同步
+    /*
+    body :OnePlayerPos类型数组
+    OnePlayerPos: 
+    {
+        seatid:number,
+        posx:string,
+        posy:string,
+    }
+    */
+    static send_all_player_ball_pos(posArray:Array<any>){
+        let body = {
+                positions: posArray,
+        }
+        GameSendGameHoodleMsg.send(Cmd.ePlayerBallPosReq,body);
+    }
+
+    //客户端发送玩家被击中
+    static send_player_is_shooted(src_seatid:number, des_seatid:number){
+        let body = {
+            srcseatid: src_seatid,
+            desseatid: des_seatid,
+        }
+        GameSendGameHoodleMsg.send(Cmd.ePlayerIsShootedReq,body);
+    }
 }
