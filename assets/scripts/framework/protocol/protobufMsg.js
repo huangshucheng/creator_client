@@ -6121,6 +6121,7 @@ $root.GameHoodleProto = (function() {
      * @property {number} ePlayerIsShootedRes=33 ePlayerIsShootedRes value
      * @property {number} eGameResultRes=34 eGameResultRes value
      * @property {number} eTotalGameResultRes=35 eTotalGameResultRes value
+     * @property {number} ePlayerScoreRes=36 ePlayerScoreRes value
      */
     GameHoodleProto.Cmd = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -6160,6 +6161,7 @@ $root.GameHoodleProto = (function() {
         values[valuesById[33] = "ePlayerIsShootedRes"] = 33;
         values[valuesById[34] = "eGameResultRes"] = 34;
         values[valuesById[35] = "eTotalGameResultRes"] = 35;
+        values[valuesById[36] = "ePlayerScoreRes"] = 36;
         return values;
     })();
 
@@ -11437,6 +11439,216 @@ $root.GameHoodleProto = (function() {
         return OnePlayerPower;
     })();
 
+    GameHoodleProto.OnePlayerScore = (function() {
+
+        /**
+         * Properties of an OnePlayerScore.
+         * @memberof GameHoodleProto
+         * @interface IOnePlayerScore
+         * @property {number} seatid OnePlayerScore seatid
+         * @property {string} score OnePlayerScore score
+         */
+
+        /**
+         * Constructs a new OnePlayerScore.
+         * @memberof GameHoodleProto
+         * @classdesc Represents an OnePlayerScore.
+         * @implements IOnePlayerScore
+         * @constructor
+         * @param {GameHoodleProto.IOnePlayerScore=} [properties] Properties to set
+         */
+        function OnePlayerScore(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * OnePlayerScore seatid.
+         * @member {number} seatid
+         * @memberof GameHoodleProto.OnePlayerScore
+         * @instance
+         */
+        OnePlayerScore.prototype.seatid = 0;
+
+        /**
+         * OnePlayerScore score.
+         * @member {string} score
+         * @memberof GameHoodleProto.OnePlayerScore
+         * @instance
+         */
+        OnePlayerScore.prototype.score = "";
+
+        /**
+         * Creates a new OnePlayerScore instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.OnePlayerScore
+         * @static
+         * @param {GameHoodleProto.IOnePlayerScore=} [properties] Properties to set
+         * @returns {GameHoodleProto.OnePlayerScore} OnePlayerScore instance
+         */
+        OnePlayerScore.create = function create(properties) {
+            return new OnePlayerScore(properties);
+        };
+
+        /**
+         * Encodes the specified OnePlayerScore message. Does not implicitly {@link GameHoodleProto.OnePlayerScore.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.OnePlayerScore
+         * @static
+         * @param {GameHoodleProto.IOnePlayerScore} message OnePlayerScore message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OnePlayerScore.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.seatid);
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.score);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified OnePlayerScore message, length delimited. Does not implicitly {@link GameHoodleProto.OnePlayerScore.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.OnePlayerScore
+         * @static
+         * @param {GameHoodleProto.IOnePlayerScore} message OnePlayerScore message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OnePlayerScore.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an OnePlayerScore message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.OnePlayerScore
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.OnePlayerScore} OnePlayerScore
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OnePlayerScore.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.OnePlayerScore();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.seatid = reader.sint32();
+                    break;
+                case 2:
+                    message.score = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("seatid"))
+                throw $util.ProtocolError("missing required 'seatid'", { instance: message });
+            if (!message.hasOwnProperty("score"))
+                throw $util.ProtocolError("missing required 'score'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes an OnePlayerScore message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.OnePlayerScore
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.OnePlayerScore} OnePlayerScore
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OnePlayerScore.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an OnePlayerScore message.
+         * @function verify
+         * @memberof GameHoodleProto.OnePlayerScore
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        OnePlayerScore.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.seatid))
+                return "seatid: integer expected";
+            if (!$util.isString(message.score))
+                return "score: string expected";
+            return null;
+        };
+
+        /**
+         * Creates an OnePlayerScore message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.OnePlayerScore
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.OnePlayerScore} OnePlayerScore
+         */
+        OnePlayerScore.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.OnePlayerScore)
+                return object;
+            var message = new $root.GameHoodleProto.OnePlayerScore();
+            if (object.seatid != null)
+                message.seatid = object.seatid | 0;
+            if (object.score != null)
+                message.score = String(object.score);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an OnePlayerScore message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.OnePlayerScore
+         * @static
+         * @param {GameHoodleProto.OnePlayerScore} message OnePlayerScore
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        OnePlayerScore.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.seatid = 0;
+                object.score = "";
+            }
+            if (message.seatid != null && message.hasOwnProperty("seatid"))
+                object.seatid = message.seatid;
+            if (message.score != null && message.hasOwnProperty("score"))
+                object.score = message.score;
+            return object;
+        };
+
+        /**
+         * Converts this OnePlayerScore to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.OnePlayerScore
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        OnePlayerScore.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return OnePlayerScore;
+    })();
+
     GameHoodleProto.PlayerFirstBallPosRes = (function() {
 
         /**
@@ -13220,216 +13432,6 @@ $root.GameHoodleProto = (function() {
         return PlayerIsShootedRes;
     })();
 
-    GameHoodleProto.OnePlayerScore = (function() {
-
-        /**
-         * Properties of an OnePlayerScore.
-         * @memberof GameHoodleProto
-         * @interface IOnePlayerScore
-         * @property {number} seatid OnePlayerScore seatid
-         * @property {string} score OnePlayerScore score
-         */
-
-        /**
-         * Constructs a new OnePlayerScore.
-         * @memberof GameHoodleProto
-         * @classdesc Represents an OnePlayerScore.
-         * @implements IOnePlayerScore
-         * @constructor
-         * @param {GameHoodleProto.IOnePlayerScore=} [properties] Properties to set
-         */
-        function OnePlayerScore(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * OnePlayerScore seatid.
-         * @member {number} seatid
-         * @memberof GameHoodleProto.OnePlayerScore
-         * @instance
-         */
-        OnePlayerScore.prototype.seatid = 0;
-
-        /**
-         * OnePlayerScore score.
-         * @member {string} score
-         * @memberof GameHoodleProto.OnePlayerScore
-         * @instance
-         */
-        OnePlayerScore.prototype.score = "";
-
-        /**
-         * Creates a new OnePlayerScore instance using the specified properties.
-         * @function create
-         * @memberof GameHoodleProto.OnePlayerScore
-         * @static
-         * @param {GameHoodleProto.IOnePlayerScore=} [properties] Properties to set
-         * @returns {GameHoodleProto.OnePlayerScore} OnePlayerScore instance
-         */
-        OnePlayerScore.create = function create(properties) {
-            return new OnePlayerScore(properties);
-        };
-
-        /**
-         * Encodes the specified OnePlayerScore message. Does not implicitly {@link GameHoodleProto.OnePlayerScore.verify|verify} messages.
-         * @function encode
-         * @memberof GameHoodleProto.OnePlayerScore
-         * @static
-         * @param {GameHoodleProto.IOnePlayerScore} message OnePlayerScore message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        OnePlayerScore.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.seatid);
-            writer.uint32(/* id 2, wireType 2 =*/18).string(message.score);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified OnePlayerScore message, length delimited. Does not implicitly {@link GameHoodleProto.OnePlayerScore.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof GameHoodleProto.OnePlayerScore
-         * @static
-         * @param {GameHoodleProto.IOnePlayerScore} message OnePlayerScore message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        OnePlayerScore.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes an OnePlayerScore message from the specified reader or buffer.
-         * @function decode
-         * @memberof GameHoodleProto.OnePlayerScore
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {GameHoodleProto.OnePlayerScore} OnePlayerScore
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        OnePlayerScore.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.OnePlayerScore();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.seatid = reader.sint32();
-                    break;
-                case 2:
-                    message.score = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            if (!message.hasOwnProperty("seatid"))
-                throw $util.ProtocolError("missing required 'seatid'", { instance: message });
-            if (!message.hasOwnProperty("score"))
-                throw $util.ProtocolError("missing required 'score'", { instance: message });
-            return message;
-        };
-
-        /**
-         * Decodes an OnePlayerScore message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof GameHoodleProto.OnePlayerScore
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {GameHoodleProto.OnePlayerScore} OnePlayerScore
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        OnePlayerScore.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies an OnePlayerScore message.
-         * @function verify
-         * @memberof GameHoodleProto.OnePlayerScore
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        OnePlayerScore.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isInteger(message.seatid))
-                return "seatid: integer expected";
-            if (!$util.isString(message.score))
-                return "score: string expected";
-            return null;
-        };
-
-        /**
-         * Creates an OnePlayerScore message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof GameHoodleProto.OnePlayerScore
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {GameHoodleProto.OnePlayerScore} OnePlayerScore
-         */
-        OnePlayerScore.fromObject = function fromObject(object) {
-            if (object instanceof $root.GameHoodleProto.OnePlayerScore)
-                return object;
-            var message = new $root.GameHoodleProto.OnePlayerScore();
-            if (object.seatid != null)
-                message.seatid = object.seatid | 0;
-            if (object.score != null)
-                message.score = String(object.score);
-            return message;
-        };
-
-        /**
-         * Creates a plain object from an OnePlayerScore message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof GameHoodleProto.OnePlayerScore
-         * @static
-         * @param {GameHoodleProto.OnePlayerScore} message OnePlayerScore
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        OnePlayerScore.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.seatid = 0;
-                object.score = "";
-            }
-            if (message.seatid != null && message.hasOwnProperty("seatid"))
-                object.seatid = message.seatid;
-            if (message.score != null && message.hasOwnProperty("score"))
-                object.score = message.score;
-            return object;
-        };
-
-        /**
-         * Converts this OnePlayerScore to JSON.
-         * @function toJSON
-         * @memberof GameHoodleProto.OnePlayerScore
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        OnePlayerScore.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return OnePlayerScore;
-    })();
-
     GameHoodleProto.GameResultRes = (function() {
 
         /**
@@ -13844,6 +13846,214 @@ $root.GameHoodleProto = (function() {
         };
 
         return TotalGameResultRes;
+    })();
+
+    GameHoodleProto.PlayerScoreRes = (function() {
+
+        /**
+         * Properties of a PlayerScoreRes.
+         * @memberof GameHoodleProto
+         * @interface IPlayerScoreRes
+         * @property {Array.<GameHoodleProto.IOnePlayerScore>|null} [scores] PlayerScoreRes scores
+         */
+
+        /**
+         * Constructs a new PlayerScoreRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a PlayerScoreRes.
+         * @implements IPlayerScoreRes
+         * @constructor
+         * @param {GameHoodleProto.IPlayerScoreRes=} [properties] Properties to set
+         */
+        function PlayerScoreRes(properties) {
+            this.scores = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PlayerScoreRes scores.
+         * @member {Array.<GameHoodleProto.IOnePlayerScore>} scores
+         * @memberof GameHoodleProto.PlayerScoreRes
+         * @instance
+         */
+        PlayerScoreRes.prototype.scores = $util.emptyArray;
+
+        /**
+         * Creates a new PlayerScoreRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.PlayerScoreRes
+         * @static
+         * @param {GameHoodleProto.IPlayerScoreRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.PlayerScoreRes} PlayerScoreRes instance
+         */
+        PlayerScoreRes.create = function create(properties) {
+            return new PlayerScoreRes(properties);
+        };
+
+        /**
+         * Encodes the specified PlayerScoreRes message. Does not implicitly {@link GameHoodleProto.PlayerScoreRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.PlayerScoreRes
+         * @static
+         * @param {GameHoodleProto.IPlayerScoreRes} message PlayerScoreRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerScoreRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.scores != null && message.scores.length)
+                for (var i = 0; i < message.scores.length; ++i)
+                    $root.GameHoodleProto.OnePlayerScore.encode(message.scores[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PlayerScoreRes message, length delimited. Does not implicitly {@link GameHoodleProto.PlayerScoreRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.PlayerScoreRes
+         * @static
+         * @param {GameHoodleProto.IPlayerScoreRes} message PlayerScoreRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerScoreRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PlayerScoreRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.PlayerScoreRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.PlayerScoreRes} PlayerScoreRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerScoreRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.PlayerScoreRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.scores && message.scores.length))
+                        message.scores = [];
+                    message.scores.push($root.GameHoodleProto.OnePlayerScore.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a PlayerScoreRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.PlayerScoreRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.PlayerScoreRes} PlayerScoreRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerScoreRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PlayerScoreRes message.
+         * @function verify
+         * @memberof GameHoodleProto.PlayerScoreRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PlayerScoreRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.scores != null && message.hasOwnProperty("scores")) {
+                if (!Array.isArray(message.scores))
+                    return "scores: array expected";
+                for (var i = 0; i < message.scores.length; ++i) {
+                    var error = $root.GameHoodleProto.OnePlayerScore.verify(message.scores[i]);
+                    if (error)
+                        return "scores." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a PlayerScoreRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.PlayerScoreRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.PlayerScoreRes} PlayerScoreRes
+         */
+        PlayerScoreRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.PlayerScoreRes)
+                return object;
+            var message = new $root.GameHoodleProto.PlayerScoreRes();
+            if (object.scores) {
+                if (!Array.isArray(object.scores))
+                    throw TypeError(".GameHoodleProto.PlayerScoreRes.scores: array expected");
+                message.scores = [];
+                for (var i = 0; i < object.scores.length; ++i) {
+                    if (typeof object.scores[i] !== "object")
+                        throw TypeError(".GameHoodleProto.PlayerScoreRes.scores: object expected");
+                    message.scores[i] = $root.GameHoodleProto.OnePlayerScore.fromObject(object.scores[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PlayerScoreRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.PlayerScoreRes
+         * @static
+         * @param {GameHoodleProto.PlayerScoreRes} message PlayerScoreRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PlayerScoreRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.scores = [];
+            if (message.scores && message.scores.length) {
+                object.scores = [];
+                for (var j = 0; j < message.scores.length; ++j)
+                    object.scores[j] = $root.GameHoodleProto.OnePlayerScore.toObject(message.scores[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this PlayerScoreRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.PlayerScoreRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PlayerScoreRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PlayerScoreRes;
     })();
 
     return GameHoodleProto;

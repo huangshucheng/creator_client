@@ -18,6 +18,16 @@ class  Player {
         return this._uinfo.numberid;
     }
 
+    //玩家登陆账号
+    get_uname(){
+        return this._uinfo.uname;
+    }
+    
+    //玩家昵称
+    get_unick(){
+        return this._uinfo.unick;
+    }
+
     get_seatid(){
         return this._uinfo.seatid;
     }

@@ -4,7 +4,7 @@ import UIController from "../../../../framework/uibase/UIController";
 import RoomData from '../../../common/RoomData';
 import GameHoodleData from './GameHoodleData';
 import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
-import { PlayerPower } from '../../../common/State';
+import { PlayerPower , BallState} from '../../../common/State';
 import DialogManager from "../../../../framework/manager/DialogManager";
 import HoodleBallManager from './HoodleBallManager';
 
@@ -35,6 +35,30 @@ export default class gameHoodleTouchEvent extends UIController {
         }
     }
 
+    //小球是否能射击
+    can_shoot():boolean{
+        let self_power = GameHoodleData.getInstance().get_power(RoomData.getInstance().get_self_seatid());
+        if(self_power != PlayerPower.canPlay){
+            return false;
+        }
+   
+        let all_ball = HoodleBallManager.getInstance().get_all_ball();
+        for(let key in all_ball){
+            let ball:cc.Node = all_ball[key];
+            if(!ball || !cc.isValid(ball)){
+                return false;
+            }
+            let script = ball.getComponent("HoodleBallCtrl");
+            if(script){
+                let state = script.get_ball_state();
+                if(state != BallState.stop){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     private onTouchStart(touch: cc.Event.EventTouch) {
         if(!this._graphic_line){
             return;
@@ -42,6 +66,10 @@ export default class gameHoodleTouchEvent extends UIController {
         this._graphic_line.clear();
         const startLocation = this.get_self_ball_pos()
         if(!startLocation){
+            return;
+        }
+
+        if(!this.can_shoot()){
             return;
         }
 
@@ -62,6 +90,9 @@ export default class gameHoodleTouchEvent extends UIController {
         if(!startLocation){
             return;
         }
+        if(!this.can_shoot()){
+            return;
+        }
 
         // 计算射线
         const location = touch.getLocation();
@@ -73,9 +104,9 @@ export default class gameHoodleTouchEvent extends UIController {
         if(!this._graphic_line){
             return;
         }
+
         this._graphic_line.clear();
-        let self_power = GameHoodleData.getInstance().get_power(RoomData.getInstance().get_self_seatid());
-        if(self_power != PlayerPower.canPlay){
+        if(!this.can_shoot()){
             DialogManager.getInstance().show_weak_hint("还未轮到你操作!")
             return;
         }

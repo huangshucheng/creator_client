@@ -7,6 +7,8 @@ import Response from '../../../../framework/config/Response';
 import RoomData from '../../../common/RoomData';
 import { PlayerPower } from '../../../common/State';
 import HoodleBallManager from './HoodleBallManager';
+import DialogManager from "../../../../framework/manager/DialogManager";
+import Player from '../../../common/Player';
 
 const {ccclass, property} = cc._decorator;
 
@@ -134,6 +136,37 @@ export default class GameHoodleRecvMsg extends UIController {
     on_event_game_result(event: cc.Event.EventCustom){
         // let showUI = this.get_script("GameHoodleShowUI");
         console.log("hcc>>on_event_game_result",event.getUserData());
+        let udata = event.getUserData();
+        let score_text = "";
+        if(udata){
+            let scores = udata.scores;
+            for(let k in scores){
+                let info = scores[k];
+                let seatid = info.seatid;
+                let score = info.score;
+                let player: Player = RoomData.getInstance().get_player(seatid);
+                if(player){
+                    let uname = player.get_uname();
+                    let score_str = score > 0 ? ("+" + score) : score
+                    score_text = score_text + uname + ":" + score_str + "\n";
+                }
+            }
+        }
+        let _this = this;
+        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogGameResult","GameResultDialog",function(resNode:cc.Node){
+            if(resNode){
+                let script = resNode.getComponent("GameResultDialog");
+                if (script){
+                    script.set_title_text("结束")
+                    script.set_reward_text("")
+                    script.set_score_text(score_text);
+                }
+                resNode.active = false;
+                _this.scheduleOnce(function(){
+                    resNode.active = true;
+                },2.5)
+            }
+        })
     }
 
     //大结算

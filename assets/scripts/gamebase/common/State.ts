@@ -18,3 +18,9 @@ export let PlayerPower = {
 	canNotPlay : 0,   	//不能玩
 	canPlay : 1, 		//可以玩
 }
+
+//小球状态
+export let BallState = {
+    stop: 0,
+    moving: 1,
+}

@@ -45,9 +45,9 @@ export default class GameHoodleShowUI extends UIController {
         if(ball){
             let script = ball.getComponent("HoodleBallCtrl")
             if(script){
-                // script.set_name(player.get_uinfo().unick)
-                script.set_name(player.get_uinfo().uname) //TODO 暂时先显示玩家账号
+                // script.set_name(player.get_unick())
                 script.set_ball_id(player.get_uinfo().seatid);
+                script.set_name(player.get_uname()) //TODO 暂时先显示玩家账号
                 script.set_img_face(player.get_uinfo().uface)
                 this._hoodleManager.set_ball(player.get_uinfo().seatid, ball);
                 ball.active = false;
@@ -87,9 +87,9 @@ export default class GameHoodleShowUI extends UIController {
         if(!ball || !cc.isValid(ball)){
             return;
         }
-        let delay_1 = cc.delayTime(2.0);
+        let delay_1 = cc.delayTime(0.5);
         let blink = cc.blink(1.5, 10);
-        let delay_2 = cc.delayTime(0.4);
+        let delay_2 = cc.delayTime(0.3);
         let hide = cc.callFunc(function(){
             ball.active = false;
         })
@@ -102,23 +102,23 @@ export default class GameHoodleShowUI extends UIController {
     test_boarn_ball(){
         let ball: cc.Node = UIFunction.getInstance().add_prefab_to_node(this.view["KW_GAME_TABLE"],"ui_prefabs/games/HoodleBall","HoodleBallCtrl");
         if(ball){
-            let ballPos = cc.v2(0,0)
+            let ballPos = cc.v2(0,-300)
             ball.setPosition(ballPos)
             this._hoodleManager.set_ball(RoomData.getInstance().get_self_seatid(),ball);
             let script = ball.getComponent("HoodleBallCtrl")
-            script.set_is_active_turn(true)
-            script.set_name("ball1")
             script.set_ball_id(1);
+            script.set_name("ball1")
+            
         }
         let ball2 = UIFunction.getInstance().add_prefab_to_node(this.view["KW_GAME_TABLE"],"ui_prefabs/games/HoodleBall","HoodleBallCtrl");
         if(ball2){
-            let ballPos = cc.v2(0,200)
+            let ballPos = cc.v2(0,300)
             ball2.setPosition(ballPos) 
             this._hoodleManager.set_ball(2,ball2);
             let script = ball2.getComponent("HoodleBallCtrl")
-            script.set_is_active_turn(false)
-            script.set_name("ball2")
             script.set_ball_id(2);
+            script.set_name("ball2")
+            
         }
     }
 }

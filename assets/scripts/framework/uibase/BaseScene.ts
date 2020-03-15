@@ -31,7 +31,7 @@ export default class BaseScene implements ISceneBase {
                 completedCountFunc(completedCount, totalCount, item)
                 // cc.log("load scene: " + _this._scene_name + " ,percent: " + completedCount + "/" + totalCount);
             }
-        })
+        }) 
     }
  
     //销毁场景和资源

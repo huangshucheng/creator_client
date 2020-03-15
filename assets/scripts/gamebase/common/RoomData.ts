@@ -4,7 +4,7 @@ import UserInfo from '../../framework/common/UserInfo';
 class  RoomData {
     public static readonly instance: RoomData = new RoomData();
 
-    private _player_set = {};
+    private _player_set = {}; //seatid->player
     private _game_rule = "";
     private _room_id = "";
     private _play_count = 0;

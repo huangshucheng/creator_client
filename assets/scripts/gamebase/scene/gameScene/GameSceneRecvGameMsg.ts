@@ -7,6 +7,7 @@ import DialogManager from '../../../framework/manager/DialogManager';
 import LobbyScene from '../lobbyScene/LobbyScene';
 import RoomData from '../../common/RoomData';
 import { UserState } from '../../common/State';
+import Player from '../../common/Player';
 
 const {ccclass, property} = cc._decorator;
 
@@ -34,6 +35,8 @@ export default class GameSceneRecvGameMsg extends UIController {
         EventManager.on(CmdName[Cmd.eGameStartRes], this, this.on_event_game_start)
         EventManager.on(CmdName[Cmd.eGameEndRes], this, this.on_event_game_end)
         EventManager.on(CmdName[Cmd.eUserOfflineRes], this, this.on_event_user_offline)
+        EventManager.on(CmdName[Cmd.ePlayerScoreRes], this, this.on_event_play_score)
+        EventManager.on(CmdName[Cmd.eTotalGameResultRes], this, this.on_event_game_total_result)
     }
 
     on_event_login_logic(event:cc.Event.EventCustom){
@@ -132,6 +135,25 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }    
 
+    on_event_play_score(event: cc.Event.EventCustom){
+        let udata =  event.getUserData()
+        if(udata){
+            let scores = udata.scores;
+            let total_str = ""
+            for(let key in scores){
+                let score_info = scores[key];
+                let score = score_info.score;
+                let player:Player = RoomData.getInstance().get_player(score_info.seatid);
+                if(player){
+                    let score_str = player.get_uname() + ": " + score + "\n";
+                    total_str = total_str + score_str;
+                }
+            }
+            console.log("hcc>>score_str: " , total_str);
+            this.set_string(this.view["KW_TEXT_PLAY_SCORE"],total_str);
+        }
+    }    
+
     on_event_user_offline(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
         cc.log("on_event_user_offline" , udata)
@@ -177,5 +199,10 @@ export default class GameSceneRecvGameMsg extends UIController {
     on_event_game_end(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
         cc.log("on_event_game_end" , udata)
+    }
+
+    on_event_game_total_result(event: cc.Event.EventCustom){
+        this.set_visible(this.view["KW_BTN_READY"],false);
+        this.set_visible(this.view["KW_BTN_BACK_LOBBY"],true);
     }
 }

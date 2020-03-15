@@ -34,6 +34,10 @@ class HoodleBallManager {
         return this._ball_set[RoomData.getInstance().get_self_seatid()];
     }
 
+    public get_all_ball(){
+        return this._ball_set;
+    }
+
 }
 
 export default HoodleBallManager

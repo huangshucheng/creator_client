@@ -1,17 +1,12 @@
 //小球控制器
 import UIController from "../../../../framework/uibase/UIController";
-import { PlayerPower } from '../../../common/State';
+import { PlayerPower, BallState } from '../../../common/State';
 import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
 import GameHoodleData from './GameHoodleData';
+import RoomData from '../../../common/RoomData';
 
 let SHOOT_POWER = 0.1;
 let ROUND_HEAD_PATH = "lobby/roundheader/round_1";
-
-//小球状态
-let BALL_STATE = {
-    stop: 0,
-    moving: 1,
-}
 
 const {ccclass, property} = cc._decorator;
 
@@ -20,11 +15,10 @@ export default class HoodleBallCtrl extends UIController {
     _rigid_body:cc.RigidBody = null;
     _ball_name: string = "";
     _ball_id: number = -1;
-    _ball_state: number = BALL_STATE.stop;
+    _ball_state: number = BallState.stop;
 
     onLoad () {
         super.onLoad()
-
     }
 
     start () {
@@ -51,6 +45,9 @@ export default class HoodleBallCtrl extends UIController {
 
     // 名称
     public set_name(name_str: string){
+        if(this.get_ball_id() == RoomData.getInstance().get_self_seatid()){
+            name_str = name_str + "(我)";
+        }
         this.set_string(this.view["KW_TEXT_NAME"],name_str);
         this._ball_name = name_str;
     }
@@ -98,7 +95,7 @@ export default class HoodleBallCtrl extends UIController {
     // 只在两个碰撞体结束接触时被调用一次 004
     onEndContact(contact:cc.PhysicsContact, selfCollider:cc.PhysicsCollider, otherCollider:cc.PhysicsCollider) {
         // console.log("onEndContact")
-        //TODO
+        //发送玩家被击中
         let src_seatid = -1;
         let des_seatid = -1;
 
@@ -142,11 +139,11 @@ export default class HoodleBallCtrl extends UIController {
        if(this._rigid_body){
             let linearv: cc.Vec2 = this._rigid_body.linearVelocity; //线性速度
             let lineMag = linearv.magSqr();
-            if(this.get_ball_state() == BALL_STATE.stop && lineMag != 0){ //开始移动
+            if(this.get_ball_state() == BallState.stop && lineMag != 0){ //开始移动
                 // console.log("hcc>>start moving")
             }
 
-            if(this.get_ball_state() == BALL_STATE.moving && lineMag == 0){ //开始停下来
+            if(this.get_ball_state() == BallState.moving && lineMag == 0){ //开始停下来
                 // console.log("hcc>>start stop, position: " ,this.node.position.x , this.node.position.y);
                 if(this.get_ball_id() == -1){
                     return;
@@ -167,9 +164,9 @@ export default class HoodleBallCtrl extends UIController {
             let linearv: cc.Vec2 = this._rigid_body.linearVelocity; //线性速度
             let lineMag = linearv.magSqr();
             if(lineMag == 0){
-                this.set_ball_state(BALL_STATE.stop);
+                this.set_ball_state(BallState.stop);
             }else{
-                this.set_ball_state(BALL_STATE.moving);
+                this.set_ball_state(BallState.moving);
             }
         }
 

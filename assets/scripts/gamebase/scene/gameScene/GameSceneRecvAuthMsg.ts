@@ -30,6 +30,7 @@ export default class GameSceneRecvAuthMsg extends UIController {
         EventManager.on(CmdName[Cmd.eGuestLoginRes], this, this.on_event_guest_login)
         EventManager.on(CmdName[Cmd.eReloginRes], this, this.on_event_relogin)
     }
+    
     //重连成功-》登录游戏-》登录逻辑服务-》获取玩家信息
     on_net_connected(event:cc.Event.EventCustom){
         let loginType = Storage.get(LSDefine.USER_LOGIN_TYPE)

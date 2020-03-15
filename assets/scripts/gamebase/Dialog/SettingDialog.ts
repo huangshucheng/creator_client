@@ -42,7 +42,7 @@ export default class SettingDialog extends UIDialog {
     on_click_back(sender: cc.Component){
         LobbySendGameHoodleMsg.send_exit_room();
         this.close()
-        SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
+        SceneManager.getInstance().enter_scene_asyc(new LobbyScene());
     }
 
     on_click_dessolve(sender:cc.Component){

@@ -45,13 +45,14 @@ export enum Cmd {
 	ePlayerFirstBallPosRes = 26, 	// 小球开局位置
 	ePlayerPowerRes = 27,  			// 玩家权限，0 不能射击，1 能射击
 	ePlayerShootReq = 28,  			// 玩家射击
-	ePlayerShootRes = 29,  			// 玩家射击
+	ePlayerShootRes = 29,  			
 	ePlayerBallPosReq = 30, 		// 玩家位置
-	ePlayerBallPosRes = 31,  		// 玩家位置
+	ePlayerBallPosRes = 31,  		
 	ePlayerIsShootedReq = 32,  		// 玩家被击中
-	ePlayerIsShootedRes = 33,  		// 玩家被击中
+	ePlayerIsShootedRes = 33,  		
 	eGameResultRes = 34,			// 小结算
 	eTotalGameResultRes = 35, 		// 大结算
+	ePlayerScoreRes = 36,			// 玩家得分
 }
 
 export let CmdName = {
@@ -99,12 +100,13 @@ export let CmdName = {
 	[26] :"PlayerFirstBallPosRes", 		// 小球开局位置
 	[27] :"PlayerPowerRes",  			// 玩家权限，0 不能射击，1 能射击
 	[28] :"PlayerShootReq",  			// 玩家射击
-	[29] :"PlayerShootRes",  			// 玩家射击
+	[29] :"PlayerShootRes",  			
 	[30] :"PlayerBallPosReq", 			// 玩家位置
 	[31] :"PlayerBallPosRes",  			
 	[32] :"PlayerIsShootedReq",  		// 玩家被击中
 	[33] :"PlayerIsShootedRes",  		
 	[34] :"GameResultRes",				// 小结算
 	[35] :"TotalGameResultRes", 		// 大结算
+	[36] :"PlayerScoreRes", 			// 玩家得分
 }
 

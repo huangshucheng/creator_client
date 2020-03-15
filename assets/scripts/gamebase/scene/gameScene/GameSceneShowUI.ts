@@ -16,11 +16,11 @@ export default class GameSceneShowUI extends UIController {
     _gamehoodle = null;
 
     onLoad () {
-        super.onLoad()
+        super.onLoad();
+        this.initUI();
     }
 
     start () {
-        this.initUI()
     }
 
     initUI(){
@@ -101,11 +101,20 @@ export default class GameSceneShowUI extends UIController {
     show_gamehoodle(is_show:boolean){
        if(this._gamehoodle){
             this._gamehoodle.active = is_show;
+            GameSendGameHoodleMsg.send_check_link_game();
        }else{
-            this._gamehoodle = UIFunction.getInstance().add_prefab_to_node(this.view["KW_GAME_NODE"],"ui_prefabs/games/GameHoodle","GameHoodleCtrl");
-            if(this._gamehoodle){
-                this._gamehoodle.active = is_show;
-            }
+            // this._gamehoodle = UIFunction.getInstance().add_prefab_to_node(this.view["KW_GAME_NODE"],"ui_prefabs/games/GameHoodle","GameHoodleCtrl");
+            // if(this._gamehoodle){
+            //     this._gamehoodle.active = is_show;
+            // }
+            let _this = this;
+            UIFunction.getInstance().add_prefab_to_node_async(this.view["KW_GAME_NODE"],"ui_prefabs/games/GameHoodle","GameHoodleCtrl",function(resnode:cc.Node){
+                if(resnode){
+                    resnode.active = is_show;
+                    _this._gamehoodle = resnode;
+                    GameSendGameHoodleMsg.send_check_link_game();
+                }
+            });
         }
     }
 

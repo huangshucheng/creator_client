@@ -8,11 +8,11 @@ export default class GameSceneCtrl extends UIController {
     onLoad () {
         super.onLoad()
         // this.add_script("EnablePhysics")
+        this.add_script("GameSceneShowUI")
         this.add_script("GameSceneTouchEvent")
         this.add_script("GameSceneRecvGameMsg")
         this.add_script("GameSceneRecvAuthMsg")
         this.add_script("GameSceneInit")
-        this.add_script("GameSceneShowUI")
     }
 
     start () {
