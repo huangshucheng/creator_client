@@ -5,7 +5,7 @@ import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
 import GameHoodleData from './GameHoodleData';
 import RoomData from '../../../common/RoomData';
 
-let SHOOT_POWER = 0.1;
+let SHOOT_POWER = 0.2;
 let ROUND_HEAD_PATH = "lobby/roundheader/round_1";
 
 const {ccclass, property} = cc._decorator;
