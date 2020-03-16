@@ -49,23 +49,28 @@ export default class GameSceneShowUI extends UIController {
         if(!cc.isValid(info_node)){
             return;
         }
-
-        this.set_visible(info_node, true)
+        this.set_visible(info_node, true);
 //        this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.unick)
         this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.uname) //TODO 暂时先显示玩家账号
         let ufaceImg = HEAD_PATH + infoObj.uface;
-        // this.set_sprite_asyc(info_node.getChildByName("KW_IMG_HEAD"),ufaceImg)
+        this.set_sprite_asyc(info_node.getChildByName("KW_IMG_HEAD"),ufaceImg) // 头像
         console.log("hcc>>GameSceneShowUI>>show_one_user_info")
         this.set_visible(info_node.getChildByName("KW_IMG_OFFINLE"), infoObj.isoffline)
         this.set_visible(info_node.getChildByName("KW_IMG_MASTER"), infoObj.ishost == true) // 房主
         this.set_visible(info_node.getChildByName("KW_IMG_READY"), infoObj.userstate == UserState.Ready);
+        
         if(infoObj.seatid == RoomData.getInstance().get_self_seatid()){
             let userstate = infoObj.userstate
             if(userstate == UserState.Ready || userstate == UserState.Playing){
+                //准备货开始之后，不可见
                 this.set_visible(this.view["KW_BTN_READY"], false);
             }else{
                 this.set_visible(this.view["KW_BTN_READY"], true);
             }
+        }
+
+        if(infoObj.userstate == UserState.Playing){
+            this.set_visible(info_node, false);
         }
     }
 
@@ -101,20 +106,23 @@ export default class GameSceneShowUI extends UIController {
     show_gamehoodle(is_show:boolean){
        if(this._gamehoodle){
             this._gamehoodle.active = is_show;
-            GameSendGameHoodleMsg.send_check_link_game();
        }else{
-            // this._gamehoodle = UIFunction.getInstance().add_prefab_to_node(this.view["KW_GAME_NODE"],"ui_prefabs/games/GameHoodle","GameHoodleCtrl");
-            // if(this._gamehoodle){
-            //     this._gamehoodle.active = is_show;
-            // }
+            this._gamehoodle = UIFunction.getInstance().add_prefab_to_node(this.view["KW_GAME_NODE"],"ui_prefabs/games/GameHoodle","GameHoodleCtrl");
+            if(this._gamehoodle){
+                this._gamehoodle.active = is_show;
+            }
+            /*
             let _this = this;
             UIFunction.getInstance().add_prefab_to_node_async(this.view["KW_GAME_NODE"],"ui_prefabs/games/GameHoodle","GameHoodleCtrl",function(resnode:cc.Node){
                 if(resnode){
                     resnode.active = is_show;
                     _this._gamehoodle = resnode;
-                    GameSendGameHoodleMsg.send_check_link_game();
+                    _this.scheduleOnce(function(){
+                        GameSendGameHoodleMsg.send_check_link_game();
+                    },0.1);
                 }
             });
+            */
         }
     }
 

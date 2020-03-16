@@ -7,6 +7,7 @@ import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
 import { PlayerPower , BallState} from '../../../common/State';
 import DialogManager from "../../../../framework/manager/DialogManager";
 import HoodleBallManager from './HoodleBallManager';
+import AppConfig from '../../../../framework/config/AppConfig';
 
 const AIM_LINE_MAX_LENGTH = 1440;
 // const AIM_LINE_MAX_LENGTH = 2000;
@@ -37,6 +38,11 @@ export default class gameHoodleTouchEvent extends UIController {
 
     //小球是否能射击
     can_shoot():boolean{
+        //test
+        if(AppConfig.IS_TEST_BALL){
+            return true;
+        }
+        
         let self_power = GameHoodleData.getInstance().get_power(RoomData.getInstance().get_self_seatid());
         if(self_power != PlayerPower.canPlay){
             return false;
@@ -111,13 +117,17 @@ export default class gameHoodleTouchEvent extends UIController {
             return;
         }
 
-        const location = touch.getLocation();
+        let location = touch.getLocation();
+        let locationWord = this.node.convertToWorldSpace(location);
+        console.log("hcc>>onTouchEnd: " , location , locationWord);
         let ball = this.get_self_ball();
         if(ball){
             let script = ball.getComponent("HoodleBallCtrl")
             if(script){
                 script.shoot_at(location);
+                //计算成百分比
                 GameSendGameHoodleMsg.send_player_shoot(RoomData.getInstance().get_self_seatid(),location.x, location.y);
+                // GameSendGameHoodleMsg.send_player_shoot(RoomData.getInstance().get_self_seatid(),percX, percY);
             }
         }
     }

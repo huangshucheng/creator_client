@@ -29,8 +29,7 @@ export default class GameApp extends cc.Component {
         let scene = new HotFixScene();
         SceneManager.getInstance().enter_scene_asyc(scene);
         PlatForm.printPlatForm()
-        // this.test_func()
-        // this.test_func()
+        this.test_func()
     }
 
     on_net_connected(event:cc.Event.EventCustom){
@@ -74,11 +73,17 @@ export default class GameApp extends cc.Component {
         // -540-> 540
         // -960-> 960
         //0 - 1
-       let posx = StringUtil.random_int(-540 , 540);
-       let posy = StringUtil.random_int(-960 , 960);
-       console.log("hcc>>startpos: " , posx, posy)
+    //    let posx = StringUtil.random_int(-540 , 540);
+    //    let posy = StringUtil.random_int(-960 , 960);
+    //    console.log("hcc>>startpos: " , posx, posy)
 
-       console.log("hcc>>>>>>>>" , 5 % 4)
+    //    if(undefined){
+    //         console.log("hcc>> undefined is true");
+    //    }else{
+    //     console.log("hcc>> undefined is false");
+    //    }
+
+        console.log("hcc>>winsize: " , cc.winSize);
     }
 
 }

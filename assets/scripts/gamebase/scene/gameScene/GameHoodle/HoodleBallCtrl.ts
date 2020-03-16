@@ -5,7 +5,7 @@ import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
 import GameHoodleData from './GameHoodleData';
 import RoomData from '../../../common/RoomData';
 
-let SHOOT_POWER = 0.2;
+let SHOOT_POWER = 2.5;
 let ROUND_HEAD_PATH = "lobby/roundheader/round_1";
 
 const {ccclass, property} = cc._decorator;
@@ -30,6 +30,7 @@ export default class HoodleBallCtrl extends UIController {
         // 冲量: 给这个球一个方向的冲量，矢量，大小，有方向;
         // 方向问题:  src---> dst;
         let dst = this.node.parent.convertToNodeSpaceAR(inDst);
+        // let dst = inDst;
         var src = cc.v2(this.node.x,this.node.y);
         var dir = dst.sub(src)
         // 大小问题;
@@ -37,6 +38,7 @@ export default class HoodleBallCtrl extends UIController {
         var power_x = distance * SHOOT_POWER * dir.x;
         var power_y = distance * SHOOT_POWER * dir.y;
 
+        console.log("hcc>>shoot_at: " ,inDst , dst, src, dir , distance ,power_x, power_y);
         // applyLinearImpulse(冲量大小向量, 原点转成世界坐标, true)
         if(this._rigid_body){
             this._rigid_body.applyLinearImpulse(cc.v2(power_x, power_y), this.node.convertToWorldSpaceAR(cc.v2(0, 0)), true);
@@ -102,7 +104,12 @@ export default class HoodleBallCtrl extends UIController {
         let selfScript = selfCollider.getComponent("HoodleBallCtrl");
         let otherScript = otherCollider.getComponent("HoodleBallCtrl");
 
-        if(selfScript && otherCollider){
+        if(selfScript && otherScript){
+            if(!selfScript.get_ball_id || !otherScript.get_ball_id){
+                console.error("hcc>>selfScript.get_ball_id is null");
+                return;
+            }
+
             let self_ballid = selfScript.get_ball_id();
             let other_ballid = otherScript.get_ball_id();
             console.log("hcc>>selfballid: " ,self_ballid , " ,otherballid: ", other_ballid);

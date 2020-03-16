@@ -92,6 +92,7 @@ export default class GameHoodleRecvMsg extends UIController {
                 let dirx = Number(udata.posx);
                 let diry = Number(udata.posy);
                 let showUI = this.get_script("GameHoodleShowUI");
+                //TODO 百分比计算成界面上坐标
                 showUI.show_player_shoot(seatid, dirx, diry);
             }
         }

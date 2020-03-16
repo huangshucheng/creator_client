@@ -6,6 +6,7 @@ import UIFunction from "../../../../framework/common/UIFunciton";
 import RoomData from '../../../common/RoomData';
 import Player from '../../../common/Player';
 import HoodleBallManager from "./HoodleBallManager";
+import AppConfig from '../../../../framework/config/AppConfig';
 
 const {ccclass, property} = cc._decorator;
 
@@ -16,6 +17,18 @@ export default class GameHoodleShowUI extends UIController {
 
     onLoad () {
         super.onLoad();
+        //test ball
+        if(AppConfig.IS_TEST_BALL){
+            this.test_boarn_ball()
+        }
+        let testpos = cc.v2(200,200);
+        let despos = this.node.convertToNodeSpaceAR(testpos);
+        let despos1 = this.view["KW_GAME_TABLE"].convertToNodeSpaceAR(testpos);
+
+        let wpos1 = this.node.convertToWorldSpaceAR(testpos);
+        let wpos2 = this.view["KW_GAME_TABLE"].convertToWorldSpaceAR(testpos);
+
+        console.log("hcc>>testpos: " ,wpos1 , wpos2);
     }
 
     start () {
@@ -63,8 +76,8 @@ export default class GameHoodleShowUI extends UIController {
         if(!ball || !cc.isValid(ball)){
             return false;
         }
-        ball.active = true;
         ball.setPosition(posx, posy);
+        ball.active = true;
         return true;
     }
 
@@ -102,9 +115,9 @@ export default class GameHoodleShowUI extends UIController {
     test_boarn_ball(){
         let ball: cc.Node = UIFunction.getInstance().add_prefab_to_node(this.view["KW_GAME_TABLE"],"ui_prefabs/games/HoodleBall","HoodleBallCtrl");
         if(ball){
-            let ballPos = cc.v2(0,-300)
+            let ballPos = cc.v2(-500,-900)
             ball.setPosition(ballPos)
-            this._hoodleManager.set_ball(RoomData.getInstance().get_self_seatid(),ball);
+            this._hoodleManager.set_ball(1,ball);
             let script = ball.getComponent("HoodleBallCtrl")
             script.set_ball_id(1);
             script.set_name("ball1")
