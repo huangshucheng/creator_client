@@ -118,16 +118,18 @@ export default class gameHoodleTouchEvent extends UIController {
         }
 
         let location = touch.getLocation();
-        let locationWord = this.node.convertToWorldSpace(location);
-        console.log("hcc>>onTouchEnd: " , location , locationWord);
+        let gameTableNode = this.view["KW_GAME_TABLE"];
+        if(!gameTableNode){
+            return;
+        }
+        let nodepos = gameTableNode.convertToNodeSpaceAR(location)
         let ball = this.get_self_ball();
         if(ball){
             let script = ball.getComponent("HoodleBallCtrl")
             if(script){
                 script.shoot_at(location);
                 //计算成百分比
-                GameSendGameHoodleMsg.send_player_shoot(RoomData.getInstance().get_self_seatid(),location.x, location.y);
-                // GameSendGameHoodleMsg.send_player_shoot(RoomData.getInstance().get_self_seatid(),percX, percY);
+                GameSendGameHoodleMsg.send_player_shoot(RoomData.getInstance().get_self_seatid(),nodepos.x, nodepos.y);
             }
         }
     }

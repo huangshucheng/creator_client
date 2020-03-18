@@ -7,7 +7,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class EnablePhysics extends UIController {
 
-    _is_debug = true; // 是否显示调试信息;
+    _is_debug = false; // 是否显示调试信息;
     _gravity = cc.v2(0, 0); // 重力加速度是一个向量, 有方向的,2D, Vec重力加速度的大小;
 
     onLoad () {

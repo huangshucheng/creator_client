@@ -5,7 +5,7 @@ import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
 import GameHoodleData from './GameHoodleData';
 import RoomData from '../../../common/RoomData';
 
-let SHOOT_POWER = 2.5;
+let SHOOT_POWER = 2.0;
 let ROUND_HEAD_PATH = "lobby/roundheader/round_1";
 
 const {ccclass, property} = cc._decorator;
@@ -37,6 +37,8 @@ export default class HoodleBallCtrl extends UIController {
         var distance = dir.mag()//起点到终点的长度
         var power_x = distance * SHOOT_POWER * dir.x;
         var power_y = distance * SHOOT_POWER * dir.y;
+        // var power_x =  SHOOT_POWER * dir.x;
+        // var power_y =  SHOOT_POWER * dir.y;
 
         console.log("hcc>>shoot_at: " ,inDst , dst, src, dir , distance ,power_x, power_y);
         // applyLinearImpulse(冲量大小向量, 原点转成世界坐标, true)
@@ -64,9 +66,8 @@ export default class HoodleBallCtrl extends UIController {
 
     // 头像
     public set_img_face(uface: number){
-        let ufaceImg = ROUND_HEAD_PATH + String(uface);
-        this.set_sprite_asyc(this.view["KW_IMG_HEAD"],ufaceImg)
-        console.log("hcc>>HoodleBallCtrl>>set_img_face")
+        // let ufaceImg = ROUND_HEAD_PATH + String(uface);
+        // this.set_sprite_asyc(this.view["KW_IMG_HEAD"],ufaceImg)
     }
 
     // 有权限变名字成红色
