@@ -24,7 +24,8 @@ export default class LobbySceneTouchEvent extends UIController {
         this.add_click_event(this.view["BTN_JOIN_ROOM"],this.on_click_join_room.bind(this))
         this.add_click_event(this.view["BTN_BACK_ROOM"],this.on_click_back_room.bind(this))
         this.add_click_event(this.view["IMG_HEAD"],this.on_click_head.bind(this))
-        
+        this.add_click_event(this.view["BTN_MATCH_ROOM"],this.on_click_match_room.bind(this))
+        this.add_click_event(this.view["BTN_MATCH_STOP"],this.on_click_match_stop.bind(this))
     }
 
     on_click_set(sender:cc.Component) {
@@ -80,6 +81,15 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_back_room(sender: cc.Component){
         LobbySendGameHoodleMsg.send_back_room();
+    }
+
+    on_click_match_room(sender: cc.Component){
+        console.log("hcc>>on_click_match_room")
+        LobbySendGameHoodleMsg.send_user_match();
+    }
+    
+    on_click_match_stop(sender: cc.Component){
+        LobbySendGameHoodleMsg.send_user_stop_match();
     }
 
 }

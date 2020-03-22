@@ -38,8 +38,20 @@ export default class LobbySendGameHoodleMsg {
         LobbySendGameHoodleMsg.send(Cmd.eGetRoomStatusReq);
     }
 
+    //返回房间
     static send_back_room(){
         LobbySendGameHoodleMsg.send(Cmd.eBackRoomReq);
     }
+
+    //玩家匹配
+    static send_user_match(){
+        LobbySendGameHoodleMsg.send(Cmd.eUserMatchReq,{zoomid : 0});
+    }
+
+    //玩家取消匹配
+    static send_user_stop_match(){
+        LobbySendGameHoodleMsg.send(Cmd.eUserStopMatchReq);
+    }
+
 
 }

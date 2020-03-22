@@ -30,6 +30,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         EventManager.on(CmdName[Cmd.eDessolveRes], this, this.on_event_dessolve_room)
         EventManager.on(CmdName[Cmd.eGetRoomStatusReq], this, this.on_event_get_room_status)
         EventManager.on(CmdName[Cmd.eBackRoomRes], this, this.on_event_back_room)
+        EventManager.on(CmdName[Cmd.eUserMatchRes], this, this.on_event_match)
+        EventManager.on(CmdName[Cmd.eUserStopMatchRes], this, this.on_event_match_stop)
     }
 
     on_event_login_logic(event:cc.Event.EventCustom){
@@ -122,6 +124,40 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
                 DialogManager.getInstance().show_weak_hint("返回房间成功!")
             }else{
                 DialogManager.getInstance().show_weak_hint("返回房间失败!")
+            }
+        }
+    }
+
+    on_event_match(event: cc.Event.EventCustom){
+        let udata =  event.getUserData()
+        cc.log("on_event_match",udata)
+        if(udata){
+            let status = udata.status
+            if(status == Response.OK){
+                let matchsuccess = udata.matchsuccess;
+                if(matchsuccess == true){
+                    SceneManager.getInstance().enter_scene_asyc(new GameScene())
+                    DialogManager.getInstance().show_weak_hint("匹配完成!")
+                }else{
+                    DialogManager.getInstance().show_weak_hint("正在匹配中。。。。。")
+                }
+            }else if(status == Response.NOT_YOUR_TURN){
+                DialogManager.getInstance().show_weak_hint("请稍等候，正在匹配中。。。。")
+            }else{
+                DialogManager.getInstance().show_weak_hint("匹配失败!")
+            }
+        }
+    }
+
+    on_event_match_stop(event: cc.Event.EventCustom){
+        let udata =  event.getUserData()
+        cc.log("on_event_match_stop",udata)
+        if(udata){
+            let status = udata.status
+            if(status == Response.OK){
+                DialogManager.getInstance().show_weak_hint("取消匹配成功!")
+            }else{
+                DialogManager.getInstance().show_weak_hint("取消匹配失败!")
             }
         }
     }

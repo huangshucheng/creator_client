@@ -6122,6 +6122,10 @@ $root.GameHoodleProto = (function() {
      * @property {number} eGameResultRes=34 eGameResultRes value
      * @property {number} eTotalGameResultRes=35 eTotalGameResultRes value
      * @property {number} ePlayerScoreRes=36 ePlayerScoreRes value
+     * @property {number} eUserMatchReq=37 eUserMatchReq value
+     * @property {number} eUserMatchRes=38 eUserMatchRes value
+     * @property {number} eUserStopMatchReq=39 eUserStopMatchReq value
+     * @property {number} eUserStopMatchRes=40 eUserStopMatchRes value
      */
     GameHoodleProto.Cmd = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -6162,6 +6166,10 @@ $root.GameHoodleProto = (function() {
         values[valuesById[34] = "eGameResultRes"] = 34;
         values[valuesById[35] = "eTotalGameResultRes"] = 35;
         values[valuesById[36] = "ePlayerScoreRes"] = 36;
+        values[valuesById[37] = "eUserMatchReq"] = 37;
+        values[valuesById[38] = "eUserMatchRes"] = 38;
+        values[valuesById[39] = "eUserStopMatchReq"] = 39;
+        values[valuesById[40] = "eUserStopMatchRes"] = 40;
         return values;
     })();
 
@@ -14054,6 +14062,794 @@ $root.GameHoodleProto = (function() {
         };
 
         return PlayerScoreRes;
+    })();
+
+    GameHoodleProto.UserMatchReq = (function() {
+
+        /**
+         * Properties of a UserMatchReq.
+         * @memberof GameHoodleProto
+         * @interface IUserMatchReq
+         * @property {number} zoomid UserMatchReq zoomid
+         */
+
+        /**
+         * Constructs a new UserMatchReq.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserMatchReq.
+         * @implements IUserMatchReq
+         * @constructor
+         * @param {GameHoodleProto.IUserMatchReq=} [properties] Properties to set
+         */
+        function UserMatchReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserMatchReq zoomid.
+         * @member {number} zoomid
+         * @memberof GameHoodleProto.UserMatchReq
+         * @instance
+         */
+        UserMatchReq.prototype.zoomid = 0;
+
+        /**
+         * Creates a new UserMatchReq instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserMatchReq
+         * @static
+         * @param {GameHoodleProto.IUserMatchReq=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserMatchReq} UserMatchReq instance
+         */
+        UserMatchReq.create = function create(properties) {
+            return new UserMatchReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserMatchReq message. Does not implicitly {@link GameHoodleProto.UserMatchReq.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserMatchReq
+         * @static
+         * @param {GameHoodleProto.IUserMatchReq} message UserMatchReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserMatchReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.zoomid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserMatchReq message, length delimited. Does not implicitly {@link GameHoodleProto.UserMatchReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserMatchReq
+         * @static
+         * @param {GameHoodleProto.IUserMatchReq} message UserMatchReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserMatchReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserMatchReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserMatchReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserMatchReq} UserMatchReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserMatchReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserMatchReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.zoomid = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("zoomid"))
+                throw $util.ProtocolError("missing required 'zoomid'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserMatchReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserMatchReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserMatchReq} UserMatchReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserMatchReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserMatchReq message.
+         * @function verify
+         * @memberof GameHoodleProto.UserMatchReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserMatchReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.zoomid))
+                return "zoomid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserMatchReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserMatchReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserMatchReq} UserMatchReq
+         */
+        UserMatchReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserMatchReq)
+                return object;
+            var message = new $root.GameHoodleProto.UserMatchReq();
+            if (object.zoomid != null)
+                message.zoomid = object.zoomid | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserMatchReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserMatchReq
+         * @static
+         * @param {GameHoodleProto.UserMatchReq} message UserMatchReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserMatchReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.zoomid = 0;
+            if (message.zoomid != null && message.hasOwnProperty("zoomid"))
+                object.zoomid = message.zoomid;
+            return object;
+        };
+
+        /**
+         * Converts this UserMatchReq to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserMatchReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserMatchReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserMatchReq;
+    })();
+
+    GameHoodleProto.UserMatchRes = (function() {
+
+        /**
+         * Properties of a UserMatchRes.
+         * @memberof GameHoodleProto
+         * @interface IUserMatchRes
+         * @property {number} status UserMatchRes status
+         * @property {boolean|null} [matchsuccess] UserMatchRes matchsuccess
+         * @property {Array.<GameHoodleProto.IUserInfo>|null} [userinfo] UserMatchRes userinfo
+         */
+
+        /**
+         * Constructs a new UserMatchRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserMatchRes.
+         * @implements IUserMatchRes
+         * @constructor
+         * @param {GameHoodleProto.IUserMatchRes=} [properties] Properties to set
+         */
+        function UserMatchRes(properties) {
+            this.userinfo = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserMatchRes status.
+         * @member {number} status
+         * @memberof GameHoodleProto.UserMatchRes
+         * @instance
+         */
+        UserMatchRes.prototype.status = 0;
+
+        /**
+         * UserMatchRes matchsuccess.
+         * @member {boolean} matchsuccess
+         * @memberof GameHoodleProto.UserMatchRes
+         * @instance
+         */
+        UserMatchRes.prototype.matchsuccess = false;
+
+        /**
+         * UserMatchRes userinfo.
+         * @member {Array.<GameHoodleProto.IUserInfo>} userinfo
+         * @memberof GameHoodleProto.UserMatchRes
+         * @instance
+         */
+        UserMatchRes.prototype.userinfo = $util.emptyArray;
+
+        /**
+         * Creates a new UserMatchRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserMatchRes
+         * @static
+         * @param {GameHoodleProto.IUserMatchRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserMatchRes} UserMatchRes instance
+         */
+        UserMatchRes.create = function create(properties) {
+            return new UserMatchRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserMatchRes message. Does not implicitly {@link GameHoodleProto.UserMatchRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserMatchRes
+         * @static
+         * @param {GameHoodleProto.IUserMatchRes} message UserMatchRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserMatchRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.matchsuccess != null && message.hasOwnProperty("matchsuccess"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.matchsuccess);
+            if (message.userinfo != null && message.userinfo.length)
+                for (var i = 0; i < message.userinfo.length; ++i)
+                    $root.GameHoodleProto.UserInfo.encode(message.userinfo[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserMatchRes message, length delimited. Does not implicitly {@link GameHoodleProto.UserMatchRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserMatchRes
+         * @static
+         * @param {GameHoodleProto.IUserMatchRes} message UserMatchRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserMatchRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserMatchRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserMatchRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserMatchRes} UserMatchRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserMatchRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserMatchRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.matchsuccess = reader.bool();
+                    break;
+                case 3:
+                    if (!(message.userinfo && message.userinfo.length))
+                        message.userinfo = [];
+                    message.userinfo.push($root.GameHoodleProto.UserInfo.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserMatchRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserMatchRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserMatchRes} UserMatchRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserMatchRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserMatchRes message.
+         * @function verify
+         * @memberof GameHoodleProto.UserMatchRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserMatchRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.matchsuccess != null && message.hasOwnProperty("matchsuccess"))
+                if (typeof message.matchsuccess !== "boolean")
+                    return "matchsuccess: boolean expected";
+            if (message.userinfo != null && message.hasOwnProperty("userinfo")) {
+                if (!Array.isArray(message.userinfo))
+                    return "userinfo: array expected";
+                for (var i = 0; i < message.userinfo.length; ++i) {
+                    var error = $root.GameHoodleProto.UserInfo.verify(message.userinfo[i]);
+                    if (error)
+                        return "userinfo." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a UserMatchRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserMatchRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserMatchRes} UserMatchRes
+         */
+        UserMatchRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserMatchRes)
+                return object;
+            var message = new $root.GameHoodleProto.UserMatchRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.matchsuccess != null)
+                message.matchsuccess = Boolean(object.matchsuccess);
+            if (object.userinfo) {
+                if (!Array.isArray(object.userinfo))
+                    throw TypeError(".GameHoodleProto.UserMatchRes.userinfo: array expected");
+                message.userinfo = [];
+                for (var i = 0; i < object.userinfo.length; ++i) {
+                    if (typeof object.userinfo[i] !== "object")
+                        throw TypeError(".GameHoodleProto.UserMatchRes.userinfo: object expected");
+                    message.userinfo[i] = $root.GameHoodleProto.UserInfo.fromObject(object.userinfo[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserMatchRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserMatchRes
+         * @static
+         * @param {GameHoodleProto.UserMatchRes} message UserMatchRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserMatchRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.userinfo = [];
+            if (options.defaults) {
+                object.status = 0;
+                object.matchsuccess = false;
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.matchsuccess != null && message.hasOwnProperty("matchsuccess"))
+                object.matchsuccess = message.matchsuccess;
+            if (message.userinfo && message.userinfo.length) {
+                object.userinfo = [];
+                for (var j = 0; j < message.userinfo.length; ++j)
+                    object.userinfo[j] = $root.GameHoodleProto.UserInfo.toObject(message.userinfo[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this UserMatchRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserMatchRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserMatchRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserMatchRes;
+    })();
+
+    GameHoodleProto.UserStopMatchReq = (function() {
+
+        /**
+         * Properties of a UserStopMatchReq.
+         * @memberof GameHoodleProto
+         * @interface IUserStopMatchReq
+         */
+
+        /**
+         * Constructs a new UserStopMatchReq.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserStopMatchReq.
+         * @implements IUserStopMatchReq
+         * @constructor
+         * @param {GameHoodleProto.IUserStopMatchReq=} [properties] Properties to set
+         */
+        function UserStopMatchReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new UserStopMatchReq instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserStopMatchReq
+         * @static
+         * @param {GameHoodleProto.IUserStopMatchReq=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserStopMatchReq} UserStopMatchReq instance
+         */
+        UserStopMatchReq.create = function create(properties) {
+            return new UserStopMatchReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserStopMatchReq message. Does not implicitly {@link GameHoodleProto.UserStopMatchReq.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserStopMatchReq
+         * @static
+         * @param {GameHoodleProto.IUserStopMatchReq} message UserStopMatchReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserStopMatchReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserStopMatchReq message, length delimited. Does not implicitly {@link GameHoodleProto.UserStopMatchReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserStopMatchReq
+         * @static
+         * @param {GameHoodleProto.IUserStopMatchReq} message UserStopMatchReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserStopMatchReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserStopMatchReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserStopMatchReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserStopMatchReq} UserStopMatchReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserStopMatchReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserStopMatchReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserStopMatchReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserStopMatchReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserStopMatchReq} UserStopMatchReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserStopMatchReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserStopMatchReq message.
+         * @function verify
+         * @memberof GameHoodleProto.UserStopMatchReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserStopMatchReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserStopMatchReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserStopMatchReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserStopMatchReq} UserStopMatchReq
+         */
+        UserStopMatchReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserStopMatchReq)
+                return object;
+            return new $root.GameHoodleProto.UserStopMatchReq();
+        };
+
+        /**
+         * Creates a plain object from a UserStopMatchReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserStopMatchReq
+         * @static
+         * @param {GameHoodleProto.UserStopMatchReq} message UserStopMatchReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserStopMatchReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this UserStopMatchReq to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserStopMatchReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserStopMatchReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserStopMatchReq;
+    })();
+
+    GameHoodleProto.UserStopMatchRes = (function() {
+
+        /**
+         * Properties of a UserStopMatchRes.
+         * @memberof GameHoodleProto
+         * @interface IUserStopMatchRes
+         * @property {number} status UserStopMatchRes status
+         */
+
+        /**
+         * Constructs a new UserStopMatchRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserStopMatchRes.
+         * @implements IUserStopMatchRes
+         * @constructor
+         * @param {GameHoodleProto.IUserStopMatchRes=} [properties] Properties to set
+         */
+        function UserStopMatchRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserStopMatchRes status.
+         * @member {number} status
+         * @memberof GameHoodleProto.UserStopMatchRes
+         * @instance
+         */
+        UserStopMatchRes.prototype.status = 0;
+
+        /**
+         * Creates a new UserStopMatchRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserStopMatchRes
+         * @static
+         * @param {GameHoodleProto.IUserStopMatchRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserStopMatchRes} UserStopMatchRes instance
+         */
+        UserStopMatchRes.create = function create(properties) {
+            return new UserStopMatchRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserStopMatchRes message. Does not implicitly {@link GameHoodleProto.UserStopMatchRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserStopMatchRes
+         * @static
+         * @param {GameHoodleProto.IUserStopMatchRes} message UserStopMatchRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserStopMatchRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserStopMatchRes message, length delimited. Does not implicitly {@link GameHoodleProto.UserStopMatchRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserStopMatchRes
+         * @static
+         * @param {GameHoodleProto.IUserStopMatchRes} message UserStopMatchRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserStopMatchRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserStopMatchRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserStopMatchRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserStopMatchRes} UserStopMatchRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserStopMatchRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserStopMatchRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserStopMatchRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserStopMatchRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserStopMatchRes} UserStopMatchRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserStopMatchRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserStopMatchRes message.
+         * @function verify
+         * @memberof GameHoodleProto.UserStopMatchRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserStopMatchRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserStopMatchRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserStopMatchRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserStopMatchRes} UserStopMatchRes
+         */
+        UserStopMatchRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserStopMatchRes)
+                return object;
+            var message = new $root.GameHoodleProto.UserStopMatchRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserStopMatchRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserStopMatchRes
+         * @static
+         * @param {GameHoodleProto.UserStopMatchRes} message UserStopMatchRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserStopMatchRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this UserStopMatchRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserStopMatchRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserStopMatchRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserStopMatchRes;
     })();
 
     return GameHoodleProto;
