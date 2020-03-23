@@ -206,7 +206,7 @@ export default class gameHoodleTouchEvent extends UIController {
 
     get_self_ball_pos(){
         let ball = this.get_self_ball();
-        if(ball){
+        if(ball && cc.isValid(ball)){
             return ball.convertToWorldSpaceAR(cc.v2(0,0));
         }
         return null;
