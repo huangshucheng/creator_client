@@ -136,10 +136,26 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             if(status == Response.OK){
                 let matchsuccess = udata.matchsuccess;
                 if(matchsuccess == true){
-                    SceneManager.getInstance().enter_scene_asyc(new GameScene())
+                    // DialogManager.getInstance().clear_dialog();
                     DialogManager.getInstance().show_weak_hint("匹配完成!")
+                    this.scheduleOnce(function(dt:number){
+                        DialogManager.getInstance().close_dialog("MatchDialog");
+                        SceneManager.getInstance().enter_scene_asyc(new GameScene())
+                    },1.0)
                 }else{
                     DialogManager.getInstance().show_weak_hint("正在匹配中。。。。。")
+                }
+                let userinfo = udata.userinfo;
+                if(!matchsuccess && userinfo){
+                    DialogManager.getInstance().close_dialog("MatchDialog");
+                    DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogMatch","MatchDialog",function(resNode:cc.Node){
+                        if(resNode && cc.isValid(resNode)){
+                            let script = resNode.getComponent("MatchDialog");
+                            if(script){
+                                script.show_math_user_info(userinfo);
+                            }
+                        }
+                    })
                 }
             }else if(status == Response.NOT_YOUR_TURN){
                 DialogManager.getInstance().show_weak_hint("请稍等候，正在匹配中。。。。")
@@ -155,9 +171,9 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         if(udata){
             let status = udata.status
             if(status == Response.OK){
-                DialogManager.getInstance().show_weak_hint("取消匹配成功!")
+                DialogManager.getInstance().show_weak_hint("取消匹配!")
             }else{
-                DialogManager.getInstance().show_weak_hint("取消匹配失败!")
+                DialogManager.getInstance().show_weak_hint("取消失败!")
             }
         }
     }

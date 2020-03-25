@@ -229,6 +229,7 @@ export default class UIFunction {
             var item = cc.instantiate(prefab);
             if (item) {
                 parent.addChild(item);
+                item.position = cc.v2(0,0)
                 if (scriptName) {
                     item.addComponent(scriptName);
                 }

@@ -33,6 +33,10 @@ export default abstract class UIController extends cc.Component {
         UIFunction.getInstance().add_click_event(target, callback, this)
     }
 
+    add_to_node(parent: cc.Node, prefab: cc.Prefab, scriptName?: string){
+        return UIFunction.getInstance().add_to_node(parent, prefab,scriptName)
+    }
+
     set_string(target: cc.Node, str: string) {
         UIFunction.getInstance().set_string(target, str)
     }

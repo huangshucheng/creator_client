@@ -1654,7 +1654,7 @@
     "_enabled": true,
     "alignMode": 1,
     "_target": null,
-    "_alignFlags": 5,
+    "_alignFlags": 0,
     "_left": 60,
     "_right": 60,
     "_top": 640,

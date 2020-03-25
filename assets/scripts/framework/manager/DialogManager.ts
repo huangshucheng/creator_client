@@ -88,19 +88,24 @@ export default class DialogManager{
     show_weak_hint(str: string) {
         let _this = this;
         this.show_dialog_asyc("ui_prefabs/dialog/DialogWeakHint", "WeakHintDialog",function (resNode:any) {
-            let hint = resNode;    
-            let component: WeakHintDialog = hint.getComponent("WeakHintDialog")
-            if(component && component.show){
-                component.show(str)
-            }
-            _this._weakhint.forEach((key, value) => {
-                let hint: cc.Node = value;
+            let hint = resNode;
+            if(hint && cc.isValid(hint)){
                 let component: WeakHintDialog = hint.getComponent("WeakHintDialog")
-                if(component && component.move){
-                    component.move()
+                if(component && cc.isValid(component) && component.show){
+                    component.show(str)
                 }
-            })
-            _this._weakhint.enqueue(hint);
+                _this._weakhint.forEach((key, value) => {
+                    let hint: cc.Node = value;
+                    if(cc.isValid(hint)){
+                        let component: WeakHintDialog = hint.getComponent("WeakHintDialog")
+                        if(component && cc.isValid(component) && component.move){
+                            component.move()
+                        }
+                    }
+                })
+                _this._weakhint.enqueue(hint);
+
+            }
         })
     }
 
@@ -110,9 +115,9 @@ export default class DialogManager{
         }
 
         this.show_dialog_asyc("ui_prefabs/dialog/DialogCommon", "CommonDialog",function (resNode:any) {
-           if(resNode){
+           if(resNode && cc.isValid(resNode)){
                 let component =  resNode.getComponent("CommonDialog")
-                if(component){
+                if(component && cc.isValid(component)){
                     component.set_btn_num(btnNum)
                     if(succeCallfunc){
                         succeCallfunc(component)
