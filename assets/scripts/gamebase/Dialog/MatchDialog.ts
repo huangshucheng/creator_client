@@ -38,6 +38,7 @@ export default class MatchDialog extends UIDialog {
 
     on_click_cancel(sender: cc.Component){
         LobbySendGameHoodleMsg.send_user_stop_match();
+        this.close();
     }
 
     ////////////
