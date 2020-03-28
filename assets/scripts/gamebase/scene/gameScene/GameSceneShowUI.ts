@@ -4,11 +4,13 @@ import UserInfo from '../../../framework/common/UserInfo';
 import { UserState } from '../../common/State';
 import RoomData from '../../common/RoomData';
 import UIFunction from '../../../framework/common/UIFunciton';
+import { ResourceManager } from '../../../framework/manager/ResourceManager';
 
 const {ccclass, property} = cc._decorator;
 
 let HEAD_PATH = "lobby/rectheader/1";
 let MAX_PLAYER = 4;
+let KW_PANEL_USER_INFO = "KW_PANEL_USER_INFO_"
 
 @ccclass
 export default class GameSceneShowUI extends UIController {
@@ -24,22 +26,31 @@ export default class GameSceneShowUI extends UIController {
     }
 
     initUI(){
-       this.show_all_player_head_visible(false);
        this.show_all_player_ready_visible(false);
        this.show_gamehoodle(true);
     }
 
     show_user_info(udata:any){
-        this.show_all_player_head_visible(false)
         if(udata.userinfo){
+            if(this.view["KW_LAYOUT_USER"]){
+                this.view["KW_LAYOUT_USER"].removeAllChildren();
+            }
             udata.userinfo.forEach(value => {
                 let numberid = value.numberid;
                 let infostr = value.userInfoString;
                 let infoObj = JSON.parse(infostr);
                 let seatid = infoObj.seatid;
                 if(seatid){
-                    let headNodeStr = "KW_PANEL_USER_INFO_" + seatid;
-                    this.show_one_user_info(this.view[headNodeStr],infoObj);
+                    let prefab = ResourceManager.getInstance().getRes("ui_prefabs/games/PrefabUserInfo", cc.Prefab)
+                    if(prefab){
+                        if(this.view["KW_LAYOUT_USER"]){
+                            let infoNode:cc.Node = this.add_to_node(this.view["KW_LAYOUT_USER"],prefab)
+                            if(infoNode){
+                                infoNode.name = KW_PANEL_USER_INFO + seatid;
+                                this.show_one_user_info(infoNode,infoObj)
+                            }
+                        }
+                    }
                 }
             });
         }
@@ -59,13 +70,16 @@ export default class GameSceneShowUI extends UIController {
         this.set_visible(info_node.getChildByName("KW_IMG_MASTER"), infoObj.ishost == true) // 房主
         this.set_visible(info_node.getChildByName("KW_IMG_READY"), infoObj.userstate == UserState.Ready);
         
-        if(infoObj.seatid == RoomData.getInstance().get_self_seatid()){
-            let userstate = infoObj.userstate
+        if(Number(infoObj.seatid) == Number(RoomData.getInstance().get_self_seatid())){
+            let userstate = Number(infoObj.userstate)
             if(userstate == UserState.Ready || userstate == UserState.Playing){
-                //准备货开始之后，不可见
                 this.set_visible(this.view["KW_BTN_READY"], false);
             }else{
-                this.set_visible(this.view["KW_BTN_READY"], true);
+                // let playcount = Number(RoomData.getInstance().get_play_count())
+                // console.log("hcc>>playcount: " , playcount);
+                // if( playcount < 1){
+                    this.set_visible(this.view["KW_BTN_READY"], true);
+                // }
             }
         }
 
@@ -74,28 +88,23 @@ export default class GameSceneShowUI extends UIController {
         }
     }
 
-    show_all_player_head_visible(visible:boolean){
-        for(let i = 1; i <= MAX_PLAYER; i++){
-            let viewstr = "KW_PANEL_USER_INFO_" + i;
-            this.set_visible(this.view[viewstr], visible)
-        }
-    }
-
     show_all_player_ready_visible(visible:boolean){
-        for(let seatid = 1; seatid <= MAX_PLAYER; seatid++){
-            let headNodeStr = "KW_PANEL_USER_INFO_" + seatid;
-            let headNode = this.view[headNodeStr];
-            if(headNode){
-                this.set_visible(headNode.getChildByName("KW_IMG_READY"),visible);
+        let layout:cc.Node = this.view["KW_LAYOUT_USER"]
+        if (layout){
+            for(let seatid = 1; seatid <= MAX_PLAYER; seatid++){
+                this.show_user_ready(seatid,false)
             }
         }
     }
 
-    show_user_ready(seatid:number){
-        let headNodeStr = "KW_PANEL_USER_INFO_" + seatid;
-        let headNode = this.view[headNodeStr];
-        if(headNode){
-            this.set_visible(headNode.getChildByName("KW_IMG_READY"),true);
+    show_user_ready(seatid:number, isShow:boolean){
+        let layout:cc.Node = this.view["KW_LAYOUT_USER"]
+        if (layout){
+            let headNodeStr = "KW_PANEL_USER_INFO_" + seatid;
+            let headNode = layout.getChildByName(headNodeStr)
+            if(headNode){
+                this.set_visible(headNode.getChildByName("KW_IMG_READY"),isShow);
+            }
         }
 
         if(seatid == RoomData.getInstance().get_self_seatid()){
@@ -127,9 +136,12 @@ export default class GameSceneShowUI extends UIController {
     }
 
     clear_table(){
-        this.show_all_player_head_visible(false);
         this.show_all_player_ready_visible(false);
         this.set_visible(this.view["KW_BTN_READY"], false);
+        if(this.view["KW_LAYOUT_USER"]){
+            this.view["KW_LAYOUT_USER"].removeAllChildren();
+        }
+
     }
 
 }

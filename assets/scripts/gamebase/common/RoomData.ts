@@ -73,6 +73,10 @@ class  RoomData {
         }
     }
 
+    clear_player(){
+        this._player_set = {}
+    }
+
     get_player(seatid:number){
         return this._player_set[seatid];
     }
@@ -89,6 +93,14 @@ class  RoomData {
             }
         }
         return -1;
+    }
+
+    clear_room_data(){
+        this.set_game_rule("");
+        this.set_play_count(0);
+        this.set_totl_play_count(0);
+        this.set_room_id("");
+        this.clear_player();
     }
 
 }

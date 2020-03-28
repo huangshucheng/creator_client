@@ -127,9 +127,10 @@ export default class gameHoodleTouchEvent extends UIController {
         if(ball){
             let script = ball.getComponent("HoodleBallCtrl")
             if(script){
-                script.shoot_at(location);
+                let shootPower = this.get_shoot_pwer();
+                script.shoot_at(location,shootPower);
                 //计算成百分比
-                GameSendGameHoodleMsg.send_player_shoot(RoomData.getInstance().get_self_seatid(),nodepos.x, nodepos.y);
+                GameSendGameHoodleMsg.send_player_shoot(RoomData.getInstance().get_self_seatid(),nodepos.x, nodepos.y,shootPower);
             }
         }
     }
@@ -210,6 +211,18 @@ export default class gameHoodleTouchEvent extends UIController {
             return ball.convertToWorldSpaceAR(cc.v2(0,0));
         }
         return null;
+    }
+
+    //获取射击力度大小 0-100;
+    get_shoot_pwer():number{
+        let progressNode:cc.Node = this.view["KW_POWER_PROGRESS"];
+        if (progressNode && cc.isValid(progressNode)){
+            let progressBar:cc.ProgressBar = progressNode.getComponent(cc.ProgressBar);
+            if(progressBar){
+                return Math.floor(progressBar.progress * 100);
+            }
+        }
+        return 0;
     }
 
 }

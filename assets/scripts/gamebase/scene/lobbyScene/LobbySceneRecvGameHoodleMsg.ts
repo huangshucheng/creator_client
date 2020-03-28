@@ -8,6 +8,7 @@ import GameScene from '../gameScene/GameScene';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbyScene from './LobbyScene';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
+import RoomData from '../../common/RoomData';
 
 const {ccclass, property} = cc._decorator;
 
@@ -80,6 +81,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             let status = udata.status
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
+                RoomData.getInstance().clear_room_data();
                 DialogManager.getInstance().show_weak_hint("退出房间成功!")
             }else{
                 DialogManager.getInstance().show_weak_hint("退出房间失败!")
@@ -94,6 +96,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             let status = udata.status
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
+                RoomData.getInstance().clear_room_data();
                 DialogManager.getInstance().show_weak_hint("解散房间成功!")
             }else{
                 DialogManager.getInstance().show_weak_hint("解散房间失败!")
@@ -136,14 +139,13 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             if(status == Response.OK){
                 let matchsuccess = udata.matchsuccess;
                 if(matchsuccess == true){
-                    // DialogManager.getInstance().clear_dialog();
                     DialogManager.getInstance().show_weak_hint("匹配完成!")
                     this.scheduleOnce(function(dt:number){
                         DialogManager.getInstance().close_dialog("MatchDialog");
                         SceneManager.getInstance().enter_scene_asyc(new GameScene())
                     },1.0)
                 }else{
-                    DialogManager.getInstance().show_weak_hint("正在匹配中。。。。。")
+                    // DialogManager.getInstance().show_weak_hint("正在匹配中。。。。。")
                 }
                 let userinfo = udata.userinfo;
                 if(!matchsuccess && userinfo){

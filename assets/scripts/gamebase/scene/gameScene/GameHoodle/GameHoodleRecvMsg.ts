@@ -38,8 +38,11 @@ export default class GameHoodleRecvMsg extends UIController {
     //游戏开始
     on_event_game_start(event: cc.Event.EventCustom){
         let showUIScript = this.get_script("GameHoodleShowUI");
-        showUIScript.clear_all_ball();
-        showUIScript.show_all_ball();
+        if(showUIScript){
+            showUIScript.set_power_percent_visible(true);
+            showUIScript.clear_all_ball();
+            showUIScript.show_all_ball();
+        }
         //test
         // showUIScript.show_ball_shooted_animation(RoomData.getInstance().get_self_seatid());
     }
@@ -91,7 +94,7 @@ export default class GameHoodleRecvMsg extends UIController {
                 let seatid = udata.seatid;
                 let dirx = Number(udata.posx);
                 let diry = Number(udata.posy);
-                let showUI = this.get_script("GameHoodleShowUI");
+                let shootpower = Number(udata.shootpower);
 
                 //收到的是this.view["KW_GAME_TABLE"]下的节点坐标,应该转成世界坐标
                 let gameTableNode = this.view["KW_GAME_TABLE"];
@@ -99,7 +102,10 @@ export default class GameHoodleRecvMsg extends UIController {
                     return;
                 }
                 let afterTransDir = gameTableNode.convertToWorldSpaceAR(cc.v2(dirx,diry));
-                showUI.show_player_shoot(seatid, afterTransDir.x, afterTransDir.y);
+                let showUI = this.get_script("GameHoodleShowUI");
+                if(showUI){
+                    showUI.show_player_shoot(seatid, afterTransDir.x, afterTransDir.y, shootpower);
+                }
             }
         }
     }
@@ -141,7 +147,7 @@ export default class GameHoodleRecvMsg extends UIController {
 
     //小结算
     on_event_game_result(event: cc.Event.EventCustom){
-        // let showUI = this.get_script("GameHoodleShowUI");
+        /*
         console.log("hcc>>on_event_game_result",event.getUserData());
         let udata = event.getUserData();
         let score_text = "";
@@ -174,12 +180,49 @@ export default class GameHoodleRecvMsg extends UIController {
                 },2.5)
             }
         })
+        */
+       let showUIScript = this.get_script("GameHoodleShowUI");
+       if(showUIScript){
+           showUIScript.set_power_percent_visible(false);
+       }
     }
 
     //大结算
     on_event_game_total_result(event: cc.Event.EventCustom){
         // let showUI = this.get_script("GameHoodleShowUI");
         console.log("hcc>>on_event_game_total_result" , event.getUserData());
+        let udata = event.getUserData();
+        let score_text = "";
+        if(udata){
+            let scores = udata.scores;
+            for(let k in scores){
+                let info = scores[k];
+                let seatid = info.seatid;
+                let score = info.score;
+                let player: Player = RoomData.getInstance().get_player(seatid);
+                if(player){
+                    let uname = player.get_uname();
+                    let score_str = score > 0 ? ("+" + score) : score
+                    score_text = score_text + uname + ":" + score_str + "\n";
+                }
+            }
+        }
+        let _this = this;
+        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogGameResult","GameResultDialog",function(resNode:cc.Node){
+            if(resNode){
+                let script = resNode.getComponent("GameResultDialog");
+                if (script){
+                    script.set_title_text("结束")
+                    script.set_reward_text("")
+                    script.set_score_text(score_text);
+                }
+                resNode.active = false;
+                _this.scheduleOnce(function(){
+                    resNode.active = true;
+                },2.5)
+            }
+        })
+
     }
 
 }

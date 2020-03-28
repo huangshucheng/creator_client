@@ -37,11 +37,12 @@ export default class GameSendGameHoodleMsg {
     ////////////////////////
 
     //玩家射击
-    static send_player_shoot(seatid:number, posx:number, posy:number){
+    static send_player_shoot(seatid:number, posx:number, posy:number, shootpower:number){
         let body = {
             seatid:seatid,
             posx:String(posx),
             posy:String(posy),
+            shootpower:Number(shootpower),
         }
         GameSendGameHoodleMsg.send(Cmd.ePlayerShootReq,body);
     }

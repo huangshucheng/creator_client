@@ -47,7 +47,7 @@ export default class MatchDialog extends UIDialog {
             userinfo.forEach(element => {
                 let numberid = element.numberid;
                 let userInfoString = element.userInfoString;
-                let prefab = ResourceManager.getInstance().getRes("ui_prefabs/dialog/PrefabUserInfo", cc.Prefab)
+                let prefab = ResourceManager.getInstance().getRes("ui_prefabs/games/PrefabUserInfo", cc.Prefab)
                 if(prefab){
                     let infoNode = this.add_to_node(this.view["KW_LAYOUT_MATCH_USER"],prefab)
                     if(infoNode){

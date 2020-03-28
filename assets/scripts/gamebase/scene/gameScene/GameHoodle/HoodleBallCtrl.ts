@@ -5,7 +5,8 @@ import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
 import GameHoodleData from './GameHoodleData';
 import RoomData from '../../../common/RoomData';
 
-let SHOOT_POWER = 2.0;
+let SHOOT_DISTANCE = 380;
+let SHOOT_POWER = 50.0;
 let ROUND_HEAD_PATH = "lobby/roundheader/round_1";
 
 const {ccclass, property} = cc._decorator;
@@ -26,23 +27,29 @@ export default class HoodleBallCtrl extends UIController {
     }
 
     //往inDest发射
-    public shoot_at(inDst: cc.Vec2){
+    public shoot_at(inDst: cc.Vec2, shootPower?:number){
+        if(!shootPower){
+            shootPower = SHOOT_POWER;
+        }
         // 冲量: 给这个球一个方向的冲量，矢量，大小，有方向;
         // 方向问题:  src---> dst;
         let dst = this.node.parent.convertToNodeSpaceAR(inDst);
-        // let dst = inDst;
         var src = cc.v2(this.node.x,this.node.y);
         var dir = dst.sub(src)
         // 大小问题;
+        /*
         var distance = dir.mag()//起点到终点的长度
         var power_x = distance * SHOOT_POWER * dir.x;
         var power_y = distance * SHOOT_POWER * dir.y;
-        // var power_x =  SHOOT_POWER * dir.x;
-        // var power_y =  SHOOT_POWER * dir.y;
-
-        console.log("hcc>>shoot_at: " ,inDst , dst, src, dir , distance ,power_x, power_y);
+        */
         // applyLinearImpulse(冲量大小向量, 原点转成世界坐标, true)
         if(this._rigid_body){
+            let normalizeSelfVec = dir.normalizeSelf()
+            let power_x = normalizeSelfVec.x * SHOOT_DISTANCE * shootPower;
+            let power_y = normalizeSelfVec.y * SHOOT_DISTANCE * shootPower;
+
+            console.log("hcc>>shoot_at: " , power_x, power_y , " ,power: " , shootPower);
+            
             this._rigid_body.applyLinearImpulse(cc.v2(power_x, power_y), this.node.convertToWorldSpaceAR(cc.v2(0, 0)), true);
         }
     }
@@ -123,8 +130,22 @@ export default class HoodleBallCtrl extends UIController {
                 src_seatid = other_ballid;
                 des_seatid = self_ballid;
             }
+            //发送服务端，玩家碰撞信息
             if(src_seatid != -1 && des_seatid != -1){
                 GameSendGameHoodleMsg.send_player_is_shooted(src_seatid, des_seatid);
+            }
+
+            //是否显示拖尾
+            let selfMotionstreak = selfCollider.getComponent(cc.MotionStreak);
+            let otherMotionstreak = selfCollider.getComponent(cc.MotionStreak);
+            if(selfMotionstreak && otherMotionstreak){
+                if(power_self == PlayerPower.canPlay){
+                    selfMotionstreak.enabled = true;
+                    otherMotionstreak.enabled = false;
+                }else if(power_other == PlayerPower.canPlay){
+                    selfMotionstreak.enabled = false;
+                    otherMotionstreak.enabled = true;
+                }
             }
         }
 
@@ -164,14 +185,15 @@ export default class HoodleBallCtrl extends UIController {
                 };
                 posArray.push(posInfo);
                 GameSendGameHoodleMsg.send_all_player_ball_pos(posArray);
-                console.log("hcc>>send_all_player_ball_pos: " , posArray);
+                // console.log("hcc>>send_all_player_ball_pos: " , posArray);
             }
         }
         //设置状态
         if(this._rigid_body){
             let linearv: cc.Vec2 = this._rigid_body.linearVelocity; //线性速度
             let lineMag = linearv.magSqr();
-            if(lineMag == 0){
+            // console.log("hcc>>linearV: seatid: " , this.get_ball_id() , " ,v: " , lineMag);
+            if(lineMag <= 50){
                 this.set_ball_state(BallState.stop);
             }else{
                 this.set_ball_state(BallState.moving);

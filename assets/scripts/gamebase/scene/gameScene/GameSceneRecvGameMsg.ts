@@ -36,9 +36,11 @@ export default class GameSceneRecvGameMsg extends UIController {
         EventManager.on(CmdName[Cmd.eGameEndRes], this, this.on_event_game_end)
         EventManager.on(CmdName[Cmd.eUserOfflineRes], this, this.on_event_user_offline)
         EventManager.on(CmdName[Cmd.ePlayerScoreRes], this, this.on_event_play_score)
+        EventManager.on(CmdName[Cmd.eGameResultRes], this, this.on_event_game_result)
         EventManager.on(CmdName[Cmd.eTotalGameResultRes], this, this.on_event_game_total_result)
     }
-
+    ///////////////////////////////////////
+    ///////////////////////////////////////
     on_event_login_logic(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
         cc.log("hcc>>on_event_login_logic>>udata: " , udata)
@@ -50,6 +52,7 @@ export default class GameSceneRecvGameMsg extends UIController {
             if(udata.status == Response.OK){
                 DialogManager.getInstance().show_weak_hint("房间已解散!")
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
+                RoomData.getInstance().clear_room_data();
             }else{
                 DialogManager.getInstance().show_weak_hint("解散房间失败!")
             }
@@ -129,6 +132,8 @@ export default class GameSceneRecvGameMsg extends UIController {
         if(udata){
           let playcount = udata.playcount;
           let totalplaycount = udata.totalplaycount;
+          RoomData.getInstance().set_play_count(Number(playcount))
+          RoomData.getInstance().set_totl_play_count(Number(totalplaycount))
           if(playcount && totalplaycount){
             this.set_string(this.view['KW_TEXT_PLAY_COUNT'],"局数:" + String(playcount) + "/" + String(totalplaycount));
           }
@@ -179,7 +184,7 @@ export default class GameSceneRecvGameMsg extends UIController {
                     player.set_user_state(UserState.Ready);
                     let script = this.get_script("GameSceneShowUI")
                     if(script){
-                        script.show_user_ready(seatid)
+                        script.show_user_ready(seatid, true)
                     }
                 }
             }
@@ -201,8 +206,17 @@ export default class GameSceneRecvGameMsg extends UIController {
         cc.log("on_event_game_end" , udata)
     }
 
+    on_event_game_result(event: cc.Event.EventCustom){
+        this.set_visible(this.view["KW_BTN_READY"],false);    
+        this.scheduleOnce(function(){
+            this.set_visible(this.view["KW_BTN_READY"],true);    
+        },2)
+    }
+
     on_event_game_total_result(event: cc.Event.EventCustom){
-        this.set_visible(this.view["KW_BTN_READY"],false);
-        this.set_visible(this.view["KW_BTN_BACK_LOBBY"],true);
+        this.scheduleOnce(function(){
+            this.set_visible(this.view["KW_BTN_READY"],false);    
+            this.set_visible(this.view["KW_BTN_BACK_LOBBY"],true);
+        },2)
     }
 }

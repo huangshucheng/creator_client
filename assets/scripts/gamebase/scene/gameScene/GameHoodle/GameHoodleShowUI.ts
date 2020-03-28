@@ -8,12 +8,15 @@ import Player from '../../../common/Player';
 import HoodleBallManager from "./HoodleBallManager";
 import AppConfig from '../../../../framework/config/AppConfig';
 
+let PROGRESS_SPEED = 0.01
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class GameHoodleShowUI extends UIController {
 
     _hoodleManager = HoodleBallManager.getInstance()
+    _percent_control = 1;
 
     onLoad () {
         super.onLoad();
@@ -21,14 +24,17 @@ export default class GameHoodleShowUI extends UIController {
         if(AppConfig.IS_TEST_BALL){
             this.test_boarn_ball()
         }
+        this.set_power_percent_visible(false);
+        //test
+        /*
         let testpos = cc.v2(200,200);
         let despos = this.node.convertToNodeSpaceAR(testpos);
         let despos1 = this.view["KW_GAME_TABLE"].convertToNodeSpaceAR(testpos);
 
         let wpos1 = this.node.convertToWorldSpaceAR(testpos);
         let wpos2 = this.view["KW_GAME_TABLE"].convertToWorldSpaceAR(testpos);
-
         console.log("hcc>>testpos: " ,wpos1 , wpos2);
+        */
     }
 
     start () {
@@ -82,14 +88,14 @@ export default class GameHoodleShowUI extends UIController {
     }
 
     //显示玩家射击
-    show_player_shoot(seatid:number, dirx:number, diry:number):boolean{
+    show_player_shoot(seatid:number, dirx:number, diry:number, shootpower?:number):boolean{
         let ball: cc.Node = this._hoodleManager.get_ball(seatid);
         if(!ball || !cc.isValid(ball)){
             return false;
         }
         let script = ball.getComponent("HoodleBallCtrl");
         if(script){
-            script.shoot_at(cc.v2(dirx, diry));
+            script.shoot_at(cc.v2(dirx, diry),shootpower);
         }
         return true;
     }
@@ -101,12 +107,79 @@ export default class GameHoodleShowUI extends UIController {
             return;
         }
         let delay_1 = cc.delayTime(0.5);
-        let blink = cc.blink(1.5, 10);
+        let blink = cc.blink(1, 5);
         let delay_2 = cc.delayTime(0.3);
         let hide = cc.callFunc(function(){
             ball.active = false;
         })
         ball.runAction(cc.sequence(delay_1 ,blink, delay_2, hide));
+    }
+
+    //力度条,进度, percent:0-1
+    set_power_percent(percent:number){
+        let progressNode:cc.Node = this.view["KW_POWER_PROGRESS"];
+        if (progressNode && cc.isValid(progressNode)){
+            let progressBar:cc.ProgressBar = progressNode.getComponent(cc.ProgressBar);
+            if(progressBar){
+                progressBar.progress = percent;
+            }
+        }
+        let textPer = this.seek_child_by_name(this.view["KW_POWER_PROGRESS"],"KW_TEXT_PERCENT");
+        let per = Math.floor(percent*100);
+        this.set_string(textPer,"力量:" + String(per));
+    }
+
+    set_power_percent_visible(isVisible:boolean){
+        this.set_visible(this.view["KW_POWER_PROGRESS"],isVisible);
+        if(!isVisible){
+            let progressNode:cc.Node = this.view["KW_POWER_PROGRESS"];
+            if (progressNode && cc.isValid(progressNode)){
+                let progressBar:cc.ProgressBar = progressNode.getComponent(cc.ProgressBar);
+                if(progressBar){
+                    progressBar.progress = 0;
+                }
+            }
+            let textPer = this.seek_child_by_name(this.view["KW_POWER_PROGRESS"],"KW_TEXT_PERCENT");
+            this.set_string(textPer,"力量:0");
+        }
+    }
+
+    get_power_percent_visible():boolean{
+        return this.get_visible(this.view["KW_POWER_PROGRESS"]);
+    }
+
+    //获取进度条进度 0->1
+    get_pwer_percent():number{
+        let progressNode:cc.Node = this.view["KW_POWER_PROGRESS"];
+        if (progressNode && cc.isValid(progressNode)){
+            let progressBar:cc.ProgressBar = progressNode.getComponent(cc.ProgressBar);
+            if(progressBar){
+                return progressBar.progress;
+            }
+        }
+        return 0;
+    }
+
+    //////////////////////////////////
+    //////////////////////////////////
+
+    update(dt:number){
+        if(!this.get_power_percent_visible()){
+            return;
+        }
+        let per = this.get_pwer_percent();
+        if(per >= 1){
+            this._percent_control = this._percent_control*(-1);
+        }else if(per <= 0){
+            this._percent_control = this._percent_control*(-1);
+        }
+        per = per + this._percent_control * PROGRESS_SPEED;
+        if(per >= 1){
+            per = 1;
+        }else if(per <= 0){
+            per = 0;
+        }
+        this.set_power_percent(per);
     }
 
     //////////////////////////////////

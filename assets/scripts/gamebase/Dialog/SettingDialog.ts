@@ -6,6 +6,7 @@ import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoo
 import EventManager from '../../framework/manager/EventManager';
 import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
 import Response from '../../framework/config/Response';
+import RoomData from '../common/RoomData';
 
 const { ccclass, property } = cc._decorator;
 
@@ -43,6 +44,7 @@ export default class SettingDialog extends UIDialog {
         LobbySendGameHoodleMsg.send_exit_room();
         this.close()
         SceneManager.getInstance().enter_scene_asyc(new LobbyScene());
+        RoomData.getInstance().clear_room_data();
     }
 
     on_click_dessolve(sender:cc.Component){

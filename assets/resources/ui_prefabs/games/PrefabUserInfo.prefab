@@ -221,7 +221,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50.03,
+      "width": 60,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -269,8 +269,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "name",
-    "_N$string": "name",
+    "_string": "小玩家",
+    "_N$string": "小玩家",
     "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -335,7 +335,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -4,
-      "y": -97,
+      "y": -89.6,
       "z": 0
     },
     "_scale": {
@@ -648,7 +648,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -8.891,
-      "y": -139.733,
+      "y": -130,
       "z": 0
     },
     "_scale": {

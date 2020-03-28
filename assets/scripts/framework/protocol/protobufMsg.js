@@ -12082,6 +12082,7 @@ $root.GameHoodleProto = (function() {
          * @property {number} seatid PlayerShootReq seatid
          * @property {string} posx PlayerShootReq posx
          * @property {string} posy PlayerShootReq posy
+         * @property {number|null} [shootpower] PlayerShootReq shootpower
          */
 
         /**
@@ -12124,6 +12125,14 @@ $root.GameHoodleProto = (function() {
         PlayerShootReq.prototype.posy = "";
 
         /**
+         * PlayerShootReq shootpower.
+         * @member {number} shootpower
+         * @memberof GameHoodleProto.PlayerShootReq
+         * @instance
+         */
+        PlayerShootReq.prototype.shootpower = 0;
+
+        /**
          * Creates a new PlayerShootReq instance using the specified properties.
          * @function create
          * @memberof GameHoodleProto.PlayerShootReq
@@ -12150,6 +12159,8 @@ $root.GameHoodleProto = (function() {
             writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.seatid);
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.posx);
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.posy);
+            if (message.shootpower != null && message.hasOwnProperty("shootpower"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.shootpower);
             return writer;
         };
 
@@ -12192,6 +12203,9 @@ $root.GameHoodleProto = (function() {
                     break;
                 case 3:
                     message.posy = reader.string();
+                    break;
+                case 4:
+                    message.shootpower = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -12240,6 +12254,9 @@ $root.GameHoodleProto = (function() {
                 return "posx: string expected";
             if (!$util.isString(message.posy))
                 return "posy: string expected";
+            if (message.shootpower != null && message.hasOwnProperty("shootpower"))
+                if (!$util.isInteger(message.shootpower))
+                    return "shootpower: integer expected";
             return null;
         };
 
@@ -12261,6 +12278,8 @@ $root.GameHoodleProto = (function() {
                 message.posx = String(object.posx);
             if (object.posy != null)
                 message.posy = String(object.posy);
+            if (object.shootpower != null)
+                message.shootpower = object.shootpower | 0;
             return message;
         };
 
@@ -12281,6 +12300,7 @@ $root.GameHoodleProto = (function() {
                 object.seatid = 0;
                 object.posx = "";
                 object.posy = "";
+                object.shootpower = 0;
             }
             if (message.seatid != null && message.hasOwnProperty("seatid"))
                 object.seatid = message.seatid;
@@ -12288,6 +12308,8 @@ $root.GameHoodleProto = (function() {
                 object.posx = message.posx;
             if (message.posy != null && message.hasOwnProperty("posy"))
                 object.posy = message.posy;
+            if (message.shootpower != null && message.hasOwnProperty("shootpower"))
+                object.shootpower = message.shootpower;
             return object;
         };
 
@@ -12315,6 +12337,7 @@ $root.GameHoodleProto = (function() {
          * @property {number} seatid PlayerShootRes seatid
          * @property {string} posx PlayerShootRes posx
          * @property {string} posy PlayerShootRes posy
+         * @property {number|null} [shootpower] PlayerShootRes shootpower
          */
 
         /**
@@ -12365,6 +12388,14 @@ $root.GameHoodleProto = (function() {
         PlayerShootRes.prototype.posy = "";
 
         /**
+         * PlayerShootRes shootpower.
+         * @member {number} shootpower
+         * @memberof GameHoodleProto.PlayerShootRes
+         * @instance
+         */
+        PlayerShootRes.prototype.shootpower = 0;
+
+        /**
          * Creates a new PlayerShootRes instance using the specified properties.
          * @function create
          * @memberof GameHoodleProto.PlayerShootRes
@@ -12392,6 +12423,8 @@ $root.GameHoodleProto = (function() {
             writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.seatid);
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.posx);
             writer.uint32(/* id 4, wireType 2 =*/34).string(message.posy);
+            if (message.shootpower != null && message.hasOwnProperty("shootpower"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.shootpower);
             return writer;
         };
 
@@ -12437,6 +12470,9 @@ $root.GameHoodleProto = (function() {
                     break;
                 case 4:
                     message.posy = reader.string();
+                    break;
+                case 5:
+                    message.shootpower = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -12489,6 +12525,9 @@ $root.GameHoodleProto = (function() {
                 return "posx: string expected";
             if (!$util.isString(message.posy))
                 return "posy: string expected";
+            if (message.shootpower != null && message.hasOwnProperty("shootpower"))
+                if (!$util.isInteger(message.shootpower))
+                    return "shootpower: integer expected";
             return null;
         };
 
@@ -12512,6 +12551,8 @@ $root.GameHoodleProto = (function() {
                 message.posx = String(object.posx);
             if (object.posy != null)
                 message.posy = String(object.posy);
+            if (object.shootpower != null)
+                message.shootpower = object.shootpower | 0;
             return message;
         };
 
@@ -12533,6 +12574,7 @@ $root.GameHoodleProto = (function() {
                 object.seatid = 0;
                 object.posx = "";
                 object.posy = "";
+                object.shootpower = 0;
             }
             if (message.status != null && message.hasOwnProperty("status"))
                 object.status = message.status;
@@ -12542,6 +12584,8 @@ $root.GameHoodleProto = (function() {
                 object.posx = message.posx;
             if (message.posy != null && message.hasOwnProperty("posy"))
                 object.posy = message.posy;
+            if (message.shootpower != null && message.hasOwnProperty("shootpower"))
+                object.shootpower = message.shootpower;
             return object;
         };
 
