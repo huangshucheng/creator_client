@@ -129,6 +129,7 @@ export default class gameHoodleTouchEvent extends UIController {
             if(script){
                 let shootPower = this.get_shoot_pwer();
                 script.shoot_at(location,shootPower);
+                script.set_src_shoot_seatid(RoomData.getInstance().get_self_seatid());
                 //计算成百分比
                 GameSendGameHoodleMsg.send_player_shoot(RoomData.getInstance().get_self_seatid(),nodepos.x, nodepos.y,shootPower);
             }

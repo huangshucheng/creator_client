@@ -83,7 +83,11 @@ export default class GameApp extends cc.Component {
     //     console.log("hcc>> undefined is false");
     //    }
 
-        console.log("hcc>>winsize: " , cc.winSize);
+        // console.log("hcc>>winsize: " , cc.winSize);
+        console.log("hcc>>iswechatgame: " , PlatForm.isWeChatGame())
+        if(PlatForm.isWeChatGame()){
+            console.log("hcc>>wx::::::" , wx);
+        }
     }
 
 }

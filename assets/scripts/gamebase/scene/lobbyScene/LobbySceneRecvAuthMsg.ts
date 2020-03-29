@@ -98,7 +98,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
                 UserInfo.set_uinfo(udataStr)
                 let lobyShowUI = this.get_script("LobbySceneShowUI")
                 if(lobyShowUI){
-                    lobyShowUI.show_user_info()
+                    lobyShowUI.show_user_info();
                 }
             }
         }

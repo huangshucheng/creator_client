@@ -1,5 +1,6 @@
 export default class UserInfo {
     private static _uinfo:any = {};
+    private static _ugame_info:any = {}
 
     private constructor() {
         
@@ -39,6 +40,18 @@ export default class UserInfo {
     //登录账号
     static get_uname(){
         return this._uinfo.uname
+    }
+
+    static set_ugame_info(ugame_info:any){
+        this._ugame_info = ugame_info
+    }
+
+    static get_ugame_info(){
+        return this._ugame_info;
+    }
+
+    static get_uchip(){
+        return this._ugame_info.uchip;
     }
 
 }

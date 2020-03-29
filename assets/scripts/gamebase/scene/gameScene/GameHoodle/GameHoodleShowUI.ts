@@ -8,7 +8,7 @@ import Player from '../../../common/Player';
 import HoodleBallManager from "./HoodleBallManager";
 import AppConfig from '../../../../framework/config/AppConfig';
 
-let PROGRESS_SPEED = 0.01
+let PROGRESS_SPEED = 0.02
 
 const {ccclass, property} = cc._decorator;
 
@@ -96,6 +96,7 @@ export default class GameHoodleShowUI extends UIController {
         let script = ball.getComponent("HoodleBallCtrl");
         if(script){
             script.shoot_at(cc.v2(dirx, diry),shootpower);
+            script.set_src_shoot_seatid(seatid);
         }
         return true;
     }
@@ -107,7 +108,7 @@ export default class GameHoodleShowUI extends UIController {
             return;
         }
         let delay_1 = cc.delayTime(0.5);
-        let blink = cc.blink(1, 5);
+        let blink = cc.blink(1, 3);
         let delay_2 = cc.delayTime(0.3);
         let hide = cc.callFunc(function(){
             ball.active = false;

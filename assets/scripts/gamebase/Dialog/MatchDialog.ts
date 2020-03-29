@@ -60,6 +60,8 @@ export default class MatchDialog extends UIDialog {
                         let headString = "lobby/rectheader/1" + headIndex;
                         this.set_sprite(this.seek_child_by_name(infoNode,"KW_IMG_HEAD"),headString);
                         this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_NAME"),json_object.uname);
+                        this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_GOLD"),json_object.uchip);
+                        this.set_visible(this.seek_child_by_name(infoNode,"KW_TEXT_GOLD"),true);
                     }
                 }
             });

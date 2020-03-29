@@ -33,6 +33,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         EventManager.on(CmdName[Cmd.eBackRoomRes], this, this.on_event_back_room)
         EventManager.on(CmdName[Cmd.eUserMatchRes], this, this.on_event_match)
         EventManager.on(CmdName[Cmd.eUserStopMatchRes], this, this.on_event_match_stop)
+        EventManager.on(CmdName[Cmd.eUserGameInfoRes], this, this.on_event_ugame_info)
     }
 
     on_event_login_logic(event:cc.Event.EventCustom){
@@ -41,6 +42,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         if(udata){
             if(udata.status == Response.OK){
                 LobbySendGameHoodleMsg.send_get_room_status();
+                LobbySendGameHoodleMsg.send_get_ugame_info();
                 DialogManager.getInstance().show_weak_hint("登录游戏服务成功!")
             }
         }
@@ -176,6 +178,22 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
                 DialogManager.getInstance().show_weak_hint("取消匹配!")
             }else{
                 DialogManager.getInstance().show_weak_hint("取消失败!")
+            }
+        }
+    }
+
+    on_event_ugame_info(event: cc.Event.EventCustom){
+        let udata =  event.getUserData()
+        cc.log("on_event_ugame_info",udata)
+        if(udata){
+            let status = udata.status
+            if(status == Response.OK){
+                let ugame_info = JSON.parse(udata.userInfoString);
+                UserInfo.set_ugame_info(ugame_info);
+                let lobyShowUI = this.get_script("LobbySceneShowUI")
+                if(lobyShowUI){
+                    lobyShowUI.show_user_info();
+                }
             }
         }
     }

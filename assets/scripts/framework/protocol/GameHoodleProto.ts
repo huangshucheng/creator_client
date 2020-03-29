@@ -57,6 +57,8 @@ export enum Cmd {
 	eUserMatchRes = 38,
 	eUserStopMatchReq = 39,			// 玩家取消匹配
 	eUserStopMatchRes = 40,
+	eUserGameInfoReq = 41,			// 游戏中心数据
+	eUserGameInfoRes = 42,			
 }
 
 export let CmdName = {
@@ -116,5 +118,8 @@ export let CmdName = {
 	[38] :"UserMatchRes", 		
 	[39] :"UserStopMatchReq",			// 玩家取消匹配 		
 	[40] :"UserStopMatchRes", 		
+	[41] :"UserGameInfoReq",			// 游戏中心数据
+	[42] :"UserGameInfoRes",
+
 }
 

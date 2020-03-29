@@ -932,15 +932,15 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 254,
-      "g": 255,
-      "b": 253,
+      "r": 255,
+      "g": 204,
+      "b": 0,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 860,
-      "height": 300
+      "height": 250
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -950,7 +950,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -1,
-      "y": -21.677,
+      "y": -42.894,
       "z": 0
     },
     "_scale": {
@@ -987,9 +987,9 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "testxxxx: +1\ntestnnnn: -1",
-    "_N$string": "testxxxx: +1\ntestnnnn: -1",
-    "_fontSize": 40,
+    "_string": "testxxxx: 分数:+1   金币+100\ntestnnnn: 分数:-1   金币-100",
+    "_N$string": "testxxxx: 分数:+1   金币+100\ntestnnnn: 分数:-1   金币-100",
+    "_fontSize": 60,
     "_lineHeight": 60,
     "_enableWrapText": true,
     "_N$file": null,
@@ -1049,7 +1049,7 @@
       "__id__": 7
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 3,
     "_components": [
       {
@@ -1073,7 +1073,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 860,
-      "height": 100
+      "height": 250
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1083,7 +1083,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -1,
-      "y": -208.869,
+      "y": -37.572,
       "z": 0
     },
     "_scale": {
@@ -1120,9 +1120,9 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "获得:弹珠(1级)*1",
-    "_N$string": "获得:弹珠(1级)*1",
-    "_fontSize": 40,
+    "_string": "testxxx:+100\ntestxxx:-100",
+    "_N$string": "testxxx:+100\ntestxxx:-100",
+    "_fontSize": 60,
     "_lineHeight": 60,
     "_enableWrapText": true,
     "_N$file": null,
@@ -1198,9 +1198,9 @@
     "_opacity": 188,
     "_color": {
       "__type__": "cc.Color",
-      "r": 250,
-      "g": 6,
-      "b": 6,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_contentSize": {

@@ -140,7 +140,7 @@ export default class GameHoodleRecvMsg extends UIController {
                 let src_seatid = udata.srcseatid;
                 let des_seatid = udata.desseatid;
                 let showUI = this.get_script("GameHoodleShowUI");
-                showUI.show_ball_shooted_animation(src_seatid);
+                showUI.show_ball_shooted_animation(des_seatid);
             }
         }
     }
@@ -192,20 +192,39 @@ export default class GameHoodleRecvMsg extends UIController {
         // let showUI = this.get_script("GameHoodleShowUI");
         console.log("hcc>>on_event_game_total_result" , event.getUserData());
         let udata = event.getUserData();
-        let score_text = "";
+        let show_text = "";
         if(udata){
             let scores = udata.scores;
-            for(let k in scores){
-                let info = scores[k];
-                let seatid = info.seatid;
-                let score = info.score;
+            let golds = udata.golds;
+            for(let index = 0; index < scores.length; index++){
+                let scoreInfo = scores[index];
+                let goldInfo = golds[index];
+                let seatid = scoreInfo.seatid;
+                let score = Number(scoreInfo.score);
+                let gold = Number(goldInfo.gold);
                 let player: Player = RoomData.getInstance().get_player(seatid);
                 if(player){
                     let uname = player.get_uname();
-                    let score_str = score > 0 ? ("+" + score) : score
-                    score_text = score_text + uname + ":" + score_str + "\n";
+                    let score_str = score > 0 ? ("+" + score) : score;
+                    let gold_str = gold > 0 ? ("+" + gold) : gold;
+                    show_text = show_text + uname + ": 分数 " + score_str + "   " + "金币:" + gold_str + "\n";
                 }
+                
             }
+
+            // for(let k in scores){
+            //     let info = scores[k];
+            //     let gold = golds[k];
+            //     let seatid = info.seatid;
+            //     let score = Number(info.score);
+            //     let player: Player = RoomData.getInstance().get_player(seatid);
+            //     if(player){
+            //         let uname = player.get_uname();
+            //         let score_str = score > 0 ? ("+" + score) : score
+            //         let gold_str = 
+            //         show_text = show_text + uname + ": 分数 " + score_str + "   " + "金币:" +  + "\n";
+            //     }
+            // }
         }
         let _this = this;
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogGameResult","GameResultDialog",function(resNode:cc.Node){
@@ -214,7 +233,7 @@ export default class GameHoodleRecvMsg extends UIController {
                 if (script){
                     script.set_title_text("结束")
                     script.set_reward_text("")
-                    script.set_score_text(score_text);
+                    script.set_score_text(show_text);
                 }
                 resNode.active = false;
                 _this.scheduleOnce(function(){

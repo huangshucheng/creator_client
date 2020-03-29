@@ -298,7 +298,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "KW_TEXT_SCORE",
+    "_name": "KW_TEXT_GOLD",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1

@@ -912,7 +912,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 106,
-      "y": 21.045,
+      "y": 29.045,
       "z": 0
     },
     "_scale": {
@@ -1015,7 +1015,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 106,
-      "y": -27.798,
+      "y": -18.798,
       "z": 0
     },
     "_scale": {
@@ -1094,7 +1094,7 @@
         "__id__": 31
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 4,
     "_components": [],
     "_prefab": {

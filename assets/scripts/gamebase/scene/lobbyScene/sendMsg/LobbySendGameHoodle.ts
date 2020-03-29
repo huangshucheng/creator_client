@@ -8,10 +8,12 @@ export default class LobbySendGameHoodleMsg {
         NetWork.getInstance().send_msg(Stype.GameHoodle,ctype,body)
     }
 
+    //登录游戏服务
     static send_login_logic(){
         LobbySendGameHoodleMsg.send(Cmd.eLoginLogicReq);
     }
 
+    //创建房间
     static send_create_room(gamerule: string){
         if (gamerule == null || gamerule == ''){
             return;
@@ -19,6 +21,7 @@ export default class LobbySendGameHoodleMsg {
         LobbySendGameHoodleMsg.send(Cmd.eCreateRoomReq,{gamerule: gamerule});
     }
 
+    //加入房间
     static send_join_room(roomid: string){
         if (roomid == null || roomid == ''){
             return;
@@ -26,16 +29,24 @@ export default class LobbySendGameHoodleMsg {
         LobbySendGameHoodleMsg.send(Cmd.eJoinRoomReq, {roomid: roomid});
     }
 
+    //退出房间
     static send_exit_room(){
         LobbySendGameHoodleMsg.send(Cmd.eExitRoomReq);
     }
 
+    //解散房间
     static send_dessolve_room(){
         LobbySendGameHoodleMsg.send(Cmd.eDessolveReq);
     }
 
+    //是否创建了房间
     static send_get_room_status(){
         LobbySendGameHoodleMsg.send(Cmd.eGetRoomStatusReq);
+    }
+
+    //游戏服务信息
+    static send_get_ugame_info(){
+        LobbySendGameHoodleMsg.send(Cmd.eUserGameInfoReq);
     }
 
     //返回房间
