@@ -1,6 +1,7 @@
 import UIController from '../../../framework/uibase/UIController';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
+import PlatForm from '../../../framework/config/PlatForm';
 
 const {ccclass, property} = cc._decorator;
 
@@ -34,7 +35,8 @@ export default class LoginSceneInit extends UIController {
             this.set_editbox_string(upwdEditBox,loginMsg.upwd)
         }
         
-        this.set_string(this.view['KW_TEXT_PLATFORM'], "platform:" + String(cc.sys.os)+ "  ,isnative:" + cc.sys.isNative);
+        let showPlatformStr = "platform: " + String(cc.sys.os) + " ,isNative:" + cc.sys.isNative + " ,isWechatGame:" + PlatForm.isWeChatGame() + " ,isBrows:" + cc.sys.isBrowser;
+        this.set_string(this.view['KW_TEXT_PLATFORM'], showPlatformStr);
         this.set_string(this.view['KW_TEXT_VERSION'], "1.0.0")
     }
 

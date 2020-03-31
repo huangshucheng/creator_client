@@ -7,7 +7,7 @@ import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
 import { PlayerPower , BallState} from '../../../common/State';
 import DialogManager from "../../../../framework/manager/DialogManager";
 import HoodleBallManager from './HoodleBallManager';
-import AppConfig from '../../../../framework/config/AppConfig';
+import GameAppConfig from '../../../../framework/config/GameAppConfig';
 
 const AIM_LINE_MAX_LENGTH = 1440;
 // const AIM_LINE_MAX_LENGTH = 2000;
@@ -39,7 +39,7 @@ export default class gameHoodleTouchEvent extends UIController {
     //小球是否能射击
     can_shoot():boolean{
         //test
-        if(AppConfig.IS_TEST_BALL){
+        if(GameAppConfig.IS_TEST_BALL){
             return true;
         }
         

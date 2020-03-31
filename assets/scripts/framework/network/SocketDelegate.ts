@@ -5,7 +5,7 @@ import EventManager from '../manager/EventManager';
 import ProtoCmd from '../protocol/ProtoCmd';
 import { Stype,StypeName } from '../protocol/Stype';
 import EventDefine from '../config/EventDefine';
-import AppConfig from '../config/AppConfig';
+import GameAppConfig from '../config/GameAppConfig';
 
 export interface ISocketDelegate {
     on_socket_open();
@@ -24,7 +24,7 @@ export class SocketDelegate implements ISocketDelegate {
     }
 
     on_socket_message(data:string | ArrayBuffer){
-        let decode_cmd = ProtoManater.decode_cmd(AppConfig.PROTO_TYPE,data)
+        let decode_cmd = ProtoManater.decode_cmd(GameAppConfig.PROTO_TYPE,data)
         if(!decode_cmd){
             return
         }
@@ -66,8 +66,6 @@ export class SocketDelegate implements ISocketDelegate {
         cc.log("socket is connecting address:", url)
         this._socket = new WSocket(url, this);
         this._socket.connect();
-
-        cc.sys.WECHAT_GAME
     }
 
     close_connect() {
@@ -87,7 +85,7 @@ export class SocketDelegate implements ISocketDelegate {
         if(!this._socket || this._socket.get_state() != SocketState.OPEN){
             return
         }
-        let encode_msg = ProtoManater.encode_cmd(stype,ctype,AppConfig.PROTO_TYPE,body)
+        let encode_msg = ProtoManater.encode_cmd(stype,ctype,GameAppConfig.PROTO_TYPE,body)
         if(encode_msg){
             this._socket.send(encode_msg)
         }

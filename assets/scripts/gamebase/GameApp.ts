@@ -29,7 +29,7 @@ export default class GameApp extends cc.Component {
         let scene = new HotFixScene();
         SceneManager.getInstance().enter_scene_asyc(scene);
         PlatForm.printPlatForm()
-        this.test_func()
+        // this.test_func()
     }
 
     on_net_connected(event:cc.Event.EventCustom){

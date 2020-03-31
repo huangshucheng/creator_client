@@ -1,6 +1,6 @@
 import { SocketDelegate, ISocketDelegate } from './SocketDelegate';
 import { SocketState } from './Socket';
-import AppConfig from '../config/AppConfig';
+import GameAppConfig from '../config/GameAppConfig';
 import PlatForm from '../config/PlatForm';
 
 class NetWork {
@@ -9,13 +9,13 @@ class NetWork {
     private _url: string = null;
 
     constructor(){
-        if(AppConfig.IS_LOCAL_DEBUG){
-            this._url = "ws://" + AppConfig.LOCAL_IP + ":" + AppConfig.REMOTE_WECHAT_PORT + "/ws"
+        if(GameAppConfig.IS_LOCAL_DEBUG){
+            this._url = "ws://" + GameAppConfig.LOCAL_IP + ":" + GameAppConfig.REMOTE_WECHAT_PORT + "/ws"
         }else{
-            if(PlatForm.isNative()){
-                this._url = "ws://" + AppConfig.REMOTE_IP + ":" + AppConfig.NATIVE_PLATFORM_PORT + "/ws"
+            if(PlatForm.isWeChatGame()){
+                this._url = "wss://" + GameAppConfig.REMOTE_IP + ":" + GameAppConfig.REMOTE_WECHAT_PORT + "/wss"
             }else{
-                this._url = "wss://" + AppConfig.REMOTE_IP + ":" + AppConfig.REMOTE_WECHAT_PORT + "/wss"
+                this._url = "ws://" + GameAppConfig.REMOTE_IP + ":" + GameAppConfig.NATIVE_PLATFORM_PORT + "/ws"
             }
         }
 
