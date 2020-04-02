@@ -10,7 +10,7 @@ class NetWork {
 
     constructor(){
         if(GameAppConfig.IS_LOCAL_DEBUG){
-            this._url = "ws://" + GameAppConfig.LOCAL_IP + ":" + GameAppConfig.REMOTE_WECHAT_PORT + "/ws"
+            this._url = "ws://" + GameAppConfig.LOCAL_HOST + ":" + GameAppConfig.REMOTE_WECHAT_PORT + "/ws"
         }else{
             if(PlatForm.isWeChatGame()){
                 this._url = "wss://" + GameAppConfig.REMOTE_IP + ":" + GameAppConfig.REMOTE_WECHAT_PORT + "/wss"
