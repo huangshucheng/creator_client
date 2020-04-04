@@ -43,6 +43,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             if(udata.status == Response.OK){
                 LobbySendGameHoodleMsg.send_get_room_status();
                 LobbySendGameHoodleMsg.send_get_ugame_info();
+                LobbySendGameHoodleMsg.send_get_uball_info();
                 DialogManager.getInstance().show_weak_hint("登录游戏服务成功!")
             }
         }
@@ -188,7 +189,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         if(udata){
             let status = udata.status
             if(status == Response.OK){
-                let ugame_info = JSON.parse(udata.userInfoString);
+                let ugame_info = JSON.parse(udata.userinfostring);
                 UserInfo.set_ugame_info(ugame_info);
                 let lobyShowUI = this.get_script("LobbySceneShowUI")
                 if(lobyShowUI){

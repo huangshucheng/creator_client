@@ -37,7 +37,7 @@ export default class GameSceneShowUI extends UIController {
             }
             udata.userinfo.forEach(value => {
                 let numberid = value.numberid;
-                let infostr = value.userInfoString;
+                let infostr = value.userinfostring;
                 let infoObj = JSON.parse(infostr);
                 let seatid = infoObj.seatid;
                 if(seatid){

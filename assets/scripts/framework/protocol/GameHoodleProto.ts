@@ -59,6 +59,10 @@ export enum Cmd {
 	eUserStopMatchRes = 40,
 	eUserGameInfoReq = 41,			// 游戏中心数据
 	eUserGameInfoRes = 42,			
+	eUserBallInfoReq = 43,			//小球信息
+	eUserBallInfoRes = 44,
+	eUpdateUserBallReq = 45,		//更新小球信息
+	eUpdateUserBallRes = 46,
 }
 
 export let CmdName = {
@@ -120,6 +124,9 @@ export let CmdName = {
 	[40] :"UserStopMatchRes", 		
 	[41] :"UserGameInfoReq",			// 游戏中心数据
 	[42] :"UserGameInfoRes",
-
+	[43] :"UserBallInfoReq",			//小球信息
+	[44] :"UserBallInfoRes",
+	[45] :"UpdateUserBallReq",			//更新小球信息
+	[46] :"UpdateUserBallRes",
 }
 

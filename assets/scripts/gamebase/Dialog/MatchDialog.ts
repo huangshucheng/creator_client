@@ -46,14 +46,14 @@ export default class MatchDialog extends UIDialog {
         if (userinfo){
             userinfo.forEach(element => {
                 let numberid = element.numberid;
-                let userInfoString = element.userInfoString;
+                let userinfostring = element.userinfostring;
                 let prefab = ResourceManager.getInstance().getRes("ui_prefabs/games/PrefabUserInfo", cc.Prefab)
                 if(prefab){
                     let infoNode = this.add_to_node(this.view["KW_LAYOUT_MATCH_USER"],prefab)
                     if(infoNode){
                         // this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_NAME"),numberid);
                         let headIndex = 1;
-                        let json_object = JSON.parse(userInfoString);
+                        let json_object = JSON.parse(userinfostring);
                         if(json_object){
                             headIndex = json_object.uface;
                         }

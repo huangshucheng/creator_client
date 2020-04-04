@@ -64,5 +64,28 @@ export default class LobbySendGameHoodleMsg {
         LobbySendGameHoodleMsg.send(Cmd.eUserStopMatchReq);
     }
 
+    //
+    static send_get_uball_info(){
+        LobbySendGameHoodleMsg.send(Cmd.eUserBallInfoReq)
+    }
+
+    //
+    static send_update_uball_info(updatetype:number,level:number, count?:number){
+        const updateType:any = {
+            SELL_TYPE:      0,  //卖了
+            COMPOSE_TYPE:   1,  //合成,三个一合成
+            GIVE_TYPE:      2,  //赠送
+        }
+
+        if(!count){
+            count = 1;
+        }
+        let body = {
+            updatetype : updatetype,
+            level: level,
+            count: count,
+        }
+        LobbySendGameHoodleMsg.send(Cmd.eUpdateUserBallReq,body);
+    }
 
 }

@@ -52,7 +52,7 @@ export default class LoginSceneRecvMsg extends UIController {
         if(udata.status == Response.OK){
             SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
             try {
-                let resbody = JSON.parse(udata.userLoginInfo)
+                let resbody = JSON.parse(udata.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
                 Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,resbody.guest_key)
             } catch (error) {
@@ -72,7 +72,7 @@ export default class LoginSceneRecvMsg extends UIController {
         if(udata.status == Response.OK){
             SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
             try {
-                let resbody = JSON.parse(udata.userLoginInfo)
+                let resbody = JSON.parse(udata.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
                 Storage.set(LSDefine.USER_LOGIN_MSG,{uname: resbody.uname, upwd: resbody.upwd})
             } catch (error) {

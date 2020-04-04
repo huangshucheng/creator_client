@@ -91,7 +91,7 @@ export default class GameSceneRecvGameMsg extends UIController {
                 if(udata.userinfo){
                     udata.userinfo.forEach(value => {
                         let numberid = value.numberid;
-                        let infostr = value.userInfoString;
+                        let infostr = value.userinfostring;
                         let infoObj = JSON.parse(infostr);
                         RoomData.getInstance().add_player_by_uinfo(infoObj);
                         cc.log("hcc>>userinfo numid: " , numberid , " ,info: " , infostr);

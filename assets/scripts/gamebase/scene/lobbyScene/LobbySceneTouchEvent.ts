@@ -49,6 +49,7 @@ export default class LobbySceneTouchEvent extends UIController {
         // let ssss = Base64.decode(ecde)
         // cc.log("decode: " , ssss)
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogMyCenter","MyCenterDialog")
+        // LobbySendGameHoodleMsg.send_update_uball_info(1,7);--test compose
     }
 
     on_click_create_room(sender:cc.Component){

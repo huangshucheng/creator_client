@@ -55,7 +55,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
         cc.log("guestlogin udata: " , udata)
         if(udata.status == Response.OK){
             try {
-                let resbody = JSON.parse(udata.userLoginInfo)
+                let resbody = JSON.parse(udata.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
                 Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,resbody.guest_key)
             } catch (error) {
@@ -75,7 +75,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
         cc.log("unamelogin udata: " , udata)
         if(udata.status == Response.OK){
             try {
-                let resbody = JSON.parse(udata.userLoginInfo)
+                let resbody = JSON.parse(udata.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
                 Storage.set(LSDefine.USER_LOGIN_MSG,{uname: resbody.uname, upwd: resbody.upwd})
             } catch (error) {
@@ -93,7 +93,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
     on_event_center_info(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
         if(udata){
-            let udataStr = udata.userCenterInfoString
+            let udataStr = udata.usercenterinfostring
             if(udataStr){
                 UserInfo.set_uinfo(udataStr)
                 let lobyShowUI = this.get_script("LobbySceneShowUI")
