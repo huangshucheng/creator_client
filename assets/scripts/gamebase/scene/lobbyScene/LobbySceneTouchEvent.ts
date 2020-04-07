@@ -26,6 +26,7 @@ export default class LobbySceneTouchEvent extends UIController {
         this.add_click_event(this.view["IMG_HEAD"],this.on_click_head.bind(this))
         this.add_click_event(this.view["BTN_MATCH_ROOM"],this.on_click_match_room.bind(this))
         this.add_click_event(this.view["BTN_MATCH_STOP"],this.on_click_match_stop.bind(this))
+        this.add_click_event(this.view["KW_BTN_BALL"],this.on_click_ball_dialog.bind(this))
     }
 
     on_click_set(sender:cc.Component) {
@@ -91,6 +92,10 @@ export default class LobbySceneTouchEvent extends UIController {
     
     on_click_match_stop(sender: cc.Component){
         LobbySendGameHoodleMsg.send_user_stop_match();
+    }
+
+    on_click_ball_dialog(sender: cc.Component){
+        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogBallCenter","BallCenterDialog")
     }
 
 }
