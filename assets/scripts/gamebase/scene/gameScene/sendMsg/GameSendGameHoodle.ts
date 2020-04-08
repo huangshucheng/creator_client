@@ -72,4 +72,8 @@ export default class GameSendGameHoodleMsg {
         }
         GameSendGameHoodleMsg.send(Cmd.ePlayerIsShootedReq,body);
     }
+
+    static send_get_player_ball_info(){
+        GameSendGameHoodleMsg.send(Cmd.eUserBallInfoReq);
+    }
 }
