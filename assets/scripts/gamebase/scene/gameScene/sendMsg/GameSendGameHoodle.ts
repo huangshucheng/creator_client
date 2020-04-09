@@ -1,6 +1,7 @@
 import NetWork from '../../../../framework/network/NetWork';
 import { Stype } from '../../../../framework/protocol/Stype';
 import { Cmd } from '../../../../framework/protocol/GameHoodleProto';
+import GameAppConfig from '../../../../framework/config/GameAppConfig';
 
 export default class GameSendGameHoodleMsg {
     
@@ -75,5 +76,17 @@ export default class GameSendGameHoodleMsg {
 
     static send_get_player_ball_info(){
         GameSendGameHoodleMsg.send(Cmd.eUserBallInfoReq);
+    }
+
+    static send_ball_compose(level:number, count?:number){
+        if (!count){
+            count = 0;
+        }
+        let body = {
+            updatetype: GameAppConfig.BALL_UPDATE_TYPE.COMPOSE_TYPE,
+            level: level,
+            count: count,
+        }
+        GameSendGameHoodleMsg.send(Cmd.eUpdateUserBallReq, body)
     }
 }
