@@ -11,7 +11,7 @@ import DialogManager from '../../framework/manager/DialogManager';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class BallCenterDialog extends UIDialog {
+export default class StoreDialog extends UIDialog {
 
     _ball_info_str = "";
 

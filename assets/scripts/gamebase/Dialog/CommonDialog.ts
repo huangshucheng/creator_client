@@ -6,13 +6,13 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class CommonDialog extends UIDialog {
     
-    _btnNum: number              = 1;
+    _btnNum: number             = 1;
     _content: string            = "";
     _leftBtnText: string        = "取消";
     _rightBtnText: string       = "确定";
     _leftBtnCallback: Function  = null;
     _rightBtnCallback: Function = null;
-    _closeFunc: Function        = null;
+    _closeBtnCallback: Function = null;
 
     onLoad(){
         super.onLoad()
@@ -21,15 +21,16 @@ export default class CommonDialog extends UIDialog {
     start () {
         this.initUI();
         this.add_button_event_listener();
-
     }
 
     set_content_text(str: string) {
         this._content = str
+        this.set_string(this.view["KW_UI_LABEL_CONTENT"], this._content)
     }
 
     set_btn_num(btnNum: number = 1) {
         this._btnNum = btnNum
+        this.initUI()
     }
 
     set_btn_text(str1: string = null, str2: string = null) {
@@ -37,18 +38,18 @@ export default class CommonDialog extends UIDialog {
         this._rightBtnText = str2
     }
 
-    set_btn_callback(func1: Function = null, func2: Function = null, closeFunc: Function = null) {
-        this._leftBtnCallback = func1
-        this._rightBtnCallback = func2
-        this._closeFunc = closeFunc;
+    set_btn_callback(rightCallback?: Function, leftCallback?: Function, closeFunc?: Function) {
+        this._rightBtnCallback  = rightCallback;
+        this._leftBtnCallback   = leftCallback;
+        this._closeBtnCallback  = closeFunc;
     }
 
     initUI(){
-        if (this._btnNum === 1) {
-            let pos1 = this.view["KW_UI_BTN_LEFT"].getPosition()
-            let pos2 = this.view["KW_UI_BTN_RIGHT"].getPosition()
+        if (this._btnNum == 1) {
             this.view["KW_UI_BTN_LEFT"].active = false
-            this.view["KW_UI_BTN_RIGHT"].setPosition((pos1.x + pos2.x) / 2, pos1.y)
+            if (this.view["KW_UI_BTN_RIGHT"]){
+                this.view["KW_UI_BTN_RIGHT"].x = 0;
+            }
         }
                 
         this.set_string(this.view["KW_UI_LABEL_CONTENT"], this._content)
@@ -68,8 +69,8 @@ export default class CommonDialog extends UIDialog {
     }
 
     on_click_close(sender: cc.Component){
-        if (this._closeFunc) {
-            this._closeFunc()
+        if (this._closeBtnCallback) {
+            this._closeBtnCallback()
         }
         this.close()
     }

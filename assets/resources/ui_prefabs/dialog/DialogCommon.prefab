@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "DialogMyCenter",
+    "_name": "DialogCommon",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -589,7 +589,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -243,
+      "x": -240,
       "y": -190,
       "z": 0
     },
@@ -804,8 +804,8 @@
     "_enabled": true,
     "alignMode": 1,
     "_target": null,
-    "_alignFlags": 12,
-    "_left": 87.00000000000003,
+    "_alignFlags": 0,
+    "_left": 90,
     "_right": 0,
     "_top": 0,
     "_bottom": 80,
@@ -912,7 +912,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 249,
+      "x": 250,
       "y": -190,
       "z": 0
     },
@@ -1127,9 +1127,9 @@
     "_enabled": true,
     "alignMode": 1,
     "_target": null,
-    "_alignFlags": 36,
+    "_alignFlags": 0,
     "_left": 0,
-    "_right": 81,
+    "_right": 80,
     "_top": 0,
     "_bottom": 80,
     "_verticalCenter": 0,

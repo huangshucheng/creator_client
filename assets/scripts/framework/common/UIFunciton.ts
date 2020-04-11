@@ -69,12 +69,9 @@ export default class UIFunction {
     }
 
     public add_click_evenet_with_data(target:cc.Node, callbackName:string, obj:cc.Component, customEventData?:any){
-        if (typeof(callbackName) != "string"){
-            cc.error("add_click_evenet_with_data>>callbackName is not string");
-            return;
-        }
 
-        if(callbackName == ""){
+        if (!callbackName || typeof(callbackName) != "string" || callbackName == ""){
+            cc.error("add_click_evenet_with_data>>callbackName is not string");
             return;
         }
 
@@ -89,8 +86,10 @@ export default class UIFunction {
             return;
         }
 
+        this.clear_btn_click_event(target); //清理点之间就有的点击事件
+
         let fileName: string = obj.name;    // 例"LobbyUI<LobbySceneTouchEvent>"
-        let matchStr = fileName.match(/(?:<)(.*)(?:>)/i);//去除尖括号中字符串
+        let matchStr = fileName.match(/(?:<)(.*)(?:>)/i);//获取尖括号中字符串
         if(!matchStr[1]){
             cc.error("add_click_evenet_with_data>> " + callbackName + " , matchStr is not exist");
             return;
@@ -106,6 +105,18 @@ export default class UIFunction {
         btnComponent.clickEvents.push(clickEventHandler);
     }
 
+    clear_btn_click_event(target: cc.Node) {
+        if (!this.node_exist(target)) {
+            return;
+        }
+        let component: cc.Button = target.getComponent(cc.Button);
+        if (!component) {
+            return;
+        }
+        if (component.clickEvents.length > 0){
+            component.clickEvents.splice(0, component.clickEvents.length); //remove old click event
+        }
+    }
 
     set_string(target: cc.Node, str: string){
         if (!this.node_exist(target)){

@@ -83,16 +83,4 @@ export default abstract class UIController extends cc.Component {
     seek_child_by_name(target:cc.Node, name:string){
         return UIFunction.getInstance().seek_widget_by_name(target,name)
     }
-
-    clear_btn_click_event(target:cc.Node){
-        if (!UIFunction.getInstance().node_exist(target)) {
-            return
-        }
-        var component: cc.Button = target.getComponent(cc.Button);
-        if (!component) {
-            return;
-        }
-        component.clickEvents.splice(0, component.clickEvents.length); //remove old click event
-    }
-
 }

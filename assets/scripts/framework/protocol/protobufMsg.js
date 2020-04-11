@@ -6132,6 +6132,10 @@ $root.GameHoodleProto = (function() {
      * @property {number} eUserBallInfoRes=44 eUserBallInfoRes value
      * @property {number} eUpdateUserBallReq=45 eUpdateUserBallReq value
      * @property {number} eUpdateUserBallRes=46 eUpdateUserBallRes value
+     * @property {number} eStoreListReq=47 eStoreListReq value
+     * @property {number} eStoreListRes=48 eStoreListRes value
+     * @property {number} eBuyThingsReq=49 eBuyThingsReq value
+     * @property {number} eBuyThingsRes=50 eBuyThingsRes value
      */
     GameHoodleProto.Cmd = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -6182,6 +6186,10 @@ $root.GameHoodleProto = (function() {
         values[valuesById[44] = "eUserBallInfoRes"] = 44;
         values[valuesById[45] = "eUpdateUserBallReq"] = 45;
         values[valuesById[46] = "eUpdateUserBallRes"] = 46;
+        values[valuesById[47] = "eStoreListReq"] = 47;
+        values[valuesById[48] = "eStoreListRes"] = 48;
+        values[valuesById[49] = "eBuyThingsReq"] = 49;
+        values[valuesById[50] = "eBuyThingsRes"] = 50;
         return values;
     })();
 
@@ -16342,6 +16350,1225 @@ $root.GameHoodleProto = (function() {
         };
 
         return UpdateUserBallRes;
+    })();
+
+    GameHoodleProto.OneStoreProp = (function() {
+
+        /**
+         * Properties of an OneStoreProp.
+         * @memberof GameHoodleProto
+         * @interface IOneStoreProp
+         * @property {number} propsvrindex OneStoreProp propsvrindex
+         * @property {number} propid OneStoreProp propid
+         * @property {number} propcount OneStoreProp propcount
+         * @property {number} propprice OneStoreProp propprice
+         * @property {number} propinfo OneStoreProp propinfo
+         */
+
+        /**
+         * Constructs a new OneStoreProp.
+         * @memberof GameHoodleProto
+         * @classdesc Represents an OneStoreProp.
+         * @implements IOneStoreProp
+         * @constructor
+         * @param {GameHoodleProto.IOneStoreProp=} [properties] Properties to set
+         */
+        function OneStoreProp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * OneStoreProp propsvrindex.
+         * @member {number} propsvrindex
+         * @memberof GameHoodleProto.OneStoreProp
+         * @instance
+         */
+        OneStoreProp.prototype.propsvrindex = 0;
+
+        /**
+         * OneStoreProp propid.
+         * @member {number} propid
+         * @memberof GameHoodleProto.OneStoreProp
+         * @instance
+         */
+        OneStoreProp.prototype.propid = 0;
+
+        /**
+         * OneStoreProp propcount.
+         * @member {number} propcount
+         * @memberof GameHoodleProto.OneStoreProp
+         * @instance
+         */
+        OneStoreProp.prototype.propcount = 0;
+
+        /**
+         * OneStoreProp propprice.
+         * @member {number} propprice
+         * @memberof GameHoodleProto.OneStoreProp
+         * @instance
+         */
+        OneStoreProp.prototype.propprice = 0;
+
+        /**
+         * OneStoreProp propinfo.
+         * @member {number} propinfo
+         * @memberof GameHoodleProto.OneStoreProp
+         * @instance
+         */
+        OneStoreProp.prototype.propinfo = 0;
+
+        /**
+         * Creates a new OneStoreProp instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.OneStoreProp
+         * @static
+         * @param {GameHoodleProto.IOneStoreProp=} [properties] Properties to set
+         * @returns {GameHoodleProto.OneStoreProp} OneStoreProp instance
+         */
+        OneStoreProp.create = function create(properties) {
+            return new OneStoreProp(properties);
+        };
+
+        /**
+         * Encodes the specified OneStoreProp message. Does not implicitly {@link GameHoodleProto.OneStoreProp.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.OneStoreProp
+         * @static
+         * @param {GameHoodleProto.IOneStoreProp} message OneStoreProp message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OneStoreProp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.propsvrindex);
+            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propid);
+            writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.propcount);
+            writer.uint32(/* id 4, wireType 0 =*/32).sint32(message.propprice);
+            writer.uint32(/* id 5, wireType 0 =*/40).sint32(message.propinfo);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified OneStoreProp message, length delimited. Does not implicitly {@link GameHoodleProto.OneStoreProp.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.OneStoreProp
+         * @static
+         * @param {GameHoodleProto.IOneStoreProp} message OneStoreProp message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OneStoreProp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an OneStoreProp message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.OneStoreProp
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.OneStoreProp} OneStoreProp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OneStoreProp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.OneStoreProp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.propsvrindex = reader.sint32();
+                    break;
+                case 2:
+                    message.propid = reader.sint32();
+                    break;
+                case 3:
+                    message.propcount = reader.sint32();
+                    break;
+                case 4:
+                    message.propprice = reader.sint32();
+                    break;
+                case 5:
+                    message.propinfo = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("propsvrindex"))
+                throw $util.ProtocolError("missing required 'propsvrindex'", { instance: message });
+            if (!message.hasOwnProperty("propid"))
+                throw $util.ProtocolError("missing required 'propid'", { instance: message });
+            if (!message.hasOwnProperty("propcount"))
+                throw $util.ProtocolError("missing required 'propcount'", { instance: message });
+            if (!message.hasOwnProperty("propprice"))
+                throw $util.ProtocolError("missing required 'propprice'", { instance: message });
+            if (!message.hasOwnProperty("propinfo"))
+                throw $util.ProtocolError("missing required 'propinfo'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes an OneStoreProp message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.OneStoreProp
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.OneStoreProp} OneStoreProp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OneStoreProp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an OneStoreProp message.
+         * @function verify
+         * @memberof GameHoodleProto.OneStoreProp
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        OneStoreProp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.propsvrindex))
+                return "propsvrindex: integer expected";
+            if (!$util.isInteger(message.propid))
+                return "propid: integer expected";
+            if (!$util.isInteger(message.propcount))
+                return "propcount: integer expected";
+            if (!$util.isInteger(message.propprice))
+                return "propprice: integer expected";
+            if (!$util.isInteger(message.propinfo))
+                return "propinfo: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates an OneStoreProp message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.OneStoreProp
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.OneStoreProp} OneStoreProp
+         */
+        OneStoreProp.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.OneStoreProp)
+                return object;
+            var message = new $root.GameHoodleProto.OneStoreProp();
+            if (object.propsvrindex != null)
+                message.propsvrindex = object.propsvrindex | 0;
+            if (object.propid != null)
+                message.propid = object.propid | 0;
+            if (object.propcount != null)
+                message.propcount = object.propcount | 0;
+            if (object.propprice != null)
+                message.propprice = object.propprice | 0;
+            if (object.propinfo != null)
+                message.propinfo = object.propinfo | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an OneStoreProp message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.OneStoreProp
+         * @static
+         * @param {GameHoodleProto.OneStoreProp} message OneStoreProp
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        OneStoreProp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.propsvrindex = 0;
+                object.propid = 0;
+                object.propcount = 0;
+                object.propprice = 0;
+                object.propinfo = 0;
+            }
+            if (message.propsvrindex != null && message.hasOwnProperty("propsvrindex"))
+                object.propsvrindex = message.propsvrindex;
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                object.propid = message.propid;
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                object.propcount = message.propcount;
+            if (message.propprice != null && message.hasOwnProperty("propprice"))
+                object.propprice = message.propprice;
+            if (message.propinfo != null && message.hasOwnProperty("propinfo"))
+                object.propinfo = message.propinfo;
+            return object;
+        };
+
+        /**
+         * Converts this OneStoreProp to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.OneStoreProp
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        OneStoreProp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return OneStoreProp;
+    })();
+
+    GameHoodleProto.StoreListReq = (function() {
+
+        /**
+         * Properties of a StoreListReq.
+         * @memberof GameHoodleProto
+         * @interface IStoreListReq
+         */
+
+        /**
+         * Constructs a new StoreListReq.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a StoreListReq.
+         * @implements IStoreListReq
+         * @constructor
+         * @param {GameHoodleProto.IStoreListReq=} [properties] Properties to set
+         */
+        function StoreListReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new StoreListReq instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.StoreListReq
+         * @static
+         * @param {GameHoodleProto.IStoreListReq=} [properties] Properties to set
+         * @returns {GameHoodleProto.StoreListReq} StoreListReq instance
+         */
+        StoreListReq.create = function create(properties) {
+            return new StoreListReq(properties);
+        };
+
+        /**
+         * Encodes the specified StoreListReq message. Does not implicitly {@link GameHoodleProto.StoreListReq.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.StoreListReq
+         * @static
+         * @param {GameHoodleProto.IStoreListReq} message StoreListReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        StoreListReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified StoreListReq message, length delimited. Does not implicitly {@link GameHoodleProto.StoreListReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.StoreListReq
+         * @static
+         * @param {GameHoodleProto.IStoreListReq} message StoreListReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        StoreListReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a StoreListReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.StoreListReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.StoreListReq} StoreListReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        StoreListReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.StoreListReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a StoreListReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.StoreListReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.StoreListReq} StoreListReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        StoreListReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a StoreListReq message.
+         * @function verify
+         * @memberof GameHoodleProto.StoreListReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        StoreListReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a StoreListReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.StoreListReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.StoreListReq} StoreListReq
+         */
+        StoreListReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.StoreListReq)
+                return object;
+            return new $root.GameHoodleProto.StoreListReq();
+        };
+
+        /**
+         * Creates a plain object from a StoreListReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.StoreListReq
+         * @static
+         * @param {GameHoodleProto.StoreListReq} message StoreListReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        StoreListReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this StoreListReq to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.StoreListReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        StoreListReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return StoreListReq;
+    })();
+
+    GameHoodleProto.StoreListRes = (function() {
+
+        /**
+         * Properties of a StoreListRes.
+         * @memberof GameHoodleProto
+         * @interface IStoreListRes
+         * @property {number} status StoreListRes status
+         * @property {Array.<GameHoodleProto.IOneStoreProp>|null} [storeprops] StoreListRes storeprops
+         */
+
+        /**
+         * Constructs a new StoreListRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a StoreListRes.
+         * @implements IStoreListRes
+         * @constructor
+         * @param {GameHoodleProto.IStoreListRes=} [properties] Properties to set
+         */
+        function StoreListRes(properties) {
+            this.storeprops = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * StoreListRes status.
+         * @member {number} status
+         * @memberof GameHoodleProto.StoreListRes
+         * @instance
+         */
+        StoreListRes.prototype.status = 0;
+
+        /**
+         * StoreListRes storeprops.
+         * @member {Array.<GameHoodleProto.IOneStoreProp>} storeprops
+         * @memberof GameHoodleProto.StoreListRes
+         * @instance
+         */
+        StoreListRes.prototype.storeprops = $util.emptyArray;
+
+        /**
+         * Creates a new StoreListRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.StoreListRes
+         * @static
+         * @param {GameHoodleProto.IStoreListRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.StoreListRes} StoreListRes instance
+         */
+        StoreListRes.create = function create(properties) {
+            return new StoreListRes(properties);
+        };
+
+        /**
+         * Encodes the specified StoreListRes message. Does not implicitly {@link GameHoodleProto.StoreListRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.StoreListRes
+         * @static
+         * @param {GameHoodleProto.IStoreListRes} message StoreListRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        StoreListRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.storeprops != null && message.storeprops.length)
+                for (var i = 0; i < message.storeprops.length; ++i)
+                    $root.GameHoodleProto.OneStoreProp.encode(message.storeprops[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified StoreListRes message, length delimited. Does not implicitly {@link GameHoodleProto.StoreListRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.StoreListRes
+         * @static
+         * @param {GameHoodleProto.IStoreListRes} message StoreListRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        StoreListRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a StoreListRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.StoreListRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.StoreListRes} StoreListRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        StoreListRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.StoreListRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    if (!(message.storeprops && message.storeprops.length))
+                        message.storeprops = [];
+                    message.storeprops.push($root.GameHoodleProto.OneStoreProp.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a StoreListRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.StoreListRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.StoreListRes} StoreListRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        StoreListRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a StoreListRes message.
+         * @function verify
+         * @memberof GameHoodleProto.StoreListRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        StoreListRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.storeprops != null && message.hasOwnProperty("storeprops")) {
+                if (!Array.isArray(message.storeprops))
+                    return "storeprops: array expected";
+                for (var i = 0; i < message.storeprops.length; ++i) {
+                    var error = $root.GameHoodleProto.OneStoreProp.verify(message.storeprops[i]);
+                    if (error)
+                        return "storeprops." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a StoreListRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.StoreListRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.StoreListRes} StoreListRes
+         */
+        StoreListRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.StoreListRes)
+                return object;
+            var message = new $root.GameHoodleProto.StoreListRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.storeprops) {
+                if (!Array.isArray(object.storeprops))
+                    throw TypeError(".GameHoodleProto.StoreListRes.storeprops: array expected");
+                message.storeprops = [];
+                for (var i = 0; i < object.storeprops.length; ++i) {
+                    if (typeof object.storeprops[i] !== "object")
+                        throw TypeError(".GameHoodleProto.StoreListRes.storeprops: object expected");
+                    message.storeprops[i] = $root.GameHoodleProto.OneStoreProp.fromObject(object.storeprops[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a StoreListRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.StoreListRes
+         * @static
+         * @param {GameHoodleProto.StoreListRes} message StoreListRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        StoreListRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.storeprops = [];
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.storeprops && message.storeprops.length) {
+                object.storeprops = [];
+                for (var j = 0; j < message.storeprops.length; ++j)
+                    object.storeprops[j] = $root.GameHoodleProto.OneStoreProp.toObject(message.storeprops[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this StoreListRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.StoreListRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        StoreListRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return StoreListRes;
+    })();
+
+    GameHoodleProto.BuyThingsReq = (function() {
+
+        /**
+         * Properties of a BuyThingsReq.
+         * @memberof GameHoodleProto
+         * @interface IBuyThingsReq
+         * @property {number} propsvrindex BuyThingsReq propsvrindex
+         * @property {number} propid BuyThingsReq propid
+         * @property {number} propcount BuyThingsReq propcount
+         * @property {number} propprice BuyThingsReq propprice
+         * @property {number} propinfo BuyThingsReq propinfo
+         */
+
+        /**
+         * Constructs a new BuyThingsReq.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a BuyThingsReq.
+         * @implements IBuyThingsReq
+         * @constructor
+         * @param {GameHoodleProto.IBuyThingsReq=} [properties] Properties to set
+         */
+        function BuyThingsReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BuyThingsReq propsvrindex.
+         * @member {number} propsvrindex
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @instance
+         */
+        BuyThingsReq.prototype.propsvrindex = 0;
+
+        /**
+         * BuyThingsReq propid.
+         * @member {number} propid
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @instance
+         */
+        BuyThingsReq.prototype.propid = 0;
+
+        /**
+         * BuyThingsReq propcount.
+         * @member {number} propcount
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @instance
+         */
+        BuyThingsReq.prototype.propcount = 0;
+
+        /**
+         * BuyThingsReq propprice.
+         * @member {number} propprice
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @instance
+         */
+        BuyThingsReq.prototype.propprice = 0;
+
+        /**
+         * BuyThingsReq propinfo.
+         * @member {number} propinfo
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @instance
+         */
+        BuyThingsReq.prototype.propinfo = 0;
+
+        /**
+         * Creates a new BuyThingsReq instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @static
+         * @param {GameHoodleProto.IBuyThingsReq=} [properties] Properties to set
+         * @returns {GameHoodleProto.BuyThingsReq} BuyThingsReq instance
+         */
+        BuyThingsReq.create = function create(properties) {
+            return new BuyThingsReq(properties);
+        };
+
+        /**
+         * Encodes the specified BuyThingsReq message. Does not implicitly {@link GameHoodleProto.BuyThingsReq.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @static
+         * @param {GameHoodleProto.IBuyThingsReq} message BuyThingsReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BuyThingsReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.propsvrindex);
+            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propid);
+            writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.propcount);
+            writer.uint32(/* id 4, wireType 0 =*/32).sint32(message.propprice);
+            writer.uint32(/* id 5, wireType 0 =*/40).sint32(message.propinfo);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BuyThingsReq message, length delimited. Does not implicitly {@link GameHoodleProto.BuyThingsReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @static
+         * @param {GameHoodleProto.IBuyThingsReq} message BuyThingsReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BuyThingsReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BuyThingsReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.BuyThingsReq} BuyThingsReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BuyThingsReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.BuyThingsReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.propsvrindex = reader.sint32();
+                    break;
+                case 2:
+                    message.propid = reader.sint32();
+                    break;
+                case 3:
+                    message.propcount = reader.sint32();
+                    break;
+                case 4:
+                    message.propprice = reader.sint32();
+                    break;
+                case 5:
+                    message.propinfo = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("propsvrindex"))
+                throw $util.ProtocolError("missing required 'propsvrindex'", { instance: message });
+            if (!message.hasOwnProperty("propid"))
+                throw $util.ProtocolError("missing required 'propid'", { instance: message });
+            if (!message.hasOwnProperty("propcount"))
+                throw $util.ProtocolError("missing required 'propcount'", { instance: message });
+            if (!message.hasOwnProperty("propprice"))
+                throw $util.ProtocolError("missing required 'propprice'", { instance: message });
+            if (!message.hasOwnProperty("propinfo"))
+                throw $util.ProtocolError("missing required 'propinfo'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a BuyThingsReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.BuyThingsReq} BuyThingsReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BuyThingsReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BuyThingsReq message.
+         * @function verify
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BuyThingsReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.propsvrindex))
+                return "propsvrindex: integer expected";
+            if (!$util.isInteger(message.propid))
+                return "propid: integer expected";
+            if (!$util.isInteger(message.propcount))
+                return "propcount: integer expected";
+            if (!$util.isInteger(message.propprice))
+                return "propprice: integer expected";
+            if (!$util.isInteger(message.propinfo))
+                return "propinfo: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a BuyThingsReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.BuyThingsReq} BuyThingsReq
+         */
+        BuyThingsReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.BuyThingsReq)
+                return object;
+            var message = new $root.GameHoodleProto.BuyThingsReq();
+            if (object.propsvrindex != null)
+                message.propsvrindex = object.propsvrindex | 0;
+            if (object.propid != null)
+                message.propid = object.propid | 0;
+            if (object.propcount != null)
+                message.propcount = object.propcount | 0;
+            if (object.propprice != null)
+                message.propprice = object.propprice | 0;
+            if (object.propinfo != null)
+                message.propinfo = object.propinfo | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BuyThingsReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @static
+         * @param {GameHoodleProto.BuyThingsReq} message BuyThingsReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BuyThingsReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.propsvrindex = 0;
+                object.propid = 0;
+                object.propcount = 0;
+                object.propprice = 0;
+                object.propinfo = 0;
+            }
+            if (message.propsvrindex != null && message.hasOwnProperty("propsvrindex"))
+                object.propsvrindex = message.propsvrindex;
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                object.propid = message.propid;
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                object.propcount = message.propcount;
+            if (message.propprice != null && message.hasOwnProperty("propprice"))
+                object.propprice = message.propprice;
+            if (message.propinfo != null && message.hasOwnProperty("propinfo"))
+                object.propinfo = message.propinfo;
+            return object;
+        };
+
+        /**
+         * Converts this BuyThingsReq to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.BuyThingsReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BuyThingsReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BuyThingsReq;
+    })();
+
+    GameHoodleProto.BuyThingsRes = (function() {
+
+        /**
+         * Properties of a BuyThingsRes.
+         * @memberof GameHoodleProto
+         * @interface IBuyThingsRes
+         * @property {number} propsvrindex BuyThingsRes propsvrindex
+         * @property {number} propid BuyThingsRes propid
+         * @property {number} propcount BuyThingsRes propcount
+         * @property {number} propprice BuyThingsRes propprice
+         * @property {number} propinfo BuyThingsRes propinfo
+         */
+
+        /**
+         * Constructs a new BuyThingsRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a BuyThingsRes.
+         * @implements IBuyThingsRes
+         * @constructor
+         * @param {GameHoodleProto.IBuyThingsRes=} [properties] Properties to set
+         */
+        function BuyThingsRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BuyThingsRes propsvrindex.
+         * @member {number} propsvrindex
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @instance
+         */
+        BuyThingsRes.prototype.propsvrindex = 0;
+
+        /**
+         * BuyThingsRes propid.
+         * @member {number} propid
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @instance
+         */
+        BuyThingsRes.prototype.propid = 0;
+
+        /**
+         * BuyThingsRes propcount.
+         * @member {number} propcount
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @instance
+         */
+        BuyThingsRes.prototype.propcount = 0;
+
+        /**
+         * BuyThingsRes propprice.
+         * @member {number} propprice
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @instance
+         */
+        BuyThingsRes.prototype.propprice = 0;
+
+        /**
+         * BuyThingsRes propinfo.
+         * @member {number} propinfo
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @instance
+         */
+        BuyThingsRes.prototype.propinfo = 0;
+
+        /**
+         * Creates a new BuyThingsRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @static
+         * @param {GameHoodleProto.IBuyThingsRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.BuyThingsRes} BuyThingsRes instance
+         */
+        BuyThingsRes.create = function create(properties) {
+            return new BuyThingsRes(properties);
+        };
+
+        /**
+         * Encodes the specified BuyThingsRes message. Does not implicitly {@link GameHoodleProto.BuyThingsRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @static
+         * @param {GameHoodleProto.IBuyThingsRes} message BuyThingsRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BuyThingsRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.propsvrindex);
+            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propid);
+            writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.propcount);
+            writer.uint32(/* id 4, wireType 0 =*/32).sint32(message.propprice);
+            writer.uint32(/* id 5, wireType 0 =*/40).sint32(message.propinfo);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BuyThingsRes message, length delimited. Does not implicitly {@link GameHoodleProto.BuyThingsRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @static
+         * @param {GameHoodleProto.IBuyThingsRes} message BuyThingsRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BuyThingsRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BuyThingsRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.BuyThingsRes} BuyThingsRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BuyThingsRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.BuyThingsRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.propsvrindex = reader.sint32();
+                    break;
+                case 2:
+                    message.propid = reader.sint32();
+                    break;
+                case 3:
+                    message.propcount = reader.sint32();
+                    break;
+                case 4:
+                    message.propprice = reader.sint32();
+                    break;
+                case 5:
+                    message.propinfo = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("propsvrindex"))
+                throw $util.ProtocolError("missing required 'propsvrindex'", { instance: message });
+            if (!message.hasOwnProperty("propid"))
+                throw $util.ProtocolError("missing required 'propid'", { instance: message });
+            if (!message.hasOwnProperty("propcount"))
+                throw $util.ProtocolError("missing required 'propcount'", { instance: message });
+            if (!message.hasOwnProperty("propprice"))
+                throw $util.ProtocolError("missing required 'propprice'", { instance: message });
+            if (!message.hasOwnProperty("propinfo"))
+                throw $util.ProtocolError("missing required 'propinfo'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a BuyThingsRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.BuyThingsRes} BuyThingsRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BuyThingsRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BuyThingsRes message.
+         * @function verify
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BuyThingsRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.propsvrindex))
+                return "propsvrindex: integer expected";
+            if (!$util.isInteger(message.propid))
+                return "propid: integer expected";
+            if (!$util.isInteger(message.propcount))
+                return "propcount: integer expected";
+            if (!$util.isInteger(message.propprice))
+                return "propprice: integer expected";
+            if (!$util.isInteger(message.propinfo))
+                return "propinfo: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a BuyThingsRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.BuyThingsRes} BuyThingsRes
+         */
+        BuyThingsRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.BuyThingsRes)
+                return object;
+            var message = new $root.GameHoodleProto.BuyThingsRes();
+            if (object.propsvrindex != null)
+                message.propsvrindex = object.propsvrindex | 0;
+            if (object.propid != null)
+                message.propid = object.propid | 0;
+            if (object.propcount != null)
+                message.propcount = object.propcount | 0;
+            if (object.propprice != null)
+                message.propprice = object.propprice | 0;
+            if (object.propinfo != null)
+                message.propinfo = object.propinfo | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BuyThingsRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @static
+         * @param {GameHoodleProto.BuyThingsRes} message BuyThingsRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BuyThingsRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.propsvrindex = 0;
+                object.propid = 0;
+                object.propcount = 0;
+                object.propprice = 0;
+                object.propinfo = 0;
+            }
+            if (message.propsvrindex != null && message.hasOwnProperty("propsvrindex"))
+                object.propsvrindex = message.propsvrindex;
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                object.propid = message.propid;
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                object.propcount = message.propcount;
+            if (message.propprice != null && message.hasOwnProperty("propprice"))
+                object.propprice = message.propprice;
+            if (message.propinfo != null && message.hasOwnProperty("propinfo"))
+                object.propinfo = message.propinfo;
+            return object;
+        };
+
+        /**
+         * Converts this BuyThingsRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BuyThingsRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BuyThingsRes;
     })();
 
     return GameHoodleProto;

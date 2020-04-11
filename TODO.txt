@@ -44,11 +44,35 @@
 
 道具系统：
 签到功能:可获得金币，弹珠
-匹配->胜利/失败/ 可获得/丢失金币
+匹配->胜利/失败/ 可获得/丢失金币  OK
 
 商城系统:
 可购买弹珠(低等级弹珠)，消费金币
 可以卖出弹珠，但是卖出价格比较低
+
+商城列表协议：
+StoreListReq;
+StoreListRes;
+{
+status,
+propid,
+propcount,
+propprice,
+}
+
+购买协议：
+ChargeReq;
+{
+propid,
+propcount,
+}
+
+ChargeRes;
+{
+status,
+propid,
+propcount,
+}
 
 弹珠系统：
 弹珠分等级，不同弹珠，皮肤，光效，动画，不一样

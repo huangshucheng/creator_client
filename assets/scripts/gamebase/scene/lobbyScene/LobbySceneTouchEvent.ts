@@ -26,7 +26,8 @@ export default class LobbySceneTouchEvent extends UIController {
         this.add_click_event(this.view["IMG_HEAD"],this.on_click_head.bind(this))
         this.add_click_event(this.view["BTN_MATCH_ROOM"],this.on_click_match_room.bind(this))
         this.add_click_event(this.view["BTN_MATCH_STOP"],this.on_click_match_stop.bind(this))
-        this.add_click_event(this.view["KW_BTN_BALL"],this.on_click_ball_dialog.bind(this))
+        this.add_click_event(this.view["KW_BTN_BALL_COMPOSE"], this.on_click_ball_compose.bind(this))
+        this.add_click_event(this.view["KW_BTN_STORE"], this.on_click_store.bind(this))
         //带参数的点击事件
         // this.add_click_evenet_with_data(this.view["KW_BTN_BALL"], "on_click_ball_dialog_data",[1,2,3,5]) // test
     }
@@ -79,8 +80,13 @@ export default class LobbySceneTouchEvent extends UIController {
         LobbySendGameHoodleMsg.send_user_stop_match();
     }
 
-    on_click_ball_dialog(sender: cc.Component){
+    on_click_ball_compose(sender: cc.Component){
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogBallCenter","BallCenterDialog")
+    }
+
+    on_click_store(sender: cc.Component){
+        cc.log("store click");
+        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogStore", "StoreDialog")
     }
 
 }
