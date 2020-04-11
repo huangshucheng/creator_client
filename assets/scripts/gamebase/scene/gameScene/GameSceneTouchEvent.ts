@@ -31,12 +31,6 @@ export default class GameSceneTouchEvent extends UIController {
     }
 
     on_click_setting2(sender:cc.Component){
-        //test
-        // GameSendGameHoodleMsg.send_login_logic();
-        // GameSendGameHoodleMsg.send_check_link_game();
-
-        // let script = this.get_script("GameSceneShowUI")
-        // script.show_gamehoodle(true)
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogGameResult","GameResultDialog",function(resNode:cc.Node){
             if(resNode){
                 let script = resNode.getComponent("GameResultDialog");

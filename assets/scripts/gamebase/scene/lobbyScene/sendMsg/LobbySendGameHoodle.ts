@@ -64,21 +64,15 @@ export default class LobbySendGameHoodleMsg {
         LobbySendGameHoodleMsg.send(Cmd.eUserStopMatchReq);
     }
 
-    //
+    //获取小球信息
     static send_get_uball_info(){
         LobbySendGameHoodleMsg.send(Cmd.eUserBallInfoReq)
     }
 
-    //
+    //合成，销售小球
     static send_update_uball_info(updatetype:number,level:number, count?:number){
-        const updateType:any = {
-            SELL_TYPE:      0,  //卖了
-            COMPOSE_TYPE:   1,  //合成,三个一合成
-            GIVE_TYPE:      2,  //赠送
-        }
-
         if(!count){
-            count = 1;
+            count = 0;
         }
         let body = {
             updatetype : updatetype,

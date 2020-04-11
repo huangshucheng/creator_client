@@ -5,20 +5,20 @@ import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
 import GameHoodleData from './GameHoodleData';
 import RoomData from '../../../common/RoomData';
 
-let SHOOT_DISTANCE = 380;
-let SHOOT_POWER = 50.0;
-let BALL_STOP_SPEED_SQR = 100;  //判定小球停下来的速度平方
-let ROUND_HEAD_PATH = "lobby/roundheader/round_1";
+let SHOOT_DISTANCE          = 380;
+let SHOOT_POWER             = 50.0;
+let BALL_STOP_SPEED_SQR     = 100;  //判定小球停下来的速度平方
+let ROUND_HEAD_PATH         = "lobby/roundheader/round_1";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class HoodleBallCtrl extends UIController {
-    _rigid_body:cc.RigidBody = null;
-    _ball_name: string = "";
-    _ball_id: number = -1;
-    _ball_state: number = BallState.stop;
-    _src_shoot_seatid = -1; //先手射击的seatid
+    _rigid_body:cc.RigidBody    = null;
+    _ball_name: string          = "";
+    _ball_id: number            = -1;
+    _src_shoot_seatid:number    = -1; //先手射击的seatid
+    _ball_state: number         = BallState.stop;
 
     onLoad () {
         super.onLoad()
@@ -118,30 +118,8 @@ export default class HoodleBallCtrl extends UIController {
         if(!selfScript || !otherScript){
             return;
         }
-        /*
-
-        let array_seatid = [selfScript.get_ball_id(),otherScript.get_ball_id()];
-        let ballid = this.get_ball_id();
-        let power = GameHoodleData.getInstance().get_power(ballid);
-        if(power == PlayerPower.canPlay){
-            src_seatid = ballid;
-            for(let key in array_seatid){
-                if(array_seatid[key] != src_seatid){
-                    des_seatid = array_seatid[key];
-                    break;
-                }
-            }
-        }
-
-        console.log("hcc>>send_player_is_shooted111: src: " , src_seatid , " ,des: " , des_seatid);
-        //发送服务端，玩家碰撞信息
-        if(src_seatid != -1 && des_seatid != -1){
-            GameSendGameHoodleMsg.send_player_is_shooted(src_seatid, des_seatid);
-            console.log("hcc>>send_player_is_shooted222: src: " , src_seatid , " ,des: " , des_seatid);
-        }
-        */
-
-        ///*
+        
+        ///
         if(!selfScript.get_ball_id || !otherScript.get_ball_id){
             return;
         }
@@ -151,13 +129,7 @@ export default class HoodleBallCtrl extends UIController {
         console.log("hcc>>selfballid: " ,self_ballid , " ,otherballid: ", other_ballid);
         let power_self = GameHoodleData.getInstance().get_power(self_ballid);
         let power_other = GameHoodleData.getInstance().get_power(other_ballid);
-        // if(power_self == PlayerPower.canNotPlay){ //这里暂时把加分玩家给canNotPlay,因为服务端已经把权限给改成下一个玩家了
-        //     src_seatid = self_ballid;
-        //     des_seatid = other_ballid;
-        // }else if(power_other == PlayerPower.canNotPlay){
-        //     src_seatid = other_ballid;
-        //     des_seatid = self_ballid;
-        // }
+
         if(self_ballid == this.get_src_shoot_seatid()){
             src_seatid = self_ballid;
             des_seatid = other_ballid;

@@ -31,6 +31,7 @@ export default class LoginSceneRecvMsg extends UIController {
         EventManager.on(CmdName[Cmd.eUnameLoginRes], this, this.on_event_uname_login)
         EventManager.on(CmdName[Cmd.eGuestLoginRes], this, this.on_event_guest_login)
         EventManager.on(CmdName[Cmd.eUnameRegistRes], this, this.on_event_uname_regist)
+        EventManager.on("LoginLogicRes", this, this.on_event_login_logic)//这里要检测玩家游戏服务的信息是否存在，不存在要先创建数据库数据
     }
 
     on_net_connected(event:cc.Event.EventCustom){
@@ -93,5 +94,13 @@ export default class LoginSceneRecvMsg extends UIController {
         }else{
             DialogManager.getInstance().show_weak_hint("注册失败! " + udata.status)
         }
+    }
+
+    //这里要检测玩家游戏服务的信息是否存在，不存在要先创建数据库数据
+    on_event_login_logic(event:cc.Event.EventCustom){
+        let udata = event.getUserData()
+        if (udata.status == Response.OK) {
+            LobbySendGameHoodleMsg.send_get_ugame_info();
+        } 
     }
 }

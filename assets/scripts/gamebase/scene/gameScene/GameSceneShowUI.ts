@@ -77,11 +77,7 @@ export default class GameSceneShowUI extends UIController {
             if(userstate == UserState.Ready || userstate == UserState.Playing){
                 this.set_visible(this.view["KW_BTN_READY"], false);
             }else{
-                // let playcount = Number(RoomData.getInstance().get_play_count())
-                // console.log("hcc>>playcount: " , playcount);
-                // if( playcount < 1){
-                    this.set_visible(this.view["KW_BTN_READY"], true);
-                // }
+                this.set_visible(this.view["KW_BTN_READY"], true);
             }
         }
 
@@ -122,18 +118,6 @@ export default class GameSceneShowUI extends UIController {
             if(this._gamehoodle){
                 this._gamehoodle.active = is_show;
             }
-            /*
-            let _this = this;
-            UIFunction.getInstance().add_prefab_to_node_async(this.view["KW_GAME_NODE"],"ui_prefabs/games/GameHoodle","GameHoodleCtrl",function(resnode:cc.Node){
-                if(resnode){
-                    resnode.active = is_show;
-                    _this._gamehoodle = resnode;
-                    _this.scheduleOnce(function(){
-                        GameSendGameHoodleMsg.send_check_link_game();
-                    },0.1);
-                }
-            });
-            */
         }
     }
 

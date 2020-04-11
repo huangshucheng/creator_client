@@ -15329,7 +15329,7 @@ $root.GameHoodleProto = (function() {
          * @memberof GameHoodleProto
          * @interface IUserGameInfoRes
          * @property {number} status UserGameInfoRes status
-         * @property {string} userinfostring UserGameInfoRes userinfostring
+         * @property {string|null} [userinfostring] UserGameInfoRes userinfostring
          */
 
         /**
@@ -15388,7 +15388,8 @@ $root.GameHoodleProto = (function() {
             if (!writer)
                 writer = $Writer.create();
             writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
-            writer.uint32(/* id 2, wireType 2 =*/18).string(message.userinfostring);
+            if (message.userinfostring != null && message.hasOwnProperty("userinfostring"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.userinfostring);
             return writer;
         };
 
@@ -15436,8 +15437,6 @@ $root.GameHoodleProto = (function() {
             }
             if (!message.hasOwnProperty("status"))
                 throw $util.ProtocolError("missing required 'status'", { instance: message });
-            if (!message.hasOwnProperty("userinfostring"))
-                throw $util.ProtocolError("missing required 'userinfostring'", { instance: message });
             return message;
         };
 
@@ -15470,8 +15469,9 @@ $root.GameHoodleProto = (function() {
                 return "object expected";
             if (!$util.isInteger(message.status))
                 return "status: integer expected";
-            if (!$util.isString(message.userinfostring))
-                return "userinfostring: string expected";
+            if (message.userinfostring != null && message.hasOwnProperty("userinfostring"))
+                if (!$util.isString(message.userinfostring))
+                    return "userinfostring: string expected";
             return null;
         };
 

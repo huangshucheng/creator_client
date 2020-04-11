@@ -101,6 +101,12 @@ export default class BallCenterDialog extends UIDialog {
         return level_array[0];
     }
 
+    //info_str: "lv_1"
+    get_ball_level(info_str: string): string {
+        let level_str = info_str.split("_");
+        return level_str[1];
+    }
+
     /////////
     on_event_user_ball_info(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
@@ -194,19 +200,19 @@ export default class BallCenterDialog extends UIDialog {
             let ball_count_all = 0;
             let prefab_size = null;
             if(scrollview){
+                cc.log("hcc>>ball_info_obj: " , ball_info_obj)
                 for(let key in ball_info_obj){
-                    let info_str:string     = key;
-                    let level_str:any       = info_str.split("_");
-                    let level:string        = level_str[1];
-                    let level_count:string    = ball_info_obj[key];
-                    if (level_count && level && Number(level_count) != 0){
+                    let level_count:string  = ball_info_obj[key];
+                    let level: string = this.get_ball_level(key);
+                    if (level_count && Number(level_count) != 0 && level){
                         let prefab = ResourceManager.getInstance().getRes("ui_prefabs/games/HoodleBallShow", cc.Prefab)
                         if(prefab){
-                            let infoNode:cc.Node = this.add_to_node(layout_ball, prefab)
+                            let infoNode:any = this.add_to_node(layout_ball, prefab)
                             if(infoNode){
+                                infoNode.info_obj = { level: level, count: level_count };
                                 this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_COUNT"),level_count);
                                 this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_LEVEL"), String(level) +  "级");
-                                this.add_click_event(infoNode,this.on_click_ball_select.bind(this))
+                                this.add_click_evenet_with_data(infoNode, "on_click_ball_select",{level: level, count: level_count})
                             }
                             let conSize = infoNode.getContentSize();
                             ball_count_all++;
@@ -223,68 +229,55 @@ export default class BallCenterDialog extends UIDialog {
         }
     }
 
-    on_click_ball_select(sender: cc.Component){
-        let compose_layer = this.view["KW_LAYOUT_COMPOSE"]
-        if (!compose_layer){
-            return;
+    on_click_ball_select(event:cc.Event, data:any){
+        let ballComponent: cc.Component = event.target.getComponent(cc.Button);
+        cc.log("hcc>>on_click_ball_select", ballComponent.node.name, data);
+        if(!data){
+            return
         }
-        let countNode:cc.Node = this.seek_child_by_name(sender.node,"KW_TEXT_COUNT")
-        let levelNode:cc.Node = this.seek_child_by_name(sender.node,"KW_TEXT_LEVEL")
-        if (countNode && levelNode){
-            let count = Number(this.get_string(countNode))
-            let level = this.get_string(levelNode);
-            count = count-1;
-            if (count >= 0 && compose_layer.childrenCount < GameAppConfig.BALL_COMPOSE_COUNT){
-                this.set_string(this.seek_child_by_name(sender.node,"KW_TEXT_COUNT"),String(count));
-            }
-            if(count < 0){
-                return;
-            }
-            console.log("hcc>>count: " , count ,  " ,level: " ,level)
+        let level = Number(data.level);
+        let count = Number(data.count);
+        let compose_layer = this.view["KW_LAYOUT_COMPOSE"];
+        let textCountNode = this.seek_child_by_name(ballComponent.node, "KW_TEXT_COUNT");
+        let textCount = Number(this.get_string(textCountNode));
+        if (level && count && compose_layer && textCount){
+            if (textCount > 0 && count > 0 && compose_layer.childrenCount < GameAppConfig.BALL_COMPOSE_COUNT){
+                textCount = textCount -1;
+                this.set_string(this.seek_child_by_name(ballComponent.node,"KW_TEXT_COUNT"),String(textCount))
+                //
+                let newNode: cc.Node = cc.instantiate(event.target);
+                this.clear_btn_click_event(newNode); //remove old click event
+                compose_layer.addChild(newNode);
+                newNode.y = 0;
+                this.set_string(this.seek_child_by_name(newNode, "KW_TEXT_COUNT"), "1");
+                this.add_click_evenet_with_data(newNode, "on_click_ball_unselect", data)
+            }    
         }
-
-        let childCount = compose_layer.childrenCount
-        if(childCount >=GameAppConfig.BALL_COMPOSE_COUNT){
-            return;
-        }
-
-        let newNode = cc.instantiate(sender.node);
-        compose_layer.addChild(newNode);
-        newNode.y = 0;
-        this.set_string(this.seek_child_by_name(newNode,"KW_TEXT_COUNT"),"1");
-        this.add_click_event(newNode,this.on_click_ball_unselect.bind(this))
     }
 
-    on_click_ball_unselect(sender: cc.Component){
-        let countNode:cc.Node = this.seek_child_by_name(sender.node,"KW_TEXT_COUNT");
-        let levelNode:cc.Node = this.seek_child_by_name(sender.node,"KW_TEXT_LEVEL");
-        if (countNode && levelNode){
-            let count = this.get_string(countNode);
-            let level = this.get_string(levelNode);
-            // this.set_string(this.seek_child_by_name(sender.node,"KW_TEXT_COUNT"),"1");
-            console.log("hcc>>unsel count: " , count ,  " ,level: " ,level)
+    on_click_ball_unselect(event:cc.Event, data:any){
+        let ballComponent: cc.Component = event.target.getComponent(cc.Button);
+        cc.log("hcc>>on_click_ball_unselect", ballComponent.node.name, data);
+        if (!data) {
+            return
         }
-        sender.node.destroy();
-
-        let scrollview:cc.Node = this.view["KW_SCROLLVIEW_NEW"];
-        let layout_ball:cc.Node = this.seek_child_by_name(scrollview,"KW_LAYOUT")
-        if(layout_ball){
+        let scrollview: cc.Node = this.view["KW_SCROLLVIEW_NEW"];
+        let layout_ball: cc.Node = this.seek_child_by_name(scrollview, "KW_LAYOUT")
+        if (layout_ball){
             let children = layout_ball.children;
-            for(let key in children){
-                let childNode = children[key];
-                let layoutLevelNode:cc.Node = this.seek_child_by_name(childNode,"KW_TEXT_LEVEL");
-                if (layoutLevelNode){
-                    let lyStr = this.get_string(layoutLevelNode)
-                    let lstr = this.get_string(levelNode)
-                    if(lyStr == lstr){
-                        let originCount = this.get_string(this.seek_child_by_name(childNode,"KW_TEXT_COUNT"));
+            for (let key in children) {
+                let childNode:any = children[key];
+                let info_obj = childNode.info_obj;
+                if (info_obj) {
+                    if (info_obj.level == data.level && info_obj.count == data.count) { //等级和个数都相等
+                        let originCount = this.get_string(this.seek_child_by_name(childNode, "KW_TEXT_COUNT"));
                         let tmpCount = Number(originCount) + 1;
-                        this.set_string(this.seek_child_by_name(childNode,"KW_TEXT_COUNT"),String(tmpCount));
+                        this.set_string(this.seek_child_by_name(childNode, "KW_TEXT_COUNT"), String(tmpCount));
+                        event.target.destroy();
                         break;
                     }
                 }
             }
         }
     }
-
 }

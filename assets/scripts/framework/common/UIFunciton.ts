@@ -45,11 +45,11 @@ export default class UIFunction {
         return isExist;
     }
 
-    public add_click_event(target: cc.Node, callback: Function, obj: any) {
+    public add_click_event(target: cc.Node, callback: Function, obj:any) {
         if (!this.node_exist(target)){
             return
         }
-        var component = target.getComponent(cc.Button);
+        var component:cc.Component = target.getComponent(cc.Button);
         if (!component) {
             return;
         }
@@ -67,6 +67,45 @@ export default class UIFunction {
         }
         target.on("click", func, obj);
     }
+
+    public add_click_evenet_with_data(target:cc.Node, callbackName:string, obj:cc.Component, customEventData?:any){
+        if (typeof(callbackName) != "string"){
+            cc.error("add_click_evenet_with_data>>callbackName is not string");
+            return;
+        }
+
+        if(callbackName == ""){
+            return;
+        }
+
+        if (!this.node_exist(target)) {
+            cc.error("add_click_evenet_with_data>>target node is not exist");
+            return
+        }
+
+        let btnComponent: cc.Button = target.getComponent(cc.Button);
+        if (!btnComponent) {
+            cc.error("add_click_evenet_with_data>>component is not exist");
+            return;
+        }
+
+        let fileName: string = obj.name;    // 例"LobbyUI<LobbySceneTouchEvent>"
+        let matchStr = fileName.match(/(?:<)(.*)(?:>)/i);//去除尖括号中字符串
+        if(!matchStr[1]){
+            cc.error("add_click_evenet_with_data>> " + callbackName + " , matchStr is not exist");
+            return;
+        }
+
+        let clickEventHandler       = new cc.Component.EventHandler();
+        clickEventHandler.target    = obj.node;             // 这个 node 节点是你的事件处理代码组件所属的节点
+        clickEventHandler.component = matchStr[1];          // 代码文件名
+        clickEventHandler.handler   = callbackName;
+        if (customEventData){
+            clickEventHandler.customEventData = customEventData; //自定义字符串
+        }
+        btnComponent.clickEvents.push(clickEventHandler);
+    }
+
 
     set_string(target: cc.Node, str: string){
         if (!this.node_exist(target)){

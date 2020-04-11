@@ -28,25 +28,22 @@ export class SocketDelegate implements ISocketDelegate {
         if(!decode_cmd){
             return
         }
+        let cmd_name = ProtoCmd.getCmdName(decode_cmd.stype, decode_cmd.ctype)
 
-        let cmd_name = ProtoCmd.getCmdName(decode_cmd.stype,decode_cmd.ctype)
+        cc.log("\n\n###########################>>>recvstart")
         if (cmd_name){
-            EventManager.emit(cmd_name,decode_cmd.body)
-        }
-
-        cc.log("###########################>>>recvstart")
-        if (cmd_name){
-            cc.log(StypeName[decode_cmd.stype],cmd_name);
+            cc.log("Svr:", StypeName[decode_cmd.stype], ",xyname:", cmd_name, ",xyid:", decode_cmd.ctype);
             let cmdbody = ""
             try {
                 cmdbody = JSON.stringify(decode_cmd.body)    
             } catch (error) {
             }
-            if(cmdbody){
-                cc.log(cmdbody)
-            }
+            cc.log(cmdbody)
         }
         cc.log("###########################>>>recvend\n\n")
+        if (cmd_name) {
+            EventManager.emit(cmd_name, decode_cmd.body)
+        }
     }
 
     on_socket_error(errMsg:any){

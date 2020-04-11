@@ -18,18 +18,19 @@ export default class GameApp extends cc.Component {
     //onload >> start
     onLoad () {
         this.node.addComponent("EnablePhysics"); //开启物理引擎
-        NetWork.getInstance().connect()
-
+        
         EventManager.on(EventDefine.EVENT_NET_CONNECTED, this, this.on_net_connected.bind(this));
         EventManager.on(EventDefine.EVENT_NET_CLOSED, this, this.on_net_closed.bind(this));
         EventManager.on(EventDefine.EVENT_NET_ERROR, this, this.on_net_error.bind(this));
+        NetWork.getInstance().connect();
+        cc.debug.setDisplayStats(false);
     }
 
     start () {
         let scene = new HotFixScene();
         SceneManager.getInstance().enter_scene_asyc(scene);
         PlatForm.printPlatForm()
-        // this.test_func()
+        this.test_func()
     }
 
     on_net_connected(event:cc.Event.EventCustom){
@@ -88,9 +89,10 @@ export default class GameApp extends cc.Component {
         // if(PlatForm.isWeChatGame()){
         //     console.log("hcc>>wx::::::" , wx);
         // }
-        PlatForm.getUserIP(function(ip:any){
-            console.log("hcc>>localip: ", ip);
-        });
+        
+        // PlatForm.getUserIP(function(ip:any){
+        //     console.log("hcc>>localip: ", ip);
+        // });
     }
 
 }

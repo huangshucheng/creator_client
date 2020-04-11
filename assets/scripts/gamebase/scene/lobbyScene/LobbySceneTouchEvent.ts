@@ -27,34 +27,23 @@ export default class LobbySceneTouchEvent extends UIController {
         this.add_click_event(this.view["BTN_MATCH_ROOM"],this.on_click_match_room.bind(this))
         this.add_click_event(this.view["BTN_MATCH_STOP"],this.on_click_match_stop.bind(this))
         this.add_click_event(this.view["KW_BTN_BALL"],this.on_click_ball_dialog.bind(this))
+        //带参数的点击事件
+        // this.add_click_evenet_with_data(this.view["KW_BTN_BALL"], "on_click_ball_dialog_data",[1,2,3,5]) // test
+    }
+    
+    //test
+    on_click_ball_dialog_data(event: cc.Event, customEventData: any) {
+        // let tgNode: cc.Node = event.target;
+        // let btn = tgNode.getComponent(cc.Button);
+        // cc.log("hccccc11111", customEventData, btn.name, tgNode.name);
     }
 
     on_click_set(sender:cc.Component) {
-        // LobbySceneSendAuthMsg.send_login_out()
-        // SceneManager.getInstance().enter_scene_asyc(new LoginScene())
-
-        //test
-        // DialogManager.getInstance().show_common_dialog(2,function (resComp:any) {
-        //     if(resComp){
-        //         resComp.set_content_text("你好你好，在干啥呢？？？？,你好你好，在干啥呢？？？？,,,你好你好，在干啥呢？？？？,,,你好你好，在干啥呢？？？？")
-        //     }
-        // })
-
-        // let qrcode = QRCode.generate("huangshucheng")
-        // let qrcode_html = QRCode.generatePNG("huangshucheng")
-        // cc.sys.openURL(qrcode_html)
-        // cc.log(qrcode_html)
-
-        // let ecde = Base64.encode("huangshucheng")
-        // cc.log("ecde: " , ecde)
-        // let ssss = Base64.decode(ecde)
-        // cc.log("decode: " , ssss)
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogMyCenter","MyCenterDialog")
         // LobbySendGameHoodleMsg.send_update_uball_info(1,7);--test compose
     }
 
     on_click_create_room(sender:cc.Component){
-        // SceneManager.getInstance().enter_scene_asyc(new GameScene())
         let gamerule = {
             playerCount : GameHoodleConfig.playerCount,
             playCount : GameHoodleConfig.playCount,
@@ -65,9 +54,6 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_login_logic(sender:cc.Component){
-        ////test
-        // LobbySceneSendAuthMsg.send_login_out()
-
         DialogManager.getInstance().show_weak_hint("你好你好，在干啥呢？？？？啊啊大打发士大夫阿道夫")
         DialogManager.getInstance().show_weak_hint("你好你好")
         
@@ -86,7 +72,6 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_match_room(sender: cc.Component){
-        console.log("hcc>>on_click_match_room")
         LobbySendGameHoodleMsg.send_user_match();
     }
     

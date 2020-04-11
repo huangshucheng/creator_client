@@ -11,9 +11,7 @@ export default class GameSceneInit extends UIController {
     }
 
     start () {
-        // this.scheduleOnce(function(){
-            GameSendGameHoodleMsg.send_check_link_game();
-        // },0.1);
+        GameSendGameHoodleMsg.send_check_link_game();
     }
     
 }

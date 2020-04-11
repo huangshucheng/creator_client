@@ -1,0 +1,27 @@
+{
+  "name": "creator_client",
+  "version": "1.0.0",
+  "description": "cocoscreator客户端",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huangshucheng/creator_client.git"
+  },
+  "author": "hcc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huangshucheng/creator_client/issues"
+  },
+  "homepage": "https://github.com/huangshucheng/creator_client#readme",
+  "devDependencies": {
+    "grunt": "^1.1.0",
+    "grunt-shell": "^3.0.1",
+    "grunt-sync": "^0.8.2"
+  },
+  "dependencies": {
+    "rd": "^2.0.1"
+  }
+}

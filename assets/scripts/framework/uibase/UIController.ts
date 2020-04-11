@@ -33,6 +33,10 @@ export default abstract class UIController extends cc.Component {
         UIFunction.getInstance().add_click_event(target, callback, this)
     }
 
+    add_click_evenet_with_data(target: cc.Node, callbackName:string, customEventData?: any) {
+        UIFunction.getInstance().add_click_evenet_with_data(target, callbackName, this, customEventData);
+    }
+
     add_to_node(parent: cc.Node, prefab: cc.Prefab, scriptName?: string){
         return UIFunction.getInstance().add_to_node(parent, prefab,scriptName)
     }
@@ -78,6 +82,17 @@ export default abstract class UIController extends cc.Component {
 
     seek_child_by_name(target:cc.Node, name:string){
         return UIFunction.getInstance().seek_widget_by_name(target,name)
+    }
+
+    clear_btn_click_event(target:cc.Node){
+        if (!UIFunction.getInstance().node_exist(target)) {
+            return
+        }
+        var component: cc.Button = target.getComponent(cc.Button);
+        if (!component) {
+            return;
+        }
+        component.clickEvents.splice(0, component.clickEvents.length); //remove old click event
     }
 
 }
