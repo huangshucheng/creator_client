@@ -45,12 +45,7 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_create_room(sender:cc.Component){
-        let gamerule = {
-            playerCount : GameHoodleConfig.playerCount,
-            playCount : GameHoodleConfig.playCount,
-        }
-
-        let ruleStr = JSON.stringify(gamerule);
+        let ruleStr = JSON.stringify(GameHoodleConfig.BOX_GAME_RULE);
         LobbySendGameHoodleMsg.send_create_room(ruleStr);
     }
 
@@ -85,7 +80,6 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_store(sender: cc.Component){
-        cc.log("store click");
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogStore", "StoreDialog")
     }
 

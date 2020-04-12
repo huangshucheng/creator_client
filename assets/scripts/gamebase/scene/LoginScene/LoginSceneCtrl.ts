@@ -1,10 +1,4 @@
 import UIController from '../../../framework/uibase/UIController';
-import Log from '../../../framework/utils/Log';
-import EventManager from '../../../framework/manager/EventManager';
-import EventDefine from '../../../framework/config/EventDefine';
-import NetWork from '../../../framework/network/NetWork';
-import {Stype } from '../../../framework/protocol/Stype';
-import { Cmd } from "./../../../framework/protocol/AuthProto";
 
 const {ccclass, property} = cc._decorator;
 

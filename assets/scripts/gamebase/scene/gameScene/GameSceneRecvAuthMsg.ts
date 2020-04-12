@@ -1,7 +1,7 @@
 import UIController from '../../../framework/uibase/UIController';
 import EventManager from '../../../framework/manager/EventManager';
 import { Cmd, CmdName } from "../../../framework/protocol/AuthProto";
-import Response from '../../../framework/config/Response';
+import Response from '../../../framework/protocol/Response';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LoginScene from '../LoginScene/LoginScene';
 import Storage from '../../../framework/utils/Storage';

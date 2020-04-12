@@ -1,7 +1,4 @@
 import UIDialog from '../../framework/uibase/UIDialog';
-import DialogManager from '../../framework/manager/DialogManager';
-import Storage from '../../framework/utils/Storage';
-import LSDefine from '../../framework/config/LSDefine';
 import LobbySceneSendAuthMsg from '../scene/lobbyScene/sendMsg/LobbySendAuthMsg';
 import SceneManager from '../../framework/manager/SceneManager';
 import LoginScene from '../scene/LoginScene/LoginScene';

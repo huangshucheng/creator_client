@@ -1,7 +1,6 @@
 import UIController from '../../../framework/uibase/UIController';
 import DialogManager from '../../../framework/manager/DialogManager';
 import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
-import RoomData from '../../common/RoomData';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LobbyScene from '../lobbyScene/LobbyScene';
 

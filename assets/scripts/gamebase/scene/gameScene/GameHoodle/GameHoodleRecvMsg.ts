@@ -3,7 +3,7 @@ import UIController from "../../../../framework/uibase/UIController";
 import EventManager from "../../../../framework/manager/EventManager";
 import { Cmd, CmdName } from "../../../../framework/protocol/GameHoodleProto";
 import GameHoodleData from './GameHoodleData';
-import Response from '../../../../framework/config/Response';
+import Response from '../../../../framework/protocol/Response';
 import RoomData from '../../../common/RoomData';
 import { PlayerPower } from '../../../common/State';
 import HoodleBallManager from './HoodleBallManager';

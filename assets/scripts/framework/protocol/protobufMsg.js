@@ -16362,7 +16362,7 @@ $root.GameHoodleProto = (function() {
          * @property {number} propid OneStoreProp propid
          * @property {number} propcount OneStoreProp propcount
          * @property {number} propprice OneStoreProp propprice
-         * @property {number} propinfo OneStoreProp propinfo
+         * @property {string} propinfo OneStoreProp propinfo
          */
 
         /**
@@ -16414,11 +16414,11 @@ $root.GameHoodleProto = (function() {
 
         /**
          * OneStoreProp propinfo.
-         * @member {number} propinfo
+         * @member {string} propinfo
          * @memberof GameHoodleProto.OneStoreProp
          * @instance
          */
-        OneStoreProp.prototype.propinfo = 0;
+        OneStoreProp.prototype.propinfo = "";
 
         /**
          * Creates a new OneStoreProp instance using the specified properties.
@@ -16448,7 +16448,7 @@ $root.GameHoodleProto = (function() {
             writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propid);
             writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.propcount);
             writer.uint32(/* id 4, wireType 0 =*/32).sint32(message.propprice);
-            writer.uint32(/* id 5, wireType 0 =*/40).sint32(message.propinfo);
+            writer.uint32(/* id 5, wireType 2 =*/42).string(message.propinfo);
             return writer;
         };
 
@@ -16496,7 +16496,7 @@ $root.GameHoodleProto = (function() {
                     message.propprice = reader.sint32();
                     break;
                 case 5:
-                    message.propinfo = reader.sint32();
+                    message.propinfo = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -16551,8 +16551,8 @@ $root.GameHoodleProto = (function() {
                 return "propcount: integer expected";
             if (!$util.isInteger(message.propprice))
                 return "propprice: integer expected";
-            if (!$util.isInteger(message.propinfo))
-                return "propinfo: integer expected";
+            if (!$util.isString(message.propinfo))
+                return "propinfo: string expected";
             return null;
         };
 
@@ -16577,7 +16577,7 @@ $root.GameHoodleProto = (function() {
             if (object.propprice != null)
                 message.propprice = object.propprice | 0;
             if (object.propinfo != null)
-                message.propinfo = object.propinfo | 0;
+                message.propinfo = String(object.propinfo);
             return message;
         };
 
@@ -16599,7 +16599,7 @@ $root.GameHoodleProto = (function() {
                 object.propid = 0;
                 object.propcount = 0;
                 object.propprice = 0;
-                object.propinfo = 0;
+                object.propinfo = "";
             }
             if (message.propsvrindex != null && message.hasOwnProperty("propsvrindex"))
                 object.propsvrindex = message.propsvrindex;
@@ -17029,7 +17029,7 @@ $root.GameHoodleProto = (function() {
          * @property {number} propid BuyThingsReq propid
          * @property {number} propcount BuyThingsReq propcount
          * @property {number} propprice BuyThingsReq propprice
-         * @property {number} propinfo BuyThingsReq propinfo
+         * @property {string} propinfo BuyThingsReq propinfo
          */
 
         /**
@@ -17081,11 +17081,11 @@ $root.GameHoodleProto = (function() {
 
         /**
          * BuyThingsReq propinfo.
-         * @member {number} propinfo
+         * @member {string} propinfo
          * @memberof GameHoodleProto.BuyThingsReq
          * @instance
          */
-        BuyThingsReq.prototype.propinfo = 0;
+        BuyThingsReq.prototype.propinfo = "";
 
         /**
          * Creates a new BuyThingsReq instance using the specified properties.
@@ -17115,7 +17115,7 @@ $root.GameHoodleProto = (function() {
             writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propid);
             writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.propcount);
             writer.uint32(/* id 4, wireType 0 =*/32).sint32(message.propprice);
-            writer.uint32(/* id 5, wireType 0 =*/40).sint32(message.propinfo);
+            writer.uint32(/* id 5, wireType 2 =*/42).string(message.propinfo);
             return writer;
         };
 
@@ -17163,7 +17163,7 @@ $root.GameHoodleProto = (function() {
                     message.propprice = reader.sint32();
                     break;
                 case 5:
-                    message.propinfo = reader.sint32();
+                    message.propinfo = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -17218,8 +17218,8 @@ $root.GameHoodleProto = (function() {
                 return "propcount: integer expected";
             if (!$util.isInteger(message.propprice))
                 return "propprice: integer expected";
-            if (!$util.isInteger(message.propinfo))
-                return "propinfo: integer expected";
+            if (!$util.isString(message.propinfo))
+                return "propinfo: string expected";
             return null;
         };
 
@@ -17244,7 +17244,7 @@ $root.GameHoodleProto = (function() {
             if (object.propprice != null)
                 message.propprice = object.propprice | 0;
             if (object.propinfo != null)
-                message.propinfo = object.propinfo | 0;
+                message.propinfo = String(object.propinfo);
             return message;
         };
 
@@ -17266,7 +17266,7 @@ $root.GameHoodleProto = (function() {
                 object.propid = 0;
                 object.propcount = 0;
                 object.propprice = 0;
-                object.propinfo = 0;
+                object.propinfo = "";
             }
             if (message.propsvrindex != null && message.hasOwnProperty("propsvrindex"))
                 object.propsvrindex = message.propsvrindex;
@@ -17301,11 +17301,12 @@ $root.GameHoodleProto = (function() {
          * Properties of a BuyThingsRes.
          * @memberof GameHoodleProto
          * @interface IBuyThingsRes
-         * @property {number} propsvrindex BuyThingsRes propsvrindex
-         * @property {number} propid BuyThingsRes propid
-         * @property {number} propcount BuyThingsRes propcount
-         * @property {number} propprice BuyThingsRes propprice
-         * @property {number} propinfo BuyThingsRes propinfo
+         * @property {number} status BuyThingsRes status
+         * @property {number|null} [propsvrindex] BuyThingsRes propsvrindex
+         * @property {number|null} [propid] BuyThingsRes propid
+         * @property {number|null} [propcount] BuyThingsRes propcount
+         * @property {number|null} [propprice] BuyThingsRes propprice
+         * @property {string|null} [propinfo] BuyThingsRes propinfo
          */
 
         /**
@@ -17322,6 +17323,14 @@ $root.GameHoodleProto = (function() {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+
+        /**
+         * BuyThingsRes status.
+         * @member {number} status
+         * @memberof GameHoodleProto.BuyThingsRes
+         * @instance
+         */
+        BuyThingsRes.prototype.status = 0;
 
         /**
          * BuyThingsRes propsvrindex.
@@ -17357,11 +17366,11 @@ $root.GameHoodleProto = (function() {
 
         /**
          * BuyThingsRes propinfo.
-         * @member {number} propinfo
+         * @member {string} propinfo
          * @memberof GameHoodleProto.BuyThingsRes
          * @instance
          */
-        BuyThingsRes.prototype.propinfo = 0;
+        BuyThingsRes.prototype.propinfo = "";
 
         /**
          * Creates a new BuyThingsRes instance using the specified properties.
@@ -17387,11 +17396,17 @@ $root.GameHoodleProto = (function() {
         BuyThingsRes.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.propsvrindex);
-            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propid);
-            writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.propcount);
-            writer.uint32(/* id 4, wireType 0 =*/32).sint32(message.propprice);
-            writer.uint32(/* id 5, wireType 0 =*/40).sint32(message.propinfo);
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.propsvrindex != null && message.hasOwnProperty("propsvrindex"))
+                writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propsvrindex);
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.propid);
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                writer.uint32(/* id 4, wireType 0 =*/32).sint32(message.propcount);
+            if (message.propprice != null && message.hasOwnProperty("propprice"))
+                writer.uint32(/* id 5, wireType 0 =*/40).sint32(message.propprice);
+            if (message.propinfo != null && message.hasOwnProperty("propinfo"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.propinfo);
             return writer;
         };
 
@@ -17427,35 +17442,30 @@ $root.GameHoodleProto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.propsvrindex = reader.sint32();
+                    message.status = reader.sint32();
                     break;
                 case 2:
-                    message.propid = reader.sint32();
+                    message.propsvrindex = reader.sint32();
                     break;
                 case 3:
-                    message.propcount = reader.sint32();
+                    message.propid = reader.sint32();
                     break;
                 case 4:
-                    message.propprice = reader.sint32();
+                    message.propcount = reader.sint32();
                     break;
                 case 5:
-                    message.propinfo = reader.sint32();
+                    message.propprice = reader.sint32();
+                    break;
+                case 6:
+                    message.propinfo = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
-            if (!message.hasOwnProperty("propsvrindex"))
-                throw $util.ProtocolError("missing required 'propsvrindex'", { instance: message });
-            if (!message.hasOwnProperty("propid"))
-                throw $util.ProtocolError("missing required 'propid'", { instance: message });
-            if (!message.hasOwnProperty("propcount"))
-                throw $util.ProtocolError("missing required 'propcount'", { instance: message });
-            if (!message.hasOwnProperty("propprice"))
-                throw $util.ProtocolError("missing required 'propprice'", { instance: message });
-            if (!message.hasOwnProperty("propinfo"))
-                throw $util.ProtocolError("missing required 'propinfo'", { instance: message });
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
             return message;
         };
 
@@ -17486,16 +17496,23 @@ $root.GameHoodleProto = (function() {
         BuyThingsRes.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (!$util.isInteger(message.propsvrindex))
-                return "propsvrindex: integer expected";
-            if (!$util.isInteger(message.propid))
-                return "propid: integer expected";
-            if (!$util.isInteger(message.propcount))
-                return "propcount: integer expected";
-            if (!$util.isInteger(message.propprice))
-                return "propprice: integer expected";
-            if (!$util.isInteger(message.propinfo))
-                return "propinfo: integer expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.propsvrindex != null && message.hasOwnProperty("propsvrindex"))
+                if (!$util.isInteger(message.propsvrindex))
+                    return "propsvrindex: integer expected";
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                if (!$util.isInteger(message.propid))
+                    return "propid: integer expected";
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                if (!$util.isInteger(message.propcount))
+                    return "propcount: integer expected";
+            if (message.propprice != null && message.hasOwnProperty("propprice"))
+                if (!$util.isInteger(message.propprice))
+                    return "propprice: integer expected";
+            if (message.propinfo != null && message.hasOwnProperty("propinfo"))
+                if (!$util.isString(message.propinfo))
+                    return "propinfo: string expected";
             return null;
         };
 
@@ -17511,6 +17528,8 @@ $root.GameHoodleProto = (function() {
             if (object instanceof $root.GameHoodleProto.BuyThingsRes)
                 return object;
             var message = new $root.GameHoodleProto.BuyThingsRes();
+            if (object.status != null)
+                message.status = object.status | 0;
             if (object.propsvrindex != null)
                 message.propsvrindex = object.propsvrindex | 0;
             if (object.propid != null)
@@ -17520,7 +17539,7 @@ $root.GameHoodleProto = (function() {
             if (object.propprice != null)
                 message.propprice = object.propprice | 0;
             if (object.propinfo != null)
-                message.propinfo = object.propinfo | 0;
+                message.propinfo = String(object.propinfo);
             return message;
         };
 
@@ -17538,12 +17557,15 @@ $root.GameHoodleProto = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
+                object.status = 0;
                 object.propsvrindex = 0;
                 object.propid = 0;
                 object.propcount = 0;
                 object.propprice = 0;
-                object.propinfo = 0;
+                object.propinfo = "";
             }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
             if (message.propsvrindex != null && message.hasOwnProperty("propsvrindex"))
                 object.propsvrindex = message.propsvrindex;
             if (message.propid != null && message.hasOwnProperty("propid"))

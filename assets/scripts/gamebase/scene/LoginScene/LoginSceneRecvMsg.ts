@@ -3,7 +3,7 @@ import EventManager from '../../../framework/manager/EventManager';
 import EventDefine from '../../../framework/config/EventDefine';
 import Log from '../../../framework/utils/Log';
 import { Cmd, CmdName } from "./../../../framework/protocol/AuthProto";
-import Response from '../../../framework/config/Response';
+import Response from '../../../framework/protocol/Response';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LobbyScene from '../lobbyScene/LobbyScene';
 import Storage from '../../../framework/utils/Storage';

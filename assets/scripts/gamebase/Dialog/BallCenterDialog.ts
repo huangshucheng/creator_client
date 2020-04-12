@@ -1,12 +1,12 @@
 import UIDialog from '../../framework/uibase/UIDialog';
 import EventManager from '../../framework/manager/EventManager';
 import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
-import Response from '../../framework/config/Response';
+import Response from '../../framework/protocol/Response';
 import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import ArrayUtil from '../../framework/utils/ArrayUtil';
-import GameAppConfig from '../../framework/config/GameAppConfig';
 import DialogManager from '../../framework/manager/DialogManager';
+import GameHoodleConfig from '../../framework/config/GameHoodleConfig';
 
 const { ccclass, property } = cc._decorator;
 
@@ -99,7 +99,7 @@ export default class BallCenterDialog extends UIDialog {
             }
         }
 
-        if (level_array.length != GameAppConfig.BALL_COMPOSE_COUNT){
+        if (level_array.length != GameHoodleConfig.BALL_COMPOSE_COUNT){
             DialogManager.getInstance().show_weak_hint("小球合成需要3个，目前不足!")
             return;
         }
@@ -261,7 +261,7 @@ export default class BallCenterDialog extends UIDialog {
         let textCountNode = this.seek_child_by_name(ballComponent.node, "KW_TEXT_COUNT");
         let textCount = Number(this.get_string(textCountNode));
         if (level && count && compose_layer && textCount){
-            if (textCount > 0 && count > 0 && compose_layer.childrenCount < GameAppConfig.BALL_COMPOSE_COUNT){
+            if (textCount > 0 && count > 0 && compose_layer.childrenCount < GameHoodleConfig.BALL_COMPOSE_COUNT){
                 textCount = textCount -1;
                 this.set_string(this.seek_child_by_name(ballComponent.node,"KW_TEXT_COUNT"),String(textCount))
                 //

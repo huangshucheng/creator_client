@@ -1,5 +1,4 @@
 import UIDialog from '../../framework/uibase/UIDialog';
-import DialogManager from '../../framework/manager/DialogManager';
 
 const { ccclass, property } = cc._decorator;
 

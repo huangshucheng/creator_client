@@ -28,7 +28,6 @@
 小球缩小  OK
 房间规则隐藏  OK
 做一个上下摇摆，控制冲力的开关  OK
-
 点击事件能加参数 类似lua的handler  OK
 
 游戏玩法：
@@ -47,32 +46,8 @@
 匹配->胜利/失败/ 可获得/丢失金币  OK
 
 商城系统:
-可购买弹珠(低等级弹珠)，消费金币
-可以卖出弹珠，但是卖出价格比较低
-
-商城列表协议：
-StoreListReq;
-StoreListRes;
-{
-status,
-propid,
-propcount,
-propprice,
-}
-
-购买协议：
-ChargeReq;
-{
-propid,
-propcount,
-}
-
-ChargeRes;
-{
-status,
-propid,
-propcount,
-}
+可购买弹珠(低等级弹珠)，消费金币 OK
+可以卖出弹珠，但是卖出价格比较低（暂时先不做）
 
 弹珠系统：
 弹珠分等级，不同弹珠，皮肤，光效，动画，不一样

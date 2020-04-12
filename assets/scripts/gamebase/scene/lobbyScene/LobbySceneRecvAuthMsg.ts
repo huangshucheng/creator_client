@@ -1,7 +1,7 @@
 import UIController from '../../../framework/uibase/UIController';
 import EventManager from '../../../framework/manager/EventManager';
 import { Cmd, CmdName } from "../../../framework/protocol/AuthProto";
-import Response from '../../../framework/config/Response';
+import Response from '../../../framework/protocol/Response';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LoginScene from '../LoginScene/LoginScene';
 import Storage from '../../../framework/utils/Storage';
@@ -34,6 +34,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
         EventManager.on(CmdName[Cmd.eLoginOutRes], this, this.on_event_login_out)
         EventManager.on(CmdName[Cmd.eReloginRes], this, this.on_event_relogin)
     }
+    
     //重连成功-》登录游戏-》登录逻辑服务-》获取玩家信息
     on_net_connected(event:cc.Event.EventCustom){
         let loginType = Storage.get(LSDefine.USER_LOGIN_TYPE)

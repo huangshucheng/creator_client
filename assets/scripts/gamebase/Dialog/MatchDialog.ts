@@ -1,11 +1,8 @@
 import UIDialog from '../../framework/uibase/UIDialog';
-import DialogManager from '../../framework/manager/DialogManager';
-import LobbyScene from '../scene/lobbyScene/LobbyScene';
-import SceneManager from '../../framework/manager/SceneManager';
 import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
 import EventManager from '../../framework/manager/EventManager';
 import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
-import Response from '../../framework/config/Response';
+import Response from '../../framework/protocol/Response';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 
 //匹配界面

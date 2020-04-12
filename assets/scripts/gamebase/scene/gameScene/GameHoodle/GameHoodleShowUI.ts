@@ -1,12 +1,10 @@
 //游戏消息
 import UIController from "../../../../framework/uibase/UIController";
-import EventManager from "../../../../framework/manager/EventManager";
-import { Cmd, CmdName } from "../../../../framework/protocol/GameHoodleProto";
 import UIFunction from "../../../../framework/common/UIFunciton";
 import RoomData from '../../../common/RoomData';
 import Player from '../../../common/Player';
 import HoodleBallManager from "./HoodleBallManager";
-import GameAppConfig from '../../../../framework/config/GameAppConfig';
+import GameHoodleConfig from "../../../../framework/config/GameHoodleConfig";
 
 let PROGRESS_SPEED = 0.02
 
@@ -21,7 +19,7 @@ export default class GameHoodleShowUI extends UIController {
     onLoad () {
         super.onLoad();
         //test ball
-        if(GameAppConfig.IS_TEST_BALL){
+        if (GameHoodleConfig.IS_TEST_BALL){
             this.test_boarn_ball()
         }
         this.set_power_percent_visible(false);

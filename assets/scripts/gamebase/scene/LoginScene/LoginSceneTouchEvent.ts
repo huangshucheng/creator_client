@@ -1,13 +1,9 @@
 import UIController from '../../../framework/uibase/UIController';
-import NetWork from '../../../framework/network/NetWork';
-import { Cmd, CmdName } from '../../../framework/protocol/AuthProto';
-import { Stype,StypeName } from '../../../framework/protocol/Stype';
 import LoginSendAuthMsg from './sendMsg/LoginSendAuthMsg';
 import StringUtil from '../../../framework/utils/StringUtil';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
-import UIFunction from '../../../framework/common/UIFunciton';
 
 const {ccclass, property} = cc._decorator;
 

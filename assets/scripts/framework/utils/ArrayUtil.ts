@@ -1,14 +1,26 @@
 class ArrayUtil {
     //删除数组[]内元素，不适用对象{}
     static ArrayRemove(array:any,obj:any):boolean{
-        //TODO ,array 用typeof判断类型，分对象或者数组
-        var idx = array.indexOf(obj)
-        if (idx > -1){
-            array.splice(idx,1)
-            return true;
+        if(Array.isArray(array)){
+            var idx = array.indexOf(obj)
+            if (idx > -1){
+                array.splice(idx,1)
+                return true;
+            }
         }
         return false;
     }
+
+    static ObjRemove(obj:any, key:any){
+        if(ArrayUtil.GetArrayLen(obj) > 0){
+            if(obj[key]){
+                delete obj[key];
+                return true;
+            }
+        }
+        return false;
+    }
+
     //获取对象{},或者数组[],的长度
     static GetArrayLen(array:any){
         let count = 0;

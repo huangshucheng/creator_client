@@ -1,7 +1,8 @@
 import NetWork from '../../../../framework/network/NetWork';
 import { Stype } from '../../../../framework/protocol/Stype';
 import { Cmd } from '../../../../framework/protocol/GameHoodleProto';
-import GameAppConfig from '../../../../framework/config/GameAppConfig';
+import GameHoodleConfig from '../../../../framework/config/GameHoodleConfig';
+import ArrayUtil from '../../../../framework/utils/ArrayUtil';
 
 export default class GameSendGameHoodleMsg {
     
@@ -33,6 +34,33 @@ export default class GameSendGameHoodleMsg {
         GameSendGameHoodleMsg.send(Cmd.eUserReadyReq)
     }
 
+    static send_get_player_ball_info() {
+        GameSendGameHoodleMsg.send(Cmd.eUserBallInfoReq);
+    }
+
+    static send_ball_compose(level: number, count?: number) {
+        if (!count) {
+            count = 1;
+        }
+        let body = {
+            updatetype: GameHoodleConfig.BALL_UPDATE_TYPE.COMPOSE_TYPE,
+            level: level,
+            count: count,
+        }
+        GameSendGameHoodleMsg.send(Cmd.eUpdateUserBallReq, body);
+    }
+
+    static send_store_list_req(){
+        GameSendGameHoodleMsg.send(Cmd.eStoreListReq);
+    }
+
+    static send_buy_product(productinfo:any){
+        if(!productinfo || ArrayUtil.GetArrayLen(productinfo) <= 0){
+            return;
+        }
+        GameSendGameHoodleMsg.send(Cmd.eBuyThingsReq, productinfo);
+    }
+
     ////////////////////////
     //游戏具体逻辑
     ////////////////////////
@@ -60,7 +88,7 @@ export default class GameSendGameHoodleMsg {
     */
     static send_all_player_ball_pos(posArray:Array<any>){
         let body = {
-                positions: posArray,
+            positions: posArray,
         }
         GameSendGameHoodleMsg.send(Cmd.ePlayerBallPosReq,body);
     }
@@ -72,21 +100,5 @@ export default class GameSendGameHoodleMsg {
             desseatid: des_seatid,
         }
         GameSendGameHoodleMsg.send(Cmd.ePlayerIsShootedReq,body);
-    }
-
-    static send_get_player_ball_info(){
-        GameSendGameHoodleMsg.send(Cmd.eUserBallInfoReq);
-    }
-
-    static send_ball_compose(level:number, count?:number){
-        if (!count){
-            count = 0;
-        }
-        let body = {
-            updatetype: GameAppConfig.BALL_UPDATE_TYPE.COMPOSE_TYPE,
-            level: level,
-            count: count,
-        }
-        GameSendGameHoodleMsg.send(Cmd.eUpdateUserBallReq, body)
     }
 }

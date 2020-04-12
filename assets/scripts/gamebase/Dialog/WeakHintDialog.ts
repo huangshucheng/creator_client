@@ -1,4 +1,3 @@
-import UIDialog from '../../framework/uibase/UIDialog';
 import DialogManager from '../../framework/manager/DialogManager';
 import UIController from '../../framework/uibase/UIController';
 

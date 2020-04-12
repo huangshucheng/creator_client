@@ -9,7 +9,6 @@ import EventDefine from '../framework/config/EventDefine';
 import NetWork from '../framework/network/NetWork';
 import DialogManager from '../framework/manager/DialogManager';
 import PlatForm from '../framework/config/PlatForm';
-import StringUtil from '../framework/utils/StringUtil';
 
 const {ccclass, property} = cc._decorator;
 
@@ -50,49 +49,14 @@ export default class GameApp extends cc.Component {
         Log.info("GameApp hcc>>>on_net_error")
         DialogManager.getInstance().show_weak_hint("网络断开!")
     }
+
     //test
     test_func(){
         /*
-        //array test
-        let array = {
-            [0]: 1,
-            [1]: "222222",
-            [3]: "sdfsdfds",
-            [9]: 9999,
-        }
-        let count = 0;
-        for(let key in array){
-            count ++;
-            cc.log("key: " , key , " ,value: " , array[key])
-        }
-        cc.log("count: " , count)
         //
         this.node.convertToNodeSpaceAR(cc.v2(100,100)); //将世界坐标ccv2(100,100)转换成node下的节点坐标系  
         this.node.convertToWorldSpaceAR(cc.v2(100,100)); // 将节点坐标系node下的一个点cc.v2(100,100)转换到世界空间坐标系。
         */
-        //1080  1920
-        // -540-> 540
-        // -960-> 960
-        //0 - 1
-    //    let posx = StringUtil.random_int(-540 , 540);
-    //    let posy = StringUtil.random_int(-960 , 960);
-    //    console.log("hcc>>startpos: " , posx, posy)
-
-    //    if(undefined){
-    //         console.log("hcc>> undefined is true");
-    //    }else{
-    //     console.log("hcc>> undefined is false");
-    //    }
-
-        // console.log("hcc>>winsize: " , cc.winSize);
-        // console.log("hcc>>iswechatgame: " , PlatForm.isWeChatGame())
-        // if(PlatForm.isWeChatGame()){
-        //     console.log("hcc>>wx::::::" , wx);
-        // }
-        
-        // PlatForm.getUserIP(function(ip:any){
-        //     console.log("hcc>>localip: ", ip);
-        // });
     }
 
 }

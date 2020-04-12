@@ -1,10 +1,9 @@
 import UIDialog from '../../framework/uibase/UIDialog';
-import DialogManager from '../../framework/manager/DialogManager';
 import StringUtil from '../../framework/utils/StringUtil';
 import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
 import EventManager from '../../framework/manager/EventManager';
 import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
-import Response from '../../framework/config/Response';
+import Response from '../../framework/protocol/Response';
 
 const { ccclass, property } = cc._decorator;
 
