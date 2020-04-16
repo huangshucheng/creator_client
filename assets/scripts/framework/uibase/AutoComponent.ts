@@ -1,3 +1,6 @@
+//自动绑定UI节点工具
+//节点名字需要和界面上的UI名字一样，支持绑定prefab
+
 let { ccclass, property, executeInEditMode } = cc._decorator;
 let DEBUG = false;
 let assets = [];

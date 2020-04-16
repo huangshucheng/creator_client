@@ -436,5 +436,4 @@ export default class UIFunction {
         }
         return null;
     }
-    
 }

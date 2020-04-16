@@ -49,6 +49,11 @@ export default class PlatForm {
         return false;
     }
 
+    // 获得当前域名
+    static getCurDomain() {
+        return `${window.location.protocol}//${window.location.hostname}`
+    }
+
     //获取本地ip,浏览器有用，模拟器无效
     //  onNewIp - your listener function for new IPs
     static getUserIP(onNewIP:Function) {
