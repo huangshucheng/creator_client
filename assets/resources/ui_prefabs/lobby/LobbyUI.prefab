@@ -48,7 +48,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1080,
-      "height": 1920
+      "height": 1920.0000000000002
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -58,7 +58,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 540,
-      "y": 960,
+      "y": 960.0000000000001,
       "z": 0
     },
     "_scale": {
@@ -111,7 +111,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1080,
-      "height": 1920
+      "height": 1920.0000000000002
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -267,7 +267,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 960,
+      "y": 960.0000000000001,
       "z": 0
     },
     "_scale": {
@@ -1114,7 +1114,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 426,
-      "y": -1785,
+      "y": -1729,
       "z": 0
     },
     "_scale": {
@@ -1352,7 +1352,7 @@
     "_left": 868.7239999999999,
     "_right": 39,
     "_top": 1577.67,
-    "_bottom": -1660,
+    "_bottom": -1604,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -1424,8 +1424,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 218.13399999999996,
-      "y": -1785,
+      "x": 218,
+      "y": -1729,
       "z": 0
     },
     "_scale": {
@@ -1661,9 +1661,9 @@
     "_target": null,
     "_alignFlags": 36,
     "_left": 868.7239999999999,
-    "_right": 246.86600000000004,
+    "_right": 247.00000000000003,
     "_top": 1577.67,
-    "_bottom": -1660,
+    "_bottom": -1604,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -1735,8 +1735,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 15.223000000000013,
-      "y": -1785,
+      "x": 15,
+      "y": -1729,
       "z": 0
     },
     "_scale": {
@@ -1972,9 +1972,9 @@
     "_target": null,
     "_alignFlags": 36,
     "_left": 868.7239999999999,
-    "_right": 449.777,
+    "_right": 450,
     "_top": 1577.67,
-    "_bottom": -1660,
+    "_bottom": -1604,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -2119,7 +2119,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1080,
-      "height": 1580
+      "height": 1580.0000000000002
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3600,7 +3600,7 @@
     "_layoutSize": {
       "__type__": "cc.Size",
       "width": 1080,
-      "height": 1580
+      "height": 1580.0000000000002
     },
     "_resize": 0,
     "_N$layoutType": 0,

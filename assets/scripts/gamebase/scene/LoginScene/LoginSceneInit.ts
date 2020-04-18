@@ -2,6 +2,7 @@ import UIController from '../../../framework/uibase/UIController';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 import PlatForm from '../../../framework/config/PlatForm';
+import { ResourceManager } from '../../../framework/manager/ResourceManager';
 
 const {ccclass, property} = cc._decorator;
 
@@ -14,6 +15,12 @@ export default class LoginSceneInit extends UIController {
 
     start () {
         this.initUI();
+
+        //test
+        // let manifest = ResourceManager.getInstance().getRes("ui_prefabs/dialog/DialogBallCenter", cc.Asset);
+        // let manifest = ResourceManager.getInstance().getRes("manifest/project_json", cc.Asset);
+        // let manifest = ResourceManager.getInstance().getRes("manifest/project", cc.Asset);
+        // cc.log("hcc>>manifest: ", manifest);
     }
 
     initUI(){

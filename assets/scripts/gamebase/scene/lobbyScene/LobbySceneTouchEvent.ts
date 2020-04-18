@@ -2,6 +2,8 @@ import UIController from '../../../framework/uibase/UIController';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import GameHoodleConfig from '../../../framework/config/GameHoodleConfig';
+import HttpUtil from '../../../framework/utils/HttpUtil';
+import GameAppConfig from '../../../framework/config/GameAppConfig';
 
 const {ccclass, property} = cc._decorator;
 
@@ -81,6 +83,17 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_store(sender: cc.Component){
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogStore", "StoreDialog")
+        //test
+        /*
+        let address = "http://" + GameAppConfig.LOCAL_HOST + ":" + GameAppConfig.REMORE_HTTP_PORT
+        HttpUtil.get(address, "/server_info", null, function (err: any, data: any) {
+            if (err) {
+                cc.error("hcc>>httpget error: ", err);
+                return;
+            }
+            cc.log("hcc>>httpget", data);
+        });
+        */
     }
 
 }

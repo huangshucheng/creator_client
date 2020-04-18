@@ -11,14 +11,13 @@ import DialogManager from '../framework/manager/DialogManager';
 import PlatForm from '../framework/config/PlatForm';
 import UIController from '../framework/uibase/UIController';
 import HotUpdate from '../framework/hotfix/HotUpdate';
+import HotUpdateNew from '../framework/hotfix/HotUpdateNew';
+import { ResourceManager } from '../framework/manager/ResourceManager';
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class GameApp extends cc.Component {
-
-    // @property(cc.Node)
-    // testNode:cc.Node = null;
 
     //onload >> start
     onLoad () {
@@ -57,10 +56,6 @@ export default class GameApp extends cc.Component {
 
     //test
     test_func(){
-        HotUpdate.getInstance()//.check_hotupdate_start();
-
-        // cc.log("hcc>>yuming: " , PlatForm.getCurDomain());
-        // cc.js.getClassByName("")
         /*
         //
         this.node.convertToNodeSpaceAR(cc.v2(100,100)); //将世界坐标ccv2(100,100)转换成node下的节点坐标系  

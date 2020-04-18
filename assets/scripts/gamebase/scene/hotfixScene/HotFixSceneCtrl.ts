@@ -5,6 +5,7 @@ import { ResourceManager } from '../../../framework/manager/ResourceManager';
 import StringUtil from '../../../framework/utils/StringUtil';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LoginScene from '../LoginScene/LoginScene';
+import HotUpdateNew from '../../../framework/hotfix/HotUpdateNew';
 
 const {ccclass, property} = cc._decorator;
 
@@ -14,13 +15,14 @@ export default class HotFixSceneCtrl extends UIController {
     _progressbar: cc.ProgressBar = null;
 
     _urlArray: string[] = [ 
-                            "ui_prefabs/login/", 
-                            "ui_prefabs/lobby/", 
+                            "ui_prefabs/login/",
+                            "ui_prefabs/lobby/",
                             "ui_prefabs/dialog/",
-                            "ui_prefabs/hotfix/", 
-                            "ui_prefabs/games/", 
-                            "textures/lobby/", 
-                            "textures/dialog/", 
+                            "ui_prefabs/hotfix/",
+                            "ui_prefabs/games/",
+                            "textures/lobby/",
+                            "textures/dialog/",
+                            "mainfest/",
                             "config/",
                           ]
 
@@ -81,6 +83,19 @@ export default class HotFixSceneCtrl extends UIController {
     }
 
     enter_login_scene() {
-        SceneManager.getInstance().enter_scene_asyc(new LoginScene())
+        let hotupdateMgr = HotUpdateNew.getInstance();
+        hotupdateMgr.checkUpdate(function(isNeedUpdate:boolean) {
+            if(isNeedUpdate){
+                cc.log("hcc>>enter_login_scene>>is need hotupdate............");
+                hotupdateMgr.hotUpdateStart();
+                hotupdateMgr.setUpdateSuccessCallback(function(isSuccess:boolean) {
+                    if(isSuccess){
+                        SceneManager.getInstance().enter_scene_asyc(new LoginScene())
+                    }
+                })
+            }else{
+                SceneManager.getInstance().enter_scene_asyc(new LoginScene())
+            }
+        })
     }
 }

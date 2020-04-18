@@ -1,13 +1,13 @@
 
-class http {
-    static get(url, path, params, callback) {
-        var xhr = cc.loader.getXMLHttpRequest();
+class HttpUtil {
+    //url前面要带http开头否则会报错
+    static get(url:string, path:string, params?:any, callback?:Function) {
+        let xhr: XMLHttpRequest = cc.loader.getXMLHttpRequest();
         xhr.timeout = 5000;
-        var requestURL = url + path;
+        let requestURL:string = url + path;
         if (params) {
             requestURL = requestURL + "?" + params;
         }
-    
         xhr.open("GET", requestURL, true);
         if (cc.sys.isNative) {
             xhr.setRequestHeader("Accept-Encoding", "gzip,deflate");
@@ -17,7 +17,7 @@ class http {
             if (xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 300)) {
                 console.log("http res(" + xhr.responseText.length + "):" + xhr.responseText);
                 try {
-                    var ret = xhr.responseText;
+                    let ret = xhr.responseText;
                     if (callback !== null) {
                         callback(null, ret);
                     }
@@ -30,15 +30,14 @@ class http {
                 callback(xhr.readyState + ":" + xhr.status, null);
             }
         };
-    
         xhr.send();
         return xhr;
     }
 
-    static post(url, path, params, body, callback) {
-        var xhr = cc.loader.getXMLHttpRequest();
+    static post(url:string, path:string, params?:any, body?:any, callback?:any) {
+        let xhr = cc.loader.getXMLHttpRequest();
         xhr.timeout = 5000;
-        var requestURL = url + path;
+        let requestURL = url + path;
         if (params) {
             requestURL = requestURL + "?" + params;
         }
@@ -55,7 +54,7 @@ class http {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 300)) {
                 try {
-                    var ret = xhr.responseText;
+                    let ret = xhr.responseText;
                     if (callback !== null) {
                         callback(null, ret);
                     }
@@ -74,10 +73,10 @@ class http {
         return xhr;
     }
 
-    static download(url, path, params, callback) {
-        var xhr = cc.loader.getXMLHttpRequest();
+    static download(url:string, path:string, params?:any, callback?:any) {
+        let xhr = cc.loader.getXMLHttpRequest();
         xhr.timeout = 5000;
-        var requestURL = url + path;
+        let requestURL = url + path;
         if (params) {
             requestURL = requestURL + "?" + params;
         }
@@ -90,10 +89,10 @@ class http {
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 300)) {
-                var buffer = xhr.response;
-                var dataview = new DataView(buffer);
-                var ints = new Uint8Array(buffer.byteLength);
-                for (var i = 0; i < ints.length; i++) {
+                let buffer = xhr.response;
+                let dataview = new DataView(buffer);
+                let ints = new Uint8Array(buffer.byteLength);
+                for (let i = 0; i < ints.length; i++) {
                     ints[i] = dataview.getUint8(i);
                 }
                 callback(null, ints);
@@ -107,6 +106,6 @@ class http {
     }
 }
 
-export default http;
+export default HttpUtil;
 
 

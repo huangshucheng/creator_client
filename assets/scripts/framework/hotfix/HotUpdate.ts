@@ -8,20 +8,14 @@ class HotUpdate {
 
     _storagePath:string = null;
     _hotpath:string = null;
-    _url: string = "http://" + GameAppConfig.LOCAL_HOST + GameAppConfig.REMORE_HTTP_PORT
+    _url: string = GameAppConfig.HOT_UPDATE_ADDRESS;
 
     constructor(){
-        // this._storagePath = jsb.fileUtils.getWritablePath();
-        //test
-        HttpUtil.get(this._url, "/hotupdate/" + manifest_filename ,null,function (err,data) {
-            cc.log("hcc>>httpget", err,data)
-        });
     }
 
     public static getInstance() {
         return HotUpdate.instance;
     }
-
 
     check_hotupdate_start(){
         // 设置一下搜索路径
@@ -30,7 +24,6 @@ class HotUpdate {
         var now_list = this.local_hotupdate_download_list(this._hotpath);
 
         var server_list = null;
-        // http_download("http://127.0.0.1:6080", "/hotupdate/hotupdate.json", null, function(err, data) {
         HttpUtil.get(this._url , "/hotupdate/" + manifest_filename, null, function (err, data) {
             if (err) {
                 return;
@@ -50,14 +43,13 @@ class HotUpdate {
                 return;
             }
 
-
             var i = 0;
             var callback = function () {
                 i++;
                 if (i >= download_array.length) {
                     jsb.fileUtils.writeStringToFile(data, this.hotpath + "/" + manifest_filename);
                     cc.audioEngine.stopAll();
-                    // cc.game.restart();
+                    cc.game.restart();
                     return;
                 }
 
@@ -79,7 +71,6 @@ class HotUpdate {
         path.unshift(hotpath);
         // 把热更新的path放到最前面
         jsb.fileUtils.setSearchPaths(path);
-
         this._hotpath = hotpath;
     }
     
@@ -96,7 +87,7 @@ class HotUpdate {
         return json;
     }
 
-    download_item(write_path, server_item, end_func) {
+    download_item(write_path:string, server_item:any, end_func:Function) {
         if (server_item.file.indexOf(".json") >= 0) {
             HttpUtil.get(this._url  , "/" + server_item.file, null, function (err, data) {
                 if (err) {
@@ -132,7 +123,6 @@ class HotUpdate {
                     }
                     return;
                 }
-
                 {
                     var dir_array = new Array(); //定义一数组 
                     dir_array = server_item.dir.split("/");
@@ -152,10 +142,7 @@ class HotUpdate {
                 }
             });
         }
-
     }
-
-
 }
 
 export default HotUpdate;
