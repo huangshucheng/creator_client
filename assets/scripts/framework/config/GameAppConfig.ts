@@ -11,4 +11,5 @@ export default class GameAppConfig {
     static PROTO_TYPE               = ProtoManater.PROTO_BUF;   
     static REMORE_HTTP_PORT         = "7000";                       // http端口
     static HOT_UPDATE_ADDRESS       = "http://" + GameAppConfig.LOCAL_HOST + ":" + GameAppConfig.REMORE_HTTP_PORT
+    static LOCAL_MANIFEST_PATH      = "manifest/project";
 }

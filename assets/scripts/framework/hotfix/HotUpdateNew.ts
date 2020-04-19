@@ -1,5 +1,9 @@
-import { ResourceManager } from "../manager/ResourceManager";
+//用cocos creator 自带的jsb.AssetsManager更新
 
+import { ResourceManager } from "../manager/ResourceManager";
+import PlatForm from "../config/PlatForm";
+
+//for test
 let customManifestStr = JSON.stringify({
     "packageUrl": "http://192.168.50.220:5555/tutorial-hot-update/remote-assets/",
     "remoteManifestUrl": "http://192.168.50.220:5555/tutorial-hot-update/remote-assets/project.manifest",
@@ -14,21 +18,9 @@ let customManifestStr = JSON.stringify({
     "searchPaths": []
 });
 
-/**
- main.js 加上
-(function () {
-    if (typeof window.jsb === 'object') {
-        var hotUpdateSearchPaths = localStorage.getItem('HotUpdateSearchPaths');
-        if (hotUpdateSearchPaths) {
-            console.log("hcc>>hotUpdateSearchPaths:" , hotUpdateSearchPaths)
-            jsb.fileUtils.setSearchPaths(JSON.parse(hotUpdateSearchPaths));
-        }
-    }
-})();
- */
-
 let hotUpdatePath = "hotUpdateCache";
 let localManifestPath = "manifest/project";
+let hotUpdateSearchPaths = "HotUpdateSearchPaths" //热更新缓存保存本地key
 
 class HotUpdateNew{
     public static readonly instance: HotUpdateNew = new HotUpdateNew();
@@ -37,7 +29,8 @@ class HotUpdateNew{
     _updating:boolean       = false;
     _canRetry:boolean       = false;
     _manifestUrl:cc.Asset    = null;
-    _updateSuccessCallback:Function = null;
+    _updateCallback:Function = null;
+    _localVersion:string     = "";
 
     constructor(){
         this.init();
@@ -47,40 +40,56 @@ class HotUpdateNew{
         return HotUpdateNew.instance;
     }
 
+    //获得本地版本
+    public getLocalVersion(){
+        return this._localVersion;
+    }
+
     init(){
+        if (!this.checkPlatForm()) {
+            return;
+        }
+
         let _this = this;
         ResourceManager.getInstance().loadResAsyc(localManifestPath, cc.Asset, function (error: Error, resource: any) {
             if (!error) {
                 _this._manifestUrl = resource;
                 cc.log("hcc>>manifest: ", resource.nativeUrl);
+                if(_this._manifestUrl){
+                    let url = _this._manifestUrl.nativeUrl;
+                    cc.log("hcc>>_manifestUrl.nativeUrl111>>init: ", url);
+                    if (cc.loader.md5Pipe) {
+                        url = cc.loader.md5Pipe.transformURL(url);
+                    }
+                    cc.log("hcc>>_manifestUrl.nativeUrl222>>init:  ", url);
+
+                    let storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + hotUpdatePath);
+                    cc.log('hcc>>Storage path for remote asset : ', storagePath);
+                    _this._assetsManager = new jsb.AssetsManager('', storagePath, _this.versionCompareCallback.bind(_this));
+                    _this._assetsManager.setVerifyCallback(_this.assetsVerifyCallback.bind(_this))
+                    if (cc.sys.os === cc.sys.OS_ANDROID) {
+                        _this._assetsManager.setMaxConcurrentTask(2);
+                    }
+                    _this._assetsManager.loadLocalManifest(url);
+
+                    let localMani = _this._assetsManager.getLocalManifest()
+                    if (localMani && localMani.getVersion){
+                        _this._localVersion = localMani.getVersion()
+                        cc.log("hcc>>localMani: ", localMani , localMani.getVersion())
+                    }
+                }
             } else {
                 cc.log("hcc>>manifest error: ", error);
             }
         })
-
-        cc.log("hcc>>111111111111");
-        if (!this.checkPlatForm()) {
-            return;
-        }
-
-        cc.log("hcc>>222222");
-        let storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + hotUpdatePath);
-        cc.log('hcc>>Storage path for remote asset : ', storagePath);
-        this._assetsManager = new jsb.AssetsManager('', storagePath, this.versionCompareCallback);
-        this._assetsManager.setVerifyCallback(this.assetsVerifyCallback)
-        cc.log("hcc>>setEventCallback: " , this._assetsManager.setEventCallback);
-
-        if (cc.sys.os === cc.sys.OS_ANDROID) {
-            // Some Android device may slow down the download process when concurrent tasks is too much.
-            // The value may not be accurate, please do more test and find what's most suitable for your game.
-            this._assetsManager.setMaxConcurrentTask(2);
-        }
     }
 
-    setUpdateSuccessCallback(callback:Function) {
-        this._updateSuccessCallback = callback;
+    //热更新回调
+    setUpdateCallback(callback:Function) {
+        this._updateCallback = callback;
     }
 
+    //平台判断
     checkPlatForm(){
         if(!cc.sys.isNative){
             cc.warn("not native platform,can not hotupdate!");
@@ -89,7 +98,7 @@ class HotUpdateNew{
         return true;
     }
 
-    //
+    //检测更新
     checkUpdate(callback:Function) {
         if (!this.checkPlatForm()) {
             callback(false);
@@ -103,7 +112,11 @@ class HotUpdateNew{
 
         let panel_info_string = "";
         if (this._updating) {
-            panel_info_string = 'Checking or updating ...';
+            callback(false);
+            return;
+        }
+
+        if (!this._assetsManager){
             callback(false);
             return;
         }
@@ -119,7 +132,7 @@ class HotUpdateNew{
         }
 
         if (!this._assetsManager.getLocalManifest() || !this._assetsManager.getLocalManifest().isLoaded()) {
-            panel_info_string = 'Failed to load local manifest ...';
+            cc.log("hcc>>checkUpdate: Failed to load local manifest ...");
             callback(false);
             return;
         }
@@ -132,17 +145,17 @@ class HotUpdateNew{
             let eventCode = event.getEventCode();
             switch (eventCode) {
                 case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
-                    panel_info_string = "No local manifest file found, hot update skipped.";
+                    panel_info_string = "本地没有manifest文件!";
                     break;
                 case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
                 case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
-                    panel_info_string = "Fail to download manifest file, hot update skipped.";
+                    panel_info_string = "manifest下载失败!";
                     break;
                 case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
-                    panel_info_string = "Already up to date with the latest remote version.";
+                    panel_info_string = "已经更新到最新版本!";
                     break;
                 case jsb.EventAssetsManager.NEW_VERSION_FOUND:
-                    panel_info_string = 'New version found, please try to update.';
+                    panel_info_string = '发现新版本，准备更新!';
                     break;
                 default:
                     return;
@@ -158,7 +171,7 @@ class HotUpdateNew{
         this._updating = true;
     }
 
-    //
+    //开始更新
     hotUpdateStart():boolean {
         if (!this.checkPlatForm()) {
             return false;
@@ -183,8 +196,7 @@ class HotUpdateNew{
         return true;
     }
 
-    //callback
-    //
+    //资源对比回调
     assetsVerifyCallback(path: string, asset: any): boolean {
         let compressed = asset.compressed;
         let expectedMD5 = asset.md5;
@@ -201,7 +213,7 @@ class HotUpdateNew{
         return true;
     }
 
-    //
+    //版本对比回调
     versionCompareCallback(versionA: string, versionB: string) {
         cc.log("hcc>>JS Custom Version Compare: version A is " + versionA + ', version B is ' + versionB);
         let vA = versionA.split('.');
@@ -224,7 +236,7 @@ class HotUpdateNew{
         }
     }
 
-    //
+    //检测更新回调
     checkUpdateCallback (event:any) {
         cc.log('hcc>>checkUpdateCallback,Code: ' + event.getEventCode());
         let panel_info_string = "";
@@ -245,59 +257,67 @@ class HotUpdateNew{
             default:
                 return;
         }
-        this._assetsManager.setEventCallback(null);
-        this._updating = false;
+
+        if (this._assetsManager){
+            this._assetsManager.setEventCallback(null);
+            this._updating = false;
+        }
         cc.log("hcc>>checkUpdateCallback: " , panel_info_string)
     }
 
+    //热更新回调
     updateCallback(event:any) {
-        cc.log("hcc>>updateCallback");
+        if(!this._assetsManager){
+            return;
+        }
+        cc.log("hcc>>updateCallback, code: ", event.getEventCode());
         let needRestart:boolean     = false;
         let failed: boolean         = false;
-        let panel_info_string:string = "";
+        let panel_info_string:string = null;
+        let update_percent = null;
         switch (event.getEventCode()) {
             case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
-                panel_info_string = 'No local manifest file found, hot update skipped.';
+                panel_info_string = '本地没有manifest文件，更新失败!';
                 failed = true;
                 break;
             case jsb.EventAssetsManager.UPDATE_PROGRESSION:
-                // this.panel.byteProgress.progress = event.getPercent();
-                // this.panel.fileProgress.progress = event.getPercentByFile();
-                // this.panel.fileLabel.string = event.getDownloadedFiles() + ' / ' + event.getTotalFiles();
-                // this.panel.byteLabel.string = event.getDownloadedBytes() + ' / ' + event.getTotalBytes();
-
-                let msg = event.getMessage();
-                if (msg) {
-                    panel_info_string = 'Updated file: ' + msg;
-                    cc.log("hcc>>percent: ", event.getPercent()/100 + '% : ' + msg);
-                }
+                // cc.log("hcc>> per11: ", event.getPercent(), event.getPercentByFile());
+                // cc.log("hcc>> per22: ", event.getDownloadedFiles(), event.getTotalFiles(), event.getDownloadedBytes(), event.getTotalBytes())
+                update_percent      = Math.floor(event.getPercentByFile() * 100) / 100;
+                let down_byte       = Math.floor(event.getDownloadedBytes() / 1024 / 1024 * 100) / 100;
+                let total_byte      = Math.floor(event.getTotalBytes() / 1024 / 1024 * 100) / 100;
+                panel_info_string   = "更新进度: " + down_byte + "M" + ' / ' + total_byte + "M"; 
                 break;
             case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
             case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
-                panel_info_string = 'Fail to download manifest file, hot update skipped.';
+                panel_info_string = '下载manifest文件失败!';
                 failed = true;
                 break;
             case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
-                panel_info_string = 'Already up to date with the latest remote version.';
+                panel_info_string = '已经更新到最新版本!';
                 failed = true;
                 break;
             case jsb.EventAssetsManager.UPDATE_FINISHED:
-                panel_info_string = 'Update finished. ' + event.getMessage();
+                panel_info_string = '更新成功! ' + event.getMessage();
                 needRestart = true;
                 break;
             case jsb.EventAssetsManager.UPDATE_FAILED:
-                panel_info_string = 'Update failed. ' + event.getMessage();
+                panel_info_string = '更新失败! ' + event.getMessage();
                 this._updating = false;
                 this._canRetry = true;
                 break;
             case jsb.EventAssetsManager.ERROR_UPDATING:
-                panel_info_string = 'Asset update error: ' + event.getAssetId() + ', ' + event.getMessage();
+                panel_info_string = '资源更新失败! ' + event.getAssetId() + ', ' + event.getMessage();
                 break;
             case jsb.EventAssetsManager.ERROR_DECOMPRESS:
-                panel_info_string = event.getMessage();
+                panel_info_string = "资源解压失败! "  + event.getMessage();
                 break;
             default:
                 break;
+        }
+
+        if (this._updateCallback) {
+            this._updateCallback.call(this, false, update_percent, panel_info_string);
         }
 
         cc.log("hcc>>updateCallback: ", panel_info_string);
@@ -307,6 +327,10 @@ class HotUpdateNew{
         }
 
         if (needRestart) {
+            if (this._updateCallback) {
+                this._updateCallback.call(this,true,update_percent, panel_info_string)
+            }
+            
             this._assetsManager.setEventCallback(null);
             // Prepend the manifest's search path
             let searchPaths = jsb.fileUtils.getSearchPaths();
@@ -316,30 +340,28 @@ class HotUpdateNew{
                 console.log("hcc>>newPaths:" , JSON.stringify(newPaths));
                 Array.prototype.unshift.apply(searchPaths, newPaths);
             }
-            // This value will be retrieved and appended to the default search path during game startup,
-            // please refer to samples/js-tests/main.js for detailed usage.
-            // !!! Re-add the search paths in main.js is very important, otherwise, new scripts won't take effect.
-            cc.sys.localStorage.setItem('HotUpdateSearchPaths', JSON.stringify(searchPaths));
+            cc.sys.localStorage.setItem(hotUpdateSearchPaths, JSON.stringify(searchPaths));
             jsb.fileUtils.setSearchPaths(searchPaths);
             cc.audioEngine.stopAll();
-            cc.game.restart();
-            if(this._updateSuccessCallback){
-                this._updateSuccessCallback.call(true)
+            //PC上重启游戏会崩溃
+            if(PlatForm.isAndroidNative() || PlatForm.isIOSNative()){
+                cc.game.restart();
             }
         }
     }
 
+    //加载本地manifest
     loadCustomManifest () {
-        if (this._assetsManager.getState() === jsb.AssetsManager.State.UNINITED) {
+        if (this._assetsManager && this._assetsManager.getState() === jsb.AssetsManager.State.UNINITED) {
             let storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + hotUpdatePath);
             let manifest = new jsb.Manifest(customManifestStr, storagePath);
             this._assetsManager.loadLocalManifest(manifest, storagePath);
-            console.log("hcc>>loadCustomManifest.....success!");
         }
     }
 
+    //下载失败时候，重新下载
     retry() {
-        if (!this._updating && this._canRetry) {
+        if (!this._updating && this._canRetry && this._assetsManager) {
             this._canRetry = false;
             this._assetsManager.downloadFailedAssets();
         }

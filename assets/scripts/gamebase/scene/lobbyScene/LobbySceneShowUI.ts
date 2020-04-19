@@ -1,5 +1,8 @@
 import UIController from '../../../framework/uibase/UIController';
 import UserInfo from '../../../framework/common/UserInfo';
+import { ResourceManager } from '../../../framework/manager/ResourceManager';
+import GameAppConfig from '../../../framework/config/GameAppConfig';
+import HotUpdateNew from '../../../framework/hotfix/HotUpdateNew';
 
 let HEAD_PATH = "lobby/rectheader/1";
 
@@ -13,7 +16,7 @@ export default class LobbySceneShowUI extends UIController {
     }
 
     start () {
-        
+        this.show_version();
     }
 
     show_user_info(){
@@ -27,5 +30,9 @@ export default class LobbySceneShowUI extends UIController {
             this.set_string(this.view['TEXT_COIN'],UserInfo.get_uchip());
             console.log("hcc>>LobbySceneShowUI>>show_user_info " , ufaceImg);
         }
+    }
+
+    show_version() {
+        this.set_string(this.view["KW_TEXT_VERSION"], HotUpdateNew.getInstance().getLocalVersion());
     }
 }

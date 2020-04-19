@@ -1,3 +1,5 @@
+//不用assetsManaget 更新，直接用http更新
+
 import HttpUtil from '../utils/HttpUtil';
 import GameAppConfig from '../config/GameAppConfig';
 

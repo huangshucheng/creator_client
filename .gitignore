@@ -52,5 +52,8 @@ Thumbs.db
 #//////////////////////////
 
 .vscode/
+build/
+remote-assets/
+res_test/
 
 node_modules/

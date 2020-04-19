@@ -16,6 +16,19 @@ import { ResourceManager } from '../framework/manager/ResourceManager';
 
 const {ccclass, property} = cc._decorator;
 
+/*
+function loadPath() {
+    if (typeof window.jsb === 'object') {
+        var hotUpdateSearchPaths = localStorage.getItem('HotUpdateSearchPaths');
+        if (hotUpdateSearchPaths) {
+            console.log("hcc>>hotUpdateSearchPaths:", hotUpdateSearchPaths)
+            jsb.fileUtils.setSearchPaths(JSON.parse(hotUpdateSearchPaths));
+        }
+    }
+}
+loadPath();
+*/
+
 @ccclass
 export default class GameApp extends cc.Component {
 
