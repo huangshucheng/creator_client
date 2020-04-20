@@ -1,18 +1,11 @@
 import Log from '../framework/utils/Log';
 import SceneManager from '../framework/manager/SceneManager';
-import LoginScene from './scene/LoginScene/LoginScene';
-import LobbyScene from './scene/lobbyScene/LobbyScene';
-import GameScene from './scene/gameScene/GameScene';
 import HotFixScene from './scene/hotfixScene/HotFixScene';
 import EventManager from '../framework/manager/EventManager';
 import EventDefine from '../framework/config/EventDefine';
 import NetWork from '../framework/network/NetWork';
 import DialogManager from '../framework/manager/DialogManager';
 import PlatForm from '../framework/config/PlatForm';
-import UIController from '../framework/uibase/UIController';
-import HotUpdate from '../framework/hotfix/HotUpdate';
-import HotUpdateNew from '../framework/hotfix/HotUpdateNew';
-import { ResourceManager } from '../framework/manager/ResourceManager';
 
 const {ccclass, property} = cc._decorator;
 

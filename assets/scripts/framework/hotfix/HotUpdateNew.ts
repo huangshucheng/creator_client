@@ -2,6 +2,7 @@
 
 import { ResourceManager } from "../manager/ResourceManager";
 import PlatForm from "../config/PlatForm";
+import GameAppConfig from '../config/GameAppConfig';
 
 //for test
 let customManifestStr = JSON.stringify({
@@ -19,7 +20,6 @@ let customManifestStr = JSON.stringify({
 });
 
 let hotUpdatePath = "hotUpdateCache";
-let localManifestPath = "manifest/project";
 let hotUpdateSearchPaths = "HotUpdateSearchPaths" //热更新缓存保存本地key
 
 class HotUpdateNew{
@@ -46,23 +46,26 @@ class HotUpdateNew{
     }
 
     init(){
-        if (!this.checkPlatForm()) {
-            return;
-        }
+        // if (!this.checkPlatForm()) {
+        //     return;
+        // }
 
         let _this = this;
-        ResourceManager.getInstance().loadResAsyc(localManifestPath, cc.Asset, function (error: Error, resource: any) {
+        ResourceManager.getInstance().loadResAsyc(GameAppConfig.LOCAL_MANIFEST_PATH, cc.Asset, function (error: Error, resource: any) {
             if (!error) {
                 _this._manifestUrl = resource;
                 cc.log("hcc>>manifest: ", resource.nativeUrl);
                 if(_this._manifestUrl){
                     let url = _this._manifestUrl.nativeUrl;
                     cc.log("hcc>>_manifestUrl.nativeUrl111>>init: ", url);
+                    
                     if (cc.loader.md5Pipe) {
                         url = cc.loader.md5Pipe.transformURL(url);
                     }
                     cc.log("hcc>>_manifestUrl.nativeUrl222>>init:  ", url);
-
+                    if (!_this.checkPlatForm()) {
+                        return;
+                    }
                     let storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + hotUpdatePath);
                     cc.log('hcc>>Storage path for remote asset : ', storagePath);
                     _this._assetsManager = new jsb.AssetsManager('', storagePath, _this.versionCompareCallback.bind(_this));
@@ -75,7 +78,7 @@ class HotUpdateNew{
                     let localMani = _this._assetsManager.getLocalManifest()
                     if (localMani && localMani.getVersion){
                         _this._localVersion = localMani.getVersion()
-                        cc.log("hcc>>localMani: ", localMani , localMani.getVersion())
+                        cc.log("hcc>>localMani: ", localMani , " ,localversion:",localMani.getVersion())
                     }
                 }
             } else {

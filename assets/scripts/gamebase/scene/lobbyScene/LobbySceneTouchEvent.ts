@@ -83,17 +83,6 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_store(sender: cc.Component){
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogStore", "StoreDialog")
-        //test
-        /*
-        let address = "http://" + GameAppConfig.LOCAL_HOST + ":" + GameAppConfig.REMORE_HTTP_PORT
-        HttpUtil.get(address, "/server_info", null, function (err: any, data: any) {
-            if (err) {
-                cc.error("hcc>>httpget error: ", err);
-                return;
-            }
-            cc.log("hcc>>httpget", data);
-        });
-        */
     }
 
 }

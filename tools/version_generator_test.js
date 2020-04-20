@@ -30,11 +30,12 @@ build param
 - `-s` 本地原生打包版本的目录相对路径。
 - `-d` 保存 Manifest 文件的地址
  */
-
+var hostName = "http://192.168.1.105:7000";
+ 
 var manifest = {
-    packageUrl: 'http://192.168.0.105:7000/hotupdate/',
-    remoteManifestUrl: 'http://192.168.0.105:7000/hotupdate/project.manifest',
-    remoteVersionUrl: 'http://192.168.0.105:7000/hotupdate/version.manifest',
+    packageUrl: hostName + '/hotupdate/',
+    remoteManifestUrl: hostName + '/hotupdate/project.manifest',
+    remoteVersionUrl: hostName + '/hotupdate/version.manifest',
     version: '1.0.0.0',
     assets: {},
     searchPaths: []

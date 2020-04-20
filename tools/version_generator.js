@@ -31,10 +31,11 @@ build param
 - `-d` 保存 Manifest 文件的地址
  */
 
+var hostName = "http://www.hccfun.com:7000";
 var manifest = {
-    packageUrl: 'http://www.hccfun.com:7000/hotupdate/',
-    remoteManifestUrl: 'http://www.hccfun.com:7000/hotupdate/project.manifest',
-    remoteVersionUrl: 'http://www.hccfun.com:7000/hotupdate/version.manifest',
+    packageUrl: hostName + '/hotupdate/',
+    remoteManifestUrl: hostName + '/hotupdate/project.manifest',
+    remoteVersionUrl: hostName + '/hotupdate/version.manifest',
     version: '1.0.0.0',
     assets: {},
     searchPaths: []
