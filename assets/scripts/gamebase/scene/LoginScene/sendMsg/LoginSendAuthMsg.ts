@@ -31,4 +31,8 @@ export default class LoginSendAuthMsg {
         LoginSendAuthMsg.send(Cmd.eUnameRegistReq,body);
     }
 
+    static send_weixin_login(){
+        
+    }
+
 }

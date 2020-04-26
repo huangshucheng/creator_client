@@ -1,0 +1,40 @@
+﻿用户授权：
+
+hcc>>wx.getUserInfo>>success>>res.userInfo 
+{
+	avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLQoDgahGVTFb6H74TZz9z5OI9RoXWmXJ6WXbWsfvWKCAD5KCdaYfdJZCf8aR0N4oP5bKXImelbkw/132"
+	city: "Hangzhou"
+	country: "China"
+	gender: 1
+	language: "zh_CN"
+	nickName: "C小C"
+	province: "Zhejiang"
+}
+
+/////////////////////
+
+hcc>>wx.getUserInfo>>success>>res  
+
+{errMsg: "getUserInfo:ok", rawData: "{"nickName":"C小C","gender":1,"language":"zh_CN","c…WXbWsfvWKCAD5KCdaYfdJZCf8aR0N4oP5bKXImelbkw/132"}", userInfo: {…}, signature: "8bf8570c0d872e9f4b9f95542da64191016dea28", encryptedData: "KTZ40dTI6RssKIWP/qI7AJOiBmDx0GtauzDZzOAB4WOJuR1T5/…W0q3mod1PauNSV58DnHgIdIOngw9KXux5sIQ57RitrWFA2JE=", …}
+encryptedData: "KTZ40dTI6RssKIWP/qI7AJOiBmDx0GtauzDZzOAB4WOJuR1T5/SbVZVINT6s26YDFjTL9MYsZtWGRSQf0WOzGKk4vk5xAZnoes4jElBexPxDpMxpwY31ew8aNZ1gA9xkEfGSjRWFUQY+7jEOSyPTivPWsqkPEYBFWstF/p6jAy/0QmZep7hr/2dr0fOZqepVwcYk0XYXqZRDVnZud2KrV+Xsvg9NsXQH8T2FUDMQXj5DYNPPkQXf9nfJcUEpY3SAasqK8+45Wel4EheQvSnJ8skgNislK1u/rDS9GzSkp6br3/PNy0H04LSxPk0csAVh9aHt/F0nynY0lE2b0IZcQlVkgpUltzDNiKI3cv21Be2hYCAdDnDgF/Jp5dWKQYAJeJXJS/vCaP5yP7nTJax1aUsVbWgDLTxHlUQEZb7FZkJuJ+2OmyPCcOg2oCrW0q3mod1PauNSV58DnHgIdIOngw9KXux5sIQ57RitrWFA2JE="
+errMsg: "getUserInfo:ok"
+iv: "x5uxEAIsP34ycP91/55NBA=="
+rawData: "{"nickName":"C小C","gender":1,"language":"zh_CN","city":"Hangzhou","province":"Zhejiang","country":"China","avatarUrl":"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLQoDgahGVTFb6H74TZz9z5OI9RoXWmXJ6WXbWsfvWKCAD5KCdaYfdJZCf8aR0N4oP5bKXImelbkw/132"}"
+signature: "8bf8570c0d872e9f4b9f95542da64191016dea28"
+userInfo: {nickName: "C小C", gender: 1, language: "zh_CN", city: "Hangzhou", province: "Zhejiang", …}
+
+
+////////////////////////////////////////
+
+用户登录
+
+hcc>>wx.login>>success:  
+{errMsg: "login:ok", code: "02132H6A0C4ugc1W3S6A0coS6A032H6Y"}
+code: "02132H6A0C4ugc1W3S6A0coS6A032H6Y"
+errMsg: "login:ok"
+
+
+//微信登录参考：https://blog.csdn.net/SingleWizard/article/details/85252875
+//官方：https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/login.html
+//appid:wxb03d15124f396116
+//appset:6b0b8e0066b7e0e9b841a6b9e05b6941
