@@ -31,6 +31,7 @@ export default class LoginSceneRecvMsg extends UIController {
         EventManager.on(CmdName[Cmd.eUnameLoginRes], this, this.on_event_uname_login)
         EventManager.on(CmdName[Cmd.eGuestLoginRes], this, this.on_event_guest_login)
         EventManager.on(CmdName[Cmd.eUnameRegistRes], this, this.on_event_uname_regist)
+        EventManager.on(CmdName[Cmd.eWeChatLoginRes], this, this.on_event_wechat_login)
         EventManager.on("LoginLogicRes", this, this.on_event_login_logic)//这里要检测玩家游戏服务的信息是否存在，不存在要先创建数据库数据
     }
 
@@ -49,7 +50,7 @@ export default class LoginSceneRecvMsg extends UIController {
 
     on_event_guest_login(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("guestlogin udata: " , udata)
+        console.log("guestlogin udata: " , udata)
         if(udata.status == Response.OK){
             SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
             try {
@@ -57,9 +58,9 @@ export default class LoginSceneRecvMsg extends UIController {
                 Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
                 Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,resbody.guest_key)
             } catch (error) {
-                cc.error(error)
+                console.error(error)
             }
-            cc.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
+            console.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
             LobbySendGameHoodleMsg.send_login_logic()
             DialogManager.getInstance().show_weak_hint("游客登录成功!")
         }else{
@@ -69,7 +70,7 @@ export default class LoginSceneRecvMsg extends UIController {
 
     on_event_uname_login(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("unamelogin udata: " , udata)
+        console.log("unamelogin udata: " , udata)
         if(udata.status == Response.OK){
             SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
             try {
@@ -77,9 +78,9 @@ export default class LoginSceneRecvMsg extends UIController {
                 Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
                 Storage.set(LSDefine.USER_LOGIN_MSG,{uname: resbody.uname, upwd: resbody.upwd})
             } catch (error) {
-                cc.error(error)
+                console.error(error)
             }
-            cc.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG) )
+            console.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG) )
             LobbySendGameHoodleMsg.send_login_logic()
             DialogManager.getInstance().show_weak_hint("登录成功!")
         }else{
@@ -101,6 +102,13 @@ export default class LoginSceneRecvMsg extends UIController {
         let udata = event.getUserData()
         if (udata.status == Response.OK) {
             LobbySendGameHoodleMsg.send_get_ugame_info();
+        } 
+    }
+
+    on_event_wechat_login(event:cc.Event.EventCustom){
+        let udata = event.getUserData()
+        if (udata.status == Response.OK) {
+
         } 
     }
 }

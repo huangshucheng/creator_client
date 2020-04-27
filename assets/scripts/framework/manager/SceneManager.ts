@@ -18,7 +18,7 @@ export default class SceneManager {
         let _this = this;
         scene.preload(function (error: Error, resource: any) {
             if(error){
-                cc.error("enter_scene_asyc error: " , error)
+                console.error("enter_scene_asyc error: " , error)
                 return;
             }
             if(_this._curScene){
@@ -26,9 +26,9 @@ export default class SceneManager {
                 _this._curScene.destroy(isDestroy)
             }
             _this._curScene = scene;
-            cc.log("enter scene:", _this._curScene.get_name())
+            console.log("enter scene:", _this._curScene.get_name())
         },function (completedCount: number, totalCount: number, item: any) {
-            cc.log("preload scene: %" + completedCount / totalCount * 100)            
+            console.log("preload scene: %" + completedCount / totalCount * 100)            
         })
     }
 }

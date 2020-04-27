@@ -54,20 +54,20 @@ class HotUpdateNew{
         ResourceManager.getInstance().loadResAsyc(GameAppConfig.LOCAL_MANIFEST_PATH, cc.Asset, function (error: Error, resource: any) {
             if (!error) {
                 _this._manifestUrl = resource;
-                cc.log("hcc>>manifest: ", resource.nativeUrl);
+                console.log("hcc>>manifest: ", resource.nativeUrl);
                 if(_this._manifestUrl){
                     let url = _this._manifestUrl.nativeUrl;
-                    cc.log("hcc>>_manifestUrl.nativeUrl111>>init: ", url);
+                    console.log("hcc>>_manifestUrl.nativeUrl111>>init: ", url);
                     
                     if (cc.loader.md5Pipe) {
                         url = cc.loader.md5Pipe.transformURL(url);
                     }
-                    cc.log("hcc>>_manifestUrl.nativeUrl222>>init:  ", url);
+                    console.log("hcc>>_manifestUrl.nativeUrl222>>init:  ", url);
                     if (!_this.checkPlatForm()) {
                         return;
                     }
                     let storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + hotUpdatePath);
-                    cc.log('hcc>>Storage path for remote asset : ', storagePath);
+                    console.log('hcc>>Storage path for remote asset : ', storagePath);
                     _this._assetsManager = new jsb.AssetsManager('', storagePath, _this.versionCompareCallback.bind(_this));
                     _this._assetsManager.setVerifyCallback(_this.assetsVerifyCallback.bind(_this))
                     if (cc.sys.os === cc.sys.OS_ANDROID) {
@@ -78,11 +78,11 @@ class HotUpdateNew{
                     let localMani = _this._assetsManager.getLocalManifest()
                     if (localMani && localMani.getVersion){
                         _this._localVersion = localMani.getVersion()
-                        cc.log("hcc>>localMani: ", localMani , " ,localversion:",localMani.getVersion())
+                        console.log("hcc>>localMani: ", localMani , " ,localversion:",localMani.getVersion())
                     }
                 }
             } else {
-                cc.log("hcc>>manifest error: ", error);
+                console.log("hcc>>manifest error: ", error);
             }
         })
     }
@@ -95,7 +95,7 @@ class HotUpdateNew{
     //平台判断
     checkPlatForm(){
         if(!cc.sys.isNative){
-            cc.warn("not native platform,can not hotupdate!");
+            console.warn("not native platform,can not hotupdate!");
             return false;
         }
         return true;
@@ -126,24 +126,24 @@ class HotUpdateNew{
 
         if (this._assetsManager.getState() === jsb.AssetsManager.State.UNINITED) {
             let url = this._manifestUrl.nativeUrl;
-            cc.log("hcc>>_manifestUrl.nativeUrl111: " , url);
+            console.log("hcc>>_manifestUrl.nativeUrl111: " , url);
             if (cc.loader.md5Pipe) {
                 url = cc.loader.md5Pipe.transformURL(url);
             }
-            cc.log("hcc>>_manifestUrl.nativeUrl222: ", url);
+            console.log("hcc>>_manifestUrl.nativeUrl222: ", url);
             this._assetsManager.loadLocalManifest(url);
         }
 
         if (!this._assetsManager.getLocalManifest() || !this._assetsManager.getLocalManifest().isLoaded()) {
-            cc.log("hcc>>checkUpdate: Failed to load local manifest ...");
+            console.log("hcc>>checkUpdate: Failed to load local manifest ...");
             callback(false);
             return;
         }
 
-        cc.log("hcc>>checkUpdate: " , panel_info_string);
+        console.log("hcc>>checkUpdate: " , panel_info_string);
 
         let checkUpdateCallback = function(event:any) {
-            cc.log('hcc>>checkUpdateCallback,Code: ' + event.getEventCode());
+            console.log('hcc>>checkUpdateCallback,Code: ' + event.getEventCode());
             let panel_info_string = "";
             let eventCode = event.getEventCode();
             switch (eventCode) {
@@ -163,7 +163,7 @@ class HotUpdateNew{
                 default:
                     return;
             }
-            cc.log("hcc>>checkUpdateCallback: ", panel_info_string)
+            console.log("hcc>>checkUpdateCallback: ", panel_info_string)
             this._assetsManager.setEventCallback(null);
             this._updating = false;
             callback(eventCode == jsb.EventAssetsManager.NEW_VERSION_FOUND);
@@ -218,7 +218,7 @@ class HotUpdateNew{
 
     //版本对比回调
     versionCompareCallback(versionA: string, versionB: string) {
-        cc.log("hcc>>JS Custom Version Compare: version A is " + versionA + ', version B is ' + versionB);
+        console.log("hcc>>JS Custom Version Compare: version A is " + versionA + ', version B is ' + versionB);
         let vA = versionA.split('.');
         let vB = versionB.split('.');
         for (let i = 0; i < vA.length; ++i) {
@@ -241,7 +241,7 @@ class HotUpdateNew{
 
     //检测更新回调
     checkUpdateCallback (event:any) {
-        cc.log('hcc>>checkUpdateCallback,Code: ' + event.getEventCode());
+        console.log('hcc>>checkUpdateCallback,Code: ' + event.getEventCode());
         let panel_info_string = "";
         switch (event.getEventCode()) {
             case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
@@ -265,7 +265,7 @@ class HotUpdateNew{
             this._assetsManager.setEventCallback(null);
             this._updating = false;
         }
-        cc.log("hcc>>checkUpdateCallback: " , panel_info_string)
+        console.log("hcc>>checkUpdateCallback: " , panel_info_string)
     }
 
     //热更新回调
@@ -273,7 +273,7 @@ class HotUpdateNew{
         if(!this._assetsManager){
             return;
         }
-        cc.log("hcc>>updateCallback, code: ", event.getEventCode());
+        console.log("hcc>>updateCallback, code: ", event.getEventCode());
         let needRestart:boolean     = false;
         let failed: boolean         = false;
         let panel_info_string:string = null;
@@ -284,8 +284,8 @@ class HotUpdateNew{
                 failed = true;
                 break;
             case jsb.EventAssetsManager.UPDATE_PROGRESSION:
-                // cc.log("hcc>> per11: ", event.getPercent(), event.getPercentByFile());
-                // cc.log("hcc>> per22: ", event.getDownloadedFiles(), event.getTotalFiles(), event.getDownloadedBytes(), event.getTotalBytes())
+                // console.log("hcc>> per11: ", event.getPercent(), event.getPercentByFile());
+                // console.log("hcc>> per22: ", event.getDownloadedFiles(), event.getTotalFiles(), event.getDownloadedBytes(), event.getTotalBytes())
                 update_percent      = Math.floor(event.getPercentByFile() * 100) / 100;
                 let down_byte       = Math.floor(event.getDownloadedBytes() / 1024 / 1024 * 100) / 100;
                 let total_byte      = Math.floor(event.getTotalBytes() / 1024 / 1024 * 100) / 100;
@@ -323,7 +323,7 @@ class HotUpdateNew{
             this._updateCallback.call(this, false, update_percent, panel_info_string);
         }
 
-        cc.log("hcc>>updateCallback: ", panel_info_string);
+        console.log("hcc>>updateCallback: ", panel_info_string);
         if (failed) {
             this._assetsManager.setEventCallback(null);
             this._updating = false;

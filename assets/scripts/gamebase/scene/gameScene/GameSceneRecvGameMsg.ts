@@ -43,7 +43,7 @@ export default class GameSceneRecvGameMsg extends UIController {
     ///////////////////////////////////////
     on_event_login_logic(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("hcc>>on_event_login_logic>>udata: " , udata)
+        console.log("hcc>>on_event_login_logic>>udata: " , udata)
     }
 
     on_event_dessolve(event:cc.Event.EventCustom){
@@ -86,7 +86,7 @@ export default class GameSceneRecvGameMsg extends UIController {
     on_event_user_info(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
         if(udata){
-            cc.log("hcc>>userinfostr: " , udata)
+            console.log("hcc>>userinfostr: " , udata)
             try {
                 if(udata.userinfo){
                     udata.userinfo.forEach(value => {
@@ -94,7 +94,7 @@ export default class GameSceneRecvGameMsg extends UIController {
                         let infostr = value.userinfostring;
                         let infoObj = JSON.parse(infostr);
                         RoomData.getInstance().add_player_by_uinfo(infoObj);
-                        cc.log("hcc>>userinfo numid: " , numberid , " ,info: " , infostr);
+                        console.log("hcc>>userinfo numid: " , numberid , " ,info: " , infostr);
                     });
                 }
                 let script = this.get_script("GameSceneShowUI")
@@ -102,7 +102,7 @@ export default class GameSceneRecvGameMsg extends UIController {
                     script.show_user_info(udata)
                 }
             } catch (error) {
-                cc.log("hcc>>error: " , error)
+                console.log("hcc>>error: " , error)
             }
         }
     }
@@ -161,7 +161,7 @@ export default class GameSceneRecvGameMsg extends UIController {
 
     on_event_user_offline(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_user_offline" , udata)
+        console.log("on_event_user_offline" , udata)
         let seatid = udata.seatid;
         if(seatid){
             let player = RoomData.getInstance().get_player(seatid);
@@ -173,7 +173,7 @@ export default class GameSceneRecvGameMsg extends UIController {
 
     on_event_user_ready(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_user_ready" , udata)
+        console.log("on_event_user_ready" , udata)
         if(udata){
             let status = udata.status;
             let seatid = udata.seatid;
@@ -193,7 +193,7 @@ export default class GameSceneRecvGameMsg extends UIController {
 
     on_event_game_start(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_game_start" , udata)
+        console.log("on_event_game_start" , udata)
         DialogManager.getInstance().show_weak_hint("游戏开始!")
         let script = this.get_script("GameSceneShowUI")
         if(script){
@@ -203,7 +203,7 @@ export default class GameSceneRecvGameMsg extends UIController {
 
     on_event_game_end(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_game_end" , udata)
+        console.log("on_event_game_end" , udata)
     }
 
     on_event_game_result(event: cc.Event.EventCustom){

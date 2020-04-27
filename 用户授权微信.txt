@@ -16,6 +16,7 @@ hcc>>wx.getUserInfo>>success>>res.userInfo
 hcc>>wx.getUserInfo>>success>>res  
 
 {errMsg: "getUserInfo:ok", rawData: "{"nickName":"C小C","gender":1,"language":"zh_CN","c…WXbWsfvWKCAD5KCdaYfdJZCf8aR0N4oP5bKXImelbkw/132"}", userInfo: {…}, signature: "8bf8570c0d872e9f4b9f95542da64191016dea28", encryptedData: "KTZ40dTI6RssKIWP/qI7AJOiBmDx0GtauzDZzOAB4WOJuR1T5/…W0q3mod1PauNSV58DnHgIdIOngw9KXux5sIQ57RitrWFA2JE=", …}
+
 encryptedData: "KTZ40dTI6RssKIWP/qI7AJOiBmDx0GtauzDZzOAB4WOJuR1T5/SbVZVINT6s26YDFjTL9MYsZtWGRSQf0WOzGKk4vk5xAZnoes4jElBexPxDpMxpwY31ew8aNZ1gA9xkEfGSjRWFUQY+7jEOSyPTivPWsqkPEYBFWstF/p6jAy/0QmZep7hr/2dr0fOZqepVwcYk0XYXqZRDVnZud2KrV+Xsvg9NsXQH8T2FUDMQXj5DYNPPkQXf9nfJcUEpY3SAasqK8+45Wel4EheQvSnJ8skgNislK1u/rDS9GzSkp6br3/PNy0H04LSxPk0csAVh9aHt/F0nynY0lE2b0IZcQlVkgpUltzDNiKI3cv21Be2hYCAdDnDgF/Jp5dWKQYAJeJXJS/vCaP5yP7nTJax1aUsVbWgDLTxHlUQEZb7FZkJuJ+2OmyPCcOg2oCrW0q3mod1PauNSV58DnHgIdIOngw9KXux5sIQ57RitrWFA2JE="
 errMsg: "getUserInfo:ok"
 iv: "x5uxEAIsP34ycP91/55NBA=="
@@ -38,3 +39,11 @@ errMsg: "login:ok"
 //官方：https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/login.html
 //appid:wxb03d15124f396116
 //appset:6b0b8e0066b7e0e9b841a6b9e05b6941
+
+
+服务器保存： session_key 
+
+weixin login，得到:
+rawData , signature,
+
+signature = sha1(rawData+ session_key)  算出session_key 和服务器保存的session_key对比，一样的话就是同一个用户了

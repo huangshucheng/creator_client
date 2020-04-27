@@ -77,7 +77,7 @@ export default class JoinRoomDialog extends UIDialog {
     on_click_number(sender: cc.Component){
         let btnName = sender.node.name
         let btnNumStr = StringUtil.getNumberSuffixByString(btnName);
-        // cc.log(btnName , btnNumStr)
+        // console.log(btnName , btnNumStr)
         let textName = 'KW_SHOW_NUM_' + this._text_index
         this.set_string(this.view[textName],String(btnNumStr))
         
@@ -88,7 +88,7 @@ export default class JoinRoomDialog extends UIDialog {
                 var num = this.get_string(this.view[numName])
                 roomid = roomid + num;
             }
-            cc.log("roomid: " , roomid)
+            console.log("roomid: " , roomid)
             LobbySendGameHoodleMsg.send_join_room(roomid)
         }
         this._text_index++;

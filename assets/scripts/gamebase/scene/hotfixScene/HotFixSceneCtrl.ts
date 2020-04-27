@@ -44,7 +44,7 @@ export default class HotFixSceneCtrl extends UIController {
         let hotupdateMgr = HotUpdateNew.getInstance();
         let _this = this;
         hotupdateMgr.checkUpdate(function (isNeedUpdate: boolean) {
-            cc.log("hcc>>enter_login_scene>>is need hotupdate: " , isNeedUpdate);
+            console.log("hcc>>enter_login_scene>>is need hotupdate: " , isNeedUpdate);
             if (isNeedUpdate) {
                 hotupdateMgr.hotUpdateStart();
                 hotupdateMgr.setUpdateCallback(function(isSuccess: boolean, percent?:number, tipString?:string) {

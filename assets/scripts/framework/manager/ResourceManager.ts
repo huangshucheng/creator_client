@@ -36,7 +36,7 @@ export class ResourceManager {
         },function (error:Error, resource:any) {
             if(compCallback){
                 if(error){
-                    cc.warn(`load res fail, path=${path}, err=${error}`)
+                    console.warn(`load res fail, path=${path}, err=${error}`)
                 }
                 compCallback(error,resource)
             }
@@ -52,7 +52,7 @@ export class ResourceManager {
     getRes<T extends typeof cc.Asset>(url: string, type: T) {
         let res = cc.loader.getRes(url, type)
         if (!res) {
-            cc.warn(`preload res path: ${url} not exist`)
+            console.warn(`preload res path: ${url} not exist`)
         }
         return res
     }

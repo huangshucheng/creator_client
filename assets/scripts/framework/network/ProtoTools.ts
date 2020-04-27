@@ -135,18 +135,18 @@ class ProtoTools {
             let styp_name 	= ProtoCmd.getProtoName(cmd.stype)
             let cmd_name 	= ProtoCmd.getCmdName(cmd.stype, cmd.ctype)
             if (!styp_name || !cmd_name){
-                cc.error("decode_protobuf stype_name or cmd_name null");
+                console.error("decode_protobuf stype_name or cmd_name null");
                 return cmd;
             }
 
             if (!protobufMsg[styp_name]) {
-                cc.error("decode_protobuf stype_name null");
+                console.error("decode_protobuf stype_name null");
                 return cmd;
             }
 
             let msgType = protobufMsg[styp_name][cmd_name]
             if(!msgType){
-                cc.error("decode_protobuf msgType is null");
+                console.error("decode_protobuf msgType is null");
                 return cmd;
             }
             let decodeMsg = null;
@@ -154,7 +154,7 @@ class ProtoTools {
                 decodeMsg = msgType.decode(new Uint8Array(bodyBuf))
             }
             catch(e) {
-                cc.error(e)
+                console.error(e)
                 return cmd;
             }
             cmd.body = decodeMsg;
@@ -166,18 +166,18 @@ class ProtoTools {
         let styp_name 	= ProtoCmd.getProtoName(stype)
         let cmd_name 	= ProtoCmd.getCmdName(stype, ctype)
         if (!styp_name || !cmd_name){
-            cc.error("encode_protobuf stype_name or cmd_name null");
+            console.error("encode_protobuf stype_name or cmd_name null");
             return null;
         }
         
         if (!protobufMsg[styp_name]) {
-            cc.error("encode_protobuf stype_name null");
+            console.error("encode_protobuf stype_name null");
             return null;
         }
 
         let msgType = protobufMsg[styp_name][cmd_name]
         if(!msgType){
-            cc.error("encode_protobuf msgType is null");
+            console.error("encode_protobuf msgType is null");
             return null;
         }
 
@@ -187,7 +187,7 @@ class ProtoTools {
 
         let error = msgType.verify(body)
         if(error){
-            cc.error("encode_protobuf error: ", error);
+            console.error("encode_protobuf error: ", error);
             return null;
         }
 
@@ -202,7 +202,7 @@ class ProtoTools {
                 ProtoTools.write_uint8_array(cmd_buf, offset, emcode_msg);
                 return cmd_buf;
             } catch (error) {
-                cc.error(error)
+                console.error(error)
             }
         }
     }

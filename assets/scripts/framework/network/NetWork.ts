@@ -39,7 +39,7 @@ class NetWork {
         }
         let state = this._socketDelegate.get_socket_state()
         if(state == SocketState.OPEN || state == SocketState.CONNECTING){
-            cc.warn("socket is opend or connecting")
+            console.warn("socket is opend or connecting")
             return
         }
         this._socketDelegate.connect(this._url);

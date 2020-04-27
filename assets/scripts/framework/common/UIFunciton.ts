@@ -40,7 +40,7 @@ export default class UIFunction {
     public node_exist(node: cc.Node) {
         let isExist = (node && cc.isValid(node));
         if(isExist == false){
-            cc.error(node.name , "is null")
+            console.error(node.name , "is null")
         }
         return isExist;
     }
@@ -71,18 +71,18 @@ export default class UIFunction {
     public add_click_evenet_with_data(target:cc.Node, callbackName:string, obj:cc.Component, customEventData?:any){
 
         if (!callbackName || typeof(callbackName) != "string" || callbackName == ""){
-            cc.error("add_click_evenet_with_data>>callbackName is not string");
+            console.error("add_click_evenet_with_data>>callbackName is not string");
             return;
         }
 
         if (!this.node_exist(target)) {
-            cc.error("add_click_evenet_with_data>>target node is not exist");
+            console.error("add_click_evenet_with_data>>target node is not exist");
             return
         }
 
         let btnComponent: cc.Button = target.getComponent(cc.Button);
         if (!btnComponent) {
-            cc.error("add_click_evenet_with_data>>component is not exist");
+            console.error("add_click_evenet_with_data>>component is not exist");
             return;
         }
 
@@ -91,7 +91,7 @@ export default class UIFunction {
         let fileName: string = obj.name;    // 例"LobbyUI<LobbySceneTouchEvent>"
         let matchStr = fileName.match(/(?:<)(.*)(?:>)/i);//获取尖括号中字符串
         if(!matchStr[1]){
-            cc.error("add_click_evenet_with_data>> " + callbackName + " , matchStr is not exist");
+            console.error("add_click_evenet_with_data>> " + callbackName + " , matchStr is not exist");
             return;
         }
 
@@ -181,7 +181,7 @@ export default class UIFunction {
                     sprite.spriteFrame = spriteFrame  
                 }
             } catch (error) {
-                cc.error(error)
+                console.error(error)
             }   
         } else {
             console.warn(`load SpriteFrame ${str} failed`)
@@ -205,7 +205,7 @@ export default class UIFunction {
                         sprite.spriteFrame = spriteFrame  
                     }
                 } catch (error) {
-                    cc.error(error)
+                    console.error(error)
                 }                
             } else {
                 console.warn(`load SpriteFrame ${str} failed`)

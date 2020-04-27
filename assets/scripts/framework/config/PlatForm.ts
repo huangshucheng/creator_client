@@ -7,7 +7,7 @@ export default class PlatForm {
     }
 
     static printPlatForm(){
-        cc.log("platform:" + PlatForm.getPlatForm())
+        console.log("platform:" + PlatForm.getPlatForm())
     }
     //是否win32
     static isWin32(){

@@ -29,7 +29,7 @@ export default class BaseScene implements ISceneBase {
         },function (completedCount: number, totalCount: number, item: any){
             if (completedCountFunc){
                 completedCountFunc(completedCount, totalCount, item)
-                // cc.log("load scene: " + _this._scene_name + " ,percent: " + completedCount + "/" + totalCount);
+                // console.log("load scene: " + _this._scene_name + " ,percent: " + completedCount + "/" + totalCount);
             }
         }) 
     }

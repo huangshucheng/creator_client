@@ -38,7 +38,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
 
     on_event_login_logic(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_login_logic",udata)
+        console.log("on_event_login_logic",udata)
         if(udata){
             if(udata.status == Response.OK){
                 LobbySendGameHoodleMsg.send_get_room_status();
@@ -51,7 +51,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
 
     on_event_create_room(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_create_room",udata)
+        console.log("on_event_create_room",udata)
         if(udata){
             let status = udata.status
             if(status == Response.OK){
@@ -65,7 +65,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
 
     on_event_join_room(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_join_room",udata)
+        console.log("on_event_join_room",udata)
         if(udata){
             let status = udata.status
             if(status == Response.OK){
@@ -79,7 +79,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
 
     on_event_exit_room(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_exit_room",udata)
+        console.log("on_event_exit_room",udata)
         if(udata){
             let status = udata.status
             if(status == Response.OK){
@@ -94,7 +94,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
 
     on_event_dessolve_room(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_dessolve_room",udata)
+        console.log("on_event_dessolve_room",udata)
         if(udata){
             let status = udata.status
             if(status == Response.OK){
@@ -109,7 +109,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
 
     on_event_get_room_status(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_get_room_status",udata)
+        console.log("on_event_get_room_status",udata)
         if(udata){
             let status = udata.status
             if(status == Response.OK){
@@ -122,7 +122,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
 
     on_event_back_room(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_back_room",udata)
+        console.log("on_event_back_room",udata)
         if(udata){
             let status = udata.status
             if(status == Response.OK){
@@ -136,7 +136,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
 
     on_event_match(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_match",udata)
+        console.log("on_event_match",udata)
         if(udata){
             let status = udata.status
             if(status == Response.OK){
@@ -172,7 +172,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
 
     on_event_match_stop(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_match_stop",udata)
+        console.log("on_event_match_stop",udata)
         if(udata){
             let status = udata.status
             if(status == Response.OK){
@@ -185,7 +185,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
 
     on_event_ugame_info(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_ugame_info",udata)
+        console.log("on_event_ugame_info",udata)
         if(udata){
             let status = udata.status
             if(status == Response.OK){

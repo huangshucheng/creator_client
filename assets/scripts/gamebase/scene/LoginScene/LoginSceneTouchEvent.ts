@@ -32,7 +32,7 @@ export default class LoginSceneTouchEvent extends UIController {
         let guestkey:string = Storage.get(LSDefine.USER_LOGIN_GUEST_KEY)
         if(!guestkey){
             guestkey = StringUtil.random_string(32)
-            cc.log("guest login reborn: " + guestkey + " ,len: " + guestkey.length)
+            console.log("guest login reborn: " + guestkey + " ,len: " + guestkey.length)
         }
 
         if(guestkey.length != 32){
@@ -47,7 +47,7 @@ export default class LoginSceneTouchEvent extends UIController {
         let upwdEditBox = this.seek_child_by_name(this.view["KW_IMG_LOGIN_BG"],"KW_INPUT_PWD")
         let _uname = this.get_editbox_string(unameEditBox)
         let _upwd = this.get_editbox_string(upwdEditBox)
-        cc.log("uname: ",_uname , " ,upwd: " , _upwd)
+        console.log("uname: ",_uname , " ,upwd: " , _upwd)
         if(_uname.length < 6 || _upwd.length < 6){
             DialogManager.getInstance().show_weak_hint("用户名或密码错误，不能少于六位!");
             return
@@ -72,9 +72,9 @@ export default class LoginSceneTouchEvent extends UIController {
         let _uname = this.get_editbox_string(unameEditBox)
         let _upwd = this.get_editbox_string(upwdEditBox)
         let _upwdok = this.get_editbox_string(upwdEditConf)
-        cc.log(_uname , _upwd , _upwdok)
+        console.log(_uname , _upwd , _upwdok)
         if(_uname.length < 6 || _upwd.length < 6 || _upwdok.length < 6 || (_upwd != _upwdok)){
-            cc.error("regist error!!!")
+            console.error("regist error!!!")
             DialogManager.getInstance().show_weak_hint("账号或密码错误!(不能少于6位)")
             return
         }
@@ -90,12 +90,6 @@ export default class LoginSceneTouchEvent extends UIController {
         }
         console.log("hcc>>on_click_wx_login222");
 
-        // wx.showModal({
-        //     title: "温馨提示",
-        //     content: "《弹珠荣耀》是一款在线对战游戏，需要您的用户信息登录游戏。",
-        //     showCancel: false,
-        // });
-
         //微信授权
         // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
         //获取玩家微信信息
@@ -108,13 +102,15 @@ export default class LoginSceneTouchEvent extends UIController {
                     //微信登录
                     wx.login({
                         success(login_res) {
-                            // console.log("hcc>>wx.login>>success: ", login_res);
                             if (login_res.code) {
                                 let login_code = login_res.code;
                                 let encryptedData = userinfo_res.encryptedData;
                                 let iv = userinfo_res.iv;
                                 //发起网络请求 TODO
-                                console.log("hcc>>login_code:" , login_code, encryptedData, iv);
+                                // console.log("hcc>>login_code:" , login_code, encryptedData, iv);
+                                let wechatuserinfo = JSON.stringify(userinfo_res);
+                                console.log("hcc>>wechatuserinfo: " , wechatuserinfo)
+                                LoginSendAuthMsg.send_wechat_login(String(login_code),wechatuserinfo);
                             } else {
                                 console.log('hcc>>登录失败！', login_res.errMsg)
                             }

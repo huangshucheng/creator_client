@@ -68,7 +68,7 @@ export default class MatchDialog extends UIDialog {
     ////////////
     on_event_match_stop(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("on_event_match_stop",udata)
+        console.log("on_event_match_stop",udata)
         if(udata){
             let status = udata.status
             if(status == Response.OK){

@@ -11,7 +11,7 @@ export default class Storage {
             try {
                 retString = JSON.parse(res);    
             } catch (error) {
-                cc.error(error)
+                console.error(error)
             }
         }
         return retString;

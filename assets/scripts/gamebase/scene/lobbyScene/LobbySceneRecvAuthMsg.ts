@@ -53,16 +53,16 @@ export default class LobbySceneRecvAuthMsg extends UIController {
 
     on_event_guest_login(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("guestlogin udata: " , udata)
+        console.log("guestlogin udata: " , udata)
         if(udata.status == Response.OK){
             try {
                 let resbody = JSON.parse(udata.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
                 Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,resbody.guest_key)
             } catch (error) {
-                cc.error(error)
+                console.error(error)
             }
-            cc.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
+            console.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
             LobbySendGameHoodleMsg.send_login_logic()
             LobbySendAuthMsg.send_get_center_info();
             DialogManager.getInstance().show_weak_hint("游客登录成功!")
@@ -73,16 +73,16 @@ export default class LobbySceneRecvAuthMsg extends UIController {
 
     on_event_uname_login(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        cc.log("unamelogin udata: " , udata)
+        console.log("unamelogin udata: " , udata)
         if(udata.status == Response.OK){
             try {
                 let resbody = JSON.parse(udata.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
                 Storage.set(LSDefine.USER_LOGIN_MSG,{uname: resbody.uname, upwd: resbody.upwd})
             } catch (error) {
-                cc.error(error)
+                console.error(error)
             }
-            cc.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG))
+            console.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG))
             LobbySendGameHoodleMsg.send_login_logic()
             LobbySendAuthMsg.send_get_center_info();
             DialogManager.getInstance().show_weak_hint("登录成功!")
@@ -110,7 +110,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
         if(udata){
             let status = udata.status
             if(status == Response.OK){
-                cc.log("on_event_login_out")
+                console.log("on_event_login_out")
                 SceneManager.getInstance().enter_scene_asyc(new LoginScene())
                 DialogManager.getInstance().show_weak_hint("退出成功!")
             }
@@ -118,7 +118,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
     }
 
     on_event_relogin(event:cc.Event.EventCustom){
-        cc.log("on_event_relogin...")
+        console.log("on_event_relogin...")
         SceneManager.getInstance().enter_scene_asyc(new LoginScene())
         DialogManager.getInstance().show_weak_hint("您已经被挤号,自动退出!")
     }

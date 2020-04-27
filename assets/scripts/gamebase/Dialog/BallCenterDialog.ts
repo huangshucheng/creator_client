@@ -220,7 +220,7 @@ export default class BallCenterDialog extends UIDialog {
             let ball_count_all = 0;
             let prefab_size = null;
             if(scrollview){
-                cc.log("hcc>>ball_info_obj: " , ball_info_obj)
+                console.log("hcc>>ball_info_obj: " , ball_info_obj)
                 for(let key in ball_info_obj){
                     let level_count:string  = ball_info_obj[key];
                     let level: string = this.get_ball_level(key);
@@ -251,7 +251,7 @@ export default class BallCenterDialog extends UIDialog {
 
     on_click_ball_select(event:cc.Event, data:any){
         let ballComponent: cc.Component = event.target.getComponent(cc.Button);
-        cc.log("hcc>>on_click_ball_select", ballComponent.node.name, data);
+        console.log("hcc>>on_click_ball_select", ballComponent.node.name, data);
         if(!data){
             return
         }
@@ -267,12 +267,12 @@ export default class BallCenterDialog extends UIDialog {
                 //
                 let newNode: cc.Node = cc.instantiate(event.target);
                 // let btnCom = newNode.getComponent(cc.Button);
-                // cc.log("hcc>>beforeEvent: " , btnCom.clickEvents.length);
+                // console.log("hcc>>beforeEvent: " , btnCom.clickEvents.length);
                 compose_layer.addChild(newNode);
                 newNode.y = 0;
                 this.set_string(this.seek_child_by_name(newNode, "KW_TEXT_COUNT"), "1");
                 this.add_click_evenet_with_data(newNode, "on_click_ball_unselect", data)
-                // cc.log("hcc>>afterEvent: ", btnCom.clickEvents.length);
+                // console.log("hcc>>afterEvent: ", btnCom.clickEvents.length);
                 this.set_visible(this.view["KW_TEXT_TITLE_UNDO"],true);
             }    
         }
@@ -280,7 +280,7 @@ export default class BallCenterDialog extends UIDialog {
 
     on_click_ball_unselect(event:cc.Event, data:any){
         let ballComponent: cc.Component = event.target.getComponent(cc.Button);
-        cc.log("hcc>>on_click_ball_unselect", ballComponent.node.name, data);
+        console.log("hcc>>on_click_ball_unselect", ballComponent.node.name, data);
         if (!data) {
             return
         }

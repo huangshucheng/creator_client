@@ -10,9 +10,9 @@ export default class UserInfo {
         let tmpInfo = null;
         try {
             tmpInfo = JSON.parse(uinfo)
-            cc.log("uinfo: " , tmpInfo)
+            console.log("uinfo: " , tmpInfo)
         } catch (error) {
-            cc.error(error)
+            console.error(error)
         }
 
         this._uinfo = tmpInfo

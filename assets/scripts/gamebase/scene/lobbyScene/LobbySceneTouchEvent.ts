@@ -38,7 +38,7 @@ export default class LobbySceneTouchEvent extends UIController {
     on_click_ball_dialog_data(event: cc.Event, customEventData: any) {
         // let tgNode: cc.Node = event.target;
         // let btn = tgNode.getComponent(cc.Button);
-        // cc.log("hccccc11111", customEventData, btn.name, tgNode.name);
+        // console.log("hccccc11111", customEventData, btn.name, tgNode.name);
     }
 
     on_click_set(sender:cc.Component) {

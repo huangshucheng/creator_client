@@ -41,7 +41,7 @@ export default class TableView extends cc.ScrollView {
     get scrollModel() { return this.horizontal ? ScrollModel.Horizontal : ScrollModel.Vertical; }
     set scrollModel(value) {
         if (!CC_EDITOR) {
-            cc.error('[TableView] 不允许动态修改scrollModel');
+            console.error('[TableView] 不允许动态修改scrollModel');
             return;
         }
         if (value === ScrollModel.Horizontal) {
@@ -161,7 +161,7 @@ export default class TableView extends cc.ScrollView {
         if (typeof num === 'number' && num >= 0) {
             this.cellCount = num;
         } else {
-            cc.error('[TableView] setCellCount 参数错误');
+            console.error('[TableView] setCellCount 参数错误');
         }
     }
 
@@ -230,13 +230,13 @@ export default class TableView extends cc.ScrollView {
     init(num: number, data?: any) {
         if (CC_DEBUG) {
             if (!this.content) {
-                return cc.error('[TableView] 请指定content');
+                return console.error('[TableView] 请指定content');
             }
             if (!this.cell) {
-                return cc.error('[TableView] 请指定cell');
+                return console.error('[TableView] 请指定cell');
             }
             if (!this.getViewCell()) {
-                return cc.error('[TableView] 请在cell中添加继承自<TableViewCell>的自定义组件');
+                return console.error('[TableView] 请在cell中添加继承自<TableViewCell>的自定义组件');
             }
         }
         this.clear();
@@ -411,7 +411,7 @@ export default class TableView extends cc.ScrollView {
     private getDefaultCellSize(): cc.Size {
         if (this.cell) {
             if (CC_DEBUG && this.cell.data.getComponent(cc.Widget)) {
-                cc.warn('[TableView] cell根节点中存在cc.Widget，可能无法正确获取Size');
+                console.warn('[TableView] cell根节点中存在cc.Widget，可能无法正确获取Size');
             }
             return this.cell.data.getContentSize();
         }

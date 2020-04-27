@@ -83,7 +83,7 @@ export default class StoreDialog extends UIDialog {
     //刷新金币
     on_event_ugame_info(event: cc.Event.EventCustom) {
         let udata = event.getUserData()
-        cc.log("on_event_ugame_info", udata)
+        console.log("on_event_ugame_info", udata)
         if (udata) {
             let status = udata.status
             if (status == Response.OK) {
@@ -110,7 +110,7 @@ export default class StoreDialog extends UIDialog {
     show_store_product_info(storeprops_obj:any){
         this.clear_ball_layout();
 
-        cc.log("hcc>>storeprops_obj: ", storeprops_obj)
+        console.log("hcc>>storeprops_obj: ", storeprops_obj)
         if(!storeprops_obj){
             return;
         }
@@ -153,7 +153,7 @@ export default class StoreDialog extends UIDialog {
             return;
         }
         
-        cc.log("hcc>>click: " , data);
+        console.log("hcc>>click: " , data);
         let req_body = {
             propsvrindex: data.propsvrindex,
             propid: data.propid,

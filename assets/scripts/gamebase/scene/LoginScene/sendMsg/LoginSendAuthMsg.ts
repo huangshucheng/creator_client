@@ -31,8 +31,13 @@ export default class LoginSendAuthMsg {
         LoginSendAuthMsg.send(Cmd.eUnameRegistReq,body);
     }
 
-    static send_weixin_login(){
-        
+    static send_wechat_login(logincode: string, wechatuserinfo:string){
+        let body = {
+            logincode:logincode,
+            wechatuserinfo: wechatuserinfo,
+        }
+        console.log("hcc>>send_wechat_login: " , body);
+        LoginSendAuthMsg.send(Cmd.eWeChatLoginReq,body);
     }
 
 }

@@ -36,7 +36,7 @@ export default class Log {
         if (this._logLevel > 1) {
             return;
         }
-        var backLog = cc.log || console.log || window["log"];
+        var backLog = console.log || console.log || window["log"];
         backLog.call(this, "%c%s%s " + cc.js.formatStr.apply(cc, arguments), Log._colors.black, Log._getDateString(), Log._stack(2));
     };
     //blue
@@ -44,12 +44,12 @@ export default class Log {
         if (this._logLevel > 0) {
             return;
         }
-        var backLog = cc.log || console.log || window["log"];
+        var backLog = console.log || console.log || window["log"];
         backLog.call(this, "%c%s%s " + cc.js.formatStr.apply(cc, arguments), Log._colors.blue, Log._getDateString(), Log._stack(2));
     };
     //red
     static error(msg?: string) {
-        var backLog = cc.log || console.log || window["log"];
+        var backLog = console.log || console.log || window["log"];
         backLog.call(this, "%c%s%s " + cc.js.formatStr.apply(cc, arguments), Log._colors.red, Log._getDateString(), Log._stack(2));
     };
     */

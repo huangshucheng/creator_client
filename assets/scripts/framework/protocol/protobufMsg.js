@@ -46,6 +46,8 @@ $root.AuthProto = (function() {
      * @property {number} eGetUserCenterInfoReq=21 eGetUserCenterInfoReq value
      * @property {number} eGetUserCenterInfoRes=22 eGetUserCenterInfoRes value
      * @property {number} eReloginRes=23 eReloginRes value
+     * @property {number} eWeChatLoginReq=24 eWeChatLoginReq value
+     * @property {number} eWeChatLoginRes=25 eWeChatLoginRes value
      */
     AuthProto.Cmd = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -73,6 +75,8 @@ $root.AuthProto = (function() {
         values[valuesById[21] = "eGetUserCenterInfoReq"] = 21;
         values[valuesById[22] = "eGetUserCenterInfoRes"] = 22;
         values[valuesById[23] = "eReloginRes"] = 23;
+        values[valuesById[24] = "eWeChatLoginReq"] = 24;
+        values[valuesById[25] = "eWeChatLoginRes"] = 25;
         return values;
     })();
 
@@ -4305,6 +4309,426 @@ $root.AuthProto = (function() {
         };
 
         return ReloginRes;
+    })();
+
+    AuthProto.WeChatLoginReq = (function() {
+
+        /**
+         * Properties of a WeChatLoginReq.
+         * @memberof AuthProto
+         * @interface IWeChatLoginReq
+         * @property {string} logincode WeChatLoginReq logincode
+         * @property {string} wechatuserinfo WeChatLoginReq wechatuserinfo
+         */
+
+        /**
+         * Constructs a new WeChatLoginReq.
+         * @memberof AuthProto
+         * @classdesc Represents a WeChatLoginReq.
+         * @implements IWeChatLoginReq
+         * @constructor
+         * @param {AuthProto.IWeChatLoginReq=} [properties] Properties to set
+         */
+        function WeChatLoginReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * WeChatLoginReq logincode.
+         * @member {string} logincode
+         * @memberof AuthProto.WeChatLoginReq
+         * @instance
+         */
+        WeChatLoginReq.prototype.logincode = "";
+
+        /**
+         * WeChatLoginReq wechatuserinfo.
+         * @member {string} wechatuserinfo
+         * @memberof AuthProto.WeChatLoginReq
+         * @instance
+         */
+        WeChatLoginReq.prototype.wechatuserinfo = "";
+
+        /**
+         * Creates a new WeChatLoginReq instance using the specified properties.
+         * @function create
+         * @memberof AuthProto.WeChatLoginReq
+         * @static
+         * @param {AuthProto.IWeChatLoginReq=} [properties] Properties to set
+         * @returns {AuthProto.WeChatLoginReq} WeChatLoginReq instance
+         */
+        WeChatLoginReq.create = function create(properties) {
+            return new WeChatLoginReq(properties);
+        };
+
+        /**
+         * Encodes the specified WeChatLoginReq message. Does not implicitly {@link AuthProto.WeChatLoginReq.verify|verify} messages.
+         * @function encode
+         * @memberof AuthProto.WeChatLoginReq
+         * @static
+         * @param {AuthProto.IWeChatLoginReq} message WeChatLoginReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        WeChatLoginReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.logincode);
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.wechatuserinfo);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified WeChatLoginReq message, length delimited. Does not implicitly {@link AuthProto.WeChatLoginReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof AuthProto.WeChatLoginReq
+         * @static
+         * @param {AuthProto.IWeChatLoginReq} message WeChatLoginReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        WeChatLoginReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a WeChatLoginReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof AuthProto.WeChatLoginReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {AuthProto.WeChatLoginReq} WeChatLoginReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        WeChatLoginReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.AuthProto.WeChatLoginReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.logincode = reader.string();
+                    break;
+                case 2:
+                    message.wechatuserinfo = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("logincode"))
+                throw $util.ProtocolError("missing required 'logincode'", { instance: message });
+            if (!message.hasOwnProperty("wechatuserinfo"))
+                throw $util.ProtocolError("missing required 'wechatuserinfo'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a WeChatLoginReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof AuthProto.WeChatLoginReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {AuthProto.WeChatLoginReq} WeChatLoginReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        WeChatLoginReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a WeChatLoginReq message.
+         * @function verify
+         * @memberof AuthProto.WeChatLoginReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        WeChatLoginReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isString(message.logincode))
+                return "logincode: string expected";
+            if (!$util.isString(message.wechatuserinfo))
+                return "wechatuserinfo: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a WeChatLoginReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof AuthProto.WeChatLoginReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {AuthProto.WeChatLoginReq} WeChatLoginReq
+         */
+        WeChatLoginReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.AuthProto.WeChatLoginReq)
+                return object;
+            var message = new $root.AuthProto.WeChatLoginReq();
+            if (object.logincode != null)
+                message.logincode = String(object.logincode);
+            if (object.wechatuserinfo != null)
+                message.wechatuserinfo = String(object.wechatuserinfo);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a WeChatLoginReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof AuthProto.WeChatLoginReq
+         * @static
+         * @param {AuthProto.WeChatLoginReq} message WeChatLoginReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        WeChatLoginReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.logincode = "";
+                object.wechatuserinfo = "";
+            }
+            if (message.logincode != null && message.hasOwnProperty("logincode"))
+                object.logincode = message.logincode;
+            if (message.wechatuserinfo != null && message.hasOwnProperty("wechatuserinfo"))
+                object.wechatuserinfo = message.wechatuserinfo;
+            return object;
+        };
+
+        /**
+         * Converts this WeChatLoginReq to JSON.
+         * @function toJSON
+         * @memberof AuthProto.WeChatLoginReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        WeChatLoginReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return WeChatLoginReq;
+    })();
+
+    AuthProto.WeChatLoginRes = (function() {
+
+        /**
+         * Properties of a WeChatLoginRes.
+         * @memberof AuthProto
+         * @interface IWeChatLoginRes
+         * @property {number} status WeChatLoginRes status
+         * @property {string|null} [wechatuserinfo] WeChatLoginRes wechatuserinfo
+         */
+
+        /**
+         * Constructs a new WeChatLoginRes.
+         * @memberof AuthProto
+         * @classdesc Represents a WeChatLoginRes.
+         * @implements IWeChatLoginRes
+         * @constructor
+         * @param {AuthProto.IWeChatLoginRes=} [properties] Properties to set
+         */
+        function WeChatLoginRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * WeChatLoginRes status.
+         * @member {number} status
+         * @memberof AuthProto.WeChatLoginRes
+         * @instance
+         */
+        WeChatLoginRes.prototype.status = 0;
+
+        /**
+         * WeChatLoginRes wechatuserinfo.
+         * @member {string} wechatuserinfo
+         * @memberof AuthProto.WeChatLoginRes
+         * @instance
+         */
+        WeChatLoginRes.prototype.wechatuserinfo = "";
+
+        /**
+         * Creates a new WeChatLoginRes instance using the specified properties.
+         * @function create
+         * @memberof AuthProto.WeChatLoginRes
+         * @static
+         * @param {AuthProto.IWeChatLoginRes=} [properties] Properties to set
+         * @returns {AuthProto.WeChatLoginRes} WeChatLoginRes instance
+         */
+        WeChatLoginRes.create = function create(properties) {
+            return new WeChatLoginRes(properties);
+        };
+
+        /**
+         * Encodes the specified WeChatLoginRes message. Does not implicitly {@link AuthProto.WeChatLoginRes.verify|verify} messages.
+         * @function encode
+         * @memberof AuthProto.WeChatLoginRes
+         * @static
+         * @param {AuthProto.IWeChatLoginRes} message WeChatLoginRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        WeChatLoginRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.wechatuserinfo != null && message.hasOwnProperty("wechatuserinfo"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.wechatuserinfo);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified WeChatLoginRes message, length delimited. Does not implicitly {@link AuthProto.WeChatLoginRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof AuthProto.WeChatLoginRes
+         * @static
+         * @param {AuthProto.IWeChatLoginRes} message WeChatLoginRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        WeChatLoginRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a WeChatLoginRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof AuthProto.WeChatLoginRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {AuthProto.WeChatLoginRes} WeChatLoginRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        WeChatLoginRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.AuthProto.WeChatLoginRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.wechatuserinfo = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a WeChatLoginRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof AuthProto.WeChatLoginRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {AuthProto.WeChatLoginRes} WeChatLoginRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        WeChatLoginRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a WeChatLoginRes message.
+         * @function verify
+         * @memberof AuthProto.WeChatLoginRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        WeChatLoginRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.wechatuserinfo != null && message.hasOwnProperty("wechatuserinfo"))
+                if (!$util.isString(message.wechatuserinfo))
+                    return "wechatuserinfo: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a WeChatLoginRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof AuthProto.WeChatLoginRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {AuthProto.WeChatLoginRes} WeChatLoginRes
+         */
+        WeChatLoginRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.AuthProto.WeChatLoginRes)
+                return object;
+            var message = new $root.AuthProto.WeChatLoginRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.wechatuserinfo != null)
+                message.wechatuserinfo = String(object.wechatuserinfo);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a WeChatLoginRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof AuthProto.WeChatLoginRes
+         * @static
+         * @param {AuthProto.WeChatLoginRes} message WeChatLoginRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        WeChatLoginRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.wechatuserinfo = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.wechatuserinfo != null && message.hasOwnProperty("wechatuserinfo"))
+                object.wechatuserinfo = message.wechatuserinfo;
+            return object;
+        };
+
+        /**
+         * Converts this WeChatLoginRes to JSON.
+         * @function toJSON
+         * @memberof AuthProto.WeChatLoginRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        WeChatLoginRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return WeChatLoginRes;
     })();
 
     return AuthProto;
