@@ -36,7 +36,6 @@ export default class LoginSendAuthMsg {
             logincode:logincode,
             wechatuserinfo: wechatuserinfo,
         }
-        console.log("hcc>>send_wechat_login: " , body);
         LoginSendAuthMsg.send(Cmd.eWeChatLoginReq,body);
     }
 

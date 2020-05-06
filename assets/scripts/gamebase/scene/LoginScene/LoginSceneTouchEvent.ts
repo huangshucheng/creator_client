@@ -5,6 +5,7 @@ import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
 import PlatForm from '../../../framework/config/PlatForm';
+import WeChatLogin from '../../../framework/utils/WeChatLogin';
 
 const {ccclass, property} = cc._decorator;
 
@@ -84,72 +85,9 @@ export default class LoginSceneTouchEvent extends UIController {
     }
 
     on_click_wx_login(sender: cc.Component){
-        console.log("hcc>>on_click_wx_login111");
         if (!PlatForm.isWeChatGame()) {
             return;
         }
-        console.log("hcc>>on_click_wx_login222");
-
-        //微信授权
-        // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.userInfo" 这个 scope
-        //获取玩家微信信息
-        function on_click_get_user_info() {
-            wx.getUserInfo({
-                success: function (userinfo_res) {
-                    // console.log("hcc>>wx.getUserInfo>>success>>res ", res)
-                    // console.log("hcc>>wx.getUserInfo>>success>>res.userInfo", userinfo_res.userInfo)
-                    ///////////////////////////
-                    //微信登录
-                    wx.login({
-                        success(login_res) {
-                            if (login_res.code) {
-                                let login_code = login_res.code;
-                                let encryptedData = userinfo_res.encryptedData;
-                                let iv = userinfo_res.iv;
-                                //发起网络请求 TODO
-                                // console.log("hcc>>login_code:" , login_code, encryptedData, iv);
-                                let wechatuserinfo = JSON.stringify(userinfo_res);
-                                console.log("hcc>>wechatuserinfo: " , wechatuserinfo)
-                                LoginSendAuthMsg.send_wechat_login(String(login_code),wechatuserinfo);
-                            } else {
-                                console.log('hcc>>登录失败！', login_res.errMsg)
-                            }
-                        },
-                        failed(login_res) {
-                            console.log("hcc>>wx.login>>failed: ", login_res);
-                        },
-                    })
-                    ///////////////////////////
-                },
-                fail: function (userinfo_res) {
-                    console.log("hcc>>wx.getUserInfo>>fail");
-                }
-            })
-        }
-
-        //授权，获取玩家信息
-        ///*
-        wx.getSetting({
-            success(res) {
-                if (!res.authSetting['scope.userInfo']) { //没授权
-                    wx.authorize({//去授权
-                        scope: 'scope.userInfo',
-                        success(){
-                            // 授权成功
-                            console.log("hcc>>wx.authorize>>success");
-                            on_click_get_user_info();
-                        },
-                        fail(){
-                            //授权失败
-                            console.log("hcc>>wx.authorize>>fail");
-                        },
-                    })
-                }else{//已经授权过了
-                    on_click_get_user_info();
-                }
-            }
-        })
-        //*/
-        ///////////
+        WeChatLogin.do_wechat_auth();
     }
 }

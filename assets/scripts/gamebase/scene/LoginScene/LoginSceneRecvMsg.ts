@@ -62,7 +62,6 @@ export default class LoginSceneRecvMsg extends UIController {
             }
             console.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
             LobbySendGameHoodleMsg.send_login_logic()
-            DialogManager.getInstance().show_weak_hint("游客登录成功!")
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)
         }
@@ -82,7 +81,6 @@ export default class LoginSceneRecvMsg extends UIController {
             }
             console.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG) )
             LobbySendGameHoodleMsg.send_login_logic()
-            DialogManager.getInstance().show_weak_hint("登录成功!")
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)
         }
@@ -108,7 +106,10 @@ export default class LoginSceneRecvMsg extends UIController {
     on_event_wechat_login(event:cc.Event.EventCustom){
         let udata = event.getUserData()
         if (udata.status == Response.OK) {
-
-        } 
+            SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
+            LobbySendGameHoodleMsg.send_login_logic()
+        }else{
+            DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)
+        }
     }
 }
