@@ -4528,6 +4528,7 @@ $root.AuthProto = (function() {
          * @memberof AuthProto
          * @interface IWeChatLoginRes
          * @property {number} status WeChatLoginRes status
+         * @property {number|null} [uid] WeChatLoginRes uid
          * @property {string|null} [wechatuserinfo] WeChatLoginRes wechatuserinfo
          */
 
@@ -4553,6 +4554,14 @@ $root.AuthProto = (function() {
          * @instance
          */
         WeChatLoginRes.prototype.status = 0;
+
+        /**
+         * WeChatLoginRes uid.
+         * @member {number} uid
+         * @memberof AuthProto.WeChatLoginRes
+         * @instance
+         */
+        WeChatLoginRes.prototype.uid = 0;
 
         /**
          * WeChatLoginRes wechatuserinfo.
@@ -4587,8 +4596,10 @@ $root.AuthProto = (function() {
             if (!writer)
                 writer = $Writer.create();
             writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.uid);
             if (message.wechatuserinfo != null && message.hasOwnProperty("wechatuserinfo"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.wechatuserinfo);
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.wechatuserinfo);
             return writer;
         };
 
@@ -4627,6 +4638,9 @@ $root.AuthProto = (function() {
                     message.status = reader.sint32();
                     break;
                 case 2:
+                    message.uid = reader.int32();
+                    break;
+                case 3:
                     message.wechatuserinfo = reader.string();
                     break;
                 default:
@@ -4668,6 +4682,9 @@ $root.AuthProto = (function() {
                 return "object expected";
             if (!$util.isInteger(message.status))
                 return "status: integer expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid))
+                    return "uid: integer expected";
             if (message.wechatuserinfo != null && message.hasOwnProperty("wechatuserinfo"))
                 if (!$util.isString(message.wechatuserinfo))
                     return "wechatuserinfo: string expected";
@@ -4688,6 +4705,8 @@ $root.AuthProto = (function() {
             var message = new $root.AuthProto.WeChatLoginRes();
             if (object.status != null)
                 message.status = object.status | 0;
+            if (object.uid != null)
+                message.uid = object.uid | 0;
             if (object.wechatuserinfo != null)
                 message.wechatuserinfo = String(object.wechatuserinfo);
             return message;
@@ -4708,10 +4727,13 @@ $root.AuthProto = (function() {
             var object = {};
             if (options.defaults) {
                 object.status = 0;
+                object.uid = 0;
                 object.wechatuserinfo = "";
             }
             if (message.status != null && message.hasOwnProperty("status"))
                 object.status = message.status;
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                object.uid = message.uid;
             if (message.wechatuserinfo != null && message.hasOwnProperty("wechatuserinfo"))
                 object.wechatuserinfo = message.wechatuserinfo;
             return object;

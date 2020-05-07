@@ -5,6 +5,7 @@ import { UserState } from '../../common/State';
 import RoomData from '../../common/RoomData';
 import UIFunction from '../../../framework/common/UIFunciton';
 import { ResourceManager } from '../../../framework/manager/ResourceManager';
+import StringUtil from '../../../framework/utils/StringUtil';
 
 const {ccclass, property} = cc._decorator;
 
@@ -61,8 +62,8 @@ export default class GameSceneShowUI extends UIController {
             return;
         }
         this.set_visible(info_node, true);
-//        this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.unick)
-        this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.uname) //TODO 暂时先显示玩家账号
+       this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.unick)
+        // this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.uname) //TODO 暂时先显示玩家账号
         this.set_string(info_node.getChildByName("KW_TEXT_GOLD"),infoObj.uchip) //金币
         let ufaceImg = HEAD_PATH + infoObj.uface;
         this.set_sprite_asyc(info_node.getChildByName("KW_IMG_HEAD"),ufaceImg) // 头像
@@ -71,6 +72,11 @@ export default class GameSceneShowUI extends UIController {
         this.set_visible(info_node.getChildByName("KW_IMG_MASTER"), infoObj.ishost == true) // 房主
         this.set_visible(info_node.getChildByName("KW_IMG_READY"), infoObj.userstate == UserState.Ready);
         this.set_visible(info_node.getChildByName("KW_TEXT_GOLD"), true);
+
+        console.log("hcc>>gameSceneShowUI: url: ", infoObj.avatarurl)
+        if (infoObj.avatarurl && !StringUtil.isEmptyString(infoObj.avatarurl)) {
+            this.set_headimg_url(info_node.getChildByName("KW_IMG_HEAD"), infoObj.avatarurl);
+        }
         
         if(Number(infoObj.seatid) == Number(RoomData.getInstance().get_self_seatid())){
             let userstate = Number(infoObj.userstate)

@@ -127,4 +127,20 @@ export default class StringUtil {
         var tmpUint8Array = new Uint8Array(arr);
         return tmpUint8Array
     }
+
+    static isEmptyString(str:string){
+        if(str == ""){
+            return true;
+        }
+
+        if(str == "'"  + "'"){
+            return true;
+        }
+
+        if (str == "\"" + "\"") {
+            return true;
+        }
+
+        return false;
+    }
 }

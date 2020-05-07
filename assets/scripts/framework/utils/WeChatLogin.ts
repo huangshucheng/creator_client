@@ -2,11 +2,11 @@ import LoginSendAuthMsg from "../../gamebase/scene/LoginScene/sendMsg/LoginSendA
 
 class WeChatLogin {
     //授权，获取玩家信息
-    static do_wechat_auth() {
+    static do_wechat_auth_login() {
         wx.getSetting({
             success(res) {
                 if (!res.authSetting['scope.userInfo']) { //没授权
-                    wx.authorize({ //去授权
+                    wx.authorize({ //去授权 TODO  新玩家授权失败
                         scope: 'scope.userInfo',
                         success() { //授权成功
                             WeChatLogin.get_wechat_user_info();
@@ -18,7 +18,7 @@ class WeChatLogin {
                                 // showCancel: false,
                                 success(res) {
                                     if (res.confirm) {
-                                        WeChatLogin.do_wechat_auth()
+                                        WeChatLogin.do_wechat_auth_login()
                                     } else if (res.cancel) {
                                     }
                                 }

@@ -436,4 +436,19 @@ export default class UIFunction {
         }
         return null;
     }
+    
+    //设置头像,因为可能出现地址不带图片格式的情况，所以下面指定了type为jpg
+    set_headimg_url(target: cc.Node, url: string) {
+        if (!this.node_exist(target)) {
+            return;
+        }
+        let sprite = target.getComponent(cc.Sprite)
+        if (!sprite) {
+            return;
+        }
+        
+        cc.loader.load({ url: url + '?file=a.jpg', type: 'jpg' }, function (err:any, tex:any) {
+            sprite.spriteFrame = new cc.SpriteFrame(tex);
+        });
+    }
 }

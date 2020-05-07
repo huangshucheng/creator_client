@@ -4,6 +4,7 @@ import EventManager from '../../framework/manager/EventManager';
 import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
+import StringUtil from '../../framework/utils/StringUtil';
 
 //匹配界面
 
@@ -56,9 +57,15 @@ export default class MatchDialog extends UIDialog {
                         }
                         let headString = "lobby/rectheader/1" + headIndex;
                         this.set_sprite(this.seek_child_by_name(infoNode,"KW_IMG_HEAD"),headString);
-                        this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_NAME"),json_object.uname);
+                        // this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_NAME"),json_object.uname);
+                        this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_NAME"),json_object.unick);
                         this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_GOLD"),json_object.uchip);
                         this.set_visible(this.seek_child_by_name(infoNode,"KW_TEXT_GOLD"),true);
+
+                        console.log("hcc>>show_math_user_info: url: ", json_object.avatarurl);
+                        if (json_object.avatarurl && !StringUtil.isEmptyString(json_object.avatarurl)) {
+                            this.set_headimg_url(this.seek_child_by_name(infoNode, "KW_IMG_HEAD"), json_object.avatarurl);
+                        }
                     }
                 }
             });

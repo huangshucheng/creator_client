@@ -54,4 +54,8 @@ export default class UserInfo {
         return this._ugame_info.uchip;
     }
 
+    static get_avatrurl(){
+        return this._uinfo.avatarurl;
+    }
+
 }

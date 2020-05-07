@@ -83,4 +83,8 @@ export default abstract class UIController extends cc.Component {
     seek_child_by_name(target:cc.Node, name:string){
         return UIFunction.getInstance().seek_widget_by_name(target,name)
     }
+
+    set_headimg_url(target: cc.Node, url: string){
+        UIFunction.getInstance().set_headimg_url(target, url);
+    }
 }
