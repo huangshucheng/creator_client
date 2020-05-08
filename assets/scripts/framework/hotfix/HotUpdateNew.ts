@@ -46,9 +46,9 @@ class HotUpdateNew{
     }
 
     init(){
-        // if (!this.checkPlatForm()) {
-        //     return;
-        // }
+        if (!this.checkPlatForm()) {
+            return;
+        }
 
         let _this = this;
         ResourceManager.getInstance().loadResAsyc(GameAppConfig.LOCAL_MANIFEST_PATH, cc.Asset, function (error: Error, resource: any) {

@@ -159,7 +159,7 @@ export default class GameHoodleRecvMsg extends UIController {
                 let score = info.score;
                 let player: Player = RoomData.getInstance().get_player(seatid);
                 if(player){
-                    let uname = player.get_uname();
+                    let uname = player.get_unick();
                     let score_str = score > 0 ? ("+" + score) : score
                     score_text = score_text + uname + ":" + score_str + "\n";
                 }
@@ -204,7 +204,8 @@ export default class GameHoodleRecvMsg extends UIController {
                 let gold = Number(goldInfo.gold);
                 let player: Player = RoomData.getInstance().get_player(seatid);
                 if(player){
-                    let uname = player.get_uname();
+                    // let uname = player.get_uname();
+                    let uname = player.get_unick();
                     let score_str = score > 0 ? ("+" + score) : score;
                     let gold_str = gold > 0 ? ("+" + gold) : gold;
                     show_text = show_text + uname + ": 分数 " + score_str + "   " + "金币:" + gold_str + "\n";

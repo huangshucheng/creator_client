@@ -5,7 +5,8 @@ export default class LSDefine {
     static USER_LOGIN_GUEST_KEY        = "user_login_guest_key"       //游客登录信息，guestkey
     static USER_INFO_SELF              = "user_info_self"             //自己信息 uinfo
 
-    static LOGIN_TYPE_GUEST            = "guest_login" //游客登录
-    static LOGIN_TYPE_UNAME            = "uname_login" //账号登录
+    static LOGIN_TYPE_GUEST            = "guest_login"                  //游客登录
+    static LOGIN_TYPE_UNAME            = "uname_login"                  //账号登录
+    static LOGIN_TYPE_WECHAT           = "wechat_login"                 //微信登录
 }
 

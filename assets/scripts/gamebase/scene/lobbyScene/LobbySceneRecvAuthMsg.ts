@@ -12,6 +12,7 @@ import EventDefine from '../../../framework/config/EventDefine';
 import LobbySendAuthMsg from './sendMsg/LobbySendAuthMsg';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
+import WeChatLogin from '../../../framework/utils/WeChatLogin';
 
 const {ccclass, property} = cc._decorator;
 
@@ -30,6 +31,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
         EventManager.on(EventDefine.EVENT_NET_CONNECTED, this, this.on_net_connected);
         EventManager.on(CmdName[Cmd.eUnameLoginRes], this, this.on_event_uname_login)
         EventManager.on(CmdName[Cmd.eGuestLoginRes], this, this.on_event_guest_login)
+        EventManager.on(CmdName[Cmd.eWeChatLoginRes], this, this.on_event_wechat_login)
         EventManager.on(CmdName[Cmd.eGetUserCenterInfoRes], this, this.on_event_center_info)
         EventManager.on(CmdName[Cmd.eLoginOutRes], this, this.on_event_login_out)
         EventManager.on(CmdName[Cmd.eReloginRes], this, this.on_event_relogin)
@@ -48,6 +50,8 @@ export default class LobbySceneRecvAuthMsg extends UIController {
            if(guestkey){
                LoginSendAuthMsg.send_guest_login(guestkey)
            }
+        }else if(loginType == LSDefine.LOGIN_TYPE_WECHAT){
+            WeChatLogin.get_wechat_user_info_and_login();
         }
     }
 
@@ -65,7 +69,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
             console.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
             LobbySendGameHoodleMsg.send_login_logic()
             LobbySendAuthMsg.send_get_center_info();
-            DialogManager.getInstance().show_weak_hint("游客登录成功!")
+            DialogManager.getInstance().show_weak_hint("游客重新登录成功!")
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)
         }
@@ -85,9 +89,19 @@ export default class LobbySceneRecvAuthMsg extends UIController {
             console.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG))
             LobbySendGameHoodleMsg.send_login_logic()
             LobbySendAuthMsg.send_get_center_info();
-            DialogManager.getInstance().show_weak_hint("登录成功!")
+            DialogManager.getInstance().show_weak_hint("玩家重新登录成功!")
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)
+        }
+    }
+
+    on_event_wechat_login(event: cc.Event.EventCustom) {
+        let udata = event.getUserData()
+        if (udata.status == Response.OK) {
+            Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_WECHAT)
+            LobbySendGameHoodleMsg.send_login_logic()
+        } else {
+            DialogManager.getInstance().show_weak_hint("微信重新登录失败! " + udata.status)
         }
     }
 

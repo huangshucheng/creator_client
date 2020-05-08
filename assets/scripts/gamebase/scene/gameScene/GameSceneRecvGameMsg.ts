@@ -35,7 +35,7 @@ export default class GameSceneRecvGameMsg extends UIController {
         EventManager.on(CmdName[Cmd.eGameStartRes], this, this.on_event_game_start)
         EventManager.on(CmdName[Cmd.eGameEndRes], this, this.on_event_game_end)
         EventManager.on(CmdName[Cmd.eUserOfflineRes], this, this.on_event_user_offline)
-        EventManager.on(CmdName[Cmd.ePlayerScoreRes], this, this.on_event_play_score)
+        EventManager.on(CmdName[Cmd.ePlayerScoreRes], this, this.on_event_player_score)
         EventManager.on(CmdName[Cmd.eGameResultRes], this, this.on_event_game_result)
         EventManager.on(CmdName[Cmd.eTotalGameResultRes], this, this.on_event_game_total_result)
     }
@@ -140,7 +140,7 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }    
 
-    on_event_play_score(event: cc.Event.EventCustom){
+    on_event_player_score(event: cc.Event.EventCustom){
         let udata =  event.getUserData()
         if(udata){
             let scores = udata.scores;
@@ -150,7 +150,7 @@ export default class GameSceneRecvGameMsg extends UIController {
                 let score = score_info.score;
                 let player:Player = RoomData.getInstance().get_player(score_info.seatid);
                 if(player){
-                    let score_str = player.get_uname() + ": " + score + "\n";
+                    let score_str = player.get_unick() + ": " + score + "\n";
                     total_str = total_str + score_str;
                 }
             }

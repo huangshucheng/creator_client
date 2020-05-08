@@ -10,6 +10,7 @@ import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbySendGameHoodleMsg from '../lobbyScene/sendMsg/LobbySendGameHoodle';
+import WeChatLogin from '../../../framework/utils/WeChatLogin';
 
 const {ccclass, property} = cc._decorator;
 
@@ -106,6 +107,8 @@ export default class LoginSceneRecvMsg extends UIController {
     on_event_wechat_login(event:cc.Event.EventCustom){
         let udata = event.getUserData()
         if (udata.status == Response.OK) {
+            WeChatLogin.destroy_auth_btn();
+            Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_WECHAT)
             SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
             LobbySendGameHoodleMsg.send_login_logic()
         }else{
