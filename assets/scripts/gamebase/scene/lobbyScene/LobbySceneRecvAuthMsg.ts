@@ -31,7 +31,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
         EventManager.on(EventDefine.EVENT_NET_CONNECTED, this, this.on_net_connected);
         EventManager.on(CmdName[Cmd.eUnameLoginRes], this, this.on_event_uname_login)
         EventManager.on(CmdName[Cmd.eGuestLoginRes], this, this.on_event_guest_login)
-        EventManager.on(CmdName[Cmd.eWeChatLoginRes], this, this.on_event_wechat_login)
+        EventManager.on(CmdName[Cmd.eWeChatSessionLoginRes], this, this.on_event_wechat_session_login)
         EventManager.on(CmdName[Cmd.eGetUserCenterInfoRes], this, this.on_event_center_info)
         EventManager.on(CmdName[Cmd.eLoginOutRes], this, this.on_event_login_out)
         EventManager.on(CmdName[Cmd.eReloginRes], this, this.on_event_relogin)
@@ -51,7 +51,10 @@ export default class LobbySceneRecvAuthMsg extends UIController {
                LoginSendAuthMsg.send_guest_login(guestkey)
            }
         }else if(loginType == LSDefine.LOGIN_TYPE_WECHAT){
-            WeChatLogin.get_wechat_user_info_and_login();
+            let wechatsessionkey = Storage.get(LSDefine.USER_LOGIN_WECHAT_SESSION);
+            if(wechatsessionkey){
+                LoginSendAuthMsg.send_wechat_session_login(wechatsessionkey);//重新用微信session登录
+            }
         }
     }
 
@@ -95,10 +98,17 @@ export default class LobbySceneRecvAuthMsg extends UIController {
         }
     }
 
-    on_event_wechat_login(event: cc.Event.EventCustom) {
+    on_event_wechat_session_login(event: cc.Event.EventCustom) {
         let udata = event.getUserData()
+        console.log("hcc>>lobbyscene>>on_event_wechat_session_login" , udata);
         if (udata.status == Response.OK) {
-            Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_WECHAT)
+            try {
+                let resbody = JSON.parse(udata.userlogininfo)
+                Storage.set(LSDefine.USER_LOGIN_WECHAT_SESSION, resbody.unionid);
+                Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_WECHAT);
+            } catch (error) {
+                console.log(error);
+            }
             LobbySendGameHoodleMsg.send_login_logic()
         } else {
             DialogManager.getInstance().show_weak_hint("微信重新登录失败! " + udata.status)

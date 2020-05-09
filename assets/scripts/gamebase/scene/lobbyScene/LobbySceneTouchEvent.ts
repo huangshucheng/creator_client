@@ -4,6 +4,9 @@ import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import GameHoodleConfig from '../../../framework/config/GameHoodleConfig';
 import HttpUtil from '../../../framework/utils/HttpUtil';
 import GameAppConfig from '../../../framework/config/GameAppConfig';
+import Storage from '../../../framework/utils/Storage';
+import LSDefine from '../../../framework/config/LSDefine';
+import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -83,6 +86,11 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_store(sender: cc.Component){
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogStore", "StoreDialog")
+        //test
+        // let wechatsessionkey = Storage.get(LSDefine.USER_LOGIN_WECHAT_SESSION);
+        // if (wechatsessionkey) {
+        //     LoginSendAuthMsg.send_wechat_session_login(wechatsessionkey);//重新用微信session登录
+        // }
     }
 
 }

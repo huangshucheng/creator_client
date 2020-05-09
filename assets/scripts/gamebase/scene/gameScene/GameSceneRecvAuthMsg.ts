@@ -10,6 +10,7 @@ import DialogManager from '../../../framework/manager/DialogManager';
 import EventDefine from '../../../framework/config/EventDefine';
 import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
 import LobbySendGameHoodleMsg from '../lobbyScene/sendMsg/LobbySendGameHoodle';
+import WeChatLogin from '../../../framework/utils/WeChatLogin';
 
 const {ccclass, property} = cc._decorator;
 
@@ -28,7 +29,7 @@ export default class GameSceneRecvAuthMsg extends UIController {
         EventManager.on(EventDefine.EVENT_NET_CONNECTED, this, this.on_net_connected);
         EventManager.on(CmdName[Cmd.eUnameLoginRes], this, this.on_event_uname_login)
         EventManager.on(CmdName[Cmd.eGuestLoginRes], this, this.on_event_guest_login)
-        EventManager.on(CmdName[Cmd.eWeChatLoginRes], this, this.on_event_wechat_login)
+        EventManager.on(CmdName[Cmd.eWeChatSessionLoginRes], this, this.on_event_wechat_session_login)
         EventManager.on(CmdName[Cmd.eReloginRes], this, this.on_event_relogin)
     }
     
@@ -45,6 +46,11 @@ export default class GameSceneRecvAuthMsg extends UIController {
            if(guestkey){
                LoginSendAuthMsg.send_guest_login(guestkey)
            }
+        } else if (loginType == LSDefine.LOGIN_TYPE_WECHAT) {
+            let wechatsessionkey = Storage.get(LSDefine.USER_LOGIN_WECHAT_SESSION);
+            if (wechatsessionkey) {
+                LoginSendAuthMsg.send_wechat_session_login(wechatsessionkey);//重新用微信session登录
+            }
         }
     }
 
@@ -86,14 +92,20 @@ export default class GameSceneRecvAuthMsg extends UIController {
         }
     }
 
-    on_event_wechat_login(event: cc.Event.EventCustom) {
+    on_event_wechat_session_login(event: cc.Event.EventCustom) {
         let udata = event.getUserData()
+        console.log("hcc>>gamescene>>on_event_wechat_session_login", udata);
         if (udata.status == Response.OK) {
-            Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_WECHAT)
+            try {
+                let resbody = JSON.parse(udata.userlogininfo)
+                Storage.set(LSDefine.USER_LOGIN_WECHAT_SESSION, resbody.unionid);
+                Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_WECHAT);
+            } catch (error) {
+                console.log(error);
+            }
             LobbySendGameHoodleMsg.send_login_logic()
-            DialogManager.getInstance().show_weak_hint("重新登录成功!")
         } else {
-            DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)
+            DialogManager.getInstance().show_weak_hint("微信重新登录失败! " + udata.status)
         }
     }
 

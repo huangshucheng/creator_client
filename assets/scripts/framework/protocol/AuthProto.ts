@@ -27,6 +27,8 @@ export enum Cmd {
 	eReloginRes 				= 23,				//用户被挤号
 	eWeChatLoginReq 			= 24,   			//微信登录
 	eWeChatLoginRes 			= 25,
+	eWeChatSessionLoginReq 		= 26,				//微信session登录
+	eWeChatSessionLoginRes 		= 27,
 }
 
 export let CmdName:any = {
@@ -56,4 +58,6 @@ export let CmdName:any = {
 	[23]: "ReloginRes",
 	[24]: "WeChatLoginReq",
 	[25]: "WeChatLoginRes",
+	[26]: "WeChatSessionLoginReq",
+	[27]: "WeChatSessionLoginRes",
 }

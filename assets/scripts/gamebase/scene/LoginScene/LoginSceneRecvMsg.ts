@@ -31,8 +31,8 @@ export default class LoginSceneRecvMsg extends UIController {
         EventManager.on(EventDefine.EVENT_NET_ERROR, this, this.on_net_error);
         EventManager.on(CmdName[Cmd.eUnameLoginRes], this, this.on_event_uname_login)
         EventManager.on(CmdName[Cmd.eGuestLoginRes], this, this.on_event_guest_login)
-        EventManager.on(CmdName[Cmd.eUnameRegistRes], this, this.on_event_uname_regist)
         EventManager.on(CmdName[Cmd.eWeChatLoginRes], this, this.on_event_wechat_login)
+        EventManager.on(CmdName[Cmd.eUnameRegistRes], this, this.on_event_uname_regist)
         EventManager.on("LoginLogicRes", this, this.on_event_login_logic)//这里要检测玩家游戏服务的信息是否存在，不存在要先创建数据库数据
     }
 
@@ -108,9 +108,15 @@ export default class LoginSceneRecvMsg extends UIController {
         let udata = event.getUserData()
         if (udata.status == Response.OK) {
             WeChatLogin.destroy_auth_btn();
-            Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_WECHAT)
             SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
             LobbySendGameHoodleMsg.send_login_logic()
+            try {
+                let resbody = JSON.parse(udata.userlogininfo)
+                Storage.set(LSDefine.USER_LOGIN_WECHAT_SESSION, resbody.unionid);
+                Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_WECHAT);
+            } catch (error) {
+                console.log(error);
+            }
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)
         }

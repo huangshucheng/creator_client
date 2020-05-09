@@ -6,28 +6,17 @@ import EventDefine from '../framework/config/EventDefine';
 import NetWork from '../framework/network/NetWork';
 import DialogManager from '../framework/manager/DialogManager';
 import PlatForm from '../framework/config/PlatForm';
+import UIController from '../framework/uibase/UIController';
 
 const {ccclass, property} = cc._decorator;
 
-/*
-function loadPath() {
-    if (typeof window.jsb === 'object') {
-        var hotUpdateSearchPaths = localStorage.getItem('HotUpdateSearchPaths');
-        if (hotUpdateSearchPaths) {
-            console.log("hcc>>hotUpdateSearchPaths:", hotUpdateSearchPaths)
-            jsb.fileUtils.setSearchPaths(JSON.parse(hotUpdateSearchPaths));
-        }
-    }
-}
-loadPath();
-*/
-
 @ccclass
-export default class GameApp extends cc.Component {
+export default class GameApp extends UIController {
 
     //onload >> start
     onLoad () {
-        this.node.addComponent("EnablePhysics"); //开启物理引擎
+        super.onLoad()
+        this.add_script("EnablePhysics");//开启物理引擎
         EventManager.on(EventDefine.EVENT_NET_CONNECTED, this, this.on_net_connected.bind(this));
         EventManager.on(EventDefine.EVENT_NET_CLOSED, this, this.on_net_closed.bind(this));
         EventManager.on(EventDefine.EVENT_NET_ERROR, this, this.on_net_error.bind(this));

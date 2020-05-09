@@ -42,6 +42,10 @@ export default class MatchDialog extends UIDialog {
     ////////////
     show_math_user_info(userinfo:any){
         if (userinfo){
+            let layout_user = this.view["KW_LAYOUT_MATCH_USER"];
+            if (layout_user){
+                layout_user.destroyAllChildren();
+            }
             userinfo.forEach(element => {
                 let numberid = element.numberid;
                 let userinfostring = element.userinfostring;

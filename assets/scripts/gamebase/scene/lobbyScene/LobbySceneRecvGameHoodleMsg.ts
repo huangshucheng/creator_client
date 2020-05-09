@@ -152,15 +152,22 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
                 }
                 let userinfo = udata.userinfo;
                 if(!matchsuccess && userinfo){
-                    DialogManager.getInstance().close_dialog("MatchDialog");
-                    DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogMatch","MatchDialog",function(resNode:cc.Node){
-                        if(resNode && cc.isValid(resNode)){
-                            let script = resNode.getComponent("MatchDialog");
-                            if(script){
-                                script.show_math_user_info(userinfo);
-                            }
+                    let matchDialog = DialogManager.getInstance().get_dialog("MatchDialog");
+                    if (matchDialog && cc.isValid(matchDialog)){
+                        let script = matchDialog.getComponent("MatchDialog");
+                        if (script) {
+                            script.show_math_user_info(userinfo);
                         }
-                    })
+                    }else{
+                        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogMatch","MatchDialog",function(resNode:cc.Node){
+                            if(resNode && cc.isValid(resNode)){
+                                let script = resNode.getComponent("MatchDialog");
+                                if(script){
+                                    script.show_math_user_info(userinfo);
+                                }
+                            }
+                        })
+                    }
                 }
             }else if(status == Response.NOT_YOUR_TURN){
                 DialogManager.getInstance().show_weak_hint("请稍等候，正在匹配中。。。。")
