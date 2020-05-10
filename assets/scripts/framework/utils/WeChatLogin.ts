@@ -1,5 +1,7 @@
 import LoginSendAuthMsg from "../../gamebase/scene/LoginScene/sendMsg/LoginSendAuthMsg";
 import PlatForm from '../config/PlatForm';
+import { hide } from '../../../../creator';
+import LobbySendGameHoodleMsg from "../../gamebase/scene/lobbyScene/sendMsg/LobbySendGameHoodle";
 
 class WeChatLogin {
     //授权，获取玩家信息，在微信小游戏上已经失效
@@ -102,7 +104,8 @@ class WeChatLogin {
         }
 
         if (WeChatLogin._auth_btn){
-            WeChatLogin._auth_btn.destroy()
+            WeChatLogin._auth_btn.show()
+            return;
         }
 
         let btnSize = cc.size(btnNode.width + 10, btnNode.height + 10);
@@ -125,7 +128,8 @@ class WeChatLogin {
                 width: width,
                 height: height,
                 lineHeight: 40,
-                backgroundColor: '#ff0000',
+                // backgroundColor: '#ff0000', // 红色
+                backgroundColor: '',
                 color: '#ffffff',
                 textAlign: 'center',
                 fontSize: 12,
@@ -154,13 +158,57 @@ class WeChatLogin {
         });
     }
 
-    static destroy_auth_btn(){
+    static hide_auth_btn(){
         if(WeChatLogin._auth_btn){
-            WeChatLogin._auth_btn.destroy();
-            WeChatLogin._auth_btn = null;
+            WeChatLogin._auth_btn.hide();
         }
     }
 
+    //有时候会失效
+    //获取分享数据，方便加入房间
+    static get_share_info(){
+        if (!PlatForm.isWeChatGame()) {
+            return;
+        }
+
+        var qData:any = {};
+        var obj = wx.getLaunchOptionsSync();
+        for (var s in obj.query) {
+            console.log("hcc>>share>>obj.query: " , s)
+            if (s == "roomid")
+                qData.roomid = obj.query[s]; 
+            if (s == "invite_unick")
+                qData.invite_unick = obj.query[s];
+        }
+        return qData
+    }
+
+    //回到小程序前台
+    static on_wx_foreground(callbadk?:Function){
+        if (!PlatForm.isWeChatGame()) {
+            return;
+        }
+        let show_func = function(params:any) {
+            let query = params.query
+            let qData:any = {}
+            if(query){
+                for (var s in query) {
+                    console.log("hcc>>on_wx_show>>value: " , s ,":", query[s]);
+                    if(s == "roomid"){
+                        let roomid = query[s];
+                        qData["roomid"] = roomid;
+                    }else if(s == "invite_unick"){
+                        qData["invite_unick"] = query[s];
+                    }
+                }
+            }
+            if(callbadk){
+                callbadk(qData);
+            }
+            console.log("hcc>>on_wx_show: " , params);
+        }
+        wx.onShow(show_func);
+    }
 }
 
 export default WeChatLogin;

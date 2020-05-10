@@ -33,7 +33,6 @@ export default class LoginSceneRecvMsg extends UIController {
         EventManager.on(CmdName[Cmd.eGuestLoginRes], this, this.on_event_guest_login)
         EventManager.on(CmdName[Cmd.eWeChatLoginRes], this, this.on_event_wechat_login)
         EventManager.on(CmdName[Cmd.eUnameRegistRes], this, this.on_event_uname_regist)
-        EventManager.on("LoginLogicRes", this, this.on_event_login_logic)//这里要检测玩家游戏服务的信息是否存在，不存在要先创建数据库数据
     }
 
     on_net_connected(event:cc.Event.EventCustom){
@@ -95,19 +94,10 @@ export default class LoginSceneRecvMsg extends UIController {
             DialogManager.getInstance().show_weak_hint("注册失败! " + udata.status)
         }
     }
-
-    //这里要检测玩家游戏服务的信息是否存在，不存在要先创建数据库数据
-    on_event_login_logic(event:cc.Event.EventCustom){
-        let udata = event.getUserData()
-        if (udata.status == Response.OK) {
-            LobbySendGameHoodleMsg.send_get_ugame_info();
-        } 
-    }
-
     on_event_wechat_login(event:cc.Event.EventCustom){
         let udata = event.getUserData()
         if (udata.status == Response.OK) {
-            WeChatLogin.destroy_auth_btn();
+            WeChatLogin.hide_auth_btn();
             SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
             LobbySendGameHoodleMsg.send_login_logic()
             try {

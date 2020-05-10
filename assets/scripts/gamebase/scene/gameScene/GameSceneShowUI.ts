@@ -75,7 +75,7 @@ export default class GameSceneShowUI extends UIController {
 
         console.log("hcc>>gameSceneShowUI: url: ", infoObj.avatarurl)
         if (infoObj.avatarurl && !StringUtil.isEmptyString(infoObj.avatarurl)) {
-            this.set_headimg_url(info_node.getChildByName("KW_IMG_HEAD"), infoObj.avatarurl);
+            this.set_headimg_url(info_node.getChildByName("KW_IMG_HEAD"), infoObj.avatarurl,80);
         }
         
         if(Number(infoObj.seatid) == Number(RoomData.getInstance().get_self_seatid())){
@@ -89,6 +89,7 @@ export default class GameSceneShowUI extends UIController {
 
         if(infoObj.userstate == UserState.Playing){
             this.set_visible(info_node, false);
+            this.set_visible(this.view["KW_BTN_SHARE"], false);
         }
     }
 

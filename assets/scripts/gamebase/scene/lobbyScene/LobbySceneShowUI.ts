@@ -32,7 +32,7 @@ export default class LobbySceneShowUI extends UIController {
             console.log("hcc>>LobbySceneShowUI>>show_user_info " , ufaceImg);
             console.log("hcc>>avatrurl: ", UserInfo.get_avatrurl());
             if (UserInfo.get_avatrurl() && !StringUtil.isEmptyString(UserInfo.get_avatrurl())){
-                this.set_headimg_url(this.view["IMG_HEAD"], UserInfo.get_avatrurl());
+                this.set_headimg_url(this.view["IMG_HEAD"], UserInfo.get_avatrurl(),120);
             }
 
             //test

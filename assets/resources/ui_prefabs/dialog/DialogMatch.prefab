@@ -60,7 +60,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1080,
-      "height": 1920
+      "height": 1920.0000000000002
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -70,7 +70,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 540,
-      "y": 960,
+      "y": 960.0000000000001,
       "z": 0
     },
     "_scale": {
@@ -125,7 +125,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1080,
-      "height": 1920
+      "height": 1920.0000000000002
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -759,7 +759,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -469.17499999999995,
+      "y": -469.1750000000002,
       "z": 0
     },
     "_scale": {
@@ -811,7 +811,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 240,
-      "height": 50.4
+      "height": 75.6
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -861,7 +861,7 @@
     "_string": "取消匹配",
     "_N$string": "取消匹配",
     "_fontSize": 60,
-    "_lineHeight": 40,
+    "_lineHeight": 60,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -1076,7 +1076,7 @@
     "_layoutSize": {
       "__type__": "cc.Size",
       "width": 1080,
-      "height": 1920
+      "height": 1920.0000000000002
     },
     "_resize": 0,
     "_N$layoutType": 0,

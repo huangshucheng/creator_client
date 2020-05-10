@@ -5,6 +5,7 @@ import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import StringUtil from '../../framework/utils/StringUtil';
+import RoomData from '../common/RoomData';
 
 //匹配界面
 
@@ -68,7 +69,7 @@ export default class MatchDialog extends UIDialog {
 
                         console.log("hcc>>show_math_user_info: url: ", json_object.avatarurl);
                         if (json_object.avatarurl && !StringUtil.isEmptyString(json_object.avatarurl)) {
-                            this.set_headimg_url(this.seek_child_by_name(infoNode, "KW_IMG_HEAD"), json_object.avatarurl);
+                            this.set_headimg_url(this.seek_child_by_name(infoNode, "KW_IMG_HEAD"), json_object.avatarurl ,80);
                         }
                     }
                 }

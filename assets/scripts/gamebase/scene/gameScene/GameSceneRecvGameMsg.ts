@@ -25,7 +25,7 @@ export default class GameSceneRecvGameMsg extends UIController {
     add_event_dispatcher(){
         EventManager.on(CmdName[Cmd.eLoginLogicRes], this, this.on_event_login_logic)
         EventManager.on(CmdName[Cmd.eDessolveRes], this, this.on_event_dessolve)
-        EventManager.on(CmdName[Cmd.eJoinRoomRes], this, this.on_event_exit_room)
+        EventManager.on(CmdName[Cmd.eExitRoomRes], this, this.on_event_exit_room)
         EventManager.on(CmdName[Cmd.eCheckLinkGameRes], this, this.on_event_check_link)
         EventManager.on(CmdName[Cmd.eUserInfoRes], this, this.on_event_user_info)
         EventManager.on(CmdName[Cmd.eGameRuleRes], this, this.on_event_game_rule)
@@ -114,6 +114,7 @@ export default class GameSceneRecvGameMsg extends UIController {
           if(gamerule){
             this.set_string(this.view['KW_TEXT_RULE'],String(gamerule));
           }
+          RoomData.getInstance().set_game_rule(gamerule);
         }
     }
 
@@ -124,6 +125,7 @@ export default class GameSceneRecvGameMsg extends UIController {
           if(roomid){
             this.set_string(this.view['KW_TEXT_ROOM_NUM'],"房间号:" + String(roomid));
           }
+          RoomData.getInstance().set_room_id(roomid);
         }
     }
 

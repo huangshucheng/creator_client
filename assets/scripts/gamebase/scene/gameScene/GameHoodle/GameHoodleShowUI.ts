@@ -62,9 +62,8 @@ export default class GameHoodleShowUI extends UIController {
         if(ball){
             let script = ball.getComponent("HoodleBallCtrl")
             if(script){
-                script.set_name(player.get_unick())
                 script.set_ball_id(player.get_uinfo().seatid);
-                // script.set_name(player.get_uname()) //TODO 暂时先显示玩家账号
+                script.set_name(player.get_unick())
                 script.set_img_face(player.get_uinfo().uface)
                 this._hoodleManager.set_ball(player.get_uinfo().seatid, ball);
                 ball.active = false;
@@ -94,7 +93,6 @@ export default class GameHoodleShowUI extends UIController {
         let script = ball.getComponent("HoodleBallCtrl");
         if(script){
             script.shoot_at(cc.v2(dirx, diry),shootpower);
-            script.set_src_shoot_seatid(seatid);
         }
         return true;
     }

@@ -84,7 +84,30 @@ export default abstract class UIController extends cc.Component {
         return UIFunction.getInstance().seek_widget_by_name(target,name)
     }
 
-    set_headimg_url(target: cc.Node, url: string){
-        UIFunction.getInstance().set_headimg_url(target, url);
+    set_headimg_url(target: cc.Node, url: string, fixWidth?:number){
+        UIFunction.getInstance().set_headimg_url(target, url, fixWidth);
     }
+
+    set_posX(target: cc.Node, posx:number){
+        if(!target || !cc.isValid(target)){
+            return;
+        }
+        target.x = posx;
+    }
+
+    set_posY(target: cc.Node, posy: number) {
+        if (!target || !cc.isValid(target)) {
+            return;
+        }
+        target.y = posy;
+    }
+
+    set_pos(target:cc.Node, posx:number, posy:number){
+        if (!target || !cc.isValid(target)) {
+            return;
+        }
+        target.x = posx;
+        target.y = posy;
+    }
+
 }

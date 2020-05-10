@@ -11,4 +11,5 @@ export default class GameAppConfig {
     static PROTO_TYPE               = ProtoManater.PROTO_BUF;   
     static REMORE_HTTP_PORT         = "7000";                       // http端口
     static LOCAL_MANIFEST_PATH      = "manifest/project";
+    static APP_OPEN_ID              = "oH8dH45oVZTuPNK6hQaSeANR-F9Y";   // 分享用的openid
 }

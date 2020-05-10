@@ -19,6 +19,11 @@ export default class SettingDialog extends UIDialog {
     start () {
         this.add_event_dispatcher()
         this.add_button_event_listener()
+
+        if (RoomData.getInstance().get_is_self_host() == false) {
+            this.set_visible(this.view["KW_BTN_DESSOLVE"],false);
+            this.set_posX(this.view["KW_BTN_EXIT"],0);
+        }
     }
 
     add_event_dispatcher(){

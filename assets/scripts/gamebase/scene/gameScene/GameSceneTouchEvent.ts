@@ -3,6 +3,9 @@ import DialogManager from '../../../framework/manager/DialogManager';
 import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LobbyScene from '../lobbyScene/LobbyScene';
+import PlatForm from '../../../framework/config/PlatForm';
+import GameAppConfig from '../../../framework/config/GameAppConfig';
+import RoomData from '../../common/RoomData';
 
 const {ccclass, property} = cc._decorator;
 
@@ -22,6 +25,7 @@ export default class GameSceneTouchEvent extends UIController {
         this.add_click_event(this.view["BTN_SETTING_2"],this.on_click_setting2)
         this.add_click_event(this.view["KW_BTN_READY"],this.on_click_ready)
         this.add_click_event(this.view["KW_BTN_BACK_LOBBY"],this.on_click_back_lobby)
+        this.add_click_event(this.view["KW_BTN_SHARE"],this.on_click_share)
     }
 
     on_click_setting(sender:cc.Component){
@@ -49,6 +53,36 @@ export default class GameSceneTouchEvent extends UIController {
 
     on_click_back_lobby(sender: cc.Component){
         SceneManager.getInstance().enter_scene_asyc(new LobbyScene());
+    }
+
+    on_click_share(sender: cc.Component){
+        console.log("hcc>>on_click_share....");
+        if (!PlatForm.isWeChatGame()) {
+            return;
+        }
+
+        let roomInfo = {
+            roomid: RoomData.getInstance().get_room_id(),
+            invite_unick: RoomData.getInstance().get_self_player().get_unick(),
+        }
+
+        let share_room_info = "roomid=" + roomInfo.roomid + "&invite_unick=" + roomInfo.invite_unick;
+        console.log("hcc>>share_room_info:" , share_room_info)
+        let shareInfo = {
+            title : "快来玩弹珠荣耀吧!",
+            imageUrl : "",
+            query: share_room_info,
+            success: function(res:any) {
+                console.log("hcc>>share success" , res);
+            },
+            fail : function(res:any){
+                console.log("hcc>>share fail" , res);
+            },
+            complete: function(){
+                console.log("hcc>>share complete");
+            },
+        }
+        wx.shareAppMessage(shareInfo)
     }
 
 }

@@ -9,6 +9,7 @@ class  RoomData {
     private _room_id = "";
     private _play_count = 0;
     private _total_play_count = 0;
+    private _share_roomid = "";
 
     private constructor() {
         
@@ -85,6 +86,10 @@ class  RoomData {
         return this._player_set;
     }
 
+    get_self_player(){
+        return this._player_set[this.get_self_seatid()];
+    }
+
     get_self_seatid(){
         for(let seatid in this._player_set){
             let player:Player = this._player_set[seatid];
@@ -93,6 +98,22 @@ class  RoomData {
             }
         }
         return -1;
+    }
+
+    get_is_self_host(){
+        let player = this.get_self_player();
+        if(player){
+            return player.get_is_host();
+        }        
+        return false;
+    }
+
+    set_share_roomid(roomid:string){
+        this._share_roomid = roomid;
+    }
+
+    get_share_roomid(){
+        return this._share_roomid;
     }
 
     clear_room_data(){

@@ -79,6 +79,10 @@ export default class GameHoodleRecvMsg extends UIController {
                     let script = ball.getComponent("HoodleBallCtrl");
                     if(script){
                         script.set_shoot_power_ui(power);
+                        let src_seatid = power == PlayerPower.canPlay ? seatid : -1;
+                        script.set_src_shoot_seatid(src_seatid);
+                        // let player:Player = RoomData.getInstance().get_player(seatid);
+                        // console.log("hcc>>seatid: " , seatid , " ,name: ",player.get_unick(), ", canplay: " , power)
                     }
                 }
             }

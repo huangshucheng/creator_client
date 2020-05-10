@@ -9,6 +9,7 @@ import DialogManager from '../../../framework/manager/DialogManager';
 import LobbyScene from './LobbyScene';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import RoomData from '../../common/RoomData';
+import WeChatLogin from '../../../framework/utils/WeChatLogin';
 
 const {ccclass, property} = cc._decorator;
 
@@ -38,7 +39,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
 
     on_event_login_logic(event:cc.Event.EventCustom){
         let udata =  event.getUserData()
-        console.log("on_event_login_logic",udata)
+        console.log("hcc>>Lobbyscene>>on_event_login_logic",udata)
         if(udata){
             if(udata.status == Response.OK){
                 LobbySendGameHoodleMsg.send_get_room_status();
@@ -75,6 +76,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
                 DialogManager.getInstance().show_weak_hint("加入房间失败!")
             }
         }
+        RoomData.getInstance().set_share_roomid("");
     }
 
     on_event_exit_room(event:cc.Event.EventCustom){

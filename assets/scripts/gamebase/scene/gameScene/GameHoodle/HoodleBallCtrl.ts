@@ -4,6 +4,7 @@ import { PlayerPower, BallState } from '../../../common/State';
 import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
 import GameHoodleData from './GameHoodleData';
 import RoomData from '../../../common/RoomData';
+import Player from '../../../common/Player';
 
 let SHOOT_DISTANCE          = 380;
 let SHOOT_POWER             = 50.0;
@@ -110,7 +111,7 @@ export default class HoodleBallCtrl extends UIController {
     // 物理碰撞
     // 只在两个碰撞体开始接触时被调用一次 001
     onBeginContact(contact:cc.PhysicsContact, selfCollider:cc.PhysicsCollider, otherCollider:cc.PhysicsCollider) {
-        // console.log("onBeginContact ball: " + this._ball_name)
+        console.log("onBeginContact ball: " + this._ball_name)
         let src_seatid = -1;
         let des_seatid = -1;
         let selfScript = selfCollider.getComponent("HoodleBallCtrl");
@@ -124,23 +125,39 @@ export default class HoodleBallCtrl extends UIController {
             return;
         }
 
+        let src_player:Player = RoomData.getInstance().get_player(this._src_shoot_seatid);
+        
+        if (this.get_src_shoot_seatid() == -1) {
+            console.log("hcc>>get_src_shoot_seatid === -1")
+            return;
+        }
+
+        console.log("hcc>>get_src_shoot_seatid： ", this._src_shoot_seatid, ", unick:", src_player.get_unick());
+
         let self_ballid = selfScript.get_ball_id();
         let other_ballid = otherScript.get_ball_id();
+        let seat_array = [];
+        seat_array.push(self_ballid);
+        seat_array.push(other_ballid);
+        
         console.log("hcc>>selfballid: " ,self_ballid , " ,otherballid: ", other_ballid);
         let power_self = GameHoodleData.getInstance().get_power(self_ballid);
         let power_other = GameHoodleData.getInstance().get_power(other_ballid);
 
-        if(self_ballid == this.get_src_shoot_seatid()){
-            src_seatid = self_ballid;
-            des_seatid = other_ballid;
-        }else{
-            src_seatid = other_ballid;
-            des_seatid = self_ballid;
-        }
+        seat_array.forEach(seatid => {
+            if(seatid == this.get_src_shoot_seatid()){
+                src_seatid = seatid;
+            }else{
+                des_seatid = seatid;
+            }
+        });
 
-        let selfPlayer = RoomData.getInstance().get_player(src_seatid);
-        let otherPlayer = RoomData.getInstance().get_player(des_seatid);
-        console.log("hcc>>src_player:",selfPlayer.get_uname() ," ,des_player: " , otherPlayer.get_uname());
+
+        let selfPlayer:Player = RoomData.getInstance().get_player(src_seatid);
+        let otherPlayer:Player = RoomData.getInstance().get_player(des_seatid);
+        console.log("hcc>>src_seatid: " , src_seatid , " ,des_seatid: " , des_seatid);
+        console.log("hcc>>src_player:", selfPlayer.get_unick(), " ,des_player: ", otherPlayer.get_unick());
+
         //发送服务端，玩家碰撞信息
         if(src_seatid != -1 && des_seatid != -1){
             GameSendGameHoodleMsg.send_player_is_shooted(src_seatid, des_seatid);
@@ -158,8 +175,6 @@ export default class HoodleBallCtrl extends UIController {
                 otherMotionstreak.enabled = true;
             }
         }
-        //*/
-
     }
 
     // 只在两个碰撞体结束接触时被调用一次 004
@@ -205,7 +220,6 @@ export default class HoodleBallCtrl extends UIController {
                 };
                 posArray.push(posInfo);
                 GameSendGameHoodleMsg.send_all_player_ball_pos(posArray);
-                // console.log("hcc>>send_all_player_ball_pos: " , posArray);
             }
         }
         //设置状态

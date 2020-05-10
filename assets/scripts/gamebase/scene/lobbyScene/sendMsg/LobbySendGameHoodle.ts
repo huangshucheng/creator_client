@@ -26,6 +26,7 @@ export default class LobbySendGameHoodleMsg {
         if (roomid == null || roomid == ''){
             return;
         }
+        console.log("hcc>>send_join_room: " , roomid);
         LobbySendGameHoodleMsg.send(Cmd.eJoinRoomReq, {roomid: roomid});
     }
 

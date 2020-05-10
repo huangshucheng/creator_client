@@ -54,16 +54,25 @@ export default class UIFunction {
             return;
         }
 
+        let isvalid = cc.isValid(obj);
+        if (!isvalid){
+            return;
+        }
+
         obj.isBtnClick = false
         let func = function () {
-            if (obj.isBtnClick) {
-                return
+            if(obj && cc.isValid(obj)){
+                if (obj.isBtnClick) {
+                    return
+                }
+                obj.isBtnClick = true
+                setTimeout(function () {
+                    if(obj && cc.isValid(obj)){
+                        obj.isBtnClick = false
+                    }
+                }, 1)
+                callback.call(obj, component)
             }
-            obj.isBtnClick = true
-            setTimeout(function () {
-                obj.isBtnClick = false
-            }, 1)
-            callback.call(obj, component)
         }
         target.on("click", func, obj);
     }
@@ -438,7 +447,7 @@ export default class UIFunction {
     }
     
     //设置头像,因为可能出现地址不带图片格式的情况，所以下面指定了type为jpg
-    set_headimg_url(target: cc.Node, url: string) {
+    set_headimg_url(target: cc.Node, url: string, fixWidth?: number) {
         if (!this.node_exist(target)) {
             return;
         }
@@ -450,5 +459,10 @@ export default class UIFunction {
         cc.loader.load({ url: url + '?file=a.jpg', type: 'jpg' }, function (err:any, tex:any) {
             sprite.spriteFrame = new cc.SpriteFrame(tex);
         });
+
+        if(fixWidth){
+            let consize = target.getContentSize();
+            target.setScale(fixWidth / consize.width, fixWidth / consize.height)
+        }
     }
 }

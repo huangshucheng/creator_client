@@ -23,7 +23,7 @@ class HoodleBallManager {
 
     public delete_ball(seatid:number){
         let ball:cc.Node = this._ball_set[seatid];
-        if(ball){
+        if(ball && cc.isValid(ball)){
             ball.destroy();
             delete this._ball_set[seatid];
         }
