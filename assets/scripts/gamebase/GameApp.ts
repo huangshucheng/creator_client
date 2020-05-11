@@ -37,9 +37,6 @@ export default class GameApp extends UIController {
             }
 
             let shareinfo = WeChatLogin.get_share_info();
-            if (shareinfo.roomid) {
-                tmp_roomid = shareinfo.roomid;
-            }
 
             RoomData.getInstance().set_share_roomid(tmp_roomid);
             if(tmp_roomid != ""){

@@ -29,13 +29,13 @@ export default class LoginSceneShowUI extends UIController {
 
             let roomid_tmp = qData.roomid;
             if (qData.roomid == undefined || qData.roomid == null || qData.roomid == ""){
-                roomid_tmp = "roomid is null"
+                roomid_tmp = ""
             }
 
-            let shareinfo = WeChatLogin.get_share_info();
-            if(shareinfo.roomid){
-                roomid_tmp = shareinfo.roomid;
-            }
+            // let shareinfo = WeChatLogin.get_share_info();
+            // if(shareinfo.roomid){
+            //     roomid_tmp = shareinfo.roomid;
+            // }
 
             RoomData.getInstance().set_share_roomid(roomid_tmp);
             // _this.set_string(_this.view["KW_TEXT_SHARE_INFO"] , roomid_tmp);

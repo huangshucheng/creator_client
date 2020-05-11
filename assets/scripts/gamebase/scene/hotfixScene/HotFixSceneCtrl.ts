@@ -15,16 +15,17 @@ export default class HotFixSceneCtrl extends UIController {
     _progressbar: cc.ProgressBar = null;
 
     _urlArray: string[] = [ 
-                            "ui_prefabs/login/",
-                            "ui_prefabs/lobby/",
-                            "ui_prefabs/dialog/",
-                            "ui_prefabs/hotfix/",
-                            "ui_prefabs/games/",
-                            "textures/lobby/",
-                            "textures/dialog/",
-                            "mainfest/",
-                            "config/",
-                          ]
+        "ui_prefabs/login/",
+        "ui_prefabs/lobby/",
+        "ui_prefabs/dialog/",
+        "ui_prefabs/hotfix/",
+        "ui_prefabs/games/",
+        "textures/lobby/",
+        "textures/dialog/",
+        "textures/shareimg/",
+        "mainfest/",
+        "config/",
+    ]
 
     _completedFlag:any = []
     _tryTimes = 0;

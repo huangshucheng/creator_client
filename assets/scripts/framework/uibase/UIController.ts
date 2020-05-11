@@ -1,4 +1,5 @@
 import UIFunction from '../common/UIFunciton';
+import { ResourceManager } from '../manager/ResourceManager';
 
 interface View {
     [propName: string]: cc.Node;
@@ -108,6 +109,10 @@ export default abstract class UIController extends cc.Component {
         }
         target.x = posx;
         target.y = posy;
+    }
+
+    get_res(resPath:string, resType:any){
+        return ResourceManager.getInstance().getRes(resPath, resType);
     }
 
 }

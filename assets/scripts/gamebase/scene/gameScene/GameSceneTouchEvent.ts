@@ -68,9 +68,16 @@ export default class GameSceneTouchEvent extends UIController {
 
         let share_room_info = "roomid=" + roomInfo.roomid + "&invite_unick=" + roomInfo.invite_unick;
         console.log("hcc>>share_room_info:" , share_room_info)
+
+        let share_img_path = cc.url.raw("resources/textures/shareimg/ball_games_hare_img.png")
+        console.log("hcc>>share_img_path: ", share_img_path);
+        if (!share_img_path || share_img_path == ""){
+            return;
+        }
+
         let shareInfo = {
-            title : "快来玩弹珠荣耀吧!",
-            imageUrl : "",
+            title : roomInfo.invite_unick + "请你一起来玩弹珠,房间:" + roomInfo.roomid,
+            imageUrl: share_img_path,
             query: share_room_info,
             success: function(res:any) {
                 console.log("hcc>>share success" , res);

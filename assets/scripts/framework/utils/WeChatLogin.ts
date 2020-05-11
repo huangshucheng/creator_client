@@ -174,7 +174,7 @@ class WeChatLogin {
         var qData:any = {};
         var obj = wx.getLaunchOptionsSync();
         for (var s in obj.query) {
-            console.log("hcc>>share>>obj.query: " , s)
+            console.log("hcc>>share>>obj.query: ", obj.query[s])
             if (s == "roomid")
                 qData.roomid = obj.query[s]; 
             if (s == "invite_unick")
