@@ -17,6 +17,7 @@ export default class LobbySceneShowUI extends UIController {
     }
 
     start () {
+        super.start();
         this.show_version();
     }
 

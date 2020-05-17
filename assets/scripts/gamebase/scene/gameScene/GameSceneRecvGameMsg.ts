@@ -8,6 +8,7 @@ import LobbyScene from '../lobbyScene/LobbyScene';
 import RoomData from '../../common/RoomData';
 import { UserState } from '../../common/State';
 import Player from '../../common/Player';
+import { Stype } from '../../../framework/protocol/Stype';
 
 const {ccclass, property} = cc._decorator;
 
@@ -19,35 +20,47 @@ export default class GameSceneRecvGameMsg extends UIController {
     }
 
     start () {
-        this.add_event_dispatcher()
+        super.start();
+        this.add_protocol_delegate();
     }
 
-    add_event_dispatcher(){
-        EventManager.on(CmdName[Cmd.eLoginLogicRes], this, this.on_event_login_logic)
-        EventManager.on(CmdName[Cmd.eDessolveRes], this, this.on_event_dessolve)
-        EventManager.on(CmdName[Cmd.eExitRoomRes], this, this.on_event_exit_room)
-        EventManager.on(CmdName[Cmd.eCheckLinkGameRes], this, this.on_event_check_link)
-        EventManager.on(CmdName[Cmd.eUserInfoRes], this, this.on_event_user_info)
-        EventManager.on(CmdName[Cmd.eGameRuleRes], this, this.on_event_game_rule)
-        EventManager.on(CmdName[Cmd.eRoomIdRes], this, this.on_event_room_id)
-        EventManager.on(CmdName[Cmd.ePlayCountRes], this, this.on_event_play_count)
-        EventManager.on(CmdName[Cmd.eUserReadyRes], this, this.on_event_user_ready)
-        EventManager.on(CmdName[Cmd.eGameStartRes], this, this.on_event_game_start)
-        EventManager.on(CmdName[Cmd.eGameEndRes], this, this.on_event_game_end)
-        EventManager.on(CmdName[Cmd.eUserOfflineRes], this, this.on_event_user_offline)
-        EventManager.on(CmdName[Cmd.ePlayerScoreRes], this, this.on_event_player_score)
-        EventManager.on(CmdName[Cmd.eGameResultRes], this, this.on_event_game_result)
-        EventManager.on(CmdName[Cmd.eTotalGameResultRes], this, this.on_event_game_total_result)
+    add_cmd_handler_map(){
+        this._cmd_handler_map = {
+            [Cmd.eLoginLogicRes]: this.on_event_login_logic,
+            [Cmd.eDessolveRes]: this.on_event_dessolve,
+            [Cmd.eExitRoomRes]: this.on_event_exit_room,
+            [Cmd.eCheckLinkGameRes]: this.on_event_check_link,
+            [Cmd.eUserInfoRes]: this.on_event_user_info,
+            [Cmd.eGameRuleRes]: this.on_event_game_rule,
+            [Cmd.eRoomIdRes]: this.on_event_room_id,
+            [Cmd.ePlayCountRes]: this.on_event_play_count,
+            [Cmd.eUserReadyRes]: this.on_event_user_ready,
+            [Cmd.eGameStartRes]: this.on_event_game_start,
+            [Cmd.eGameEndRes]: this.on_event_game_end,
+            [Cmd.eUserOfflineRes]: this.on_event_user_offline,
+            [Cmd.ePlayerScoreRes]: this.on_event_player_score,
+            [Cmd.eGameResultRes]: this.on_event_game_result,
+            [Cmd.eTotalGameResultRes]: this.on_event_game_total_result,
+        }
+    }
+
+    on_recv_server_message(stype: number, ctype: number, body: any) {
+        if (stype !== Stype.GameHoodle) {
+            return;
+        }
+        if (this._cmd_handler_map[ctype]) {
+            this._cmd_handler_map[ctype].call(this, body);
+        }
     }
     ///////////////////////////////////////
     ///////////////////////////////////////
-    on_event_login_logic(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_login_logic(body:any){
+        let udata =  body;
         console.log("hcc>>on_event_login_logic>>udata: " , udata)
     }
 
-    on_event_dessolve(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_dessolve(body:any){
+        let udata =  body;
         if(udata){
             if(udata.status == Response.OK){
                 DialogManager.getInstance().show_weak_hint("房间已解散!")
@@ -59,8 +72,8 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }
 
-    on_event_exit_room(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_exit_room(body:any){
+        let udata =  body;
         if(udata){
             let status = udata.status
             if(status == Response.OK){
@@ -71,8 +84,8 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }
 
-    on_event_check_link(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_check_link(body: any){
+        let udata =  body;
         if(udata){
             let status = udata.status
             if(status == Response.OK){
@@ -83,8 +96,8 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }
 
-    on_event_user_info(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_user_info(body: any){
+        let udata =  body;
         if(udata){
             console.log("hcc>>userinfostr: " , udata)
             try {
@@ -107,8 +120,8 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }
 
-    on_event_game_rule(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_game_rule(body: any){
+        let udata =  body;
         if(udata){
           let gamerule = udata.gamerule;
           if(gamerule){
@@ -118,8 +131,8 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }
 
-    on_event_room_id(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_room_id(body: any){
+        let udata =  body;
         if(udata){
           let roomid = udata.roomid;
           if(roomid){
@@ -129,8 +142,8 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }
 
-    on_event_play_count(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_play_count(body: any){
+        let udata =  body;
         if(udata){
           let playcount = udata.playcount;
           let totalplaycount = udata.totalplaycount;
@@ -142,8 +155,8 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }    
 
-    on_event_player_score(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_player_score(body: any){
+        let udata =  body;
         if(udata){
             let scores = udata.scores;
             let total_str = ""
@@ -161,8 +174,8 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }    
 
-    on_event_user_offline(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_user_offline(body: any){
+        let udata =  body;
         console.log("on_event_user_offline" , udata)
         let seatid = udata.seatid;
         if(seatid){
@@ -173,8 +186,8 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }
 
-    on_event_user_ready(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_user_ready(body: any){
+        let udata =  body;
         console.log("on_event_user_ready" , udata)
         if(udata){
             let status = udata.status;
@@ -193,8 +206,8 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }
 
-    on_event_game_start(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_game_start(body: any){
+        let udata =  body;
         console.log("on_event_game_start" , udata)
         DialogManager.getInstance().show_weak_hint("游戏开始!")
         let script = this.get_script("GameSceneShowUI")
@@ -203,19 +216,19 @@ export default class GameSceneRecvGameMsg extends UIController {
         }
     }
 
-    on_event_game_end(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_game_end(body: any){
+        let udata =  body;
         console.log("on_event_game_end" , udata)
     }
 
-    on_event_game_result(event: cc.Event.EventCustom){
+    on_event_game_result(body: any){
         this.set_visible(this.view["KW_BTN_READY"],false);    
         this.scheduleOnce(function(){
             this.set_visible(this.view["KW_BTN_READY"],true);    
         },2)
     }
 
-    on_event_game_total_result(event: cc.Event.EventCustom){
+    on_event_game_total_result(body: any){
         this.scheduleOnce(function(){
             this.set_visible(this.view["KW_BTN_READY"],false);    
             this.set_visible(this.view["KW_BTN_BACK_LOBBY"],true);

@@ -29,9 +29,6 @@ export default class EnablePhysics extends UIController {
 
     }
 
-    onDestroy(){
-    }
-
     close_phy(){
         cc.director.getPhysicsManager().enabled = false;
         cc.director.getPhysicsManager().debugDrawFlags = 0;

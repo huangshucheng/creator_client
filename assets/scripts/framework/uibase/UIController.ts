@@ -1,13 +1,22 @@
 import UIFunction from '../common/UIFunciton';
 import { ResourceManager } from '../manager/ResourceManager';
+import NetWork from '../network/NetWork';
 
 interface View {
     [propName: string]: cc.Node;
 }
 
+//协议id: 回调函数
+interface CmdHandlerMap {
+    [cmdtype: number]: Function;
+}
+
 export default abstract class UIController extends cc.Component {
     view: View = {};
+    
+    _cmd_handler_map: CmdHandlerMap = {};
     _winSize:cc.Size = new cc.Size(1920,1080);
+    
     //只保存一层UI名字，重复的会被覆盖，要查找相同名字的子节点，需要手动查找（getChildByName）
     private load_all_object(root: cc.Node, path: string) {
         for (let i = 0; i < root.childrenCount; i++) {
@@ -20,6 +29,45 @@ export default abstract class UIController extends cc.Component {
         UIFunction.getInstance().resize_screen()
         this.load_all_object(this.node, "");
         this.view[this.node.name] = this.node;
+        // console.log("hcc>>onLoad>>" , this.node.name);
+    }
+
+    start(){
+        this.add_cmd_handler_map();
+        this.add_event_dispatcher();
+        this.add_button_event_listener();
+    }
+
+    onDestroy(){
+        //默认自动删除当前监听对象
+        this.remove_protocol_delegate();
+    }
+
+    //客户端消息通知
+    add_event_dispatcher(){
+    }
+
+    //添加协议和回调函数
+    add_cmd_handler_map(){
+    }
+
+    //按钮点击事件
+    add_button_event_listener(){
+    }
+
+    //监听网络消息
+    add_protocol_delegate(){
+        NetWork.getInstance().add_protocol_delegate(this, this.on_recv_server_message.bind(this));
+    }
+
+    //删除当前监听对象
+    remove_protocol_delegate(){
+        NetWork.getInstance().remove_protocol_delegate(this);
+    }
+
+    //网络协议消息接收,子类自己处理数据
+    on_recv_server_message(stype:number, ctype:number, body:any){
+        console.log("hcc>>on_recv_server_message: stype " , stype , " ,ctype:" , ctype , " ,body: " , body);
     }
 
     add_script(script:string){

@@ -18,8 +18,8 @@ export default class CommonDialog extends UIDialog {
     }
 
     start () {
+        super.start();
         this.initUI();
-        this.add_button_event_listener();
     }
 
     set_content_text(str: string) {
@@ -37,9 +37,9 @@ export default class CommonDialog extends UIDialog {
         this._rightBtnText = str2
     }
 
-    set_btn_callback(rightCallback?: Function, leftCallback?: Function, closeFunc?: Function) {
-        this._rightBtnCallback  = rightCallback;
-        this._leftBtnCallback   = leftCallback;
+    set_btn_callback(okCallback?: Function, cancelCallback?: Function, closeFunc?: Function) {
+        this._rightBtnCallback = okCallback;
+        this._leftBtnCallback = cancelCallback;
         this._closeBtnCallback  = closeFunc;
     }
 
@@ -61,10 +61,6 @@ export default class CommonDialog extends UIDialog {
         this.add_click_event(this.view["KW_UI_BTN_LEFT"],this.on_click_left.bind(this))
         this.add_click_event(this.view["KW_UI_BTN_RIGHT"],this.on_click_right.bind(this))
         
-    }
-
-    onDestroy(){
-
     }
 
     on_click_close(sender: cc.Component){

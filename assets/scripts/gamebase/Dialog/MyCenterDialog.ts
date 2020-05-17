@@ -14,7 +14,7 @@ export default class MyCenterDialog extends UIDialog {
     }
 
     start () {
-        this.add_button_event_listener()
+        super.start();
         this.initUI()
     }
 
@@ -25,13 +25,8 @@ export default class MyCenterDialog extends UIDialog {
     }
 
     initUI(){
-
         this.set_string(this.view["KW_TEXT_NAME"],"昵称：" + UserInfo.get_unick())
         this.set_string(this.view["KW_TEXT_ACCOUNT"],"id: " + UserInfo.get_numberid())
-    }
-
-    onDestroy(){
-
     }
 
     on_click_close(sender: cc.Component){

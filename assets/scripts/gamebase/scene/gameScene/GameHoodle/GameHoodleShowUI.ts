@@ -35,9 +35,6 @@ export default class GameHoodleShowUI extends UIController {
         */
     }
 
-    start () {
-    }
-
     show_all_ball(){
         let all_player = RoomData.getInstance().get_all_player()
         for(let key in all_player){

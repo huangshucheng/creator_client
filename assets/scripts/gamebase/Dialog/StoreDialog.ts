@@ -8,6 +8,7 @@ import ArrayUtil from '../../framework/utils/ArrayUtil';
 import DialogManager from '../../framework/manager/DialogManager';
 import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
 import UserInfo from '../../framework/common/UserInfo';
+import { Stype } from '../../framework/protocol/Stype';
 
 const { ccclass, property } = cc._decorator;
 
@@ -16,27 +17,35 @@ export default class StoreDialog extends UIDialog {
 
     onLoad(){
         super.onLoad()
-        this.add_event_dispatcher()
-        this.add_button_event_listener()
     }
 
     start () {
+        super.start();
         this.initUI();
+        this.add_protocol_delegate();
         GameSendGameHoodleMsg.send_store_list_req();
     }
 
-    add_event_dispatcher(){
-        EventManager.on(CmdName[Cmd.eStoreListRes], this, this.on_event_store_list);
-        EventManager.on(CmdName[Cmd.eBuyThingsRes], this, this.on_event_buy_things);
-        EventManager.on(CmdName[Cmd.eUserGameInfoRes], this, this.on_event_ugame_info);
+    add_cmd_handler_map() {
+        this._cmd_handler_map = {
+            [Cmd.eStoreListRes]: this.on_event_store_list,
+            [Cmd.eBuyThingsRes]: this.on_event_buy_things,
+            [Cmd.eUserGameInfoRes]: this.on_event_ugame_info,
+        }
+    }
+
+    on_recv_server_message(stype: number, ctype: number, body: any) {
+        if (stype !== Stype.GameHoodle) {
+            return;
+        }
+
+        if (this._cmd_handler_map[ctype]) {
+            this._cmd_handler_map[ctype].call(this, body);
+        }
     }
 
     add_button_event_listener(){
         this.add_click_event(this.view["KW_BTN_CLOSE"], this.on_click_close.bind(this))
-    }
-
-    onDestroy(){
-
     }
 
     initUI(){
@@ -55,8 +64,8 @@ export default class StoreDialog extends UIDialog {
     
 
     ///////// netkevent
-    on_event_store_list(event: cc.Event.EventCustom){
-        let udata = event.getUserData()
+    on_event_store_list(body:any){
+        let udata = body;
         if (udata) {
             let status = udata.status
             if (status == Response.OK) {
@@ -65,8 +74,8 @@ export default class StoreDialog extends UIDialog {
         }
     }
 
-    on_event_buy_things(event: cc.Event.EventCustom) {
-        let udata = event.getUserData()
+    on_event_buy_things(body:any) {
+        let udata = body;
         if (udata) {
             let status = udata.status
             if (status == Response.OK) {
@@ -81,8 +90,8 @@ export default class StoreDialog extends UIDialog {
     }
 
     //刷新金币
-    on_event_ugame_info(event: cc.Event.EventCustom) {
-        let udata = event.getUserData()
+    on_event_ugame_info(body:any) {
+        let udata = body;
         console.log("on_event_ugame_info", udata)
         if (udata) {
             let status = udata.status

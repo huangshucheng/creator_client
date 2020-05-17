@@ -8,17 +8,29 @@ import EventDefine from '../config/EventDefine';
 import GameAppConfig from '../config/GameAppConfig';
 
 export interface ISocketDelegate {
-    on_socket_open();
-    on_socket_message(data:string | ArrayBuffer);
-    on_socket_error(errMsg:any);
-    on_socket_closed(msg:any);
-    get_socket_state();
+    on_socket_open(): void;
+    on_socket_message(data: string | ArrayBuffer): void;
+    on_socket_error(errMsg: any): void;
+    on_socket_closed(msg: any): void;
+    get_socket_state():number;
+    add_protocol_delegate(obj: any, callback: Function):void;
+    remove_protocol_delegate(obj: any, callBack: Function): void;
+}
+
+export interface callBackObj {
+    obj: any;
+    callBack: Function;
 }
 
 export class SocketDelegate implements ISocketDelegate {
     private _socket: ISocket;
+    private _protocolCallBackList: Array<callBackObj>;
 
     ///////////////////////////////////
+    constructor(){
+        this._protocolCallBackList = [];
+    }
+
     on_socket_open(){
         EventManager.emit(EventDefine.EVENT_NET_CONNECTED);
     }
@@ -41,9 +53,15 @@ export class SocketDelegate implements ISocketDelegate {
             console.log(cmdbody)
         }
         console.log("###########################>>>recvend\n\n")
-        if (cmd_name) {
-            EventManager.emit(cmd_name, decode_cmd.body)
-        }
+        // if (cmd_name) {
+        //     EventManager.emit(cmd_name, decode_cmd.body)
+        // }
+
+        this._protocolCallBackList.forEach(element => {
+            if (element.callBack) {
+                element.callBack.call(this, decode_cmd.stype, decode_cmd.ctype, decode_cmd.body);
+            }
+        });
     }
 
     on_socket_error(errMsg:any){
@@ -56,6 +74,43 @@ export class SocketDelegate implements ISocketDelegate {
         }
         this._socket = null;
         EventManager.emit(EventDefine.EVENT_NET_CLOSED);
+    }
+
+    add_protocol_delegate(obj: any, callBack: Function): void{
+        let cbs: callBackObj = {
+            obj: obj,
+            callBack: callBack,
+        }
+        this._protocolCallBackList.push(cbs);
+        console.log("hcc>>add_protocol_delegate: len: ", this._protocolCallBackList.length);
+    }
+
+    remove_protocol_delegate(obj: any, callBack?: Function): void{
+        if(callBack && callBack != undefined){
+            this._protocolCallBackList.forEach(element => {
+                if (element.obj === obj && element.callBack === callBack) {
+                    var index = this._protocolCallBackList.indexOf(element);
+                    if (index > -1) {
+                        this._protocolCallBackList.splice(index, 1);
+                        console.log("hcc>>remove_protocol_delegate111: len: " , this._protocolCallBackList.length);
+                    }
+                }
+            });
+        }else{
+            this._protocolCallBackList.forEach(element => {
+                if (element.obj === obj) {
+                    var index = this._protocolCallBackList.indexOf(element);
+                    if (index > -1) {
+                        this._protocolCallBackList.splice(index, 1);
+                        console.log("hcc>>remove_protocol_delegate222: len: ", this._protocolCallBackList.length);
+                    }
+                }
+            });
+        }
+    }
+
+    remove_all_protocol_delegate(): void {
+        this._protocolCallBackList.splice(0, this._protocolCallBackList.length)
     }
 
     ///////////////////////////////////

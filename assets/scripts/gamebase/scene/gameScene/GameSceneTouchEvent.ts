@@ -16,10 +16,6 @@ export default class GameSceneTouchEvent extends UIController {
         super.onLoad()
     }
 
-    start () {
-        this.add_button_event_listener()
-    }
-
     add_button_event_listener(){
         this.add_click_event(this.view["BTN_SETTING"],this.on_click_setting)
         this.add_click_event(this.view["BTN_SETTING_2"],this.on_click_setting2)

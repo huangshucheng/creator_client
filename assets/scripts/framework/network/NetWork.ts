@@ -56,6 +56,24 @@ class NetWork {
             this._socketDelegate.send_msg(stype, ctype, body);
         }
     }
+
+    add_protocol_delegate(obj: any, callBack: Function): void {
+        if (this._socketDelegate){
+            this._socketDelegate.add_protocol_delegate(obj, callBack);
+        }
+    }
+
+    remove_protocol_delegate(obj: any, callBack?: Function): void {
+        if (this._socketDelegate) {
+            this._socketDelegate.remove_protocol_delegate(obj, callBack);
+        }
+    }
+
+    remove_all_protocol_delegate(): void {
+        if (this._socketDelegate) {
+            this._socketDelegate.remove_all_protocol_delegate();
+        }
+    }
 }
 
 export default NetWork;

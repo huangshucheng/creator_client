@@ -10,6 +10,7 @@ import LobbyScene from './LobbyScene';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import RoomData from '../../common/RoomData';
 import WeChatLogin from '../../../framework/utils/WeChatLogin';
+import { Stype } from '../../../framework/protocol/Stype';
 
 const {ccclass, property} = cc._decorator;
 
@@ -21,24 +22,36 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
     }
 
     start () {
-        this.add_event_dispatcher()
+        super.start();
+        this.add_protocol_delegate();
     }
 
-    add_event_dispatcher(){
-        EventManager.on(CmdName[Cmd.eLoginLogicRes], this, this.on_event_login_logic)
-        EventManager.on(CmdName[Cmd.eCreateRoomRes], this, this.on_event_create_room)
-        EventManager.on(CmdName[Cmd.eJoinRoomRes], this, this.on_event_join_room)
-        EventManager.on(CmdName[Cmd.eExitRoomRes], this, this.on_event_exit_room)
-        EventManager.on(CmdName[Cmd.eDessolveRes], this, this.on_event_dessolve_room)
-        EventManager.on(CmdName[Cmd.eGetRoomStatusReq], this, this.on_event_get_room_status)
-        EventManager.on(CmdName[Cmd.eBackRoomRes], this, this.on_event_back_room)
-        EventManager.on(CmdName[Cmd.eUserMatchRes], this, this.on_event_match)
-        EventManager.on(CmdName[Cmd.eUserStopMatchRes], this, this.on_event_match_stop)
-        EventManager.on(CmdName[Cmd.eUserGameInfoRes], this, this.on_event_ugame_info)
+    add_cmd_handler_map(){
+        this._cmd_handler_map = {
+            [Cmd.eLoginLogicRes]: this.on_event_login_logic,
+            [Cmd.eCreateRoomRes]: this.on_event_create_room,
+            [Cmd.eJoinRoomRes]: this.on_event_join_room,
+            [Cmd.eExitRoomRes]: this.on_event_exit_room,
+            [Cmd.eDessolveRes]: this.on_event_dessolve_room,
+            [Cmd.eGetRoomStatusReq]: this.on_event_get_room_status,
+            [Cmd.eBackRoomRes]: this.on_event_back_room,
+            [Cmd.eUserMatchRes]: this.on_event_match,
+            [Cmd.eUserStopMatchRes]: this.on_event_match_stop,
+            [Cmd.eUserGameInfoRes]: this.on_event_ugame_info,
+        }
     }
 
-    on_event_login_logic(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_recv_server_message(stype: number, ctype: number, body: any) {
+        if (stype !== Stype.GameHoodle) {
+            return;
+        }
+        if (this._cmd_handler_map[ctype]) {
+            this._cmd_handler_map[ctype].call(this, body);
+        }
+    }
+
+    on_event_login_logic(body:any){
+        let udata =  body;
         console.log("hcc>>Lobbyscene>>on_event_login_logic",udata)
         if(udata){
             if(udata.status == Response.OK){
@@ -46,12 +59,19 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
                 LobbySendGameHoodleMsg.send_get_ugame_info();
                 LobbySendGameHoodleMsg.send_get_uball_info();
                 DialogManager.getInstance().show_weak_hint("登录游戏服务成功!")
+
+                //登录逻辑服务成功,如果是通过分享进来的,通过分享的房间号，自动去加入房间
+                let roomid = RoomData.getInstance().get_share_roomid();
+                console.log("hcc>>gameapp>>on_event_login_logic roomid: ", roomid);
+                if (roomid != "") {
+                    LobbySendGameHoodleMsg.send_join_room(String(roomid));
+                }
             }
         }
     }
 
-    on_event_create_room(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_create_room(body:any){
+        let udata =  body;
         console.log("on_event_create_room",udata)
         if(udata){
             let status = udata.status
@@ -64,8 +84,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         }
     }
 
-    on_event_join_room(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_join_room(body:any){
+        let udata =  body;
         console.log("on_event_join_room",udata)
         if(udata){
             let status = udata.status
@@ -79,8 +99,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         RoomData.getInstance().set_share_roomid("");
     }
 
-    on_event_exit_room(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_exit_room(body:any){
+        let udata =  body;
         console.log("on_event_exit_room",udata)
         if(udata){
             let status = udata.status
@@ -94,8 +114,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         }
     }
 
-    on_event_dessolve_room(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_dessolve_room(body:any){
+        let udata =  body;
         console.log("on_event_dessolve_room",udata)
         if(udata){
             let status = udata.status
@@ -109,8 +129,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         }
     }
 
-    on_event_get_room_status(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_get_room_status(body:any){
+        let udata =  body;
         console.log("on_event_get_room_status",udata)
         if(udata){
             let status = udata.status
@@ -122,8 +142,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         }
     }
 
-    on_event_back_room(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_back_room(body:any){
+        let udata =  body;
         console.log("on_event_back_room",udata)
         if(udata){
             let status = udata.status
@@ -136,8 +156,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         }
     }
 
-    on_event_match(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_match(body:any){
+        let udata =  body;
         console.log("on_event_match",udata)
         if(udata){
             let status = udata.status
@@ -179,8 +199,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         }
     }
 
-    on_event_match_stop(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_match_stop(body:any){
+        let udata =  body;
         console.log("on_event_match_stop",udata)
         if(udata){
             let status = udata.status
@@ -192,8 +212,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         }
     }
 
-    on_event_ugame_info(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_ugame_info(body:any){
+        let udata =  body;
         console.log("on_event_ugame_info",udata)
         if(udata){
             let status = udata.status

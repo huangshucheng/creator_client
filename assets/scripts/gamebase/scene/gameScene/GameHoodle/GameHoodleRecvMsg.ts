@@ -9,6 +9,7 @@ import { PlayerPower } from '../../../common/State';
 import HoodleBallManager from './HoodleBallManager';
 import DialogManager from "../../../../framework/manager/DialogManager";
 import Player from '../../../common/Player';
+import { Stype } from '../../../../framework/protocol/Stype';
 
 const {ccclass, property} = cc._decorator;
 
@@ -21,22 +22,34 @@ export default class GameHoodleRecvMsg extends UIController {
     }
 
     start () {
-        this.add_event_dispatcher()
+        super.start();
+        this.add_protocol_delegate();
     }
     
-    add_event_dispatcher(){
-        EventManager.on(CmdName[Cmd.eGameStartRes], this, this.on_event_game_start)
-        EventManager.on(CmdName[Cmd.ePlayerFirstBallPosRes], this, this.on_event_first_ball_pos)
-        EventManager.on(CmdName[Cmd.ePlayerPowerRes], this, this.on_event_player_power)
-        EventManager.on(CmdName[Cmd.ePlayerShootRes], this, this.on_event_player_shoot)
-        EventManager.on(CmdName[Cmd.ePlayerBallPosRes], this, this.on_event_ball_pos)
-        EventManager.on(CmdName[Cmd.ePlayerIsShootedRes], this, this.on_event_player_is_shooted)
-        EventManager.on(CmdName[Cmd.eGameResultRes], this, this.on_event_game_result)
-        EventManager.on(CmdName[Cmd.eTotalGameResultRes], this, this.on_event_game_total_result)
+    add_cmd_handler_map(){
+        this._cmd_handler_map = {
+            [Cmd.eGameStartRes]: this.on_event_game_start,
+            [Cmd.ePlayerFirstBallPosRes]: this.on_event_first_ball_pos,
+            [Cmd.ePlayerPowerRes]: this.on_event_player_power,
+            [Cmd.ePlayerShootRes]: this.on_event_player_shoot,
+            [Cmd.ePlayerBallPosRes]: this.on_event_ball_pos,
+            [Cmd.ePlayerIsShootedRes]: this.on_event_player_is_shooted,
+            [Cmd.eGameResultRes]: this.on_event_game_result,
+            [Cmd.eTotalGameResultRes]: this.on_event_game_total_result,
+        }
+    }
+
+    on_recv_server_message(stype: number, ctype: number, body: any) {
+        if (stype !== Stype.GameHoodle) {
+            return;
+        }
+        if (this._cmd_handler_map[ctype]) {
+            this._cmd_handler_map[ctype].call(this, body);
+        }
     }
 
     //游戏开始
-    on_event_game_start(event: cc.Event.EventCustom){
+    on_event_game_start(body: any){
         let showUIScript = this.get_script("GameHoodleShowUI");
         if(showUIScript){
             showUIScript.set_power_percent_visible(true);
@@ -48,8 +61,8 @@ export default class GameHoodleRecvMsg extends UIController {
     }
     
     //玩家初始位置
-    on_event_first_ball_pos(event: cc.Event.EventCustom){
-        let udata =  event.getUserData();
+    on_event_first_ball_pos(body: any){
+        let udata =  body;
         if(udata){
             let positions = udata.positions;
             for(let key in positions){
@@ -64,8 +77,8 @@ export default class GameHoodleRecvMsg extends UIController {
     }
 
     //玩家权限
-    on_event_player_power(event: cc.Event.EventCustom){
-        let udata =  event.getUserData();
+    on_event_player_power(body: any){
+        let udata =  body;
         if(udata){
             let powers = udata.powers;
             for(let key in powers){
@@ -90,8 +103,8 @@ export default class GameHoodleRecvMsg extends UIController {
     }
 
     //玩家射击
-    on_event_player_shoot(event: cc.Event.EventCustom){
-        let udata =  event.getUserData();
+    on_event_player_shoot(body: any){
+        let udata =  body;
         if(udata){
             let status = udata.status;
             if(status == Response.OK){
@@ -115,8 +128,8 @@ export default class GameHoodleRecvMsg extends UIController {
     }
 
     //同步小球位置
-    on_event_ball_pos(event: cc.Event.EventCustom){
-        let udata = event.getUserData();
+    on_event_ball_pos(body: any){
+        let udata = body;
         if(udata){
             let status = udata.status;
             if(status == Response.OK){
@@ -134,10 +147,10 @@ export default class GameHoodleRecvMsg extends UIController {
     }
 
     //玩家被击中
-    on_event_player_is_shooted(event: cc.Event.EventCustom){
+    on_event_player_is_shooted(body: any){
         // let showUI = this.get_script("GameHoodleShowUI");
-        console.log("hcc>>on_event_player_is_shooted" , event.getUserData());
-        let udata = event.getUserData();
+        console.log("hcc>>on_event_player_is_shooted" , body;);
+        let udata = body;
         if(udata){
             let status = udata.status;
             if(status == Response.OK){
@@ -150,10 +163,10 @@ export default class GameHoodleRecvMsg extends UIController {
     }
 
     //小结算
-    on_event_game_result(event: cc.Event.EventCustom){
+    on_event_game_result(body: any){
         /*
-        console.log("hcc>>on_event_game_result",event.getUserData());
-        let udata = event.getUserData();
+        console.log("hcc>>on_event_game_result",body;);
+        let udata = body;;
         let score_text = "";
         if(udata){
             let scores = udata.scores;
@@ -192,10 +205,10 @@ export default class GameHoodleRecvMsg extends UIController {
     }
 
     //大结算
-    on_event_game_total_result(event: cc.Event.EventCustom){
+    on_event_game_total_result(body: any){
         // let showUI = this.get_script("GameHoodleShowUI");
-        console.log("hcc>>on_event_game_total_result" , event.getUserData());
-        let udata = event.getUserData();
+        console.log("hcc>>on_event_game_total_result" , body);
+        let udata = body;
         let show_text = "";
         if(udata){
             let scores = udata.scores;

@@ -4,6 +4,7 @@ import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoo
 import EventManager from '../../framework/manager/EventManager';
 import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
+import { Stype } from '../../framework/protocol/Stype';
 
 const { ccclass, property } = cc._decorator;
 
@@ -18,13 +19,24 @@ export default class JoinRoomDialog extends UIDialog {
     }
 
     start () {
-        this.initUI()
-        this.add_event_dispatcher()
-        this.add_button_event_listener()
+        super.start();
+        this.initUI();
+        this.add_protocol_delegate();
     }
 
-    add_event_dispatcher(){
-        EventManager.on(CmdName[Cmd.eJoinRoomRes], this, this.on_event_join_room)
+    add_cmd_handler_map() {
+        this._cmd_handler_map = {
+            [Cmd.eJoinRoomRes]: this.on_event_join_room,
+        }
+    }
+
+    on_recv_server_message(stype: number, ctype: number, body: any) {
+        if (stype !== Stype.GameHoodle) {
+            return;
+        }
+        if (this._cmd_handler_map[ctype]) {
+            this._cmd_handler_map[ctype].call(this, body);
+        }
     }
 
     add_button_event_listener(){
@@ -44,10 +56,6 @@ export default class JoinRoomDialog extends UIDialog {
             var numName = 'KW_SHOW_NUM_' + index
             this.set_string(this.view[numName],"");
         } 
-    }
-    
-    onDestroy(){
-
     }
 
     on_click_close(sender: cc.Component){
@@ -95,8 +103,8 @@ export default class JoinRoomDialog extends UIDialog {
     }
     
     ////////////////
-    on_event_join_room(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_join_room(body:any){
+        let udata =  body;
         if(udata){
             let status = udata.status
             if(status == Response.OK){

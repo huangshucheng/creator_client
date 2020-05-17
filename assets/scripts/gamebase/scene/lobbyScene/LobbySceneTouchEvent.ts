@@ -17,11 +17,6 @@ export default class LobbySceneTouchEvent extends UIController {
         super.onLoad()
     }
 
-    start () {
-        console.log("LobbySceneTouchEvent>>start")
-        this.add_button_event_listener()
-    }
-
     add_button_event_listener(){
         this.add_click_event(this.view["KW_BTN_SET"],this.on_click_set.bind(this))
         this.add_click_event(this.view["BTN_CREATE_ROOM"],this.on_click_create_room.bind(this))

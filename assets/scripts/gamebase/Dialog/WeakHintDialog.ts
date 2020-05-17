@@ -33,10 +33,6 @@ export default class WeakHintDialog extends UIController {
         this.node.runAction(cc.moveBy(0.1, new cc.Vec2(0, 100)))
     }
 
-    onDestroy(){
-
-    }
-
     close() {
         this.node.destroy();
         DialogManager.getInstance().dequeue_weakhint()

@@ -11,6 +11,7 @@ import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbySendGameHoodleMsg from '../lobbyScene/sendMsg/LobbySendGameHoodle';
 import WeChatLogin from '../../../framework/utils/WeChatLogin';
+import { Stype } from '../../../framework/protocol/Stype';
 
 const {ccclass, property} = cc._decorator;
 
@@ -22,17 +23,33 @@ export default class LoginSceneRecvMsg extends UIController {
     }
 
     start () {
-        this.add_event_dispatcher()
+        super.start();
+        this.add_protocol_delegate();
     }
 
     add_event_dispatcher(){
         EventManager.on(EventDefine.EVENT_NET_CONNECTED, this, this.on_net_connected);
         EventManager.on(EventDefine.EVENT_NET_CLOSED, this, this.on_net_closed);
         EventManager.on(EventDefine.EVENT_NET_ERROR, this, this.on_net_error);
-        EventManager.on(CmdName[Cmd.eUnameLoginRes], this, this.on_event_uname_login)
-        EventManager.on(CmdName[Cmd.eGuestLoginRes], this, this.on_event_guest_login)
-        EventManager.on(CmdName[Cmd.eWeChatLoginRes], this, this.on_event_wechat_login)
-        EventManager.on(CmdName[Cmd.eUnameRegistRes], this, this.on_event_uname_regist)
+    }
+
+    add_cmd_handler_map(){
+        this._cmd_handler_map = {
+            [Cmd.eUnameLoginRes]: this.on_event_uname_login,
+            [Cmd.eGuestLoginRes]: this.on_event_guest_login,
+            [Cmd.eWeChatLoginRes]: this.on_event_wechat_login,
+            [Cmd.eUnameRegistRes]: this.on_event_uname_regist,
+        }
+    }
+
+    on_recv_server_message(stype: number, ctype: number, body: any) {
+        if (stype !== Stype.Auth) {
+            return;
+        }
+
+        if (this._cmd_handler_map[ctype]) {
+            this._cmd_handler_map[ctype].call(this, body);
+        }
     }
 
     on_net_connected(event:cc.Event.EventCustom){
@@ -48,8 +65,8 @@ export default class LoginSceneRecvMsg extends UIController {
 
     }
 
-    on_event_guest_login(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_guest_login(body:any){
+        let udata =  body;
         console.log("guestlogin udata: " , udata)
         if(udata.status == Response.OK){
             SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
@@ -67,8 +84,8 @@ export default class LoginSceneRecvMsg extends UIController {
         }
     }
 
-    on_event_uname_login(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_uname_login(body:any){
+        let udata =  body;
         console.log("unamelogin udata: " , udata)
         if(udata.status == Response.OK){
             SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
@@ -86,16 +103,16 @@ export default class LoginSceneRecvMsg extends UIController {
         }
     }
 
-    on_event_uname_regist(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_uname_regist(body:any){
+        let udata =  body;
         if(udata.status == Response.OK){
             DialogManager.getInstance().show_weak_hint("注册成功!")
         }else{
             DialogManager.getInstance().show_weak_hint("注册失败! " + udata.status)
         }
     }
-    on_event_wechat_login(event:cc.Event.EventCustom){
-        let udata = event.getUserData()
+    on_event_wechat_login(body:any){
+        let udata = body;
         if (udata.status == Response.OK) {
             WeChatLogin.hide_auth_btn();
             SceneManager.getInstance().enter_scene_asyc(new LobbyScene())

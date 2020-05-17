@@ -6,6 +6,7 @@ import Response from '../../framework/protocol/Response';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import StringUtil from '../../framework/utils/StringUtil';
 import RoomData from '../common/RoomData';
+import { Stype } from '../../framework/protocol/Stype';
 
 //匹配界面
 
@@ -19,20 +20,28 @@ export default class MatchDialog extends UIDialog {
     }
 
     start () {
-        this.add_event_dispatcher()
-        this.add_button_event_listener()
+        super.start();
+        this.add_protocol_delegate();
     }
 
-    add_event_dispatcher(){
-        EventManager.on(CmdName[Cmd.eUserStopMatchRes], this, this.on_event_match_stop)
+    add_cmd_handler_map() {
+        this._cmd_handler_map = {
+            [Cmd.eUserStopMatchRes]: this.on_event_match_stop,
+        }
+    }
+
+    on_recv_server_message(stype: number, ctype: number, body: any) {
+        if (stype !== Stype.GameHoodle) {
+            return;
+        }
+
+        if (this._cmd_handler_map[ctype]) {
+            this._cmd_handler_map[ctype].call(this, body);
+        }
     }
 
     add_button_event_listener(){
         this.add_click_event(this.view["KW_UI_BTN_CANCEL"],this.on_click_cancel.bind(this))
-    }
-
-    onDestroy(){
-
     }
 
     on_click_cancel(sender: cc.Component){
@@ -78,8 +87,8 @@ export default class MatchDialog extends UIDialog {
     }
 
     ////////////
-    on_event_match_stop(event: cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_match_stop(body:any){
+        let udata =  body;
         console.log("on_event_match_stop",udata)
         if(udata){
             let status = udata.status

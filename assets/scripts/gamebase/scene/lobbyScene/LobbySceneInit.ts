@@ -18,6 +18,15 @@ export default class LobbySceneInit extends UIController {
         LobbySendGameHoodleMsg.send_get_ugame_info();
         RoomData.getInstance().clear_room_data();
         WeChatLogin.hide_auth_btn();
+
+        WeChatLogin.on_wx_foreground(function (qData: any) {
+            console.log("hcc>>on_wx_foreground>>LobbySceneInit>>  roomid: ", qData.roomid);
+            let share_roomid = qData.roomid;
+            if (share_roomid && share_roomid != ""){
+                LobbySendGameHoodleMsg.send_join_room(String(share_roomid));
+            }
+        });
+
     }
 
 }

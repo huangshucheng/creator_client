@@ -7,6 +7,7 @@ import { ResourceManager } from '../../framework/manager/ResourceManager';
 import ArrayUtil from '../../framework/utils/ArrayUtil';
 import DialogManager from '../../framework/manager/DialogManager';
 import GameHoodleConfig from '../../framework/config/GameHoodleConfig';
+import { Stype } from '../../framework/protocol/Stype';
 
 const { ccclass, property } = cc._decorator;
 
@@ -17,31 +18,38 @@ export default class BallCenterDialog extends UIDialog {
 
     onLoad(){
         super.onLoad()
-        this.add_event_dispatcher()
-        this.add_button_event_listener()
     }
-
+    
     start () {
+        super.start()
         this.initUI();
+        this.add_protocol_delegate();
         GameSendGameHoodleMsg.send_get_player_ball_info();
         //test
         // this.show_ball_test();
     }
 
-    add_event_dispatcher(){
-        EventManager.on(CmdName[Cmd.eUserBallInfoRes], this, this.on_event_user_ball_info)
-        EventManager.on(CmdName[Cmd.eUpdateUserBallRes], this, this.on_event_update_user_ball_info)
+    add_cmd_handler_map() {
+        this._cmd_handler_map = {
+            [Cmd.eUserBallInfoRes]: this.on_event_user_ball_info,
+            [Cmd.eUpdateUserBallRes]: this.on_event_update_user_ball_info,
+        }
+    }
+
+    on_recv_server_message(stype: number, ctype: number, body: any){
+        if (stype !== Stype.GameHoodle) {
+            return;
+        }
+
+        if (this._cmd_handler_map[ctype]) {
+            this._cmd_handler_map[ctype].call(this, body);
+        }
     }
 
     add_button_event_listener(){
         this.add_click_event(this.view["KW_BTN_CLOSE"],this.on_click_close.bind(this))
         this.add_click_event(this.view["KW_BTN_COMPOSE"], this.on_click_compose.bind(this))
         this.add_click_event(this.view["KW_BTN_UNDO"], this.on_click_undo.bind(this))
-        
-    }
-
-    onDestroy(){
-
     }
 
     initUI(){
@@ -125,8 +133,8 @@ export default class BallCenterDialog extends UIDialog {
     }
 
     /////////
-    on_event_user_ball_info(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_user_ball_info(body:any){
+        let udata =  body;
         if(udata){
             let status = udata.status
             if(status == Response.OK){
@@ -136,8 +144,8 @@ export default class BallCenterDialog extends UIDialog {
         }
     }
 
-    on_event_update_user_ball_info(event:cc.Event.EventCustom){
-        let udata =  event.getUserData()
+    on_event_update_user_ball_info(body: any){
+        let udata =  body;
         if(udata){
             let status = udata.status
             if(status == Response.OK){

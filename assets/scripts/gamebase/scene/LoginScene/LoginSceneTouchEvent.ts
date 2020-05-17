@@ -16,10 +16,6 @@ export default class LoginSceneTouchEvent extends UIController {
         super.onLoad()
     }
 
-    start () {
-        this.add_button_event_listener()
-    }
-
     add_button_event_listener() {
         this.add_click_event(this.view["KW_BTN_GUEST_LOGIN"],this.on_click_guest_login.bind(this))
         this.add_click_event(this.view["KW_BTN_LOGIN"],this.on_click_uname_login.bind(this))

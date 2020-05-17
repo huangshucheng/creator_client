@@ -14,6 +14,7 @@ export default class LoginSceneInit extends UIController {
     }
 
     start () {
+        super.start();
         this.initUI();
     }
 

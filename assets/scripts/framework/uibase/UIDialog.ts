@@ -13,7 +13,7 @@ export default class UIDialog extends UIController {
     }
 
     start () {
-        
+        super.start();
     }
 
     close() {
