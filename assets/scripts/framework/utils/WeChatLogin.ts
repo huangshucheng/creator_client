@@ -1,7 +1,5 @@
 import LoginSendAuthMsg from "../../gamebase/scene/LoginScene/sendMsg/LoginSendAuthMsg";
 import PlatForm from '../config/PlatForm';
-import { hide } from '../../../../creator';
-import LobbySendGameHoodleMsg from "../../gamebase/scene/lobbyScene/sendMsg/LobbySendGameHoodle";
 
 class WeChatLogin {
     //授权，获取玩家信息，在微信小游戏上已经失效
