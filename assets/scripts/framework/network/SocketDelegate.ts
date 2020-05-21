@@ -44,7 +44,7 @@ export class SocketDelegate implements ISocketDelegate {
 
         console.log("\n\n###########################>>>recvstart")
         if (cmd_name){
-            console.log("Svr:", StypeName[decode_cmd.stype], ",xyname:", cmd_name, ",xyid:", decode_cmd.ctype);
+            console.log("Svr=", StypeName[decode_cmd.stype], ",xyname=", cmd_name, ",xyid=" + decode_cmd.ctype);
             let cmdbody = ""
             try {
                 cmdbody = JSON.stringify(decode_cmd.body)    

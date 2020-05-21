@@ -16,6 +16,7 @@ export default class LobbySceneInit extends UIController {
     start () {
         LobbySendAuthMsg.send_get_center_info();
         LobbySendGameHoodleMsg.send_get_ugame_info();
+        LobbySendGameHoodleMsg.send_get_room_status();
         RoomData.getInstance().clear_room_data();
         WeChatLogin.hide_auth_btn();
 

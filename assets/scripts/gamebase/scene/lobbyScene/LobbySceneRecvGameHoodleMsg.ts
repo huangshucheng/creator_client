@@ -33,7 +33,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             [Cmd.eJoinRoomRes]: this.on_event_join_room,
             [Cmd.eExitRoomRes]: this.on_event_exit_room,
             [Cmd.eDessolveRes]: this.on_event_dessolve_room,
-            [Cmd.eGetRoomStatusReq]: this.on_event_get_room_status,
+            [Cmd.eGetRoomStatusRes]: this.on_event_get_room_status,
             [Cmd.eBackRoomRes]: this.on_event_back_room,
             [Cmd.eUserMatchRes]: this.on_event_match,
             [Cmd.eUserStopMatchRes]: this.on_event_match_stop,
@@ -135,9 +135,11 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         if(udata){
             let status = udata.status
             if(status == Response.OK){
-                
+                this.set_visible(this.view["BTN_BACK_ROOM"], true);
+                this.set_visible(this.view["BTN_CREATE_ROOM"], false);
             }else{
-
+                this.set_visible(this.view["BTN_BACK_ROOM"], false);
+                this.set_visible(this.view["BTN_CREATE_ROOM"], true);
             }
         }
     }

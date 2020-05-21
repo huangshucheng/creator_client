@@ -5,6 +5,8 @@ import EventManager from '../../framework/manager/EventManager';
 import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import { Stype } from '../../framework/protocol/Stype';
+import CellManager from '../../framework/manager/CellManager';
+import DialogManager from '../../framework/manager/DialogManager';
 
 const { ccclass, property } = cc._decorator;
 
@@ -25,9 +27,9 @@ export default class JoinRoomDialog extends UIDialog {
     }
 
     add_cmd_handler_map() {
-        this._cmd_handler_map = {
-            [Cmd.eJoinRoomRes]: this.on_event_join_room,
-        }
+        // this._cmd_handler_map = {
+        //     [Cmd.eJoinRoomRes]: this.on_event_join_room,
+        // }
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
@@ -97,7 +99,13 @@ export default class JoinRoomDialog extends UIDialog {
                 roomid = roomid + num;
             }
             console.log("roomid: " , roomid)
-            LobbySendGameHoodleMsg.send_join_room(roomid)
+            
+            // LobbySendGameHoodleMsg.send_join_room(roomid);
+            //使用cell来请求一次网络
+            let body = { roomid: roomid }
+            let cell = CellManager.getInstance().start("CellJoinRoom", body, Stype.GameHoodle, Cmd.eJoinRoomReq, 5);
+            CellManager.getInstance().addCellCallBack(cell, this.on_event_join_room_cell.bind(this));
+
         }
         this._text_index++;
     }
@@ -110,6 +118,20 @@ export default class JoinRoomDialog extends UIDialog {
             if(status == Response.OK){
                 this.close()
             }
+        }
+    }
+
+    on_event_join_room_cell(cell:any, flag:any, data:any){
+        console.log("hcc>>on_event_join_room_cell flag:", flag, ",data: ", data);
+        console.log("hcc>>on_event_join_room_cell message: ", cell.getMessage());
+        if(data){
+            if(data.status == Response.OK){
+                this.close();
+            }
+        }
+        
+        if(flag == 3){
+            DialogManager.getInstance().show_weak_hint(cell.getMessage());
         }
     }
 }

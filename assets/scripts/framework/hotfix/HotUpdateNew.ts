@@ -347,9 +347,9 @@ class HotUpdateNew{
             jsb.fileUtils.setSearchPaths(searchPaths);
             cc.audioEngine.stopAll();
             //PC上重启游戏会崩溃
-            if(PlatForm.isAndroidNative() || PlatForm.isIOSNative()){
-                cc.game.restart();
-            }
+            // if(PlatForm.isAndroidNative() || PlatForm.isIOSNative()){
+            //     cc.game.restart();
+            // }
         }
     }
 

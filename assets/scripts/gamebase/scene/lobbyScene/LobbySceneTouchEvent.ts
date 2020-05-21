@@ -47,6 +47,7 @@ export default class LobbySceneTouchEvent extends UIController {
     on_click_create_room(sender:cc.Component){
         let ruleStr = JSON.stringify(GameHoodleConfig.BOX_GAME_RULE);
         LobbySendGameHoodleMsg.send_create_room(ruleStr);
+        LobbySendGameHoodleMsg.send_get_room_status();
     }
 
     on_click_login_logic(sender:cc.Component){
@@ -65,6 +66,7 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_back_room(sender: cc.Component){
         LobbySendGameHoodleMsg.send_back_room();
+        LobbySendGameHoodleMsg.send_get_room_status();
     }
 
     on_click_match_room(sender: cc.Component){

@@ -6,6 +6,8 @@ import StringUtil from '../../../framework/utils/StringUtil';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LoginScene from '../LoginScene/LoginScene';
 import HotUpdateNew from '../../../framework/hotfix/HotUpdateNew';
+import PlatForm from '../../../framework/config/PlatForm';
+import DialogManager from '../../../framework/manager/DialogManager';
 
 const {ccclass, property} = cc._decorator;
 
@@ -39,6 +41,19 @@ export default class HotFixSceneCtrl extends UIController {
     start () {
         this.setProgress(0);
         this.checkHotUpdate();
+
+        //test 在pc上重启会报错，不知道为什么
+        // DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
+        //     if (dialogScript) {
+        //         let showTextStr = "更新成功,重启游戏!"
+        //         dialogScript.set_content_text(showTextStr);
+        //         dialogScript.set_btn_callback(
+        //             function () { cc.game.restart(); },
+        //             function () { },
+        //             function () { cc.game.restart(); },
+        //         )
+        //     }
+        // });
     }
 
     checkHotUpdate(){
@@ -58,7 +73,19 @@ export default class HotFixSceneCtrl extends UIController {
                     }
                     if (isSuccess) {
                         _this.set_string(_this.view["KW_TEXT_PROGRESS_TIP"], "热更新完成!")
-                        _this.startPreloadRes();
+                        if (PlatForm.isAndroidNative() || PlatForm.isIOSNative() || PlatForm.isWin32()) {
+                            DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
+                                if (dialogScript) {
+                                    let showTextStr = "更新完成,请重启!"
+                                    dialogScript.set_content_text(showTextStr);
+                                    dialogScript.set_btn_callback(
+                                        function () {  cc.game.restart(); },
+                                        function () {},
+                                        function () { cc.game.restart(); },
+                                    )
+                                }
+                            });
+                        }
                     }
                 })
             } else {
