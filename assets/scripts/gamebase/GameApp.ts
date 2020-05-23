@@ -51,26 +51,23 @@ export default class GameApp extends UIController {
 
     on_net_closed(event:cc.Event.EventCustom){
         console.log("GameApp hcc>>>on_net_closed")
-        // setTimeout(() => {
-        //     NetWork.getInstance().reconnect();
-        // }, 2000);
-        // DialogManager.getInstance().show_weak_hint("网络断开,正在连接中。。。")
         let commonDialog = DialogManager.getInstance().get_dialog("CommonDialog");
         if (commonDialog && cc.isValid(commonDialog)){
             console.log("GameApp hcc>>>commonDialog is exist!!")
-        }else{
-            DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
-                if (dialogScript) {
-                    let showTextStr = "网络已断开，请重连!"
-                    dialogScript.set_content_text(showTextStr);
-                    dialogScript.set_btn_callback(
-                        function () { NetWork.getInstance().reconnect();},
-                        function () {},
-                        function () { NetWork.getInstance().reconnect();},
-                    )
-                }
-            });
+            DialogManager.getInstance().close_dialog("CommonDialog");
         }
+
+        DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
+            if (dialogScript) {
+                let showTextStr = "网络已断开，请重连!"
+                dialogScript.set_content_text(showTextStr);
+                dialogScript.set_btn_callback(
+                    function () { NetWork.getInstance().reconnect();},
+                    function () {},
+                    function () { NetWork.getInstance().reconnect();},
+                )
+            }
+        });
     }
 
     on_net_error(event:cc.Event.EventCustom){
