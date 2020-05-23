@@ -10,7 +10,6 @@ import DialogManager from '../../../framework/manager/DialogManager';
 import EventDefine from '../../../framework/config/EventDefine';
 import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
 import LobbySendGameHoodleMsg from '../lobbyScene/sendMsg/LobbySendGameHoodle';
-import WeChatLogin from '../../../framework/utils/WeChatLogin';
 import { Stype } from '../../../framework/protocol/Stype';
 
 const {ccclass, property} = cc._decorator;

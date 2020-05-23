@@ -1,12 +1,11 @@
 import UIDialog from '../../framework/uibase/UIDialog';
 import StringUtil from '../../framework/utils/StringUtil';
-import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
-import EventManager from '../../framework/manager/EventManager';
 import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import { Stype } from '../../framework/protocol/Stype';
 import CellManager from '../../framework/manager/CellManager';
 import DialogManager from '../../framework/manager/DialogManager';
+import { Cell } from '../../framework/cell/Cell';
 
 const { ccclass, property } = cc._decorator;
 
@@ -121,17 +120,18 @@ export default class JoinRoomDialog extends UIDialog {
         }
     }
 
-    on_event_join_room_cell(cell:any, flag:any, data:any){
-        console.log("hcc>>on_event_join_room_cell flag:", flag, ",data: ", data);
+    on_event_join_room_cell(cell:Cell, type:any, data:any){
+        console.log("hcc>>on_event_join_room_cell flag:", type, ",data: ", data);
         console.log("hcc>>on_event_join_room_cell message: ", cell.getMessage());
-        if(data){
-            if(data.status == Response.OK){
-                this.close();
+        if (type == Cell.TYPE.SUCCESS) {
+            if(data){
+                if(data.status == Response.OK){
+                    this.close();
+                }
             }
-        }
-        
-        if(flag == 3){
+        }else{
             DialogManager.getInstance().show_weak_hint(cell.getMessage());
         }
+
     }
 }

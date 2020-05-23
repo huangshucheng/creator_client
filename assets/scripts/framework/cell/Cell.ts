@@ -1,5 +1,6 @@
 import NetWork from '../network/NetWork';
 import CellManager from '../manager/CellManager';
+
 export class Cell {
     _callBacks: Array<Function>;
     _startTime: number;
@@ -9,7 +10,7 @@ export class Cell {
     _isStart: boolean;
     _msg: string;
 
-    TYPE = {
+    public static TYPE:any = {
         NONE: 0,
         SUCCESS: 1,
         FAIL: 2,
@@ -81,21 +82,21 @@ export class Cell {
     }
 
     public success(data?: any) {
-        this.dealCell(this.TYPE.SUCCESS, data);
+        this.dealCell(Cell.TYPE.SUCCESS, data);
     }
 
     public fail(data?: any) {
         if (this.getMessage() == "") {
             this.setMessage("请求服务器失败，请检查网络!");
         }
-        this.dealCell(this.TYPE.FAIL, data);
+        this.dealCell(Cell.TYPE.FAIL, data);
     }
 
     public timeout(data?: any) {
         if (this.getMessage() == "") {
             this.setMessage("请求服务器超时，请检查网络!")
         }
-        this.dealCell(this.TYPE.TIMEOUT, data);
+        this.dealCell(Cell.TYPE.TIMEOUT, data);
     }
 
     protected getLeftTime():number {

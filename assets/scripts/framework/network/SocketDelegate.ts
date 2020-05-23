@@ -53,9 +53,6 @@ export class SocketDelegate implements ISocketDelegate {
             console.log(cmdbody)
         }
         console.log("###########################>>>recvend\n\n")
-        // if (cmd_name) {
-        //     EventManager.emit(cmd_name, decode_cmd.body)
-        // }
 
         this._protocolCallBackList.forEach(element => {
             if (element.callBack) {

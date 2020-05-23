@@ -21,7 +21,6 @@ class CellManager {
             name: className,
         }
         this._cellArray.push(t);
-        // console.log("hcc>>CellManager start: len: ", this._cellArray.length );
         return classObject
     }
 
@@ -37,13 +36,11 @@ class CellManager {
         for (let index = 0; index < this._cellArray.length; index++){
             if(this._cellArray[index].cellObj === classObj){
                 findIndex = index;
-                // console.log("hcc>>removeCellModule findIndex: " , findIndex);
                 break;
             }
         }
         if (findIndex != null){
             this._cellArray.splice(findIndex, 1);
-            // console.log("hcc>>CellManager removeCellModule: len: ", this._cellArray.length);
         }
     }
 

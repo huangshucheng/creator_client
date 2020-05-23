@@ -9,6 +9,7 @@ import RoomData from '../../common/RoomData';
 import { UserState } from '../../common/State';
 import Player from '../../common/Player';
 import { Stype } from '../../../framework/protocol/Stype';
+import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
 
 const {ccclass, property} = cc._decorator;
 
@@ -56,7 +57,9 @@ export default class GameSceneRecvGameMsg extends UIController {
     ///////////////////////////////////////
     on_event_login_logic(body:any){
         let udata =  body;
-        console.log("hcc>>on_event_login_logic>>udata: " , udata)
+        if (udata.status == Response.OK) {
+            GameSendGameHoodleMsg.send_check_link_game();
+        }
     }
 
     on_event_dessolve(body:any){
