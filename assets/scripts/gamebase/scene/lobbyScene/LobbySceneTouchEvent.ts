@@ -84,15 +84,10 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_store(sender: cc.Component){
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogStore", "StoreDialog")
-        //test
-        // let wechatsessionkey = Storage.get(LSDefine.USER_LOGIN_WECHAT_SESSION);
-        // if (wechatsessionkey) {
-        //     LoginSendAuthMsg.send_wechat_session_login(wechatsessionkey);//重新用微信session登录
-        // }
 
+        //test
         // DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogLoading", "LoadingDialog");
         // DialogManager.getInstance().close_dialog("LoadingDialog");
-
         // DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogVideoAd", "VideoAdDialog");
     }
 

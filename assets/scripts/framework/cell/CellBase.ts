@@ -7,7 +7,7 @@ import ProtoCmd from '../protocol/ProtoCmd';
 //Cell模板类
 class CellBase extends Cell {
 
-    start(data: any, stype: number, ctype: number, timeOutTime?: number): boolean {
+    start(data: any, stype: number, ctype: number, timeOutTime?: number) {
         if(!timeOutTime){
             timeOutTime = 5;
         }
@@ -26,16 +26,7 @@ class CellBase extends Cell {
         return true;
     }
 
-    onMsgReceive(stype: number, ctype: number, body: any):boolean {
-        if(!ArrayUtil.ValueOf(Stype, stype)){
-            this.fail(body);
-            return false;
-        }
-        if (!ArrayUtil.ValueOf(ProtoCmd.StypeProtos[stype].Cmd, ctype)) {
-            this.fail(body);
-            return false;
-        }
-        return true;
+    onMsgReceive(stype: number, ctype: number, body: any) {
     }
 }
 

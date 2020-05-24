@@ -1,22 +1,22 @@
 import { Stype } from '../../framework/protocol/Stype';
-import { Cmd } from '../../framework/protocol/GameHoodleProto';
+import { Cmd } from '../../framework/protocol/AuthProto';
 
 import CellBase = require('../../framework/cell/CellBase');
 import DialogManager from '../../framework/manager/DialogManager';
 import { Cell } from '../../framework/cell/Cell';
 
-class CellJoinRoom extends CellBase {
+class CellWeChatLogin extends CellBase {
 
     start(body:any, timeOutTime:number): boolean {
         DialogManager.getInstance().show_loading_dialog();
-        if (!super.start(body, Stype.GameHoodle, Cmd.eJoinRoomReq, timeOutTime)) {
+        if (!super.start(body, Stype.Auth, Cmd.eWeChatLoginReq, timeOutTime)) {
             return false;
         }
         return true;
     }
 
     onMsgReceive(stype:number, ctype:number, body:any) {
-        if (stype != Stype.GameHoodle || ctype != Cmd.eJoinRoomRes){
+        if (stype != Stype.Auth || ctype != Cmd.eWeChatLoginRes){
             return;
         }
         this.success(body);
@@ -31,4 +31,4 @@ class CellJoinRoom extends CellBase {
     }
 }
 
-export = CellJoinRoom;
+export = CellWeChatLogin;

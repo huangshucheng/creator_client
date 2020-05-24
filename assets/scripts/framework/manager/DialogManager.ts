@@ -1,6 +1,6 @@
 import Queue from '../utils/Queue';
 import UIFunction from '../common/UIFunciton';
-import WeakHintDialog from '../../gamebase/Dialog/WeakHintDialog';
+import WeakHintDialog from '../../gamebase/dialog/WeakHintDialog';
 
 enum DialogZorder {
     dialog = 10,
@@ -124,6 +124,17 @@ export default class DialogManager{
                 }
            }
         })
+    }
+
+    show_loading_dialog(){
+        this.close_dialog("LoadingDialog");
+        this.show_dialog_asyc("ui_prefabs/dialog/DialogLoading", "LoadingDialog",function(resNode:any){
+            console.log("hcc>>show_loading_dialog");
+        })
+    }
+
+    close_loading_dialog(){
+        this.close_dialog("LoadingDialog");
     }
 
 }

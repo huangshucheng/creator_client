@@ -26,9 +26,8 @@ export default class JoinRoomDialog extends UIDialog {
     }
 
     add_cmd_handler_map() {
-        // this._cmd_handler_map = {
-        //     [Cmd.eJoinRoomRes]: this.on_event_join_room,
-        // }
+        this._cmd_handler_map = {
+        }
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
@@ -99,30 +98,20 @@ export default class JoinRoomDialog extends UIDialog {
             }
             console.log("roomid: " , roomid)
             
-            // LobbySendGameHoodleMsg.send_join_room(roomid);
             //使用cell来请求一次网络
-            let body = { roomid: roomid }
-            let cell = CellManager.getInstance().start("CellJoinRoom", body, Stype.GameHoodle, Cmd.eJoinRoomReq, 5);
+            let body = {
+                roomid : roomid,
+            }
+            let cell = CellManager.getInstance().start("CellJoinRoom", body , 5);
             CellManager.getInstance().addCellCallBack(cell, this.on_event_join_room_cell.bind(this));
-
         }
         this._text_index++;
     }
     
-    ////////////////
-    on_event_join_room(body:any){
-        let udata =  body;
-        if(udata){
-            let status = udata.status
-            if(status == Response.OK){
-                this.close()
-            }
-        }
-    }
-
     on_event_join_room_cell(cell:Cell, type:any, data:any){
         console.log("hcc>>on_event_join_room_cell flag:", type, ",data: ", data);
         console.log("hcc>>on_event_join_room_cell message: ", cell.getMessage());
+        DialogManager.getInstance().close_loading_dialog();
         if (type == Cell.TYPE.SUCCESS) {
             if(data){
                 if(data.status == Response.OK){

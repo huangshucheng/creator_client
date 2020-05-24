@@ -1,5 +1,6 @@
 import LoginSendAuthMsg from "../../gamebase/scene/LoginScene/sendMsg/LoginSendAuthMsg";
 import PlatForm from '../config/PlatForm';
+import CellManager from "../manager/CellManager";
 
 class WeChatLogin {
     //授权，获取玩家信息，在微信小游戏上已经失效
@@ -55,7 +56,11 @@ class WeChatLogin {
                             let wechatuserinfo = JSON.stringify(userinfo_res);
                             console.log("hcc>>login_code: ", login_code)
                             console.log("hcc>>wechatuserinfo: ", wechatuserinfo)
-                            LoginSendAuthMsg.send_wechat_login(String(login_code), wechatuserinfo);
+                            let body = {
+                                logincode: String(login_code),
+                                userlogininfo: wechatuserinfo,
+                            }
+                            CellManager.getInstance().start("CellWeChatLogin", body, 5);
                         } else {
                             console.log('hcc>>login failed！', login_res.errMsg)
                         }

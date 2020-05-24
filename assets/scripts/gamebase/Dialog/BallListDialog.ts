@@ -163,7 +163,7 @@ export default class BallListDialog extends UIDialog {
                 for(let key in ball_info_obj){
                     let level_count:string  = ball_info_obj[key];
                     let level: string = this.get_ball_level(key);
-                    if (level_count && Number(level_count) != 0 && level){
+                    if (level_count && level){
                         let prefab = ResourceManager.getInstance().getRes("ui_prefabs/games/HoodleBallShow", cc.Prefab)
                         if(prefab){
                             let infoNode:any = this.add_to_node(layout_ball, prefab)

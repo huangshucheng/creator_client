@@ -13,6 +13,7 @@ import LobbySendAuthMsg from './sendMsg/LobbySendAuthMsg';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
 import { Stype } from '../../../framework/protocol/Stype';
+import CellManager from '../../../framework/manager/CellManager';
 
 const {ccclass, property} = cc._decorator;
 
@@ -69,7 +70,11 @@ export default class LobbySceneRecvAuthMsg extends UIController {
         }else if(loginType == LSDefine.LOGIN_TYPE_WECHAT){
             let wechatsessionkey = Storage.get(LSDefine.USER_LOGIN_WECHAT_SESSION);
             if(wechatsessionkey){
-                LoginSendAuthMsg.send_wechat_session_login(wechatsessionkey);//重新用微信session登录
+                //重新用微信session登录
+                let body = {
+                    wechatsessionkey: wechatsessionkey,
+                }
+                CellManager.getInstance().start("CellWeChatSessionLogin", body, 5);
             }
         }
     }

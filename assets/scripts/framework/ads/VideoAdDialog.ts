@@ -26,7 +26,7 @@ export default class VideoAdDialog extends UIDialog {
         if (!this.adUnitId) {
             console.log('视频广告ID不存在，直接通过');
             if (this.playOnLoad) {
-                this.simulationPlayVideoAd(10);
+                this.simulationPlayVideoAd();
             }
             return;
         }
@@ -34,7 +34,7 @@ export default class VideoAdDialog extends UIDialog {
         if (PlatForm.isWeChatGame()) {
             this.init();
         } else if (this.playOnLoad) {
-            this.simulationPlayVideoAd(10);
+            this.simulationPlayVideoAd();
         }
     }
 
@@ -99,18 +99,17 @@ export default class VideoAdDialog extends UIDialog {
             item.rewardedVideoAd.offClose(callback);
             if (res && res.isEnded || res === undefined) {
                 item.playCount++;
-                // cc.Component.EventHandler.emitEvents(this.events, res);
                 console.log("hcc>>play>>res: ", res);
             }
         }
         item.rewardedVideoAd.onClose(callback);
     }
 
-    /**
-     * 模拟播放视频广告，可以删除
-     * @param second 模拟时间
-     */
-    simulationPlayVideoAd(second: number = 10) {
-        
+    simulationPlayVideoAd() {
+        this.add_click_event(this.view["KW_BTN_RIGHT"],this.on_click_event_close_ad.bind(this));
+    }
+
+    on_click_event_close_ad(sender:cc.Component){
+        this.close();
     }
 }
