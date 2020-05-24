@@ -21,6 +21,26 @@ class ArrayUtil {
         return false;
     }
 
+    //判断key是否在obj内,适用对象或数组
+    static KeyOf(obj:any, key:any):boolean{
+        for(let k in obj){
+            if(k === key){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //判断value是否在obj内，适用对象或数组
+    static ValueOf(obj:any, value:any):boolean{
+        for(let v in obj){
+            if(obj[v] === value){
+                return true;
+            }
+        }
+        return false;
+    }
+
     //获取对象{},或者数组[],的长度
     static GetArrayLen(array:any){
         let count = 0;

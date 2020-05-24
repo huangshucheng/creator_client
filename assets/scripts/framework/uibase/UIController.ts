@@ -90,6 +90,10 @@ export default abstract class UIController extends cc.Component {
         return UIFunction.getInstance().add_to_node(parent, prefab,scriptName)
     }
 
+    add_to_scene(prefab: cc.Prefab, scriptName: string = null): cc.Node {
+        return UIFunction.getInstance().add_to_scene(prefab, scriptName)
+    }
+
     set_string(target: cc.Node, str: string) {
         UIFunction.getInstance().set_string(target, str)
     }

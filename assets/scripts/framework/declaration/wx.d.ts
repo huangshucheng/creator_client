@@ -118,6 +118,9 @@ declare namespace wx {
 
     //微信分享
     export function shareAppMessage(object:any);
+
+    //微信视屏广告
+    export function createRewardedVideoAd(object: any);
 }
 
 /**

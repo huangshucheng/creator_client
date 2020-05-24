@@ -113,7 +113,6 @@ export default class DialogManager{
         if(!btnNum){
             btnNum = 1;
         }
-
         this.show_dialog_asyc("ui_prefabs/dialog/DialogCommon", "CommonDialog",function (resNode:any) {
            if(resNode && cc.isValid(resNode)){
                 let component =  resNode.getComponent("CommonDialog")
@@ -125,7 +124,6 @@ export default class DialogManager{
                 }
            }
         })
-
     }
 
 }

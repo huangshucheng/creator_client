@@ -49,7 +49,8 @@ export default class LoginSceneTouchEvent extends UIController {
             DialogManager.getInstance().show_weak_hint("用户名或密码错误，不能少于六位!");
             return
         }
-        LoginSendAuthMsg.send_uname_login(_uname,_upwd)
+        LoginSendAuthMsg.send_uname_login(_uname,_upwd);
+        // DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogLoading", "LoadingDialog");
     }
 
     on_click_goto_regist(sender: cc.Component){

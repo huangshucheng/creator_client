@@ -3,7 +3,8 @@ var path = require('path');
 var crypto = require('crypto');
 
 var remote_assets = '../remote-assets/';
-var public_path = '../../game_server/src/web_server/www_root/hotupdate/';
+// var public_path = '../../game_server/src/web_server/www_root/hotupdate/';
+var public_path = '../../game_server/dist/web_server/www_root/hotupdate/';
 
 var public_util = require("./public_util")
 
