@@ -28,6 +28,7 @@ export default class LobbySceneTouchEvent extends UIController {
         this.add_click_event(this.view["BTN_MATCH_STOP"],this.on_click_match_stop.bind(this))
         this.add_click_event(this.view["KW_BTN_BALL_COMPOSE"], this.on_click_ball_compose.bind(this))
         this.add_click_event(this.view["KW_BTN_STORE"], this.on_click_store.bind(this))
+        this.add_click_event(this.view["KW_BTN_BALL_LIST"], this.on_click_ball_list.bind(this))
         //带参数的点击事件
         // this.add_click_evenet_with_data(this.view["KW_BTN_BALL"], "on_click_ball_dialog_data",[1,2,3,5]) // test
     }
@@ -88,6 +89,10 @@ export default class LobbySceneTouchEvent extends UIController {
         // if (wechatsessionkey) {
         //     LoginSendAuthMsg.send_wechat_session_login(wechatsessionkey);//重新用微信session登录
         // }
+    }
+
+    on_click_ball_list(sender:cc.Component){
+        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogBallList", "BallListDialog")
     }
 
 }

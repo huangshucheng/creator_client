@@ -1,5 +1,4 @@
 import UIController from '../../../framework/uibase/UIController';
-import EventManager from '../../../framework/manager/EventManager';
 import { Cmd, CmdName } from "../../../framework/protocol/GameHoodleProto";
 import Response from '../../../framework/protocol/Response';
 import SceneManager from '../../../framework/manager/SceneManager';

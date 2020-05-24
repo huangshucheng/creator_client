@@ -101,4 +101,18 @@ export default class GameSendGameHoodleMsg {
         }
         GameSendGameHoodleMsg.send(Cmd.ePlayerIsShootedReq,body);
     }
+
+    static send_get_user_config(){
+        GameSendGameHoodleMsg.send(Cmd.eUserConfigReq);
+    }
+
+    static send_use_ball(balllevel:number){
+        if(balllevel <= 0){
+            return;
+        }
+        let body = {
+            balllevel: balllevel,
+        }
+        GameSendGameHoodleMsg.send(Cmd.eUseHoodleBallReq,body);
+    }
 }

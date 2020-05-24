@@ -116,6 +116,8 @@ declare namespace wx {
     //弹出回调
     export function onShow(object: any);
 
+    //微信分享
+    export function shareAppMessage(object:any);
 }
 
 /**

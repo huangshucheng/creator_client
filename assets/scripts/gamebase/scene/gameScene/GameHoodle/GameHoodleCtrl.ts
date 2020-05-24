@@ -1,7 +1,6 @@
 //游戏界面控制器
 
 import UIController from "../../../../framework/uibase/UIController";
-import UIFunction from "../../../../framework/common/UIFunciton";
 
 const {ccclass, property} = cc._decorator;
 

@@ -12,7 +12,6 @@ import EventDefine from '../../../framework/config/EventDefine';
 import LobbySendAuthMsg from './sendMsg/LobbySendAuthMsg';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
-import WeChatLogin from '../../../framework/utils/WeChatLogin';
 import { Stype } from '../../../framework/protocol/Stype';
 
 const {ccclass, property} = cc._decorator;

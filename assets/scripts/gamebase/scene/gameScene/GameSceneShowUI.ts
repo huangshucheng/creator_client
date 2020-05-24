@@ -1,6 +1,4 @@
 import UIController from '../../../framework/uibase/UIController';
-import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
-import UserInfo from '../../../framework/common/UserInfo';
 import { UserState } from '../../common/State';
 import RoomData from '../../common/RoomData';
 import UIFunction from '../../../framework/common/UIFunciton';

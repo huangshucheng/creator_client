@@ -4,7 +4,6 @@ import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LobbyScene from '../lobbyScene/LobbyScene';
 import PlatForm from '../../../framework/config/PlatForm';
-import GameAppConfig from '../../../framework/config/GameAppConfig';
 import RoomData from '../../common/RoomData';
 
 const {ccclass, property} = cc._decorator;

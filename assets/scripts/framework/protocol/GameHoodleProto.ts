@@ -67,9 +67,13 @@ export enum Cmd {
 	eStoreListRes 					= 48,
 	eBuyThingsReq 					= 49, 		// 购买
 	eBuyThingsRes 					= 50,
+	eUseHoodleBallReq 				= 51,		//使用小球
+	eUseHoodleBallRes 				= 52,
+	eUserConfigReq 					= 53,  		//玩家配置
+	eUserConfigRes 					= 54,
 }
 
-export let CmdName = {
+export let CmdName:any = {
 	
 	///////////////////////////////////
 	//房间相关协议
@@ -132,9 +136,13 @@ export let CmdName = {
 	[44] :"UserBallInfoRes",
 	[45] :"UpdateUserBallReq",			// 更新小球信息
 	[46] :"UpdateUserBallRes",
-	[47]: "StoreListReq", 				// 请求商城列表
-	[48]: "StoreListRes",
-	[49]: "BuyThingsReq",				// 玩家购买
-	[50]: "BuyThingsRes",
+	[47] :"StoreListReq", 				// 请求商城列表
+	[48] :"StoreListRes",
+	[49] :"BuyThingsReq",				// 玩家购买
+	[50] :"BuyThingsRes",
+	[51] :"UseHoodleBallReq",			// 使用小球
+	[52] :"UseHoodleBallRes",
+	[53] :"UserConfigReq", 				//玩家配置
+	[54] :"UserConfigRes",
 }
 

@@ -1,5 +1,4 @@
 import UIController from '../../../framework/uibase/UIController';
-import EventManager from '../../../framework/manager/EventManager';
 import { Cmd, CmdName } from "../../../framework/protocol/GameHoodleProto";
 import Response from '../../../framework/protocol/Response';
 import SceneManager from '../../../framework/manager/SceneManager';
@@ -9,8 +8,8 @@ import DialogManager from '../../../framework/manager/DialogManager';
 import LobbyScene from './LobbyScene';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import RoomData from '../../common/RoomData';
-import WeChatLogin from '../../../framework/utils/WeChatLogin';
 import { Stype } from '../../../framework/protocol/Stype';
+import GameSendGameHoodleMsg from '../gameScene/sendMsg/GameSendGameHoodle';
 
 const {ccclass, property} = cc._decorator;
 
@@ -226,6 +225,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
                 if(lobyShowUI){
                     lobyShowUI.show_user_info();
                 }
+                GameSendGameHoodleMsg.send_get_user_config();
             }
         }
     }
