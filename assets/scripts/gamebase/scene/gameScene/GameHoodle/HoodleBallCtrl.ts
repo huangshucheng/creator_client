@@ -5,11 +5,11 @@ import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
 import GameHoodleData from './GameHoodleData';
 import RoomData from '../../../common/RoomData';
 import Player from '../../../common/Player';
+import StringUtil from "../../../../framework/utils/StringUtil";
 
 let SHOOT_DISTANCE          = 380;
 let SHOOT_POWER             = 50.0;
 let BALL_STOP_SPEED_SQR     = 100;  //判定小球停下来的速度平方
-let ROUND_HEAD_PATH         = "lobby/roundheader/round_1";
 
 const {ccclass, property} = cc._decorator;
 
@@ -61,7 +61,8 @@ export default class HoodleBallCtrl extends UIController {
     // 名称
     public set_name(name_str: string){
         if(this.get_ball_id() == RoomData.getInstance().get_self_seatid()){
-            name_str = name_str + "(我)";
+            // name_str = name_str + "(我)";
+            name_str = "我";
         }
         this.set_string(this.view["KW_TEXT_NAME"],name_str);
         this._ball_name = name_str;
@@ -84,9 +85,10 @@ export default class HoodleBallCtrl extends UIController {
     }
 
     // 头像
-    public set_img_face(uface: number){
-        // let ufaceImg = ROUND_HEAD_PATH + String(uface);
-        // this.set_sprite_asyc(this.view["KW_IMG_HEAD"],ufaceImg)
+    public set_img_face(ballLevel: number){
+        let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
+        let ballNameStr = StringUtil.format(BALL_TEXTURE_KEY_STR, ballLevel);
+        this.set_sprite_asyc(this.view["KW_IMG_HEAD"], ballNameStr)
     }
 
     // 有权限变名字成红色

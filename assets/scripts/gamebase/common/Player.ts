@@ -52,6 +52,13 @@ class  Player {
         return this._uinfo.userstate;
     }
 
+    get_user_ball_level(){
+        if(this._uinfo.userconfig){
+            return this._uinfo.userconfig.user_ball_level;
+        }
+        return 1;
+    }
+
     reset(){
         this._uinfo = {}
     }

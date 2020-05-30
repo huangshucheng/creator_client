@@ -1,3 +1,5 @@
+//弹珠合成界面
+
 import UIDialog from '../../framework/uibase/UIDialog';
 import EventManager from '../../framework/manager/EventManager';
 import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
@@ -8,6 +10,9 @@ import ArrayUtil from '../../framework/utils/ArrayUtil';
 import DialogManager from '../../framework/manager/DialogManager';
 import GameHoodleConfig from '../../framework/config/GameHoodleConfig';
 import { Stype } from '../../framework/protocol/Stype';
+import StringUtil from '../../framework/utils/StringUtil';
+
+let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
 const { ccclass, property } = cc._decorator;
 
@@ -181,13 +186,15 @@ export default class BallCenterDialog extends UIDialog {
         let ball_count_all = 0;
         let prefab_size = null;
         if(scrollview){
-            for(let index = 1;index <= 30;index++){
+            for(let index = 1;index <= 60;index++){
                 let prefab = ResourceManager.getInstance().getRes("ui_prefabs/games/HoodleBallShow", cc.Prefab)
                 if(prefab){
                     let infoNode:cc.Node = this.add_to_node(layout_ball, prefab)
                     let conSize = infoNode.getContentSize();
                     ball_count_all++;
                     prefab_size = conSize;
+                    let ballNameStr = StringUtil.format(BALL_TEXTURE_KEY_STR, index);
+                    this.set_sprite_asyc(this.seek_child_by_name(infoNode, "KW_IMG_BALL_BODY"), ballNameStr);
                 }
             }
 
@@ -196,6 +203,10 @@ export default class BallCenterDialog extends UIDialog {
             if(content && layout && ball_count_all > 30){
                 let height = prefab_size.height * Math.ceil((ball_count_all / 5)) + 200
                 content.setContentSize(content.getContentSize().width, height);
+                let scrollCom: cc.ScrollView = scrollview.getComponent(cc.ScrollView);
+                if (scrollCom) {
+                    scrollCom.scrollToTop(0.01);
+                }
             }
         }
     }
@@ -240,6 +251,8 @@ export default class BallCenterDialog extends UIDialog {
                                 infoNode.info_obj = { level: level, count: level_count };
                                 this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_COUNT"),level_count);
                                 this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_LEVEL"), String(level) +  "级");
+                                let ballNameStr = StringUtil.format(BALL_TEXTURE_KEY_STR, level);
+                                this.set_sprite_asyc(this.seek_child_by_name(infoNode, "KW_IMG_BALL_BODY"), ballNameStr);
                                 this.add_click_evenet_with_data(infoNode, "on_click_ball_select",{level: level, count: level_count})
                             }
                             let conSize = infoNode.getContentSize();
@@ -274,13 +287,10 @@ export default class BallCenterDialog extends UIDialog {
                 this.set_string(this.seek_child_by_name(ballComponent.node,"KW_TEXT_COUNT"),String(textCount))
                 //
                 let newNode: cc.Node = cc.instantiate(event.target);
-                // let btnCom = newNode.getComponent(cc.Button);
-                // console.log("hcc>>beforeEvent: " , btnCom.clickEvents.length);
                 compose_layer.addChild(newNode);
                 newNode.y = 0;
                 this.set_string(this.seek_child_by_name(newNode, "KW_TEXT_COUNT"), "1");
                 this.add_click_evenet_with_data(newNode, "on_click_ball_unselect", data)
-                // console.log("hcc>>afterEvent: ", btnCom.clickEvents.length);
                 this.set_visible(this.view["KW_TEXT_TITLE_UNDO"],true);
             }    
         }

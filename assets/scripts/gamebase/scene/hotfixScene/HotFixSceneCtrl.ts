@@ -8,6 +8,7 @@ import LoginScene from '../LoginScene/LoginScene';
 import HotUpdateNew from '../../../framework/hotfix/HotUpdateNew';
 import PlatForm from '../../../framework/config/PlatForm';
 import DialogManager from '../../../framework/manager/DialogManager';
+import NetWork from '../../../framework/network/NetWork';
 
 const {ccclass, property} = cc._decorator;
 
@@ -19,14 +20,14 @@ export default class HotFixSceneCtrl extends UIController {
     _urlArray: string[] = [ 
         "ui_prefabs/login/",
         "ui_prefabs/lobby/",
-        "ui_prefabs/dialog/",
         "ui_prefabs/hotfix/",
         "ui_prefabs/games/",
+        "ui_prefabs/dialog/",
+        "textures/games/",
         "textures/lobby/",
         "textures/dialog/",
         "textures/shareimg/",
         "mainfest/",
-        "config/",
     ]
 
     _completedFlag:any = []
@@ -143,6 +144,7 @@ export default class HotFixSceneCtrl extends UIController {
     }
 
     enter_login_scene() {
+        NetWork.getInstance().connect();
         SceneManager.getInstance().enter_scene_asyc(new LoginScene());
     }
 }

@@ -20,7 +20,8 @@ export default class GameSceneTouchEvent extends UIController {
         this.add_click_event(this.view["BTN_SETTING_2"],this.on_click_setting2)
         this.add_click_event(this.view["KW_BTN_READY"],this.on_click_ready)
         this.add_click_event(this.view["KW_BTN_BACK_LOBBY"],this.on_click_back_lobby)
-        this.add_click_event(this.view["KW_BTN_SHARE"],this.on_click_share)
+        this.add_click_event(this.view["KW_BTN_SHARE"], this.on_click_share)
+        this.add_click_event(this.view["KW_BTN_EMOj"], this.on_click_emoj)
     }
 
     on_click_setting(sender:cc.Component){
@@ -85,6 +86,10 @@ export default class GameSceneTouchEvent extends UIController {
             },
         }
         wx.shareAppMessage(shareInfo)
+    }
+
+    on_click_emoj(sender: cc.Component){
+        DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogEmoj", "EmojDialog");
     }
 
 }

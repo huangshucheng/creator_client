@@ -1,3 +1,5 @@
+//我的弹珠页面
+
 import UIDialog from '../../framework/uibase/UIDialog';
 import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
@@ -5,8 +7,10 @@ import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import { Stype } from '../../framework/protocol/Stype';
 import DialogManager from '../../framework/manager/DialogManager';
+import StringUtil from '../../framework/utils/StringUtil';
 
 let BALL_NAME_KEY_STR = "ball_name_level_"
+let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
 const { ccclass, property } = cc._decorator;
 
@@ -101,7 +105,11 @@ export default class BallListDialog extends UIDialog {
                 if (user_ball_level) {
                     this.show_user_ball_info(this._ball_info_str)
                     this.show_cur_use_ball(user_ball_level);
+                    GameSendGameHoodleMsg.send_get_user_config();
+                    DialogManager.getInstance().show_weak_hint("使用成功!");
                 }
+            }else{
+                DialogManager.getInstance().show_weak_hint("使用失败!");
             }
         }
     }
@@ -152,6 +160,11 @@ export default class BallListDialog extends UIDialog {
             console.error(error)
             return;
         }
+        //test
+        // for(let index = 1 ;index <= 58; index++){
+        //     let strrr = "lv_" + index;
+        //     ball_info_obj[strrr] = "1";
+        // }
 
         if(ball_info_obj){
             let scrollview:cc.Node = this.view["KW_SCROLLVIEW_NEW"];
@@ -173,6 +186,8 @@ export default class BallListDialog extends UIDialog {
                                 this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_LEVEL"), String(level) +  "级");
                                 this.set_visible(this.seek_child_by_name(infoNode, "KW_TEXT_COUNT"), false);
                                 this.set_visible(this.seek_child_by_name(infoNode, "KW_IMG_LEVEL_BG"), false);
+                                let ballNameStr = StringUtil.format(BALL_TEXTURE_KEY_STR,level);
+                                this.set_sprite_asyc(this.seek_child_by_name(infoNode, "KW_IMG_BALL_BODY"), ballNameStr);
                                 this.add_click_evenet_with_data(infoNode, "on_click_ball_select",{level: level, count: level_count})
                             }
                             let conSize = infoNode.getContentSize();
@@ -185,6 +200,10 @@ export default class BallListDialog extends UIDialog {
                 if(content && ball_count_all > 30){
                     let height = prefab_size.height * Math.ceil((ball_count_all / 5)) + 200
                     content.setContentSize(content.getContentSize().width, height);
+                    let scrollCom:cc.ScrollView = scrollview.getComponent(cc.ScrollView);
+                    if (scrollCom){
+                        scrollCom.scrollToTop(0.01);
+                    }
                 }
             }
         }

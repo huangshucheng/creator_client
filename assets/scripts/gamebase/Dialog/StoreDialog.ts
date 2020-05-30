@@ -1,5 +1,6 @@
+//商城界面
+
 import UIDialog from '../../framework/uibase/UIDialog';
-import EventManager from '../../framework/manager/EventManager';
 import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
@@ -9,6 +10,9 @@ import DialogManager from '../../framework/manager/DialogManager';
 import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
 import UserInfo from '../../framework/common/UserInfo';
 import { Stype } from '../../framework/protocol/Stype';
+import StringUtil from '../../framework/utils/StringUtil';
+
+let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
 const { ccclass, property } = cc._decorator;
 
@@ -142,6 +146,8 @@ export default class StoreDialog extends UIDialog {
                     if(infoNode){
                         this.set_string(this.seek_child_by_name(infoNode, "KW_TEXT_PRICE"), storeprop.propprice + "金币");
                         this.set_string(this.seek_child_by_name(infoNode, "KW_TEXT_LEVEL"), storeprop_info.level +  "级");
+                        let ballNameStr = StringUtil.format(BALL_TEXTURE_KEY_STR, storeprop_info.level);
+                        this.set_sprite_asyc(this.seek_child_by_name(infoNode, "KW_IMG_BALL_BODY"), ballNameStr);
                         this.add_click_evenet_with_data(infoNode, "on_click_product", storeprop);
                     }
                     let conSize = infoNode.getContentSize();
@@ -153,6 +159,10 @@ export default class StoreDialog extends UIDialog {
             if(content && ball_count_all > 30){
                 let height = prefab_size.height * Math.ceil((ball_count_all / 5)) + 200
                 content.setContentSize(content.getContentSize().width, height);
+                let scrollCom: cc.ScrollView = scrollview.getComponent(cc.ScrollView);
+                if (scrollCom) {
+                    scrollCom.scrollToTop(0.01);
+                }
             }
         }
     }

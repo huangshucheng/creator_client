@@ -41,6 +41,7 @@ export default class GameSceneRecvGameMsg extends UIController {
             [Cmd.ePlayerScoreRes]: this.on_event_player_score,
             [Cmd.eGameResultRes]: this.on_event_game_result,
             [Cmd.eTotalGameResultRes]: this.on_event_game_total_result,
+            [Cmd.eUserEmojRes]: this.on_event_emoj,
         }
     }
 
@@ -235,5 +236,16 @@ export default class GameSceneRecvGameMsg extends UIController {
             this.set_visible(this.view["KW_BTN_READY"],false);    
             this.set_visible(this.view["KW_BTN_BACK_LOBBY"],true);
         },2)
+    }
+
+    on_event_emoj(body:any){
+        if(body && body.status == Response.OK){
+            let emojconfig = body.emojconfig;
+            let configObj = JSON.parse(emojconfig);
+            let script = this.get_script("GameSceneShowUI")
+            if (script) {
+                script.show_emoj(Number(configObj.seatid), Number(configObj.emojconfig))
+            }
+        }
     }
 }

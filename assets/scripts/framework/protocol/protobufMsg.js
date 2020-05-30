@@ -7009,6 +7009,12 @@ $root.GameHoodleProto = (function() {
      * @property {number} eUseHoodleBallRes=52 eUseHoodleBallRes value
      * @property {number} eUserConfigReq=53 eUserConfigReq value
      * @property {number} eUserConfigRes=54 eUserConfigRes value
+     * @property {number} eUserEmojReq=55 eUserEmojReq value
+     * @property {number} eUserEmojRes=56 eUserEmojRes value
+     * @property {number} eUserPlayAgainReq=57 eUserPlayAgainReq value
+     * @property {number} eUserPlayAgainRes=58 eUserPlayAgainRes value
+     * @property {number} eUserPlayAgainAnswerReq=59 eUserPlayAgainAnswerReq value
+     * @property {number} eUserPlayAgainAnswerRes=60 eUserPlayAgainAnswerRes value
      */
     GameHoodleProto.Cmd = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -7067,6 +7073,12 @@ $root.GameHoodleProto = (function() {
         values[valuesById[52] = "eUseHoodleBallRes"] = 52;
         values[valuesById[53] = "eUserConfigReq"] = 53;
         values[valuesById[54] = "eUserConfigRes"] = 54;
+        values[valuesById[55] = "eUserEmojReq"] = 55;
+        values[valuesById[56] = "eUserEmojRes"] = 56;
+        values[valuesById[57] = "eUserPlayAgainReq"] = 57;
+        values[valuesById[58] = "eUserPlayAgainRes"] = 58;
+        values[valuesById[59] = "eUserPlayAgainAnswerReq"] = 59;
+        values[valuesById[60] = "eUserPlayAgainAnswerRes"] = 60;
         return values;
     })();
 
@@ -19235,6 +19247,1170 @@ $root.GameHoodleProto = (function() {
         };
 
         return UserConfigRes;
+    })();
+
+    GameHoodleProto.UserEmojReq = (function() {
+
+        /**
+         * Properties of a UserEmojReq.
+         * @memberof GameHoodleProto
+         * @interface IUserEmojReq
+         * @property {string} emojconfig UserEmojReq emojconfig
+         */
+
+        /**
+         * Constructs a new UserEmojReq.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserEmojReq.
+         * @implements IUserEmojReq
+         * @constructor
+         * @param {GameHoodleProto.IUserEmojReq=} [properties] Properties to set
+         */
+        function UserEmojReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserEmojReq emojconfig.
+         * @member {string} emojconfig
+         * @memberof GameHoodleProto.UserEmojReq
+         * @instance
+         */
+        UserEmojReq.prototype.emojconfig = "";
+
+        /**
+         * Creates a new UserEmojReq instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserEmojReq
+         * @static
+         * @param {GameHoodleProto.IUserEmojReq=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserEmojReq} UserEmojReq instance
+         */
+        UserEmojReq.create = function create(properties) {
+            return new UserEmojReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserEmojReq message. Does not implicitly {@link GameHoodleProto.UserEmojReq.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserEmojReq
+         * @static
+         * @param {GameHoodleProto.IUserEmojReq} message UserEmojReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserEmojReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.emojconfig);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserEmojReq message, length delimited. Does not implicitly {@link GameHoodleProto.UserEmojReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserEmojReq
+         * @static
+         * @param {GameHoodleProto.IUserEmojReq} message UserEmojReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserEmojReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserEmojReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserEmojReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserEmojReq} UserEmojReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserEmojReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserEmojReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.emojconfig = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("emojconfig"))
+                throw $util.ProtocolError("missing required 'emojconfig'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserEmojReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserEmojReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserEmojReq} UserEmojReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserEmojReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserEmojReq message.
+         * @function verify
+         * @memberof GameHoodleProto.UserEmojReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserEmojReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isString(message.emojconfig))
+                return "emojconfig: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserEmojReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserEmojReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserEmojReq} UserEmojReq
+         */
+        UserEmojReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserEmojReq)
+                return object;
+            var message = new $root.GameHoodleProto.UserEmojReq();
+            if (object.emojconfig != null)
+                message.emojconfig = String(object.emojconfig);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserEmojReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserEmojReq
+         * @static
+         * @param {GameHoodleProto.UserEmojReq} message UserEmojReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserEmojReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.emojconfig = "";
+            if (message.emojconfig != null && message.hasOwnProperty("emojconfig"))
+                object.emojconfig = message.emojconfig;
+            return object;
+        };
+
+        /**
+         * Converts this UserEmojReq to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserEmojReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserEmojReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserEmojReq;
+    })();
+
+    GameHoodleProto.UserEmojRes = (function() {
+
+        /**
+         * Properties of a UserEmojRes.
+         * @memberof GameHoodleProto
+         * @interface IUserEmojRes
+         * @property {number} status UserEmojRes status
+         * @property {string|null} [emojconfig] UserEmojRes emojconfig
+         */
+
+        /**
+         * Constructs a new UserEmojRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserEmojRes.
+         * @implements IUserEmojRes
+         * @constructor
+         * @param {GameHoodleProto.IUserEmojRes=} [properties] Properties to set
+         */
+        function UserEmojRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserEmojRes status.
+         * @member {number} status
+         * @memberof GameHoodleProto.UserEmojRes
+         * @instance
+         */
+        UserEmojRes.prototype.status = 0;
+
+        /**
+         * UserEmojRes emojconfig.
+         * @member {string} emojconfig
+         * @memberof GameHoodleProto.UserEmojRes
+         * @instance
+         */
+        UserEmojRes.prototype.emojconfig = "";
+
+        /**
+         * Creates a new UserEmojRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserEmojRes
+         * @static
+         * @param {GameHoodleProto.IUserEmojRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserEmojRes} UserEmojRes instance
+         */
+        UserEmojRes.create = function create(properties) {
+            return new UserEmojRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserEmojRes message. Does not implicitly {@link GameHoodleProto.UserEmojRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserEmojRes
+         * @static
+         * @param {GameHoodleProto.IUserEmojRes} message UserEmojRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserEmojRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.emojconfig != null && message.hasOwnProperty("emojconfig"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.emojconfig);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserEmojRes message, length delimited. Does not implicitly {@link GameHoodleProto.UserEmojRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserEmojRes
+         * @static
+         * @param {GameHoodleProto.IUserEmojRes} message UserEmojRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserEmojRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserEmojRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserEmojRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserEmojRes} UserEmojRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserEmojRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserEmojRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.emojconfig = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserEmojRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserEmojRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserEmojRes} UserEmojRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserEmojRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserEmojRes message.
+         * @function verify
+         * @memberof GameHoodleProto.UserEmojRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserEmojRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.emojconfig != null && message.hasOwnProperty("emojconfig"))
+                if (!$util.isString(message.emojconfig))
+                    return "emojconfig: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserEmojRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserEmojRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserEmojRes} UserEmojRes
+         */
+        UserEmojRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserEmojRes)
+                return object;
+            var message = new $root.GameHoodleProto.UserEmojRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.emojconfig != null)
+                message.emojconfig = String(object.emojconfig);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserEmojRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserEmojRes
+         * @static
+         * @param {GameHoodleProto.UserEmojRes} message UserEmojRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserEmojRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.emojconfig = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.emojconfig != null && message.hasOwnProperty("emojconfig"))
+                object.emojconfig = message.emojconfig;
+            return object;
+        };
+
+        /**
+         * Converts this UserEmojRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserEmojRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserEmojRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserEmojRes;
+    })();
+
+    GameHoodleProto.UserPlayAgainReq = (function() {
+
+        /**
+         * Properties of a UserPlayAgainReq.
+         * @memberof GameHoodleProto
+         * @interface IUserPlayAgainReq
+         */
+
+        /**
+         * Constructs a new UserPlayAgainReq.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserPlayAgainReq.
+         * @implements IUserPlayAgainReq
+         * @constructor
+         * @param {GameHoodleProto.IUserPlayAgainReq=} [properties] Properties to set
+         */
+        function UserPlayAgainReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new UserPlayAgainReq instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserPlayAgainReq
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainReq=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserPlayAgainReq} UserPlayAgainReq instance
+         */
+        UserPlayAgainReq.create = function create(properties) {
+            return new UserPlayAgainReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainReq message. Does not implicitly {@link GameHoodleProto.UserPlayAgainReq.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserPlayAgainReq
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainReq} message UserPlayAgainReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainReq message, length delimited. Does not implicitly {@link GameHoodleProto.UserPlayAgainReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserPlayAgainReq
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainReq} message UserPlayAgainReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserPlayAgainReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserPlayAgainReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserPlayAgainReq} UserPlayAgainReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserPlayAgainReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserPlayAgainReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserPlayAgainReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserPlayAgainReq} UserPlayAgainReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserPlayAgainReq message.
+         * @function verify
+         * @memberof GameHoodleProto.UserPlayAgainReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserPlayAgainReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserPlayAgainReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserPlayAgainReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserPlayAgainReq} UserPlayAgainReq
+         */
+        UserPlayAgainReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserPlayAgainReq)
+                return object;
+            return new $root.GameHoodleProto.UserPlayAgainReq();
+        };
+
+        /**
+         * Creates a plain object from a UserPlayAgainReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserPlayAgainReq
+         * @static
+         * @param {GameHoodleProto.UserPlayAgainReq} message UserPlayAgainReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserPlayAgainReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this UserPlayAgainReq to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserPlayAgainReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserPlayAgainReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserPlayAgainReq;
+    })();
+
+    GameHoodleProto.UserPlayAgainRes = (function() {
+
+        /**
+         * Properties of a UserPlayAgainRes.
+         * @memberof GameHoodleProto
+         * @interface IUserPlayAgainRes
+         * @property {number} status UserPlayAgainRes status
+         * @property {number|null} [responsecode] UserPlayAgainRes responsecode
+         */
+
+        /**
+         * Constructs a new UserPlayAgainRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserPlayAgainRes.
+         * @implements IUserPlayAgainRes
+         * @constructor
+         * @param {GameHoodleProto.IUserPlayAgainRes=} [properties] Properties to set
+         */
+        function UserPlayAgainRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserPlayAgainRes status.
+         * @member {number} status
+         * @memberof GameHoodleProto.UserPlayAgainRes
+         * @instance
+         */
+        UserPlayAgainRes.prototype.status = 0;
+
+        /**
+         * UserPlayAgainRes responsecode.
+         * @member {number} responsecode
+         * @memberof GameHoodleProto.UserPlayAgainRes
+         * @instance
+         */
+        UserPlayAgainRes.prototype.responsecode = 0;
+
+        /**
+         * Creates a new UserPlayAgainRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserPlayAgainRes
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserPlayAgainRes} UserPlayAgainRes instance
+         */
+        UserPlayAgainRes.create = function create(properties) {
+            return new UserPlayAgainRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainRes message. Does not implicitly {@link GameHoodleProto.UserPlayAgainRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserPlayAgainRes
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainRes} message UserPlayAgainRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.responsecode != null && message.hasOwnProperty("responsecode"))
+                writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.responsecode);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainRes message, length delimited. Does not implicitly {@link GameHoodleProto.UserPlayAgainRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserPlayAgainRes
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainRes} message UserPlayAgainRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserPlayAgainRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserPlayAgainRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserPlayAgainRes} UserPlayAgainRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserPlayAgainRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.responsecode = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserPlayAgainRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserPlayAgainRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserPlayAgainRes} UserPlayAgainRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserPlayAgainRes message.
+         * @function verify
+         * @memberof GameHoodleProto.UserPlayAgainRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserPlayAgainRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.responsecode != null && message.hasOwnProperty("responsecode"))
+                if (!$util.isInteger(message.responsecode))
+                    return "responsecode: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserPlayAgainRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserPlayAgainRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserPlayAgainRes} UserPlayAgainRes
+         */
+        UserPlayAgainRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserPlayAgainRes)
+                return object;
+            var message = new $root.GameHoodleProto.UserPlayAgainRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.responsecode != null)
+                message.responsecode = object.responsecode | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserPlayAgainRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserPlayAgainRes
+         * @static
+         * @param {GameHoodleProto.UserPlayAgainRes} message UserPlayAgainRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserPlayAgainRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.responsecode = 0;
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.responsecode != null && message.hasOwnProperty("responsecode"))
+                object.responsecode = message.responsecode;
+            return object;
+        };
+
+        /**
+         * Converts this UserPlayAgainRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserPlayAgainRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserPlayAgainRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserPlayAgainRes;
+    })();
+
+    GameHoodleProto.UserPlayAgainAnswerReq = (function() {
+
+        /**
+         * Properties of a UserPlayAgainAnswerReq.
+         * @memberof GameHoodleProto
+         * @interface IUserPlayAgainAnswerReq
+         * @property {number} responsecode UserPlayAgainAnswerReq responsecode
+         */
+
+        /**
+         * Constructs a new UserPlayAgainAnswerReq.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserPlayAgainAnswerReq.
+         * @implements IUserPlayAgainAnswerReq
+         * @constructor
+         * @param {GameHoodleProto.IUserPlayAgainAnswerReq=} [properties] Properties to set
+         */
+        function UserPlayAgainAnswerReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserPlayAgainAnswerReq responsecode.
+         * @member {number} responsecode
+         * @memberof GameHoodleProto.UserPlayAgainAnswerReq
+         * @instance
+         */
+        UserPlayAgainAnswerReq.prototype.responsecode = 0;
+
+        /**
+         * Creates a new UserPlayAgainAnswerReq instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainAnswerReq=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserPlayAgainAnswerReq} UserPlayAgainAnswerReq instance
+         */
+        UserPlayAgainAnswerReq.create = function create(properties) {
+            return new UserPlayAgainAnswerReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainAnswerReq message. Does not implicitly {@link GameHoodleProto.UserPlayAgainAnswerReq.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainAnswerReq} message UserPlayAgainAnswerReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainAnswerReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.responsecode);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainAnswerReq message, length delimited. Does not implicitly {@link GameHoodleProto.UserPlayAgainAnswerReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainAnswerReq} message UserPlayAgainAnswerReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainAnswerReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserPlayAgainAnswerReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserPlayAgainAnswerReq} UserPlayAgainAnswerReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainAnswerReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserPlayAgainAnswerReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.responsecode = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("responsecode"))
+                throw $util.ProtocolError("missing required 'responsecode'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserPlayAgainAnswerReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserPlayAgainAnswerReq} UserPlayAgainAnswerReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainAnswerReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserPlayAgainAnswerReq message.
+         * @function verify
+         * @memberof GameHoodleProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserPlayAgainAnswerReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.responsecode))
+                return "responsecode: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserPlayAgainAnswerReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserPlayAgainAnswerReq} UserPlayAgainAnswerReq
+         */
+        UserPlayAgainAnswerReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserPlayAgainAnswerReq)
+                return object;
+            var message = new $root.GameHoodleProto.UserPlayAgainAnswerReq();
+            if (object.responsecode != null)
+                message.responsecode = object.responsecode | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserPlayAgainAnswerReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {GameHoodleProto.UserPlayAgainAnswerReq} message UserPlayAgainAnswerReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserPlayAgainAnswerReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.responsecode = 0;
+            if (message.responsecode != null && message.hasOwnProperty("responsecode"))
+                object.responsecode = message.responsecode;
+            return object;
+        };
+
+        /**
+         * Converts this UserPlayAgainAnswerReq to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserPlayAgainAnswerReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserPlayAgainAnswerReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserPlayAgainAnswerReq;
+    })();
+
+    GameHoodleProto.UserPlayAgainAnswerRes = (function() {
+
+        /**
+         * Properties of a UserPlayAgainAnswerRes.
+         * @memberof GameHoodleProto
+         * @interface IUserPlayAgainAnswerRes
+         * @property {number} status UserPlayAgainAnswerRes status
+         * @property {string|null} [ansconfig] UserPlayAgainAnswerRes ansconfig
+         */
+
+        /**
+         * Constructs a new UserPlayAgainAnswerRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserPlayAgainAnswerRes.
+         * @implements IUserPlayAgainAnswerRes
+         * @constructor
+         * @param {GameHoodleProto.IUserPlayAgainAnswerRes=} [properties] Properties to set
+         */
+        function UserPlayAgainAnswerRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserPlayAgainAnswerRes status.
+         * @member {number} status
+         * @memberof GameHoodleProto.UserPlayAgainAnswerRes
+         * @instance
+         */
+        UserPlayAgainAnswerRes.prototype.status = 0;
+
+        /**
+         * UserPlayAgainAnswerRes ansconfig.
+         * @member {string} ansconfig
+         * @memberof GameHoodleProto.UserPlayAgainAnswerRes
+         * @instance
+         */
+        UserPlayAgainAnswerRes.prototype.ansconfig = "";
+
+        /**
+         * Creates a new UserPlayAgainAnswerRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainAnswerRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserPlayAgainAnswerRes} UserPlayAgainAnswerRes instance
+         */
+        UserPlayAgainAnswerRes.create = function create(properties) {
+            return new UserPlayAgainAnswerRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainAnswerRes message. Does not implicitly {@link GameHoodleProto.UserPlayAgainAnswerRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainAnswerRes} message UserPlayAgainAnswerRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainAnswerRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.ansconfig != null && message.hasOwnProperty("ansconfig"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.ansconfig);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainAnswerRes message, length delimited. Does not implicitly {@link GameHoodleProto.UserPlayAgainAnswerRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainAnswerRes} message UserPlayAgainAnswerRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainAnswerRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserPlayAgainAnswerRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserPlayAgainAnswerRes} UserPlayAgainAnswerRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainAnswerRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserPlayAgainAnswerRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.ansconfig = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserPlayAgainAnswerRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserPlayAgainAnswerRes} UserPlayAgainAnswerRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainAnswerRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserPlayAgainAnswerRes message.
+         * @function verify
+         * @memberof GameHoodleProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserPlayAgainAnswerRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.ansconfig != null && message.hasOwnProperty("ansconfig"))
+                if (!$util.isString(message.ansconfig))
+                    return "ansconfig: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserPlayAgainAnswerRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserPlayAgainAnswerRes} UserPlayAgainAnswerRes
+         */
+        UserPlayAgainAnswerRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserPlayAgainAnswerRes)
+                return object;
+            var message = new $root.GameHoodleProto.UserPlayAgainAnswerRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.ansconfig != null)
+                message.ansconfig = String(object.ansconfig);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserPlayAgainAnswerRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {GameHoodleProto.UserPlayAgainAnswerRes} message UserPlayAgainAnswerRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserPlayAgainAnswerRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.ansconfig = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.ansconfig != null && message.hasOwnProperty("ansconfig"))
+                object.ansconfig = message.ansconfig;
+            return object;
+        };
+
+        /**
+         * Converts this UserPlayAgainAnswerRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserPlayAgainAnswerRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserPlayAgainAnswerRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserPlayAgainAnswerRes;
     })();
 
     return GameHoodleProto;

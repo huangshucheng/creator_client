@@ -30,6 +30,10 @@ export default class UserInfo {
         return this._uinfo.numberid;
     }
 
+    static set_uface(uface:number){
+        this._uinfo.uface = uface;
+    }
+
     static get_uface(){
         return this._uinfo.uface;
     }

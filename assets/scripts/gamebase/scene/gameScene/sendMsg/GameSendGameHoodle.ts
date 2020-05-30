@@ -115,4 +115,22 @@ export default class GameSendGameHoodleMsg {
         }
         GameSendGameHoodleMsg.send(Cmd.eUseHoodleBallReq,body);
     }
+
+    static send_use_emoj(emojIndex:number) {
+        let body = {
+            emojconfig: String(emojIndex),
+        }
+        GameSendGameHoodleMsg.send(Cmd.eUserEmojReq, body);
+    }
+
+    static send_play_again(){
+        GameSendGameHoodleMsg.send(Cmd.eUserPlayAgainReq);
+    }
+
+    static send_play_again_answer(rescode:number){
+        let body = {
+            responsecode: rescode,
+        }
+        GameSendGameHoodleMsg.send(Cmd.eUserPlayAgainAnswerReq,body);
+    }
 }

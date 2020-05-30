@@ -67,10 +67,16 @@ export enum Cmd {
 	eStoreListRes 					= 48,
 	eBuyThingsReq 					= 49, 		// 购买
 	eBuyThingsRes 					= 50,
-	eUseHoodleBallReq 				= 51,		//使用小球
+	eUseHoodleBallReq 				= 51,		// 使用小球
 	eUseHoodleBallRes 				= 52,
-	eUserConfigReq 					= 53,  		//玩家配置
+	eUserConfigReq 					= 53,  		// 玩家配置
 	eUserConfigRes 					= 54,
+	eUserEmojReq 					= 55, 		// 玩家使用表情
+	eUserEmojRes 					= 56,
+	eUserPlayAgainReq 				= 57,		// 玩家请求再次对局（当前对局结束时的玩家）
+	eUserPlayAgainRes 				= 58,		// 玩家收到另一个对局玩家再次对局的回应
+	eUserPlayAgainAnswerReq 		= 59,		// 玩家回应：另外一个玩家的再次对局请求
+	eUserPlayAgainAnswerRes 		= 60,		// 玩家收到：另外一个玩家的再次对局的请求
 }
 
 export let CmdName:any = {
@@ -143,6 +149,11 @@ export let CmdName:any = {
 	[51] :"UseHoodleBallReq",			// 使用小球
 	[52] :"UseHoodleBallRes",
 	[53] :"UserConfigReq", 				//玩家配置
-	[54] :"UserConfigRes",
+	[54]: "UserConfigRes",
+	[55]: "UserEmojReq",
+	[56]: "UserEmojRes",
+	[57]: "UserPlayAgainReq",
+	[58]: "UserPlayAgainRes",
+	[59]: "UserPlayAgainAnswerReq",
+	[60]: "UserPlayAgainAnswerRes",
 }
-

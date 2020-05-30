@@ -7,9 +7,10 @@ import StringUtil from '../../../framework/utils/StringUtil';
 
 const {ccclass, property} = cc._decorator;
 
-let HEAD_PATH = "lobby/rectheader/1";
 let MAX_PLAYER = 4;
 let KW_PANEL_USER_INFO = "KW_PANEL_USER_INFO_"
+let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
+let EMOJ_KEY_STR = "games/emoj/face_%d.png"
 
 @ccclass
 export default class GameSceneShowUI extends UIController {
@@ -60,10 +61,10 @@ export default class GameSceneShowUI extends UIController {
             return;
         }
         this.set_visible(info_node, true);
-       this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.unick)
+        this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.unick)
         // this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.uname) //TODO 暂时先显示玩家账号
         this.set_string(info_node.getChildByName("KW_TEXT_GOLD"),infoObj.uchip) //金币
-        let ufaceImg = HEAD_PATH + infoObj.uface;
+        let ufaceImg = StringUtil.format(BALL_TEXTURE_KEY_STR, infoObj.userconfig.user_ball_level);
         this.set_sprite_asyc(info_node.getChildByName("KW_IMG_HEAD"),ufaceImg) // 头像
         console.log("hcc>>GameSceneShowUI>>show_one_user_info")
         this.set_visible(info_node.getChildByName("KW_IMG_OFFINLE"), infoObj.isoffline)
@@ -132,7 +133,30 @@ export default class GameSceneShowUI extends UIController {
         if(this.view["KW_LAYOUT_USER"]){
             this.view["KW_LAYOUT_USER"].removeAllChildren();
         }
+    }
 
+    show_emoj(seat:number,emojindex:number){
+        let parentNode = this.view["KW_LAYOUT_USER"]
+        if (parentNode) {
+            let children = parentNode.children;
+            for(let key in children){
+                let child = children[key];
+                if (child.name == KW_PANEL_USER_INFO + seat){
+                    let emojNode = this.seek_child_by_name(child, "KW_IMG_EMOJ");
+                    if (!cc.isValid(emojNode)){
+                        return
+                    }
+                    this.set_visible(emojNode,true);
+                    this.set_sprite_asyc(emojNode, StringUtil.format(EMOJ_KEY_STR, emojindex));
+                    emojNode.setScale(0);
+                    emojNode.runAction(cc.scaleTo(0.2,1).easing(cc.easeBackInOut()));                   
+                    child.stopAllActions();
+                    child.runAction(cc.sequence(cc.delayTime(1.5),cc.callFunc(function(){
+                        this.set_visible(emojNode,false);
+                    }.bind(this))))
+                }
+            }
+        }
     }
 
 }

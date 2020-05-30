@@ -61,7 +61,7 @@ export default class GameHoodleShowUI extends UIController {
             if(script){
                 script.set_ball_id(player.get_uinfo().seatid);
                 script.set_name(player.get_unick())
-                script.set_img_face(player.get_uinfo().uface)
+                script.set_img_face(player.get_user_ball_level())
                 this._hoodleManager.set_ball(player.get_uinfo().seatid, ball);
                 ball.active = false;
                 return true;

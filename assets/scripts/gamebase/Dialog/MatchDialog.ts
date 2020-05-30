@@ -1,14 +1,13 @@
+//匹配界面
 import UIDialog from '../../framework/uibase/UIDialog';
 import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
-import EventManager from '../../framework/manager/EventManager';
 import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import StringUtil from '../../framework/utils/StringUtil';
-import RoomData from '../common/RoomData';
 import { Stype } from '../../framework/protocol/Stype';
 
-//匹配界面
+let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
 const { ccclass, property } = cc._decorator;
 
@@ -26,6 +25,7 @@ export default class MatchDialog extends UIDialog {
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
+            [Cmd.eUserMatchRes]: this.on_event_match,
             [Cmd.eUserStopMatchRes]: this.on_event_match_stop,
         }
     }
@@ -69,8 +69,8 @@ export default class MatchDialog extends UIDialog {
                         if(json_object){
                             headIndex = json_object.uface;
                         }
-                        let headString = "lobby/rectheader/1" + headIndex;
-                        this.set_sprite(this.seek_child_by_name(infoNode,"KW_IMG_HEAD"),headString);
+                        let ufaceImg = StringUtil.format(BALL_TEXTURE_KEY_STR, json_object.userconfig.user_ball_level);
+                        this.set_sprite_asyc(this.seek_child_by_name(infoNode,"KW_IMG_HEAD"),ufaceImg);
                         // this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_NAME"),json_object.uname);
                         this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_NAME"),json_object.unick);
                         this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_GOLD"),json_object.uchip);
@@ -94,6 +94,46 @@ export default class MatchDialog extends UIDialog {
             let status = udata.status
             if(status == Response.OK){
                 this.close();
+            }
+        }
+    }
+
+    on_event_match(body: any){
+        let udata = body;
+        if (udata) {
+            let status = udata.status
+            if (status == Response.OK) {
+                let matchsuccess = udata.matchsuccess;
+                if (matchsuccess == true) {
+                    this.set_string(this.view["KW_TEXT_TIP"],"匹配完成!");
+                    let textNode = this.view["KW_TEXT_TIP"];
+                    if(textNode){
+                        textNode.stopAllActions();
+                    }
+                }else{
+                    this.set_string(this.view["KW_TEXT_TIP"], "请稍候，正在匹配中...");
+                    let textNode = this.view["KW_TEXT_TIP"];
+                    if(textNode){
+                        let tmpnumber = 0;
+                        let tmpStr = ".";
+                        let delay = cc.delayTime(0.5);
+                        let callfunc = cc.callFunc(function(){
+                            tmpnumber++;
+                            if(tmpnumber % 3 == 0){
+                                tmpStr = "...";
+                            }else if (tmpnumber % 3 == 1){
+                                tmpStr = ".";
+                            }else{
+                                tmpStr = "..";
+                            } 
+                            this.set_string(this.view["KW_TEXT_TIP"], "请稍候，正在匹配中" + tmpStr);
+                        }.bind(this));
+                        textNode.stopAllActions();
+                        textNode.runAction(cc.repeatForever(cc.sequence(delay, callfunc)))
+                    }
+                }
+            } else if (status == Response.NOT_YOUR_TURN) {
+                this.set_string(this.view["KW_TEXT_TIP"], "请稍等候，正在匹配中...");
             }
         }
     }

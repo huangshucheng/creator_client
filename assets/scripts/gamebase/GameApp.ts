@@ -22,7 +22,6 @@ export default class GameApp extends UIController {
     start () {
         super.start();
         this.add_script("EnablePhysics");//开启物理引擎
-        NetWork.getInstance().connect();
         cc.debug.setDisplayStats(false);
         PlatForm.printPlatForm();
 

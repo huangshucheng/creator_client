@@ -2,7 +2,6 @@ import UIController from '../../../framework/uibase/UIController';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 import PlatForm from '../../../framework/config/PlatForm';
-import { ResourceManager } from '../../../framework/manager/ResourceManager';
 
 const {ccclass, property} = cc._decorator;
 

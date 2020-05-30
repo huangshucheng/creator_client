@@ -182,7 +182,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "ba992d4b-d5fd-45a4-b4f9-359ceeeffce1"
+      "__uuid__": "bd9ba59e-574c-454b-92c3-ce3d6b6017b3"
     },
     "fileId": "47Gw9ecQZG7J1EVfSceJgs",
     "sync": false
@@ -265,7 +265,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "fe1eaac5-bed9-407d-a227-c7eab6b89fbb"
+      "__uuid__": "74bdd4b2-adc5-48fe-9c0c-0e579f36b028"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -287,7 +287,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "ba992d4b-d5fd-45a4-b4f9-359ceeeffce1"
+      "__uuid__": "bd9ba59e-574c-454b-92c3-ce3d6b6017b3"
     },
     "fileId": "c8GlczX11IX59vB7qVCWrX",
     "sync": false
@@ -358,7 +358,7 @@
     "_minSeg": 0.5,
     "_stroke": 32,
     "_texture": {
-      "__uuid__": "0bd278d0-5368-42f0-a23f-d1b72014bbca"
+      "__uuid__": "0275e94c-56a7-410f-bd1a-fc7483f7d14a"
     },
     "_color": {
       "__type__": "cc.Color",
@@ -377,7 +377,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "ba992d4b-d5fd-45a4-b4f9-359ceeeffce1"
+      "__uuid__": "bd9ba59e-574c-454b-92c3-ce3d6b6017b3"
     },
     "fileId": "afk+0NwVlLK5FoSpJC76Vf",
     "sync": false

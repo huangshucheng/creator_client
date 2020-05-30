@@ -37,6 +37,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             [Cmd.eUserMatchRes]: this.on_event_match,
             [Cmd.eUserStopMatchRes]: this.on_event_match_stop,
             [Cmd.eUserGameInfoRes]: this.on_event_ugame_info,
+            [Cmd.eUserConfigRes]: this.on_event_ugame_config_info,
         }
     }
 
@@ -170,9 +171,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
                         DialogManager.getInstance().close_dialog("MatchDialog");
                         SceneManager.getInstance().enter_scene_asyc(new GameScene())
                     },1.0)
-                }else{
-                    // DialogManager.getInstance().show_weak_hint("正在匹配中。。。。。")
                 }
+
                 let userinfo = udata.userinfo;
                 if(!matchsuccess && userinfo){
                     let matchDialog = DialogManager.getInstance().get_dialog("MatchDialog");
@@ -206,7 +206,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         if(udata){
             let status = udata.status
             if(status == Response.OK){
-                DialogManager.getInstance().show_weak_hint("取消匹配!")
+                DialogManager.getInstance().show_weak_hint("您已取消匹配!")
             }else{
                 DialogManager.getInstance().show_weak_hint("取消失败!")
             }
@@ -226,6 +226,27 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
                     lobyShowUI.show_user_info();
                 }
                 GameSendGameHoodleMsg.send_get_user_config();
+            }
+        }
+    }
+
+    on_event_ugame_config_info(body:any){
+        let udata = body;
+        console.log("on_event_ugame_info", udata)
+        if (udata) {
+            let status = udata.status
+            if (status == Response.OK) {
+                let ugame_config = JSON.parse(udata.userconfigstring);
+                if (ugame_config){
+                    let gameinfo = UserInfo.get_ugame_info();
+                    if(gameinfo){
+                        UserInfo.set_uface(ugame_config.user_ball_level)
+                        let lobyShowUI = this.get_script("LobbySceneShowUI")
+                        if (lobyShowUI) {
+                            lobyShowUI.show_user_info();
+                        }
+                    }
+                }
             }
         }
     }

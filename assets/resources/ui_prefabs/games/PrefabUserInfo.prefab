@@ -118,8 +118,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 103,
-      "height": 103
+      "width": 100,
+      "height": 100
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -166,10 +166,10 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "c05560c1-0025-4eb5-b84b-9af32f69d96d"
+      "__uuid__": "74bdd4b2-adc5-48fe-9c0c-0e579f36b028"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -304,7 +304,7 @@
       "__id__": 1
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_level": 3,
     "_components": [
       {
@@ -506,7 +506,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "KW_IMG_MASTER",
+    "_name": "KW_IMG_READY",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -525,15 +525,15 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 10,
+      "g": 248,
+      "b": 0,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 95,
-      "height": 38
+      "width": 80,
+      "height": 50.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -542,8 +542,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 58.602,
+      "x": -2.199,
+      "y": -122.352,
       "z": 0
     },
     "_scale": {
@@ -567,7 +567,7 @@
     "_id": ""
   },
   {
-    "__type__": "cc.Sprite",
+    "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -579,23 +579,21 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "df660914-2519-4f10-8844-f06890c8fe8d"
-    },
-    "_type": 0,
-    "_sizeMode": 1,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_atlas": null,
+    "_useOriginalSize": true,
+    "_string": "准备",
+    "_N$string": "准备",
+    "_fontSize": 40,
+    "_lineHeight": 40,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_batchAsBitmap": false,
+    "_N$horizontalAlign": 0,
+    "_N$verticalAlign": 0,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0,
+    "_N$cacheMode": 0,
     "_id": ""
   },
   {
@@ -606,19 +604,19 @@
     "asset": {
       "__uuid__": "99372d6c-1e46-4ab3-b805-3af425e709c8"
     },
-    "fileId": "5a+R82peBGb5BsDhIjd9j8",
+    "fileId": "20r00TYqdJKJpD0WjkEhYk",
     "sync": false
   },
   {
     "__type__": "cc.Node",
-    "_name": "KW_IMG_READY",
+    "_name": "KW_IMG_EMOJ",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
     },
     "_children": [],
     "_active": false,
-    "_level": 3,
+    "_level": 2,
     "_components": [
       {
         "__id__": 18
@@ -637,18 +635,18 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 121,
-      "height": 62
+      "width": 100,
+      "height": 100
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
-      "y": 0.5
+      "y": 1
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -8.891,
-      "y": -130,
+      "x": -0.482,
+      "y": -47.642,
       "z": 0
     },
     "_scale": {
@@ -687,10 +685,10 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "33ecb3d9-c6a1-4741-9fba-7b0f9e95b78c"
+      "__uuid__": "6112557a-5604-4245-afd9-47f78fbe4b3f"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -711,7 +709,7 @@
     "asset": {
       "__uuid__": "99372d6c-1e46-4ab3-b805-3af425e709c8"
     },
-    "fileId": "20r00TYqdJKJpD0WjkEhYk",
+    "fileId": "52lTqm6A1NALLhNZWARBKx",
     "sync": false
   },
   {
