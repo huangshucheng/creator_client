@@ -16,6 +16,7 @@ export default class MyCenterDialog extends UIDialog {
     start () {
         super.start();
         this.initUI()
+        this.set_can_touch_background(true);
     }
 
     add_button_event_listener(){

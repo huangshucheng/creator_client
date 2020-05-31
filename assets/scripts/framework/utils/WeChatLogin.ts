@@ -1,6 +1,7 @@
 import LoginSendAuthMsg from "../../gamebase/scene/LoginScene/sendMsg/LoginSendAuthMsg";
 import PlatForm from '../config/PlatForm';
 import CellManager from "../manager/CellManager";
+import DialogManager from '../manager/DialogManager';
 
 class WeChatLogin {
     //授权，获取玩家信息，在微信小游戏上已经失效
@@ -43,13 +44,15 @@ class WeChatLogin {
     //获取玩家微信信息，直接登录
     static get_wechat_user_info_and_login() {
         if (!PlatForm.isWeChatGame()) {
+            DialogManager.getInstance().close_loading_dialog();
             return;
         }
         //微信登录
         wx.login({
-            success(login_res) {
+            success(login_res:any) {
                 wx.getUserInfo({
-                    success(userinfo_res) {
+                    success(userinfo_res:any) {
+                        DialogManager.getInstance().close_loading_dialog();
                         if (login_res.code) {
                             let login_code = login_res.code;
                             //发起登录请求
@@ -65,8 +68,9 @@ class WeChatLogin {
                             console.log('hcc>>login failed！', login_res.errMsg)
                         }
                     },
-                    fail(userinfo_res) {
+                    fail(userinfo_res: any) {
                         console.log("hcc>>wx.getUserInfo>>fail", userinfo_res);
+                        DialogManager.getInstance().close_loading_dialog();
                     }
                 })
             },
@@ -140,10 +144,11 @@ class WeChatLogin {
             }
         })
 
-        WeChatLogin._auth_btn.onTap((uinfo) => {
+        WeChatLogin._auth_btn.onTap((uinfo:any) => {
             if (uinfo.userInfo) {
                 console.log("hcc>>wxLogin auth success, uinfo:" , uinfo.userInfo);
-                WeChatLogin.get_wechat_user_info_and_login()
+                DialogManager.getInstance().show_loading_dialog();
+                WeChatLogin.get_wechat_user_info_and_login();
             }else{
                 console.log("hcc>>wxLogin auth fail");
                 // wx.showToast({ title: "授权失败" });

@@ -60,12 +60,19 @@ export default class LobbySceneRecvAuthMsg extends UIController {
         if(loginType == LSDefine.LOGIN_TYPE_UNAME){
             let loginObj = Storage.get(LSDefine.USER_LOGIN_MSG)
             if (loginObj){
-                    LoginSendAuthMsg.send_uname_login(loginObj.uname, loginObj.upwd)
+                let body = {
+                    uname: String(loginObj.uname),
+                    upwd: String(loginObj.upwd),
+                }
+                CellManager.getInstance().start("CellUNameLogin", body, 5);
             }
         }else if(loginType == LSDefine.LOGIN_TYPE_GUEST){
            let guestkey = Storage.get(LSDefine.USER_LOGIN_GUEST_KEY)
            if(guestkey){
-               LoginSendAuthMsg.send_guest_login(guestkey)
+               let body = {
+                   guestkey: String(guestkey),
+               }
+               CellManager.getInstance().start("CellGuestLogin", body, 5);
            }
         }else if(loginType == LSDefine.LOGIN_TYPE_WECHAT){
             let wechatsessionkey = Storage.get(LSDefine.USER_LOGIN_WECHAT_SESSION);
@@ -157,7 +164,6 @@ export default class LobbySceneRecvAuthMsg extends UIController {
             if(status == Response.OK){
                 console.log("on_event_login_out")
                 SceneManager.getInstance().enter_scene_asyc(new LoginScene())
-                DialogManager.getInstance().show_weak_hint("退出成功!")
             }
         }
     }

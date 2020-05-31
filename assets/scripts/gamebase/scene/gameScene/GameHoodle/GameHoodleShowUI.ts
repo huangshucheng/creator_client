@@ -100,13 +100,10 @@ export default class GameHoodleShowUI extends UIController {
         if(!ball || !cc.isValid(ball)){
             return;
         }
-        let delay_1 = cc.delayTime(0.5);
-        let blink = cc.blink(1, 3);
-        let delay_2 = cc.delayTime(0.3);
-        let hide = cc.callFunc(function(){
-            ball.active = false;
-        })
-        ball.runAction(cc.sequence(delay_1 ,blink, delay_2, hide));
+        let script = ball.getComponent("HoodleBallCtrl");
+        if (script){
+            script.show_ball_shooted_ani();
+        }
     }
 
     //力度条,进度, percent:0-1

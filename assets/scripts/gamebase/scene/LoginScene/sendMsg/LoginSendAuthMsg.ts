@@ -44,7 +44,6 @@ export default class LoginSendAuthMsg {
             wechatsessionkey : wechatsessionkey,
         }
         LoginSendAuthMsg.send(Cmd.eWeChatSessionLoginReq, body);
-        console.log("hcc>>send_wechat_session_login>> " , body);
     }
 
 }

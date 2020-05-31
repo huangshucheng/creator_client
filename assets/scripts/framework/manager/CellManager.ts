@@ -12,7 +12,7 @@ class CellManager {
         return CellManager.staticInstance;
     }
 
-    public start(className:string, data:any, time:number) {
+    public start(className:string, data?:any, time?:number) {
         let cn = require(className);
         let classObject = new cn;
         classObject.start(data, time);

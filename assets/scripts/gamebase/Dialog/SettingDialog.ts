@@ -20,6 +20,7 @@ export default class SettingDialog extends UIDialog {
     start () {
         super.start();
         this.add_protocol_delegate();
+        this.set_can_touch_background(true);
 
         if (RoomData.getInstance().get_is_self_host() == false) {
             this.set_visible(this.view["KW_BTN_DESSOLVE"],false);

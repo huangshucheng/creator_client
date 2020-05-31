@@ -58,8 +58,7 @@ export default class GameApp extends UIController {
 
         DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
             if (dialogScript) {
-                let showTextStr = "网络已断开，请重连!"
-                dialogScript.set_content_text(showTextStr);
+                dialogScript.set_content_text("网络已断开，请重连!");
                 dialogScript.set_btn_callback(
                     function () { NetWork.getInstance().reconnect();},
                     function () {},

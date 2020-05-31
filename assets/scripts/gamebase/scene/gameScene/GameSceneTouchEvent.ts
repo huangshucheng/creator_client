@@ -5,6 +5,9 @@ import SceneManager from '../../../framework/manager/SceneManager';
 import LobbyScene from '../lobbyScene/LobbyScene';
 import PlatForm from '../../../framework/config/PlatForm';
 import RoomData from '../../common/RoomData';
+import Player from '../../common/Player';
+import GameScene from './GameScene';
+import UserInfo from '../../../framework/common/UserInfo';
 
 const {ccclass, property} = cc._decorator;
 
@@ -19,7 +22,8 @@ export default class GameSceneTouchEvent extends UIController {
         this.add_click_event(this.view["BTN_SETTING"],this.on_click_setting)
         this.add_click_event(this.view["BTN_SETTING_2"],this.on_click_setting2)
         this.add_click_event(this.view["KW_BTN_READY"],this.on_click_ready)
-        this.add_click_event(this.view["KW_BTN_BACK_LOBBY"],this.on_click_back_lobby)
+        this.add_click_event(this.view["KW_BTN_BACK_LOBBY"], this.on_click_back_lobby)
+        this.add_click_event(this.view["KW_BTN_PLAY_AGAIN"], this.on_click_play_again)
         this.add_click_event(this.view["KW_BTN_SHARE"], this.on_click_share)
         this.add_click_event(this.view["KW_BTN_EMOj"], this.on_click_emoj)
     }
@@ -90,6 +94,29 @@ export default class GameSceneTouchEvent extends UIController {
 
     on_click_emoj(sender: cc.Component){
         DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogEmoj", "EmojDialog");
+        //test
+        // SceneManager.getInstance().enter_scene_asyc(new GameScene())
+    }
+
+    on_click_play_again(sender: cc.Component){
+        let playerSet = RoomData.getInstance().get_all_player();
+        let uidSet = [];
+        for (let k in playerSet){
+            let player:Player = playerSet[k];
+            if (player.get_numberid() != UserInfo.get_numberid()){
+                uidSet.push(player.get_uid());
+            }
+        }
+        console.log("hcc>>on_click_play_again uids: " , uidSet);
+        DialogManager.getInstance().show_common_dialog(2, function (dialogScript: any) {
+            if (dialogScript) {
+                dialogScript.set_content_text("确定再邀请该玩家再来一次对局吗!");
+                dialogScript.set_can_touch_background(true);
+                dialogScript.set_btn_callback(
+                    function () { GameSendGameHoodleMsg.send_play_again(uidSet);},
+                )
+            }
+        });
     }
 
 }

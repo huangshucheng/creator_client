@@ -38,6 +38,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             [Cmd.eUserStopMatchRes]: this.on_event_match_stop,
             [Cmd.eUserGameInfoRes]: this.on_event_ugame_info,
             [Cmd.eUserConfigRes]: this.on_event_ugame_config_info,
+            [Cmd.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer,
+            [Cmd.eUserPlayAgainStartRes]: this.on_event_play_again_start,
         }
     }
 
@@ -77,7 +79,6 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             let status = udata.status
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new GameScene())
-                DialogManager.getInstance().show_weak_hint("房间创建成功!")
             }else{
                 DialogManager.getInstance().show_weak_hint("房间创建失败!")
             }
@@ -91,7 +92,6 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             let status = udata.status
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new GameScene())
-                DialogManager.getInstance().show_weak_hint("加入房间成功!")
             }else{
                 DialogManager.getInstance().show_weak_hint("加入房间失败!")
             }
@@ -107,7 +107,6 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
                 RoomData.getInstance().clear_room_data();
-                DialogManager.getInstance().show_weak_hint("退出房间成功!")
             }else{
                 DialogManager.getInstance().show_weak_hint("退出房间失败!")
             }
@@ -122,7 +121,6 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
                 RoomData.getInstance().clear_room_data();
-                DialogManager.getInstance().show_weak_hint("解散房间成功!")
             }else{
                 DialogManager.getInstance().show_weak_hint("解散房间失败!")
             }
@@ -151,7 +149,6 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             let status = udata.status
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new GameScene())
-                DialogManager.getInstance().show_weak_hint("返回房间成功!")
             }else{
                 DialogManager.getInstance().show_weak_hint("返回房间失败!")
             }
@@ -251,4 +248,30 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         }
     }
 
+    //收到别的玩家的对局邀请
+    on_event_play_again_answer(body:any){
+        if (body && body.status == Response.OK) {
+            let config = JSON.parse(body.ansconfig);
+            let requserunick = config.requserunick;
+            let requseruid = config.requseruid;
+            let showStr = "玩家【" + requserunick + "】邀请你再次对局，是否答应？"
+            DialogManager.getInstance().show_common_dialog(2, function (dialogScript: any) {
+                if (dialogScript) {
+                    dialogScript.set_content_text(showStr);
+                    dialogScript.set_btn_callback(
+                        function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.OK); },
+                        function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.INVALID_PARAMS); },
+                        function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.INVALID_PARAMS); },
+                    )
+                }
+            });
+        }
+    }
+
+    //再次对局
+    on_event_play_again_start(body:any){
+        if (body && body.status == Response.OK) {
+            SceneManager.getInstance().enter_scene_asyc(new GameScene());
+        }
+    }
 }

@@ -28,8 +28,14 @@ class  Player {
         return this._uinfo.unick;
     }
 
+    //座位号ID
     get_seatid(){
         return this._uinfo.seatid;
+    }
+
+    //玩家uid，服务表示ID
+    get_uid(){
+        return this._uinfo.uid;
     }
     
     set_offline(isoffline:boolean){

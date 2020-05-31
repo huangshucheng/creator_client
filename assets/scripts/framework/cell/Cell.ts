@@ -28,7 +28,7 @@ export class Cell {
     }
 
     start(data:any, stype:number, ctype:number, timeout:number):boolean{
-        if(!data || !stype || !ctype){
+        if(!stype || !ctype){
             return false;
         }
         this._startTime = new Date().getTime();

@@ -51,17 +51,24 @@ export default class GameSceneRecvAuthMsg extends UIController {
     }
 
     //重连成功-》登录游戏-》登录逻辑服务-》获取玩家信息
-    on_net_connected(body:any){
+    on_net_connected(event: cc.Event.EventCustom){
         let loginType = Storage.get(LSDefine.USER_LOGIN_TYPE)
         if(loginType == LSDefine.LOGIN_TYPE_UNAME){
             let loginObj = Storage.get(LSDefine.USER_LOGIN_MSG)
             if (loginObj){
-                    LoginSendAuthMsg.send_uname_login(loginObj.uname, loginObj.upwd)
+                let body = {
+                    uname: String(loginObj.uname),
+                    upwd: String(loginObj.upwd),
+                }
+                CellManager.getInstance().start("CellUNameLogin", body, 5)
             }
         }else if(loginType == LSDefine.LOGIN_TYPE_GUEST){
            let guestkey = Storage.get(LSDefine.USER_LOGIN_GUEST_KEY)
            if(guestkey){
-               LoginSendAuthMsg.send_guest_login(guestkey)
+               let body = {
+                   guestkey: String(guestkey),
+               }
+               CellManager.getInstance().start("CellGuestLogin", body, 5);
            }
         } else if (loginType == LSDefine.LOGIN_TYPE_WECHAT) {
             let wechatsessionkey = Storage.get(LSDefine.USER_LOGIN_WECHAT_SESSION);
@@ -69,7 +76,7 @@ export default class GameSceneRecvAuthMsg extends UIController {
             let body = {
                 wechatsessionkey: wechatsessionkey,
             }
-            CellManager.getInstance().start("CellWeChatSessionLogin", body, 5);
+            CellManager.getInstance().start("CellWeChatSessionLogin", body, 10);
         }
     }
 

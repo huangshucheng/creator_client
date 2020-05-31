@@ -157,7 +157,7 @@ export default class StoreDialog extends UIDialog {
             }
             let content:cc.Node = this.seek_child_by_name(scrollview,"content")
             if(content && ball_count_all > 30){
-                let height = prefab_size.height * Math.ceil((ball_count_all / 5)) + 200
+                let height = prefab_size.height * Math.ceil((ball_count_all / 4)) + 130
                 content.setContentSize(content.getContentSize().width, height);
                 let scrollCom: cc.ScrollView = scrollview.getComponent(cc.ScrollView);
                 if (scrollCom) {

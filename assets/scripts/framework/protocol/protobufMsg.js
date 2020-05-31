@@ -7015,6 +7015,7 @@ $root.GameHoodleProto = (function() {
      * @property {number} eUserPlayAgainRes=58 eUserPlayAgainRes value
      * @property {number} eUserPlayAgainAnswerReq=59 eUserPlayAgainAnswerReq value
      * @property {number} eUserPlayAgainAnswerRes=60 eUserPlayAgainAnswerRes value
+     * @property {number} eUserPlayAgainStartRes=61 eUserPlayAgainStartRes value
      */
     GameHoodleProto.Cmd = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -7079,6 +7080,7 @@ $root.GameHoodleProto = (function() {
         values[valuesById[58] = "eUserPlayAgainRes"] = 58;
         values[valuesById[59] = "eUserPlayAgainAnswerReq"] = 59;
         values[valuesById[60] = "eUserPlayAgainAnswerRes"] = 60;
+        values[valuesById[61] = "eUserPlayAgainStartRes"] = 61;
         return values;
     })();
 
@@ -19652,6 +19654,7 @@ $root.GameHoodleProto = (function() {
          * Properties of a UserPlayAgainReq.
          * @memberof GameHoodleProto
          * @interface IUserPlayAgainReq
+         * @property {Array.<number>|null} [otheruids] UserPlayAgainReq otheruids
          */
 
         /**
@@ -19663,11 +19666,20 @@ $root.GameHoodleProto = (function() {
          * @param {GameHoodleProto.IUserPlayAgainReq=} [properties] Properties to set
          */
         function UserPlayAgainReq(properties) {
+            this.otheruids = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+
+        /**
+         * UserPlayAgainReq otheruids.
+         * @member {Array.<number>} otheruids
+         * @memberof GameHoodleProto.UserPlayAgainReq
+         * @instance
+         */
+        UserPlayAgainReq.prototype.otheruids = $util.emptyArray;
 
         /**
          * Creates a new UserPlayAgainReq instance using the specified properties.
@@ -19693,6 +19705,12 @@ $root.GameHoodleProto = (function() {
         UserPlayAgainReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.otheruids != null && message.otheruids.length) {
+                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                for (var i = 0; i < message.otheruids.length; ++i)
+                    writer.sint32(message.otheruids[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
@@ -19727,6 +19745,16 @@ $root.GameHoodleProto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
+                case 1:
+                    if (!(message.otheruids && message.otheruids.length))
+                        message.otheruids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.otheruids.push(reader.sint32());
+                    } else
+                        message.otheruids.push(reader.sint32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -19762,6 +19790,13 @@ $root.GameHoodleProto = (function() {
         UserPlayAgainReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.otheruids != null && message.hasOwnProperty("otheruids")) {
+                if (!Array.isArray(message.otheruids))
+                    return "otheruids: array expected";
+                for (var i = 0; i < message.otheruids.length; ++i)
+                    if (!$util.isInteger(message.otheruids[i]))
+                        return "otheruids: integer[] expected";
+            }
             return null;
         };
 
@@ -19776,7 +19811,15 @@ $root.GameHoodleProto = (function() {
         UserPlayAgainReq.fromObject = function fromObject(object) {
             if (object instanceof $root.GameHoodleProto.UserPlayAgainReq)
                 return object;
-            return new $root.GameHoodleProto.UserPlayAgainReq();
+            var message = new $root.GameHoodleProto.UserPlayAgainReq();
+            if (object.otheruids) {
+                if (!Array.isArray(object.otheruids))
+                    throw TypeError(".GameHoodleProto.UserPlayAgainReq.otheruids: array expected");
+                message.otheruids = [];
+                for (var i = 0; i < object.otheruids.length; ++i)
+                    message.otheruids[i] = object.otheruids[i] | 0;
+            }
+            return message;
         };
 
         /**
@@ -19788,8 +19831,18 @@ $root.GameHoodleProto = (function() {
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        UserPlayAgainReq.toObject = function toObject() {
-            return {};
+        UserPlayAgainReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.otheruids = [];
+            if (message.otheruids && message.otheruids.length) {
+                object.otheruids = [];
+                for (var j = 0; j < message.otheruids.length; ++j)
+                    object.otheruids[j] = message.otheruids[j];
+            }
+            return object;
         };
 
         /**
@@ -20022,6 +20075,7 @@ $root.GameHoodleProto = (function() {
          * Properties of a UserPlayAgainAnswerReq.
          * @memberof GameHoodleProto
          * @interface IUserPlayAgainAnswerReq
+         * @property {number} requseruid UserPlayAgainAnswerReq requseruid
          * @property {number} responsecode UserPlayAgainAnswerReq responsecode
          */
 
@@ -20039,6 +20093,14 @@ $root.GameHoodleProto = (function() {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+
+        /**
+         * UserPlayAgainAnswerReq requseruid.
+         * @member {number} requseruid
+         * @memberof GameHoodleProto.UserPlayAgainAnswerReq
+         * @instance
+         */
+        UserPlayAgainAnswerReq.prototype.requseruid = 0;
 
         /**
          * UserPlayAgainAnswerReq responsecode.
@@ -20072,7 +20134,8 @@ $root.GameHoodleProto = (function() {
         UserPlayAgainAnswerReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.responsecode);
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.requseruid);
+            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.responsecode);
             return writer;
         };
 
@@ -20108,6 +20171,9 @@ $root.GameHoodleProto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
+                    message.requseruid = reader.sint32();
+                    break;
+                case 2:
                     message.responsecode = reader.sint32();
                     break;
                 default:
@@ -20115,6 +20181,8 @@ $root.GameHoodleProto = (function() {
                     break;
                 }
             }
+            if (!message.hasOwnProperty("requseruid"))
+                throw $util.ProtocolError("missing required 'requseruid'", { instance: message });
             if (!message.hasOwnProperty("responsecode"))
                 throw $util.ProtocolError("missing required 'responsecode'", { instance: message });
             return message;
@@ -20147,6 +20215,8 @@ $root.GameHoodleProto = (function() {
         UserPlayAgainAnswerReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (!$util.isInteger(message.requseruid))
+                return "requseruid: integer expected";
             if (!$util.isInteger(message.responsecode))
                 return "responsecode: integer expected";
             return null;
@@ -20164,6 +20234,8 @@ $root.GameHoodleProto = (function() {
             if (object instanceof $root.GameHoodleProto.UserPlayAgainAnswerReq)
                 return object;
             var message = new $root.GameHoodleProto.UserPlayAgainAnswerReq();
+            if (object.requseruid != null)
+                message.requseruid = object.requseruid | 0;
             if (object.responsecode != null)
                 message.responsecode = object.responsecode | 0;
             return message;
@@ -20182,8 +20254,12 @@ $root.GameHoodleProto = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
+                object.requseruid = 0;
                 object.responsecode = 0;
+            }
+            if (message.requseruid != null && message.hasOwnProperty("requseruid"))
+                object.requseruid = message.requseruid;
             if (message.responsecode != null && message.hasOwnProperty("responsecode"))
                 object.responsecode = message.responsecode;
             return object;
@@ -20411,6 +20487,193 @@ $root.GameHoodleProto = (function() {
         };
 
         return UserPlayAgainAnswerRes;
+    })();
+
+    GameHoodleProto.UserPlayAgainStartRes = (function() {
+
+        /**
+         * Properties of a UserPlayAgainStartRes.
+         * @memberof GameHoodleProto
+         * @interface IUserPlayAgainStartRes
+         * @property {number} status UserPlayAgainStartRes status
+         */
+
+        /**
+         * Constructs a new UserPlayAgainStartRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a UserPlayAgainStartRes.
+         * @implements IUserPlayAgainStartRes
+         * @constructor
+         * @param {GameHoodleProto.IUserPlayAgainStartRes=} [properties] Properties to set
+         */
+        function UserPlayAgainStartRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserPlayAgainStartRes status.
+         * @member {number} status
+         * @memberof GameHoodleProto.UserPlayAgainStartRes
+         * @instance
+         */
+        UserPlayAgainStartRes.prototype.status = 0;
+
+        /**
+         * Creates a new UserPlayAgainStartRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.UserPlayAgainStartRes
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainStartRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.UserPlayAgainStartRes} UserPlayAgainStartRes instance
+         */
+        UserPlayAgainStartRes.create = function create(properties) {
+            return new UserPlayAgainStartRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainStartRes message. Does not implicitly {@link GameHoodleProto.UserPlayAgainStartRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.UserPlayAgainStartRes
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainStartRes} message UserPlayAgainStartRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainStartRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainStartRes message, length delimited. Does not implicitly {@link GameHoodleProto.UserPlayAgainStartRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.UserPlayAgainStartRes
+         * @static
+         * @param {GameHoodleProto.IUserPlayAgainStartRes} message UserPlayAgainStartRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainStartRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserPlayAgainStartRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.UserPlayAgainStartRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.UserPlayAgainStartRes} UserPlayAgainStartRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainStartRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.UserPlayAgainStartRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserPlayAgainStartRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.UserPlayAgainStartRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.UserPlayAgainStartRes} UserPlayAgainStartRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainStartRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserPlayAgainStartRes message.
+         * @function verify
+         * @memberof GameHoodleProto.UserPlayAgainStartRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserPlayAgainStartRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserPlayAgainStartRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.UserPlayAgainStartRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.UserPlayAgainStartRes} UserPlayAgainStartRes
+         */
+        UserPlayAgainStartRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.UserPlayAgainStartRes)
+                return object;
+            var message = new $root.GameHoodleProto.UserPlayAgainStartRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserPlayAgainStartRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.UserPlayAgainStartRes
+         * @static
+         * @param {GameHoodleProto.UserPlayAgainStartRes} message UserPlayAgainStartRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserPlayAgainStartRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this UserPlayAgainStartRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.UserPlayAgainStartRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserPlayAgainStartRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserPlayAgainStartRes;
     })();
 
     return GameHoodleProto;

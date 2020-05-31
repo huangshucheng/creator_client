@@ -23,6 +23,7 @@ export default class JoinRoomDialog extends UIDialog {
         super.start();
         this.initUI();
         this.add_protocol_delegate();
+        this.set_can_touch_background(true);
     }
 
     add_cmd_handler_map() {

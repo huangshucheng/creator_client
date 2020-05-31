@@ -7,6 +7,7 @@ import GameAppConfig from '../../../framework/config/GameAppConfig';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
+import CellManager from '../../../framework/manager/CellManager';
 
 const {ccclass, property} = cc._decorator;
 
@@ -42,19 +43,16 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_set(sender:cc.Component) {
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogMyCenter","MyCenterDialog")
-        // LobbySendGameHoodleMsg.send_update_uball_info(1,7);--test compose
     }
 
     on_click_create_room(sender:cc.Component){
         let ruleStr = JSON.stringify(GameHoodleConfig.BOX_GAME_RULE);
-        LobbySendGameHoodleMsg.send_create_room(ruleStr);
+        let body = { gamerule: ruleStr };
+        CellManager.getInstance().start("CellCreateRoom", body, 5);
         LobbySendGameHoodleMsg.send_get_room_status();
     }
 
     on_click_login_logic(sender:cc.Component){
-        DialogManager.getInstance().show_weak_hint("你好你好，在干啥呢？？？？啊啊大打发士大夫阿道夫")
-        DialogManager.getInstance().show_weak_hint("你好你好")
-        
     }
 
     on_click_join_room(sender: cc.Component){
@@ -66,12 +64,13 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_back_room(sender: cc.Component){
-        LobbySendGameHoodleMsg.send_back_room();
         LobbySendGameHoodleMsg.send_get_room_status();
+        CellManager.getInstance().start("CellBackRoom", null, 5);
     }
 
     on_click_match_room(sender: cc.Component){
-        LobbySendGameHoodleMsg.send_user_match();
+        let body = {zoomid : 0}
+        CellManager.getInstance().start("CellMatchRoom", body, 5);
     }
     
     on_click_match_stop(sender: cc.Component){
@@ -89,6 +88,7 @@ export default class LobbySceneTouchEvent extends UIController {
         // DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogLoading", "LoadingDialog");
         // DialogManager.getInstance().close_dialog("LoadingDialog");
         // DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogVideoAd", "VideoAdDialog");
+        // DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogGameStart", "GameStartDialog");
     }
 
     on_click_ball_list(sender:cc.Component){

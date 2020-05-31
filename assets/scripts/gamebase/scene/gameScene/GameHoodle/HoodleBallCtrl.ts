@@ -10,6 +10,7 @@ import StringUtil from "../../../../framework/utils/StringUtil";
 let SHOOT_DISTANCE          = 380;
 let SHOOT_POWER             = 50.0;
 let BALL_STOP_SPEED_SQR     = 100;  //判定小球停下来的速度平方
+let EMOJ_KEY_STR = "games/emoj/face_%d.png";
 
 const {ccclass, property} = cc._decorator;
 
@@ -107,6 +108,33 @@ export default class HoodleBallCtrl extends UIController {
 
     public get_ball_state(){
         return this._ball_state;
+    }
+
+    //显示表情
+    public show_ball_emoj(emojindex:number){
+        let emojNode = this.view["KW_IMG_EMOJ"];
+        if (!cc.isValid(emojNode)) {
+            return
+        }
+        this.set_visible(emojNode, true);
+        this.set_sprite_asyc(emojNode, StringUtil.format(EMOJ_KEY_STR, emojindex));
+        emojNode.stopAllActions();
+        emojNode.setScale(0);
+        emojNode.runAction(cc.scaleTo(0.2, 1).easing(cc.easeBackInOut()));
+        emojNode.runAction(cc.sequence(cc.delayTime(1.5), cc.callFunc(function () {
+            this.set_visible(emojNode, false);
+        }.bind(this))));
+    }
+
+    public show_ball_shooted_ani(){
+        let delay_1 = cc.delayTime(0.5);
+        let blink = cc.blink(1, 3);
+        let delay_2 = cc.delayTime(0.3);
+        let hide = cc.callFunc(function () {
+            let name_str = this._ball_name + "(失败)";
+            this.set_string(this.view["KW_TEXT_NAME"], name_str);
+        }.bind(this));
+        this.node.runAction(cc.sequence(delay_1, blink, delay_2, hide));
     }
 
     ////////////////////////////////碰撞事件

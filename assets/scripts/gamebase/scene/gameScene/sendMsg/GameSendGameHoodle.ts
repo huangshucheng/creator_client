@@ -123,12 +123,16 @@ export default class GameSendGameHoodleMsg {
         GameSendGameHoodleMsg.send(Cmd.eUserEmojReq, body);
     }
 
-    static send_play_again(){
-        GameSendGameHoodleMsg.send(Cmd.eUserPlayAgainReq);
+    static send_play_again(uids:Array<number>){
+        let body = {
+            otheruids: uids,
+        }
+        GameSendGameHoodleMsg.send(Cmd.eUserPlayAgainReq,body);
     }
 
-    static send_play_again_answer(rescode:number){
+    static send_play_again_answer(requseruid:number,rescode:number){
         let body = {
+            requseruid: requseruid,
             responsecode: rescode,
         }
         GameSendGameHoodleMsg.send(Cmd.eUserPlayAgainAnswerReq,body);

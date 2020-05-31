@@ -113,6 +113,7 @@ export default class DialogManager{
         if(!btnNum){
             btnNum = 1;
         }
+        this.close_dialog("CommonDialog");
         this.show_dialog_asyc("ui_prefabs/dialog/DialogCommon", "CommonDialog",function (resNode:any) {
            if(resNode && cc.isValid(resNode)){
                 let component =  resNode.getComponent("CommonDialog")
@@ -128,9 +129,7 @@ export default class DialogManager{
 
     show_loading_dialog(){
         this.close_dialog("LoadingDialog");
-        this.show_dialog_asyc("ui_prefabs/dialog/DialogLoading", "LoadingDialog",function(resNode:any){
-            console.log("hcc>>show_loading_dialog");
-        })
+        this.show_dialog_asyc("ui_prefabs/dialog/DialogLoading", "LoadingDialog")
     }
 
     close_loading_dialog(){

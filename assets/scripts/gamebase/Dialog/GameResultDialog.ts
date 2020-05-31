@@ -15,7 +15,6 @@ export default class GameResultDialog extends UIDialog {
 
     add_button_event_listener(){
         this.add_click_event(this.view["KW_BTN_CLOSE"],this.on_click_close.bind(this))
-        this.add_click_event(this.view["KW_PANEL_MASK"],this.on_click_continue.bind(this))
     }
 
     /////////
@@ -46,10 +45,6 @@ export default class GameResultDialog extends UIDialog {
 
     on_click_continue(sender: cc.Component){
         this.close();
-    }
-
-    onKeyDown(event: cc.Event) {
-        super.onKeyDown(event);
     }
 
 }

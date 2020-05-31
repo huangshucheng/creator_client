@@ -77,6 +77,7 @@ export enum Cmd {
 	eUserPlayAgainRes 				= 58,		// 玩家收到另一个对局玩家再次对局的回应
 	eUserPlayAgainAnswerReq 		= 59,		// 玩家回应：另外一个玩家的再次对局请求
 	eUserPlayAgainAnswerRes 		= 60,		// 玩家收到：另外一个玩家的再次对局的请求
+	eUserPlayAgainStartRes 			= 61, 		// 玩家再次对局，开始游戏
 }
 
 export let CmdName:any = {
@@ -156,4 +157,5 @@ export let CmdName:any = {
 	[58]: "UserPlayAgainRes",
 	[59]: "UserPlayAgainAnswerReq",
 	[60]: "UserPlayAgainAnswerRes",
+	[61]: "UserPlayAgainStartRes",
 }

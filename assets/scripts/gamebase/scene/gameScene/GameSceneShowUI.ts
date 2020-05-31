@@ -4,6 +4,7 @@ import RoomData from '../../common/RoomData';
 import UIFunction from '../../../framework/common/UIFunciton';
 import { ResourceManager } from '../../../framework/manager/ResourceManager';
 import StringUtil from '../../../framework/utils/StringUtil';
+import DialogManager from '../../../framework/manager/DialogManager';
 
 const {ccclass, property} = cc._decorator;
 
@@ -150,13 +151,16 @@ export default class GameSceneShowUI extends UIController {
                     this.set_sprite_asyc(emojNode, StringUtil.format(EMOJ_KEY_STR, emojindex));
                     emojNode.setScale(0);
                     emojNode.runAction(cc.scaleTo(0.2,1).easing(cc.easeBackInOut()));                   
-                    child.stopAllActions();
-                    child.runAction(cc.sequence(cc.delayTime(1.5),cc.callFunc(function(){
+                    emojNode.runAction(cc.sequence(cc.delayTime(1.5),cc.callFunc(function(){
                         this.set_visible(emojNode,false);
                     }.bind(this))))
                 }
             }
         }
+    }
+
+    show_game_start_ani(){
+        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogGameStart", "GameStartDialog");
     }
 
 }

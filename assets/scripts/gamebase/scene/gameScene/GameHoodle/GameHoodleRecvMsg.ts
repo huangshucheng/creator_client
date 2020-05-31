@@ -6,7 +6,7 @@ import Response from '../../../../framework/protocol/Response';
 import RoomData from '../../../common/RoomData';
 import { PlayerPower } from '../../../common/State';
 import HoodleBallManager from './HoodleBallManager';
-import DialogManager from "../../../../framework/manager/DialogManager";
+import DialogManager from '../../../../framework/manager/DialogManager';
 import Player from '../../../common/Player';
 import { Stype } from '../../../../framework/protocol/Stype';
 
@@ -35,6 +35,7 @@ export default class GameHoodleRecvMsg extends UIController {
             [Cmd.ePlayerIsShootedRes]: this.on_event_player_is_shooted,
             [Cmd.eGameResultRes]: this.on_event_game_result,
             [Cmd.eTotalGameResultRes]: this.on_event_game_total_result,
+            [Cmd.eUserEmojRes]: this.on_event_emoj,
         }
     }
 
@@ -84,8 +85,11 @@ export default class GameHoodleRecvMsg extends UIController {
                 let info = powers[key];
                 let seatid = info.seatid;
                 let power = info.power;
+                let selfSeatid = RoomData.getInstance().get_self_seatid();
+                if (seatid == selfSeatid  && power == PlayerPower.canPlay && GameHoodleData.getInstance().get_power(selfSeatid) == PlayerPower.canNotPlay){
+                    DialogManager.getInstance().show_weak_hint("轮到你操作了!");
+                }
                 GameHoodleData.getInstance().set_power(seatid, power);
-
                 let ball: cc.Node = HoodleBallManager.getInstance().get_ball(seatid);
                 if(ball){
                     let script = ball.getComponent("HoodleBallCtrl");
@@ -93,8 +97,6 @@ export default class GameHoodleRecvMsg extends UIController {
                         script.set_shoot_power_ui(power);
                         let src_seatid = power == PlayerPower.canPlay ? seatid : -1;
                         script.set_src_shoot_seatid(src_seatid);
-                        // let player:Player = RoomData.getInstance().get_player(seatid);
-                        // console.log("hcc>>seatid: " , seatid , " ,name: ",player.get_unick(), ", canplay: " , power)
                     }
                 }
             }
@@ -147,8 +149,6 @@ export default class GameHoodleRecvMsg extends UIController {
 
     //玩家被击中
     on_event_player_is_shooted(body: any){
-        // let showUI = this.get_script("GameHoodleShowUI");
-        console.log("hcc>>on_event_player_is_shooted" , body;);
         let udata = body;
         if(udata){
             let status = udata.status;
@@ -205,8 +205,6 @@ export default class GameHoodleRecvMsg extends UIController {
 
     //大结算
     on_event_game_total_result(body: any){
-        // let showUI = this.get_script("GameHoodleShowUI");
-        console.log("hcc>>on_event_game_total_result" , body);
         let udata = body;
         let show_text = "";
         if(udata){
@@ -220,28 +218,16 @@ export default class GameHoodleRecvMsg extends UIController {
                 let gold = Number(goldInfo.gold);
                 let player: Player = RoomData.getInstance().get_player(seatid);
                 if(player){
-                    // let uname = player.get_uname();
                     let uname = player.get_unick();
+                    if (seatid == RoomData.getInstance().get_self_seatid()){
+                        uname = uname + "(我)"
+                    }
                     let score_str = score > 0 ? ("+" + score) : score;
                     let gold_str = gold > 0 ? ("+" + gold) : gold;
                     show_text = show_text + uname + ": 分数 " + score_str + "   " + "金币:" + gold_str + "\n";
                 }
                 
             }
-
-            // for(let k in scores){
-            //     let info = scores[k];
-            //     let gold = golds[k];
-            //     let seatid = info.seatid;
-            //     let score = Number(info.score);
-            //     let player: Player = RoomData.getInstance().get_player(seatid);
-            //     if(player){
-            //         let uname = player.get_uname();
-            //         let score_str = score > 0 ? ("+" + score) : score
-            //         let gold_str = 
-            //         show_text = show_text + uname + ": 分数 " + score_str + "   " + "金币:" +  + "\n";
-            //     }
-            // }
         }
         let _this = this;
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogGameResult","GameResultDialog",function(resNode:cc.Node){
@@ -255,10 +241,24 @@ export default class GameHoodleRecvMsg extends UIController {
                 resNode.active = false;
                 _this.scheduleOnce(function(){
                     resNode.active = true;
-                },2.5)
+                },1.5)
             }
         })
-
     }
 
+    on_event_emoj(body: any){
+        if (body && body.status == Response.OK) {
+            let emojconfig = body.emojconfig;
+            let configObj = JSON.parse(emojconfig);
+            let seatid = Number(configObj.seatid);
+            let emojindex = Number(configObj.emojconfig);
+            let ball: cc.Node = HoodleBallManager.getInstance().get_ball(seatid);
+            if (ball && cc.isValid(ball)) {
+                let script = ball.getComponent("HoodleBallCtrl");
+                if (script) {
+                    script.show_ball_emoj(emojindex);
+                }
+            }
+        }
+    }
 }

@@ -5,6 +5,8 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class UIDialog extends UIController {
 
+    _canTouchBackground:boolean = false;
+
     onLoad () {
         super.onLoad()
         if (cc.sys.os === cc.sys.OS_WINDOWS) {
@@ -14,6 +16,7 @@ export default class UIDialog extends UIController {
 
     start () {
         super.start();
+        this.add_click_event(this.view["KW_PANEL_MASK"],this.on_click_background.bind(this))
     }
 
     close() {
@@ -25,11 +28,21 @@ export default class UIDialog extends UIController {
 
     onKeyDown(event) {
         var macro = cc.macro;
-        console.log(event.keyCode)
         switch (event.keyCode) {
             case macro.KEY.escape:
                 this.close()
                 break;
         }
+    }
+
+    set_can_touch_background(canTouch:boolean){
+        this._canTouchBackground = canTouch;
+    }
+
+    on_click_background(sender: cc.Component){
+        if(this._canTouchBackground == false){
+            return;
+        }
+        this.close();
     }
 }

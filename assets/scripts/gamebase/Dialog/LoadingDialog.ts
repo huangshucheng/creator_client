@@ -1,5 +1,4 @@
 import UIDialog from '../../framework/uibase/UIDialog';
-import DialogManager from '../../framework/manager/DialogManager';
 
 const { ccclass, property } = cc._decorator;
 
@@ -27,6 +26,5 @@ export default class LoadingDialog extends UIDialog {
     }
 
     on_click_close(sender: cc.Component){
-        // this.close();
     }
 }

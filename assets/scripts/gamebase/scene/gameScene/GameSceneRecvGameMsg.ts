@@ -9,6 +9,7 @@ import { UserState } from '../../common/State';
 import Player from '../../common/Player';
 import { Stype } from '../../../framework/protocol/Stype';
 import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
+import GameScene from './GameScene';
 
 const {ccclass, property} = cc._decorator;
 
@@ -42,6 +43,9 @@ export default class GameSceneRecvGameMsg extends UIController {
             [Cmd.eGameResultRes]: this.on_event_game_result,
             [Cmd.eTotalGameResultRes]: this.on_event_game_total_result,
             [Cmd.eUserEmojRes]: this.on_event_emoj,
+            [Cmd.eUserPlayAgainRes]: this.on_event_play_again,
+            [Cmd.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer,
+            [Cmd.eUserPlayAgainStartRes]: this.on_event_play_again_start,
         }
     }
 
@@ -80,9 +84,7 @@ export default class GameSceneRecvGameMsg extends UIController {
         if(udata){
             let status = udata.status
             if(status == Response.OK){
-                DialogManager.getInstance().show_weak_hint("退出房间成功!")
             }else{
-                DialogManager.getInstance().show_weak_hint("退出房间失败!")
             }
         }
     }
@@ -92,7 +94,6 @@ export default class GameSceneRecvGameMsg extends UIController {
         if(udata){
             let status = udata.status
             if(status == Response.OK){
-                DialogManager.getInstance().show_weak_hint("进入游戏成功!")
             }else{
                 DialogManager.getInstance().show_weak_hint("进入游戏失败!")
             }
@@ -168,8 +169,29 @@ export default class GameSceneRecvGameMsg extends UIController {
                 let score = score_info.score;
                 let player:Player = RoomData.getInstance().get_player(score_info.seatid);
                 if(player){
-                    let score_str = player.get_unick() + ": " + score + "\n";
-                    total_str = total_str + score_str;
+                    if(score_info.seatid == RoomData.getInstance().get_self_seatid()){
+                        let score_str = "我方: " + score;
+                        let flag = false;
+                        if(total_str == ""){
+                            flag = true;
+                        }
+                        if(flag){
+                            total_str = total_str + score_str + "\n";
+                        }else{
+                            total_str = total_str + score_str;
+                        }
+                    }else{
+                        let score_str = "对方: " + score;
+                        let flag = false;
+                        if(total_str == ""){
+                            flag = true;
+                        }
+                        if (flag) {
+                            total_str = total_str + score_str + "\n";
+                        } else {
+                            total_str = total_str + score_str;
+                        }
+                    }
                 }
             }
             console.log("hcc>>score_str: " , total_str);
@@ -210,12 +232,10 @@ export default class GameSceneRecvGameMsg extends UIController {
     }
 
     on_event_game_start(body: any){
-        let udata =  body;
-        console.log("on_event_game_start" , udata)
-        DialogManager.getInstance().show_weak_hint("游戏开始!")
         let script = this.get_script("GameSceneShowUI")
         if(script){
-            script.clear_table()
+            script.clear_table();
+            script.show_game_start_ani();
         }
     }
 
@@ -225,17 +245,20 @@ export default class GameSceneRecvGameMsg extends UIController {
     }
 
     on_event_game_result(body: any){
-        this.set_visible(this.view["KW_BTN_READY"],false);    
+        this.set_visible(this.view["KW_BTN_READY"],false);   
         this.scheduleOnce(function(){
-            this.set_visible(this.view["KW_BTN_READY"],true);    
-        },2)
+            if (RoomData.getInstance().get_play_count() != RoomData.getInstance().get_total_play_count()){
+                this.set_visible(this.view["KW_BTN_READY"],true);    
+            }
+        },1)
     }
 
     on_event_game_total_result(body: any){
         this.scheduleOnce(function(){
-            this.set_visible(this.view["KW_BTN_READY"],false);    
-            this.set_visible(this.view["KW_BTN_BACK_LOBBY"],true);
-        },2)
+            this.set_visible(this.view["KW_BTN_READY"],false);
+            this.set_visible(this.view["KW_BTN_BACK_LOBBY"], true);
+            this.set_visible(this.view["KW_BTN_PLAY_AGAIN"], true);
+        },1.5)
     }
 
     on_event_emoj(body:any){
@@ -246,6 +269,59 @@ export default class GameSceneRecvGameMsg extends UIController {
             if (script) {
                 script.show_emoj(Number(configObj.seatid), Number(configObj.emojconfig))
             }
+        }
+    }
+
+    //请求再次对局,返回
+    on_event_play_again(body:any){
+        if(body && body.status == Response.OK){
+            if (body.responsecode == Response.OK){
+                //玩家答应了，再次对局
+                DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
+                    if (dialogScript) {
+                        dialogScript.set_content_text("邀请玩家成功！");
+                        dialogScript.set_can_touch_background(true);
+                    }
+                });
+            }else{
+                if(body.responsecode){
+                    DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
+                        if (dialogScript) {
+                            dialogScript.set_content_text("玩家拒绝了您的邀请！");
+                            dialogScript.set_can_touch_background(true);
+                        }
+                    });
+                }else{
+                    DialogManager.getInstance().show_weak_hint("请稍等，正在等待玩家回应。。。");
+                }
+            }
+        }
+    }
+
+    //收到别的玩家的对局邀请
+    on_event_play_again_answer(body:any){
+        if (body && body.status == Response.OK) {
+            let config = JSON.parse(body.ansconfig);
+            let requserunick = config.requserunick;
+            let requseruid = config.requseruid;
+            let showStr = "玩家【" + requserunick + "】邀请你再次对局，是否答应？"
+            DialogManager.getInstance().show_common_dialog(2, function (dialogScript: any) {
+                if (dialogScript) {
+                    dialogScript.set_content_text(showStr);
+                    dialogScript.set_btn_callback(
+                        function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.OK); },
+                        function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.INVALID_PARAMS); },
+                        function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.INVALID_PARAMS); },
+                    )
+                }
+            });
+        }
+    }
+    
+    //再次对局
+    on_event_play_again_start(body: any) {
+        if (body && body.status == Response.OK) {
+            SceneManager.getInstance().enter_scene_asyc(new GameScene());
         }
     }
 }
