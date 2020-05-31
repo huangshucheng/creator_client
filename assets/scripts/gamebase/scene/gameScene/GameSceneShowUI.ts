@@ -149,6 +149,7 @@ export default class GameSceneShowUI extends UIController {
                     }
                     this.set_visible(emojNode,true);
                     this.set_sprite_asyc(emojNode, StringUtil.format(EMOJ_KEY_STR, emojindex));
+                    emojNode.stopAllActions();
                     emojNode.setScale(0);
                     emojNode.runAction(cc.scaleTo(0.2,1).easing(cc.easeBackInOut()));                   
                     emojNode.runAction(cc.sequence(cc.delayTime(1.5),cc.callFunc(function(){
