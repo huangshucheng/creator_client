@@ -295,6 +295,8 @@ export default class GameSceneRecvGameMsg extends UIController {
                     DialogManager.getInstance().show_weak_hint("请稍等，正在等待玩家回应。。。");
                 }
             }
+        }else{
+            DialogManager.getInstance().show_weak_hint("对不起，对方暂时还不能被邀请!");
         }
     }
 
@@ -315,6 +317,8 @@ export default class GameSceneRecvGameMsg extends UIController {
                     )
                 }
             });
+        }else{
+            DialogManager.getInstance().show_weak_hint("对不起，您当前还不能被邀请!");
         }
     }
     

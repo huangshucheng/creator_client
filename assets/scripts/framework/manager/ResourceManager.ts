@@ -11,7 +11,7 @@ export class ResourceManager {
 
     //载入整个文件夹
     loadResDirAsyc(url: string, progressCallback?: Function, completeCallback?: Function){
-        cc.loader.loadResDir(url, function(completedCount, totalCount, item) {
+        cc.loader.loadResDir(url, function(completedCount:number, totalCount:number, item:any) {
             if (progressCallback) {
                 progressCallback(completedCount, totalCount, item);
             }

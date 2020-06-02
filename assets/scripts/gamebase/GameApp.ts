@@ -49,10 +49,8 @@ export default class GameApp extends UIController {
     }
 
     on_net_closed(event:cc.Event.EventCustom){
-        console.log("GameApp hcc>>>on_net_closed")
         let commonDialog = DialogManager.getInstance().get_dialog("CommonDialog");
         if (commonDialog && cc.isValid(commonDialog)){
-            console.log("GameApp hcc>>>commonDialog is exist!!")
             DialogManager.getInstance().close_dialog("CommonDialog");
         }
 

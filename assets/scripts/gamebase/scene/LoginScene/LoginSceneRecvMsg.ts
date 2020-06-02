@@ -53,16 +53,12 @@ export default class LoginSceneRecvMsg extends UIController {
     }
 
     on_net_connected(event:cc.Event.EventCustom){
-        Log.info("LoginSceneRecvMsg hcc>>>on_net_connected")
     }
 
     on_net_closed(event:cc.Event.EventCustom){
-        Log.info("LoginSceneRecvMsg hcc>>>on_net_closed")
     }
 
     on_net_error(event:cc.Event.EventCustom){
-        Log.info("LoginSceneRecvMsg hcc>>>on_net_error")
-
     }
 
     on_event_guest_login(body:any){

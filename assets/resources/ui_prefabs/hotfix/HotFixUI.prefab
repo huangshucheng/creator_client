@@ -640,7 +640,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 291.67,
-      "height": 50.4
+      "height": 75.6
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -650,7 +650,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -65.613,
+      "y": -140.079,
       "z": 0
     },
     "_scale": {
@@ -690,7 +690,7 @@
     "_string": "资源加载中...",
     "_N$string": "资源加载中...",
     "_fontSize": 50,
-    "_lineHeight": 40,
+    "_lineHeight": 60,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,

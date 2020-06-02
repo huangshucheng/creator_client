@@ -8,7 +8,6 @@ import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
 import EventDefine from '../../../framework/config/EventDefine';
-import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
 import LobbySendGameHoodleMsg from '../lobbyScene/sendMsg/LobbySendGameHoodle';
 import { Stype } from '../../../framework/protocol/Stype';
 import CellManager from '../../../framework/manager/CellManager';

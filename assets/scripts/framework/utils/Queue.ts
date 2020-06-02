@@ -1,10 +1,12 @@
 export default class Queue<T> {
     _dataStore: T[] = [];    //初始化为空
 
+    //往后面加
     enqueue(element: T) {
         this._dataStore.push(element);
     }
 
+    //删除第一个
     dequeue() {
         if (this.empty()) {
         } else {

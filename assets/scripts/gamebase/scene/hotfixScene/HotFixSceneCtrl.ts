@@ -1,8 +1,5 @@
 import UIController from '../../../framework/uibase/UIController';
-import Log from '../../../framework/utils/Log';
-import UIFunction from '../../../framework/common/UIFunciton';
 import { ResourceManager } from '../../../framework/manager/ResourceManager';
-import StringUtil from '../../../framework/utils/StringUtil';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LoginScene from '../LoginScene/LoginScene';
 import HotUpdateNew from '../../../framework/hotfix/HotUpdateNew';
@@ -17,23 +14,26 @@ export default class HotFixSceneCtrl extends UIController {
 
     _progressbar: cc.ProgressBar = null;
 
-    _urlArray: string[] = [ 
-        "ui_prefabs/login/",
-        "ui_prefabs/lobby/",
-        "ui_prefabs/hotfix/",
-        "ui_prefabs/games/",
-        "ui_prefabs/dialog/",
-        "textures/games/",
-        "textures/lobby/",
-        "textures/dialog/",
-        "textures/shareimg/",
+    // _urlArray: string[] = [ 
+    //     "ui_prefabs/login/",
+    //     "ui_prefabs/lobby/",
+    //     "ui_prefabs/hotfix/",
+    //     "ui_prefabs/games/",
+    //     "ui_prefabs/dialog/",
+    //     "textures/games/",
+    //     "textures/lobby/",
+    //     "textures/dialog/",
+    //     "textures/shareimg/",
+    //     "mainfest/",
+    // ]
+
+    _urlArray: string[] = [
+        "ui_prefabs/",
+        "textures/",
         "mainfest/",
     ]
 
-    _completedFlag:any = []
     _tryTimes = 0;
-
-    _resourceMap: number[] = []
 
     onLoad () {
         super.onLoad()
@@ -98,8 +98,16 @@ export default class HotFixSceneCtrl extends UIController {
     }
 
     startPreloadRes(){
-        for (let index = 0; index < this._urlArray.length; index++) {
-            this.preloadRes(this._urlArray[index])
+        let resArrayLen = this._urlArray.length;
+        if (resArrayLen > 0){
+            let firstResStr = this._urlArray[0];
+            console.log("hcc>>loadRes: ", firstResStr);
+            this.preloadRes(firstResStr,function() {
+                this._urlArray.shift();
+                this.startPreloadRes();
+            }.bind(this));
+        }else{
+            this.enter_login_scene();
         }
     }
     
@@ -111,40 +119,38 @@ export default class HotFixSceneCtrl extends UIController {
         }
     }
 
-    preloadRes(url: string) {
+    preloadRes(url: string, successfunc:Function) {
         let _this = this
         let progressNumber = 0;
-        ResourceManager.getInstance().loadResDirAsyc(url, function (completedCount, totalCount, item) {
-            if(totalCount != 0){
-                progressNumber = completedCount / totalCount;
-                _this.setProgress(progressNumber);
-                let num = Math.max(1, progressNumber * 100)
-                let pstr = `${StringUtil.format("%2d", num)}%`
-                let tipstr  = "正在载入资源中... " + completedCount + "/" + totalCount
-                // _this.set_string(_this.view["KW_TEXT_PERCENT"],pstr)
-                _this.set_string(_this.view["KW_TEXT_PROGRESS_TIP"],tipstr)
+        ResourceManager.getInstance().loadResDirAsyc(url, function (completedCount: number, totalCount: number, item: any) {
+            if (totalCount != 0) {
+                progressNumber = Math.floor((completedCount / totalCount) * 100);
+                _this.setProgress(progressNumber / 100);
+                let tipstr = "资源加载中,进度:" + completedCount + "/" + totalCount + "\n" + progressNumber + "%";
+                _this.set_string(_this.view["KW_TEXT_PROGRESS_TIP"], tipstr)
+                console.log("hcc>>preloadRes: 【" + url + "】" + completedCount + "/" + totalCount , "percent:" , progressNumber);
             }
         }, function (error: Error, resource: any[], urls: string[]) {
             if (error) {
-                console.warn(error)
-                if (_this._tryTimes < 3) {
+                console.warn("hcc>>preloadRes error: ", error)
+                if (_this._tryTimes < 10) {
                     _this._tryTimes++
-                    _this.preloadRes(url)
+                    _this.preloadRes(url,successfunc)
                 } else {
-                    console.warn("res load failed!")
+                    successfunc.call(this); //试了10次加载失败，继续下一个
+                    console.warn("hcc>>res load failed!")
                 }
             } else {
-                _this._completedFlag.push(true)
-                if (_this._completedFlag.length >= _this._urlArray.length){
-                    _this.set_string(_this.view["KW_TEXT_PROGRESS_TIP"],"资源加载完成!")
-                    _this.enter_login_scene()
+                _this._tryTimes = 0;
+                if(successfunc){
+                    successfunc.call(this);
                 }
             }
         })
     }
 
     enter_login_scene() {
-        NetWork.getInstance().connect();
+        NetWork.getInstance().connect(); //资源加载完成后，再连接网络
         SceneManager.getInstance().enter_scene_asyc(new LoginScene());
     }
 }
