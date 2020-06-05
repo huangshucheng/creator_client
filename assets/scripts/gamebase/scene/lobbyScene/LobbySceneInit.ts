@@ -17,6 +17,7 @@ export default class LobbySceneInit extends UIController {
         LobbySendAuthMsg.send_get_center_info();
         LobbySendGameHoodleMsg.send_get_ugame_info();
         LobbySendGameHoodleMsg.send_get_room_status();
+        LobbySendGameHoodleMsg.send_get_room_list_config();
         RoomData.getInstance().clear_room_data();
         WeChatLogin.hide_auth_btn();
 
@@ -27,7 +28,6 @@ export default class LobbySceneInit extends UIController {
                 LobbySendGameHoodleMsg.send_join_room(String(share_roomid));
             }
         });
-
     }
 
 }

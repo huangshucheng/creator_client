@@ -7016,6 +7016,8 @@ $root.GameHoodleProto = (function() {
      * @property {number} eUserPlayAgainAnswerReq=59 eUserPlayAgainAnswerReq value
      * @property {number} eUserPlayAgainAnswerRes=60 eUserPlayAgainAnswerRes value
      * @property {number} eUserPlayAgainStartRes=61 eUserPlayAgainStartRes value
+     * @property {number} eRoomListConfigReq=62 eRoomListConfigReq value
+     * @property {number} eRoomListConfigRes=63 eRoomListConfigRes value
      */
     GameHoodleProto.Cmd = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -7081,6 +7083,8 @@ $root.GameHoodleProto = (function() {
         values[valuesById[59] = "eUserPlayAgainAnswerReq"] = 59;
         values[valuesById[60] = "eUserPlayAgainAnswerRes"] = 60;
         values[valuesById[61] = "eUserPlayAgainStartRes"] = 61;
+        values[valuesById[62] = "eRoomListConfigReq"] = 62;
+        values[valuesById[63] = "eRoomListConfigRes"] = 63;
         return values;
     })();
 
@@ -15279,7 +15283,7 @@ $root.GameHoodleProto = (function() {
          * Properties of a UserMatchReq.
          * @memberof GameHoodleProto
          * @interface IUserMatchReq
-         * @property {number} zoomid UserMatchReq zoomid
+         * @property {number} roomlevel UserMatchReq roomlevel
          */
 
         /**
@@ -15298,12 +15302,12 @@ $root.GameHoodleProto = (function() {
         }
 
         /**
-         * UserMatchReq zoomid.
-         * @member {number} zoomid
+         * UserMatchReq roomlevel.
+         * @member {number} roomlevel
          * @memberof GameHoodleProto.UserMatchReq
          * @instance
          */
-        UserMatchReq.prototype.zoomid = 0;
+        UserMatchReq.prototype.roomlevel = 0;
 
         /**
          * Creates a new UserMatchReq instance using the specified properties.
@@ -15329,7 +15333,7 @@ $root.GameHoodleProto = (function() {
         UserMatchReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.zoomid);
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.roomlevel);
             return writer;
         };
 
@@ -15365,15 +15369,15 @@ $root.GameHoodleProto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.zoomid = reader.sint32();
+                    message.roomlevel = reader.sint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
-            if (!message.hasOwnProperty("zoomid"))
-                throw $util.ProtocolError("missing required 'zoomid'", { instance: message });
+            if (!message.hasOwnProperty("roomlevel"))
+                throw $util.ProtocolError("missing required 'roomlevel'", { instance: message });
             return message;
         };
 
@@ -15404,8 +15408,8 @@ $root.GameHoodleProto = (function() {
         UserMatchReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (!$util.isInteger(message.zoomid))
-                return "zoomid: integer expected";
+            if (!$util.isInteger(message.roomlevel))
+                return "roomlevel: integer expected";
             return null;
         };
 
@@ -15421,8 +15425,8 @@ $root.GameHoodleProto = (function() {
             if (object instanceof $root.GameHoodleProto.UserMatchReq)
                 return object;
             var message = new $root.GameHoodleProto.UserMatchReq();
-            if (object.zoomid != null)
-                message.zoomid = object.zoomid | 0;
+            if (object.roomlevel != null)
+                message.roomlevel = object.roomlevel | 0;
             return message;
         };
 
@@ -15440,9 +15444,9 @@ $root.GameHoodleProto = (function() {
                 options = {};
             var object = {};
             if (options.defaults)
-                object.zoomid = 0;
-            if (message.zoomid != null && message.hasOwnProperty("zoomid"))
-                object.zoomid = message.zoomid;
+                object.roomlevel = 0;
+            if (message.roomlevel != null && message.hasOwnProperty("roomlevel"))
+                object.roomlevel = message.roomlevel;
             return object;
         };
 
@@ -20674,6 +20678,376 @@ $root.GameHoodleProto = (function() {
         };
 
         return UserPlayAgainStartRes;
+    })();
+
+    GameHoodleProto.RoomListConfigReq = (function() {
+
+        /**
+         * Properties of a RoomListConfigReq.
+         * @memberof GameHoodleProto
+         * @interface IRoomListConfigReq
+         */
+
+        /**
+         * Constructs a new RoomListConfigReq.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a RoomListConfigReq.
+         * @implements IRoomListConfigReq
+         * @constructor
+         * @param {GameHoodleProto.IRoomListConfigReq=} [properties] Properties to set
+         */
+        function RoomListConfigReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new RoomListConfigReq instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.RoomListConfigReq
+         * @static
+         * @param {GameHoodleProto.IRoomListConfigReq=} [properties] Properties to set
+         * @returns {GameHoodleProto.RoomListConfigReq} RoomListConfigReq instance
+         */
+        RoomListConfigReq.create = function create(properties) {
+            return new RoomListConfigReq(properties);
+        };
+
+        /**
+         * Encodes the specified RoomListConfigReq message. Does not implicitly {@link GameHoodleProto.RoomListConfigReq.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.RoomListConfigReq
+         * @static
+         * @param {GameHoodleProto.IRoomListConfigReq} message RoomListConfigReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomListConfigReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified RoomListConfigReq message, length delimited. Does not implicitly {@link GameHoodleProto.RoomListConfigReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.RoomListConfigReq
+         * @static
+         * @param {GameHoodleProto.IRoomListConfigReq} message RoomListConfigReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomListConfigReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a RoomListConfigReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.RoomListConfigReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.RoomListConfigReq} RoomListConfigReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomListConfigReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.RoomListConfigReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a RoomListConfigReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.RoomListConfigReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.RoomListConfigReq} RoomListConfigReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomListConfigReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a RoomListConfigReq message.
+         * @function verify
+         * @memberof GameHoodleProto.RoomListConfigReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        RoomListConfigReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a RoomListConfigReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.RoomListConfigReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.RoomListConfigReq} RoomListConfigReq
+         */
+        RoomListConfigReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.RoomListConfigReq)
+                return object;
+            return new $root.GameHoodleProto.RoomListConfigReq();
+        };
+
+        /**
+         * Creates a plain object from a RoomListConfigReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.RoomListConfigReq
+         * @static
+         * @param {GameHoodleProto.RoomListConfigReq} message RoomListConfigReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        RoomListConfigReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this RoomListConfigReq to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.RoomListConfigReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        RoomListConfigReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RoomListConfigReq;
+    })();
+
+    GameHoodleProto.RoomListConfigRes = (function() {
+
+        /**
+         * Properties of a RoomListConfigRes.
+         * @memberof GameHoodleProto
+         * @interface IRoomListConfigRes
+         * @property {number} status RoomListConfigRes status
+         * @property {string|null} [config] RoomListConfigRes config
+         */
+
+        /**
+         * Constructs a new RoomListConfigRes.
+         * @memberof GameHoodleProto
+         * @classdesc Represents a RoomListConfigRes.
+         * @implements IRoomListConfigRes
+         * @constructor
+         * @param {GameHoodleProto.IRoomListConfigRes=} [properties] Properties to set
+         */
+        function RoomListConfigRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * RoomListConfigRes status.
+         * @member {number} status
+         * @memberof GameHoodleProto.RoomListConfigRes
+         * @instance
+         */
+        RoomListConfigRes.prototype.status = 0;
+
+        /**
+         * RoomListConfigRes config.
+         * @member {string} config
+         * @memberof GameHoodleProto.RoomListConfigRes
+         * @instance
+         */
+        RoomListConfigRes.prototype.config = "";
+
+        /**
+         * Creates a new RoomListConfigRes instance using the specified properties.
+         * @function create
+         * @memberof GameHoodleProto.RoomListConfigRes
+         * @static
+         * @param {GameHoodleProto.IRoomListConfigRes=} [properties] Properties to set
+         * @returns {GameHoodleProto.RoomListConfigRes} RoomListConfigRes instance
+         */
+        RoomListConfigRes.create = function create(properties) {
+            return new RoomListConfigRes(properties);
+        };
+
+        /**
+         * Encodes the specified RoomListConfigRes message. Does not implicitly {@link GameHoodleProto.RoomListConfigRes.verify|verify} messages.
+         * @function encode
+         * @memberof GameHoodleProto.RoomListConfigRes
+         * @static
+         * @param {GameHoodleProto.IRoomListConfigRes} message RoomListConfigRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomListConfigRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.config != null && message.hasOwnProperty("config"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.config);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified RoomListConfigRes message, length delimited. Does not implicitly {@link GameHoodleProto.RoomListConfigRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof GameHoodleProto.RoomListConfigRes
+         * @static
+         * @param {GameHoodleProto.IRoomListConfigRes} message RoomListConfigRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomListConfigRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a RoomListConfigRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof GameHoodleProto.RoomListConfigRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GameHoodleProto.RoomListConfigRes} RoomListConfigRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomListConfigRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GameHoodleProto.RoomListConfigRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.config = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a RoomListConfigRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof GameHoodleProto.RoomListConfigRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {GameHoodleProto.RoomListConfigRes} RoomListConfigRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomListConfigRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a RoomListConfigRes message.
+         * @function verify
+         * @memberof GameHoodleProto.RoomListConfigRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        RoomListConfigRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.config != null && message.hasOwnProperty("config"))
+                if (!$util.isString(message.config))
+                    return "config: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a RoomListConfigRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof GameHoodleProto.RoomListConfigRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {GameHoodleProto.RoomListConfigRes} RoomListConfigRes
+         */
+        RoomListConfigRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.GameHoodleProto.RoomListConfigRes)
+                return object;
+            var message = new $root.GameHoodleProto.RoomListConfigRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.config != null)
+                message.config = String(object.config);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a RoomListConfigRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof GameHoodleProto.RoomListConfigRes
+         * @static
+         * @param {GameHoodleProto.RoomListConfigRes} message RoomListConfigRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        RoomListConfigRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.config = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.config != null && message.hasOwnProperty("config"))
+                object.config = message.config;
+            return object;
+        };
+
+        /**
+         * Converts this RoomListConfigRes to JSON.
+         * @function toJSON
+         * @memberof GameHoodleProto.RoomListConfigRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        RoomListConfigRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RoomListConfigRes;
     })();
 
     return GameHoodleProto;

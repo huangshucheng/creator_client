@@ -5,6 +5,7 @@ import UIFunction from '../../../framework/common/UIFunciton';
 import { ResourceManager } from '../../../framework/manager/ResourceManager';
 import StringUtil from '../../../framework/utils/StringUtil';
 import DialogManager from '../../../framework/manager/DialogManager';
+import Player from '../../common/Player';
 
 const {ccclass, property} = cc._decorator;
 
@@ -162,6 +163,57 @@ export default class GameSceneShowUI extends UIController {
 
     show_game_start_ani(){
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogGameStart", "GameStartDialog");
+    }
+
+    show_game_rule(gamerule:string){
+        this.set_string(this.view['KW_TEXT_RULE'],String(gamerule));
+    }
+
+    show_room_id(roomid:string){
+        this.set_string(this.view['KW_TEXT_ROOM_NUM'], "房间号:" + roomid);
+    }
+
+    show_play_count(countstr:string){
+        this.set_string(this.view['KW_TEXT_PLAY_COUNT'], countstr);
+    }
+
+    show_player_score(body:any){
+        if(body){
+            let scores = body.scores;
+            let total_str = ""
+            for(let key in scores){
+                let score_info = scores[key];
+                let score = score_info.score;
+                let player:Player = RoomData.getInstance().get_player(score_info.seatid);
+                if(player){
+                    if(score_info.seatid == RoomData.getInstance().get_self_seatid()){
+                        let score_str = "我方: " + score;
+                        let flag = false;
+                        if(total_str == ""){
+                            flag = true;
+                        }
+                        if(flag){
+                            total_str = total_str + score_str + "\n";
+                        }else{
+                            total_str = total_str + score_str;
+                        }
+                    }else{
+                        let score_str = "对方: " + score;
+                        let flag = false;
+                        if(total_str == ""){
+                            flag = true;
+                        }
+                        if (flag) {
+                            total_str = total_str + score_str + "\n";
+                        } else {
+                            total_str = total_str + score_str;
+                        }
+                    }
+                }
+            }
+            console.log("hcc>>score_str: " , total_str);
+            this.set_string(this.view["KW_TEXT_PLAY_SCORE"],total_str);
+        }
     }
 
 }

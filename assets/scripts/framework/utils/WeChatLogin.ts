@@ -1,6 +1,5 @@
 import LoginSendAuthMsg from "../../gamebase/scene/LoginScene/sendMsg/LoginSendAuthMsg";
 import PlatForm from '../config/PlatForm';
-import CellManager from "../manager/CellManager";
 import DialogManager from '../manager/DialogManager';
 
 class WeChatLogin {
@@ -57,13 +56,9 @@ class WeChatLogin {
                             let login_code = login_res.code;
                             //发起登录请求
                             let wechatuserinfo = JSON.stringify(userinfo_res);
-                            console.log("hcc>>login_code: ", login_code)
-                            console.log("hcc>>wechatuserinfo: ", wechatuserinfo)
-                            let body = {
-                                logincode: String(login_code),
-                                userlogininfo: wechatuserinfo,
-                            }
-                            CellManager.getInstance().start("CellWeChatLogin", body, 5);
+                            // console.log("hcc>>login_code: ", login_code)
+                            // console.log("hcc>>wechatuserinfo: ", wechatuserinfo)
+                            LoginSendAuthMsg.send_wechat_login(login_code, wechatuserinfo);
                         } else {
                             console.log('hcc>>login failed！', login_res.errMsg)
                         }

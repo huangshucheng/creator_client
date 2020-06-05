@@ -60,16 +60,14 @@ export default class GameSceneRecvGameMsg extends UIController {
     ///////////////////////////////////////
     ///////////////////////////////////////
     on_event_login_logic(body:any){
-        let udata =  body;
-        if (udata.status == Response.OK) {
+        if (body.status == Response.OK) {
             GameSendGameHoodleMsg.send_check_link_game();
         }
     }
 
     on_event_dessolve(body:any){
-        let udata =  body;
-        if(udata){
-            if(udata.status == Response.OK){
+        if (body){
+            if (body.status == Response.OK){
                 DialogManager.getInstance().show_weak_hint("房间已解散!")
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
                 RoomData.getInstance().clear_room_data();
@@ -80,33 +78,21 @@ export default class GameSceneRecvGameMsg extends UIController {
     }
 
     on_event_exit_room(body:any){
-        let udata =  body;
-        if(udata){
-            let status = udata.status
-            if(status == Response.OK){
-            }else{
-            }
-        }
     }
 
     on_event_check_link(body: any){
-        let udata =  body;
-        if(udata){
-            let status = udata.status
-            if(status == Response.OK){
-            }else{
+        if (body){
+            if (body.status != Response.OK){
                 DialogManager.getInstance().show_weak_hint("进入游戏失败!")
             }
         }
     }
 
     on_event_user_info(body: any){
-        let udata =  body;
-        if(udata){
-            console.log("hcc>>userinfostr: " , udata)
+        if (body){
             try {
-                if(udata.userinfo){
-                    udata.userinfo.forEach(value => {
+                if (body.userinfo){
+                    body.userinfo.forEach(value => {
                         let numberid = value.numberid;
                         let infostr = value.userinfostring;
                         let infoObj = JSON.parse(infostr);
@@ -114,95 +100,55 @@ export default class GameSceneRecvGameMsg extends UIController {
                         console.log("hcc>>userinfo numid: " , numberid , " ,info: " , infostr);
                     });
                 }
-                let script = this.get_script("GameSceneShowUI")
-                if(script){
-                    script.show_user_info(udata)
-                }
+                this.do_on_view("GameSceneShowUI","show_user_info",body);
             } catch (error) {
                 console.log("hcc>>error: " , error)
             }
         }
     }
 
-    on_event_game_rule(body: any){
-        let udata =  body;
-        if(udata){
-          let gamerule = udata.gamerule;
+    on_event_game_rule(body:any){
+        if (body){
+          let gamerule = body.gamerule;
           if(gamerule){
-            this.set_string(this.view['KW_TEXT_RULE'],String(gamerule));
-          }
-          RoomData.getInstance().set_game_rule(gamerule);
+              this.do_on_view("GameSceneShowUI", "show_game_rule", gamerule);
+              RoomData.getInstance().set_game_rule(gamerule);
+            }
         }
     }
 
     on_event_room_id(body: any){
-        let udata =  body;
-        if(udata){
-          let roomid = udata.roomid;
+        if (body){
+          let roomid = body.roomid;
           if(roomid){
-            this.set_string(this.view['KW_TEXT_ROOM_NUM'],"房间号:" + String(roomid));
+              this.do_on_view("GameSceneShowUI", "show_room_id", roomid);
+              RoomData.getInstance().set_room_id(roomid);
           }
-          RoomData.getInstance().set_room_id(roomid);
         }
     }
 
     on_event_play_count(body: any){
-        let udata =  body;
-        if(udata){
-          let playcount = udata.playcount;
-          let totalplaycount = udata.totalplaycount;
-          RoomData.getInstance().set_play_count(Number(playcount))
-          RoomData.getInstance().set_totl_play_count(Number(totalplaycount))
-          if(playcount && totalplaycount){
-            this.set_string(this.view['KW_TEXT_PLAY_COUNT'],"局数:" + String(playcount) + "/" + String(totalplaycount));
-          }
+        if (body){
+            let playcount = body.playcount;
+            let totalplaycount = body.totalplaycount;
+            RoomData.getInstance().set_play_count(Number(playcount))
+            RoomData.getInstance().set_totl_play_count(Number(totalplaycount))
+            if(playcount && totalplaycount){
+                let playcountstr = "局数:" + String(playcount) + "/" + String(totalplaycount);
+                this.do_on_view("GameSceneShowUI", "show_play_count", playcountstr);
+            }
         }
     }    
 
     on_event_player_score(body: any){
-        let udata =  body;
-        if(udata){
-            let scores = udata.scores;
-            let total_str = ""
-            for(let key in scores){
-                let score_info = scores[key];
-                let score = score_info.score;
-                let player:Player = RoomData.getInstance().get_player(score_info.seatid);
-                if(player){
-                    if(score_info.seatid == RoomData.getInstance().get_self_seatid()){
-                        let score_str = "我方: " + score;
-                        let flag = false;
-                        if(total_str == ""){
-                            flag = true;
-                        }
-                        if(flag){
-                            total_str = total_str + score_str + "\n";
-                        }else{
-                            total_str = total_str + score_str;
-                        }
-                    }else{
-                        let score_str = "对方: " + score;
-                        let flag = false;
-                        if(total_str == ""){
-                            flag = true;
-                        }
-                        if (flag) {
-                            total_str = total_str + score_str + "\n";
-                        } else {
-                            total_str = total_str + score_str;
-                        }
-                    }
-                }
-            }
-            console.log("hcc>>score_str: " , total_str);
-            this.set_string(this.view["KW_TEXT_PLAY_SCORE"],total_str);
+        if(body){
+            this.do_on_view("GameSceneShowUI", "show_player_score", body);
         }
     }    
 
     on_event_user_offline(body: any){
-        let udata =  body;
-        console.log("on_event_user_offline" , udata)
-        let seatid = udata.seatid;
+        console.log("on_event_user_offline", body)
+        let seatid = body.seatid;
         if(seatid){
             let player = RoomData.getInstance().get_player(seatid);
             if(player){
@@ -212,36 +158,28 @@ export default class GameSceneRecvGameMsg extends UIController {
     }
 
     on_event_user_ready(body: any){
-        let udata =  body;
-        console.log("on_event_user_ready" , udata)
-        if(udata){
-            let status = udata.status;
-            let seatid = udata.seatid;
-            let userstate = udata.userstate;
+        console.log("on_event_user_ready", body)
+        if (body){
+            let status = body.status;
+            let seatid = body.seatid;
+            let userstate = body.userstate;
             if(status == Response.OK){
                 let player = RoomData.getInstance().get_player(seatid);
                 if(player){
                     player.set_user_state(UserState.Ready);
-                    let script = this.get_script("GameSceneShowUI")
-                    if(script){
-                        script.show_user_ready(seatid, true)
-                    }
+                    this.do_on_view("GameSceneShowUI", "show_user_ready", seatid, true);
                 }
             }
         }
     }
 
     on_event_game_start(body: any){
-        let script = this.get_script("GameSceneShowUI")
-        if(script){
-            script.clear_table();
-            script.show_game_start_ani();
-        }
+        this.do_on_view("GameSceneShowUI", "clear_table");
+        this.do_on_view("GameSceneShowUI", "show_game_start_ani");
     }
 
     on_event_game_end(body: any){
-        let udata =  body;
-        console.log("on_event_game_end" , udata)
+        console.log("on_event_game_end", body)
     }
 
     on_event_game_result(body: any){
@@ -265,10 +203,7 @@ export default class GameSceneRecvGameMsg extends UIController {
         if(body && body.status == Response.OK){
             let emojconfig = body.emojconfig;
             let configObj = JSON.parse(emojconfig);
-            let script = this.get_script("GameSceneShowUI")
-            if (script) {
-                script.show_emoj(Number(configObj.seatid), Number(configObj.emojconfig))
-            }
+            this.do_on_view("GameSceneShowUI", "show_emoj", Number(configObj.seatid), Number(configObj.emojconfig));
         }
     }
 

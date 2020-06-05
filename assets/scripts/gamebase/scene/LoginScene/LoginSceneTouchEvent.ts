@@ -6,7 +6,6 @@ import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
 import PlatForm from '../../../framework/config/PlatForm';
 import WeChatLogin from '../../../framework/utils/WeChatLogin';
-import CellManager from '../../../framework/manager/CellManager';
 
 const {ccclass, property} = cc._decorator;
 
@@ -37,10 +36,7 @@ export default class LoginSceneTouchEvent extends UIController {
             DialogManager.getInstance().show_weak_hint("登陆失败，guestkey生成错误!")
             return
         }
-        let body = {
-            guestkey: String(guestkey),
-        }
-        CellManager.getInstance().start("CellGuestLogin", body, 5);
+        LoginSendAuthMsg.send_guest_login(guestkey);
     }
 
     on_click_uname_login(sender:cc.Component){
@@ -53,11 +49,7 @@ export default class LoginSceneTouchEvent extends UIController {
             DialogManager.getInstance().show_weak_hint("用户名或密码错误，不能少于六位!");
             return
         }
-        let body = {
-            uname: String(_uname),
-            upwd: String(_upwd),
-        }
-        CellManager.getInstance().start("CellUNameLogin", body, 5);
+        LoginSendAuthMsg.send_uname_login(_uname, _upwd);
     }
 
     on_click_goto_regist(sender: cc.Component){
@@ -85,11 +77,7 @@ export default class LoginSceneTouchEvent extends UIController {
         }
         Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
         Storage.set(LSDefine.USER_LOGIN_MSG,{uname:_uname,upwd:_upwd})
-        let body = {
-            uname: String(_uname),
-            upwdmd5: String(_upwd),
-        }
-        CellManager.getInstance().start("CellUNameRegist", body, 5);
+        LoginSendAuthMsg.send_uname_regist(_uname, _upwd);
     }
 
     on_click_wx_login(sender: cc.Component){

@@ -1,6 +1,6 @@
 import NetWork from '../../../../framework/network/NetWork';
 import { Stype } from '../../../../framework/protocol/Stype';
-import { Cmd } from "../../../../framework/protocol/AuthProto";
+import CellManager from '../../../../framework/manager/CellManager';
 
 export default class LoginSendAuthMsg {
     
@@ -8,11 +8,11 @@ export default class LoginSendAuthMsg {
         NetWork.getInstance().send_msg(Stype.Auth,ctype,body)
     }
 
-    static send_guest_login(guest_key){
+    static send_guest_login(guest_key:string){
         let body = {
             guestkey : String(guest_key),
         }
-        LoginSendAuthMsg.send(Cmd.eGuestLoginReq,body)
+        CellManager.getInstance().start("CellGuestLogin", body, 5);
     }
 
     static send_uname_login(uname:string, upwd:string){
@@ -20,7 +20,7 @@ export default class LoginSendAuthMsg {
             uname:String(uname),
 			upwd:String(upwd),
         }
-        LoginSendAuthMsg.send(Cmd.eUnameLoginReq,body)
+        CellManager.getInstance().start("CellUNameLogin", body, 5);
     }
 
     static send_uname_regist(uname:string, upwdmd5:string){
@@ -28,7 +28,7 @@ export default class LoginSendAuthMsg {
             uname: String(uname),
             upwdmd5: String(upwdmd5),
         }
-        LoginSendAuthMsg.send(Cmd.eUnameRegistReq,body);
+        CellManager.getInstance().start("CellUNameRegist", body, 5);
     }
 
     static send_wechat_login(logincode: string, wechatuserinfo:string){
@@ -36,14 +36,14 @@ export default class LoginSendAuthMsg {
             logincode:logincode,
             userlogininfo: wechatuserinfo,
         }
-        LoginSendAuthMsg.send(Cmd.eWeChatLoginReq,body);
+        CellManager.getInstance().start("CellWeChatLogin", body, 5);
     }
 
     static send_wechat_session_login(wechatsessionkey: string){
         let body = {
             wechatsessionkey : wechatsessionkey,
         }
-        LoginSendAuthMsg.send(Cmd.eWeChatSessionLoginReq, body);
+        CellManager.getInstance().start("CellWeChatSessionLogin", body, 10);
     }
 
 }

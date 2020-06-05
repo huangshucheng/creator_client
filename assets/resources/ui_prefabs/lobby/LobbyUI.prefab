@@ -4094,7 +4094,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "BTN_MATCH_ROOM",
+    "_name": "BTN_MATCH_ROOM_1",
     "_objFlags": 0,
     "_parent": {
       "__id__": 82
@@ -4107,7 +4107,7 @@
         "__id__": 108
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 3,
     "_components": [
       {
@@ -4289,8 +4289,8 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 255,
-      "b": 255,
+      "g": 225,
+      "b": 1,
       "a": 255
     },
     "_contentSize": {
@@ -4676,8 +4676,8 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 255,
-      "b": 255,
+      "g": 224,
+      "b": 0,
       "a": 255
     },
     "_contentSize": {
@@ -5063,8 +5063,8 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 255,
-      "b": 255,
+      "g": 224,
+      "b": 0,
       "a": 255
     },
     "_contentSize": {

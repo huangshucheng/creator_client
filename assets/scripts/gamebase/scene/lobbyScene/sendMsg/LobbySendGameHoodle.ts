@@ -1,6 +1,7 @@
 import NetWork from '../../../../framework/network/NetWork';
 import { Stype } from '../../../../framework/protocol/Stype';
 import { Cmd } from '../../../../framework/protocol/GameHoodleProto';
+import CellManager from '../../../../framework/manager/CellManager';
 
 export default class LobbySendGameHoodleMsg {
     
@@ -18,7 +19,8 @@ export default class LobbySendGameHoodleMsg {
         if (gamerule == null || gamerule == ''){
             return;
         }
-        LobbySendGameHoodleMsg.send(Cmd.eCreateRoomReq,{gamerule: gamerule});
+        let body = { gamerule: gamerule };
+        CellManager.getInstance().start("CellCreateRoom", body, 5);
     }
 
     //加入房间
@@ -52,12 +54,13 @@ export default class LobbySendGameHoodleMsg {
 
     //返回房间
     static send_back_room(){
-        LobbySendGameHoodleMsg.send(Cmd.eBackRoomReq);
+        CellManager.getInstance().start("CellBackRoom", null, 5);
     }
 
     //玩家匹配
-    static send_user_match(){
-        LobbySendGameHoodleMsg.send(Cmd.eUserMatchReq,{zoomid : 0});
+    static send_user_match(roomlevel:number){
+        let body = {roomlevel : roomlevel}
+        CellManager.getInstance().start("CellMatchRoom", body, 5);
     }
 
     //玩家取消匹配
@@ -81,6 +84,11 @@ export default class LobbySendGameHoodleMsg {
             count: count,
         }
         LobbySendGameHoodleMsg.send(Cmd.eUpdateUserBallReq,body);
+    }
+
+    //获取小球信息
+    static send_get_room_list_config() {
+        LobbySendGameHoodleMsg.send(Cmd.eRoomListConfigReq);
     }
 
 }

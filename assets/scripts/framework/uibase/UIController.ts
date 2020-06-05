@@ -24,6 +24,20 @@ export default abstract class UIController extends cc.Component {
             this.load_all_object(root.children[i], path + root.children[i].name + "/");
         }
     }
+
+    //执行script_name 的func_name方法
+    do_on_view(script_name: string, func_name: string, ...optionalParams: any[]) {
+        let script = this.get_script(script_name);
+        if (script) {
+            let func = script[func_name];
+            if (func && typeof (func) === "function") {
+                func.call(script, ...optionalParams);
+            } else {
+                console.warn("script:[", script_name, "] no function:", func_name);
+            }
+        }
+    }
+
     //子类需要手动调用super.onLoad()
     onLoad() {
         UIFunction.getInstance().resize_screen()

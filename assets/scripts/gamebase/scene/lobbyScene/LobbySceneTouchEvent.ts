@@ -2,12 +2,6 @@ import UIController from '../../../framework/uibase/UIController';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import GameHoodleConfig from '../../../framework/config/GameHoodleConfig';
-import HttpUtil from '../../../framework/utils/HttpUtil';
-import GameAppConfig from '../../../framework/config/GameAppConfig';
-import Storage from '../../../framework/utils/Storage';
-import LSDefine from '../../../framework/config/LSDefine';
-import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
-import CellManager from '../../../framework/manager/CellManager';
 
 const {ccclass, property} = cc._decorator;
 
@@ -25,7 +19,6 @@ export default class LobbySceneTouchEvent extends UIController {
         this.add_click_event(this.view["BTN_JOIN_ROOM"],this.on_click_join_room.bind(this))
         this.add_click_event(this.view["BTN_BACK_ROOM"],this.on_click_back_room.bind(this))
         this.add_click_event(this.view["IMG_HEAD"],this.on_click_head.bind(this))
-        this.add_click_event(this.view["BTN_MATCH_ROOM"],this.on_click_match_room.bind(this))
         this.add_click_event(this.view["BTN_MATCH_STOP"],this.on_click_match_stop.bind(this))
         this.add_click_event(this.view["KW_BTN_BALL_COMPOSE"], this.on_click_ball_compose.bind(this))
         this.add_click_event(this.view["KW_BTN_STORE"], this.on_click_store.bind(this))
@@ -47,8 +40,7 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_create_room(sender:cc.Component){
         let ruleStr = JSON.stringify(GameHoodleConfig.BOX_GAME_RULE);
-        let body = { gamerule: ruleStr };
-        CellManager.getInstance().start("CellCreateRoom", body, 5);
+        LobbySendGameHoodleMsg.send_create_room(ruleStr);
         LobbySendGameHoodleMsg.send_get_room_status();
     }
 
@@ -65,12 +57,15 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_back_room(sender: cc.Component){
         LobbySendGameHoodleMsg.send_get_room_status();
-        CellManager.getInstance().start("CellBackRoom", null, 5);
+        LobbySendGameHoodleMsg.send_back_room();
     }
 
-    on_click_match_room(sender: cc.Component){
-        let body = {zoomid : 0}
-        CellManager.getInstance().start("CellMatchRoom", body, 5);
+    on_click_match_room_with_data(event: cc.Event, customEventData: any){
+        console.log("on_click_match_room_with_data" , customEventData);
+        let roomlevel = customEventData.roomlevel;
+        if (roomlevel){
+            LobbySendGameHoodleMsg.send_user_match(roomlevel);
+        }
     }
     
     on_click_match_stop(sender: cc.Component){
@@ -93,6 +88,14 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_ball_list(sender:cc.Component){
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogBallList", "BallListDialog")
+    }
+
+    add_room_list_click(confobj:any){
+        let roomlevel = confobj.roomlevel;
+        if(roomlevel){
+            let roombtnkeystr = "BTN_MATCH_ROOM_" + confobj.roomlevel;
+            this.add_click_evenet_with_data(this.view[roombtnkeystr], "on_click_match_room_with_data", confobj);
+        }
     }
 
 }

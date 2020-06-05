@@ -28,7 +28,6 @@ export default class SceneManager {
             _this._curScene = scene;
             console.log("enter scene:", _this._curScene.get_name())
         },function (completedCount: number, totalCount: number, item: any) {
-            console.log("preload scene: %" + completedCount / totalCount * 100)            
         })
     }
 }

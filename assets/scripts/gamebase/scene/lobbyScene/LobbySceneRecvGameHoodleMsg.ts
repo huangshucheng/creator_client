@@ -40,6 +40,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             [Cmd.eUserConfigRes]: this.on_event_ugame_config_info,
             [Cmd.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer,
             [Cmd.eUserPlayAgainStartRes]: this.on_event_play_again_start,
+            [Cmd.eRoomListConfigRes]: this.on_event_room_config,
         }
     }
 
@@ -53,18 +54,16 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
     }
 
     on_event_login_logic(body:any){
-        let udata =  body;
-        console.log("hcc>>Lobbyscene>>on_event_login_logic",udata)
-        if(udata){
-            if(udata.status == Response.OK){
+        if (body){
+            if (body.status == Response.OK){
                 LobbySendGameHoodleMsg.send_get_room_status();
                 LobbySendGameHoodleMsg.send_get_ugame_info();
                 LobbySendGameHoodleMsg.send_get_uball_info();
+                LobbySendGameHoodleMsg.send_get_room_list_config();
                 DialogManager.getInstance().show_weak_hint("登录游戏服务成功!")
 
                 //登录逻辑服务成功,如果是通过分享进来的,通过分享的房间号，自动去加入房间
                 let roomid = RoomData.getInstance().get_share_roomid();
-                console.log("hcc>>gameapp>>on_event_login_logic roomid: ", roomid);
                 if (roomid != "") {
                     LobbySendGameHoodleMsg.send_join_room(String(roomid));
                 }
@@ -73,10 +72,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
     }
 
     on_event_create_room(body:any){
-        let udata =  body;
-        console.log("on_event_create_room",udata)
-        if(udata){
-            let status = udata.status
+        if (body){
+            let status = body.status
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new GameScene())
             }else{
@@ -86,10 +83,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
     }
 
     on_event_join_room(body:any){
-        let udata =  body;
-        console.log("on_event_join_room",udata)
-        if(udata){
-            let status = udata.status
+        if (body){
+            let status = body.status
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new GameScene())
             }else{
@@ -100,10 +95,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
     }
 
     on_event_exit_room(body:any){
-        let udata =  body;
-        console.log("on_event_exit_room",udata)
-        if(udata){
-            let status = udata.status
+        if (body){
+            let status = body.status
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
                 RoomData.getInstance().clear_room_data();
@@ -114,10 +107,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
     }
 
     on_event_dessolve_room(body:any){
-        let udata =  body;
-        console.log("on_event_dessolve_room",udata)
-        if(udata){
-            let status = udata.status
+        if (body){
+            let status = body.status
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
                 RoomData.getInstance().clear_room_data();
@@ -128,25 +119,14 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
     }
 
     on_event_get_room_status(body:any){
-        let udata =  body;
-        console.log("on_event_get_room_status",udata)
-        if(udata){
-            let status = udata.status
-            if(status == Response.OK){
-                this.set_visible(this.view["BTN_BACK_ROOM"], true);
-                this.set_visible(this.view["BTN_CREATE_ROOM"], false);
-            }else{
-                this.set_visible(this.view["BTN_BACK_ROOM"], false);
-                this.set_visible(this.view["BTN_CREATE_ROOM"], true);
-            }
+        if (body){
+            this.do_on_view("LobbySceneShowUI", "show_room_status", body.status);
         }
     }
 
     on_event_back_room(body:any){
-        let udata =  body;
-        console.log("on_event_back_room",udata)
-        if(udata){
-            let status = udata.status
+        if (body){
+            let status = body.status
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new GameScene())
             }else{
@@ -156,12 +136,10 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
     }
 
     on_event_match(body:any){
-        let udata =  body;
-        console.log("on_event_match",udata)
-        if(udata){
-            let status = udata.status
+        if (body){
+            let status = body.status
             if(status == Response.OK){
-                let matchsuccess = udata.matchsuccess;
+                let matchsuccess = body.matchsuccess;
                 if(matchsuccess == true){
                     DialogManager.getInstance().show_weak_hint("匹配完成!")
                     this.scheduleOnce(function(dt:number){
@@ -170,7 +148,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
                     },1.0)
                 }
 
-                let userinfo = udata.userinfo;
+                let userinfo = body.userinfo;
                 if(!matchsuccess && userinfo){
                     let matchDialog = DialogManager.getInstance().get_dialog("MatchDialog");
                     if (matchDialog && cc.isValid(matchDialog)){
@@ -198,10 +176,8 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
     }
 
     on_event_match_stop(body:any){
-        let udata =  body;
-        console.log("on_event_match_stop",udata)
-        if(udata){
-            let status = udata.status
+        if (body){
+            let status = body.status
             if(status == Response.OK){
                 DialogManager.getInstance().show_weak_hint("您已取消匹配!")
             }else{
@@ -211,37 +187,27 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
     }
 
     on_event_ugame_info(body:any){
-        let udata =  body;
-        console.log("on_event_ugame_info",udata)
-        if(udata){
-            let status = udata.status
+        if (body){
+            let status = body.status
             if(status == Response.OK){
-                let ugame_info = JSON.parse(udata.userinfostring);
+                let ugame_info = JSON.parse(body.userinfostring);
                 UserInfo.set_ugame_info(ugame_info);
-                let lobyShowUI = this.get_script("LobbySceneShowUI")
-                if(lobyShowUI){
-                    lobyShowUI.show_user_info();
-                }
+                this.do_on_view("LobbySceneShowUI", "show_user_info");
                 GameSendGameHoodleMsg.send_get_user_config();
             }
         }
     }
 
     on_event_ugame_config_info(body:any){
-        let udata = body;
-        console.log("on_event_ugame_info", udata)
-        if (udata) {
-            let status = udata.status
+        if (body) {
+            let status = body.status
             if (status == Response.OK) {
-                let ugame_config = JSON.parse(udata.userconfigstring);
+                let ugame_config = JSON.parse(body.userconfigstring);
                 if (ugame_config){
                     let gameinfo = UserInfo.get_ugame_info();
                     if(gameinfo){
                         UserInfo.set_uface(ugame_config.user_ball_level)
-                        let lobyShowUI = this.get_script("LobbySceneShowUI")
-                        if (lobyShowUI) {
-                            lobyShowUI.show_user_info();
-                        }
+                        this.do_on_view("LobbySceneShowUI", "show_user_info");
                     }
                 }
             }
@@ -272,6 +238,17 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
     on_event_play_again_start(body:any){
         if (body && body.status == Response.OK) {
             SceneManager.getInstance().enter_scene_asyc(new GameScene());
+        }
+    }
+
+    on_event_room_config(body:any){
+        if (body && body.status == Response.OK) {
+            let config = JSON.parse(body.config);
+            for(let key in config){
+                let confObj = config[key];
+                this.do_on_view("LobbySceneShowUI", "show_room_list_btn", confObj);
+                this.do_on_view("LobbySceneTouchEvent", "add_room_list_click", confObj);
+            }
         }
     }
 }

@@ -71,6 +71,10 @@ export default class GameApp extends UIController {
         DialogManager.getInstance().show_weak_hint("网络断开!")
     }
 
+    test_eval(){
+        console.log("hccccccccccccc>>test_eval");
+    }
+
     //test
     test_func(){
         /*
@@ -78,6 +82,17 @@ export default class GameApp extends UIController {
         this.node.convertToNodeSpaceAR(cc.v2(100,100)); //将世界坐标ccv2(100,100)转换成node下的节点坐标系  
         this.node.convertToWorldSpaceAR(cc.v2(100,100)); // 将节点坐标系node下的一个点cc.v2(100,100)转换到世界空间坐标系。
         */
+        // let evelstr = "this.test_eval();"
+        /*
+        try {
+            let evelstr = "this.test_eval_1();"
+            let result = eval(evelstr);
+            console.log("hcc>>eval: " , result);
+        } catch (error) {
+            console.error("hcc>> error: " , error);
+            // throw "hcc>>throw";
+        }
+    */
     }
 
 }

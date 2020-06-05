@@ -11,9 +11,8 @@ import DialogManager from '../../../framework/manager/DialogManager';
 import EventDefine from '../../../framework/config/EventDefine';
 import LobbySendAuthMsg from './sendMsg/LobbySendAuthMsg';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
-import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
 import { Stype } from '../../../framework/protocol/Stype';
-import CellManager from '../../../framework/manager/CellManager';
+import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -60,38 +59,26 @@ export default class LobbySceneRecvAuthMsg extends UIController {
         if(loginType == LSDefine.LOGIN_TYPE_UNAME){
             let loginObj = Storage.get(LSDefine.USER_LOGIN_MSG)
             if (loginObj){
-                let body = {
-                    uname: String(loginObj.uname),
-                    upwd: String(loginObj.upwd),
-                }
-                CellManager.getInstance().start("CellUNameLogin", body, 5);
+                LoginSendAuthMsg.send_uname_login(loginObj.uname, loginObj.upwd);
             }
         }else if(loginType == LSDefine.LOGIN_TYPE_GUEST){
            let guestkey = Storage.get(LSDefine.USER_LOGIN_GUEST_KEY)
            if(guestkey){
-               let body = {
-                   guestkey: String(guestkey),
-               }
-               CellManager.getInstance().start("CellGuestLogin", body, 5);
+               LoginSendAuthMsg.send_guest_login(guestkey);
            }
         }else if(loginType == LSDefine.LOGIN_TYPE_WECHAT){
             let wechatsessionkey = Storage.get(LSDefine.USER_LOGIN_WECHAT_SESSION);
             if(wechatsessionkey){
                 //重新用微信session登录
-                let body = {
-                    wechatsessionkey: wechatsessionkey,
-                }
-                CellManager.getInstance().start("CellWeChatSessionLogin", body, 5);
+                LoginSendAuthMsg.send_wechat_session_login(wechatsessionkey);
             }
         }
     }
 
     on_event_guest_login(body:any){
-        let udata =  body;
-        console.log("guestlogin udata: " , udata)
-        if(udata.status == Response.OK){
+        if (body.status == Response.OK){
             try {
-                let resbody = JSON.parse(udata.userlogininfo)
+                let resbody = JSON.parse(body.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
                 Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,resbody.guest_key)
             } catch (error) {
@@ -102,16 +89,14 @@ export default class LobbySceneRecvAuthMsg extends UIController {
             LobbySendAuthMsg.send_get_center_info();
             DialogManager.getInstance().show_weak_hint("游客重新登录成功!")
         }else{
-            DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)
+            DialogManager.getInstance().show_weak_hint("登录失败! " + body.status)
         }
     }
 
     on_event_uname_login(body:any){
-        let udata =  body;
-        console.log("unamelogin udata: " , udata)
-        if(udata.status == Response.OK){
+        if (body.status == Response.OK){
             try {
-                let resbody = JSON.parse(udata.userlogininfo)
+                let resbody = JSON.parse(body.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
                 Storage.set(LSDefine.USER_LOGIN_MSG,{uname: resbody.uname, upwd: resbody.upwd})
             } catch (error) {
@@ -122,16 +107,15 @@ export default class LobbySceneRecvAuthMsg extends UIController {
             LobbySendAuthMsg.send_get_center_info();
             DialogManager.getInstance().show_weak_hint("玩家重新登录成功!")
         }else{
-            DialogManager.getInstance().show_weak_hint("登录失败! " + udata.status)
+            DialogManager.getInstance().show_weak_hint("登录失败! " + body.status)
         }
     }
 
     on_event_wechat_session_login(body: any) {
-        let udata = body;
-        console.log("hcc>>lobbyscene>>on_event_wechat_session_login" , udata);
-        if (udata.status == Response.OK) {
+        console.log("hcc>>lobbyscene>>on_event_wechat_session_login", body);
+        if (body.status == Response.OK) {
             try {
-                let resbody = JSON.parse(udata.userlogininfo)
+                let resbody = JSON.parse(body.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_WECHAT_SESSION, resbody.unionid);
                 Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_WECHAT);
             } catch (error) {
@@ -139,37 +123,29 @@ export default class LobbySceneRecvAuthMsg extends UIController {
             }
             LobbySendGameHoodleMsg.send_login_logic()
         } else {
-            DialogManager.getInstance().show_weak_hint("微信重新登录失败! " + udata.status)
+            DialogManager.getInstance().show_weak_hint("微信重新登录失败! " + body.status)
         }
     }
 
     on_event_center_info(body:any){
-        let udata =  body;
-        if(udata){
-            let udataStr = udata.usercenterinfostring
+        if (body){
+            let udataStr = body.usercenterinfostring
             if(udataStr){
                 UserInfo.set_uinfo(udataStr)
-                let lobyShowUI = this.get_script("LobbySceneShowUI")
-                if(lobyShowUI){
-                    lobyShowUI.show_user_info();
-                }
+                this.do_on_view("LobbySceneShowUI","show_user_info");
             }
         }
     }
 
     on_event_login_out(body:any){
-        let udata = body;
-        if(udata){
-            let status = udata.status
-            if(status == Response.OK){
-                console.log("on_event_login_out")
+        if (body){
+            if (body.status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new LoginScene())
             }
         }
     }
 
     on_event_relogin(body:any){
-        console.log("on_event_relogin...")
         SceneManager.getInstance().enter_scene_asyc(new LoginScene())
         DialogManager.getInstance().show_weak_hint("您已经被挤号,自动退出!")
     }

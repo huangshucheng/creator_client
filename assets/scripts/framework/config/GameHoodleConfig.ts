@@ -1,7 +1,7 @@
 //游戏配置
 class GameHoodleConfig {
     
-    static BOX_GAME_RULE            = { playerCount: 2, playCount: 5 }       //包厢规则:坐满人数，局数
+    static BOX_GAME_RULE            = { playerCount: 2, playCount: 3 }       //包厢规则:坐满人数，局数
     static IS_TEST_BALL             = false;                    //是否本地测试小球碰撞
     static BALL_COMPOSE_COUNT       = 3;                        //小球合成所需数量
     //小球转换类型

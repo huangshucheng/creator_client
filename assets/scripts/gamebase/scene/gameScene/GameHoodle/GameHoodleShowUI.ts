@@ -5,6 +5,7 @@ import RoomData from '../../../common/RoomData';
 import Player from '../../../common/Player';
 import HoodleBallManager from "./HoodleBallManager";
 import GameHoodleConfig from "../../../../framework/config/GameHoodleConfig";
+import DialogManager from "../../../../framework/manager/DialogManager";
 
 let PROGRESS_SPEED = 0.02
 
@@ -173,6 +174,63 @@ export default class GameHoodleShowUI extends UIController {
         this.set_power_percent(per);
     }
 
+    show_total_result(body:any){
+        let show_text = "";
+        if (body) {
+            let scores = body.scores;
+            let golds = body.golds;
+            for (let index = 0; index < scores.length; index++) {
+                let scoreInfo = scores[index];
+                let goldInfo = golds[index];
+                let seatid = scoreInfo.seatid;
+                let score = Number(scoreInfo.score);
+                let gold = Number(goldInfo.gold);
+                let player: Player = RoomData.getInstance().get_player(seatid);
+                if (player) {
+                    let uname = player.get_unick();
+                    if (seatid == RoomData.getInstance().get_self_seatid()) {
+                        uname = uname + "(我)"
+                    }
+                    let score_str = score > 0 ? ("+" + score) : score;
+                    let gold_str = gold > 0 ? ("+" + gold) : gold;
+                    show_text = show_text + uname + ": 分数 " + score_str + "   " + "金币:" + gold_str + "\n";
+                }
+
+            }
+        }
+        let _this = this;
+        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogGameResult", "GameResultDialog", function (resNode: cc.Node) {
+            if (resNode) {
+                let script = resNode.getComponent("GameResultDialog");
+                if (script) {
+                    script.set_title_text("结束")
+                    script.set_reward_text("")
+                    script.set_score_text(show_text);
+                }
+                resNode.active = false;
+                _this.scheduleOnce(function () {
+                    resNode.active = true;
+                }, 1.5)
+            }
+        })
+    }
+
+    show_emoj(body:any){
+        let emojconfig = body.emojconfig;
+        if (emojconfig){
+            let configObj = JSON.parse(emojconfig);
+            let seatid = Number(configObj.seatid);
+            let emojindex = Number(configObj.emojconfig);
+            let ball: cc.Node = HoodleBallManager.getInstance().get_ball(seatid);
+            if (ball && cc.isValid(ball)) {
+                let script = ball.getComponent("HoodleBallCtrl");
+                if (script) {
+                    script.show_ball_emoj(emojindex);
+                }
+            }
+        }
+    }
+
     //////////////////////////////////
     //////////////////////////////////
     //test
@@ -195,7 +253,7 @@ export default class GameHoodleShowUI extends UIController {
             let script = ball2.getComponent("HoodleBallCtrl")
             script.set_ball_id(2);
             script.set_name("ball2")
-            
         }
     }
+
 }

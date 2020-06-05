@@ -101,7 +101,7 @@ export default class HotFixSceneCtrl extends UIController {
         let resArrayLen = this._urlArray.length;
         if (resArrayLen > 0){
             let firstResStr = this._urlArray[0];
-            console.log("hcc>>loadRes: ", firstResStr);
+            // console.log("hcc>>loadRes: ", firstResStr);
             this.preloadRes(firstResStr,function() {
                 this._urlArray.shift();
                 this.startPreloadRes();
@@ -128,7 +128,7 @@ export default class HotFixSceneCtrl extends UIController {
                 _this.setProgress(progressNumber / 100);
                 let tipstr = "资源加载中,进度:" + completedCount + "/" + totalCount + "\n" + progressNumber + "%";
                 _this.set_string(_this.view["KW_TEXT_PROGRESS_TIP"], tipstr)
-                console.log("hcc>>preloadRes: 【" + url + "】" + completedCount + "/" + totalCount , "percent:" , progressNumber);
+                // console.log("loadRes:[" + url + "]" + completedCount + "/" + totalCount , "percent:" , progressNumber);
             }
         }, function (error: Error, resource: any[], urls: string[]) {
             if (error) {
