@@ -13,7 +13,7 @@ export enum Cmd {
 	eOnSendMsg = 9
 }
 
-export let CmdName = {
+export let CmdName:any = {
 	[0] : "INVALED",
 	[1] : "LoginReq",
 	[2] : "LoginRes",

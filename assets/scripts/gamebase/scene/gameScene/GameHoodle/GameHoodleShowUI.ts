@@ -24,6 +24,7 @@ export default class GameHoodleShowUI extends UIController {
             this.test_boarn_ball()
         }
         this.set_power_percent_visible(false);
+        this.show_edge_center(false);
         //test
         /*
         let testpos = cc.v2(200,200);
@@ -229,6 +230,10 @@ export default class GameHoodleShowUI extends UIController {
                 }
             }
         }
+    }
+
+    show_edge_center(isshow:boolean){
+        this.set_visible(this.view["KW_EDGE_CENTER"],isshow);
     }
 
     //////////////////////////////////

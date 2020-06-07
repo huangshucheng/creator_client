@@ -228,7 +228,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "74bdd4b2-adc5-48fe-9c0c-0e579f36b028"
+      "__uuid__": "3f28d9bf-feaa-4e77-b460-ca1db8e51cac"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -283,7 +283,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 77.81,
+      "width": 54.47,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -294,7 +294,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -116.146,
+      "y": -101.146,
       "z": 0
     },
     "_scale": {
@@ -333,7 +333,7 @@
     "_useOriginalSize": false,
     "_string": "1级",
     "_N$string": "1级",
-    "_fontSize": 50,
+    "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -386,7 +386,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 211.23,
+      "width": 147.86,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -397,7 +397,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 6.453,
-      "y": -65.231,
+      "y": -64.231,
       "z": 0
     },
     "_scale": {
@@ -436,7 +436,7 @@
     "_useOriginalSize": false,
     "_string": "1000金币",
     "_N$string": "1000金币",
-    "_fontSize": 50,
+    "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,

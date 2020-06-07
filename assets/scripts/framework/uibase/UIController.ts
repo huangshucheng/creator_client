@@ -99,6 +99,15 @@ export default abstract class UIController extends cc.Component {
     add_click_evenet_with_data(target: cc.Node, callbackName:string, customEventData?: any) {
         UIFunction.getInstance().add_click_evenet_with_data(target, callbackName, this, customEventData);
     }
+    
+    //复选框事件
+    add_check_click(target:cc.Node, callback:Function){
+        UIFunction.getInstance().add_check_click(target, callback, this);
+    }
+
+    is_checked(target:cc.Node){
+        return UIFunction.getInstance().is_checked(target);
+    }
 
     add_to_node(parent: cc.Node, prefab: cc.Prefab, scriptName?: string){
         return UIFunction.getInstance().add_to_node(parent, prefab,scriptName)

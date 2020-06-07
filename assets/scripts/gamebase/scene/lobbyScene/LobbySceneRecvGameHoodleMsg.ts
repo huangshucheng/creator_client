@@ -168,9 +168,9 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
                     }
                 }
             }else if(status == Response.NOT_YOUR_TURN){
-                DialogManager.getInstance().show_weak_hint("请稍等候，正在匹配中。。。。")
+                DialogManager.getInstance().show_weak_hint("请稍等候，正在匹配中。。。。");
             }else{
-                DialogManager.getInstance().show_weak_hint("匹配失败!")
+                DialogManager.getInstance().show_weak_hint("匹配失败,您当前还不能匹配!");
             }
         }
     }

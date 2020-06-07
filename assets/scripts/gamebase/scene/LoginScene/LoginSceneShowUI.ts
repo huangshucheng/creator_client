@@ -1,10 +1,7 @@
 import UIController from '../../../framework/uibase/UIController';
-import { ResourceManager } from '../../../framework/manager/ResourceManager';
 import GameAppConfig from '../../../framework/config/GameAppConfig';
 import HotUpdateNew from '../../../framework/hotfix/HotUpdateNew';
 import WeChatLogin from '../../../framework/utils/WeChatLogin';
-import PlatForm from '../../../framework/config/PlatForm';
-import RoomData from '../../common/RoomData';
 
 const {ccclass, property} = cc._decorator;
 
@@ -18,6 +15,14 @@ export default class LoginSceneShowUI extends UIController {
     start () {
         super.start();
         this.show_version();
+
+        //微信小游戏线上环境
+        if(GameAppConfig.IS_WECHAT_GAME_ONLINE){ 
+            this.set_visible(this.view["KW_IMG_LOGIN_BG"],false);
+            this.set_visible(this.view["KW_BTN_GUEST_LOGIN"],false);
+            this.set_posX(this.view["KW_BTN_WX_LOGIN"],0);
+        }
+
         //显示微信小游戏登录按钮
         WeChatLogin.create_authorize_btn(this.view["KW_BTN_WX_LOGIN"]);
     }

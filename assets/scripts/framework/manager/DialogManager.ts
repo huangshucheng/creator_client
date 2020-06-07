@@ -129,7 +129,7 @@ export default class DialogManager{
 
     show_loading_dialog(){
         this.close_dialog("LoadingDialog");
-        this.show_dialog_asyc("ui_prefabs/dialog/DialogLoading", "LoadingDialog")
+        this.show_dialog("ui_prefabs/dialog/DialogLoading", "LoadingDialog")
     }
 
     close_loading_dialog(){

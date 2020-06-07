@@ -1,7 +1,6 @@
 //弹珠合成界面
 
 import UIDialog from '../../framework/uibase/UIDialog';
-import EventManager from '../../framework/manager/EventManager';
 import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
@@ -52,13 +51,20 @@ export default class BallCenterDialog extends UIDialog {
     }
 
     add_button_event_listener(){
-        this.add_click_event(this.view["KW_BTN_CLOSE"],this.on_click_close.bind(this))
-        this.add_click_event(this.view["KW_BTN_COMPOSE"], this.on_click_compose.bind(this))
-        this.add_click_event(this.view["KW_BTN_UNDO"], this.on_click_undo.bind(this))
+        this.add_click_event(this.view["KW_BTN_CLOSE"],this.on_click_close.bind(this));
+        this.add_click_event(this.view["KW_BTN_COMPOSE"], this.on_click_compose.bind(this));
+        this.add_click_event(this.view["KW_BTN_UNDO"], this.on_click_undo.bind(this));
+        this.add_click_event(this.view["KW_PANEL_COMP_SUCCESS"], this.on_click_comp_success.bind(this));
     }
 
     initUI(){
         this.clear_ball_layout();
+        this.set_visible(this.view["KW_PANEL_COMP_SUCCESS"],false);
+        let comp_text:cc.Node = this.view["KW_TEXT_COMP_TIP"];
+        if(comp_text){
+            let seq = cc.sequence(cc.fadeOut(1.0),cc.fadeIn(1.0))
+            comp_text.runAction(cc.repeatForever(seq));
+        }
     }
 
     /////////
@@ -68,26 +74,36 @@ export default class BallCenterDialog extends UIDialog {
 
     on_click_compose(sender: cc.Component){
         let compose_info = this.get_ball_compose_info();
+        let ischeck = this.is_checked(this.view["KW_CHECK_NO_TIP"]);
+        console.log("ischeck: " , ischeck);
         if (compose_info && compose_info.length > 0){
             let count = compose_info.length;
             let level = compose_info[0];
             let _this = this;
-            DialogManager.getInstance().show_common_dialog(2,function(dialogScript:any) {
-                if (dialogScript){
-                    let showTextStr = "确定将" + count + "个" + level + "级弹珠合成一个" + (Number(level) + 1) + "级弹珠吗?"
-                    dialogScript.set_content_text(showTextStr);
-                    dialogScript.set_btn_callback(
-                        function () { GameSendGameHoodleMsg.send_ball_compose(Number(level));},
-                        function () { _this.show_user_ball_info(_this._ball_info_str)},
-                        function () {},
-                    )
-                }
-            });
+            if (ischeck){
+                GameSendGameHoodleMsg.send_ball_compose(Number(level));
+            }else{
+                DialogManager.getInstance().show_common_dialog(2,function(dialogScript:any) {
+                    if (dialogScript){
+                        let showTextStr = "确定将" + count + "个" + level + "级弹珠合成一个" + (Number(level) + 1) + "级弹珠吗?"
+                        dialogScript.set_content_text(showTextStr);
+                        dialogScript.set_btn_callback(
+                            function () { GameSendGameHoodleMsg.send_ball_compose(Number(level));},
+                            function () { _this.show_user_ball_info(_this._ball_info_str)},
+                            function () {},
+                        )
+                    }
+                });
+            }
         }
     }
     
     on_click_undo(sender: cc.Component){
         this.show_user_ball_info(this._ball_info_str)
+    }
+
+    on_click_comp_success(sender: cc.Component){
+        this.set_visible(this.view["KW_PANEL_COMP_SUCCESS"],false);
     }
 
     onKeyDown(event: cc.Event) {
@@ -113,7 +129,8 @@ export default class BallCenterDialog extends UIDialog {
         }
 
         if (level_array.length != GameHoodleConfig.BALL_COMPOSE_COUNT){
-            DialogManager.getInstance().show_weak_hint("小球合成需要3个，目前不足!")
+            let tipstr = "弹珠合成需要" + GameHoodleConfig.BALL_COMPOSE_COUNT + "个，目前不足!"
+            DialogManager.getInstance().show_weak_hint(tipstr);
             return;
         }
 
@@ -124,7 +141,7 @@ export default class BallCenterDialog extends UIDialog {
 
         let array_len = ArrayUtil.GetArrayLen(level_table);
         if(array_len != 1){
-            DialogManager.getInstance().show_weak_hint("不能同时合成多种小球，只能放置一种!")
+            DialogManager.getInstance().show_weak_hint("不能同时合成多种弹珠，只能放置一种!")
             return;
         }
 
@@ -139,26 +156,25 @@ export default class BallCenterDialog extends UIDialog {
 
     /////////
     on_event_user_ball_info(body:any){
-        let udata =  body;
-        if(udata){
-            let status = udata.status
+        if (body){
+            let status = body.status
             if(status == Response.OK){
-                this._ball_info_str = udata.userballinfostring;
-                this.show_user_ball_info(udata.userballinfostring);
+                this._ball_info_str = body.userballinfostring;
+                this.show_user_ball_info(body.userballinfostring);
             }
         }
     }
 
     on_event_update_user_ball_info(body: any){
-        let udata =  body;
-        if(udata){
-            let status = udata.status
+        if(body){
+            let status = body.status
             if(status == Response.OK){
-                this._ball_info_str = udata.userballinfostring;
-                this.show_user_ball_info(udata.userballinfostring);
-                DialogManager.getInstance().show_weak_hint("合成成功!")
+                this._ball_info_str = body.userballinfostring;
+                this.show_user_ball_info(body.userballinfostring);
+                this.show_compose_result(body.resultinfo);
+                DialogManager.getInstance().show_weak_hint("合成成功!");
             }else{
-                DialogManager.getInstance().show_weak_hint("合成失败!")
+                DialogManager.getInstance().show_weak_hint("合成失败!");
             }
         }
     }
@@ -292,7 +308,9 @@ export default class BallCenterDialog extends UIDialog {
                 this.set_string(this.seek_child_by_name(newNode, "KW_TEXT_COUNT"), "1");
                 this.add_click_evenet_with_data(newNode, "on_click_ball_unselect", data)
                 this.set_visible(this.view["KW_TEXT_TITLE_UNDO"],true);
-            }    
+            }else{
+                DialogManager.getInstance().show_weak_hint("最多只能合成" + GameHoodleConfig.BALL_COMPOSE_COUNT + "个弹珠!");
+            }
         }
     }
 
@@ -328,6 +346,30 @@ export default class BallCenterDialog extends UIDialog {
                     this.set_visible(this.view["KW_TEXT_TITLE_UNDO"], childCount > 0); 
                 }
             },0)
+        }
+    }
+
+    show_compose_result(result_string:string){
+        let resultObj = null;
+        try {
+            resultObj =  JSON.parse(result_string);
+        } catch (error) {
+            console.warn(error);
+        }
+        if (resultObj){
+            let compose_level = resultObj.level;
+            if (compose_level){
+                this.set_visible(this.view["KW_PANEL_COMP_SUCCESS"],true);
+                let ballNameStr = StringUtil.format(BALL_TEXTURE_KEY_STR, compose_level);
+                this.set_sprite_asyc(this.seek_child_by_name(this.view["KW_PANEL_COMP_SUCCESS"], "KW_IMG_BALL_BODY"), ballNameStr);
+                this.set_string(this.seek_child_by_name(this.view["KW_PANEL_COMP_SUCCESS"], "KW_TEXT_LEVEL"), compose_level + "级");
+
+                let ball_bg:cc.Node = this.view["KW_BALL_SHOW_BG"];
+                if(ball_bg){
+                    ball_bg.setScale(0);
+                    ball_bg.runAction(cc.scaleTo(0.2, 2.0, 2.0).easing(cc.easeBackOut()));
+                }
+            }
         }
     }
 }

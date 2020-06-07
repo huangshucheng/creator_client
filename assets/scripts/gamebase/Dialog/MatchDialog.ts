@@ -21,6 +21,7 @@ export default class MatchDialog extends UIDialog {
     start () {
         super.start();
         this.add_protocol_delegate();
+        this.show_match_ani();
     }
 
     add_cmd_handler_map() {
@@ -63,7 +64,6 @@ export default class MatchDialog extends UIDialog {
                 if(prefab){
                     let infoNode = this.add_to_node(this.view["KW_LAYOUT_MATCH_USER"],prefab)
                     if(infoNode){
-                        // this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_NAME"),numberid);
                         let headIndex = 1;
                         let json_object = JSON.parse(userinfostring);
                         if(json_object){
@@ -71,11 +71,9 @@ export default class MatchDialog extends UIDialog {
                         }
                         let ufaceImg = StringUtil.format(BALL_TEXTURE_KEY_STR, json_object.userconfig.user_ball_level);
                         this.set_sprite_asyc(this.seek_child_by_name(infoNode,"KW_IMG_HEAD"),ufaceImg);
-                        // this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_NAME"),json_object.uname);
                         this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_NAME"),json_object.unick);
                         this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_GOLD"),json_object.uchip);
                         this.set_visible(this.seek_child_by_name(infoNode,"KW_TEXT_GOLD"),true);
-
                         console.log("hcc>>show_math_user_info: url: ", json_object.avatarurl);
                         if (json_object.avatarurl && !StringUtil.isEmptyString(json_object.avatarurl)) {
                             this.set_headimg_url(this.seek_child_by_name(infoNode, "KW_IMG_HEAD"), json_object.avatarurl ,80);
@@ -111,30 +109,33 @@ export default class MatchDialog extends UIDialog {
                         textNode.stopAllActions();
                     }
                 }else{
-                    this.set_string(this.view["KW_TEXT_TIP"], "请稍候，正在匹配中...");
-                    let textNode = this.view["KW_TEXT_TIP"];
-                    if(textNode){
-                        let tmpnumber = 0;
-                        let tmpStr = ".";
-                        let delay = cc.delayTime(0.5);
-                        let callfunc = cc.callFunc(function(){
-                            tmpnumber++;
-                            if(tmpnumber % 3 == 0){
-                                tmpStr = "...";
-                            }else if (tmpnumber % 3 == 1){
-                                tmpStr = ".";
-                            }else{
-                                tmpStr = "..";
-                            } 
-                            this.set_string(this.view["KW_TEXT_TIP"], "请稍候，正在匹配中" + tmpStr);
-                        }.bind(this));
-                        textNode.stopAllActions();
-                        textNode.runAction(cc.repeatForever(cc.sequence(delay, callfunc)))
-                    }
+                    this.set_string(this.view["KW_TEXT_TIP"], "请稍候，正在匹配中");
                 }
             } else if (status == Response.NOT_YOUR_TURN) {
-                this.set_string(this.view["KW_TEXT_TIP"], "请稍等候，正在匹配中...");
+                this.set_string(this.view["KW_TEXT_TIP"], "请稍等候，正在匹配中");
             }
+        }
+    }
+
+    show_match_ani(){
+        let textNode = this.view["KW_TEXT_TIP"];
+        if(textNode){
+            let tmpnumber = 0;
+            let tmpStr = ".";
+            let delay = cc.delayTime(0.5);
+            let callfunc = cc.callFunc(function(){
+                tmpnumber++;
+                if(tmpnumber % 3 == 0){
+                    tmpStr = "...";
+                }else if (tmpnumber % 3 == 1){
+                    tmpStr = ".";
+                }else{
+                    tmpStr = "..";
+                } 
+                this.set_string(this.view["KW_TEXT_TIP"], "请稍候，正在匹配中" + tmpStr);
+            }.bind(this));
+            textNode.stopAllActions();
+            textNode.runAction(cc.repeatForever(cc.sequence(delay, callfunc)))
         }
     }
 

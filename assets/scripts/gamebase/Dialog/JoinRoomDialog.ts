@@ -1,6 +1,5 @@
 import UIDialog from '../../framework/uibase/UIDialog';
 import StringUtil from '../../framework/utils/StringUtil';
-import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import { Stype } from '../../framework/protocol/Stype';
 import CellManager from '../../framework/manager/CellManager';
@@ -109,7 +108,7 @@ export default class JoinRoomDialog extends UIDialog {
         this._text_index++;
     }
     
-    on_event_join_room_cell(cell:Cell, type:any, data:any){
+    on_event_join_room_cell(cell:Cell, type:number, data:any){
         console.log("hcc>>on_event_join_room_cell flag:", type, ",data: ", data);
         console.log("hcc>>on_event_join_room_cell message: ", cell.getMessage());
         DialogManager.getInstance().close_loading_dialog();

@@ -23,6 +23,7 @@ export default class LobbySceneTouchEvent extends UIController {
         this.add_click_event(this.view["KW_BTN_BALL_COMPOSE"], this.on_click_ball_compose.bind(this))
         this.add_click_event(this.view["KW_BTN_STORE"], this.on_click_store.bind(this))
         this.add_click_event(this.view["KW_BTN_BALL_LIST"], this.on_click_ball_list.bind(this))
+        this.add_click_event(this.view["KW_BTN_SIGN"], this.on_click_sign.bind(this))
         //带参数的点击事件
         // this.add_click_evenet_with_data(this.view["KW_BTN_BALL"], "on_click_ball_dialog_data",[1,2,3,5]) // test
     }
@@ -98,4 +99,7 @@ export default class LobbySceneTouchEvent extends UIController {
         }
     }
 
+    on_click_sign(sender: cc.Component){
+        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogSign", "SignDialog")
+    }
 }

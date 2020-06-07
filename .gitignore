@@ -57,3 +57,4 @@ remote-assets/
 res_test/
 
 node_modules/
+.VSCodeCounter/

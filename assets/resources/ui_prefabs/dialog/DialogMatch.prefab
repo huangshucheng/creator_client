@@ -1181,8 +1181,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "请稍后，正在匹配中",
-    "_N$string": "请稍后，正在匹配中",
+    "_string": "请稍候，正在匹配中",
+    "_N$string": "请稍候，正在匹配中",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,

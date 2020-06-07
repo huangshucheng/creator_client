@@ -333,7 +333,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 111.99800000000016,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -398,7 +398,7 @@
     "_enabled": true,
     "alignMode": 1,
     "_target": null,
-    "_alignFlags": 4,
+    "_alignFlags": 16,
     "_left": 495,
     "_right": 495,
     "_top": 0,

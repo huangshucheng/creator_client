@@ -52,6 +52,7 @@ export default class GameHoodleRecvMsg extends UIController {
         this.do_on_view("GameHoodleShowUI", "set_power_percent_visible", true);
         this.do_on_view("GameHoodleShowUI", "clear_all_ball");
         this.do_on_view("GameHoodleShowUI", "show_all_ball");
+        this.do_on_view("GameHoodleShowUI","show_edge_center",true);
         //test
         // showUIScript.show_ball_shooted_animation(RoomData.getInstance().get_self_seatid());
     }
@@ -143,6 +144,7 @@ export default class GameHoodleRecvMsg extends UIController {
     //小结算
     on_event_game_result(body: any){
         this.do_on_view("GameHoodleShowUI","set_power_percent_visible",false);
+        this.do_on_view("GameHoodleShowUI", "show_edge_center", false);
     }
 
     //大结算

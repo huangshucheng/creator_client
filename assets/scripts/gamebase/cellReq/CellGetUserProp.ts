@@ -1,0 +1,34 @@
+//玩家道具:金币等
+import { Stype } from '../../framework/protocol/Stype';
+import CellBase = require('../../framework/cell/CellBase');
+import DialogManager from '../../framework/manager/DialogManager';
+import { Cell } from '../../framework/cell/Cell';
+import { Cmd } from '../../framework/protocol/GameHoodleProto';
+
+class CellGetUserProp extends CellBase {
+
+    start(body:any, timeOutTime:number): boolean {
+        DialogManager.getInstance().show_loading_dialog();
+        if (!super.start(body, Stype.GameHoodle, Cmd.eUserGameInfoReq, timeOutTime)) {
+            return false;
+        }
+        return true;
+    }
+
+    onMsgReceive(stype:number, ctype:number, body:any) {
+        if (stype != Stype.GameHoodle || ctype != Cmd.eUserGameInfoRes){
+            return;
+        }
+        this.success(body);
+    }
+
+    dealCell(type: number, data?: any) {
+        super.dealCell(type, data);
+        DialogManager.getInstance().close_loading_dialog();
+        if (type == Cell.TYPE.TIMEOUT) {
+            DialogManager.getInstance().show_weak_hint("" + this.getMessage());
+        }
+    }
+}
+
+export = CellGetUserProp;
