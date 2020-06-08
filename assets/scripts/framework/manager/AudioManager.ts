@@ -51,7 +51,8 @@ export class AudioManager {
      */
     public playEffect(url) {
         let id;
-        (<any>cc.AudioClip)._loadByUrl(this.getAudioUrl(url), function (err, clip) {
+        let audioUrl = this.getAudioUrl(url);
+        (<any>cc.AudioClip)._loadByUrl(audioUrl, function (err, clip) {
             if (clip) {
                 id = cc.audioEngine.playEffect(clip, false);
             }

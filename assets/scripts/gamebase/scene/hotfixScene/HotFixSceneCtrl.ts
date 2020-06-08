@@ -30,6 +30,7 @@ export default class HotFixSceneCtrl extends UIController {
     _urlArray: string[] = [
         "ui_prefabs/",
         "textures/",
+        "sounds/",
         "mainfest/",
     ]
 

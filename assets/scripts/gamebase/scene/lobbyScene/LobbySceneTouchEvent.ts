@@ -2,6 +2,7 @@ import UIController from '../../../framework/uibase/UIController';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import GameHoodleConfig from '../../../framework/config/GameHoodleConfig';
+import { AudioManager } from '../../../framework/manager/AudioManager';
 
 const {ccclass, property} = cc._decorator;
 

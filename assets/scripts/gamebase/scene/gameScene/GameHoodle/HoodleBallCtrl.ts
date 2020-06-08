@@ -6,6 +6,7 @@ import GameHoodleData from './GameHoodleData';
 import RoomData from '../../../common/RoomData';
 import Player from '../../../common/Player';
 import StringUtil from "../../../../framework/utils/StringUtil";
+import { AudioManager } from "../../../../framework/manager/AudioManager";
 
 let SHOOT_DISTANCE          = 380;
 let SHOOT_POWER             = 50.0;
@@ -141,7 +142,10 @@ export default class HoodleBallCtrl extends UIController {
     // 物理碰撞
     // 只在两个碰撞体开始接触时被调用一次 001
     onBeginContact(contact:cc.PhysicsContact, selfCollider:cc.PhysicsCollider, otherCollider:cc.PhysicsCollider) {
-        console.log("onBeginContact ball: " + this._ball_name)
+        // console.log("onBeginContact ball: " + this._ball_name)
+        if (selfCollider.node.groupIndex != otherCollider.node.groupIndex){
+            return;
+        }
         let src_seatid = -1;
         let des_seatid = -1;
         let selfScript = selfCollider.getComponent("HoodleBallCtrl");
@@ -162,7 +166,7 @@ export default class HoodleBallCtrl extends UIController {
             return;
         }
 
-        console.log("hcc>>get_src_shoot_seatid： ", this._src_shoot_seatid, ", unick:", src_player.get_unick());
+        // console.log("hcc>>get_src_shoot_seatid： ", this._src_shoot_seatid, ", unick:", src_player.get_unick());
 
         let self_ballid = selfScript.get_ball_id();
         let other_ballid = otherScript.get_ball_id();
@@ -170,7 +174,7 @@ export default class HoodleBallCtrl extends UIController {
         seat_array.push(self_ballid);
         seat_array.push(other_ballid);
         
-        console.log("hcc>>selfballid: " ,self_ballid , " ,otherballid: ", other_ballid);
+        // console.log("hcc>>selfballid: " ,self_ballid , " ,otherballid: ", other_ballid);
         let power_self = GameHoodleData.getInstance().get_power(self_ballid);
         let power_other = GameHoodleData.getInstance().get_power(other_ballid);
 
@@ -185,8 +189,8 @@ export default class HoodleBallCtrl extends UIController {
 
         let selfPlayer:Player = RoomData.getInstance().get_player(src_seatid);
         let otherPlayer:Player = RoomData.getInstance().get_player(des_seatid);
-        console.log("hcc>>src_seatid: " , src_seatid , " ,des_seatid: " , des_seatid);
-        console.log("hcc>>src_player:", selfPlayer.get_unick(), " ,des_player: ", otherPlayer.get_unick());
+        // console.log("hcc>>src_seatid: " , src_seatid , " ,des_seatid: " , des_seatid);
+        // console.log("hcc>>src_player:", selfPlayer.get_unick(), " ,des_player: ", otherPlayer.get_unick());
 
         //发送服务端，玩家碰撞信息
         if(src_seatid != -1 && des_seatid != -1){
@@ -211,6 +215,18 @@ export default class HoodleBallCtrl extends UIController {
     onEndContact(contact:cc.PhysicsContact, selfCollider:cc.PhysicsCollider, otherCollider:cc.PhysicsCollider) {
         // console.log("onEndContact")
         //发送玩家被击中
+
+        // console.log("group: ", selfCollider.node.group, otherCollider.node.group)
+        // console.log("groupIndex: ", selfCollider.node.groupIndex, otherCollider.node.groupIndex )
+
+        if(selfCollider.node.group == "ball" && otherCollider.node.group == "ball"){
+            AudioManager.getInstance().playEffect("ball_and_ball.mp3");
+
+        }
+
+        if (selfCollider.node.groupIndex != otherCollider.node.groupIndex){
+            AudioManager.getInstance().playEffect("ball_and_wall.mp3");
+        }
     }
 
     // 每次将要处理碰撞体接触逻辑时被调用 002
