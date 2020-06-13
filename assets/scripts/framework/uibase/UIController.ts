@@ -105,11 +105,15 @@ export default abstract class UIController extends cc.Component {
         UIFunction.getInstance().add_check_click(target, callback, this);
     }
 
+    add_slide_event(target: cc.Node, callback: Function) {
+        UIFunction.getInstance().add_slide_event(target, callback, this)
+    }
+
     is_checked(target:cc.Node){
         return UIFunction.getInstance().is_checked(target);
     }
 
-    add_to_node(parent: cc.Node, prefab: cc.Prefab, scriptName?: string){
+    add_to_node(parent: cc.Node, prefab:any, scriptName?: string){
         return UIFunction.getInstance().add_to_node(parent, prefab,scriptName)
     }
 

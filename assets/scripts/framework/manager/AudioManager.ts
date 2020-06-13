@@ -1,3 +1,5 @@
+import Storage from '../utils/Storage';
+
 export class AudioManager {
 
     private _musicVolume: number = 1.0;
@@ -8,7 +10,6 @@ export class AudioManager {
         this.init();
     }
 
-    //* 获取音频管理器
     static getInstance(): AudioManager {
         if (!AudioManager._instance) {
             AudioManager._instance = new AudioManager();
@@ -16,13 +17,10 @@ export class AudioManager {
         return this._instance;
     }
 
-    /**
-     * 初始化参数
-     */
     private init() {
         // 初始化音量值
-        let musicVolume = cc.sys.localStorage.getItem("musicVolume");
-        let effectVolume = cc.sys.localStorage.getItem("effectVolume");
+        let musicVolume = Storage.get("musicVolume");
+        let effectVolume = Storage.get("effectVolume");
         this.musicVolume = (musicVolume == null ? this.musicVolume : parseFloat(musicVolume));
         this.effectVolume = (effectVolume == null ? this.effectVolume : parseFloat(effectVolume));
         // 游戏进入后台时触发
@@ -35,20 +33,10 @@ export class AudioManager {
         }.bind(this));
     }
 
-
-    /**
-     * 获取音频地址URL
-     * @param url 音频相对地址
-     */
     private getAudioUrl(url) {
         return cc.url.raw("resources/sounds/" + url);
     }
 
-
-    /**
-     * 播放音效
-     * @param url 音频地址
-     */
     public playEffect(url) {
         let id;
         let audioUrl = this.getAudioUrl(url);
@@ -60,11 +48,6 @@ export class AudioManager {
         return id;
     }
 
-
-    /**
-     * 播放音乐
-     * @param url 音频地址
-     */
     public playMusic(url) {
         let id;
         (<any>cc.AudioClip)._loadByUrl(this.getAudioUrl(url), function (err, clip) {
@@ -75,26 +58,14 @@ export class AudioManager {
         return id;
     }
 
-
-    /**
-     * 暂停播放的音频
-     */
     public pauseAll() {
         cc.audioEngine.pauseAll();
     }
 
-
-    /**
-    * 恢复播放暂停的音频
-    */
     public resumeAll() {
         cc.audioEngine.resumeAll();
     }
 
-
-    /**
-     *  定义_musicVolume的存取器
-     */
     get musicVolume() {
         return this._musicVolume;
     }
@@ -102,13 +73,9 @@ export class AudioManager {
     set musicVolume(volume) {
         this._musicVolume = ((volume >= 0 || volume <= 1) ? volume : this._musicVolume);
         cc.audioEngine.setMusicVolume(this._musicVolume);
-        cc.sys.localStorage.setItem("musicVolume", volume);
+        Storage.set("musicVolume", volume);
     }
 
-
-    /**
-     * 定义_effectVolume的存取器
-     */
     get effectVolume() {
         return this._effectVolume;
     }
@@ -116,7 +83,7 @@ export class AudioManager {
     set effectVolume(volume) {
         this._effectVolume = ((volume >= 0 || volume <= 1) ? volume : this.effectVolume);
         cc.audioEngine.setEffectsVolume(this.effectVolume);
-        cc.sys.localStorage.setItem("effectVolume", volume);
+        Storage.set("effectVolume", volume);
     }
 
 }

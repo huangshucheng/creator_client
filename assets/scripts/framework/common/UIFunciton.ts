@@ -127,6 +127,29 @@ export default class UIFunction {
         }
     }
 
+    add_slide_event(target: cc.Node, callback: Function, obj: any){
+        if (!this.node_exist(target)){
+            return
+        }
+        var component:cc.Component = target.getComponent(cc.Slider);
+        if (!component) {
+            return;
+        }
+
+        let isvalid = cc.isValid(obj);
+        if (!isvalid){
+            return;
+        }
+
+        let func = function () {
+            if(obj && cc.isValid(obj)){
+                callback.call(obj, component)
+            }
+        }
+        target.on("slide", func, obj);
+
+    }
+
     set_string(target: cc.Node, str: string){
         if (!this.node_exist(target)){
             return

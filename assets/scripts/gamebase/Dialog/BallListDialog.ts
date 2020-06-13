@@ -18,6 +18,7 @@ const { ccclass, property } = cc._decorator;
 export default class BallListDialog extends UIDialog {
 
     _ball_info_str = "";
+    _cur_user_ball_level = "1";
 
     onLoad(){
         super.onLoad()
@@ -90,6 +91,7 @@ export default class BallListDialog extends UIDialog {
             if(status == Response.OK){
                 let userconfigsobj = JSON.parse(body.userconfigstring);
                 let user_ball_level = userconfigsobj["user_ball_level"];
+                this._cur_user_ball_level = user_ball_level;
                 if(user_ball_level){
                     this.show_cur_use_ball(user_ball_level);
                 }
@@ -105,6 +107,7 @@ export default class BallListDialog extends UIDialog {
                 if (user_ball_level) {
                     this.show_user_ball_info(this._ball_info_str)
                     this.show_cur_use_ball(user_ball_level);
+                    this._cur_user_ball_level = user_ball_level;
                     GameSendGameHoodleMsg.send_get_user_config();
                     DialogManager.getInstance().show_weak_hint("使用成功!");
                 }
@@ -216,12 +219,19 @@ export default class BallListDialog extends UIDialog {
             return
         }
         let level = Number(data.level);
+        let _this = this;
         DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
             if (dialogScript) {
                 let showTextStr = "确定使用（" + level + "）级弹珠吗？"
                 dialogScript.set_content_text(showTextStr);
                 dialogScript.set_btn_callback(
-                    function () { GameSendGameHoodleMsg.send_use_ball(level);},
+                    function () { 
+                        if (Number(_this._cur_user_ball_level) == level) {
+                            DialogManager.getInstance().show_weak_hint("当前已经使用该等级!");
+                            return
+                        }
+                        GameSendGameHoodleMsg.send_use_ball(level);
+                    },
                     function () { },
                     function () { },
                 )

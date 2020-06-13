@@ -2,7 +2,6 @@ import UIController from '../../../framework/uibase/UIController';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import GameHoodleConfig from '../../../framework/config/GameHoodleConfig';
-import { AudioManager } from '../../../framework/manager/AudioManager';
 
 const {ccclass, property} = cc._decorator;
 
@@ -103,4 +102,5 @@ export default class LobbySceneTouchEvent extends UIController {
     on_click_sign(sender: cc.Component){
         DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogSign", "SignDialog")
     }
+
 }

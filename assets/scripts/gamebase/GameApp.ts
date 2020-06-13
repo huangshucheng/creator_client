@@ -71,10 +71,6 @@ export default class GameApp extends UIController {
         DialogManager.getInstance().show_weak_hint("网络断开!")
     }
 
-    test_eval(){
-        console.log("hccccccccccccc>>test_eval");
-    }
-
     //test
     test_func(){
         /*

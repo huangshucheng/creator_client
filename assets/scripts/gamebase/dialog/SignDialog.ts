@@ -91,6 +91,26 @@ export default class SignDialog extends UIDialog {
                 DialogManager.getInstance().show_weak_hint("签到成功");
                 let cell = CellManager.getInstance().start("CellGetUserProp",null,5);
                 CellManager.getInstance().addCellCallBack(cell,this.on_event_ugame_info.bind(this));
+               
+                let rewardconfig = body.rewardconfig;
+                if (rewardconfig){
+                    let rewardObj = JSON.parse(rewardconfig);
+                    let propid = rewardObj.propid;
+                    let propcount = rewardObj.propcount;
+                    let dialog = DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogReward", "RewardDialog");
+                    if (dialog) {
+                        let script = dialog.getComponent("RewardDialog");
+                        if (script) {
+                            let item = script.add_item();
+                            if (item) {
+                                let lobby_coin = "lobby/lobby_coin.png";
+                                this.set_sprite_asyc(this.seek_child_by_name(item, "KW_IMG_ITEM_BODY"),lobby_coin);
+                                this.set_string(this.seek_child_by_name(item, "KW_TEXT_DESC"), propcount);
+                            }
+                        }
+                    }
+                }
+
             }else{
                 DialogManager.getInstance().show_weak_hint("签到失败");
             }

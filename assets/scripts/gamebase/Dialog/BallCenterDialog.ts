@@ -359,15 +359,17 @@ export default class BallCenterDialog extends UIDialog {
         if (resultObj){
             let compose_level = resultObj.level;
             if (compose_level){
-                this.set_visible(this.view["KW_PANEL_COMP_SUCCESS"],true);
-                let ballNameStr = StringUtil.format(BALL_TEXTURE_KEY_STR, compose_level);
-                this.set_sprite_asyc(this.seek_child_by_name(this.view["KW_PANEL_COMP_SUCCESS"], "KW_IMG_BALL_BODY"), ballNameStr);
-                this.set_string(this.seek_child_by_name(this.view["KW_PANEL_COMP_SUCCESS"], "KW_TEXT_LEVEL"), compose_level + "级");
-
-                let ball_bg:cc.Node = this.view["KW_BALL_SHOW_BG"];
-                if(ball_bg){
-                    ball_bg.setScale(0);
-                    ball_bg.runAction(cc.scaleTo(0.2, 2.0, 2.0).easing(cc.easeBackOut()));
+                let dialog =  DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogReward", "RewardDialog");
+                if (dialog){
+                    let script = dialog.getComponent("RewardDialog");
+                    if (script){
+                        let item = script.add_item();
+                        if(item){
+                            let ballNameStr = StringUtil.format(BALL_TEXTURE_KEY_STR, compose_level);
+                            this.set_sprite_asyc(this.seek_child_by_name(item,"KW_IMG_ITEM_BODY"), ballNameStr);
+                            this.set_string(this.seek_child_by_name(item, "KW_TEXT_DESC"), compose_level + "级"); 
+                        }
+                    }
                 }
             }
         }
