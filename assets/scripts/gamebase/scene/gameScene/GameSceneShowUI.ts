@@ -170,7 +170,7 @@ export default class GameSceneShowUI extends UIController {
     }
 
     show_room_id(roomid:string){
-        this.set_string(this.view['KW_TEXT_ROOM_NUM'], "房间号:" + roomid);
+        this.set_string(this.view['KW_TEXT_ROOM_NUM'], "对局号:" + roomid);
     }
 
     show_play_count(countstr:string){

@@ -79,7 +79,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new GameScene())
             }else{
-                DialogManager.getInstance().show_weak_hint("房间创建失败!")
+                DialogManager.getInstance().show_weak_hint("对局创建失败!")
             }
         }
     }
@@ -90,7 +90,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new GameScene())
             }else{
-                DialogManager.getInstance().show_weak_hint("加入房间失败!")
+                DialogManager.getInstance().show_weak_hint("加入对局失败!")
             }
         }
         RoomData.getInstance().set_share_roomid("");
@@ -102,8 +102,6 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
                 RoomData.getInstance().clear_room_data();
-            }else{
-                DialogManager.getInstance().show_weak_hint("退出房间失败!")
             }
         }
     }
@@ -114,8 +112,6 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
                 RoomData.getInstance().clear_room_data();
-            }else{
-                DialogManager.getInstance().show_weak_hint("解散房间失败!")
             }
         }
     }
@@ -131,8 +127,6 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
             let status = body.status
             if(status == Response.OK){
                 SceneManager.getInstance().enter_scene_asyc(new GameScene())
-            }else{
-                DialogManager.getInstance().show_weak_hint("返回房间失败!")
             }
         }
     }

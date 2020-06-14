@@ -446,7 +446,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 200,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -494,8 +494,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "加入房间",
-    "_N$string": "加入房间",
+    "_string": "输入对局号",
+    "_N$string": "输入对局号",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,

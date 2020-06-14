@@ -3397,8 +3397,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "创建房间",
-    "_N$string": "创建房间",
+    "_string": "创建对局",
+    "_N$string": "创建对局",
     "_fontSize": 60,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -3781,8 +3781,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "返回房间",
-    "_N$string": "返回房间",
+    "_string": "返回对局",
+    "_N$string": "返回对局",
     "_fontSize": 60,
     "_lineHeight": 60,
     "_enableWrapText": true,
@@ -4062,8 +4062,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "加入房间",
-    "_N$string": "加入房间",
+    "_string": "加入对局",
+    "_N$string": "加入对局",
     "_fontSize": 60,
     "_lineHeight": 60,
     "_enableWrapText": true,

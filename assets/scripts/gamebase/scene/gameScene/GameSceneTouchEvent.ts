@@ -75,7 +75,7 @@ export default class GameSceneTouchEvent extends UIController {
         }
 
         let shareInfo = {
-            title : roomInfo.invite_unick + "请你一起来玩弹珠,房间:" + roomInfo.roomid,
+            title : roomInfo.invite_unick + "请你一起来玩弹珠,对局号:" + roomInfo.roomid,
             imageUrl: share_img_path,
             query: share_room_info,
             success: function(res:any) {

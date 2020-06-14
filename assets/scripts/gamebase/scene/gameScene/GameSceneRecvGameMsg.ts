@@ -69,11 +69,11 @@ export default class GameSceneRecvGameMsg extends UIController {
     on_event_dessolve(body:any){
         if (body){
             if (body.status == Response.OK){
-                DialogManager.getInstance().show_weak_hint("房间已解散!")
+                DialogManager.getInstance().show_weak_hint("对局已解散!")
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
                 RoomData.getInstance().clear_room_data();
             }else{
-                DialogManager.getInstance().show_weak_hint("解散房间失败!")
+                DialogManager.getInstance().show_weak_hint("解散对局失败!")
             }
         }
     }

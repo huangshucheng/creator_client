@@ -3163,8 +3163,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "房间号:----",
-    "_N$string": "房间号:----",
+    "_string": "对局号:----",
+    "_N$string": "对局号:----",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
