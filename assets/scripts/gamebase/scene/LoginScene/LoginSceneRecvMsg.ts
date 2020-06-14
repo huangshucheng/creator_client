@@ -1,7 +1,6 @@
 import UIController from '../../../framework/uibase/UIController';
 import EventManager from '../../../framework/manager/EventManager';
 import EventDefine from '../../../framework/config/EventDefine';
-import Log from '../../../framework/utils/Log';
 import { Cmd, CmdName } from "./../../../framework/protocol/AuthProto";
 import Response from '../../../framework/protocol/Response';
 import SceneManager from '../../../framework/manager/SceneManager';

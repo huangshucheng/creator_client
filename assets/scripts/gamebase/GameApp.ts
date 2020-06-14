@@ -8,6 +8,7 @@ import PlatForm from '../framework/config/PlatForm';
 import UIController from '../framework/uibase/UIController';
 import WeChatLogin from '../framework/utils/WeChatLogin';
 import RoomData from './common/RoomData';
+import CommonDialog from './dialog/CommonDialog';
 
 const {ccclass, property} = cc._decorator;
 
@@ -48,22 +49,24 @@ export default class GameApp extends UIController {
         DialogManager.getInstance().show_weak_hint("网络连接成功!")
     }
 
-    on_net_closed(event:cc.Event.EventCustom){
+    async on_net_closed(event:cc.Event.EventCustom){
         let commonDialog = DialogManager.getInstance().get_dialog("CommonDialog");
         if (commonDialog && cc.isValid(commonDialog)){
             DialogManager.getInstance().close_dialog("CommonDialog");
         }
 
-        DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
-            if (dialogScript) {
-                dialogScript.set_content_text("网络已断开，请重连!");
-                dialogScript.set_btn_callback(
+        let resNode:cc.Node = await DialogManager.getInstance().show_common_dialog();
+        if(resNode){
+            let script: CommonDialog = resNode.getComponent("CommonDialog");
+            if (script) {
+                script.set_content_text("网络已断开，请重连!");
+                script.set_btn_callback(
                     function () { NetWork.getInstance().reconnect();},
                     function () {},
                     function () { NetWork.getInstance().reconnect();},
                 )
             }
-        });
+        }
     }
 
     on_net_error(event:cc.Event.EventCustom){
@@ -74,21 +77,9 @@ export default class GameApp extends UIController {
     //test
     test_func(){
         /*
-        //
         this.node.convertToNodeSpaceAR(cc.v2(100,100)); //将世界坐标ccv2(100,100)转换成node下的节点坐标系  
         this.node.convertToWorldSpaceAR(cc.v2(100,100)); // 将节点坐标系node下的一个点cc.v2(100,100)转换到世界空间坐标系。
         */
-        // let evelstr = "this.test_eval();"
-        /*
-        try {
-            let evelstr = "this.test_eval_1();"
-            let result = eval(evelstr);
-            console.log("hcc>>eval: " , result);
-        } catch (error) {
-            console.error("hcc>> error: " , error);
-            // throw "hcc>>throw";
-        }
-    */
     }
 
 }

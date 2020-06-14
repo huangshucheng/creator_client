@@ -10,6 +10,7 @@ import Player from '../../common/Player';
 import { Stype } from '../../../framework/protocol/Stype';
 import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
 import GameScene from './GameScene';
+import CommonDialog from '../../dialog/CommonDialog';
 
 const {ccclass, property} = cc._decorator;
 
@@ -208,24 +209,29 @@ export default class GameSceneRecvGameMsg extends UIController {
     }
 
     //请求再次对局,返回
-    on_event_play_again(body:any){
+    async on_event_play_again(body:any){
         if(body && body.status == Response.OK){
             if (body.responsecode == Response.OK){
                 //玩家答应了，再次对局
-                DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
-                    if (dialogScript) {
-                        dialogScript.set_content_text("邀请玩家成功！");
-                        dialogScript.set_can_touch_background(true);
+                let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog();
+                if (resNode) {
+                    let script: CommonDialog = resNode.getComponent("CommonDialog");
+                    if (script) {
+                        script.set_content_text("邀请玩家成功!");
+                        script.set_can_touch_background(true);
                     }
-                });
+                }
+
             }else{
                 if(body.responsecode){
-                    DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
-                        if (dialogScript) {
-                            dialogScript.set_content_text("玩家拒绝了您的邀请！");
-                            dialogScript.set_can_touch_background(true);
-                        }
-                    });
+                let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog();
+                if (resNode) {
+                    let script: CommonDialog = resNode.getComponent("CommonDialog");
+                    if (script) {
+                        script.set_content_text("玩家拒绝了您的邀请!");
+                        script.set_can_touch_background(true);
+                    }
+                }
                 }else{
                     DialogManager.getInstance().show_weak_hint("请稍等，正在等待玩家回应。。。");
                 }
@@ -236,22 +242,25 @@ export default class GameSceneRecvGameMsg extends UIController {
     }
 
     //收到别的玩家的对局邀请
-    on_event_play_again_answer(body:any){
+    async on_event_play_again_answer(body:any){
         if (body && body.status == Response.OK) {
             let config = JSON.parse(body.ansconfig);
             let requserunick = config.requserunick;
             let requseruid = config.requseruid;
             let showStr = "玩家【" + requserunick + "】邀请你再次对局，是否答应？"
-            DialogManager.getInstance().show_common_dialog(2, function (dialogScript: any) {
-                if (dialogScript) {
-                    dialogScript.set_content_text(showStr);
-                    dialogScript.set_btn_callback(
+            let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog(2);
+            if (resNode) {
+                let script: CommonDialog = resNode.getComponent("CommonDialog");
+                if (script) {
+                    script.set_content_text(showStr);
+                    script.set_btn_callback(
                         function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.OK); },
-                        function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.INVALID_PARAMS); },
+                        function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.INVALID_PARAMS);},
                         function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.INVALID_PARAMS); },
                     )
                 }
-            });
+            }
+
         }else{
             DialogManager.getInstance().show_weak_hint("对不起，您当前还不能被邀请!");
         }

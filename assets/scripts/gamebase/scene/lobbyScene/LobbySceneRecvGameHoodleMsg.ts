@@ -10,6 +10,8 @@ import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import RoomData from '../../common/RoomData';
 import { Stype } from '../../../framework/protocol/Stype';
 import GameSendGameHoodleMsg from '../gameScene/sendMsg/GameSendGameHoodle';
+import CommonDialog from '../../dialog/CommonDialog';
+import MatchDialog from '../../dialog/MatchDialog';
 
 const {ccclass, property} = cc._decorator;
 
@@ -135,7 +137,7 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
         }
     }
 
-    on_event_match(body:any){
+    async on_event_match(body:any){
         if (body){
             let status = body.status
             if(status == Response.OK){
@@ -157,14 +159,13 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
                             script.show_math_user_info(userinfo);
                         }
                     }else{
-                        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogMatch","MatchDialog",function(resNode:cc.Node){
-                            if(resNode && cc.isValid(resNode)){
-                                let script = resNode.getComponent("MatchDialog");
-                                if(script){
-                                    script.show_math_user_info(userinfo);
-                                }
+                        let resNode:cc.Node = await DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogMatch","MatchDialog");
+                        if(resNode && cc.isValid(resNode)){
+                            let script:MatchDialog = resNode.getComponent("MatchDialog");
+                            if(script){
+                                script.show_math_user_info(userinfo);
                             }
-                        })
+                        }
                     }
                 }
             }else if(status == Response.NOT_YOUR_TURN){
@@ -215,22 +216,24 @@ export default class LobbySceneRecvGameHoodleMsg extends UIController {
     }
 
     //收到别的玩家的对局邀请
-    on_event_play_again_answer(body:any){
+    async on_event_play_again_answer(body:any){
         if (body && body.status == Response.OK) {
             let config = JSON.parse(body.ansconfig);
             let requserunick = config.requserunick;
             let requseruid = config.requseruid;
             let showStr = "玩家【" + requserunick + "】邀请你再次对局，是否答应？"
-            DialogManager.getInstance().show_common_dialog(2, function (dialogScript: any) {
-                if (dialogScript) {
-                    dialogScript.set_content_text(showStr);
-                    dialogScript.set_btn_callback(
+            let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog(2);
+            if (resNode) {
+                let script: CommonDialog = resNode.getComponent("CommonDialog");
+                if (script) {
+                    script.set_content_text(showStr);
+                    script.set_btn_callback(
                         function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.OK); },
                         function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.INVALID_PARAMS); },
                         function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.INVALID_PARAMS); },
                     )
                 }
-            });
+            }
         }
     }
 

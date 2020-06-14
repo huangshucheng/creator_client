@@ -6,6 +6,8 @@ import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
 import PlatForm from '../../../framework/config/PlatForm';
 import WeChatLogin from '../../../framework/utils/WeChatLogin';
+import GameAppConfig from '../../../framework/config/GameAppConfig';
+import Http from '../../../framework/utils/Http';
 
 const {ccclass, property} = cc._decorator;
 
@@ -85,5 +87,22 @@ export default class LoginSceneTouchEvent extends UIController {
             return;
         }
         WeChatLogin.do_wechat_auth_login();
+        //test
+        // this.test_async_fun();
     }
+
+    //test
+    async test_async_fun() {
+        let ret = await this.time_out_func();
+        console.log("test_async_fun>>>>>", ret);
+    }
+
+    async time_out_func() {
+        let weburl = "http://" + GameAppConfig.LOCAL_HOST + ":" + GameAppConfig.REMORE_HTTP_CONFIG_PORT + "/server_info";
+        console.log("weburl: ", weburl);
+        let ret = await Http.getInstance().get(weburl);
+        console.log("ret: ", ret);
+        return ret;
+    }
+
 }

@@ -1,7 +1,9 @@
+import { ISceneBase } from '../uibase/BaseScene';
+
 export default class SceneManager {
     public static readonly instance: SceneManager = new SceneManager();
 
-    private _curScene: any  = null;
+    private _curScene: ISceneBase  = null;
 
     public static getInstance(){
         return SceneManager.instance;
@@ -11,23 +13,17 @@ export default class SceneManager {
         this._curScene == null;
     }
 
-    enter_scene_asyc(scene:any){
-        if(!scene || !scene.preload){
+    async enter_scene_asyc(scene:ISceneBase){
+        if (!scene || !scene.show_scene){
             return;
         }
-        let _this = this;
-        scene.preload(function (error: Error, resource: any) {
-            if(error){
-                console.error("enter_scene_asyc error: " , error)
-                return;
-            }
-            if(_this._curScene){
-                let isDestroy = _this._curScene.get_name() != scene.get_name()
-                _this._curScene.destroy(isDestroy)
-            }
-            _this._curScene = scene;
-            console.log("enter scene:", _this._curScene.get_name())
-        },function (completedCount: number, totalCount: number, item: any) {
-        })
+
+        await scene.show_scene();
+        if(this._curScene){
+            let isDestroy:boolean = this._curScene.get_name() != scene.get_name();
+            this._curScene.destroy_scene(isDestroy);
+        }
+        this._curScene = scene;
+        console.log("enter scene:", this._curScene.get_name());
     }
 }

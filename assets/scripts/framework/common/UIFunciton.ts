@@ -1,5 +1,7 @@
 import { ResourceManager } from '../manager/ResourceManager';
 
+let resMgr = ResourceManager.getInstance();
+
 export default class UIFunction {
     private static readonly instance: UIFunction = new UIFunction();
 
@@ -206,7 +208,7 @@ export default class UIFunction {
         if (!sprite) {
             return;
         }
-        let spriteFrame = ResourceManager.getInstance().getRes(str, cc.SpriteFrame);
+        let spriteFrame = resMgr.getRes(str, cc.SpriteFrame);
         if (spriteFrame) {
             try {
                 if(spriteFrame.isValid == true){
@@ -221,7 +223,7 @@ export default class UIFunction {
     }
 
     //设置图片 异步方法
-    set_sprite_async(target: cc.Node, str: string) {
+    async set_sprite_async(target: cc.Node, path: string) {
         if (!this.node_exist(target)) {
             return;
         }
@@ -229,20 +231,19 @@ export default class UIFunction {
         if (!sprite) {
             return;
         }
-        
-        ResourceManager.getInstance().loadResAsyc(str, cc.SpriteFrame,function (error:Error, spriteFrame:any) {
-            if (spriteFrame) {
-                try {
-                    if(spriteFrame.isValid == true){
-                        sprite.spriteFrame = spriteFrame  
-                    }
-                } catch (error) {
-                    console.error(error)
-                }                
-            } else {
-                console.warn(`load SpriteFrame ${str} failed`)
+        try {
+            let resource = resMgr.getRes(path, cc.SpriteFrame);
+            if (!resource){
+                resource = await resMgr.loadResAsync(path, cc.SpriteFrame);
             }
-        });
+            if (resource){
+                if (resource.isValid == true) {
+                    sprite.spriteFrame = resource;
+                }
+            }
+        } catch (error) {
+            console.warn(error);
+        }
     }
 
     //从plist合图设置图片 同步方法
@@ -255,7 +256,7 @@ export default class UIFunction {
         if (!sprite) {
             return;
         }
-        let atlas = ResourceManager.getInstance().getRes(strAtlas, cc.SpriteAtlas);
+        let atlas = resMgr.getRes(strAtlas, cc.SpriteAtlas);
         if (atlas) {
             let frame = atlas.getSpriteFrame(str);
             if (frame) {
@@ -269,7 +270,7 @@ export default class UIFunction {
     }
 
     //从plist合图设置图片 异步方法
-    set_sprite_from_atlas_async(target: cc.Node, strAtlas: string, str: string) {
+    async set_sprite_from_atlas_async(target: cc.Node, strAtlas: string, str: string) {
         if (!this.node_exist(target)) {
             return;
         }
@@ -277,8 +278,11 @@ export default class UIFunction {
         if (!sprite) {
             return;
         }
-
-        ResourceManager.getInstance().loadResAsyc(strAtlas,cc.SpriteAtlas,function (error:Error, atlas:any) {
+        try {
+            let atlas = resMgr.getRes(strAtlas, cc.SpriteFrame);
+            if(!atlas){
+                atlas = await resMgr.loadResAsync(strAtlas, cc.SpriteAtlas);
+            }
             if (atlas) {
                 let frame = atlas.getSpriteFrame(str);
                 if (frame) {
@@ -286,10 +290,10 @@ export default class UIFunction {
                 } else {
                     console.warn(`SpriteAtlas ${strAtlas} has no ${str} SpriteFrame`)
                 }
-            } else {
-                console.warn(`load SpriteAtlas ${strAtlas} failed`)
             }
-        })
+        } catch (error) {
+            console.warn(error);
+        }
     }
 
     set_visible(target: cc.Node, visible:boolean){
@@ -387,42 +391,52 @@ export default class UIFunction {
     }
 
     // 加载预制体到节点上 异步方法
-     add_prefab_to_node_async(parent: cc.Node, path: string, scriptName?: string , successCallback?:Function) {
-        let _this = this;
-        ResourceManager.getInstance().loadResAsyc(path, cc.Prefab,function(error: Error, resource: any) {
-            if(!error){
-                 let resnode = _this.add_to_node(parent,resource,scriptName)
-                if(successCallback){
-                    successCallback(resnode);
-                }
-            }            
-        })
+     async add_prefab_to_node_async(parent: cc.Node, path: string, scriptName?: string) {
+        try {
+            let resource:any = resMgr.getRes(path, cc.Prefab);
+            if(!resource){
+                console.log("add_prefab_to_node_async>> resource: ", path, " is not exist!!");
+                resource = await resMgr.loadResAsync(path, cc.Prefab);
+            }else{
+                console.log("add_prefab_to_node_async>> resource: ", path, " is exist!!");
+            }
+            if(resource){
+                return this.add_to_node(parent, resource, scriptName);
+            }
+         } catch (error) {
+             console.warn(error);
+         }
     };
 
     // 加载预制体到节点上 同步方法
     add_prefab_to_node(parent: cc.Node, path: string, scriptName: string = null) {
-        let prefab = ResourceManager.getInstance().getRes(path, cc.Prefab)
+        let prefab = resMgr.getRes(path, cc.Prefab)
         if(prefab){
             return this.add_to_node(parent, prefab, scriptName)
         }
     };
 
-    //添加prefab到场景中 异步函数 TODO
-   add_prefab_to_scene_async(path: string, scriptName: string = null, successCallback?:Function) {
-        let _this = this;
-        ResourceManager.getInstance().loadResAsyc(path, cc.Prefab, function(error: Error, resource: any) {
-            if(!error){
-                 let resnode = _this.add_to_scene(resource,scriptName)
-                 if(successCallback){
-                    successCallback(resnode)
-                 }
-            }            
-        })
+    //添加prefab到场景中,异步函数
+   async add_prefab_to_scene_async(path: string, scriptName?: string) {
+       try {
+           let resource = resMgr.getRes(path, cc.Prefab);
+           if(!resource){
+               resource = await resMgr.loadResAsync(path, cc.Prefab);
+               console.log("resource: ", path, " is not exist!!");
+            }else{
+                console.log("resource: " , path, " is exist!!");
+           }
+           if (resource) {
+               return this.add_to_scene(resource, scriptName);
+           }
+       } catch (error) {
+           console.warn(error);
+       }
     }
 
     //添加prefab到场景中 同步函数
     add_prefab_to_scene(path: string, scriptName: string = null) {
-        let prefab = ResourceManager.getInstance().getRes(path, cc.Prefab)
+        let prefab = resMgr.getRes(path, cc.Prefab)
         if(prefab){
             return this.add_to_scene(prefab, scriptName)
         }

@@ -1,44 +1,37 @@
-import { ResourceManager } from "../manager/ResourceManager";
 import UIFunction from "../common/UIFunciton";
 
-interface ISceneBase {
-    preload(successCallfunc:Function, completedCountFunc:Function);
-    destroy(is_release_res:boolean);
-    get_name();
+export interface ISceneBase {
+    show_scene():void;
+    destroy_scene(is_release_res:boolean):void;
+    get_name():string;
 }
 
 export default class BaseScene implements ISceneBase {
 
-    protected _prefab_name = "";
-    protected _script_name = "";
-    protected _canvas = null;
-    protected _scene_ui = null;
-    protected _scene_name = "BaseScene";
+    protected _prefab_name:string   = "";
+    protected _script_name:string   = "";
+    protected _scene_name:string    = "BaseScene";
+    protected _scene_ui:cc.Node     = null;
 
     constructor(){
-        this._canvas = cc.find("Canvas")
     }
 
-    preload(successCallfunc:Function, completedCountFunc:Function){
-        let _this = this;
-        ResourceManager.getInstance().loadResAsyc(this._prefab_name, cc.Prefab, function(error: Error, resource: any){
-            if(successCallfunc){
-                successCallfunc(error, resource)
-                _this._scene_ui = UIFunction.getInstance().add_to_scene(resource, _this._script_name)
+    async show_scene(){
+        try {
+            if (this._prefab_name != "" && this._script_name != ""){
+                this._scene_ui = await UIFunction.getInstance().add_prefab_to_scene_async(this._prefab_name,this._script_name);
+            }else{
+                console.warn("prefab_name and script_name is empty string!!");    
             }
-        },function (completedCount: number, totalCount: number, item: any){
-            if (completedCountFunc){
-                completedCountFunc(completedCount, totalCount, item)
-                // console.log("load scene: " + _this._scene_name + " ,percent: " + completedCount + "/" + totalCount);
-            }
-        }) 
+        } catch (error) {
+            console.warn(error);
+        }
     }
- 
+
     //销毁场景和资源
-    destroy(is_release_res:boolean){
+    destroy_scene(is_release_res:boolean){
         if(this._scene_ui){
             this._scene_ui.destroy()
-            // this._scene_ui.active = false;
         }
 
         if(is_release_res){

@@ -16,17 +16,13 @@ export default class DialogManager{
         return DialogManager.instance;
     }
 
-    show_dialog_asyc(path: string, scriptName: string, successCallback?:Function){
-        let _this = this;
-        UIFunction.getInstance().add_prefab_to_scene_async(path, scriptName ,function (resNode:any) {
-            if(successCallback){
-                successCallback(resNode)
-            }
-            if(resNode){
-                resNode.zIndex = DialogZorder.dialog;
-                _this._popMap[scriptName] = resNode;
-            }
-        })
+    async show_dialog_async(path: string, scriptName: string){
+        let resNode:cc.Node = await UIFunction.getInstance().add_prefab_to_scene_async(path, scriptName);
+        if (resNode){
+            resNode.zIndex = DialogZorder.dialog;
+            this._popMap[scriptName] = resNode;
+            return resNode;
+        }
     }
 
     show_dialog(path: string, scriptName: string): cc.Node {
@@ -85,16 +81,15 @@ export default class DialogManager{
         this._weakhint.dequeue()
     }
 
-    show_weak_hint(str: string) {
-        let _this = this;
-        this.show_dialog_asyc("ui_prefabs/dialog/DialogWeakHint", "WeakHintDialog",function (resNode:any) {
-            let hint = resNode;
-            if(hint && cc.isValid(hint)){
-                let component: WeakHintDialog = hint.getComponent("WeakHintDialog")
+    async show_weak_hint(str: string) {
+        let resNode:cc.Node = await this.show_dialog_async("ui_prefabs/dialog/DialogWeakHint", "WeakHintDialog");
+        if (resNode){
+            if (resNode && cc.isValid(resNode)){
+                let component: WeakHintDialog = resNode.getComponent("WeakHintDialog")
                 if(component && cc.isValid(component) && component.show){
                     component.show(str)
                 }
-                _this._weakhint.forEach((key, value) => {
+                this._weakhint.forEach((key, value) => {
                     let hint: cc.Node = value;
                     if(cc.isValid(hint)){
                         let component: WeakHintDialog = hint.getComponent("WeakHintDialog")
@@ -103,28 +98,28 @@ export default class DialogManager{
                         }
                     }
                 })
-                _this._weakhint.enqueue(hint);
-
+                this._weakhint.enqueue(resNode);
             }
-        })
+        }
     }
 
-    show_common_dialog(btnNum?: number, succeCallfunc?: Function){
+    async show_common_dialog(btnNum?: number){
         if(!btnNum){
             btnNum = 1;
         }
         this.close_dialog("CommonDialog");
-        this.show_dialog_asyc("ui_prefabs/dialog/DialogCommon", "CommonDialog",function (resNode:any) {
-           if(resNode && cc.isValid(resNode)){
-                let component =  resNode.getComponent("CommonDialog")
+        let resNode:cc.Node = await this.show_dialog_async("ui_prefabs/dialog/DialogCommon", "CommonDialog");
+        if (resNode){
+            if(cc.isValid(resNode)){
+               let component =  resNode.getComponent("CommonDialog")
                 if(component && cc.isValid(component)){
-                    component.set_btn_num(btnNum)
-                    if(succeCallfunc){
-                        succeCallfunc(component)
+                    if (component.set_btn_num){
+                        component.set_btn_num(btnNum)
                     }
                 }
-           }
-        })
+                return resNode;
+            }
+        }
     }
 
     show_loading_dialog(){

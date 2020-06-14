@@ -11,6 +11,7 @@ import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoo
 import UserInfo from '../../framework/common/UserInfo';
 import { Stype } from '../../framework/protocol/Stype';
 import StringUtil from '../../framework/utils/StringUtil';
+import CommonDialog from './CommonDialog';
 
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
@@ -167,7 +168,7 @@ export default class StoreDialog extends UIDialog {
         }
     }
 
-    on_click_product(event: cc.Event, data: any){
+    async on_click_product(event: cc.Event, data: any){
         if(!data){
             return;
         }
@@ -180,17 +181,18 @@ export default class StoreDialog extends UIDialog {
             propprice: data.propprice,
             propinfo: data.propinfo,
         }
-        
-        DialogManager.getInstance().show_common_dialog(2, function (dialogScript: any) {
-            if (dialogScript) {
-                let level_obj = JSON.parse(data.propinfo);
-                let showTextStr = "确定将购买" + data.propcount + "个" + level_obj.level + "级弹珠吗?" + "需要" + data.propprice + "金币哦!"
-                dialogScript.set_content_text(showTextStr);
-                dialogScript.set_btn_callback(
-                    function () { GameSendGameHoodleMsg.send_buy_product(req_body);},
+        let level_obj = JSON.parse(data.propinfo);
+        let showTextStr = "确定将购买" + data.propcount + "个" + level_obj.level + "级弹珠吗?" + "需要" + data.propprice + "金币哦!"
+        let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog();
+        if (resNode) {
+            let script: CommonDialog = resNode.getComponent("CommonDialog");
+            if (script) {
+                script.set_content_text(showTextStr);
+                script.set_btn_callback(
+                    function () { GameSendGameHoodleMsg.send_buy_product(req_body); },
                 )
             }
-        });
+        }
 
     }
 

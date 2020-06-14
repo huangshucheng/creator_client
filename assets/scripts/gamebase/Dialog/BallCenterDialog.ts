@@ -10,6 +10,7 @@ import DialogManager from '../../framework/manager/DialogManager';
 import GameHoodleConfig from '../../framework/config/GameHoodleConfig';
 import { Stype } from '../../framework/protocol/Stype';
 import StringUtil from '../../framework/utils/StringUtil';
+import CommonDialog from './CommonDialog';
 
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
@@ -72,7 +73,7 @@ export default class BallCenterDialog extends UIDialog {
         this.close();
     }
 
-    on_click_compose(sender: cc.Component){
+   async on_click_compose(sender: cc.Component){
         let compose_info = this.get_ball_compose_info();
         let ischeck = this.is_checked(this.view["KW_CHECK_NO_TIP"]);
         console.log("ischeck: " , ischeck);
@@ -83,17 +84,19 @@ export default class BallCenterDialog extends UIDialog {
             if (ischeck){
                 GameSendGameHoodleMsg.send_ball_compose(Number(level));
             }else{
-                DialogManager.getInstance().show_common_dialog(2,function(dialogScript:any) {
-                    if (dialogScript){
+                let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog(2);
+                if (resNode) {
+                    let script: CommonDialog = resNode.getComponent("CommonDialog");
+                    if (script) {
                         let showTextStr = "确定将" + count + "个" + level + "级弹珠合成一个" + (Number(level) + 1) + "级弹珠吗?"
-                        dialogScript.set_content_text(showTextStr);
-                        dialogScript.set_btn_callback(
-                            function () { GameSendGameHoodleMsg.send_ball_compose(Number(level));},
-                            function () { _this.show_user_ball_info(_this._ball_info_str)},
-                            function () {},
+                        script.set_content_text(showTextStr);
+                        script.set_btn_callback(
+                            function () { GameSendGameHoodleMsg.send_ball_compose(Number(level)); },
+                            function () {  _this.show_user_ball_info(_this._ball_info_str)},
+                            function () { },
                         )
                     }
-                });
+                }
             }
         }
     }

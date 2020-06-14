@@ -6,6 +6,7 @@ import Player from '../../../common/Player';
 import HoodleBallManager from "./HoodleBallManager";
 import GameHoodleConfig from "../../../../framework/config/GameHoodleConfig";
 import DialogManager from "../../../../framework/manager/DialogManager";
+import GameResultDialog from "../../../dialog/GameResultDialog";
 
 let PROGRESS_SPEED = 0.02
 
@@ -175,7 +176,7 @@ export default class GameHoodleShowUI extends UIController {
         this.set_power_percent(per);
     }
 
-    show_total_result(body:any){
+    async show_total_result(body:any){
         let show_text = "";
         if (body) {
             let scores = body.scores;
@@ -199,21 +200,19 @@ export default class GameHoodleShowUI extends UIController {
 
             }
         }
-        let _this = this;
-        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogGameResult", "GameResultDialog", function (resNode: cc.Node) {
-            if (resNode) {
-                let script = resNode.getComponent("GameResultDialog");
-                if (script) {
-                    script.set_title_text("结束")
-                    script.set_reward_text("")
-                    script.set_score_text(show_text);
-                }
-                resNode.active = false;
-                _this.scheduleOnce(function () {
-                    resNode.active = true;
-                }, 1.5)
+        let resNode:cc.Node = await DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogGameResult", "GameResultDialog");
+        if (resNode) {
+            let script: GameResultDialog = resNode.getComponent("GameResultDialog");
+            if (script) {
+                script.set_title_text("结束")
+                script.set_reward_text("")
+                script.set_score_text(show_text);
             }
-        })
+            resNode.active = false;
+            this.scheduleOnce(function () {
+                resNode.active = true;
+            }, 1.5)
+        }
     }
 
     show_emoj(body:any){

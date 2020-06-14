@@ -8,8 +8,4 @@ export default class LoginScene extends BaseScene {
         this._script_name   = "LoginSceneCtrl"
         this._scene_name    = "LoginScene";
     }
-
-    destroy(is_release_res:boolean){
-        super.destroy(is_release_res)
-    }
 }

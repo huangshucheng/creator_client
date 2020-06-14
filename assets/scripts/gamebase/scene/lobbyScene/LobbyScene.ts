@@ -8,8 +8,4 @@ export default class LobbyScene extends BaseScene {
         this._script_name   = "LobbySceneCtrl"
         this._scene_name    = "LobbyScene";
     }
-
-    destroy(is_release_res:boolean){
-        super.destroy(is_release_res)
-    }
 }

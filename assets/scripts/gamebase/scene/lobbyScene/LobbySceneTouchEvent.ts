@@ -2,6 +2,8 @@ import UIController from '../../../framework/uibase/UIController';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import GameHoodleConfig from '../../../framework/config/GameHoodleConfig';
+import Http from '../../../framework/utils/Http';
+import GameAppConfig from '../../../framework/config/GameAppConfig';
 
 const {ccclass, property} = cc._decorator;
 
@@ -32,11 +34,10 @@ export default class LobbySceneTouchEvent extends UIController {
     on_click_ball_dialog_data(event: cc.Event, customEventData: any) {
         // let tgNode: cc.Node = event.target;
         // let btn = tgNode.getComponent(cc.Button);
-        // console.log("hccccc11111", customEventData, btn.name, tgNode.name);
     }
 
     on_click_set(sender:cc.Component) {
-        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogMyCenter","MyCenterDialog")
+        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogMyCenter","MyCenterDialog")
     }
 
     on_click_create_room(sender:cc.Component){
@@ -49,11 +50,11 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_join_room(sender: cc.Component){
-        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogJoinRoom","JoinRoomDialog")
+        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogJoinRoom","JoinRoomDialog")
     }
 
     on_click_head(sender: cc.Component){
-        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogMyCenter","MyCenterDialog")
+        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogMyCenter","MyCenterDialog")
     }
 
     on_click_back_room(sender: cc.Component){
@@ -74,21 +75,15 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_ball_compose(sender: cc.Component){
-        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogBallCenter","BallCenterDialog")
+        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogBallCenter","BallCenterDialog")
     }
 
     on_click_store(sender: cc.Component){
-        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogStore", "StoreDialog")
-
-        //test
-        // DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogLoading", "LoadingDialog");
-        // DialogManager.getInstance().close_dialog("LoadingDialog");
-        // DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogVideoAd", "VideoAdDialog");
-        // DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogGameStart", "GameStartDialog");
+        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogStore", "StoreDialog")
     }
 
     on_click_ball_list(sender:cc.Component){
-        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogBallList", "BallListDialog")
+        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogBallList", "BallListDialog")
     }
 
     add_room_list_click(confobj:any){
@@ -100,7 +95,7 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_sign(sender: cc.Component){
-        DialogManager.getInstance().show_dialog_asyc("ui_prefabs/dialog/DialogSign", "SignDialog")
+        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogSign", "SignDialog");
     }
 
 }

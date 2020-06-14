@@ -6,6 +6,7 @@ import HotUpdateNew from '../../../framework/hotfix/HotUpdateNew';
 import PlatForm from '../../../framework/config/PlatForm';
 import DialogManager from '../../../framework/manager/DialogManager';
 import NetWork from '../../../framework/network/NetWork';
+import CommonDialog from '../../dialog/CommonDialog';
 
 const {ccclass, property} = cc._decorator;
 
@@ -43,29 +44,16 @@ export default class HotFixSceneCtrl extends UIController {
     start () {
         this.setProgress(0);
         this.checkHotUpdate();
-
-        //test 在pc上重启会报错，不知道为什么
-        // DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
-        //     if (dialogScript) {
-        //         let showTextStr = "更新成功,重启游戏!"
-        //         dialogScript.set_content_text(showTextStr);
-        //         dialogScript.set_btn_callback(
-        //             function () { cc.game.restart(); },
-        //             function () { },
-        //             function () { cc.game.restart(); },
-        //         )
-        //     }
-        // });
     }
 
-    checkHotUpdate(){
+    async checkHotUpdate(){
         let hotupdateMgr = HotUpdateNew.getInstance();
         let _this = this;
         hotupdateMgr.checkUpdate(function (isNeedUpdate: boolean) {
             console.log("hcc>>enter_login_scene>>is need hotupdate: " , isNeedUpdate);
             if (isNeedUpdate) {
                 hotupdateMgr.hotUpdateStart();
-                hotupdateMgr.setUpdateCallback(function(isSuccess: boolean, percent?:number, tipString?:string) {
+                hotupdateMgr.setUpdateCallback(async function(isSuccess: boolean, percent?:number, tipString?:string) {
                     console.log("hcc>>hotupdate: isSuccess: " , isSuccess , "  ,percent: " , percent, "  ,tipstring: " , tipString);
                     if (percent){
                         _this.setProgress(percent);
@@ -76,17 +64,18 @@ export default class HotFixSceneCtrl extends UIController {
                     if (isSuccess) {
                         _this.set_string(_this.view["KW_TEXT_PROGRESS_TIP"], "热更新完成!")
                         if (PlatForm.isAndroidNative() || PlatForm.isIOSNative() || PlatForm.isWin32()) {
-                            DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
-                                if (dialogScript) {
-                                    let showTextStr = "更新完成,请重启!"
-                                    dialogScript.set_content_text(showTextStr);
-                                    dialogScript.set_btn_callback(
-                                        function () {  cc.game.restart(); },
-                                        function () {},
+                            let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog();
+                            if (resNode) {
+                                let script: CommonDialog = resNode.getComponent("CommonDialog");
+                                if (script) {
+                                    script.set_content_text("更新完成,请重启!");
+                                    script.set_btn_callback(
+                                        function () { cc.game.restart(); },
+                                        function () { cc.game.restart(); },
                                         function () { cc.game.restart(); },
                                     )
                                 }
-                            });
+                            }
                         }
                     }
                 })

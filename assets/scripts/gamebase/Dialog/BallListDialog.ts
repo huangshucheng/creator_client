@@ -8,6 +8,7 @@ import { ResourceManager } from '../../framework/manager/ResourceManager';
 import { Stype } from '../../framework/protocol/Stype';
 import DialogManager from '../../framework/manager/DialogManager';
 import StringUtil from '../../framework/utils/StringUtil';
+import CommonDialog from './CommonDialog';
 
 let BALL_NAME_KEY_STR = "ball_name_level_"
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
@@ -212,7 +213,7 @@ export default class BallListDialog extends UIDialog {
         }
     }
 
-    on_click_ball_select(event:cc.Event, data:any){
+    async on_click_ball_select(event:cc.Event, data:any){
         let ballComponent: cc.Component = event.target.getComponent(cc.Button);
         console.log("hcc>>on_click_ball_select", ballComponent.node.name, data);
         if(!data){
@@ -220,22 +221,24 @@ export default class BallListDialog extends UIDialog {
         }
         let level = Number(data.level);
         let _this = this;
-        DialogManager.getInstance().show_common_dialog(1, function (dialogScript: any) {
-            if (dialogScript) {
+        let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog();
+        if (resNode) {
+            let script: CommonDialog = resNode.getComponent("CommonDialog");
+            if (script) {
                 let showTextStr = "确定使用（" + level + "）级弹珠吗？"
-                dialogScript.set_content_text(showTextStr);
-                dialogScript.set_btn_callback(
+                script.set_content_text(showTextStr);
+                script.set_btn_callback(
                     function () { 
                         if (Number(_this._cur_user_ball_level) == level) {
                             DialogManager.getInstance().show_weak_hint("当前已经使用该等级!");
                             return
                         }
                         GameSendGameHoodleMsg.send_use_ball(level);
-                    },
+                     },
                     function () { },
                     function () { },
                 )
             }
-        });
+        }
     }
 }

@@ -9,7 +9,4 @@ export default class GameScene extends BaseScene {
         this._scene_name  = "GameScene"
     }
 
-    destroy(is_release_res:boolean){
-        super.destroy(is_release_res)
-    }
 }
