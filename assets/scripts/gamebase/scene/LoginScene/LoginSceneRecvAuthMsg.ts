@@ -1,10 +1,6 @@
 import UIController from '../../../framework/uibase/UIController';
-import EventManager from '../../../framework/manager/EventManager';
-import EventDefine from '../../../framework/config/EventDefine';
-import { Cmd, CmdName } from "./../../../framework/protocol/AuthProto";
+import { Cmd, CmdName } from "../../../framework/protocol/AuthProto";
 import Response from '../../../framework/protocol/Response';
-import SceneManager from '../../../framework/manager/SceneManager';
-import LobbyScene from '../lobbyScene/LobbyScene';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
@@ -15,7 +11,7 @@ import { Stype } from '../../../framework/protocol/Stype';
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class LoginSceneRecvMsg extends UIController {
+export default class LoginSceneRecvAuthMsg extends UIController {
 
     onLoad() {
         super.onLoad()
@@ -27,9 +23,6 @@ export default class LoginSceneRecvMsg extends UIController {
     }
 
     add_event_dispatcher(){
-        EventManager.on(EventDefine.EVENT_NET_CONNECTED, this, this.on_net_connected);
-        EventManager.on(EventDefine.EVENT_NET_CLOSED, this, this.on_net_closed);
-        EventManager.on(EventDefine.EVENT_NET_ERROR, this, this.on_net_error);
     }
 
     add_cmd_handler_map(){
@@ -51,19 +44,9 @@ export default class LoginSceneRecvMsg extends UIController {
         }
     }
 
-    on_net_connected(event:cc.Event.EventCustom){
-    }
-
-    on_net_closed(event:cc.Event.EventCustom){
-    }
-
-    on_net_error(event:cc.Event.EventCustom){
-    }
-
     on_event_guest_login(body:any){
         console.log("guestlogin udata: ", body)
         if (body.status == Response.OK){
-            SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
             try {
                 let resbody = JSON.parse(body.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
@@ -81,7 +64,6 @@ export default class LoginSceneRecvMsg extends UIController {
     on_event_uname_login(body:any){
         console.log("unamelogin udata: ", body)
         if (body.status == Response.OK){
-            SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
             try {
                 let resbody = JSON.parse(body.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
@@ -90,7 +72,7 @@ export default class LoginSceneRecvMsg extends UIController {
                 console.error(error)
             }
             console.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG) )
-            LobbySendGameHoodleMsg.send_login_logic()
+            LobbySendGameHoodleMsg.send_login_logic();
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + body.status)
         }
@@ -106,8 +88,7 @@ export default class LoginSceneRecvMsg extends UIController {
     on_event_wechat_login(body:any){
         if (body.status == Response.OK) {
             WeChatLogin.hide_auth_btn();
-            SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
-            LobbySendGameHoodleMsg.send_login_logic()
+            LobbySendGameHoodleMsg.send_login_logic();
             try {
                 let resbody = JSON.parse(body.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_WECHAT_SESSION, resbody.unionid);

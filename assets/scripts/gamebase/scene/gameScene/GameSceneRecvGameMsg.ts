@@ -209,11 +209,11 @@ export default class GameSceneRecvGameMsg extends UIController {
     }
 
     //请求再次对局,返回
-    async on_event_play_again(body:any){
+    on_event_play_again(body:any){
         if(body && body.status == Response.OK){
             if (body.responsecode == Response.OK){
                 //玩家答应了，再次对局
-                let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog();
+                let resNode: cc.Node = DialogManager.getInstance().show_common_dialog();
                 if (resNode) {
                     let script: CommonDialog = resNode.getComponent("CommonDialog");
                     if (script) {
@@ -224,7 +224,7 @@ export default class GameSceneRecvGameMsg extends UIController {
 
             }else{
                 if(body.responsecode){
-                let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog();
+                let resNode: cc.Node = DialogManager.getInstance().show_common_dialog();
                 if (resNode) {
                     let script: CommonDialog = resNode.getComponent("CommonDialog");
                     if (script) {
@@ -242,13 +242,13 @@ export default class GameSceneRecvGameMsg extends UIController {
     }
 
     //收到别的玩家的对局邀请
-    async on_event_play_again_answer(body:any){
+    on_event_play_again_answer(body:any){
         if (body && body.status == Response.OK) {
             let config = JSON.parse(body.ansconfig);
             let requserunick = config.requserunick;
             let requseruid = config.requseruid;
             let showStr = "玩家【" + requserunick + "】邀请你再次对局，是否答应？"
-            let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog(2);
+            let resNode: cc.Node = DialogManager.getInstance().show_common_dialog(2);
             if (resNode) {
                 let script: CommonDialog = resNode.getComponent("CommonDialog");
                 if (script) {

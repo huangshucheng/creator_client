@@ -23,11 +23,11 @@ export default class UserInfo {
     }
     //玩家昵称
     static get_unick(){
-        return this._uinfo.unick;
+        return this._uinfo.unick || "";
     }
 
     static get_numberid(){
-        return this._uinfo.numberid;
+        return this._uinfo.numberid || 0;
     }
 
     static set_uface(uface:number){
@@ -35,15 +35,15 @@ export default class UserInfo {
     }
 
     static get_uface(){
-        return this._uinfo.uface;
+        return this._uinfo.uface || 0;
     }
 
     static get_usex(){
-        return this._uinfo.usex;
+        return this._uinfo.usex || 0;
     }
     //登录账号
     static get_uname(){
-        return this._uinfo.uname
+        return this._uinfo.uname || "";
     }
 
     static set_ugame_info(ugame_info:any){
@@ -55,11 +55,11 @@ export default class UserInfo {
     }
 
     static get_uchip(){
-        return this._ugame_info.uchip;
+        return this._ugame_info.uchip || 0;
     }
 
     static get_avatrurl(){
-        return this._uinfo.avatarurl;
+        return this._uinfo.avatarurl || "";
     }
 
 }

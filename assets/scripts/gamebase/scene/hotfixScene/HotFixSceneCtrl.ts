@@ -46,14 +46,14 @@ export default class HotFixSceneCtrl extends UIController {
         this.checkHotUpdate();
     }
 
-    async checkHotUpdate(){
+    checkHotUpdate(){
         let hotupdateMgr = HotUpdateNew.getInstance();
         let _this = this;
         hotupdateMgr.checkUpdate(function (isNeedUpdate: boolean) {
             console.log("hcc>>enter_login_scene>>is need hotupdate: " , isNeedUpdate);
             if (isNeedUpdate) {
                 hotupdateMgr.hotUpdateStart();
-                hotupdateMgr.setUpdateCallback(async function(isSuccess: boolean, percent?:number, tipString?:string) {
+                hotupdateMgr.setUpdateCallback(function(isSuccess: boolean, percent?:number, tipString?:string) {
                     console.log("hcc>>hotupdate: isSuccess: " , isSuccess , "  ,percent: " , percent, "  ,tipstring: " , tipString);
                     if (percent){
                         _this.setProgress(percent);
@@ -64,7 +64,7 @@ export default class HotFixSceneCtrl extends UIController {
                     if (isSuccess) {
                         _this.set_string(_this.view["KW_TEXT_PROGRESS_TIP"], "热更新完成!")
                         if (PlatForm.isAndroidNative() || PlatForm.isIOSNative() || PlatForm.isWin32()) {
-                            let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog();
+                            let resNode: cc.Node = DialogManager.getInstance().show_common_dialog();
                             if (resNode) {
                                 let script: CommonDialog = resNode.getComponent("CommonDialog");
                                 if (script) {
@@ -140,7 +140,7 @@ export default class HotFixSceneCtrl extends UIController {
     }
 
     enter_login_scene() {
-        NetWork.getInstance().connect(); //资源加载完成后，再连接网络
+        NetWork.getInstance().connect(); //连接网络
         SceneManager.getInstance().enter_scene_asyc(new LoginScene());
     }
 }

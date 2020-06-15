@@ -97,7 +97,7 @@ export default class GameSceneTouchEvent extends UIController {
         // SceneManager.getInstance().enter_scene_asyc(new GameScene())
     }
 
-    async on_click_play_again(sender: cc.Component){
+    on_click_play_again(sender: cc.Component){
         let playerSet = RoomData.getInstance().get_all_player();
         let uidSet = [];
         for (let k in playerSet){
@@ -107,7 +107,7 @@ export default class GameSceneTouchEvent extends UIController {
             }
         }
         console.log("hcc>>on_click_play_again uids: " , uidSet);
-        let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog(2);
+        let resNode: cc.Node = DialogManager.getInstance().show_common_dialog(2);
         if (resNode) {
             let script: CommonDialog = resNode.getComponent("CommonDialog");
             if (script) {

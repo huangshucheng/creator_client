@@ -16,7 +16,7 @@
 				"iOS",
 				"HTML5"
 			],
-			"package_download_url": "https://download.cocos.com/CocosServices/plugins/service-tcb/0.6.2_1.6.1.zip",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-tcb/0.6.2_1.6.1.zip",
 			"package_version_desc": "<p>更新日志:<br />\n新增 TCB 服务集成<br />\n",
 			"service_component_name": "service-tcb",
 			"package_versions": [
@@ -44,7 +44,7 @@
 				"Android",
 				"iOS"
 			],
-			"package_download_url": "https://download.cocos.com/CocosServices/plugins/service-mgobe/0.6.4_1.3.0.zip",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-mgobe/0.6.4_1.3.0.zip",
 			"package_version_desc": "<p>更新日志:<br />\n新增 MGOBE 服务集成<br />\n",
 			"service_component_name": "service-mgobe",
 			"package_versions": [
@@ -72,7 +72,7 @@
 				"Android",
 				"iOS"
 			],
-			"package_download_url": "https://download.cocos.com/CocosServices/plugins/service-gme/0.6.1_2.5.2.zip",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-gme/0.6.1_2.5.2.zip",
 			"package_version_desc": "<p>更新日志:<br />\n新增 GME 服务集成<br />\n",
 			"service_component_name": "service-gme",
 			"package_versions": [
@@ -101,7 +101,7 @@
 				"iOS",
 				"HTML5"
 			],
-			"package_download_url": "https://download.cocos.com/CocosServices/plugins/service-analytics/1.2.7_2.1.2.zip",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-analytics/1.2.7_2.1.2.zip",
 			"package_version_desc": "<p><strong>更新日期：</strong> 2020/04/29<br />\n<strong>更新说明：</strong><br />\n1.修复重复点击重新加载云岚插件导致 Creator 插件系统报错的问题。<br />\n2.修复网络重试导致的性能损耗问题。<br />\n3.更新 cocosanalytics.d.ts 语法提示文档。<br />\n4.更新 SDK 版本。<br />\n",
 			"service_component_name": "service-analytics",
 			"package_versions": [
@@ -141,7 +141,7 @@
 				"iOS",
 				"HTML5"
 			],
-			"package_download_url": "https://download.cocos.com/CocosServices/plugins/service-matchvs/1.0.10_3.7.9.10.zip",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-matchvs/1.0.10_3.7.9.10.zip",
 			"package_version_desc": "<p><strong>更新日期：</strong> 2019/9/12\n<strong>更新内容：</strong>\n1.多语言支持\n2.SDK日常更新</p>",
 			"service_component_name": "service-matchvs",
 			"package_versions": [
@@ -175,7 +175,7 @@
 				"iOS",
 				"HTML5"
 			],
-			"package_download_url": "https://download.cocos.com/CocosServices/plugins/service-agora/1.1.0_2.2.3.20_2.5.2.zip",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agora/1.1.0_2.2.3.20_2.5.2.zip",
 			"package_version_desc": "<p><strong>更新日期：</strong> 2020/03/05<br />\n<strong>更新说明：</strong><br />\n1、适配 Cocos Creator 2.3.x<br />\n",
 			"service_component_name": "service-agora",
 			"package_versions": [

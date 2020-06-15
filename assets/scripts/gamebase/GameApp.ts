@@ -35,7 +35,7 @@ export default class GameApp extends UIController {
             RoomData.getInstance().set_share_roomid(roomid_tmp);
         });
 
-        SceneManager.getInstance().enter_scene_asyc(new HotFixScene);
+        SceneManager.getInstance().enter_scene_asyc(new HotFixScene());
         this.test_func()
     }
 
@@ -46,36 +46,38 @@ export default class GameApp extends UIController {
     }
 
     on_net_connected(event:cc.Event.EventCustom){
-        DialogManager.getInstance().show_weak_hint("网络连接成功!")
+        DialogManager.getInstance().show_weak_hint("网络连接成功!");
     }
 
     async on_net_closed(event:cc.Event.EventCustom){
-        let commonDialog = DialogManager.getInstance().get_dialog("CommonDialog");
-        if (commonDialog && cc.isValid(commonDialog)){
+        this.show_net_close_tip();
+    }
+
+    on_net_error(event:cc.Event.EventCustom){
+        this.show_net_close_tip();
+    }
+
+    show_net_close_tip(){
+        let commondialog = DialogManager.getInstance().get_dialog("CommonDialog");
+        if (commondialog && cc.isValid(commondialog)){
             DialogManager.getInstance().close_dialog("CommonDialog");
         }
-
-        let resNode:cc.Node = await DialogManager.getInstance().show_common_dialog();
-        if(resNode){
+        let resNode: cc.Node = DialogManager.getInstance().show_common_dialog();
+        if (resNode) {
             let script: CommonDialog = resNode.getComponent("CommonDialog");
             if (script) {
                 script.set_content_text("网络已断开，请重连!");
                 script.set_btn_callback(
-                    function () { NetWork.getInstance().reconnect();},
+                    function () { NetWork.getInstance().reconnect(); },
                     function () {},
-                    function () { NetWork.getInstance().reconnect();},
+                    function () { NetWork.getInstance().reconnect(); },
                 )
             }
         }
     }
 
-    on_net_error(event:cc.Event.EventCustom){
-        console.log("GameApp hcc>>>on_net_error")
-        DialogManager.getInstance().show_weak_hint("网络断开!")
-    }
-
     //test
-    test_func(){
+    test_func() {
         /*
         this.node.convertToNodeSpaceAR(cc.v2(100,100)); //将世界坐标ccv2(100,100)转换成node下的节点坐标系  
         this.node.convertToWorldSpaceAR(cc.v2(100,100)); // 将节点坐标系node下的一个点cc.v2(100,100)转换到世界空间坐标系。

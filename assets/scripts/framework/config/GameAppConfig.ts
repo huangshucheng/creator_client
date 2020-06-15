@@ -12,5 +12,5 @@ export default class GameAppConfig {
     static REMORE_HTTP_HOT_PORT     = "7000";                       // http 热更新端口
     static REMORE_HTTP_CONFIG_PORT  = "6070";                       // http 配置端口
     static LOCAL_MANIFEST_PATH      = "manifest/project";
-    static IS_WECHAT_GAME_ONLINE    = true;                             //微信小游戏线上环境，需要隐藏账号登录注册入口，只能使用微信登录
+    static IS_WECHAT_GAME_ONLINE    = false;                             //微信小游戏线上环境，需要隐藏账号登录注册入口，只能使用微信登录
 }

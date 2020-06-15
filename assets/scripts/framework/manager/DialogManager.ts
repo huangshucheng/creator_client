@@ -1,6 +1,7 @@
 import Queue from '../utils/Queue';
 import UIFunction from '../common/UIFunciton';
 import WeakHintDialog from '../../gamebase/dialog/WeakHintDialog';
+import CommonDialog from '../../gamebase/dialog/CommonDialog';
 
 enum DialogZorder {
     dialog = 10,
@@ -103,15 +104,15 @@ export default class DialogManager{
         }
     }
 
-    async show_common_dialog(btnNum?: number){
+    show_common_dialog(btnNum?: number){
         if(!btnNum){
             btnNum = 1;
         }
         this.close_dialog("CommonDialog");
-        let resNode:cc.Node = await this.show_dialog_async("ui_prefabs/dialog/DialogCommon", "CommonDialog");
+        let resNode:cc.Node = this.show_dialog("ui_prefabs/dialog/DialogCommon", "CommonDialog");
         if (resNode){
             if(cc.isValid(resNode)){
-               let component =  resNode.getComponent("CommonDialog")
+                let component: CommonDialog =  resNode.getComponent("CommonDialog")
                 if(component && cc.isValid(component)){
                     if (component.set_btn_num){
                         component.set_btn_num(btnNum)

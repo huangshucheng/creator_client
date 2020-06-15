@@ -168,7 +168,7 @@ export default class StoreDialog extends UIDialog {
         }
     }
 
-    async on_click_product(event: cc.Event, data: any){
+    on_click_product(event: cc.Event, data: any){
         if(!data){
             return;
         }
@@ -183,7 +183,7 @@ export default class StoreDialog extends UIDialog {
         }
         let level_obj = JSON.parse(data.propinfo);
         let showTextStr = "确定将购买" + data.propcount + "个" + level_obj.level + "级弹珠吗?" + "需要" + data.propprice + "金币哦!"
-        let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog();
+        let resNode: cc.Node = DialogManager.getInstance().show_common_dialog();
         if (resNode) {
             let script: CommonDialog = resNode.getComponent("CommonDialog");
             if (script) {

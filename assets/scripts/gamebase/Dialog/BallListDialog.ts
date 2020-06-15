@@ -213,7 +213,7 @@ export default class BallListDialog extends UIDialog {
         }
     }
 
-    async on_click_ball_select(event:cc.Event, data:any){
+    on_click_ball_select(event:cc.Event, data:any){
         let ballComponent: cc.Component = event.target.getComponent(cc.Button);
         console.log("hcc>>on_click_ball_select", ballComponent.node.name, data);
         if(!data){
@@ -221,7 +221,7 @@ export default class BallListDialog extends UIDialog {
         }
         let level = Number(data.level);
         let _this = this;
-        let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog();
+        let resNode: cc.Node = DialogManager.getInstance().show_common_dialog();
         if (resNode) {
             let script: CommonDialog = resNode.getComponent("CommonDialog");
             if (script) {

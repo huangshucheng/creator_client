@@ -27,7 +27,7 @@ export default class MyCenterDialog extends UIDialog {
 
     initUI(){
         this.set_string(this.view["KW_TEXT_NAME"],"昵称：" + UserInfo.get_unick())
-        this.set_string(this.view["KW_TEXT_ACCOUNT"],"id: " + UserInfo.get_numberid())
+        this.set_string(this.view["KW_TEXT_ACCOUNT"],"账号: " + UserInfo.get_numberid())
     }
 
     on_click_close(sender: cc.Component){

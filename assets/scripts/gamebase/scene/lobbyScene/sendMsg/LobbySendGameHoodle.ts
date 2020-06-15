@@ -11,7 +11,8 @@ export default class LobbySendGameHoodleMsg {
 
     //登录游戏服务
     static send_login_logic(){
-        LobbySendGameHoodleMsg.send(Cmd.eLoginLogicReq);
+        // LobbySendGameHoodleMsg.send(Cmd.eLoginLogicReq);
+        CellManager.getInstance().start("CellLoginLogic", null, 5);
     }
 
     //创建房间

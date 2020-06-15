@@ -73,7 +73,7 @@ export default class BallCenterDialog extends UIDialog {
         this.close();
     }
 
-   async on_click_compose(sender: cc.Component){
+   on_click_compose(sender: cc.Component){
         let compose_info = this.get_ball_compose_info();
         let ischeck = this.is_checked(this.view["KW_CHECK_NO_TIP"]);
         console.log("ischeck: " , ischeck);
@@ -84,7 +84,7 @@ export default class BallCenterDialog extends UIDialog {
             if (ischeck){
                 GameSendGameHoodleMsg.send_ball_compose(Number(level));
             }else{
-                let resNode: cc.Node = await DialogManager.getInstance().show_common_dialog(2);
+                let resNode: cc.Node = DialogManager.getInstance().show_common_dialog(2);
                 if (resNode) {
                     let script: CommonDialog = resNode.getComponent("CommonDialog");
                     if (script) {
