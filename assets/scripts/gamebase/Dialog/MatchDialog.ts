@@ -108,6 +108,7 @@ export default class MatchDialog extends UIDialog {
                     if(textNode){
                         textNode.stopAllActions();
                     }
+                    this.set_visible(this.view["KW_UI_BTN_CANCEL"],false);
                 }else{
                     this.set_string(this.view["KW_TEXT_TIP"], "请稍候，正在匹配中");
                 }

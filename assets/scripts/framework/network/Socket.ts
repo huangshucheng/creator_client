@@ -36,11 +36,11 @@ export class WSocket implements ISocket {
         };
         webSocket.onerror = (event) => {
             this._delegate.on_socket_error(null);
-            console.error("WSocket websocket connect " + this._url + " error")
+            console.warn("WSocket websocket connect " + this._url + " error")
         };
         webSocket.onclose = (event) => {
             this._delegate.on_socket_closed(event.reason);
-            console.error("WSocket websocket connect " + this._url + " closed")
+            console.warn("WSocket websocket connect " + this._url + " closed")
         }
     }
 

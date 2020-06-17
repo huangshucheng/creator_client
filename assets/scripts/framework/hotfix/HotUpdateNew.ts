@@ -45,46 +45,42 @@ class HotUpdateNew{
         return this._localVersion;
     }
 
-    init(){
+    async init(){
         if (!this.checkPlatForm()) {
             return;
         }
 
         let _this = this;
-        ResourceManager.getInstance().loadResAsyc(GameAppConfig.LOCAL_MANIFEST_PATH, cc.Asset, function (error: Error, resource: any) {
-            if (!error) {
-                _this._manifestUrl = resource;
-                console.log("hcc>>manifest: ", resource.nativeUrl);
-                if(_this._manifestUrl){
-                    let url = _this._manifestUrl.nativeUrl;
-                    console.log("hcc>>_manifestUrl.nativeUrl111>>init: ", url);
-                    
-                    if (cc.loader.md5Pipe) {
-                        url = cc.loader.md5Pipe.transformURL(url);
-                    }
-                    console.log("hcc>>_manifestUrl.nativeUrl222>>init:  ", url);
-                    if (!_this.checkPlatForm()) {
-                        return;
-                    }
-                    let storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + hotUpdatePath);
-                    console.log('hcc>>Storage path for remote asset : ', storagePath);
-                    _this._assetsManager = new jsb.AssetsManager('', storagePath, _this.versionCompareCallback.bind(_this));
-                    _this._assetsManager.setVerifyCallback(_this.assetsVerifyCallback.bind(_this))
-                    if (cc.sys.os === cc.sys.OS_ANDROID) {
-                        _this._assetsManager.setMaxConcurrentTask(2);
-                    }
-                    _this._assetsManager.loadLocalManifest(url);
-
-                    let localMani = _this._assetsManager.getLocalManifest()
-                    if (localMani && localMani.getVersion){
-                        _this._localVersion = localMani.getVersion()
-                        console.log("hcc>>localMani: ", localMani , " ,localversion:",localMani.getVersion())
-                    }
+        let resource:any = await ResourceManager.getInstance().loadResAsync(GameAppConfig.LOCAL_MANIFEST_PATH, cc.Asset);
+        if (resource){
+            _this._manifestUrl = resource;
+            console.log("hcc>>manifest: ", resource.nativeUrl);
+            if(_this._manifestUrl){
+                let url = _this._manifestUrl.nativeUrl;
+                console.log("hcc>>_manifestUrl.nativeUrl111>>init: ", url);
+                
+                if (cc.loader.md5Pipe) {
+                    url = cc.loader.md5Pipe.transformURL(url);
                 }
-            } else {
-                console.log("hcc>>manifest error: ", error);
+                console.log("hcc>>_manifestUrl.nativeUrl222>>init:  ", url);
+                if (!_this.checkPlatForm()) {
+                    return;
+                }
+                let storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + hotUpdatePath);
+                console.log('hcc>>Storage path for remote asset : ', storagePath);
+                _this._assetsManager = new jsb.AssetsManager('', storagePath, _this.versionCompareCallback.bind(_this));
+                _this._assetsManager.setVerifyCallback(_this.assetsVerifyCallback.bind(_this))
+                if (cc.sys.os === cc.sys.OS_ANDROID) {
+                    _this._assetsManager.setMaxConcurrentTask(2);
+                }
+                _this._assetsManager.loadLocalManifest(url);
+                let localMani = _this._assetsManager.getLocalManifest();
+                if (localMani && localMani.getVersion){
+                    _this._localVersion = localMani.getVersion();
+                    console.log("hcc>>localMani: ", localMani , " ,localversion:",localMani.getVersion());
+                }
             }
-        })
+        }
     }
 
     //热更新回调
