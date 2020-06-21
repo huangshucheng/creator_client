@@ -69,7 +69,8 @@ export default class MatchDialog extends UIDialog {
                         if(json_object){
                             headIndex = json_object.uface;
                         }
-                        let ufaceImg = StringUtil.format(BALL_TEXTURE_KEY_STR, json_object.userconfig.user_ball_level);
+                        let ball_level = json_object.userconfig.user_ball_level || 1;
+                        let ufaceImg = StringUtil.format(BALL_TEXTURE_KEY_STR, ball_level);
                         this.set_sprite_asyc(this.seek_child_by_name(infoNode,"KW_IMG_HEAD"),ufaceImg);
                         this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_NAME"),json_object.unick);
                         this.set_string(this.seek_child_by_name(infoNode,"KW_TEXT_GOLD"),json_object.uchip);

@@ -33,11 +33,11 @@ export class AudioManager {
         }.bind(this));
     }
 
-    private getAudioUrl(url) {
+    private getAudioUrl(url:string) {
         return cc.url.raw("resources/sounds/" + url);
     }
 
-    public playEffect(url) {
+    public playEffect(url:string) {
         let id;
         let audioUrl = this.getAudioUrl(url);
         (<any>cc.AudioClip)._loadByUrl(audioUrl, function (err, clip) {
@@ -48,7 +48,7 @@ export class AudioManager {
         return id;
     }
 
-    public playMusic(url) {
+    public playMusic(url:string) {
         let id;
         (<any>cc.AudioClip)._loadByUrl(this.getAudioUrl(url), function (err, clip) {
             if (clip) {
@@ -84,6 +84,10 @@ export class AudioManager {
         this._effectVolume = ((volume >= 0 || volume <= 1) ? volume : this.effectVolume);
         cc.audioEngine.setEffectsVolume(this.effectVolume);
         Storage.set("effectVolume", volume);
+    }
+
+    public playBtnClick(){
+        this.playEffect("btn_pop.wav");
     }
 
 }

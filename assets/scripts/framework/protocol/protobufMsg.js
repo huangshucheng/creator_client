@@ -5179,1768 +5179,6 @@ $root.AuthProto = (function() {
     return AuthProto;
 })();
 
-$root.TalkProto = (function() {
-
-    /**
-     * Namespace TalkProto.
-     * @exports TalkProto
-     * @namespace
-     */
-    var TalkProto = {};
-
-    /**
-     * Cmd enum.
-     * @name TalkProto.Cmd
-     * @enum {string}
-     * @property {number} INVALED=0 INVALED value
-     * @property {number} eLoginReq=1 eLoginReq value
-     * @property {number} eLoginRes=2 eLoginRes value
-     * @property {number} eExitReq=3 eExitReq value
-     * @property {number} eExitRes=4 eExitRes value
-     * @property {number} eSendMsgReq=5 eSendMsgReq value
-     * @property {number} eSendMsgRes=6 eSendMsgRes value
-     * @property {number} eOnUserLogin=7 eOnUserLogin value
-     * @property {number} eOnUserExit=8 eOnUserExit value
-     * @property {number} eOnSendMsg=9 eOnSendMsg value
-     */
-    TalkProto.Cmd = (function() {
-        var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "INVALED"] = 0;
-        values[valuesById[1] = "eLoginReq"] = 1;
-        values[valuesById[2] = "eLoginRes"] = 2;
-        values[valuesById[3] = "eExitReq"] = 3;
-        values[valuesById[4] = "eExitRes"] = 4;
-        values[valuesById[5] = "eSendMsgReq"] = 5;
-        values[valuesById[6] = "eSendMsgRes"] = 6;
-        values[valuesById[7] = "eOnUserLogin"] = 7;
-        values[valuesById[8] = "eOnUserExit"] = 8;
-        values[valuesById[9] = "eOnSendMsg"] = 9;
-        return values;
-    })();
-
-    TalkProto.LoginReq = (function() {
-
-        /**
-         * Properties of a LoginReq.
-         * @memberof TalkProto
-         * @interface ILoginReq
-         */
-
-        /**
-         * Constructs a new LoginReq.
-         * @memberof TalkProto
-         * @classdesc Represents a LoginReq.
-         * @implements ILoginReq
-         * @constructor
-         * @param {TalkProto.ILoginReq=} [properties] Properties to set
-         */
-        function LoginReq(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * Creates a new LoginReq instance using the specified properties.
-         * @function create
-         * @memberof TalkProto.LoginReq
-         * @static
-         * @param {TalkProto.ILoginReq=} [properties] Properties to set
-         * @returns {TalkProto.LoginReq} LoginReq instance
-         */
-        LoginReq.create = function create(properties) {
-            return new LoginReq(properties);
-        };
-
-        /**
-         * Encodes the specified LoginReq message. Does not implicitly {@link TalkProto.LoginReq.verify|verify} messages.
-         * @function encode
-         * @memberof TalkProto.LoginReq
-         * @static
-         * @param {TalkProto.ILoginReq} message LoginReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LoginReq.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified LoginReq message, length delimited. Does not implicitly {@link TalkProto.LoginReq.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof TalkProto.LoginReq
-         * @static
-         * @param {TalkProto.ILoginReq} message LoginReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LoginReq.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a LoginReq message from the specified reader or buffer.
-         * @function decode
-         * @memberof TalkProto.LoginReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {TalkProto.LoginReq} LoginReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LoginReq.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.TalkProto.LoginReq();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a LoginReq message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof TalkProto.LoginReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {TalkProto.LoginReq} LoginReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LoginReq.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a LoginReq message.
-         * @function verify
-         * @memberof TalkProto.LoginReq
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        LoginReq.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        /**
-         * Creates a LoginReq message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof TalkProto.LoginReq
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {TalkProto.LoginReq} LoginReq
-         */
-        LoginReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.TalkProto.LoginReq)
-                return object;
-            return new $root.TalkProto.LoginReq();
-        };
-
-        /**
-         * Creates a plain object from a LoginReq message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof TalkProto.LoginReq
-         * @static
-         * @param {TalkProto.LoginReq} message LoginReq
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        LoginReq.toObject = function toObject() {
-            return {};
-        };
-
-        /**
-         * Converts this LoginReq to JSON.
-         * @function toJSON
-         * @memberof TalkProto.LoginReq
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        LoginReq.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return LoginReq;
-    })();
-
-    TalkProto.LoginRes = (function() {
-
-        /**
-         * Properties of a LoginRes.
-         * @memberof TalkProto
-         * @interface ILoginRes
-         * @property {number} status LoginRes status
-         */
-
-        /**
-         * Constructs a new LoginRes.
-         * @memberof TalkProto
-         * @classdesc Represents a LoginRes.
-         * @implements ILoginRes
-         * @constructor
-         * @param {TalkProto.ILoginRes=} [properties] Properties to set
-         */
-        function LoginRes(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * LoginRes status.
-         * @member {number} status
-         * @memberof TalkProto.LoginRes
-         * @instance
-         */
-        LoginRes.prototype.status = 0;
-
-        /**
-         * Creates a new LoginRes instance using the specified properties.
-         * @function create
-         * @memberof TalkProto.LoginRes
-         * @static
-         * @param {TalkProto.ILoginRes=} [properties] Properties to set
-         * @returns {TalkProto.LoginRes} LoginRes instance
-         */
-        LoginRes.create = function create(properties) {
-            return new LoginRes(properties);
-        };
-
-        /**
-         * Encodes the specified LoginRes message. Does not implicitly {@link TalkProto.LoginRes.verify|verify} messages.
-         * @function encode
-         * @memberof TalkProto.LoginRes
-         * @static
-         * @param {TalkProto.ILoginRes} message LoginRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LoginRes.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified LoginRes message, length delimited. Does not implicitly {@link TalkProto.LoginRes.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof TalkProto.LoginRes
-         * @static
-         * @param {TalkProto.ILoginRes} message LoginRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LoginRes.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a LoginRes message from the specified reader or buffer.
-         * @function decode
-         * @memberof TalkProto.LoginRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {TalkProto.LoginRes} LoginRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LoginRes.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.TalkProto.LoginRes();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.status = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            if (!message.hasOwnProperty("status"))
-                throw $util.ProtocolError("missing required 'status'", { instance: message });
-            return message;
-        };
-
-        /**
-         * Decodes a LoginRes message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof TalkProto.LoginRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {TalkProto.LoginRes} LoginRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LoginRes.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a LoginRes message.
-         * @function verify
-         * @memberof TalkProto.LoginRes
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        LoginRes.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isInteger(message.status))
-                return "status: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a LoginRes message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof TalkProto.LoginRes
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {TalkProto.LoginRes} LoginRes
-         */
-        LoginRes.fromObject = function fromObject(object) {
-            if (object instanceof $root.TalkProto.LoginRes)
-                return object;
-            var message = new $root.TalkProto.LoginRes();
-            if (object.status != null)
-                message.status = object.status | 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a LoginRes message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof TalkProto.LoginRes
-         * @static
-         * @param {TalkProto.LoginRes} message LoginRes
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        LoginRes.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.status = 0;
-            if (message.status != null && message.hasOwnProperty("status"))
-                object.status = message.status;
-            return object;
-        };
-
-        /**
-         * Converts this LoginRes to JSON.
-         * @function toJSON
-         * @memberof TalkProto.LoginRes
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        LoginRes.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return LoginRes;
-    })();
-
-    TalkProto.ExitReq = (function() {
-
-        /**
-         * Properties of an ExitReq.
-         * @memberof TalkProto
-         * @interface IExitReq
-         */
-
-        /**
-         * Constructs a new ExitReq.
-         * @memberof TalkProto
-         * @classdesc Represents an ExitReq.
-         * @implements IExitReq
-         * @constructor
-         * @param {TalkProto.IExitReq=} [properties] Properties to set
-         */
-        function ExitReq(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * Creates a new ExitReq instance using the specified properties.
-         * @function create
-         * @memberof TalkProto.ExitReq
-         * @static
-         * @param {TalkProto.IExitReq=} [properties] Properties to set
-         * @returns {TalkProto.ExitReq} ExitReq instance
-         */
-        ExitReq.create = function create(properties) {
-            return new ExitReq(properties);
-        };
-
-        /**
-         * Encodes the specified ExitReq message. Does not implicitly {@link TalkProto.ExitReq.verify|verify} messages.
-         * @function encode
-         * @memberof TalkProto.ExitReq
-         * @static
-         * @param {TalkProto.IExitReq} message ExitReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        ExitReq.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        /**
-         * Encodes the specified ExitReq message, length delimited. Does not implicitly {@link TalkProto.ExitReq.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof TalkProto.ExitReq
-         * @static
-         * @param {TalkProto.IExitReq} message ExitReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        ExitReq.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes an ExitReq message from the specified reader or buffer.
-         * @function decode
-         * @memberof TalkProto.ExitReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {TalkProto.ExitReq} ExitReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        ExitReq.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.TalkProto.ExitReq();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes an ExitReq message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof TalkProto.ExitReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {TalkProto.ExitReq} ExitReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        ExitReq.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies an ExitReq message.
-         * @function verify
-         * @memberof TalkProto.ExitReq
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        ExitReq.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        /**
-         * Creates an ExitReq message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof TalkProto.ExitReq
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {TalkProto.ExitReq} ExitReq
-         */
-        ExitReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.TalkProto.ExitReq)
-                return object;
-            return new $root.TalkProto.ExitReq();
-        };
-
-        /**
-         * Creates a plain object from an ExitReq message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof TalkProto.ExitReq
-         * @static
-         * @param {TalkProto.ExitReq} message ExitReq
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        ExitReq.toObject = function toObject() {
-            return {};
-        };
-
-        /**
-         * Converts this ExitReq to JSON.
-         * @function toJSON
-         * @memberof TalkProto.ExitReq
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        ExitReq.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return ExitReq;
-    })();
-
-    TalkProto.ExitRes = (function() {
-
-        /**
-         * Properties of an ExitRes.
-         * @memberof TalkProto
-         * @interface IExitRes
-         * @property {number} status ExitRes status
-         */
-
-        /**
-         * Constructs a new ExitRes.
-         * @memberof TalkProto
-         * @classdesc Represents an ExitRes.
-         * @implements IExitRes
-         * @constructor
-         * @param {TalkProto.IExitRes=} [properties] Properties to set
-         */
-        function ExitRes(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * ExitRes status.
-         * @member {number} status
-         * @memberof TalkProto.ExitRes
-         * @instance
-         */
-        ExitRes.prototype.status = 0;
-
-        /**
-         * Creates a new ExitRes instance using the specified properties.
-         * @function create
-         * @memberof TalkProto.ExitRes
-         * @static
-         * @param {TalkProto.IExitRes=} [properties] Properties to set
-         * @returns {TalkProto.ExitRes} ExitRes instance
-         */
-        ExitRes.create = function create(properties) {
-            return new ExitRes(properties);
-        };
-
-        /**
-         * Encodes the specified ExitRes message. Does not implicitly {@link TalkProto.ExitRes.verify|verify} messages.
-         * @function encode
-         * @memberof TalkProto.ExitRes
-         * @static
-         * @param {TalkProto.IExitRes} message ExitRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        ExitRes.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified ExitRes message, length delimited. Does not implicitly {@link TalkProto.ExitRes.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof TalkProto.ExitRes
-         * @static
-         * @param {TalkProto.IExitRes} message ExitRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        ExitRes.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes an ExitRes message from the specified reader or buffer.
-         * @function decode
-         * @memberof TalkProto.ExitRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {TalkProto.ExitRes} ExitRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        ExitRes.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.TalkProto.ExitRes();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.status = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            if (!message.hasOwnProperty("status"))
-                throw $util.ProtocolError("missing required 'status'", { instance: message });
-            return message;
-        };
-
-        /**
-         * Decodes an ExitRes message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof TalkProto.ExitRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {TalkProto.ExitRes} ExitRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        ExitRes.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies an ExitRes message.
-         * @function verify
-         * @memberof TalkProto.ExitRes
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        ExitRes.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isInteger(message.status))
-                return "status: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates an ExitRes message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof TalkProto.ExitRes
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {TalkProto.ExitRes} ExitRes
-         */
-        ExitRes.fromObject = function fromObject(object) {
-            if (object instanceof $root.TalkProto.ExitRes)
-                return object;
-            var message = new $root.TalkProto.ExitRes();
-            if (object.status != null)
-                message.status = object.status | 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from an ExitRes message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof TalkProto.ExitRes
-         * @static
-         * @param {TalkProto.ExitRes} message ExitRes
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        ExitRes.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.status = 0;
-            if (message.status != null && message.hasOwnProperty("status"))
-                object.status = message.status;
-            return object;
-        };
-
-        /**
-         * Converts this ExitRes to JSON.
-         * @function toJSON
-         * @memberof TalkProto.ExitRes
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        ExitRes.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return ExitRes;
-    })();
-
-    TalkProto.SendMsgReq = (function() {
-
-        /**
-         * Properties of a SendMsgReq.
-         * @memberof TalkProto
-         * @interface ISendMsgReq
-         * @property {string} content SendMsgReq content
-         */
-
-        /**
-         * Constructs a new SendMsgReq.
-         * @memberof TalkProto
-         * @classdesc Represents a SendMsgReq.
-         * @implements ISendMsgReq
-         * @constructor
-         * @param {TalkProto.ISendMsgReq=} [properties] Properties to set
-         */
-        function SendMsgReq(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * SendMsgReq content.
-         * @member {string} content
-         * @memberof TalkProto.SendMsgReq
-         * @instance
-         */
-        SendMsgReq.prototype.content = "";
-
-        /**
-         * Creates a new SendMsgReq instance using the specified properties.
-         * @function create
-         * @memberof TalkProto.SendMsgReq
-         * @static
-         * @param {TalkProto.ISendMsgReq=} [properties] Properties to set
-         * @returns {TalkProto.SendMsgReq} SendMsgReq instance
-         */
-        SendMsgReq.create = function create(properties) {
-            return new SendMsgReq(properties);
-        };
-
-        /**
-         * Encodes the specified SendMsgReq message. Does not implicitly {@link TalkProto.SendMsgReq.verify|verify} messages.
-         * @function encode
-         * @memberof TalkProto.SendMsgReq
-         * @static
-         * @param {TalkProto.ISendMsgReq} message SendMsgReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        SendMsgReq.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.content);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified SendMsgReq message, length delimited. Does not implicitly {@link TalkProto.SendMsgReq.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof TalkProto.SendMsgReq
-         * @static
-         * @param {TalkProto.ISendMsgReq} message SendMsgReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        SendMsgReq.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a SendMsgReq message from the specified reader or buffer.
-         * @function decode
-         * @memberof TalkProto.SendMsgReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {TalkProto.SendMsgReq} SendMsgReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        SendMsgReq.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.TalkProto.SendMsgReq();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.content = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            if (!message.hasOwnProperty("content"))
-                throw $util.ProtocolError("missing required 'content'", { instance: message });
-            return message;
-        };
-
-        /**
-         * Decodes a SendMsgReq message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof TalkProto.SendMsgReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {TalkProto.SendMsgReq} SendMsgReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        SendMsgReq.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a SendMsgReq message.
-         * @function verify
-         * @memberof TalkProto.SendMsgReq
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        SendMsgReq.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isString(message.content))
-                return "content: string expected";
-            return null;
-        };
-
-        /**
-         * Creates a SendMsgReq message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof TalkProto.SendMsgReq
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {TalkProto.SendMsgReq} SendMsgReq
-         */
-        SendMsgReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.TalkProto.SendMsgReq)
-                return object;
-            var message = new $root.TalkProto.SendMsgReq();
-            if (object.content != null)
-                message.content = String(object.content);
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a SendMsgReq message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof TalkProto.SendMsgReq
-         * @static
-         * @param {TalkProto.SendMsgReq} message SendMsgReq
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        SendMsgReq.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.content = "";
-            if (message.content != null && message.hasOwnProperty("content"))
-                object.content = message.content;
-            return object;
-        };
-
-        /**
-         * Converts this SendMsgReq to JSON.
-         * @function toJSON
-         * @memberof TalkProto.SendMsgReq
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        SendMsgReq.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return SendMsgReq;
-    })();
-
-    TalkProto.SendMsgRes = (function() {
-
-        /**
-         * Properties of a SendMsgRes.
-         * @memberof TalkProto
-         * @interface ISendMsgRes
-         * @property {number} status SendMsgRes status
-         */
-
-        /**
-         * Constructs a new SendMsgRes.
-         * @memberof TalkProto
-         * @classdesc Represents a SendMsgRes.
-         * @implements ISendMsgRes
-         * @constructor
-         * @param {TalkProto.ISendMsgRes=} [properties] Properties to set
-         */
-        function SendMsgRes(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * SendMsgRes status.
-         * @member {number} status
-         * @memberof TalkProto.SendMsgRes
-         * @instance
-         */
-        SendMsgRes.prototype.status = 0;
-
-        /**
-         * Creates a new SendMsgRes instance using the specified properties.
-         * @function create
-         * @memberof TalkProto.SendMsgRes
-         * @static
-         * @param {TalkProto.ISendMsgRes=} [properties] Properties to set
-         * @returns {TalkProto.SendMsgRes} SendMsgRes instance
-         */
-        SendMsgRes.create = function create(properties) {
-            return new SendMsgRes(properties);
-        };
-
-        /**
-         * Encodes the specified SendMsgRes message. Does not implicitly {@link TalkProto.SendMsgRes.verify|verify} messages.
-         * @function encode
-         * @memberof TalkProto.SendMsgRes
-         * @static
-         * @param {TalkProto.ISendMsgRes} message SendMsgRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        SendMsgRes.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.status);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified SendMsgRes message, length delimited. Does not implicitly {@link TalkProto.SendMsgRes.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof TalkProto.SendMsgRes
-         * @static
-         * @param {TalkProto.ISendMsgRes} message SendMsgRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        SendMsgRes.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a SendMsgRes message from the specified reader or buffer.
-         * @function decode
-         * @memberof TalkProto.SendMsgRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {TalkProto.SendMsgRes} SendMsgRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        SendMsgRes.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.TalkProto.SendMsgRes();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.status = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            if (!message.hasOwnProperty("status"))
-                throw $util.ProtocolError("missing required 'status'", { instance: message });
-            return message;
-        };
-
-        /**
-         * Decodes a SendMsgRes message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof TalkProto.SendMsgRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {TalkProto.SendMsgRes} SendMsgRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        SendMsgRes.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a SendMsgRes message.
-         * @function verify
-         * @memberof TalkProto.SendMsgRes
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        SendMsgRes.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isInteger(message.status))
-                return "status: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates a SendMsgRes message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof TalkProto.SendMsgRes
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {TalkProto.SendMsgRes} SendMsgRes
-         */
-        SendMsgRes.fromObject = function fromObject(object) {
-            if (object instanceof $root.TalkProto.SendMsgRes)
-                return object;
-            var message = new $root.TalkProto.SendMsgRes();
-            if (object.status != null)
-                message.status = object.status | 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a SendMsgRes message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof TalkProto.SendMsgRes
-         * @static
-         * @param {TalkProto.SendMsgRes} message SendMsgRes
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        SendMsgRes.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.status = 0;
-            if (message.status != null && message.hasOwnProperty("status"))
-                object.status = message.status;
-            return object;
-        };
-
-        /**
-         * Converts this SendMsgRes to JSON.
-         * @function toJSON
-         * @memberof TalkProto.SendMsgRes
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        SendMsgRes.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return SendMsgRes;
-    })();
-
-    TalkProto.OnUserLogin = (function() {
-
-        /**
-         * Properties of an OnUserLogin.
-         * @memberof TalkProto
-         * @interface IOnUserLogin
-         * @property {string} ip OnUserLogin ip
-         * @property {number} port OnUserLogin port
-         */
-
-        /**
-         * Constructs a new OnUserLogin.
-         * @memberof TalkProto
-         * @classdesc Represents an OnUserLogin.
-         * @implements IOnUserLogin
-         * @constructor
-         * @param {TalkProto.IOnUserLogin=} [properties] Properties to set
-         */
-        function OnUserLogin(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * OnUserLogin ip.
-         * @member {string} ip
-         * @memberof TalkProto.OnUserLogin
-         * @instance
-         */
-        OnUserLogin.prototype.ip = "";
-
-        /**
-         * OnUserLogin port.
-         * @member {number} port
-         * @memberof TalkProto.OnUserLogin
-         * @instance
-         */
-        OnUserLogin.prototype.port = 0;
-
-        /**
-         * Creates a new OnUserLogin instance using the specified properties.
-         * @function create
-         * @memberof TalkProto.OnUserLogin
-         * @static
-         * @param {TalkProto.IOnUserLogin=} [properties] Properties to set
-         * @returns {TalkProto.OnUserLogin} OnUserLogin instance
-         */
-        OnUserLogin.create = function create(properties) {
-            return new OnUserLogin(properties);
-        };
-
-        /**
-         * Encodes the specified OnUserLogin message. Does not implicitly {@link TalkProto.OnUserLogin.verify|verify} messages.
-         * @function encode
-         * @memberof TalkProto.OnUserLogin
-         * @static
-         * @param {TalkProto.IOnUserLogin} message OnUserLogin message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        OnUserLogin.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.ip);
-            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.port);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified OnUserLogin message, length delimited. Does not implicitly {@link TalkProto.OnUserLogin.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof TalkProto.OnUserLogin
-         * @static
-         * @param {TalkProto.IOnUserLogin} message OnUserLogin message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        OnUserLogin.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes an OnUserLogin message from the specified reader or buffer.
-         * @function decode
-         * @memberof TalkProto.OnUserLogin
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {TalkProto.OnUserLogin} OnUserLogin
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        OnUserLogin.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.TalkProto.OnUserLogin();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.ip = reader.string();
-                    break;
-                case 2:
-                    message.port = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            if (!message.hasOwnProperty("ip"))
-                throw $util.ProtocolError("missing required 'ip'", { instance: message });
-            if (!message.hasOwnProperty("port"))
-                throw $util.ProtocolError("missing required 'port'", { instance: message });
-            return message;
-        };
-
-        /**
-         * Decodes an OnUserLogin message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof TalkProto.OnUserLogin
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {TalkProto.OnUserLogin} OnUserLogin
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        OnUserLogin.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies an OnUserLogin message.
-         * @function verify
-         * @memberof TalkProto.OnUserLogin
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        OnUserLogin.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isString(message.ip))
-                return "ip: string expected";
-            if (!$util.isInteger(message.port))
-                return "port: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates an OnUserLogin message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof TalkProto.OnUserLogin
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {TalkProto.OnUserLogin} OnUserLogin
-         */
-        OnUserLogin.fromObject = function fromObject(object) {
-            if (object instanceof $root.TalkProto.OnUserLogin)
-                return object;
-            var message = new $root.TalkProto.OnUserLogin();
-            if (object.ip != null)
-                message.ip = String(object.ip);
-            if (object.port != null)
-                message.port = object.port | 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from an OnUserLogin message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof TalkProto.OnUserLogin
-         * @static
-         * @param {TalkProto.OnUserLogin} message OnUserLogin
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        OnUserLogin.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.ip = "";
-                object.port = 0;
-            }
-            if (message.ip != null && message.hasOwnProperty("ip"))
-                object.ip = message.ip;
-            if (message.port != null && message.hasOwnProperty("port"))
-                object.port = message.port;
-            return object;
-        };
-
-        /**
-         * Converts this OnUserLogin to JSON.
-         * @function toJSON
-         * @memberof TalkProto.OnUserLogin
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        OnUserLogin.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return OnUserLogin;
-    })();
-
-    TalkProto.OnUserExit = (function() {
-
-        /**
-         * Properties of an OnUserExit.
-         * @memberof TalkProto
-         * @interface IOnUserExit
-         * @property {string} ip OnUserExit ip
-         * @property {number} port OnUserExit port
-         */
-
-        /**
-         * Constructs a new OnUserExit.
-         * @memberof TalkProto
-         * @classdesc Represents an OnUserExit.
-         * @implements IOnUserExit
-         * @constructor
-         * @param {TalkProto.IOnUserExit=} [properties] Properties to set
-         */
-        function OnUserExit(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * OnUserExit ip.
-         * @member {string} ip
-         * @memberof TalkProto.OnUserExit
-         * @instance
-         */
-        OnUserExit.prototype.ip = "";
-
-        /**
-         * OnUserExit port.
-         * @member {number} port
-         * @memberof TalkProto.OnUserExit
-         * @instance
-         */
-        OnUserExit.prototype.port = 0;
-
-        /**
-         * Creates a new OnUserExit instance using the specified properties.
-         * @function create
-         * @memberof TalkProto.OnUserExit
-         * @static
-         * @param {TalkProto.IOnUserExit=} [properties] Properties to set
-         * @returns {TalkProto.OnUserExit} OnUserExit instance
-         */
-        OnUserExit.create = function create(properties) {
-            return new OnUserExit(properties);
-        };
-
-        /**
-         * Encodes the specified OnUserExit message. Does not implicitly {@link TalkProto.OnUserExit.verify|verify} messages.
-         * @function encode
-         * @memberof TalkProto.OnUserExit
-         * @static
-         * @param {TalkProto.IOnUserExit} message OnUserExit message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        OnUserExit.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.ip);
-            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.port);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified OnUserExit message, length delimited. Does not implicitly {@link TalkProto.OnUserExit.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof TalkProto.OnUserExit
-         * @static
-         * @param {TalkProto.IOnUserExit} message OnUserExit message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        OnUserExit.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes an OnUserExit message from the specified reader or buffer.
-         * @function decode
-         * @memberof TalkProto.OnUserExit
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {TalkProto.OnUserExit} OnUserExit
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        OnUserExit.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.TalkProto.OnUserExit();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.ip = reader.string();
-                    break;
-                case 2:
-                    message.port = reader.int32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            if (!message.hasOwnProperty("ip"))
-                throw $util.ProtocolError("missing required 'ip'", { instance: message });
-            if (!message.hasOwnProperty("port"))
-                throw $util.ProtocolError("missing required 'port'", { instance: message });
-            return message;
-        };
-
-        /**
-         * Decodes an OnUserExit message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof TalkProto.OnUserExit
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {TalkProto.OnUserExit} OnUserExit
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        OnUserExit.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies an OnUserExit message.
-         * @function verify
-         * @memberof TalkProto.OnUserExit
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        OnUserExit.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isString(message.ip))
-                return "ip: string expected";
-            if (!$util.isInteger(message.port))
-                return "port: integer expected";
-            return null;
-        };
-
-        /**
-         * Creates an OnUserExit message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof TalkProto.OnUserExit
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {TalkProto.OnUserExit} OnUserExit
-         */
-        OnUserExit.fromObject = function fromObject(object) {
-            if (object instanceof $root.TalkProto.OnUserExit)
-                return object;
-            var message = new $root.TalkProto.OnUserExit();
-            if (object.ip != null)
-                message.ip = String(object.ip);
-            if (object.port != null)
-                message.port = object.port | 0;
-            return message;
-        };
-
-        /**
-         * Creates a plain object from an OnUserExit message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof TalkProto.OnUserExit
-         * @static
-         * @param {TalkProto.OnUserExit} message OnUserExit
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        OnUserExit.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.ip = "";
-                object.port = 0;
-            }
-            if (message.ip != null && message.hasOwnProperty("ip"))
-                object.ip = message.ip;
-            if (message.port != null && message.hasOwnProperty("port"))
-                object.port = message.port;
-            return object;
-        };
-
-        /**
-         * Converts this OnUserExit to JSON.
-         * @function toJSON
-         * @memberof TalkProto.OnUserExit
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        OnUserExit.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return OnUserExit;
-    })();
-
-    TalkProto.OnSendMsg = (function() {
-
-        /**
-         * Properties of an OnSendMsg.
-         * @memberof TalkProto
-         * @interface IOnSendMsg
-         * @property {string} ip OnSendMsg ip
-         * @property {number} port OnSendMsg port
-         * @property {string} content OnSendMsg content
-         */
-
-        /**
-         * Constructs a new OnSendMsg.
-         * @memberof TalkProto
-         * @classdesc Represents an OnSendMsg.
-         * @implements IOnSendMsg
-         * @constructor
-         * @param {TalkProto.IOnSendMsg=} [properties] Properties to set
-         */
-        function OnSendMsg(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * OnSendMsg ip.
-         * @member {string} ip
-         * @memberof TalkProto.OnSendMsg
-         * @instance
-         */
-        OnSendMsg.prototype.ip = "";
-
-        /**
-         * OnSendMsg port.
-         * @member {number} port
-         * @memberof TalkProto.OnSendMsg
-         * @instance
-         */
-        OnSendMsg.prototype.port = 0;
-
-        /**
-         * OnSendMsg content.
-         * @member {string} content
-         * @memberof TalkProto.OnSendMsg
-         * @instance
-         */
-        OnSendMsg.prototype.content = "";
-
-        /**
-         * Creates a new OnSendMsg instance using the specified properties.
-         * @function create
-         * @memberof TalkProto.OnSendMsg
-         * @static
-         * @param {TalkProto.IOnSendMsg=} [properties] Properties to set
-         * @returns {TalkProto.OnSendMsg} OnSendMsg instance
-         */
-        OnSendMsg.create = function create(properties) {
-            return new OnSendMsg(properties);
-        };
-
-        /**
-         * Encodes the specified OnSendMsg message. Does not implicitly {@link TalkProto.OnSendMsg.verify|verify} messages.
-         * @function encode
-         * @memberof TalkProto.OnSendMsg
-         * @static
-         * @param {TalkProto.IOnSendMsg} message OnSendMsg message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        OnSendMsg.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 2 =*/10).string(message.ip);
-            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.port);
-            writer.uint32(/* id 3, wireType 2 =*/26).string(message.content);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified OnSendMsg message, length delimited. Does not implicitly {@link TalkProto.OnSendMsg.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof TalkProto.OnSendMsg
-         * @static
-         * @param {TalkProto.IOnSendMsg} message OnSendMsg message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        OnSendMsg.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes an OnSendMsg message from the specified reader or buffer.
-         * @function decode
-         * @memberof TalkProto.OnSendMsg
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {TalkProto.OnSendMsg} OnSendMsg
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        OnSendMsg.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.TalkProto.OnSendMsg();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.ip = reader.string();
-                    break;
-                case 2:
-                    message.port = reader.int32();
-                    break;
-                case 3:
-                    message.content = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            if (!message.hasOwnProperty("ip"))
-                throw $util.ProtocolError("missing required 'ip'", { instance: message });
-            if (!message.hasOwnProperty("port"))
-                throw $util.ProtocolError("missing required 'port'", { instance: message });
-            if (!message.hasOwnProperty("content"))
-                throw $util.ProtocolError("missing required 'content'", { instance: message });
-            return message;
-        };
-
-        /**
-         * Decodes an OnSendMsg message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof TalkProto.OnSendMsg
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {TalkProto.OnSendMsg} OnSendMsg
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        OnSendMsg.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies an OnSendMsg message.
-         * @function verify
-         * @memberof TalkProto.OnSendMsg
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        OnSendMsg.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isString(message.ip))
-                return "ip: string expected";
-            if (!$util.isInteger(message.port))
-                return "port: integer expected";
-            if (!$util.isString(message.content))
-                return "content: string expected";
-            return null;
-        };
-
-        /**
-         * Creates an OnSendMsg message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof TalkProto.OnSendMsg
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {TalkProto.OnSendMsg} OnSendMsg
-         */
-        OnSendMsg.fromObject = function fromObject(object) {
-            if (object instanceof $root.TalkProto.OnSendMsg)
-                return object;
-            var message = new $root.TalkProto.OnSendMsg();
-            if (object.ip != null)
-                message.ip = String(object.ip);
-            if (object.port != null)
-                message.port = object.port | 0;
-            if (object.content != null)
-                message.content = String(object.content);
-            return message;
-        };
-
-        /**
-         * Creates a plain object from an OnSendMsg message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof TalkProto.OnSendMsg
-         * @static
-         * @param {TalkProto.OnSendMsg} message OnSendMsg
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        OnSendMsg.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.ip = "";
-                object.port = 0;
-                object.content = "";
-            }
-            if (message.ip != null && message.hasOwnProperty("ip"))
-                object.ip = message.ip;
-            if (message.port != null && message.hasOwnProperty("port"))
-                object.port = message.port;
-            if (message.content != null && message.hasOwnProperty("content"))
-                object.content = message.content;
-            return object;
-        };
-
-        /**
-         * Converts this OnSendMsg to JSON.
-         * @function toJSON
-         * @memberof TalkProto.OnSendMsg
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        OnSendMsg.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return OnSendMsg;
-    })();
-
-    return TalkProto;
-})();
-
 $root.GameHoodleProto = (function() {
 
     /**
@@ -11579,6 +9817,7 @@ $root.GameHoodleProto = (function() {
          * Properties of a LoginLogicReq.
          * @memberof GameHoodleProto
          * @interface ILoginLogicReq
+         * @property {boolean|null} [isrobot] LoginLogicReq isrobot
          */
 
         /**
@@ -11595,6 +9834,14 @@ $root.GameHoodleProto = (function() {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+
+        /**
+         * LoginLogicReq isrobot.
+         * @member {boolean} isrobot
+         * @memberof GameHoodleProto.LoginLogicReq
+         * @instance
+         */
+        LoginLogicReq.prototype.isrobot = false;
 
         /**
          * Creates a new LoginLogicReq instance using the specified properties.
@@ -11620,6 +9867,8 @@ $root.GameHoodleProto = (function() {
         LoginLogicReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.isrobot != null && message.hasOwnProperty("isrobot"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.isrobot);
             return writer;
         };
 
@@ -11654,6 +9903,9 @@ $root.GameHoodleProto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
+                case 1:
+                    message.isrobot = reader.bool();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -11689,6 +9941,9 @@ $root.GameHoodleProto = (function() {
         LoginLogicReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.isrobot != null && message.hasOwnProperty("isrobot"))
+                if (typeof message.isrobot !== "boolean")
+                    return "isrobot: boolean expected";
             return null;
         };
 
@@ -11703,7 +9958,10 @@ $root.GameHoodleProto = (function() {
         LoginLogicReq.fromObject = function fromObject(object) {
             if (object instanceof $root.GameHoodleProto.LoginLogicReq)
                 return object;
-            return new $root.GameHoodleProto.LoginLogicReq();
+            var message = new $root.GameHoodleProto.LoginLogicReq();
+            if (object.isrobot != null)
+                message.isrobot = Boolean(object.isrobot);
+            return message;
         };
 
         /**
@@ -11715,8 +9973,15 @@ $root.GameHoodleProto = (function() {
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        LoginLogicReq.toObject = function toObject() {
-            return {};
+        LoginLogicReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.isrobot = false;
+            if (message.isrobot != null && message.hasOwnProperty("isrobot"))
+                object.isrobot = message.isrobot;
+            return object;
         };
 
         /**
@@ -14616,6 +12881,7 @@ $root.GameHoodleProto = (function() {
          * @memberof GameHoodleProto
          * @interface IGameResultRes
          * @property {Array.<GameHoodleProto.IOnePlayerScore>|null} [scores] GameResultRes scores
+         * @property {boolean|null} [isfinal] GameResultRes isfinal
          */
 
         /**
@@ -14641,6 +12907,14 @@ $root.GameHoodleProto = (function() {
          * @instance
          */
         GameResultRes.prototype.scores = $util.emptyArray;
+
+        /**
+         * GameResultRes isfinal.
+         * @member {boolean} isfinal
+         * @memberof GameHoodleProto.GameResultRes
+         * @instance
+         */
+        GameResultRes.prototype.isfinal = false;
 
         /**
          * Creates a new GameResultRes instance using the specified properties.
@@ -14669,6 +12943,8 @@ $root.GameHoodleProto = (function() {
             if (message.scores != null && message.scores.length)
                 for (var i = 0; i < message.scores.length; ++i)
                     $root.GameHoodleProto.OnePlayerScore.encode(message.scores[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.isfinal != null && message.hasOwnProperty("isfinal"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.isfinal);
             return writer;
         };
 
@@ -14707,6 +12983,9 @@ $root.GameHoodleProto = (function() {
                     if (!(message.scores && message.scores.length))
                         message.scores = [];
                     message.scores.push($root.GameHoodleProto.OnePlayerScore.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    message.isfinal = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -14752,6 +13031,9 @@ $root.GameHoodleProto = (function() {
                         return "scores." + error;
                 }
             }
+            if (message.isfinal != null && message.hasOwnProperty("isfinal"))
+                if (typeof message.isfinal !== "boolean")
+                    return "isfinal: boolean expected";
             return null;
         };
 
@@ -14777,6 +13059,8 @@ $root.GameHoodleProto = (function() {
                     message.scores[i] = $root.GameHoodleProto.OnePlayerScore.fromObject(object.scores[i]);
                 }
             }
+            if (object.isfinal != null)
+                message.isfinal = Boolean(object.isfinal);
             return message;
         };
 
@@ -14795,11 +13079,15 @@ $root.GameHoodleProto = (function() {
             var object = {};
             if (options.arrays || options.defaults)
                 object.scores = [];
+            if (options.defaults)
+                object.isfinal = false;
             if (message.scores && message.scores.length) {
                 object.scores = [];
                 for (var j = 0; j < message.scores.length; ++j)
                     object.scores[j] = $root.GameHoodleProto.OnePlayerScore.toObject(message.scores[j], options);
             }
+            if (message.isfinal != null && message.hasOwnProperty("isfinal"))
+                object.isfinal = message.isfinal;
             return object;
         };
 
@@ -21093,6 +19381,10 @@ $root.SystemProto = (function() {
      * @property {number} eLoginRewardConfigRes=2 eLoginRewardConfigRes value
      * @property {number} eLoginRewardSignReq=3 eLoginRewardSignReq value
      * @property {number} eLoginRewardSignRes=4 eLoginRewardSignRes value
+     * @property {number} eUserShareReq=5 eUserShareReq value
+     * @property {number} eUserShareRes=6 eUserShareRes value
+     * @property {number} eUserAddChipReq=7 eUserAddChipReq value
+     * @property {number} eUserAddChipRes=8 eUserAddChipRes value
      */
     SystemProto.Cmd = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -21101,6 +19393,10 @@ $root.SystemProto = (function() {
         values[valuesById[2] = "eLoginRewardConfigRes"] = 2;
         values[valuesById[3] = "eLoginRewardSignReq"] = 3;
         values[valuesById[4] = "eLoginRewardSignRes"] = 4;
+        values[valuesById[5] = "eUserShareReq"] = 5;
+        values[valuesById[6] = "eUserShareRes"] = 6;
+        values[valuesById[7] = "eUserAddChipReq"] = 7;
+        values[valuesById[8] = "eUserAddChipRes"] = 8;
         return values;
     })();
 
@@ -21915,7 +20211,15001 @@ $root.SystemProto = (function() {
         return LoginRewardSignRes;
     })();
 
+    SystemProto.UserShareReq = (function() {
+
+        /**
+         * Properties of a UserShareReq.
+         * @memberof SystemProto
+         * @interface IUserShareReq
+         */
+
+        /**
+         * Constructs a new UserShareReq.
+         * @memberof SystemProto
+         * @classdesc Represents a UserShareReq.
+         * @implements IUserShareReq
+         * @constructor
+         * @param {SystemProto.IUserShareReq=} [properties] Properties to set
+         */
+        function UserShareReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new UserShareReq instance using the specified properties.
+         * @function create
+         * @memberof SystemProto.UserShareReq
+         * @static
+         * @param {SystemProto.IUserShareReq=} [properties] Properties to set
+         * @returns {SystemProto.UserShareReq} UserShareReq instance
+         */
+        UserShareReq.create = function create(properties) {
+            return new UserShareReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserShareReq message. Does not implicitly {@link SystemProto.UserShareReq.verify|verify} messages.
+         * @function encode
+         * @memberof SystemProto.UserShareReq
+         * @static
+         * @param {SystemProto.IUserShareReq} message UserShareReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserShareReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserShareReq message, length delimited. Does not implicitly {@link SystemProto.UserShareReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SystemProto.UserShareReq
+         * @static
+         * @param {SystemProto.IUserShareReq} message UserShareReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserShareReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserShareReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof SystemProto.UserShareReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SystemProto.UserShareReq} UserShareReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserShareReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SystemProto.UserShareReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserShareReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SystemProto.UserShareReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SystemProto.UserShareReq} UserShareReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserShareReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserShareReq message.
+         * @function verify
+         * @memberof SystemProto.UserShareReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserShareReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserShareReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SystemProto.UserShareReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SystemProto.UserShareReq} UserShareReq
+         */
+        UserShareReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.SystemProto.UserShareReq)
+                return object;
+            return new $root.SystemProto.UserShareReq();
+        };
+
+        /**
+         * Creates a plain object from a UserShareReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SystemProto.UserShareReq
+         * @static
+         * @param {SystemProto.UserShareReq} message UserShareReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserShareReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this UserShareReq to JSON.
+         * @function toJSON
+         * @memberof SystemProto.UserShareReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserShareReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserShareReq;
+    })();
+
+    SystemProto.UserShareRes = (function() {
+
+        /**
+         * Properties of a UserShareRes.
+         * @memberof SystemProto
+         * @interface IUserShareRes
+         * @property {number} status UserShareRes status
+         */
+
+        /**
+         * Constructs a new UserShareRes.
+         * @memberof SystemProto
+         * @classdesc Represents a UserShareRes.
+         * @implements IUserShareRes
+         * @constructor
+         * @param {SystemProto.IUserShareRes=} [properties] Properties to set
+         */
+        function UserShareRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserShareRes status.
+         * @member {number} status
+         * @memberof SystemProto.UserShareRes
+         * @instance
+         */
+        UserShareRes.prototype.status = 0;
+
+        /**
+         * Creates a new UserShareRes instance using the specified properties.
+         * @function create
+         * @memberof SystemProto.UserShareRes
+         * @static
+         * @param {SystemProto.IUserShareRes=} [properties] Properties to set
+         * @returns {SystemProto.UserShareRes} UserShareRes instance
+         */
+        UserShareRes.create = function create(properties) {
+            return new UserShareRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserShareRes message. Does not implicitly {@link SystemProto.UserShareRes.verify|verify} messages.
+         * @function encode
+         * @memberof SystemProto.UserShareRes
+         * @static
+         * @param {SystemProto.IUserShareRes} message UserShareRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserShareRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserShareRes message, length delimited. Does not implicitly {@link SystemProto.UserShareRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SystemProto.UserShareRes
+         * @static
+         * @param {SystemProto.IUserShareRes} message UserShareRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserShareRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserShareRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof SystemProto.UserShareRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SystemProto.UserShareRes} UserShareRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserShareRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SystemProto.UserShareRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserShareRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SystemProto.UserShareRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SystemProto.UserShareRes} UserShareRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserShareRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserShareRes message.
+         * @function verify
+         * @memberof SystemProto.UserShareRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserShareRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserShareRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SystemProto.UserShareRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SystemProto.UserShareRes} UserShareRes
+         */
+        UserShareRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.SystemProto.UserShareRes)
+                return object;
+            var message = new $root.SystemProto.UserShareRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserShareRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SystemProto.UserShareRes
+         * @static
+         * @param {SystemProto.UserShareRes} message UserShareRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserShareRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this UserShareRes to JSON.
+         * @function toJSON
+         * @memberof SystemProto.UserShareRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserShareRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserShareRes;
+    })();
+
+    SystemProto.UserAddChipReq = (function() {
+
+        /**
+         * Properties of a UserAddChipReq.
+         * @memberof SystemProto
+         * @interface IUserAddChipReq
+         * @property {number} propid UserAddChipReq propid
+         * @property {number} propcount UserAddChipReq propcount
+         * @property {string|null} [config] UserAddChipReq config
+         */
+
+        /**
+         * Constructs a new UserAddChipReq.
+         * @memberof SystemProto
+         * @classdesc Represents a UserAddChipReq.
+         * @implements IUserAddChipReq
+         * @constructor
+         * @param {SystemProto.IUserAddChipReq=} [properties] Properties to set
+         */
+        function UserAddChipReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserAddChipReq propid.
+         * @member {number} propid
+         * @memberof SystemProto.UserAddChipReq
+         * @instance
+         */
+        UserAddChipReq.prototype.propid = 0;
+
+        /**
+         * UserAddChipReq propcount.
+         * @member {number} propcount
+         * @memberof SystemProto.UserAddChipReq
+         * @instance
+         */
+        UserAddChipReq.prototype.propcount = 0;
+
+        /**
+         * UserAddChipReq config.
+         * @member {string} config
+         * @memberof SystemProto.UserAddChipReq
+         * @instance
+         */
+        UserAddChipReq.prototype.config = "";
+
+        /**
+         * Creates a new UserAddChipReq instance using the specified properties.
+         * @function create
+         * @memberof SystemProto.UserAddChipReq
+         * @static
+         * @param {SystemProto.IUserAddChipReq=} [properties] Properties to set
+         * @returns {SystemProto.UserAddChipReq} UserAddChipReq instance
+         */
+        UserAddChipReq.create = function create(properties) {
+            return new UserAddChipReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserAddChipReq message. Does not implicitly {@link SystemProto.UserAddChipReq.verify|verify} messages.
+         * @function encode
+         * @memberof SystemProto.UserAddChipReq
+         * @static
+         * @param {SystemProto.IUserAddChipReq} message UserAddChipReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserAddChipReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.propid);
+            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propcount);
+            if (message.config != null && message.hasOwnProperty("config"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.config);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserAddChipReq message, length delimited. Does not implicitly {@link SystemProto.UserAddChipReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SystemProto.UserAddChipReq
+         * @static
+         * @param {SystemProto.IUserAddChipReq} message UserAddChipReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserAddChipReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserAddChipReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof SystemProto.UserAddChipReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SystemProto.UserAddChipReq} UserAddChipReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserAddChipReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SystemProto.UserAddChipReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.propid = reader.sint32();
+                    break;
+                case 2:
+                    message.propcount = reader.sint32();
+                    break;
+                case 3:
+                    message.config = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("propid"))
+                throw $util.ProtocolError("missing required 'propid'", { instance: message });
+            if (!message.hasOwnProperty("propcount"))
+                throw $util.ProtocolError("missing required 'propcount'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserAddChipReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SystemProto.UserAddChipReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SystemProto.UserAddChipReq} UserAddChipReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserAddChipReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserAddChipReq message.
+         * @function verify
+         * @memberof SystemProto.UserAddChipReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserAddChipReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.propid))
+                return "propid: integer expected";
+            if (!$util.isInteger(message.propcount))
+                return "propcount: integer expected";
+            if (message.config != null && message.hasOwnProperty("config"))
+                if (!$util.isString(message.config))
+                    return "config: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserAddChipReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SystemProto.UserAddChipReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SystemProto.UserAddChipReq} UserAddChipReq
+         */
+        UserAddChipReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.SystemProto.UserAddChipReq)
+                return object;
+            var message = new $root.SystemProto.UserAddChipReq();
+            if (object.propid != null)
+                message.propid = object.propid | 0;
+            if (object.propcount != null)
+                message.propcount = object.propcount | 0;
+            if (object.config != null)
+                message.config = String(object.config);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserAddChipReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SystemProto.UserAddChipReq
+         * @static
+         * @param {SystemProto.UserAddChipReq} message UserAddChipReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserAddChipReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.propid = 0;
+                object.propcount = 0;
+                object.config = "";
+            }
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                object.propid = message.propid;
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                object.propcount = message.propcount;
+            if (message.config != null && message.hasOwnProperty("config"))
+                object.config = message.config;
+            return object;
+        };
+
+        /**
+         * Converts this UserAddChipReq to JSON.
+         * @function toJSON
+         * @memberof SystemProto.UserAddChipReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserAddChipReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserAddChipReq;
+    })();
+
+    SystemProto.UserAddChipRes = (function() {
+
+        /**
+         * Properties of a UserAddChipRes.
+         * @memberof SystemProto
+         * @interface IUserAddChipRes
+         * @property {number} status UserAddChipRes status
+         * @property {number|null} [propid] UserAddChipRes propid
+         * @property {number|null} [propcount] UserAddChipRes propcount
+         * @property {string|null} [config] UserAddChipRes config
+         */
+
+        /**
+         * Constructs a new UserAddChipRes.
+         * @memberof SystemProto
+         * @classdesc Represents a UserAddChipRes.
+         * @implements IUserAddChipRes
+         * @constructor
+         * @param {SystemProto.IUserAddChipRes=} [properties] Properties to set
+         */
+        function UserAddChipRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserAddChipRes status.
+         * @member {number} status
+         * @memberof SystemProto.UserAddChipRes
+         * @instance
+         */
+        UserAddChipRes.prototype.status = 0;
+
+        /**
+         * UserAddChipRes propid.
+         * @member {number} propid
+         * @memberof SystemProto.UserAddChipRes
+         * @instance
+         */
+        UserAddChipRes.prototype.propid = 0;
+
+        /**
+         * UserAddChipRes propcount.
+         * @member {number} propcount
+         * @memberof SystemProto.UserAddChipRes
+         * @instance
+         */
+        UserAddChipRes.prototype.propcount = 0;
+
+        /**
+         * UserAddChipRes config.
+         * @member {string} config
+         * @memberof SystemProto.UserAddChipRes
+         * @instance
+         */
+        UserAddChipRes.prototype.config = "";
+
+        /**
+         * Creates a new UserAddChipRes instance using the specified properties.
+         * @function create
+         * @memberof SystemProto.UserAddChipRes
+         * @static
+         * @param {SystemProto.IUserAddChipRes=} [properties] Properties to set
+         * @returns {SystemProto.UserAddChipRes} UserAddChipRes instance
+         */
+        UserAddChipRes.create = function create(properties) {
+            return new UserAddChipRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserAddChipRes message. Does not implicitly {@link SystemProto.UserAddChipRes.verify|verify} messages.
+         * @function encode
+         * @memberof SystemProto.UserAddChipRes
+         * @static
+         * @param {SystemProto.IUserAddChipRes} message UserAddChipRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserAddChipRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propid);
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.propcount);
+            if (message.config != null && message.hasOwnProperty("config"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.config);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserAddChipRes message, length delimited. Does not implicitly {@link SystemProto.UserAddChipRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof SystemProto.UserAddChipRes
+         * @static
+         * @param {SystemProto.IUserAddChipRes} message UserAddChipRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserAddChipRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserAddChipRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof SystemProto.UserAddChipRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {SystemProto.UserAddChipRes} UserAddChipRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserAddChipRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SystemProto.UserAddChipRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.propid = reader.sint32();
+                    break;
+                case 3:
+                    message.propcount = reader.sint32();
+                    break;
+                case 4:
+                    message.config = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserAddChipRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof SystemProto.UserAddChipRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {SystemProto.UserAddChipRes} UserAddChipRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserAddChipRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserAddChipRes message.
+         * @function verify
+         * @memberof SystemProto.UserAddChipRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserAddChipRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                if (!$util.isInteger(message.propid))
+                    return "propid: integer expected";
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                if (!$util.isInteger(message.propcount))
+                    return "propcount: integer expected";
+            if (message.config != null && message.hasOwnProperty("config"))
+                if (!$util.isString(message.config))
+                    return "config: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserAddChipRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof SystemProto.UserAddChipRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {SystemProto.UserAddChipRes} UserAddChipRes
+         */
+        UserAddChipRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.SystemProto.UserAddChipRes)
+                return object;
+            var message = new $root.SystemProto.UserAddChipRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.propid != null)
+                message.propid = object.propid | 0;
+            if (object.propcount != null)
+                message.propcount = object.propcount | 0;
+            if (object.config != null)
+                message.config = String(object.config);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserAddChipRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof SystemProto.UserAddChipRes
+         * @static
+         * @param {SystemProto.UserAddChipRes} message UserAddChipRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserAddChipRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.propid = 0;
+                object.propcount = 0;
+                object.config = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                object.propid = message.propid;
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                object.propcount = message.propcount;
+            if (message.config != null && message.hasOwnProperty("config"))
+                object.config = message.config;
+            return object;
+        };
+
+        /**
+         * Converts this UserAddChipRes to JSON.
+         * @function toJSON
+         * @memberof SystemProto.UserAddChipRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserAddChipRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserAddChipRes;
+    })();
+
     return SystemProto;
+})();
+
+$root.RobotProto = (function() {
+
+    /**
+     * Namespace RobotProto.
+     * @exports RobotProto
+     * @namespace
+     */
+    var RobotProto = {};
+
+    /**
+     * Cmd enum.
+     * @name RobotProto.Cmd
+     * @enum {string}
+     * @property {number} INVALED=0 INVALED value
+     * @property {number} eCreateRoomReq=1 eCreateRoomReq value
+     * @property {number} eCreateRoomRes=2 eCreateRoomRes value
+     * @property {number} eJoinRoomReq=3 eJoinRoomReq value
+     * @property {number} eJoinRoomRes=4 eJoinRoomRes value
+     * @property {number} eExitRoomReq=5 eExitRoomReq value
+     * @property {number} eExitRoomRes=6 eExitRoomRes value
+     * @property {number} eDessolveReq=7 eDessolveReq value
+     * @property {number} eDessolveRes=8 eDessolveRes value
+     * @property {number} eGetRoomStatusReq=9 eGetRoomStatusReq value
+     * @property {number} eGetRoomStatusRes=10 eGetRoomStatusRes value
+     * @property {number} eBackRoomReq=11 eBackRoomReq value
+     * @property {number} eBackRoomRes=12 eBackRoomRes value
+     * @property {number} eCheckLinkGameReq=13 eCheckLinkGameReq value
+     * @property {number} eCheckLinkGameRes=14 eCheckLinkGameRes value
+     * @property {number} eUserInfoRes=15 eUserInfoRes value
+     * @property {number} eGameRuleRes=16 eGameRuleRes value
+     * @property {number} eRoomIdRes=17 eRoomIdRes value
+     * @property {number} ePlayCountRes=18 ePlayCountRes value
+     * @property {number} eUserReadyReq=19 eUserReadyReq value
+     * @property {number} eUserReadyRes=20 eUserReadyRes value
+     * @property {number} eGameStartRes=21 eGameStartRes value
+     * @property {number} eGameEndRes=22 eGameEndRes value
+     * @property {number} eLoginLogicReq=23 eLoginLogicReq value
+     * @property {number} eLoginLogicRes=24 eLoginLogicRes value
+     * @property {number} eUserOfflineRes=25 eUserOfflineRes value
+     * @property {number} ePlayerFirstBallPosRes=26 ePlayerFirstBallPosRes value
+     * @property {number} ePlayerPowerRes=27 ePlayerPowerRes value
+     * @property {number} ePlayerShootReq=28 ePlayerShootReq value
+     * @property {number} ePlayerShootRes=29 ePlayerShootRes value
+     * @property {number} ePlayerBallPosReq=30 ePlayerBallPosReq value
+     * @property {number} ePlayerBallPosRes=31 ePlayerBallPosRes value
+     * @property {number} ePlayerIsShootedReq=32 ePlayerIsShootedReq value
+     * @property {number} ePlayerIsShootedRes=33 ePlayerIsShootedRes value
+     * @property {number} eGameResultRes=34 eGameResultRes value
+     * @property {number} eTotalGameResultRes=35 eTotalGameResultRes value
+     * @property {number} ePlayerScoreRes=36 ePlayerScoreRes value
+     * @property {number} eUserMatchReq=37 eUserMatchReq value
+     * @property {number} eUserMatchRes=38 eUserMatchRes value
+     * @property {number} eUserStopMatchReq=39 eUserStopMatchReq value
+     * @property {number} eUserStopMatchRes=40 eUserStopMatchRes value
+     * @property {number} eUserGameInfoReq=41 eUserGameInfoReq value
+     * @property {number} eUserGameInfoRes=42 eUserGameInfoRes value
+     * @property {number} eUserBallInfoReq=43 eUserBallInfoReq value
+     * @property {number} eUserBallInfoRes=44 eUserBallInfoRes value
+     * @property {number} eUpdateUserBallReq=45 eUpdateUserBallReq value
+     * @property {number} eUpdateUserBallRes=46 eUpdateUserBallRes value
+     * @property {number} eStoreListReq=47 eStoreListReq value
+     * @property {number} eStoreListRes=48 eStoreListRes value
+     * @property {number} eBuyThingsReq=49 eBuyThingsReq value
+     * @property {number} eBuyThingsRes=50 eBuyThingsRes value
+     * @property {number} eUseHoodleBallReq=51 eUseHoodleBallReq value
+     * @property {number} eUseHoodleBallRes=52 eUseHoodleBallRes value
+     * @property {number} eUserConfigReq=53 eUserConfigReq value
+     * @property {number} eUserConfigRes=54 eUserConfigRes value
+     * @property {number} eUserEmojReq=55 eUserEmojReq value
+     * @property {number} eUserEmojRes=56 eUserEmojRes value
+     * @property {number} eUserPlayAgainReq=57 eUserPlayAgainReq value
+     * @property {number} eUserPlayAgainRes=58 eUserPlayAgainRes value
+     * @property {number} eUserPlayAgainAnswerReq=59 eUserPlayAgainAnswerReq value
+     * @property {number} eUserPlayAgainAnswerRes=60 eUserPlayAgainAnswerRes value
+     * @property {number} eUserPlayAgainStartRes=61 eUserPlayAgainStartRes value
+     * @property {number} eRoomListConfigReq=62 eRoomListConfigReq value
+     * @property {number} eRoomListConfigRes=63 eRoomListConfigRes value
+     */
+    RobotProto.Cmd = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "INVALED"] = 0;
+        values[valuesById[1] = "eCreateRoomReq"] = 1;
+        values[valuesById[2] = "eCreateRoomRes"] = 2;
+        values[valuesById[3] = "eJoinRoomReq"] = 3;
+        values[valuesById[4] = "eJoinRoomRes"] = 4;
+        values[valuesById[5] = "eExitRoomReq"] = 5;
+        values[valuesById[6] = "eExitRoomRes"] = 6;
+        values[valuesById[7] = "eDessolveReq"] = 7;
+        values[valuesById[8] = "eDessolveRes"] = 8;
+        values[valuesById[9] = "eGetRoomStatusReq"] = 9;
+        values[valuesById[10] = "eGetRoomStatusRes"] = 10;
+        values[valuesById[11] = "eBackRoomReq"] = 11;
+        values[valuesById[12] = "eBackRoomRes"] = 12;
+        values[valuesById[13] = "eCheckLinkGameReq"] = 13;
+        values[valuesById[14] = "eCheckLinkGameRes"] = 14;
+        values[valuesById[15] = "eUserInfoRes"] = 15;
+        values[valuesById[16] = "eGameRuleRes"] = 16;
+        values[valuesById[17] = "eRoomIdRes"] = 17;
+        values[valuesById[18] = "ePlayCountRes"] = 18;
+        values[valuesById[19] = "eUserReadyReq"] = 19;
+        values[valuesById[20] = "eUserReadyRes"] = 20;
+        values[valuesById[21] = "eGameStartRes"] = 21;
+        values[valuesById[22] = "eGameEndRes"] = 22;
+        values[valuesById[23] = "eLoginLogicReq"] = 23;
+        values[valuesById[24] = "eLoginLogicRes"] = 24;
+        values[valuesById[25] = "eUserOfflineRes"] = 25;
+        values[valuesById[26] = "ePlayerFirstBallPosRes"] = 26;
+        values[valuesById[27] = "ePlayerPowerRes"] = 27;
+        values[valuesById[28] = "ePlayerShootReq"] = 28;
+        values[valuesById[29] = "ePlayerShootRes"] = 29;
+        values[valuesById[30] = "ePlayerBallPosReq"] = 30;
+        values[valuesById[31] = "ePlayerBallPosRes"] = 31;
+        values[valuesById[32] = "ePlayerIsShootedReq"] = 32;
+        values[valuesById[33] = "ePlayerIsShootedRes"] = 33;
+        values[valuesById[34] = "eGameResultRes"] = 34;
+        values[valuesById[35] = "eTotalGameResultRes"] = 35;
+        values[valuesById[36] = "ePlayerScoreRes"] = 36;
+        values[valuesById[37] = "eUserMatchReq"] = 37;
+        values[valuesById[38] = "eUserMatchRes"] = 38;
+        values[valuesById[39] = "eUserStopMatchReq"] = 39;
+        values[valuesById[40] = "eUserStopMatchRes"] = 40;
+        values[valuesById[41] = "eUserGameInfoReq"] = 41;
+        values[valuesById[42] = "eUserGameInfoRes"] = 42;
+        values[valuesById[43] = "eUserBallInfoReq"] = 43;
+        values[valuesById[44] = "eUserBallInfoRes"] = 44;
+        values[valuesById[45] = "eUpdateUserBallReq"] = 45;
+        values[valuesById[46] = "eUpdateUserBallRes"] = 46;
+        values[valuesById[47] = "eStoreListReq"] = 47;
+        values[valuesById[48] = "eStoreListRes"] = 48;
+        values[valuesById[49] = "eBuyThingsReq"] = 49;
+        values[valuesById[50] = "eBuyThingsRes"] = 50;
+        values[valuesById[51] = "eUseHoodleBallReq"] = 51;
+        values[valuesById[52] = "eUseHoodleBallRes"] = 52;
+        values[valuesById[53] = "eUserConfigReq"] = 53;
+        values[valuesById[54] = "eUserConfigRes"] = 54;
+        values[valuesById[55] = "eUserEmojReq"] = 55;
+        values[valuesById[56] = "eUserEmojRes"] = 56;
+        values[valuesById[57] = "eUserPlayAgainReq"] = 57;
+        values[valuesById[58] = "eUserPlayAgainRes"] = 58;
+        values[valuesById[59] = "eUserPlayAgainAnswerReq"] = 59;
+        values[valuesById[60] = "eUserPlayAgainAnswerRes"] = 60;
+        values[valuesById[61] = "eUserPlayAgainStartRes"] = 61;
+        values[valuesById[62] = "eRoomListConfigReq"] = 62;
+        values[valuesById[63] = "eRoomListConfigRes"] = 63;
+        return values;
+    })();
+
+    RobotProto.CreateRoomReq = (function() {
+
+        /**
+         * Properties of a CreateRoomReq.
+         * @memberof RobotProto
+         * @interface ICreateRoomReq
+         * @property {string} gamerule CreateRoomReq gamerule
+         */
+
+        /**
+         * Constructs a new CreateRoomReq.
+         * @memberof RobotProto
+         * @classdesc Represents a CreateRoomReq.
+         * @implements ICreateRoomReq
+         * @constructor
+         * @param {RobotProto.ICreateRoomReq=} [properties] Properties to set
+         */
+        function CreateRoomReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CreateRoomReq gamerule.
+         * @member {string} gamerule
+         * @memberof RobotProto.CreateRoomReq
+         * @instance
+         */
+        CreateRoomReq.prototype.gamerule = "";
+
+        /**
+         * Creates a new CreateRoomReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.CreateRoomReq
+         * @static
+         * @param {RobotProto.ICreateRoomReq=} [properties] Properties to set
+         * @returns {RobotProto.CreateRoomReq} CreateRoomReq instance
+         */
+        CreateRoomReq.create = function create(properties) {
+            return new CreateRoomReq(properties);
+        };
+
+        /**
+         * Encodes the specified CreateRoomReq message. Does not implicitly {@link RobotProto.CreateRoomReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.CreateRoomReq
+         * @static
+         * @param {RobotProto.ICreateRoomReq} message CreateRoomReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CreateRoomReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.gamerule);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CreateRoomReq message, length delimited. Does not implicitly {@link RobotProto.CreateRoomReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.CreateRoomReq
+         * @static
+         * @param {RobotProto.ICreateRoomReq} message CreateRoomReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CreateRoomReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CreateRoomReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.CreateRoomReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.CreateRoomReq} CreateRoomReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CreateRoomReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.CreateRoomReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.gamerule = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("gamerule"))
+                throw $util.ProtocolError("missing required 'gamerule'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a CreateRoomReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.CreateRoomReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.CreateRoomReq} CreateRoomReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CreateRoomReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CreateRoomReq message.
+         * @function verify
+         * @memberof RobotProto.CreateRoomReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CreateRoomReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isString(message.gamerule))
+                return "gamerule: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a CreateRoomReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.CreateRoomReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.CreateRoomReq} CreateRoomReq
+         */
+        CreateRoomReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.CreateRoomReq)
+                return object;
+            var message = new $root.RobotProto.CreateRoomReq();
+            if (object.gamerule != null)
+                message.gamerule = String(object.gamerule);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CreateRoomReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.CreateRoomReq
+         * @static
+         * @param {RobotProto.CreateRoomReq} message CreateRoomReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CreateRoomReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.gamerule = "";
+            if (message.gamerule != null && message.hasOwnProperty("gamerule"))
+                object.gamerule = message.gamerule;
+            return object;
+        };
+
+        /**
+         * Converts this CreateRoomReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.CreateRoomReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CreateRoomReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CreateRoomReq;
+    })();
+
+    RobotProto.CreateRoomRes = (function() {
+
+        /**
+         * Properties of a CreateRoomRes.
+         * @memberof RobotProto
+         * @interface ICreateRoomRes
+         * @property {number} status CreateRoomRes status
+         */
+
+        /**
+         * Constructs a new CreateRoomRes.
+         * @memberof RobotProto
+         * @classdesc Represents a CreateRoomRes.
+         * @implements ICreateRoomRes
+         * @constructor
+         * @param {RobotProto.ICreateRoomRes=} [properties] Properties to set
+         */
+        function CreateRoomRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CreateRoomRes status.
+         * @member {number} status
+         * @memberof RobotProto.CreateRoomRes
+         * @instance
+         */
+        CreateRoomRes.prototype.status = 0;
+
+        /**
+         * Creates a new CreateRoomRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.CreateRoomRes
+         * @static
+         * @param {RobotProto.ICreateRoomRes=} [properties] Properties to set
+         * @returns {RobotProto.CreateRoomRes} CreateRoomRes instance
+         */
+        CreateRoomRes.create = function create(properties) {
+            return new CreateRoomRes(properties);
+        };
+
+        /**
+         * Encodes the specified CreateRoomRes message. Does not implicitly {@link RobotProto.CreateRoomRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.CreateRoomRes
+         * @static
+         * @param {RobotProto.ICreateRoomRes} message CreateRoomRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CreateRoomRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CreateRoomRes message, length delimited. Does not implicitly {@link RobotProto.CreateRoomRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.CreateRoomRes
+         * @static
+         * @param {RobotProto.ICreateRoomRes} message CreateRoomRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CreateRoomRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CreateRoomRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.CreateRoomRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.CreateRoomRes} CreateRoomRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CreateRoomRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.CreateRoomRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a CreateRoomRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.CreateRoomRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.CreateRoomRes} CreateRoomRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CreateRoomRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CreateRoomRes message.
+         * @function verify
+         * @memberof RobotProto.CreateRoomRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CreateRoomRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CreateRoomRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.CreateRoomRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.CreateRoomRes} CreateRoomRes
+         */
+        CreateRoomRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.CreateRoomRes)
+                return object;
+            var message = new $root.RobotProto.CreateRoomRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CreateRoomRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.CreateRoomRes
+         * @static
+         * @param {RobotProto.CreateRoomRes} message CreateRoomRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CreateRoomRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this CreateRoomRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.CreateRoomRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CreateRoomRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CreateRoomRes;
+    })();
+
+    RobotProto.JoinRoomReq = (function() {
+
+        /**
+         * Properties of a JoinRoomReq.
+         * @memberof RobotProto
+         * @interface IJoinRoomReq
+         * @property {string} roomid JoinRoomReq roomid
+         */
+
+        /**
+         * Constructs a new JoinRoomReq.
+         * @memberof RobotProto
+         * @classdesc Represents a JoinRoomReq.
+         * @implements IJoinRoomReq
+         * @constructor
+         * @param {RobotProto.IJoinRoomReq=} [properties] Properties to set
+         */
+        function JoinRoomReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * JoinRoomReq roomid.
+         * @member {string} roomid
+         * @memberof RobotProto.JoinRoomReq
+         * @instance
+         */
+        JoinRoomReq.prototype.roomid = "";
+
+        /**
+         * Creates a new JoinRoomReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.JoinRoomReq
+         * @static
+         * @param {RobotProto.IJoinRoomReq=} [properties] Properties to set
+         * @returns {RobotProto.JoinRoomReq} JoinRoomReq instance
+         */
+        JoinRoomReq.create = function create(properties) {
+            return new JoinRoomReq(properties);
+        };
+
+        /**
+         * Encodes the specified JoinRoomReq message. Does not implicitly {@link RobotProto.JoinRoomReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.JoinRoomReq
+         * @static
+         * @param {RobotProto.IJoinRoomReq} message JoinRoomReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        JoinRoomReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.roomid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified JoinRoomReq message, length delimited. Does not implicitly {@link RobotProto.JoinRoomReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.JoinRoomReq
+         * @static
+         * @param {RobotProto.IJoinRoomReq} message JoinRoomReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        JoinRoomReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a JoinRoomReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.JoinRoomReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.JoinRoomReq} JoinRoomReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        JoinRoomReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.JoinRoomReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.roomid = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("roomid"))
+                throw $util.ProtocolError("missing required 'roomid'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a JoinRoomReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.JoinRoomReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.JoinRoomReq} JoinRoomReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        JoinRoomReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a JoinRoomReq message.
+         * @function verify
+         * @memberof RobotProto.JoinRoomReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        JoinRoomReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isString(message.roomid))
+                return "roomid: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a JoinRoomReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.JoinRoomReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.JoinRoomReq} JoinRoomReq
+         */
+        JoinRoomReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.JoinRoomReq)
+                return object;
+            var message = new $root.RobotProto.JoinRoomReq();
+            if (object.roomid != null)
+                message.roomid = String(object.roomid);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a JoinRoomReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.JoinRoomReq
+         * @static
+         * @param {RobotProto.JoinRoomReq} message JoinRoomReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        JoinRoomReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.roomid = "";
+            if (message.roomid != null && message.hasOwnProperty("roomid"))
+                object.roomid = message.roomid;
+            return object;
+        };
+
+        /**
+         * Converts this JoinRoomReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.JoinRoomReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        JoinRoomReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return JoinRoomReq;
+    })();
+
+    RobotProto.JoinRoomRes = (function() {
+
+        /**
+         * Properties of a JoinRoomRes.
+         * @memberof RobotProto
+         * @interface IJoinRoomRes
+         * @property {number} status JoinRoomRes status
+         */
+
+        /**
+         * Constructs a new JoinRoomRes.
+         * @memberof RobotProto
+         * @classdesc Represents a JoinRoomRes.
+         * @implements IJoinRoomRes
+         * @constructor
+         * @param {RobotProto.IJoinRoomRes=} [properties] Properties to set
+         */
+        function JoinRoomRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * JoinRoomRes status.
+         * @member {number} status
+         * @memberof RobotProto.JoinRoomRes
+         * @instance
+         */
+        JoinRoomRes.prototype.status = 0;
+
+        /**
+         * Creates a new JoinRoomRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.JoinRoomRes
+         * @static
+         * @param {RobotProto.IJoinRoomRes=} [properties] Properties to set
+         * @returns {RobotProto.JoinRoomRes} JoinRoomRes instance
+         */
+        JoinRoomRes.create = function create(properties) {
+            return new JoinRoomRes(properties);
+        };
+
+        /**
+         * Encodes the specified JoinRoomRes message. Does not implicitly {@link RobotProto.JoinRoomRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.JoinRoomRes
+         * @static
+         * @param {RobotProto.IJoinRoomRes} message JoinRoomRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        JoinRoomRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified JoinRoomRes message, length delimited. Does not implicitly {@link RobotProto.JoinRoomRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.JoinRoomRes
+         * @static
+         * @param {RobotProto.IJoinRoomRes} message JoinRoomRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        JoinRoomRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a JoinRoomRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.JoinRoomRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.JoinRoomRes} JoinRoomRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        JoinRoomRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.JoinRoomRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a JoinRoomRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.JoinRoomRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.JoinRoomRes} JoinRoomRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        JoinRoomRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a JoinRoomRes message.
+         * @function verify
+         * @memberof RobotProto.JoinRoomRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        JoinRoomRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a JoinRoomRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.JoinRoomRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.JoinRoomRes} JoinRoomRes
+         */
+        JoinRoomRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.JoinRoomRes)
+                return object;
+            var message = new $root.RobotProto.JoinRoomRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a JoinRoomRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.JoinRoomRes
+         * @static
+         * @param {RobotProto.JoinRoomRes} message JoinRoomRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        JoinRoomRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this JoinRoomRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.JoinRoomRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        JoinRoomRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return JoinRoomRes;
+    })();
+
+    RobotProto.ExitRoomReq = (function() {
+
+        /**
+         * Properties of an ExitRoomReq.
+         * @memberof RobotProto
+         * @interface IExitRoomReq
+         */
+
+        /**
+         * Constructs a new ExitRoomReq.
+         * @memberof RobotProto
+         * @classdesc Represents an ExitRoomReq.
+         * @implements IExitRoomReq
+         * @constructor
+         * @param {RobotProto.IExitRoomReq=} [properties] Properties to set
+         */
+        function ExitRoomReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new ExitRoomReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.ExitRoomReq
+         * @static
+         * @param {RobotProto.IExitRoomReq=} [properties] Properties to set
+         * @returns {RobotProto.ExitRoomReq} ExitRoomReq instance
+         */
+        ExitRoomReq.create = function create(properties) {
+            return new ExitRoomReq(properties);
+        };
+
+        /**
+         * Encodes the specified ExitRoomReq message. Does not implicitly {@link RobotProto.ExitRoomReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.ExitRoomReq
+         * @static
+         * @param {RobotProto.IExitRoomReq} message ExitRoomReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ExitRoomReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ExitRoomReq message, length delimited. Does not implicitly {@link RobotProto.ExitRoomReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.ExitRoomReq
+         * @static
+         * @param {RobotProto.IExitRoomReq} message ExitRoomReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ExitRoomReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an ExitRoomReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.ExitRoomReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.ExitRoomReq} ExitRoomReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ExitRoomReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.ExitRoomReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an ExitRoomReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.ExitRoomReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.ExitRoomReq} ExitRoomReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ExitRoomReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an ExitRoomReq message.
+         * @function verify
+         * @memberof RobotProto.ExitRoomReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ExitRoomReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates an ExitRoomReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.ExitRoomReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.ExitRoomReq} ExitRoomReq
+         */
+        ExitRoomReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.ExitRoomReq)
+                return object;
+            return new $root.RobotProto.ExitRoomReq();
+        };
+
+        /**
+         * Creates a plain object from an ExitRoomReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.ExitRoomReq
+         * @static
+         * @param {RobotProto.ExitRoomReq} message ExitRoomReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ExitRoomReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this ExitRoomReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.ExitRoomReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ExitRoomReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ExitRoomReq;
+    })();
+
+    RobotProto.ExitRoomRes = (function() {
+
+        /**
+         * Properties of an ExitRoomRes.
+         * @memberof RobotProto
+         * @interface IExitRoomRes
+         * @property {number} status ExitRoomRes status
+         * @property {number|null} [numberid] ExitRoomRes numberid
+         */
+
+        /**
+         * Constructs a new ExitRoomRes.
+         * @memberof RobotProto
+         * @classdesc Represents an ExitRoomRes.
+         * @implements IExitRoomRes
+         * @constructor
+         * @param {RobotProto.IExitRoomRes=} [properties] Properties to set
+         */
+        function ExitRoomRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ExitRoomRes status.
+         * @member {number} status
+         * @memberof RobotProto.ExitRoomRes
+         * @instance
+         */
+        ExitRoomRes.prototype.status = 0;
+
+        /**
+         * ExitRoomRes numberid.
+         * @member {number} numberid
+         * @memberof RobotProto.ExitRoomRes
+         * @instance
+         */
+        ExitRoomRes.prototype.numberid = 0;
+
+        /**
+         * Creates a new ExitRoomRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.ExitRoomRes
+         * @static
+         * @param {RobotProto.IExitRoomRes=} [properties] Properties to set
+         * @returns {RobotProto.ExitRoomRes} ExitRoomRes instance
+         */
+        ExitRoomRes.create = function create(properties) {
+            return new ExitRoomRes(properties);
+        };
+
+        /**
+         * Encodes the specified ExitRoomRes message. Does not implicitly {@link RobotProto.ExitRoomRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.ExitRoomRes
+         * @static
+         * @param {RobotProto.IExitRoomRes} message ExitRoomRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ExitRoomRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.numberid != null && message.hasOwnProperty("numberid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.numberid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ExitRoomRes message, length delimited. Does not implicitly {@link RobotProto.ExitRoomRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.ExitRoomRes
+         * @static
+         * @param {RobotProto.IExitRoomRes} message ExitRoomRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ExitRoomRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an ExitRoomRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.ExitRoomRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.ExitRoomRes} ExitRoomRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ExitRoomRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.ExitRoomRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.numberid = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes an ExitRoomRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.ExitRoomRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.ExitRoomRes} ExitRoomRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ExitRoomRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an ExitRoomRes message.
+         * @function verify
+         * @memberof RobotProto.ExitRoomRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ExitRoomRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.numberid != null && message.hasOwnProperty("numberid"))
+                if (!$util.isInteger(message.numberid))
+                    return "numberid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates an ExitRoomRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.ExitRoomRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.ExitRoomRes} ExitRoomRes
+         */
+        ExitRoomRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.ExitRoomRes)
+                return object;
+            var message = new $root.RobotProto.ExitRoomRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.numberid != null)
+                message.numberid = object.numberid | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an ExitRoomRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.ExitRoomRes
+         * @static
+         * @param {RobotProto.ExitRoomRes} message ExitRoomRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ExitRoomRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.numberid = 0;
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.numberid != null && message.hasOwnProperty("numberid"))
+                object.numberid = message.numberid;
+            return object;
+        };
+
+        /**
+         * Converts this ExitRoomRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.ExitRoomRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ExitRoomRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ExitRoomRes;
+    })();
+
+    RobotProto.DessolveReq = (function() {
+
+        /**
+         * Properties of a DessolveReq.
+         * @memberof RobotProto
+         * @interface IDessolveReq
+         */
+
+        /**
+         * Constructs a new DessolveReq.
+         * @memberof RobotProto
+         * @classdesc Represents a DessolveReq.
+         * @implements IDessolveReq
+         * @constructor
+         * @param {RobotProto.IDessolveReq=} [properties] Properties to set
+         */
+        function DessolveReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new DessolveReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.DessolveReq
+         * @static
+         * @param {RobotProto.IDessolveReq=} [properties] Properties to set
+         * @returns {RobotProto.DessolveReq} DessolveReq instance
+         */
+        DessolveReq.create = function create(properties) {
+            return new DessolveReq(properties);
+        };
+
+        /**
+         * Encodes the specified DessolveReq message. Does not implicitly {@link RobotProto.DessolveReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.DessolveReq
+         * @static
+         * @param {RobotProto.IDessolveReq} message DessolveReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        DessolveReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified DessolveReq message, length delimited. Does not implicitly {@link RobotProto.DessolveReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.DessolveReq
+         * @static
+         * @param {RobotProto.IDessolveReq} message DessolveReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        DessolveReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a DessolveReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.DessolveReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.DessolveReq} DessolveReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        DessolveReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.DessolveReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a DessolveReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.DessolveReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.DessolveReq} DessolveReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        DessolveReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a DessolveReq message.
+         * @function verify
+         * @memberof RobotProto.DessolveReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        DessolveReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a DessolveReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.DessolveReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.DessolveReq} DessolveReq
+         */
+        DessolveReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.DessolveReq)
+                return object;
+            return new $root.RobotProto.DessolveReq();
+        };
+
+        /**
+         * Creates a plain object from a DessolveReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.DessolveReq
+         * @static
+         * @param {RobotProto.DessolveReq} message DessolveReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        DessolveReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this DessolveReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.DessolveReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        DessolveReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return DessolveReq;
+    })();
+
+    RobotProto.DessolveRes = (function() {
+
+        /**
+         * Properties of a DessolveRes.
+         * @memberof RobotProto
+         * @interface IDessolveRes
+         * @property {number} status DessolveRes status
+         */
+
+        /**
+         * Constructs a new DessolveRes.
+         * @memberof RobotProto
+         * @classdesc Represents a DessolveRes.
+         * @implements IDessolveRes
+         * @constructor
+         * @param {RobotProto.IDessolveRes=} [properties] Properties to set
+         */
+        function DessolveRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * DessolveRes status.
+         * @member {number} status
+         * @memberof RobotProto.DessolveRes
+         * @instance
+         */
+        DessolveRes.prototype.status = 0;
+
+        /**
+         * Creates a new DessolveRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.DessolveRes
+         * @static
+         * @param {RobotProto.IDessolveRes=} [properties] Properties to set
+         * @returns {RobotProto.DessolveRes} DessolveRes instance
+         */
+        DessolveRes.create = function create(properties) {
+            return new DessolveRes(properties);
+        };
+
+        /**
+         * Encodes the specified DessolveRes message. Does not implicitly {@link RobotProto.DessolveRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.DessolveRes
+         * @static
+         * @param {RobotProto.IDessolveRes} message DessolveRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        DessolveRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified DessolveRes message, length delimited. Does not implicitly {@link RobotProto.DessolveRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.DessolveRes
+         * @static
+         * @param {RobotProto.IDessolveRes} message DessolveRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        DessolveRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a DessolveRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.DessolveRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.DessolveRes} DessolveRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        DessolveRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.DessolveRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a DessolveRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.DessolveRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.DessolveRes} DessolveRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        DessolveRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a DessolveRes message.
+         * @function verify
+         * @memberof RobotProto.DessolveRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        DessolveRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a DessolveRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.DessolveRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.DessolveRes} DessolveRes
+         */
+        DessolveRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.DessolveRes)
+                return object;
+            var message = new $root.RobotProto.DessolveRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a DessolveRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.DessolveRes
+         * @static
+         * @param {RobotProto.DessolveRes} message DessolveRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        DessolveRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this DessolveRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.DessolveRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        DessolveRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return DessolveRes;
+    })();
+
+    RobotProto.GetRoomStatusReq = (function() {
+
+        /**
+         * Properties of a GetRoomStatusReq.
+         * @memberof RobotProto
+         * @interface IGetRoomStatusReq
+         */
+
+        /**
+         * Constructs a new GetRoomStatusReq.
+         * @memberof RobotProto
+         * @classdesc Represents a GetRoomStatusReq.
+         * @implements IGetRoomStatusReq
+         * @constructor
+         * @param {RobotProto.IGetRoomStatusReq=} [properties] Properties to set
+         */
+        function GetRoomStatusReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new GetRoomStatusReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.GetRoomStatusReq
+         * @static
+         * @param {RobotProto.IGetRoomStatusReq=} [properties] Properties to set
+         * @returns {RobotProto.GetRoomStatusReq} GetRoomStatusReq instance
+         */
+        GetRoomStatusReq.create = function create(properties) {
+            return new GetRoomStatusReq(properties);
+        };
+
+        /**
+         * Encodes the specified GetRoomStatusReq message. Does not implicitly {@link RobotProto.GetRoomStatusReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.GetRoomStatusReq
+         * @static
+         * @param {RobotProto.IGetRoomStatusReq} message GetRoomStatusReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetRoomStatusReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GetRoomStatusReq message, length delimited. Does not implicitly {@link RobotProto.GetRoomStatusReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.GetRoomStatusReq
+         * @static
+         * @param {RobotProto.IGetRoomStatusReq} message GetRoomStatusReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetRoomStatusReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GetRoomStatusReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.GetRoomStatusReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.GetRoomStatusReq} GetRoomStatusReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetRoomStatusReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.GetRoomStatusReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a GetRoomStatusReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.GetRoomStatusReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.GetRoomStatusReq} GetRoomStatusReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetRoomStatusReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GetRoomStatusReq message.
+         * @function verify
+         * @memberof RobotProto.GetRoomStatusReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GetRoomStatusReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a GetRoomStatusReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.GetRoomStatusReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.GetRoomStatusReq} GetRoomStatusReq
+         */
+        GetRoomStatusReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.GetRoomStatusReq)
+                return object;
+            return new $root.RobotProto.GetRoomStatusReq();
+        };
+
+        /**
+         * Creates a plain object from a GetRoomStatusReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.GetRoomStatusReq
+         * @static
+         * @param {RobotProto.GetRoomStatusReq} message GetRoomStatusReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GetRoomStatusReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this GetRoomStatusReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.GetRoomStatusReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GetRoomStatusReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetRoomStatusReq;
+    })();
+
+    RobotProto.GetRoomStatusRes = (function() {
+
+        /**
+         * Properties of a GetRoomStatusRes.
+         * @memberof RobotProto
+         * @interface IGetRoomStatusRes
+         * @property {number} status GetRoomStatusRes status
+         */
+
+        /**
+         * Constructs a new GetRoomStatusRes.
+         * @memberof RobotProto
+         * @classdesc Represents a GetRoomStatusRes.
+         * @implements IGetRoomStatusRes
+         * @constructor
+         * @param {RobotProto.IGetRoomStatusRes=} [properties] Properties to set
+         */
+        function GetRoomStatusRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GetRoomStatusRes status.
+         * @member {number} status
+         * @memberof RobotProto.GetRoomStatusRes
+         * @instance
+         */
+        GetRoomStatusRes.prototype.status = 0;
+
+        /**
+         * Creates a new GetRoomStatusRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.GetRoomStatusRes
+         * @static
+         * @param {RobotProto.IGetRoomStatusRes=} [properties] Properties to set
+         * @returns {RobotProto.GetRoomStatusRes} GetRoomStatusRes instance
+         */
+        GetRoomStatusRes.create = function create(properties) {
+            return new GetRoomStatusRes(properties);
+        };
+
+        /**
+         * Encodes the specified GetRoomStatusRes message. Does not implicitly {@link RobotProto.GetRoomStatusRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.GetRoomStatusRes
+         * @static
+         * @param {RobotProto.IGetRoomStatusRes} message GetRoomStatusRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetRoomStatusRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GetRoomStatusRes message, length delimited. Does not implicitly {@link RobotProto.GetRoomStatusRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.GetRoomStatusRes
+         * @static
+         * @param {RobotProto.IGetRoomStatusRes} message GetRoomStatusRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetRoomStatusRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GetRoomStatusRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.GetRoomStatusRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.GetRoomStatusRes} GetRoomStatusRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetRoomStatusRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.GetRoomStatusRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a GetRoomStatusRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.GetRoomStatusRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.GetRoomStatusRes} GetRoomStatusRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetRoomStatusRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GetRoomStatusRes message.
+         * @function verify
+         * @memberof RobotProto.GetRoomStatusRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GetRoomStatusRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a GetRoomStatusRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.GetRoomStatusRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.GetRoomStatusRes} GetRoomStatusRes
+         */
+        GetRoomStatusRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.GetRoomStatusRes)
+                return object;
+            var message = new $root.RobotProto.GetRoomStatusRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GetRoomStatusRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.GetRoomStatusRes
+         * @static
+         * @param {RobotProto.GetRoomStatusRes} message GetRoomStatusRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GetRoomStatusRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this GetRoomStatusRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.GetRoomStatusRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GetRoomStatusRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetRoomStatusRes;
+    })();
+
+    RobotProto.BackRoomReq = (function() {
+
+        /**
+         * Properties of a BackRoomReq.
+         * @memberof RobotProto
+         * @interface IBackRoomReq
+         */
+
+        /**
+         * Constructs a new BackRoomReq.
+         * @memberof RobotProto
+         * @classdesc Represents a BackRoomReq.
+         * @implements IBackRoomReq
+         * @constructor
+         * @param {RobotProto.IBackRoomReq=} [properties] Properties to set
+         */
+        function BackRoomReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new BackRoomReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.BackRoomReq
+         * @static
+         * @param {RobotProto.IBackRoomReq=} [properties] Properties to set
+         * @returns {RobotProto.BackRoomReq} BackRoomReq instance
+         */
+        BackRoomReq.create = function create(properties) {
+            return new BackRoomReq(properties);
+        };
+
+        /**
+         * Encodes the specified BackRoomReq message. Does not implicitly {@link RobotProto.BackRoomReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.BackRoomReq
+         * @static
+         * @param {RobotProto.IBackRoomReq} message BackRoomReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BackRoomReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BackRoomReq message, length delimited. Does not implicitly {@link RobotProto.BackRoomReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.BackRoomReq
+         * @static
+         * @param {RobotProto.IBackRoomReq} message BackRoomReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BackRoomReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BackRoomReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.BackRoomReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.BackRoomReq} BackRoomReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BackRoomReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.BackRoomReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a BackRoomReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.BackRoomReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.BackRoomReq} BackRoomReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BackRoomReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BackRoomReq message.
+         * @function verify
+         * @memberof RobotProto.BackRoomReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BackRoomReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a BackRoomReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.BackRoomReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.BackRoomReq} BackRoomReq
+         */
+        BackRoomReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.BackRoomReq)
+                return object;
+            return new $root.RobotProto.BackRoomReq();
+        };
+
+        /**
+         * Creates a plain object from a BackRoomReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.BackRoomReq
+         * @static
+         * @param {RobotProto.BackRoomReq} message BackRoomReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BackRoomReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this BackRoomReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.BackRoomReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BackRoomReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BackRoomReq;
+    })();
+
+    RobotProto.BackRoomRes = (function() {
+
+        /**
+         * Properties of a BackRoomRes.
+         * @memberof RobotProto
+         * @interface IBackRoomRes
+         * @property {number} status BackRoomRes status
+         */
+
+        /**
+         * Constructs a new BackRoomRes.
+         * @memberof RobotProto
+         * @classdesc Represents a BackRoomRes.
+         * @implements IBackRoomRes
+         * @constructor
+         * @param {RobotProto.IBackRoomRes=} [properties] Properties to set
+         */
+        function BackRoomRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BackRoomRes status.
+         * @member {number} status
+         * @memberof RobotProto.BackRoomRes
+         * @instance
+         */
+        BackRoomRes.prototype.status = 0;
+
+        /**
+         * Creates a new BackRoomRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.BackRoomRes
+         * @static
+         * @param {RobotProto.IBackRoomRes=} [properties] Properties to set
+         * @returns {RobotProto.BackRoomRes} BackRoomRes instance
+         */
+        BackRoomRes.create = function create(properties) {
+            return new BackRoomRes(properties);
+        };
+
+        /**
+         * Encodes the specified BackRoomRes message. Does not implicitly {@link RobotProto.BackRoomRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.BackRoomRes
+         * @static
+         * @param {RobotProto.IBackRoomRes} message BackRoomRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BackRoomRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BackRoomRes message, length delimited. Does not implicitly {@link RobotProto.BackRoomRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.BackRoomRes
+         * @static
+         * @param {RobotProto.IBackRoomRes} message BackRoomRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BackRoomRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BackRoomRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.BackRoomRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.BackRoomRes} BackRoomRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BackRoomRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.BackRoomRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a BackRoomRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.BackRoomRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.BackRoomRes} BackRoomRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BackRoomRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BackRoomRes message.
+         * @function verify
+         * @memberof RobotProto.BackRoomRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BackRoomRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a BackRoomRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.BackRoomRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.BackRoomRes} BackRoomRes
+         */
+        BackRoomRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.BackRoomRes)
+                return object;
+            var message = new $root.RobotProto.BackRoomRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BackRoomRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.BackRoomRes
+         * @static
+         * @param {RobotProto.BackRoomRes} message BackRoomRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BackRoomRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this BackRoomRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.BackRoomRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BackRoomRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BackRoomRes;
+    })();
+
+    RobotProto.UserInfo = (function() {
+
+        /**
+         * Properties of a UserInfo.
+         * @memberof RobotProto
+         * @interface IUserInfo
+         * @property {string} numberid UserInfo numberid
+         * @property {string} userinfostring UserInfo userinfostring
+         */
+
+        /**
+         * Constructs a new UserInfo.
+         * @memberof RobotProto
+         * @classdesc Represents a UserInfo.
+         * @implements IUserInfo
+         * @constructor
+         * @param {RobotProto.IUserInfo=} [properties] Properties to set
+         */
+        function UserInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserInfo numberid.
+         * @member {string} numberid
+         * @memberof RobotProto.UserInfo
+         * @instance
+         */
+        UserInfo.prototype.numberid = "";
+
+        /**
+         * UserInfo userinfostring.
+         * @member {string} userinfostring
+         * @memberof RobotProto.UserInfo
+         * @instance
+         */
+        UserInfo.prototype.userinfostring = "";
+
+        /**
+         * Creates a new UserInfo instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserInfo
+         * @static
+         * @param {RobotProto.IUserInfo=} [properties] Properties to set
+         * @returns {RobotProto.UserInfo} UserInfo instance
+         */
+        UserInfo.create = function create(properties) {
+            return new UserInfo(properties);
+        };
+
+        /**
+         * Encodes the specified UserInfo message. Does not implicitly {@link RobotProto.UserInfo.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserInfo
+         * @static
+         * @param {RobotProto.IUserInfo} message UserInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.numberid);
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.userinfostring);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserInfo message, length delimited. Does not implicitly {@link RobotProto.UserInfo.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserInfo
+         * @static
+         * @param {RobotProto.IUserInfo} message UserInfo message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserInfo message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserInfo} UserInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.numberid = reader.string();
+                    break;
+                case 2:
+                    message.userinfostring = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("numberid"))
+                throw $util.ProtocolError("missing required 'numberid'", { instance: message });
+            if (!message.hasOwnProperty("userinfostring"))
+                throw $util.ProtocolError("missing required 'userinfostring'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserInfo message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserInfo
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserInfo} UserInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserInfo message.
+         * @function verify
+         * @memberof RobotProto.UserInfo
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isString(message.numberid))
+                return "numberid: string expected";
+            if (!$util.isString(message.userinfostring))
+                return "userinfostring: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserInfo message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserInfo
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserInfo} UserInfo
+         */
+        UserInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserInfo)
+                return object;
+            var message = new $root.RobotProto.UserInfo();
+            if (object.numberid != null)
+                message.numberid = String(object.numberid);
+            if (object.userinfostring != null)
+                message.userinfostring = String(object.userinfostring);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserInfo message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserInfo
+         * @static
+         * @param {RobotProto.UserInfo} message UserInfo
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.numberid = "";
+                object.userinfostring = "";
+            }
+            if (message.numberid != null && message.hasOwnProperty("numberid"))
+                object.numberid = message.numberid;
+            if (message.userinfostring != null && message.hasOwnProperty("userinfostring"))
+                object.userinfostring = message.userinfostring;
+            return object;
+        };
+
+        /**
+         * Converts this UserInfo to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserInfo
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserInfo;
+    })();
+
+    RobotProto.CheckLinkGameReq = (function() {
+
+        /**
+         * Properties of a CheckLinkGameReq.
+         * @memberof RobotProto
+         * @interface ICheckLinkGameReq
+         */
+
+        /**
+         * Constructs a new CheckLinkGameReq.
+         * @memberof RobotProto
+         * @classdesc Represents a CheckLinkGameReq.
+         * @implements ICheckLinkGameReq
+         * @constructor
+         * @param {RobotProto.ICheckLinkGameReq=} [properties] Properties to set
+         */
+        function CheckLinkGameReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new CheckLinkGameReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.CheckLinkGameReq
+         * @static
+         * @param {RobotProto.ICheckLinkGameReq=} [properties] Properties to set
+         * @returns {RobotProto.CheckLinkGameReq} CheckLinkGameReq instance
+         */
+        CheckLinkGameReq.create = function create(properties) {
+            return new CheckLinkGameReq(properties);
+        };
+
+        /**
+         * Encodes the specified CheckLinkGameReq message. Does not implicitly {@link RobotProto.CheckLinkGameReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.CheckLinkGameReq
+         * @static
+         * @param {RobotProto.ICheckLinkGameReq} message CheckLinkGameReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CheckLinkGameReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CheckLinkGameReq message, length delimited. Does not implicitly {@link RobotProto.CheckLinkGameReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.CheckLinkGameReq
+         * @static
+         * @param {RobotProto.ICheckLinkGameReq} message CheckLinkGameReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CheckLinkGameReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CheckLinkGameReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.CheckLinkGameReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.CheckLinkGameReq} CheckLinkGameReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CheckLinkGameReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.CheckLinkGameReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CheckLinkGameReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.CheckLinkGameReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.CheckLinkGameReq} CheckLinkGameReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CheckLinkGameReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CheckLinkGameReq message.
+         * @function verify
+         * @memberof RobotProto.CheckLinkGameReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CheckLinkGameReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a CheckLinkGameReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.CheckLinkGameReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.CheckLinkGameReq} CheckLinkGameReq
+         */
+        CheckLinkGameReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.CheckLinkGameReq)
+                return object;
+            return new $root.RobotProto.CheckLinkGameReq();
+        };
+
+        /**
+         * Creates a plain object from a CheckLinkGameReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.CheckLinkGameReq
+         * @static
+         * @param {RobotProto.CheckLinkGameReq} message CheckLinkGameReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CheckLinkGameReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this CheckLinkGameReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.CheckLinkGameReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CheckLinkGameReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CheckLinkGameReq;
+    })();
+
+    RobotProto.CheckLinkGameRes = (function() {
+
+        /**
+         * Properties of a CheckLinkGameRes.
+         * @memberof RobotProto
+         * @interface ICheckLinkGameRes
+         * @property {number} status CheckLinkGameRes status
+         */
+
+        /**
+         * Constructs a new CheckLinkGameRes.
+         * @memberof RobotProto
+         * @classdesc Represents a CheckLinkGameRes.
+         * @implements ICheckLinkGameRes
+         * @constructor
+         * @param {RobotProto.ICheckLinkGameRes=} [properties] Properties to set
+         */
+        function CheckLinkGameRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CheckLinkGameRes status.
+         * @member {number} status
+         * @memberof RobotProto.CheckLinkGameRes
+         * @instance
+         */
+        CheckLinkGameRes.prototype.status = 0;
+
+        /**
+         * Creates a new CheckLinkGameRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.CheckLinkGameRes
+         * @static
+         * @param {RobotProto.ICheckLinkGameRes=} [properties] Properties to set
+         * @returns {RobotProto.CheckLinkGameRes} CheckLinkGameRes instance
+         */
+        CheckLinkGameRes.create = function create(properties) {
+            return new CheckLinkGameRes(properties);
+        };
+
+        /**
+         * Encodes the specified CheckLinkGameRes message. Does not implicitly {@link RobotProto.CheckLinkGameRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.CheckLinkGameRes
+         * @static
+         * @param {RobotProto.ICheckLinkGameRes} message CheckLinkGameRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CheckLinkGameRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CheckLinkGameRes message, length delimited. Does not implicitly {@link RobotProto.CheckLinkGameRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.CheckLinkGameRes
+         * @static
+         * @param {RobotProto.ICheckLinkGameRes} message CheckLinkGameRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CheckLinkGameRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CheckLinkGameRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.CheckLinkGameRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.CheckLinkGameRes} CheckLinkGameRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CheckLinkGameRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.CheckLinkGameRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a CheckLinkGameRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.CheckLinkGameRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.CheckLinkGameRes} CheckLinkGameRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CheckLinkGameRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CheckLinkGameRes message.
+         * @function verify
+         * @memberof RobotProto.CheckLinkGameRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CheckLinkGameRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a CheckLinkGameRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.CheckLinkGameRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.CheckLinkGameRes} CheckLinkGameRes
+         */
+        CheckLinkGameRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.CheckLinkGameRes)
+                return object;
+            var message = new $root.RobotProto.CheckLinkGameRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CheckLinkGameRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.CheckLinkGameRes
+         * @static
+         * @param {RobotProto.CheckLinkGameRes} message CheckLinkGameRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CheckLinkGameRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this CheckLinkGameRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.CheckLinkGameRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CheckLinkGameRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CheckLinkGameRes;
+    })();
+
+    RobotProto.UserInfoRes = (function() {
+
+        /**
+         * Properties of a UserInfoRes.
+         * @memberof RobotProto
+         * @interface IUserInfoRes
+         * @property {Array.<RobotProto.IUserInfo>|null} [userinfo] UserInfoRes userinfo
+         */
+
+        /**
+         * Constructs a new UserInfoRes.
+         * @memberof RobotProto
+         * @classdesc Represents a UserInfoRes.
+         * @implements IUserInfoRes
+         * @constructor
+         * @param {RobotProto.IUserInfoRes=} [properties] Properties to set
+         */
+        function UserInfoRes(properties) {
+            this.userinfo = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserInfoRes userinfo.
+         * @member {Array.<RobotProto.IUserInfo>} userinfo
+         * @memberof RobotProto.UserInfoRes
+         * @instance
+         */
+        UserInfoRes.prototype.userinfo = $util.emptyArray;
+
+        /**
+         * Creates a new UserInfoRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserInfoRes
+         * @static
+         * @param {RobotProto.IUserInfoRes=} [properties] Properties to set
+         * @returns {RobotProto.UserInfoRes} UserInfoRes instance
+         */
+        UserInfoRes.create = function create(properties) {
+            return new UserInfoRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserInfoRes message. Does not implicitly {@link RobotProto.UserInfoRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserInfoRes
+         * @static
+         * @param {RobotProto.IUserInfoRes} message UserInfoRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserInfoRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.userinfo != null && message.userinfo.length)
+                for (var i = 0; i < message.userinfo.length; ++i)
+                    $root.RobotProto.UserInfo.encode(message.userinfo[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserInfoRes message, length delimited. Does not implicitly {@link RobotProto.UserInfoRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserInfoRes
+         * @static
+         * @param {RobotProto.IUserInfoRes} message UserInfoRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserInfoRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserInfoRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserInfoRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserInfoRes} UserInfoRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserInfoRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserInfoRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.userinfo && message.userinfo.length))
+                        message.userinfo = [];
+                    message.userinfo.push($root.RobotProto.UserInfo.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserInfoRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserInfoRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserInfoRes} UserInfoRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserInfoRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserInfoRes message.
+         * @function verify
+         * @memberof RobotProto.UserInfoRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserInfoRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.userinfo != null && message.hasOwnProperty("userinfo")) {
+                if (!Array.isArray(message.userinfo))
+                    return "userinfo: array expected";
+                for (var i = 0; i < message.userinfo.length; ++i) {
+                    var error = $root.RobotProto.UserInfo.verify(message.userinfo[i]);
+                    if (error)
+                        return "userinfo." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a UserInfoRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserInfoRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserInfoRes} UserInfoRes
+         */
+        UserInfoRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserInfoRes)
+                return object;
+            var message = new $root.RobotProto.UserInfoRes();
+            if (object.userinfo) {
+                if (!Array.isArray(object.userinfo))
+                    throw TypeError(".RobotProto.UserInfoRes.userinfo: array expected");
+                message.userinfo = [];
+                for (var i = 0; i < object.userinfo.length; ++i) {
+                    if (typeof object.userinfo[i] !== "object")
+                        throw TypeError(".RobotProto.UserInfoRes.userinfo: object expected");
+                    message.userinfo[i] = $root.RobotProto.UserInfo.fromObject(object.userinfo[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserInfoRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserInfoRes
+         * @static
+         * @param {RobotProto.UserInfoRes} message UserInfoRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserInfoRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.userinfo = [];
+            if (message.userinfo && message.userinfo.length) {
+                object.userinfo = [];
+                for (var j = 0; j < message.userinfo.length; ++j)
+                    object.userinfo[j] = $root.RobotProto.UserInfo.toObject(message.userinfo[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this UserInfoRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserInfoRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserInfoRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserInfoRes;
+    })();
+
+    RobotProto.GameRuleRes = (function() {
+
+        /**
+         * Properties of a GameRuleRes.
+         * @memberof RobotProto
+         * @interface IGameRuleRes
+         * @property {string} gamerule GameRuleRes gamerule
+         */
+
+        /**
+         * Constructs a new GameRuleRes.
+         * @memberof RobotProto
+         * @classdesc Represents a GameRuleRes.
+         * @implements IGameRuleRes
+         * @constructor
+         * @param {RobotProto.IGameRuleRes=} [properties] Properties to set
+         */
+        function GameRuleRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GameRuleRes gamerule.
+         * @member {string} gamerule
+         * @memberof RobotProto.GameRuleRes
+         * @instance
+         */
+        GameRuleRes.prototype.gamerule = "";
+
+        /**
+         * Creates a new GameRuleRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.GameRuleRes
+         * @static
+         * @param {RobotProto.IGameRuleRes=} [properties] Properties to set
+         * @returns {RobotProto.GameRuleRes} GameRuleRes instance
+         */
+        GameRuleRes.create = function create(properties) {
+            return new GameRuleRes(properties);
+        };
+
+        /**
+         * Encodes the specified GameRuleRes message. Does not implicitly {@link RobotProto.GameRuleRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.GameRuleRes
+         * @static
+         * @param {RobotProto.IGameRuleRes} message GameRuleRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameRuleRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.gamerule);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GameRuleRes message, length delimited. Does not implicitly {@link RobotProto.GameRuleRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.GameRuleRes
+         * @static
+         * @param {RobotProto.IGameRuleRes} message GameRuleRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameRuleRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GameRuleRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.GameRuleRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.GameRuleRes} GameRuleRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameRuleRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.GameRuleRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.gamerule = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("gamerule"))
+                throw $util.ProtocolError("missing required 'gamerule'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a GameRuleRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.GameRuleRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.GameRuleRes} GameRuleRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameRuleRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GameRuleRes message.
+         * @function verify
+         * @memberof RobotProto.GameRuleRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GameRuleRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isString(message.gamerule))
+                return "gamerule: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a GameRuleRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.GameRuleRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.GameRuleRes} GameRuleRes
+         */
+        GameRuleRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.GameRuleRes)
+                return object;
+            var message = new $root.RobotProto.GameRuleRes();
+            if (object.gamerule != null)
+                message.gamerule = String(object.gamerule);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GameRuleRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.GameRuleRes
+         * @static
+         * @param {RobotProto.GameRuleRes} message GameRuleRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GameRuleRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.gamerule = "";
+            if (message.gamerule != null && message.hasOwnProperty("gamerule"))
+                object.gamerule = message.gamerule;
+            return object;
+        };
+
+        /**
+         * Converts this GameRuleRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.GameRuleRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GameRuleRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameRuleRes;
+    })();
+
+    RobotProto.RoomIdRes = (function() {
+
+        /**
+         * Properties of a RoomIdRes.
+         * @memberof RobotProto
+         * @interface IRoomIdRes
+         * @property {string} roomid RoomIdRes roomid
+         */
+
+        /**
+         * Constructs a new RoomIdRes.
+         * @memberof RobotProto
+         * @classdesc Represents a RoomIdRes.
+         * @implements IRoomIdRes
+         * @constructor
+         * @param {RobotProto.IRoomIdRes=} [properties] Properties to set
+         */
+        function RoomIdRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * RoomIdRes roomid.
+         * @member {string} roomid
+         * @memberof RobotProto.RoomIdRes
+         * @instance
+         */
+        RoomIdRes.prototype.roomid = "";
+
+        /**
+         * Creates a new RoomIdRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.RoomIdRes
+         * @static
+         * @param {RobotProto.IRoomIdRes=} [properties] Properties to set
+         * @returns {RobotProto.RoomIdRes} RoomIdRes instance
+         */
+        RoomIdRes.create = function create(properties) {
+            return new RoomIdRes(properties);
+        };
+
+        /**
+         * Encodes the specified RoomIdRes message. Does not implicitly {@link RobotProto.RoomIdRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.RoomIdRes
+         * @static
+         * @param {RobotProto.IRoomIdRes} message RoomIdRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomIdRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.roomid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified RoomIdRes message, length delimited. Does not implicitly {@link RobotProto.RoomIdRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.RoomIdRes
+         * @static
+         * @param {RobotProto.IRoomIdRes} message RoomIdRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomIdRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a RoomIdRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.RoomIdRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.RoomIdRes} RoomIdRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomIdRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.RoomIdRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.roomid = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("roomid"))
+                throw $util.ProtocolError("missing required 'roomid'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a RoomIdRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.RoomIdRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.RoomIdRes} RoomIdRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomIdRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a RoomIdRes message.
+         * @function verify
+         * @memberof RobotProto.RoomIdRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        RoomIdRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isString(message.roomid))
+                return "roomid: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a RoomIdRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.RoomIdRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.RoomIdRes} RoomIdRes
+         */
+        RoomIdRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.RoomIdRes)
+                return object;
+            var message = new $root.RobotProto.RoomIdRes();
+            if (object.roomid != null)
+                message.roomid = String(object.roomid);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a RoomIdRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.RoomIdRes
+         * @static
+         * @param {RobotProto.RoomIdRes} message RoomIdRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        RoomIdRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.roomid = "";
+            if (message.roomid != null && message.hasOwnProperty("roomid"))
+                object.roomid = message.roomid;
+            return object;
+        };
+
+        /**
+         * Converts this RoomIdRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.RoomIdRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        RoomIdRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RoomIdRes;
+    })();
+
+    RobotProto.PlayCountRes = (function() {
+
+        /**
+         * Properties of a PlayCountRes.
+         * @memberof RobotProto
+         * @interface IPlayCountRes
+         * @property {string} playcount PlayCountRes playcount
+         * @property {string} totalplaycount PlayCountRes totalplaycount
+         */
+
+        /**
+         * Constructs a new PlayCountRes.
+         * @memberof RobotProto
+         * @classdesc Represents a PlayCountRes.
+         * @implements IPlayCountRes
+         * @constructor
+         * @param {RobotProto.IPlayCountRes=} [properties] Properties to set
+         */
+        function PlayCountRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PlayCountRes playcount.
+         * @member {string} playcount
+         * @memberof RobotProto.PlayCountRes
+         * @instance
+         */
+        PlayCountRes.prototype.playcount = "";
+
+        /**
+         * PlayCountRes totalplaycount.
+         * @member {string} totalplaycount
+         * @memberof RobotProto.PlayCountRes
+         * @instance
+         */
+        PlayCountRes.prototype.totalplaycount = "";
+
+        /**
+         * Creates a new PlayCountRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.PlayCountRes
+         * @static
+         * @param {RobotProto.IPlayCountRes=} [properties] Properties to set
+         * @returns {RobotProto.PlayCountRes} PlayCountRes instance
+         */
+        PlayCountRes.create = function create(properties) {
+            return new PlayCountRes(properties);
+        };
+
+        /**
+         * Encodes the specified PlayCountRes message. Does not implicitly {@link RobotProto.PlayCountRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.PlayCountRes
+         * @static
+         * @param {RobotProto.IPlayCountRes} message PlayCountRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayCountRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.playcount);
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.totalplaycount);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PlayCountRes message, length delimited. Does not implicitly {@link RobotProto.PlayCountRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.PlayCountRes
+         * @static
+         * @param {RobotProto.IPlayCountRes} message PlayCountRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayCountRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PlayCountRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.PlayCountRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.PlayCountRes} PlayCountRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayCountRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.PlayCountRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.playcount = reader.string();
+                    break;
+                case 2:
+                    message.totalplaycount = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("playcount"))
+                throw $util.ProtocolError("missing required 'playcount'", { instance: message });
+            if (!message.hasOwnProperty("totalplaycount"))
+                throw $util.ProtocolError("missing required 'totalplaycount'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a PlayCountRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.PlayCountRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.PlayCountRes} PlayCountRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayCountRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PlayCountRes message.
+         * @function verify
+         * @memberof RobotProto.PlayCountRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PlayCountRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isString(message.playcount))
+                return "playcount: string expected";
+            if (!$util.isString(message.totalplaycount))
+                return "totalplaycount: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a PlayCountRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.PlayCountRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.PlayCountRes} PlayCountRes
+         */
+        PlayCountRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.PlayCountRes)
+                return object;
+            var message = new $root.RobotProto.PlayCountRes();
+            if (object.playcount != null)
+                message.playcount = String(object.playcount);
+            if (object.totalplaycount != null)
+                message.totalplaycount = String(object.totalplaycount);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PlayCountRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.PlayCountRes
+         * @static
+         * @param {RobotProto.PlayCountRes} message PlayCountRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PlayCountRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.playcount = "";
+                object.totalplaycount = "";
+            }
+            if (message.playcount != null && message.hasOwnProperty("playcount"))
+                object.playcount = message.playcount;
+            if (message.totalplaycount != null && message.hasOwnProperty("totalplaycount"))
+                object.totalplaycount = message.totalplaycount;
+            return object;
+        };
+
+        /**
+         * Converts this PlayCountRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.PlayCountRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PlayCountRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PlayCountRes;
+    })();
+
+    RobotProto.UserReadyReq = (function() {
+
+        /**
+         * Properties of a UserReadyReq.
+         * @memberof RobotProto
+         * @interface IUserReadyReq
+         */
+
+        /**
+         * Constructs a new UserReadyReq.
+         * @memberof RobotProto
+         * @classdesc Represents a UserReadyReq.
+         * @implements IUserReadyReq
+         * @constructor
+         * @param {RobotProto.IUserReadyReq=} [properties] Properties to set
+         */
+        function UserReadyReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new UserReadyReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserReadyReq
+         * @static
+         * @param {RobotProto.IUserReadyReq=} [properties] Properties to set
+         * @returns {RobotProto.UserReadyReq} UserReadyReq instance
+         */
+        UserReadyReq.create = function create(properties) {
+            return new UserReadyReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserReadyReq message. Does not implicitly {@link RobotProto.UserReadyReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserReadyReq
+         * @static
+         * @param {RobotProto.IUserReadyReq} message UserReadyReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserReadyReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserReadyReq message, length delimited. Does not implicitly {@link RobotProto.UserReadyReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserReadyReq
+         * @static
+         * @param {RobotProto.IUserReadyReq} message UserReadyReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserReadyReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserReadyReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserReadyReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserReadyReq} UserReadyReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserReadyReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserReadyReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserReadyReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserReadyReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserReadyReq} UserReadyReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserReadyReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserReadyReq message.
+         * @function verify
+         * @memberof RobotProto.UserReadyReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserReadyReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserReadyReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserReadyReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserReadyReq} UserReadyReq
+         */
+        UserReadyReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserReadyReq)
+                return object;
+            return new $root.RobotProto.UserReadyReq();
+        };
+
+        /**
+         * Creates a plain object from a UserReadyReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserReadyReq
+         * @static
+         * @param {RobotProto.UserReadyReq} message UserReadyReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserReadyReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this UserReadyReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserReadyReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserReadyReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserReadyReq;
+    })();
+
+    RobotProto.UserReadyRes = (function() {
+
+        /**
+         * Properties of a UserReadyRes.
+         * @memberof RobotProto
+         * @interface IUserReadyRes
+         * @property {number} status UserReadyRes status
+         * @property {number|null} [seatid] UserReadyRes seatid
+         * @property {number|null} [userstate] UserReadyRes userstate
+         */
+
+        /**
+         * Constructs a new UserReadyRes.
+         * @memberof RobotProto
+         * @classdesc Represents a UserReadyRes.
+         * @implements IUserReadyRes
+         * @constructor
+         * @param {RobotProto.IUserReadyRes=} [properties] Properties to set
+         */
+        function UserReadyRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserReadyRes status.
+         * @member {number} status
+         * @memberof RobotProto.UserReadyRes
+         * @instance
+         */
+        UserReadyRes.prototype.status = 0;
+
+        /**
+         * UserReadyRes seatid.
+         * @member {number} seatid
+         * @memberof RobotProto.UserReadyRes
+         * @instance
+         */
+        UserReadyRes.prototype.seatid = 0;
+
+        /**
+         * UserReadyRes userstate.
+         * @member {number} userstate
+         * @memberof RobotProto.UserReadyRes
+         * @instance
+         */
+        UserReadyRes.prototype.userstate = 0;
+
+        /**
+         * Creates a new UserReadyRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserReadyRes
+         * @static
+         * @param {RobotProto.IUserReadyRes=} [properties] Properties to set
+         * @returns {RobotProto.UserReadyRes} UserReadyRes instance
+         */
+        UserReadyRes.create = function create(properties) {
+            return new UserReadyRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserReadyRes message. Does not implicitly {@link RobotProto.UserReadyRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserReadyRes
+         * @static
+         * @param {RobotProto.IUserReadyRes} message UserReadyRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserReadyRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.seatid != null && message.hasOwnProperty("seatid"))
+                writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.seatid);
+            if (message.userstate != null && message.hasOwnProperty("userstate"))
+                writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.userstate);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserReadyRes message, length delimited. Does not implicitly {@link RobotProto.UserReadyRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserReadyRes
+         * @static
+         * @param {RobotProto.IUserReadyRes} message UserReadyRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserReadyRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserReadyRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserReadyRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserReadyRes} UserReadyRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserReadyRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserReadyRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.seatid = reader.sint32();
+                    break;
+                case 3:
+                    message.userstate = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserReadyRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserReadyRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserReadyRes} UserReadyRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserReadyRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserReadyRes message.
+         * @function verify
+         * @memberof RobotProto.UserReadyRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserReadyRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.seatid != null && message.hasOwnProperty("seatid"))
+                if (!$util.isInteger(message.seatid))
+                    return "seatid: integer expected";
+            if (message.userstate != null && message.hasOwnProperty("userstate"))
+                if (!$util.isInteger(message.userstate))
+                    return "userstate: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserReadyRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserReadyRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserReadyRes} UserReadyRes
+         */
+        UserReadyRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserReadyRes)
+                return object;
+            var message = new $root.RobotProto.UserReadyRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.seatid != null)
+                message.seatid = object.seatid | 0;
+            if (object.userstate != null)
+                message.userstate = object.userstate | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserReadyRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserReadyRes
+         * @static
+         * @param {RobotProto.UserReadyRes} message UserReadyRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserReadyRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.seatid = 0;
+                object.userstate = 0;
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.seatid != null && message.hasOwnProperty("seatid"))
+                object.seatid = message.seatid;
+            if (message.userstate != null && message.hasOwnProperty("userstate"))
+                object.userstate = message.userstate;
+            return object;
+        };
+
+        /**
+         * Converts this UserReadyRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserReadyRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserReadyRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserReadyRes;
+    })();
+
+    RobotProto.GameStartRes = (function() {
+
+        /**
+         * Properties of a GameStartRes.
+         * @memberof RobotProto
+         * @interface IGameStartRes
+         * @property {number} status GameStartRes status
+         */
+
+        /**
+         * Constructs a new GameStartRes.
+         * @memberof RobotProto
+         * @classdesc Represents a GameStartRes.
+         * @implements IGameStartRes
+         * @constructor
+         * @param {RobotProto.IGameStartRes=} [properties] Properties to set
+         */
+        function GameStartRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GameStartRes status.
+         * @member {number} status
+         * @memberof RobotProto.GameStartRes
+         * @instance
+         */
+        GameStartRes.prototype.status = 0;
+
+        /**
+         * Creates a new GameStartRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.GameStartRes
+         * @static
+         * @param {RobotProto.IGameStartRes=} [properties] Properties to set
+         * @returns {RobotProto.GameStartRes} GameStartRes instance
+         */
+        GameStartRes.create = function create(properties) {
+            return new GameStartRes(properties);
+        };
+
+        /**
+         * Encodes the specified GameStartRes message. Does not implicitly {@link RobotProto.GameStartRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.GameStartRes
+         * @static
+         * @param {RobotProto.IGameStartRes} message GameStartRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameStartRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GameStartRes message, length delimited. Does not implicitly {@link RobotProto.GameStartRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.GameStartRes
+         * @static
+         * @param {RobotProto.IGameStartRes} message GameStartRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameStartRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GameStartRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.GameStartRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.GameStartRes} GameStartRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameStartRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.GameStartRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a GameStartRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.GameStartRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.GameStartRes} GameStartRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameStartRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GameStartRes message.
+         * @function verify
+         * @memberof RobotProto.GameStartRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GameStartRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a GameStartRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.GameStartRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.GameStartRes} GameStartRes
+         */
+        GameStartRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.GameStartRes)
+                return object;
+            var message = new $root.RobotProto.GameStartRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GameStartRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.GameStartRes
+         * @static
+         * @param {RobotProto.GameStartRes} message GameStartRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GameStartRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this GameStartRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.GameStartRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GameStartRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameStartRes;
+    })();
+
+    RobotProto.GameEndRes = (function() {
+
+        /**
+         * Properties of a GameEndRes.
+         * @memberof RobotProto
+         * @interface IGameEndRes
+         * @property {Array.<number>|null} [status] GameEndRes status
+         */
+
+        /**
+         * Constructs a new GameEndRes.
+         * @memberof RobotProto
+         * @classdesc Represents a GameEndRes.
+         * @implements IGameEndRes
+         * @constructor
+         * @param {RobotProto.IGameEndRes=} [properties] Properties to set
+         */
+        function GameEndRes(properties) {
+            this.status = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GameEndRes status.
+         * @member {Array.<number>} status
+         * @memberof RobotProto.GameEndRes
+         * @instance
+         */
+        GameEndRes.prototype.status = $util.emptyArray;
+
+        /**
+         * Creates a new GameEndRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.GameEndRes
+         * @static
+         * @param {RobotProto.IGameEndRes=} [properties] Properties to set
+         * @returns {RobotProto.GameEndRes} GameEndRes instance
+         */
+        GameEndRes.create = function create(properties) {
+            return new GameEndRes(properties);
+        };
+
+        /**
+         * Encodes the specified GameEndRes message. Does not implicitly {@link RobotProto.GameEndRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.GameEndRes
+         * @static
+         * @param {RobotProto.IGameEndRes} message GameEndRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameEndRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.status != null && message.status.length) {
+                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                for (var i = 0; i < message.status.length; ++i)
+                    writer.sint32(message.status[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GameEndRes message, length delimited. Does not implicitly {@link RobotProto.GameEndRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.GameEndRes
+         * @static
+         * @param {RobotProto.IGameEndRes} message GameEndRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameEndRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GameEndRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.GameEndRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.GameEndRes} GameEndRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameEndRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.GameEndRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.status && message.status.length))
+                        message.status = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.status.push(reader.sint32());
+                    } else
+                        message.status.push(reader.sint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a GameEndRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.GameEndRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.GameEndRes} GameEndRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameEndRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GameEndRes message.
+         * @function verify
+         * @memberof RobotProto.GameEndRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GameEndRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.status != null && message.hasOwnProperty("status")) {
+                if (!Array.isArray(message.status))
+                    return "status: array expected";
+                for (var i = 0; i < message.status.length; ++i)
+                    if (!$util.isInteger(message.status[i]))
+                        return "status: integer[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates a GameEndRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.GameEndRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.GameEndRes} GameEndRes
+         */
+        GameEndRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.GameEndRes)
+                return object;
+            var message = new $root.RobotProto.GameEndRes();
+            if (object.status) {
+                if (!Array.isArray(object.status))
+                    throw TypeError(".RobotProto.GameEndRes.status: array expected");
+                message.status = [];
+                for (var i = 0; i < object.status.length; ++i)
+                    message.status[i] = object.status[i] | 0;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GameEndRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.GameEndRes
+         * @static
+         * @param {RobotProto.GameEndRes} message GameEndRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GameEndRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.status = [];
+            if (message.status && message.status.length) {
+                object.status = [];
+                for (var j = 0; j < message.status.length; ++j)
+                    object.status[j] = message.status[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this GameEndRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.GameEndRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GameEndRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameEndRes;
+    })();
+
+    RobotProto.UserOfflineRes = (function() {
+
+        /**
+         * Properties of a UserOfflineRes.
+         * @memberof RobotProto
+         * @interface IUserOfflineRes
+         * @property {number} seatid UserOfflineRes seatid
+         */
+
+        /**
+         * Constructs a new UserOfflineRes.
+         * @memberof RobotProto
+         * @classdesc Represents a UserOfflineRes.
+         * @implements IUserOfflineRes
+         * @constructor
+         * @param {RobotProto.IUserOfflineRes=} [properties] Properties to set
+         */
+        function UserOfflineRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserOfflineRes seatid.
+         * @member {number} seatid
+         * @memberof RobotProto.UserOfflineRes
+         * @instance
+         */
+        UserOfflineRes.prototype.seatid = 0;
+
+        /**
+         * Creates a new UserOfflineRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserOfflineRes
+         * @static
+         * @param {RobotProto.IUserOfflineRes=} [properties] Properties to set
+         * @returns {RobotProto.UserOfflineRes} UserOfflineRes instance
+         */
+        UserOfflineRes.create = function create(properties) {
+            return new UserOfflineRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserOfflineRes message. Does not implicitly {@link RobotProto.UserOfflineRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserOfflineRes
+         * @static
+         * @param {RobotProto.IUserOfflineRes} message UserOfflineRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserOfflineRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.seatid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserOfflineRes message, length delimited. Does not implicitly {@link RobotProto.UserOfflineRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserOfflineRes
+         * @static
+         * @param {RobotProto.IUserOfflineRes} message UserOfflineRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserOfflineRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserOfflineRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserOfflineRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserOfflineRes} UserOfflineRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserOfflineRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserOfflineRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.seatid = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("seatid"))
+                throw $util.ProtocolError("missing required 'seatid'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserOfflineRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserOfflineRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserOfflineRes} UserOfflineRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserOfflineRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserOfflineRes message.
+         * @function verify
+         * @memberof RobotProto.UserOfflineRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserOfflineRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.seatid))
+                return "seatid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserOfflineRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserOfflineRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserOfflineRes} UserOfflineRes
+         */
+        UserOfflineRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserOfflineRes)
+                return object;
+            var message = new $root.RobotProto.UserOfflineRes();
+            if (object.seatid != null)
+                message.seatid = object.seatid | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserOfflineRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserOfflineRes
+         * @static
+         * @param {RobotProto.UserOfflineRes} message UserOfflineRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserOfflineRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.seatid = 0;
+            if (message.seatid != null && message.hasOwnProperty("seatid"))
+                object.seatid = message.seatid;
+            return object;
+        };
+
+        /**
+         * Converts this UserOfflineRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserOfflineRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserOfflineRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserOfflineRes;
+    })();
+
+    RobotProto.LoginLogicReq = (function() {
+
+        /**
+         * Properties of a LoginLogicReq.
+         * @memberof RobotProto
+         * @interface ILoginLogicReq
+         * @property {boolean|null} [isrobot] LoginLogicReq isrobot
+         */
+
+        /**
+         * Constructs a new LoginLogicReq.
+         * @memberof RobotProto
+         * @classdesc Represents a LoginLogicReq.
+         * @implements ILoginLogicReq
+         * @constructor
+         * @param {RobotProto.ILoginLogicReq=} [properties] Properties to set
+         */
+        function LoginLogicReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * LoginLogicReq isrobot.
+         * @member {boolean} isrobot
+         * @memberof RobotProto.LoginLogicReq
+         * @instance
+         */
+        LoginLogicReq.prototype.isrobot = false;
+
+        /**
+         * Creates a new LoginLogicReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.LoginLogicReq
+         * @static
+         * @param {RobotProto.ILoginLogicReq=} [properties] Properties to set
+         * @returns {RobotProto.LoginLogicReq} LoginLogicReq instance
+         */
+        LoginLogicReq.create = function create(properties) {
+            return new LoginLogicReq(properties);
+        };
+
+        /**
+         * Encodes the specified LoginLogicReq message. Does not implicitly {@link RobotProto.LoginLogicReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.LoginLogicReq
+         * @static
+         * @param {RobotProto.ILoginLogicReq} message LoginLogicReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        LoginLogicReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.isrobot != null && message.hasOwnProperty("isrobot"))
+                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.isrobot);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified LoginLogicReq message, length delimited. Does not implicitly {@link RobotProto.LoginLogicReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.LoginLogicReq
+         * @static
+         * @param {RobotProto.ILoginLogicReq} message LoginLogicReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        LoginLogicReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a LoginLogicReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.LoginLogicReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.LoginLogicReq} LoginLogicReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        LoginLogicReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.LoginLogicReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.isrobot = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a LoginLogicReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.LoginLogicReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.LoginLogicReq} LoginLogicReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        LoginLogicReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a LoginLogicReq message.
+         * @function verify
+         * @memberof RobotProto.LoginLogicReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        LoginLogicReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.isrobot != null && message.hasOwnProperty("isrobot"))
+                if (typeof message.isrobot !== "boolean")
+                    return "isrobot: boolean expected";
+            return null;
+        };
+
+        /**
+         * Creates a LoginLogicReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.LoginLogicReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.LoginLogicReq} LoginLogicReq
+         */
+        LoginLogicReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.LoginLogicReq)
+                return object;
+            var message = new $root.RobotProto.LoginLogicReq();
+            if (object.isrobot != null)
+                message.isrobot = Boolean(object.isrobot);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a LoginLogicReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.LoginLogicReq
+         * @static
+         * @param {RobotProto.LoginLogicReq} message LoginLogicReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        LoginLogicReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.isrobot = false;
+            if (message.isrobot != null && message.hasOwnProperty("isrobot"))
+                object.isrobot = message.isrobot;
+            return object;
+        };
+
+        /**
+         * Converts this LoginLogicReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.LoginLogicReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        LoginLogicReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LoginLogicReq;
+    })();
+
+    RobotProto.LoginLogicRes = (function() {
+
+        /**
+         * Properties of a LoginLogicRes.
+         * @memberof RobotProto
+         * @interface ILoginLogicRes
+         * @property {number} status LoginLogicRes status
+         */
+
+        /**
+         * Constructs a new LoginLogicRes.
+         * @memberof RobotProto
+         * @classdesc Represents a LoginLogicRes.
+         * @implements ILoginLogicRes
+         * @constructor
+         * @param {RobotProto.ILoginLogicRes=} [properties] Properties to set
+         */
+        function LoginLogicRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * LoginLogicRes status.
+         * @member {number} status
+         * @memberof RobotProto.LoginLogicRes
+         * @instance
+         */
+        LoginLogicRes.prototype.status = 0;
+
+        /**
+         * Creates a new LoginLogicRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.LoginLogicRes
+         * @static
+         * @param {RobotProto.ILoginLogicRes=} [properties] Properties to set
+         * @returns {RobotProto.LoginLogicRes} LoginLogicRes instance
+         */
+        LoginLogicRes.create = function create(properties) {
+            return new LoginLogicRes(properties);
+        };
+
+        /**
+         * Encodes the specified LoginLogicRes message. Does not implicitly {@link RobotProto.LoginLogicRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.LoginLogicRes
+         * @static
+         * @param {RobotProto.ILoginLogicRes} message LoginLogicRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        LoginLogicRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified LoginLogicRes message, length delimited. Does not implicitly {@link RobotProto.LoginLogicRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.LoginLogicRes
+         * @static
+         * @param {RobotProto.ILoginLogicRes} message LoginLogicRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        LoginLogicRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a LoginLogicRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.LoginLogicRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.LoginLogicRes} LoginLogicRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        LoginLogicRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.LoginLogicRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a LoginLogicRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.LoginLogicRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.LoginLogicRes} LoginLogicRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        LoginLogicRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a LoginLogicRes message.
+         * @function verify
+         * @memberof RobotProto.LoginLogicRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        LoginLogicRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a LoginLogicRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.LoginLogicRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.LoginLogicRes} LoginLogicRes
+         */
+        LoginLogicRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.LoginLogicRes)
+                return object;
+            var message = new $root.RobotProto.LoginLogicRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a LoginLogicRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.LoginLogicRes
+         * @static
+         * @param {RobotProto.LoginLogicRes} message LoginLogicRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        LoginLogicRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this LoginLogicRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.LoginLogicRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        LoginLogicRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LoginLogicRes;
+    })();
+
+    RobotProto.OnePlayerPos = (function() {
+
+        /**
+         * Properties of an OnePlayerPos.
+         * @memberof RobotProto
+         * @interface IOnePlayerPos
+         * @property {number} seatid OnePlayerPos seatid
+         * @property {string} posx OnePlayerPos posx
+         * @property {string} posy OnePlayerPos posy
+         */
+
+        /**
+         * Constructs a new OnePlayerPos.
+         * @memberof RobotProto
+         * @classdesc Represents an OnePlayerPos.
+         * @implements IOnePlayerPos
+         * @constructor
+         * @param {RobotProto.IOnePlayerPos=} [properties] Properties to set
+         */
+        function OnePlayerPos(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * OnePlayerPos seatid.
+         * @member {number} seatid
+         * @memberof RobotProto.OnePlayerPos
+         * @instance
+         */
+        OnePlayerPos.prototype.seatid = 0;
+
+        /**
+         * OnePlayerPos posx.
+         * @member {string} posx
+         * @memberof RobotProto.OnePlayerPos
+         * @instance
+         */
+        OnePlayerPos.prototype.posx = "";
+
+        /**
+         * OnePlayerPos posy.
+         * @member {string} posy
+         * @memberof RobotProto.OnePlayerPos
+         * @instance
+         */
+        OnePlayerPos.prototype.posy = "";
+
+        /**
+         * Creates a new OnePlayerPos instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.OnePlayerPos
+         * @static
+         * @param {RobotProto.IOnePlayerPos=} [properties] Properties to set
+         * @returns {RobotProto.OnePlayerPos} OnePlayerPos instance
+         */
+        OnePlayerPos.create = function create(properties) {
+            return new OnePlayerPos(properties);
+        };
+
+        /**
+         * Encodes the specified OnePlayerPos message. Does not implicitly {@link RobotProto.OnePlayerPos.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.OnePlayerPos
+         * @static
+         * @param {RobotProto.IOnePlayerPos} message OnePlayerPos message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OnePlayerPos.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.seatid);
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.posx);
+            writer.uint32(/* id 3, wireType 2 =*/26).string(message.posy);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified OnePlayerPos message, length delimited. Does not implicitly {@link RobotProto.OnePlayerPos.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.OnePlayerPos
+         * @static
+         * @param {RobotProto.IOnePlayerPos} message OnePlayerPos message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OnePlayerPos.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an OnePlayerPos message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.OnePlayerPos
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.OnePlayerPos} OnePlayerPos
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OnePlayerPos.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.OnePlayerPos();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.seatid = reader.sint32();
+                    break;
+                case 2:
+                    message.posx = reader.string();
+                    break;
+                case 3:
+                    message.posy = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("seatid"))
+                throw $util.ProtocolError("missing required 'seatid'", { instance: message });
+            if (!message.hasOwnProperty("posx"))
+                throw $util.ProtocolError("missing required 'posx'", { instance: message });
+            if (!message.hasOwnProperty("posy"))
+                throw $util.ProtocolError("missing required 'posy'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes an OnePlayerPos message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.OnePlayerPos
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.OnePlayerPos} OnePlayerPos
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OnePlayerPos.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an OnePlayerPos message.
+         * @function verify
+         * @memberof RobotProto.OnePlayerPos
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        OnePlayerPos.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.seatid))
+                return "seatid: integer expected";
+            if (!$util.isString(message.posx))
+                return "posx: string expected";
+            if (!$util.isString(message.posy))
+                return "posy: string expected";
+            return null;
+        };
+
+        /**
+         * Creates an OnePlayerPos message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.OnePlayerPos
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.OnePlayerPos} OnePlayerPos
+         */
+        OnePlayerPos.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.OnePlayerPos)
+                return object;
+            var message = new $root.RobotProto.OnePlayerPos();
+            if (object.seatid != null)
+                message.seatid = object.seatid | 0;
+            if (object.posx != null)
+                message.posx = String(object.posx);
+            if (object.posy != null)
+                message.posy = String(object.posy);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an OnePlayerPos message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.OnePlayerPos
+         * @static
+         * @param {RobotProto.OnePlayerPos} message OnePlayerPos
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        OnePlayerPos.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.seatid = 0;
+                object.posx = "";
+                object.posy = "";
+            }
+            if (message.seatid != null && message.hasOwnProperty("seatid"))
+                object.seatid = message.seatid;
+            if (message.posx != null && message.hasOwnProperty("posx"))
+                object.posx = message.posx;
+            if (message.posy != null && message.hasOwnProperty("posy"))
+                object.posy = message.posy;
+            return object;
+        };
+
+        /**
+         * Converts this OnePlayerPos to JSON.
+         * @function toJSON
+         * @memberof RobotProto.OnePlayerPos
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        OnePlayerPos.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return OnePlayerPos;
+    })();
+
+    RobotProto.OnePlayerPower = (function() {
+
+        /**
+         * Properties of an OnePlayerPower.
+         * @memberof RobotProto
+         * @interface IOnePlayerPower
+         * @property {number} seatid OnePlayerPower seatid
+         * @property {number} power OnePlayerPower power
+         */
+
+        /**
+         * Constructs a new OnePlayerPower.
+         * @memberof RobotProto
+         * @classdesc Represents an OnePlayerPower.
+         * @implements IOnePlayerPower
+         * @constructor
+         * @param {RobotProto.IOnePlayerPower=} [properties] Properties to set
+         */
+        function OnePlayerPower(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * OnePlayerPower seatid.
+         * @member {number} seatid
+         * @memberof RobotProto.OnePlayerPower
+         * @instance
+         */
+        OnePlayerPower.prototype.seatid = 0;
+
+        /**
+         * OnePlayerPower power.
+         * @member {number} power
+         * @memberof RobotProto.OnePlayerPower
+         * @instance
+         */
+        OnePlayerPower.prototype.power = 0;
+
+        /**
+         * Creates a new OnePlayerPower instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.OnePlayerPower
+         * @static
+         * @param {RobotProto.IOnePlayerPower=} [properties] Properties to set
+         * @returns {RobotProto.OnePlayerPower} OnePlayerPower instance
+         */
+        OnePlayerPower.create = function create(properties) {
+            return new OnePlayerPower(properties);
+        };
+
+        /**
+         * Encodes the specified OnePlayerPower message. Does not implicitly {@link RobotProto.OnePlayerPower.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.OnePlayerPower
+         * @static
+         * @param {RobotProto.IOnePlayerPower} message OnePlayerPower message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OnePlayerPower.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.seatid);
+            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.power);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified OnePlayerPower message, length delimited. Does not implicitly {@link RobotProto.OnePlayerPower.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.OnePlayerPower
+         * @static
+         * @param {RobotProto.IOnePlayerPower} message OnePlayerPower message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OnePlayerPower.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an OnePlayerPower message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.OnePlayerPower
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.OnePlayerPower} OnePlayerPower
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OnePlayerPower.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.OnePlayerPower();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.seatid = reader.sint32();
+                    break;
+                case 2:
+                    message.power = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("seatid"))
+                throw $util.ProtocolError("missing required 'seatid'", { instance: message });
+            if (!message.hasOwnProperty("power"))
+                throw $util.ProtocolError("missing required 'power'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes an OnePlayerPower message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.OnePlayerPower
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.OnePlayerPower} OnePlayerPower
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OnePlayerPower.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an OnePlayerPower message.
+         * @function verify
+         * @memberof RobotProto.OnePlayerPower
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        OnePlayerPower.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.seatid))
+                return "seatid: integer expected";
+            if (!$util.isInteger(message.power))
+                return "power: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates an OnePlayerPower message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.OnePlayerPower
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.OnePlayerPower} OnePlayerPower
+         */
+        OnePlayerPower.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.OnePlayerPower)
+                return object;
+            var message = new $root.RobotProto.OnePlayerPower();
+            if (object.seatid != null)
+                message.seatid = object.seatid | 0;
+            if (object.power != null)
+                message.power = object.power | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an OnePlayerPower message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.OnePlayerPower
+         * @static
+         * @param {RobotProto.OnePlayerPower} message OnePlayerPower
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        OnePlayerPower.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.seatid = 0;
+                object.power = 0;
+            }
+            if (message.seatid != null && message.hasOwnProperty("seatid"))
+                object.seatid = message.seatid;
+            if (message.power != null && message.hasOwnProperty("power"))
+                object.power = message.power;
+            return object;
+        };
+
+        /**
+         * Converts this OnePlayerPower to JSON.
+         * @function toJSON
+         * @memberof RobotProto.OnePlayerPower
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        OnePlayerPower.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return OnePlayerPower;
+    })();
+
+    RobotProto.OnePlayerScore = (function() {
+
+        /**
+         * Properties of an OnePlayerScore.
+         * @memberof RobotProto
+         * @interface IOnePlayerScore
+         * @property {number} seatid OnePlayerScore seatid
+         * @property {string} score OnePlayerScore score
+         */
+
+        /**
+         * Constructs a new OnePlayerScore.
+         * @memberof RobotProto
+         * @classdesc Represents an OnePlayerScore.
+         * @implements IOnePlayerScore
+         * @constructor
+         * @param {RobotProto.IOnePlayerScore=} [properties] Properties to set
+         */
+        function OnePlayerScore(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * OnePlayerScore seatid.
+         * @member {number} seatid
+         * @memberof RobotProto.OnePlayerScore
+         * @instance
+         */
+        OnePlayerScore.prototype.seatid = 0;
+
+        /**
+         * OnePlayerScore score.
+         * @member {string} score
+         * @memberof RobotProto.OnePlayerScore
+         * @instance
+         */
+        OnePlayerScore.prototype.score = "";
+
+        /**
+         * Creates a new OnePlayerScore instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.OnePlayerScore
+         * @static
+         * @param {RobotProto.IOnePlayerScore=} [properties] Properties to set
+         * @returns {RobotProto.OnePlayerScore} OnePlayerScore instance
+         */
+        OnePlayerScore.create = function create(properties) {
+            return new OnePlayerScore(properties);
+        };
+
+        /**
+         * Encodes the specified OnePlayerScore message. Does not implicitly {@link RobotProto.OnePlayerScore.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.OnePlayerScore
+         * @static
+         * @param {RobotProto.IOnePlayerScore} message OnePlayerScore message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OnePlayerScore.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.seatid);
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.score);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified OnePlayerScore message, length delimited. Does not implicitly {@link RobotProto.OnePlayerScore.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.OnePlayerScore
+         * @static
+         * @param {RobotProto.IOnePlayerScore} message OnePlayerScore message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OnePlayerScore.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an OnePlayerScore message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.OnePlayerScore
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.OnePlayerScore} OnePlayerScore
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OnePlayerScore.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.OnePlayerScore();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.seatid = reader.sint32();
+                    break;
+                case 2:
+                    message.score = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("seatid"))
+                throw $util.ProtocolError("missing required 'seatid'", { instance: message });
+            if (!message.hasOwnProperty("score"))
+                throw $util.ProtocolError("missing required 'score'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes an OnePlayerScore message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.OnePlayerScore
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.OnePlayerScore} OnePlayerScore
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OnePlayerScore.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an OnePlayerScore message.
+         * @function verify
+         * @memberof RobotProto.OnePlayerScore
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        OnePlayerScore.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.seatid))
+                return "seatid: integer expected";
+            if (!$util.isString(message.score))
+                return "score: string expected";
+            return null;
+        };
+
+        /**
+         * Creates an OnePlayerScore message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.OnePlayerScore
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.OnePlayerScore} OnePlayerScore
+         */
+        OnePlayerScore.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.OnePlayerScore)
+                return object;
+            var message = new $root.RobotProto.OnePlayerScore();
+            if (object.seatid != null)
+                message.seatid = object.seatid | 0;
+            if (object.score != null)
+                message.score = String(object.score);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an OnePlayerScore message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.OnePlayerScore
+         * @static
+         * @param {RobotProto.OnePlayerScore} message OnePlayerScore
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        OnePlayerScore.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.seatid = 0;
+                object.score = "";
+            }
+            if (message.seatid != null && message.hasOwnProperty("seatid"))
+                object.seatid = message.seatid;
+            if (message.score != null && message.hasOwnProperty("score"))
+                object.score = message.score;
+            return object;
+        };
+
+        /**
+         * Converts this OnePlayerScore to JSON.
+         * @function toJSON
+         * @memberof RobotProto.OnePlayerScore
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        OnePlayerScore.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return OnePlayerScore;
+    })();
+
+    RobotProto.OnPlayerGolds = (function() {
+
+        /**
+         * Properties of an OnPlayerGolds.
+         * @memberof RobotProto
+         * @interface IOnPlayerGolds
+         * @property {number} seatid OnPlayerGolds seatid
+         * @property {string} gold OnPlayerGolds gold
+         */
+
+        /**
+         * Constructs a new OnPlayerGolds.
+         * @memberof RobotProto
+         * @classdesc Represents an OnPlayerGolds.
+         * @implements IOnPlayerGolds
+         * @constructor
+         * @param {RobotProto.IOnPlayerGolds=} [properties] Properties to set
+         */
+        function OnPlayerGolds(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * OnPlayerGolds seatid.
+         * @member {number} seatid
+         * @memberof RobotProto.OnPlayerGolds
+         * @instance
+         */
+        OnPlayerGolds.prototype.seatid = 0;
+
+        /**
+         * OnPlayerGolds gold.
+         * @member {string} gold
+         * @memberof RobotProto.OnPlayerGolds
+         * @instance
+         */
+        OnPlayerGolds.prototype.gold = "";
+
+        /**
+         * Creates a new OnPlayerGolds instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.OnPlayerGolds
+         * @static
+         * @param {RobotProto.IOnPlayerGolds=} [properties] Properties to set
+         * @returns {RobotProto.OnPlayerGolds} OnPlayerGolds instance
+         */
+        OnPlayerGolds.create = function create(properties) {
+            return new OnPlayerGolds(properties);
+        };
+
+        /**
+         * Encodes the specified OnPlayerGolds message. Does not implicitly {@link RobotProto.OnPlayerGolds.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.OnPlayerGolds
+         * @static
+         * @param {RobotProto.IOnPlayerGolds} message OnPlayerGolds message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OnPlayerGolds.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.seatid);
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.gold);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified OnPlayerGolds message, length delimited. Does not implicitly {@link RobotProto.OnPlayerGolds.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.OnPlayerGolds
+         * @static
+         * @param {RobotProto.IOnPlayerGolds} message OnPlayerGolds message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OnPlayerGolds.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an OnPlayerGolds message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.OnPlayerGolds
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.OnPlayerGolds} OnPlayerGolds
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OnPlayerGolds.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.OnPlayerGolds();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.seatid = reader.sint32();
+                    break;
+                case 2:
+                    message.gold = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("seatid"))
+                throw $util.ProtocolError("missing required 'seatid'", { instance: message });
+            if (!message.hasOwnProperty("gold"))
+                throw $util.ProtocolError("missing required 'gold'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes an OnPlayerGolds message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.OnPlayerGolds
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.OnPlayerGolds} OnPlayerGolds
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OnPlayerGolds.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an OnPlayerGolds message.
+         * @function verify
+         * @memberof RobotProto.OnPlayerGolds
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        OnPlayerGolds.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.seatid))
+                return "seatid: integer expected";
+            if (!$util.isString(message.gold))
+                return "gold: string expected";
+            return null;
+        };
+
+        /**
+         * Creates an OnPlayerGolds message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.OnPlayerGolds
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.OnPlayerGolds} OnPlayerGolds
+         */
+        OnPlayerGolds.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.OnPlayerGolds)
+                return object;
+            var message = new $root.RobotProto.OnPlayerGolds();
+            if (object.seatid != null)
+                message.seatid = object.seatid | 0;
+            if (object.gold != null)
+                message.gold = String(object.gold);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an OnPlayerGolds message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.OnPlayerGolds
+         * @static
+         * @param {RobotProto.OnPlayerGolds} message OnPlayerGolds
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        OnPlayerGolds.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.seatid = 0;
+                object.gold = "";
+            }
+            if (message.seatid != null && message.hasOwnProperty("seatid"))
+                object.seatid = message.seatid;
+            if (message.gold != null && message.hasOwnProperty("gold"))
+                object.gold = message.gold;
+            return object;
+        };
+
+        /**
+         * Converts this OnPlayerGolds to JSON.
+         * @function toJSON
+         * @memberof RobotProto.OnPlayerGolds
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        OnPlayerGolds.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return OnPlayerGolds;
+    })();
+
+    RobotProto.PlayerFirstBallPosRes = (function() {
+
+        /**
+         * Properties of a PlayerFirstBallPosRes.
+         * @memberof RobotProto
+         * @interface IPlayerFirstBallPosRes
+         * @property {Array.<RobotProto.IOnePlayerPos>|null} [positions] PlayerFirstBallPosRes positions
+         */
+
+        /**
+         * Constructs a new PlayerFirstBallPosRes.
+         * @memberof RobotProto
+         * @classdesc Represents a PlayerFirstBallPosRes.
+         * @implements IPlayerFirstBallPosRes
+         * @constructor
+         * @param {RobotProto.IPlayerFirstBallPosRes=} [properties] Properties to set
+         */
+        function PlayerFirstBallPosRes(properties) {
+            this.positions = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PlayerFirstBallPosRes positions.
+         * @member {Array.<RobotProto.IOnePlayerPos>} positions
+         * @memberof RobotProto.PlayerFirstBallPosRes
+         * @instance
+         */
+        PlayerFirstBallPosRes.prototype.positions = $util.emptyArray;
+
+        /**
+         * Creates a new PlayerFirstBallPosRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.PlayerFirstBallPosRes
+         * @static
+         * @param {RobotProto.IPlayerFirstBallPosRes=} [properties] Properties to set
+         * @returns {RobotProto.PlayerFirstBallPosRes} PlayerFirstBallPosRes instance
+         */
+        PlayerFirstBallPosRes.create = function create(properties) {
+            return new PlayerFirstBallPosRes(properties);
+        };
+
+        /**
+         * Encodes the specified PlayerFirstBallPosRes message. Does not implicitly {@link RobotProto.PlayerFirstBallPosRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.PlayerFirstBallPosRes
+         * @static
+         * @param {RobotProto.IPlayerFirstBallPosRes} message PlayerFirstBallPosRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerFirstBallPosRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.positions != null && message.positions.length)
+                for (var i = 0; i < message.positions.length; ++i)
+                    $root.RobotProto.OnePlayerPos.encode(message.positions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PlayerFirstBallPosRes message, length delimited. Does not implicitly {@link RobotProto.PlayerFirstBallPosRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.PlayerFirstBallPosRes
+         * @static
+         * @param {RobotProto.IPlayerFirstBallPosRes} message PlayerFirstBallPosRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerFirstBallPosRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PlayerFirstBallPosRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.PlayerFirstBallPosRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.PlayerFirstBallPosRes} PlayerFirstBallPosRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerFirstBallPosRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.PlayerFirstBallPosRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.positions && message.positions.length))
+                        message.positions = [];
+                    message.positions.push($root.RobotProto.OnePlayerPos.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a PlayerFirstBallPosRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.PlayerFirstBallPosRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.PlayerFirstBallPosRes} PlayerFirstBallPosRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerFirstBallPosRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PlayerFirstBallPosRes message.
+         * @function verify
+         * @memberof RobotProto.PlayerFirstBallPosRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PlayerFirstBallPosRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.positions != null && message.hasOwnProperty("positions")) {
+                if (!Array.isArray(message.positions))
+                    return "positions: array expected";
+                for (var i = 0; i < message.positions.length; ++i) {
+                    var error = $root.RobotProto.OnePlayerPos.verify(message.positions[i]);
+                    if (error)
+                        return "positions." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a PlayerFirstBallPosRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.PlayerFirstBallPosRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.PlayerFirstBallPosRes} PlayerFirstBallPosRes
+         */
+        PlayerFirstBallPosRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.PlayerFirstBallPosRes)
+                return object;
+            var message = new $root.RobotProto.PlayerFirstBallPosRes();
+            if (object.positions) {
+                if (!Array.isArray(object.positions))
+                    throw TypeError(".RobotProto.PlayerFirstBallPosRes.positions: array expected");
+                message.positions = [];
+                for (var i = 0; i < object.positions.length; ++i) {
+                    if (typeof object.positions[i] !== "object")
+                        throw TypeError(".RobotProto.PlayerFirstBallPosRes.positions: object expected");
+                    message.positions[i] = $root.RobotProto.OnePlayerPos.fromObject(object.positions[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PlayerFirstBallPosRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.PlayerFirstBallPosRes
+         * @static
+         * @param {RobotProto.PlayerFirstBallPosRes} message PlayerFirstBallPosRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PlayerFirstBallPosRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.positions = [];
+            if (message.positions && message.positions.length) {
+                object.positions = [];
+                for (var j = 0; j < message.positions.length; ++j)
+                    object.positions[j] = $root.RobotProto.OnePlayerPos.toObject(message.positions[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this PlayerFirstBallPosRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.PlayerFirstBallPosRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PlayerFirstBallPosRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PlayerFirstBallPosRes;
+    })();
+
+    RobotProto.PlayerPowerRes = (function() {
+
+        /**
+         * Properties of a PlayerPowerRes.
+         * @memberof RobotProto
+         * @interface IPlayerPowerRes
+         * @property {Array.<RobotProto.IOnePlayerPower>|null} [powers] PlayerPowerRes powers
+         */
+
+        /**
+         * Constructs a new PlayerPowerRes.
+         * @memberof RobotProto
+         * @classdesc Represents a PlayerPowerRes.
+         * @implements IPlayerPowerRes
+         * @constructor
+         * @param {RobotProto.IPlayerPowerRes=} [properties] Properties to set
+         */
+        function PlayerPowerRes(properties) {
+            this.powers = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PlayerPowerRes powers.
+         * @member {Array.<RobotProto.IOnePlayerPower>} powers
+         * @memberof RobotProto.PlayerPowerRes
+         * @instance
+         */
+        PlayerPowerRes.prototype.powers = $util.emptyArray;
+
+        /**
+         * Creates a new PlayerPowerRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.PlayerPowerRes
+         * @static
+         * @param {RobotProto.IPlayerPowerRes=} [properties] Properties to set
+         * @returns {RobotProto.PlayerPowerRes} PlayerPowerRes instance
+         */
+        PlayerPowerRes.create = function create(properties) {
+            return new PlayerPowerRes(properties);
+        };
+
+        /**
+         * Encodes the specified PlayerPowerRes message. Does not implicitly {@link RobotProto.PlayerPowerRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.PlayerPowerRes
+         * @static
+         * @param {RobotProto.IPlayerPowerRes} message PlayerPowerRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerPowerRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.powers != null && message.powers.length)
+                for (var i = 0; i < message.powers.length; ++i)
+                    $root.RobotProto.OnePlayerPower.encode(message.powers[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PlayerPowerRes message, length delimited. Does not implicitly {@link RobotProto.PlayerPowerRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.PlayerPowerRes
+         * @static
+         * @param {RobotProto.IPlayerPowerRes} message PlayerPowerRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerPowerRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PlayerPowerRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.PlayerPowerRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.PlayerPowerRes} PlayerPowerRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerPowerRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.PlayerPowerRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.powers && message.powers.length))
+                        message.powers = [];
+                    message.powers.push($root.RobotProto.OnePlayerPower.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a PlayerPowerRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.PlayerPowerRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.PlayerPowerRes} PlayerPowerRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerPowerRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PlayerPowerRes message.
+         * @function verify
+         * @memberof RobotProto.PlayerPowerRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PlayerPowerRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.powers != null && message.hasOwnProperty("powers")) {
+                if (!Array.isArray(message.powers))
+                    return "powers: array expected";
+                for (var i = 0; i < message.powers.length; ++i) {
+                    var error = $root.RobotProto.OnePlayerPower.verify(message.powers[i]);
+                    if (error)
+                        return "powers." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a PlayerPowerRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.PlayerPowerRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.PlayerPowerRes} PlayerPowerRes
+         */
+        PlayerPowerRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.PlayerPowerRes)
+                return object;
+            var message = new $root.RobotProto.PlayerPowerRes();
+            if (object.powers) {
+                if (!Array.isArray(object.powers))
+                    throw TypeError(".RobotProto.PlayerPowerRes.powers: array expected");
+                message.powers = [];
+                for (var i = 0; i < object.powers.length; ++i) {
+                    if (typeof object.powers[i] !== "object")
+                        throw TypeError(".RobotProto.PlayerPowerRes.powers: object expected");
+                    message.powers[i] = $root.RobotProto.OnePlayerPower.fromObject(object.powers[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PlayerPowerRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.PlayerPowerRes
+         * @static
+         * @param {RobotProto.PlayerPowerRes} message PlayerPowerRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PlayerPowerRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.powers = [];
+            if (message.powers && message.powers.length) {
+                object.powers = [];
+                for (var j = 0; j < message.powers.length; ++j)
+                    object.powers[j] = $root.RobotProto.OnePlayerPower.toObject(message.powers[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this PlayerPowerRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.PlayerPowerRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PlayerPowerRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PlayerPowerRes;
+    })();
+
+    RobotProto.PlayerShootReq = (function() {
+
+        /**
+         * Properties of a PlayerShootReq.
+         * @memberof RobotProto
+         * @interface IPlayerShootReq
+         * @property {number} seatid PlayerShootReq seatid
+         * @property {string} posx PlayerShootReq posx
+         * @property {string} posy PlayerShootReq posy
+         * @property {number|null} [shootpower] PlayerShootReq shootpower
+         */
+
+        /**
+         * Constructs a new PlayerShootReq.
+         * @memberof RobotProto
+         * @classdesc Represents a PlayerShootReq.
+         * @implements IPlayerShootReq
+         * @constructor
+         * @param {RobotProto.IPlayerShootReq=} [properties] Properties to set
+         */
+        function PlayerShootReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PlayerShootReq seatid.
+         * @member {number} seatid
+         * @memberof RobotProto.PlayerShootReq
+         * @instance
+         */
+        PlayerShootReq.prototype.seatid = 0;
+
+        /**
+         * PlayerShootReq posx.
+         * @member {string} posx
+         * @memberof RobotProto.PlayerShootReq
+         * @instance
+         */
+        PlayerShootReq.prototype.posx = "";
+
+        /**
+         * PlayerShootReq posy.
+         * @member {string} posy
+         * @memberof RobotProto.PlayerShootReq
+         * @instance
+         */
+        PlayerShootReq.prototype.posy = "";
+
+        /**
+         * PlayerShootReq shootpower.
+         * @member {number} shootpower
+         * @memberof RobotProto.PlayerShootReq
+         * @instance
+         */
+        PlayerShootReq.prototype.shootpower = 0;
+
+        /**
+         * Creates a new PlayerShootReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.PlayerShootReq
+         * @static
+         * @param {RobotProto.IPlayerShootReq=} [properties] Properties to set
+         * @returns {RobotProto.PlayerShootReq} PlayerShootReq instance
+         */
+        PlayerShootReq.create = function create(properties) {
+            return new PlayerShootReq(properties);
+        };
+
+        /**
+         * Encodes the specified PlayerShootReq message. Does not implicitly {@link RobotProto.PlayerShootReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.PlayerShootReq
+         * @static
+         * @param {RobotProto.IPlayerShootReq} message PlayerShootReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerShootReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.seatid);
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.posx);
+            writer.uint32(/* id 3, wireType 2 =*/26).string(message.posy);
+            if (message.shootpower != null && message.hasOwnProperty("shootpower"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.shootpower);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PlayerShootReq message, length delimited. Does not implicitly {@link RobotProto.PlayerShootReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.PlayerShootReq
+         * @static
+         * @param {RobotProto.IPlayerShootReq} message PlayerShootReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerShootReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PlayerShootReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.PlayerShootReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.PlayerShootReq} PlayerShootReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerShootReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.PlayerShootReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.seatid = reader.sint32();
+                    break;
+                case 2:
+                    message.posx = reader.string();
+                    break;
+                case 3:
+                    message.posy = reader.string();
+                    break;
+                case 4:
+                    message.shootpower = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("seatid"))
+                throw $util.ProtocolError("missing required 'seatid'", { instance: message });
+            if (!message.hasOwnProperty("posx"))
+                throw $util.ProtocolError("missing required 'posx'", { instance: message });
+            if (!message.hasOwnProperty("posy"))
+                throw $util.ProtocolError("missing required 'posy'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a PlayerShootReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.PlayerShootReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.PlayerShootReq} PlayerShootReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerShootReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PlayerShootReq message.
+         * @function verify
+         * @memberof RobotProto.PlayerShootReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PlayerShootReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.seatid))
+                return "seatid: integer expected";
+            if (!$util.isString(message.posx))
+                return "posx: string expected";
+            if (!$util.isString(message.posy))
+                return "posy: string expected";
+            if (message.shootpower != null && message.hasOwnProperty("shootpower"))
+                if (!$util.isInteger(message.shootpower))
+                    return "shootpower: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a PlayerShootReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.PlayerShootReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.PlayerShootReq} PlayerShootReq
+         */
+        PlayerShootReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.PlayerShootReq)
+                return object;
+            var message = new $root.RobotProto.PlayerShootReq();
+            if (object.seatid != null)
+                message.seatid = object.seatid | 0;
+            if (object.posx != null)
+                message.posx = String(object.posx);
+            if (object.posy != null)
+                message.posy = String(object.posy);
+            if (object.shootpower != null)
+                message.shootpower = object.shootpower | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PlayerShootReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.PlayerShootReq
+         * @static
+         * @param {RobotProto.PlayerShootReq} message PlayerShootReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PlayerShootReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.seatid = 0;
+                object.posx = "";
+                object.posy = "";
+                object.shootpower = 0;
+            }
+            if (message.seatid != null && message.hasOwnProperty("seatid"))
+                object.seatid = message.seatid;
+            if (message.posx != null && message.hasOwnProperty("posx"))
+                object.posx = message.posx;
+            if (message.posy != null && message.hasOwnProperty("posy"))
+                object.posy = message.posy;
+            if (message.shootpower != null && message.hasOwnProperty("shootpower"))
+                object.shootpower = message.shootpower;
+            return object;
+        };
+
+        /**
+         * Converts this PlayerShootReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.PlayerShootReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PlayerShootReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PlayerShootReq;
+    })();
+
+    RobotProto.PlayerShootRes = (function() {
+
+        /**
+         * Properties of a PlayerShootRes.
+         * @memberof RobotProto
+         * @interface IPlayerShootRes
+         * @property {number} status PlayerShootRes status
+         * @property {number} seatid PlayerShootRes seatid
+         * @property {string} posx PlayerShootRes posx
+         * @property {string} posy PlayerShootRes posy
+         * @property {number|null} [shootpower] PlayerShootRes shootpower
+         */
+
+        /**
+         * Constructs a new PlayerShootRes.
+         * @memberof RobotProto
+         * @classdesc Represents a PlayerShootRes.
+         * @implements IPlayerShootRes
+         * @constructor
+         * @param {RobotProto.IPlayerShootRes=} [properties] Properties to set
+         */
+        function PlayerShootRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PlayerShootRes status.
+         * @member {number} status
+         * @memberof RobotProto.PlayerShootRes
+         * @instance
+         */
+        PlayerShootRes.prototype.status = 0;
+
+        /**
+         * PlayerShootRes seatid.
+         * @member {number} seatid
+         * @memberof RobotProto.PlayerShootRes
+         * @instance
+         */
+        PlayerShootRes.prototype.seatid = 0;
+
+        /**
+         * PlayerShootRes posx.
+         * @member {string} posx
+         * @memberof RobotProto.PlayerShootRes
+         * @instance
+         */
+        PlayerShootRes.prototype.posx = "";
+
+        /**
+         * PlayerShootRes posy.
+         * @member {string} posy
+         * @memberof RobotProto.PlayerShootRes
+         * @instance
+         */
+        PlayerShootRes.prototype.posy = "";
+
+        /**
+         * PlayerShootRes shootpower.
+         * @member {number} shootpower
+         * @memberof RobotProto.PlayerShootRes
+         * @instance
+         */
+        PlayerShootRes.prototype.shootpower = 0;
+
+        /**
+         * Creates a new PlayerShootRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.PlayerShootRes
+         * @static
+         * @param {RobotProto.IPlayerShootRes=} [properties] Properties to set
+         * @returns {RobotProto.PlayerShootRes} PlayerShootRes instance
+         */
+        PlayerShootRes.create = function create(properties) {
+            return new PlayerShootRes(properties);
+        };
+
+        /**
+         * Encodes the specified PlayerShootRes message. Does not implicitly {@link RobotProto.PlayerShootRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.PlayerShootRes
+         * @static
+         * @param {RobotProto.IPlayerShootRes} message PlayerShootRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerShootRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.seatid);
+            writer.uint32(/* id 3, wireType 2 =*/26).string(message.posx);
+            writer.uint32(/* id 4, wireType 2 =*/34).string(message.posy);
+            if (message.shootpower != null && message.hasOwnProperty("shootpower"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.shootpower);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PlayerShootRes message, length delimited. Does not implicitly {@link RobotProto.PlayerShootRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.PlayerShootRes
+         * @static
+         * @param {RobotProto.IPlayerShootRes} message PlayerShootRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerShootRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PlayerShootRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.PlayerShootRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.PlayerShootRes} PlayerShootRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerShootRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.PlayerShootRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.seatid = reader.sint32();
+                    break;
+                case 3:
+                    message.posx = reader.string();
+                    break;
+                case 4:
+                    message.posy = reader.string();
+                    break;
+                case 5:
+                    message.shootpower = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            if (!message.hasOwnProperty("seatid"))
+                throw $util.ProtocolError("missing required 'seatid'", { instance: message });
+            if (!message.hasOwnProperty("posx"))
+                throw $util.ProtocolError("missing required 'posx'", { instance: message });
+            if (!message.hasOwnProperty("posy"))
+                throw $util.ProtocolError("missing required 'posy'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a PlayerShootRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.PlayerShootRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.PlayerShootRes} PlayerShootRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerShootRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PlayerShootRes message.
+         * @function verify
+         * @memberof RobotProto.PlayerShootRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PlayerShootRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (!$util.isInteger(message.seatid))
+                return "seatid: integer expected";
+            if (!$util.isString(message.posx))
+                return "posx: string expected";
+            if (!$util.isString(message.posy))
+                return "posy: string expected";
+            if (message.shootpower != null && message.hasOwnProperty("shootpower"))
+                if (!$util.isInteger(message.shootpower))
+                    return "shootpower: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a PlayerShootRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.PlayerShootRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.PlayerShootRes} PlayerShootRes
+         */
+        PlayerShootRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.PlayerShootRes)
+                return object;
+            var message = new $root.RobotProto.PlayerShootRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.seatid != null)
+                message.seatid = object.seatid | 0;
+            if (object.posx != null)
+                message.posx = String(object.posx);
+            if (object.posy != null)
+                message.posy = String(object.posy);
+            if (object.shootpower != null)
+                message.shootpower = object.shootpower | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PlayerShootRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.PlayerShootRes
+         * @static
+         * @param {RobotProto.PlayerShootRes} message PlayerShootRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PlayerShootRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.seatid = 0;
+                object.posx = "";
+                object.posy = "";
+                object.shootpower = 0;
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.seatid != null && message.hasOwnProperty("seatid"))
+                object.seatid = message.seatid;
+            if (message.posx != null && message.hasOwnProperty("posx"))
+                object.posx = message.posx;
+            if (message.posy != null && message.hasOwnProperty("posy"))
+                object.posy = message.posy;
+            if (message.shootpower != null && message.hasOwnProperty("shootpower"))
+                object.shootpower = message.shootpower;
+            return object;
+        };
+
+        /**
+         * Converts this PlayerShootRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.PlayerShootRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PlayerShootRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PlayerShootRes;
+    })();
+
+    RobotProto.PlayerBallPosReq = (function() {
+
+        /**
+         * Properties of a PlayerBallPosReq.
+         * @memberof RobotProto
+         * @interface IPlayerBallPosReq
+         * @property {Array.<RobotProto.IOnePlayerPos>|null} [positions] PlayerBallPosReq positions
+         */
+
+        /**
+         * Constructs a new PlayerBallPosReq.
+         * @memberof RobotProto
+         * @classdesc Represents a PlayerBallPosReq.
+         * @implements IPlayerBallPosReq
+         * @constructor
+         * @param {RobotProto.IPlayerBallPosReq=} [properties] Properties to set
+         */
+        function PlayerBallPosReq(properties) {
+            this.positions = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PlayerBallPosReq positions.
+         * @member {Array.<RobotProto.IOnePlayerPos>} positions
+         * @memberof RobotProto.PlayerBallPosReq
+         * @instance
+         */
+        PlayerBallPosReq.prototype.positions = $util.emptyArray;
+
+        /**
+         * Creates a new PlayerBallPosReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.PlayerBallPosReq
+         * @static
+         * @param {RobotProto.IPlayerBallPosReq=} [properties] Properties to set
+         * @returns {RobotProto.PlayerBallPosReq} PlayerBallPosReq instance
+         */
+        PlayerBallPosReq.create = function create(properties) {
+            return new PlayerBallPosReq(properties);
+        };
+
+        /**
+         * Encodes the specified PlayerBallPosReq message. Does not implicitly {@link RobotProto.PlayerBallPosReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.PlayerBallPosReq
+         * @static
+         * @param {RobotProto.IPlayerBallPosReq} message PlayerBallPosReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerBallPosReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.positions != null && message.positions.length)
+                for (var i = 0; i < message.positions.length; ++i)
+                    $root.RobotProto.OnePlayerPos.encode(message.positions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PlayerBallPosReq message, length delimited. Does not implicitly {@link RobotProto.PlayerBallPosReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.PlayerBallPosReq
+         * @static
+         * @param {RobotProto.IPlayerBallPosReq} message PlayerBallPosReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerBallPosReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PlayerBallPosReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.PlayerBallPosReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.PlayerBallPosReq} PlayerBallPosReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerBallPosReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.PlayerBallPosReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.positions && message.positions.length))
+                        message.positions = [];
+                    message.positions.push($root.RobotProto.OnePlayerPos.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a PlayerBallPosReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.PlayerBallPosReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.PlayerBallPosReq} PlayerBallPosReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerBallPosReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PlayerBallPosReq message.
+         * @function verify
+         * @memberof RobotProto.PlayerBallPosReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PlayerBallPosReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.positions != null && message.hasOwnProperty("positions")) {
+                if (!Array.isArray(message.positions))
+                    return "positions: array expected";
+                for (var i = 0; i < message.positions.length; ++i) {
+                    var error = $root.RobotProto.OnePlayerPos.verify(message.positions[i]);
+                    if (error)
+                        return "positions." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a PlayerBallPosReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.PlayerBallPosReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.PlayerBallPosReq} PlayerBallPosReq
+         */
+        PlayerBallPosReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.PlayerBallPosReq)
+                return object;
+            var message = new $root.RobotProto.PlayerBallPosReq();
+            if (object.positions) {
+                if (!Array.isArray(object.positions))
+                    throw TypeError(".RobotProto.PlayerBallPosReq.positions: array expected");
+                message.positions = [];
+                for (var i = 0; i < object.positions.length; ++i) {
+                    if (typeof object.positions[i] !== "object")
+                        throw TypeError(".RobotProto.PlayerBallPosReq.positions: object expected");
+                    message.positions[i] = $root.RobotProto.OnePlayerPos.fromObject(object.positions[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PlayerBallPosReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.PlayerBallPosReq
+         * @static
+         * @param {RobotProto.PlayerBallPosReq} message PlayerBallPosReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PlayerBallPosReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.positions = [];
+            if (message.positions && message.positions.length) {
+                object.positions = [];
+                for (var j = 0; j < message.positions.length; ++j)
+                    object.positions[j] = $root.RobotProto.OnePlayerPos.toObject(message.positions[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this PlayerBallPosReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.PlayerBallPosReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PlayerBallPosReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PlayerBallPosReq;
+    })();
+
+    RobotProto.PlayerBallPosRes = (function() {
+
+        /**
+         * Properties of a PlayerBallPosRes.
+         * @memberof RobotProto
+         * @interface IPlayerBallPosRes
+         * @property {number} status PlayerBallPosRes status
+         * @property {Array.<RobotProto.IOnePlayerPos>|null} [positions] PlayerBallPosRes positions
+         */
+
+        /**
+         * Constructs a new PlayerBallPosRes.
+         * @memberof RobotProto
+         * @classdesc Represents a PlayerBallPosRes.
+         * @implements IPlayerBallPosRes
+         * @constructor
+         * @param {RobotProto.IPlayerBallPosRes=} [properties] Properties to set
+         */
+        function PlayerBallPosRes(properties) {
+            this.positions = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PlayerBallPosRes status.
+         * @member {number} status
+         * @memberof RobotProto.PlayerBallPosRes
+         * @instance
+         */
+        PlayerBallPosRes.prototype.status = 0;
+
+        /**
+         * PlayerBallPosRes positions.
+         * @member {Array.<RobotProto.IOnePlayerPos>} positions
+         * @memberof RobotProto.PlayerBallPosRes
+         * @instance
+         */
+        PlayerBallPosRes.prototype.positions = $util.emptyArray;
+
+        /**
+         * Creates a new PlayerBallPosRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.PlayerBallPosRes
+         * @static
+         * @param {RobotProto.IPlayerBallPosRes=} [properties] Properties to set
+         * @returns {RobotProto.PlayerBallPosRes} PlayerBallPosRes instance
+         */
+        PlayerBallPosRes.create = function create(properties) {
+            return new PlayerBallPosRes(properties);
+        };
+
+        /**
+         * Encodes the specified PlayerBallPosRes message. Does not implicitly {@link RobotProto.PlayerBallPosRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.PlayerBallPosRes
+         * @static
+         * @param {RobotProto.IPlayerBallPosRes} message PlayerBallPosRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerBallPosRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.positions != null && message.positions.length)
+                for (var i = 0; i < message.positions.length; ++i)
+                    $root.RobotProto.OnePlayerPos.encode(message.positions[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PlayerBallPosRes message, length delimited. Does not implicitly {@link RobotProto.PlayerBallPosRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.PlayerBallPosRes
+         * @static
+         * @param {RobotProto.IPlayerBallPosRes} message PlayerBallPosRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerBallPosRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PlayerBallPosRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.PlayerBallPosRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.PlayerBallPosRes} PlayerBallPosRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerBallPosRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.PlayerBallPosRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    if (!(message.positions && message.positions.length))
+                        message.positions = [];
+                    message.positions.push($root.RobotProto.OnePlayerPos.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a PlayerBallPosRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.PlayerBallPosRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.PlayerBallPosRes} PlayerBallPosRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerBallPosRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PlayerBallPosRes message.
+         * @function verify
+         * @memberof RobotProto.PlayerBallPosRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PlayerBallPosRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.positions != null && message.hasOwnProperty("positions")) {
+                if (!Array.isArray(message.positions))
+                    return "positions: array expected";
+                for (var i = 0; i < message.positions.length; ++i) {
+                    var error = $root.RobotProto.OnePlayerPos.verify(message.positions[i]);
+                    if (error)
+                        return "positions." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a PlayerBallPosRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.PlayerBallPosRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.PlayerBallPosRes} PlayerBallPosRes
+         */
+        PlayerBallPosRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.PlayerBallPosRes)
+                return object;
+            var message = new $root.RobotProto.PlayerBallPosRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.positions) {
+                if (!Array.isArray(object.positions))
+                    throw TypeError(".RobotProto.PlayerBallPosRes.positions: array expected");
+                message.positions = [];
+                for (var i = 0; i < object.positions.length; ++i) {
+                    if (typeof object.positions[i] !== "object")
+                        throw TypeError(".RobotProto.PlayerBallPosRes.positions: object expected");
+                    message.positions[i] = $root.RobotProto.OnePlayerPos.fromObject(object.positions[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PlayerBallPosRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.PlayerBallPosRes
+         * @static
+         * @param {RobotProto.PlayerBallPosRes} message PlayerBallPosRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PlayerBallPosRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.positions = [];
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.positions && message.positions.length) {
+                object.positions = [];
+                for (var j = 0; j < message.positions.length; ++j)
+                    object.positions[j] = $root.RobotProto.OnePlayerPos.toObject(message.positions[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this PlayerBallPosRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.PlayerBallPosRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PlayerBallPosRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PlayerBallPosRes;
+    })();
+
+    RobotProto.PlayerIsShootedReq = (function() {
+
+        /**
+         * Properties of a PlayerIsShootedReq.
+         * @memberof RobotProto
+         * @interface IPlayerIsShootedReq
+         * @property {number} srcseatid PlayerIsShootedReq srcseatid
+         * @property {number} desseatid PlayerIsShootedReq desseatid
+         */
+
+        /**
+         * Constructs a new PlayerIsShootedReq.
+         * @memberof RobotProto
+         * @classdesc Represents a PlayerIsShootedReq.
+         * @implements IPlayerIsShootedReq
+         * @constructor
+         * @param {RobotProto.IPlayerIsShootedReq=} [properties] Properties to set
+         */
+        function PlayerIsShootedReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PlayerIsShootedReq srcseatid.
+         * @member {number} srcseatid
+         * @memberof RobotProto.PlayerIsShootedReq
+         * @instance
+         */
+        PlayerIsShootedReq.prototype.srcseatid = 0;
+
+        /**
+         * PlayerIsShootedReq desseatid.
+         * @member {number} desseatid
+         * @memberof RobotProto.PlayerIsShootedReq
+         * @instance
+         */
+        PlayerIsShootedReq.prototype.desseatid = 0;
+
+        /**
+         * Creates a new PlayerIsShootedReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.PlayerIsShootedReq
+         * @static
+         * @param {RobotProto.IPlayerIsShootedReq=} [properties] Properties to set
+         * @returns {RobotProto.PlayerIsShootedReq} PlayerIsShootedReq instance
+         */
+        PlayerIsShootedReq.create = function create(properties) {
+            return new PlayerIsShootedReq(properties);
+        };
+
+        /**
+         * Encodes the specified PlayerIsShootedReq message. Does not implicitly {@link RobotProto.PlayerIsShootedReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.PlayerIsShootedReq
+         * @static
+         * @param {RobotProto.IPlayerIsShootedReq} message PlayerIsShootedReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerIsShootedReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.srcseatid);
+            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.desseatid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PlayerIsShootedReq message, length delimited. Does not implicitly {@link RobotProto.PlayerIsShootedReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.PlayerIsShootedReq
+         * @static
+         * @param {RobotProto.IPlayerIsShootedReq} message PlayerIsShootedReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerIsShootedReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PlayerIsShootedReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.PlayerIsShootedReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.PlayerIsShootedReq} PlayerIsShootedReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerIsShootedReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.PlayerIsShootedReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.srcseatid = reader.sint32();
+                    break;
+                case 2:
+                    message.desseatid = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("srcseatid"))
+                throw $util.ProtocolError("missing required 'srcseatid'", { instance: message });
+            if (!message.hasOwnProperty("desseatid"))
+                throw $util.ProtocolError("missing required 'desseatid'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a PlayerIsShootedReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.PlayerIsShootedReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.PlayerIsShootedReq} PlayerIsShootedReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerIsShootedReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PlayerIsShootedReq message.
+         * @function verify
+         * @memberof RobotProto.PlayerIsShootedReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PlayerIsShootedReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.srcseatid))
+                return "srcseatid: integer expected";
+            if (!$util.isInteger(message.desseatid))
+                return "desseatid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a PlayerIsShootedReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.PlayerIsShootedReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.PlayerIsShootedReq} PlayerIsShootedReq
+         */
+        PlayerIsShootedReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.PlayerIsShootedReq)
+                return object;
+            var message = new $root.RobotProto.PlayerIsShootedReq();
+            if (object.srcseatid != null)
+                message.srcseatid = object.srcseatid | 0;
+            if (object.desseatid != null)
+                message.desseatid = object.desseatid | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PlayerIsShootedReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.PlayerIsShootedReq
+         * @static
+         * @param {RobotProto.PlayerIsShootedReq} message PlayerIsShootedReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PlayerIsShootedReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.srcseatid = 0;
+                object.desseatid = 0;
+            }
+            if (message.srcseatid != null && message.hasOwnProperty("srcseatid"))
+                object.srcseatid = message.srcseatid;
+            if (message.desseatid != null && message.hasOwnProperty("desseatid"))
+                object.desseatid = message.desseatid;
+            return object;
+        };
+
+        /**
+         * Converts this PlayerIsShootedReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.PlayerIsShootedReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PlayerIsShootedReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PlayerIsShootedReq;
+    })();
+
+    RobotProto.PlayerIsShootedRes = (function() {
+
+        /**
+         * Properties of a PlayerIsShootedRes.
+         * @memberof RobotProto
+         * @interface IPlayerIsShootedRes
+         * @property {number} status PlayerIsShootedRes status
+         * @property {number} srcseatid PlayerIsShootedRes srcseatid
+         * @property {number} desseatid PlayerIsShootedRes desseatid
+         */
+
+        /**
+         * Constructs a new PlayerIsShootedRes.
+         * @memberof RobotProto
+         * @classdesc Represents a PlayerIsShootedRes.
+         * @implements IPlayerIsShootedRes
+         * @constructor
+         * @param {RobotProto.IPlayerIsShootedRes=} [properties] Properties to set
+         */
+        function PlayerIsShootedRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PlayerIsShootedRes status.
+         * @member {number} status
+         * @memberof RobotProto.PlayerIsShootedRes
+         * @instance
+         */
+        PlayerIsShootedRes.prototype.status = 0;
+
+        /**
+         * PlayerIsShootedRes srcseatid.
+         * @member {number} srcseatid
+         * @memberof RobotProto.PlayerIsShootedRes
+         * @instance
+         */
+        PlayerIsShootedRes.prototype.srcseatid = 0;
+
+        /**
+         * PlayerIsShootedRes desseatid.
+         * @member {number} desseatid
+         * @memberof RobotProto.PlayerIsShootedRes
+         * @instance
+         */
+        PlayerIsShootedRes.prototype.desseatid = 0;
+
+        /**
+         * Creates a new PlayerIsShootedRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.PlayerIsShootedRes
+         * @static
+         * @param {RobotProto.IPlayerIsShootedRes=} [properties] Properties to set
+         * @returns {RobotProto.PlayerIsShootedRes} PlayerIsShootedRes instance
+         */
+        PlayerIsShootedRes.create = function create(properties) {
+            return new PlayerIsShootedRes(properties);
+        };
+
+        /**
+         * Encodes the specified PlayerIsShootedRes message. Does not implicitly {@link RobotProto.PlayerIsShootedRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.PlayerIsShootedRes
+         * @static
+         * @param {RobotProto.IPlayerIsShootedRes} message PlayerIsShootedRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerIsShootedRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.srcseatid);
+            writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.desseatid);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PlayerIsShootedRes message, length delimited. Does not implicitly {@link RobotProto.PlayerIsShootedRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.PlayerIsShootedRes
+         * @static
+         * @param {RobotProto.IPlayerIsShootedRes} message PlayerIsShootedRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerIsShootedRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PlayerIsShootedRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.PlayerIsShootedRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.PlayerIsShootedRes} PlayerIsShootedRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerIsShootedRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.PlayerIsShootedRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.srcseatid = reader.sint32();
+                    break;
+                case 3:
+                    message.desseatid = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            if (!message.hasOwnProperty("srcseatid"))
+                throw $util.ProtocolError("missing required 'srcseatid'", { instance: message });
+            if (!message.hasOwnProperty("desseatid"))
+                throw $util.ProtocolError("missing required 'desseatid'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a PlayerIsShootedRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.PlayerIsShootedRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.PlayerIsShootedRes} PlayerIsShootedRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerIsShootedRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PlayerIsShootedRes message.
+         * @function verify
+         * @memberof RobotProto.PlayerIsShootedRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PlayerIsShootedRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (!$util.isInteger(message.srcseatid))
+                return "srcseatid: integer expected";
+            if (!$util.isInteger(message.desseatid))
+                return "desseatid: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a PlayerIsShootedRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.PlayerIsShootedRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.PlayerIsShootedRes} PlayerIsShootedRes
+         */
+        PlayerIsShootedRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.PlayerIsShootedRes)
+                return object;
+            var message = new $root.RobotProto.PlayerIsShootedRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.srcseatid != null)
+                message.srcseatid = object.srcseatid | 0;
+            if (object.desseatid != null)
+                message.desseatid = object.desseatid | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PlayerIsShootedRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.PlayerIsShootedRes
+         * @static
+         * @param {RobotProto.PlayerIsShootedRes} message PlayerIsShootedRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PlayerIsShootedRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.srcseatid = 0;
+                object.desseatid = 0;
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.srcseatid != null && message.hasOwnProperty("srcseatid"))
+                object.srcseatid = message.srcseatid;
+            if (message.desseatid != null && message.hasOwnProperty("desseatid"))
+                object.desseatid = message.desseatid;
+            return object;
+        };
+
+        /**
+         * Converts this PlayerIsShootedRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.PlayerIsShootedRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PlayerIsShootedRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PlayerIsShootedRes;
+    })();
+
+    RobotProto.GameResultRes = (function() {
+
+        /**
+         * Properties of a GameResultRes.
+         * @memberof RobotProto
+         * @interface IGameResultRes
+         * @property {Array.<RobotProto.IOnePlayerScore>|null} [scores] GameResultRes scores
+         */
+
+        /**
+         * Constructs a new GameResultRes.
+         * @memberof RobotProto
+         * @classdesc Represents a GameResultRes.
+         * @implements IGameResultRes
+         * @constructor
+         * @param {RobotProto.IGameResultRes=} [properties] Properties to set
+         */
+        function GameResultRes(properties) {
+            this.scores = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GameResultRes scores.
+         * @member {Array.<RobotProto.IOnePlayerScore>} scores
+         * @memberof RobotProto.GameResultRes
+         * @instance
+         */
+        GameResultRes.prototype.scores = $util.emptyArray;
+
+        /**
+         * Creates a new GameResultRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.GameResultRes
+         * @static
+         * @param {RobotProto.IGameResultRes=} [properties] Properties to set
+         * @returns {RobotProto.GameResultRes} GameResultRes instance
+         */
+        GameResultRes.create = function create(properties) {
+            return new GameResultRes(properties);
+        };
+
+        /**
+         * Encodes the specified GameResultRes message. Does not implicitly {@link RobotProto.GameResultRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.GameResultRes
+         * @static
+         * @param {RobotProto.IGameResultRes} message GameResultRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameResultRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.scores != null && message.scores.length)
+                for (var i = 0; i < message.scores.length; ++i)
+                    $root.RobotProto.OnePlayerScore.encode(message.scores[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GameResultRes message, length delimited. Does not implicitly {@link RobotProto.GameResultRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.GameResultRes
+         * @static
+         * @param {RobotProto.IGameResultRes} message GameResultRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameResultRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GameResultRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.GameResultRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.GameResultRes} GameResultRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameResultRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.GameResultRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.scores && message.scores.length))
+                        message.scores = [];
+                    message.scores.push($root.RobotProto.OnePlayerScore.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a GameResultRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.GameResultRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.GameResultRes} GameResultRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameResultRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GameResultRes message.
+         * @function verify
+         * @memberof RobotProto.GameResultRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GameResultRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.scores != null && message.hasOwnProperty("scores")) {
+                if (!Array.isArray(message.scores))
+                    return "scores: array expected";
+                for (var i = 0; i < message.scores.length; ++i) {
+                    var error = $root.RobotProto.OnePlayerScore.verify(message.scores[i]);
+                    if (error)
+                        return "scores." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a GameResultRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.GameResultRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.GameResultRes} GameResultRes
+         */
+        GameResultRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.GameResultRes)
+                return object;
+            var message = new $root.RobotProto.GameResultRes();
+            if (object.scores) {
+                if (!Array.isArray(object.scores))
+                    throw TypeError(".RobotProto.GameResultRes.scores: array expected");
+                message.scores = [];
+                for (var i = 0; i < object.scores.length; ++i) {
+                    if (typeof object.scores[i] !== "object")
+                        throw TypeError(".RobotProto.GameResultRes.scores: object expected");
+                    message.scores[i] = $root.RobotProto.OnePlayerScore.fromObject(object.scores[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GameResultRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.GameResultRes
+         * @static
+         * @param {RobotProto.GameResultRes} message GameResultRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GameResultRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.scores = [];
+            if (message.scores && message.scores.length) {
+                object.scores = [];
+                for (var j = 0; j < message.scores.length; ++j)
+                    object.scores[j] = $root.RobotProto.OnePlayerScore.toObject(message.scores[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this GameResultRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.GameResultRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GameResultRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameResultRes;
+    })();
+
+    RobotProto.TotalGameResultRes = (function() {
+
+        /**
+         * Properties of a TotalGameResultRes.
+         * @memberof RobotProto
+         * @interface ITotalGameResultRes
+         * @property {Array.<RobotProto.IOnePlayerScore>|null} [scores] TotalGameResultRes scores
+         * @property {Array.<RobotProto.IOnPlayerGolds>|null} [golds] TotalGameResultRes golds
+         */
+
+        /**
+         * Constructs a new TotalGameResultRes.
+         * @memberof RobotProto
+         * @classdesc Represents a TotalGameResultRes.
+         * @implements ITotalGameResultRes
+         * @constructor
+         * @param {RobotProto.ITotalGameResultRes=} [properties] Properties to set
+         */
+        function TotalGameResultRes(properties) {
+            this.scores = [];
+            this.golds = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * TotalGameResultRes scores.
+         * @member {Array.<RobotProto.IOnePlayerScore>} scores
+         * @memberof RobotProto.TotalGameResultRes
+         * @instance
+         */
+        TotalGameResultRes.prototype.scores = $util.emptyArray;
+
+        /**
+         * TotalGameResultRes golds.
+         * @member {Array.<RobotProto.IOnPlayerGolds>} golds
+         * @memberof RobotProto.TotalGameResultRes
+         * @instance
+         */
+        TotalGameResultRes.prototype.golds = $util.emptyArray;
+
+        /**
+         * Creates a new TotalGameResultRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.TotalGameResultRes
+         * @static
+         * @param {RobotProto.ITotalGameResultRes=} [properties] Properties to set
+         * @returns {RobotProto.TotalGameResultRes} TotalGameResultRes instance
+         */
+        TotalGameResultRes.create = function create(properties) {
+            return new TotalGameResultRes(properties);
+        };
+
+        /**
+         * Encodes the specified TotalGameResultRes message. Does not implicitly {@link RobotProto.TotalGameResultRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.TotalGameResultRes
+         * @static
+         * @param {RobotProto.ITotalGameResultRes} message TotalGameResultRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TotalGameResultRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.scores != null && message.scores.length)
+                for (var i = 0; i < message.scores.length; ++i)
+                    $root.RobotProto.OnePlayerScore.encode(message.scores[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.golds != null && message.golds.length)
+                for (var i = 0; i < message.golds.length; ++i)
+                    $root.RobotProto.OnPlayerGolds.encode(message.golds[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified TotalGameResultRes message, length delimited. Does not implicitly {@link RobotProto.TotalGameResultRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.TotalGameResultRes
+         * @static
+         * @param {RobotProto.ITotalGameResultRes} message TotalGameResultRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TotalGameResultRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a TotalGameResultRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.TotalGameResultRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.TotalGameResultRes} TotalGameResultRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TotalGameResultRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.TotalGameResultRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.scores && message.scores.length))
+                        message.scores = [];
+                    message.scores.push($root.RobotProto.OnePlayerScore.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    if (!(message.golds && message.golds.length))
+                        message.golds = [];
+                    message.golds.push($root.RobotProto.OnPlayerGolds.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a TotalGameResultRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.TotalGameResultRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.TotalGameResultRes} TotalGameResultRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TotalGameResultRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a TotalGameResultRes message.
+         * @function verify
+         * @memberof RobotProto.TotalGameResultRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        TotalGameResultRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.scores != null && message.hasOwnProperty("scores")) {
+                if (!Array.isArray(message.scores))
+                    return "scores: array expected";
+                for (var i = 0; i < message.scores.length; ++i) {
+                    var error = $root.RobotProto.OnePlayerScore.verify(message.scores[i]);
+                    if (error)
+                        return "scores." + error;
+                }
+            }
+            if (message.golds != null && message.hasOwnProperty("golds")) {
+                if (!Array.isArray(message.golds))
+                    return "golds: array expected";
+                for (var i = 0; i < message.golds.length; ++i) {
+                    var error = $root.RobotProto.OnPlayerGolds.verify(message.golds[i]);
+                    if (error)
+                        return "golds." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a TotalGameResultRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.TotalGameResultRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.TotalGameResultRes} TotalGameResultRes
+         */
+        TotalGameResultRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.TotalGameResultRes)
+                return object;
+            var message = new $root.RobotProto.TotalGameResultRes();
+            if (object.scores) {
+                if (!Array.isArray(object.scores))
+                    throw TypeError(".RobotProto.TotalGameResultRes.scores: array expected");
+                message.scores = [];
+                for (var i = 0; i < object.scores.length; ++i) {
+                    if (typeof object.scores[i] !== "object")
+                        throw TypeError(".RobotProto.TotalGameResultRes.scores: object expected");
+                    message.scores[i] = $root.RobotProto.OnePlayerScore.fromObject(object.scores[i]);
+                }
+            }
+            if (object.golds) {
+                if (!Array.isArray(object.golds))
+                    throw TypeError(".RobotProto.TotalGameResultRes.golds: array expected");
+                message.golds = [];
+                for (var i = 0; i < object.golds.length; ++i) {
+                    if (typeof object.golds[i] !== "object")
+                        throw TypeError(".RobotProto.TotalGameResultRes.golds: object expected");
+                    message.golds[i] = $root.RobotProto.OnPlayerGolds.fromObject(object.golds[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a TotalGameResultRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.TotalGameResultRes
+         * @static
+         * @param {RobotProto.TotalGameResultRes} message TotalGameResultRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        TotalGameResultRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.scores = [];
+                object.golds = [];
+            }
+            if (message.scores && message.scores.length) {
+                object.scores = [];
+                for (var j = 0; j < message.scores.length; ++j)
+                    object.scores[j] = $root.RobotProto.OnePlayerScore.toObject(message.scores[j], options);
+            }
+            if (message.golds && message.golds.length) {
+                object.golds = [];
+                for (var j = 0; j < message.golds.length; ++j)
+                    object.golds[j] = $root.RobotProto.OnPlayerGolds.toObject(message.golds[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this TotalGameResultRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.TotalGameResultRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        TotalGameResultRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TotalGameResultRes;
+    })();
+
+    RobotProto.PlayerScoreRes = (function() {
+
+        /**
+         * Properties of a PlayerScoreRes.
+         * @memberof RobotProto
+         * @interface IPlayerScoreRes
+         * @property {Array.<RobotProto.IOnePlayerScore>|null} [scores] PlayerScoreRes scores
+         */
+
+        /**
+         * Constructs a new PlayerScoreRes.
+         * @memberof RobotProto
+         * @classdesc Represents a PlayerScoreRes.
+         * @implements IPlayerScoreRes
+         * @constructor
+         * @param {RobotProto.IPlayerScoreRes=} [properties] Properties to set
+         */
+        function PlayerScoreRes(properties) {
+            this.scores = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PlayerScoreRes scores.
+         * @member {Array.<RobotProto.IOnePlayerScore>} scores
+         * @memberof RobotProto.PlayerScoreRes
+         * @instance
+         */
+        PlayerScoreRes.prototype.scores = $util.emptyArray;
+
+        /**
+         * Creates a new PlayerScoreRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.PlayerScoreRes
+         * @static
+         * @param {RobotProto.IPlayerScoreRes=} [properties] Properties to set
+         * @returns {RobotProto.PlayerScoreRes} PlayerScoreRes instance
+         */
+        PlayerScoreRes.create = function create(properties) {
+            return new PlayerScoreRes(properties);
+        };
+
+        /**
+         * Encodes the specified PlayerScoreRes message. Does not implicitly {@link RobotProto.PlayerScoreRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.PlayerScoreRes
+         * @static
+         * @param {RobotProto.IPlayerScoreRes} message PlayerScoreRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerScoreRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.scores != null && message.scores.length)
+                for (var i = 0; i < message.scores.length; ++i)
+                    $root.RobotProto.OnePlayerScore.encode(message.scores[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PlayerScoreRes message, length delimited. Does not implicitly {@link RobotProto.PlayerScoreRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.PlayerScoreRes
+         * @static
+         * @param {RobotProto.IPlayerScoreRes} message PlayerScoreRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PlayerScoreRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PlayerScoreRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.PlayerScoreRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.PlayerScoreRes} PlayerScoreRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerScoreRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.PlayerScoreRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.scores && message.scores.length))
+                        message.scores = [];
+                    message.scores.push($root.RobotProto.OnePlayerScore.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a PlayerScoreRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.PlayerScoreRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.PlayerScoreRes} PlayerScoreRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PlayerScoreRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PlayerScoreRes message.
+         * @function verify
+         * @memberof RobotProto.PlayerScoreRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PlayerScoreRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.scores != null && message.hasOwnProperty("scores")) {
+                if (!Array.isArray(message.scores))
+                    return "scores: array expected";
+                for (var i = 0; i < message.scores.length; ++i) {
+                    var error = $root.RobotProto.OnePlayerScore.verify(message.scores[i]);
+                    if (error)
+                        return "scores." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a PlayerScoreRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.PlayerScoreRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.PlayerScoreRes} PlayerScoreRes
+         */
+        PlayerScoreRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.PlayerScoreRes)
+                return object;
+            var message = new $root.RobotProto.PlayerScoreRes();
+            if (object.scores) {
+                if (!Array.isArray(object.scores))
+                    throw TypeError(".RobotProto.PlayerScoreRes.scores: array expected");
+                message.scores = [];
+                for (var i = 0; i < object.scores.length; ++i) {
+                    if (typeof object.scores[i] !== "object")
+                        throw TypeError(".RobotProto.PlayerScoreRes.scores: object expected");
+                    message.scores[i] = $root.RobotProto.OnePlayerScore.fromObject(object.scores[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PlayerScoreRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.PlayerScoreRes
+         * @static
+         * @param {RobotProto.PlayerScoreRes} message PlayerScoreRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PlayerScoreRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.scores = [];
+            if (message.scores && message.scores.length) {
+                object.scores = [];
+                for (var j = 0; j < message.scores.length; ++j)
+                    object.scores[j] = $root.RobotProto.OnePlayerScore.toObject(message.scores[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this PlayerScoreRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.PlayerScoreRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PlayerScoreRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PlayerScoreRes;
+    })();
+
+    RobotProto.UserMatchReq = (function() {
+
+        /**
+         * Properties of a UserMatchReq.
+         * @memberof RobotProto
+         * @interface IUserMatchReq
+         * @property {number} roomlevel UserMatchReq roomlevel
+         */
+
+        /**
+         * Constructs a new UserMatchReq.
+         * @memberof RobotProto
+         * @classdesc Represents a UserMatchReq.
+         * @implements IUserMatchReq
+         * @constructor
+         * @param {RobotProto.IUserMatchReq=} [properties] Properties to set
+         */
+        function UserMatchReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserMatchReq roomlevel.
+         * @member {number} roomlevel
+         * @memberof RobotProto.UserMatchReq
+         * @instance
+         */
+        UserMatchReq.prototype.roomlevel = 0;
+
+        /**
+         * Creates a new UserMatchReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserMatchReq
+         * @static
+         * @param {RobotProto.IUserMatchReq=} [properties] Properties to set
+         * @returns {RobotProto.UserMatchReq} UserMatchReq instance
+         */
+        UserMatchReq.create = function create(properties) {
+            return new UserMatchReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserMatchReq message. Does not implicitly {@link RobotProto.UserMatchReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserMatchReq
+         * @static
+         * @param {RobotProto.IUserMatchReq} message UserMatchReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserMatchReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.roomlevel);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserMatchReq message, length delimited. Does not implicitly {@link RobotProto.UserMatchReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserMatchReq
+         * @static
+         * @param {RobotProto.IUserMatchReq} message UserMatchReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserMatchReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserMatchReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserMatchReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserMatchReq} UserMatchReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserMatchReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserMatchReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.roomlevel = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("roomlevel"))
+                throw $util.ProtocolError("missing required 'roomlevel'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserMatchReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserMatchReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserMatchReq} UserMatchReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserMatchReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserMatchReq message.
+         * @function verify
+         * @memberof RobotProto.UserMatchReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserMatchReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.roomlevel))
+                return "roomlevel: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserMatchReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserMatchReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserMatchReq} UserMatchReq
+         */
+        UserMatchReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserMatchReq)
+                return object;
+            var message = new $root.RobotProto.UserMatchReq();
+            if (object.roomlevel != null)
+                message.roomlevel = object.roomlevel | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserMatchReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserMatchReq
+         * @static
+         * @param {RobotProto.UserMatchReq} message UserMatchReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserMatchReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.roomlevel = 0;
+            if (message.roomlevel != null && message.hasOwnProperty("roomlevel"))
+                object.roomlevel = message.roomlevel;
+            return object;
+        };
+
+        /**
+         * Converts this UserMatchReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserMatchReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserMatchReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserMatchReq;
+    })();
+
+    RobotProto.UserMatchRes = (function() {
+
+        /**
+         * Properties of a UserMatchRes.
+         * @memberof RobotProto
+         * @interface IUserMatchRes
+         * @property {number} status UserMatchRes status
+         * @property {boolean|null} [matchsuccess] UserMatchRes matchsuccess
+         * @property {Array.<RobotProto.IUserInfo>|null} [userinfo] UserMatchRes userinfo
+         */
+
+        /**
+         * Constructs a new UserMatchRes.
+         * @memberof RobotProto
+         * @classdesc Represents a UserMatchRes.
+         * @implements IUserMatchRes
+         * @constructor
+         * @param {RobotProto.IUserMatchRes=} [properties] Properties to set
+         */
+        function UserMatchRes(properties) {
+            this.userinfo = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserMatchRes status.
+         * @member {number} status
+         * @memberof RobotProto.UserMatchRes
+         * @instance
+         */
+        UserMatchRes.prototype.status = 0;
+
+        /**
+         * UserMatchRes matchsuccess.
+         * @member {boolean} matchsuccess
+         * @memberof RobotProto.UserMatchRes
+         * @instance
+         */
+        UserMatchRes.prototype.matchsuccess = false;
+
+        /**
+         * UserMatchRes userinfo.
+         * @member {Array.<RobotProto.IUserInfo>} userinfo
+         * @memberof RobotProto.UserMatchRes
+         * @instance
+         */
+        UserMatchRes.prototype.userinfo = $util.emptyArray;
+
+        /**
+         * Creates a new UserMatchRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserMatchRes
+         * @static
+         * @param {RobotProto.IUserMatchRes=} [properties] Properties to set
+         * @returns {RobotProto.UserMatchRes} UserMatchRes instance
+         */
+        UserMatchRes.create = function create(properties) {
+            return new UserMatchRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserMatchRes message. Does not implicitly {@link RobotProto.UserMatchRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserMatchRes
+         * @static
+         * @param {RobotProto.IUserMatchRes} message UserMatchRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserMatchRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.matchsuccess != null && message.hasOwnProperty("matchsuccess"))
+                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.matchsuccess);
+            if (message.userinfo != null && message.userinfo.length)
+                for (var i = 0; i < message.userinfo.length; ++i)
+                    $root.RobotProto.UserInfo.encode(message.userinfo[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserMatchRes message, length delimited. Does not implicitly {@link RobotProto.UserMatchRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserMatchRes
+         * @static
+         * @param {RobotProto.IUserMatchRes} message UserMatchRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserMatchRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserMatchRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserMatchRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserMatchRes} UserMatchRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserMatchRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserMatchRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.matchsuccess = reader.bool();
+                    break;
+                case 3:
+                    if (!(message.userinfo && message.userinfo.length))
+                        message.userinfo = [];
+                    message.userinfo.push($root.RobotProto.UserInfo.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserMatchRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserMatchRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserMatchRes} UserMatchRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserMatchRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserMatchRes message.
+         * @function verify
+         * @memberof RobotProto.UserMatchRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserMatchRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.matchsuccess != null && message.hasOwnProperty("matchsuccess"))
+                if (typeof message.matchsuccess !== "boolean")
+                    return "matchsuccess: boolean expected";
+            if (message.userinfo != null && message.hasOwnProperty("userinfo")) {
+                if (!Array.isArray(message.userinfo))
+                    return "userinfo: array expected";
+                for (var i = 0; i < message.userinfo.length; ++i) {
+                    var error = $root.RobotProto.UserInfo.verify(message.userinfo[i]);
+                    if (error)
+                        return "userinfo." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a UserMatchRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserMatchRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserMatchRes} UserMatchRes
+         */
+        UserMatchRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserMatchRes)
+                return object;
+            var message = new $root.RobotProto.UserMatchRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.matchsuccess != null)
+                message.matchsuccess = Boolean(object.matchsuccess);
+            if (object.userinfo) {
+                if (!Array.isArray(object.userinfo))
+                    throw TypeError(".RobotProto.UserMatchRes.userinfo: array expected");
+                message.userinfo = [];
+                for (var i = 0; i < object.userinfo.length; ++i) {
+                    if (typeof object.userinfo[i] !== "object")
+                        throw TypeError(".RobotProto.UserMatchRes.userinfo: object expected");
+                    message.userinfo[i] = $root.RobotProto.UserInfo.fromObject(object.userinfo[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserMatchRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserMatchRes
+         * @static
+         * @param {RobotProto.UserMatchRes} message UserMatchRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserMatchRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.userinfo = [];
+            if (options.defaults) {
+                object.status = 0;
+                object.matchsuccess = false;
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.matchsuccess != null && message.hasOwnProperty("matchsuccess"))
+                object.matchsuccess = message.matchsuccess;
+            if (message.userinfo && message.userinfo.length) {
+                object.userinfo = [];
+                for (var j = 0; j < message.userinfo.length; ++j)
+                    object.userinfo[j] = $root.RobotProto.UserInfo.toObject(message.userinfo[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this UserMatchRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserMatchRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserMatchRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserMatchRes;
+    })();
+
+    RobotProto.UserStopMatchReq = (function() {
+
+        /**
+         * Properties of a UserStopMatchReq.
+         * @memberof RobotProto
+         * @interface IUserStopMatchReq
+         */
+
+        /**
+         * Constructs a new UserStopMatchReq.
+         * @memberof RobotProto
+         * @classdesc Represents a UserStopMatchReq.
+         * @implements IUserStopMatchReq
+         * @constructor
+         * @param {RobotProto.IUserStopMatchReq=} [properties] Properties to set
+         */
+        function UserStopMatchReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new UserStopMatchReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserStopMatchReq
+         * @static
+         * @param {RobotProto.IUserStopMatchReq=} [properties] Properties to set
+         * @returns {RobotProto.UserStopMatchReq} UserStopMatchReq instance
+         */
+        UserStopMatchReq.create = function create(properties) {
+            return new UserStopMatchReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserStopMatchReq message. Does not implicitly {@link RobotProto.UserStopMatchReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserStopMatchReq
+         * @static
+         * @param {RobotProto.IUserStopMatchReq} message UserStopMatchReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserStopMatchReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserStopMatchReq message, length delimited. Does not implicitly {@link RobotProto.UserStopMatchReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserStopMatchReq
+         * @static
+         * @param {RobotProto.IUserStopMatchReq} message UserStopMatchReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserStopMatchReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserStopMatchReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserStopMatchReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserStopMatchReq} UserStopMatchReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserStopMatchReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserStopMatchReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserStopMatchReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserStopMatchReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserStopMatchReq} UserStopMatchReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserStopMatchReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserStopMatchReq message.
+         * @function verify
+         * @memberof RobotProto.UserStopMatchReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserStopMatchReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserStopMatchReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserStopMatchReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserStopMatchReq} UserStopMatchReq
+         */
+        UserStopMatchReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserStopMatchReq)
+                return object;
+            return new $root.RobotProto.UserStopMatchReq();
+        };
+
+        /**
+         * Creates a plain object from a UserStopMatchReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserStopMatchReq
+         * @static
+         * @param {RobotProto.UserStopMatchReq} message UserStopMatchReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserStopMatchReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this UserStopMatchReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserStopMatchReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserStopMatchReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserStopMatchReq;
+    })();
+
+    RobotProto.UserStopMatchRes = (function() {
+
+        /**
+         * Properties of a UserStopMatchRes.
+         * @memberof RobotProto
+         * @interface IUserStopMatchRes
+         * @property {number} status UserStopMatchRes status
+         */
+
+        /**
+         * Constructs a new UserStopMatchRes.
+         * @memberof RobotProto
+         * @classdesc Represents a UserStopMatchRes.
+         * @implements IUserStopMatchRes
+         * @constructor
+         * @param {RobotProto.IUserStopMatchRes=} [properties] Properties to set
+         */
+        function UserStopMatchRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserStopMatchRes status.
+         * @member {number} status
+         * @memberof RobotProto.UserStopMatchRes
+         * @instance
+         */
+        UserStopMatchRes.prototype.status = 0;
+
+        /**
+         * Creates a new UserStopMatchRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserStopMatchRes
+         * @static
+         * @param {RobotProto.IUserStopMatchRes=} [properties] Properties to set
+         * @returns {RobotProto.UserStopMatchRes} UserStopMatchRes instance
+         */
+        UserStopMatchRes.create = function create(properties) {
+            return new UserStopMatchRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserStopMatchRes message. Does not implicitly {@link RobotProto.UserStopMatchRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserStopMatchRes
+         * @static
+         * @param {RobotProto.IUserStopMatchRes} message UserStopMatchRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserStopMatchRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserStopMatchRes message, length delimited. Does not implicitly {@link RobotProto.UserStopMatchRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserStopMatchRes
+         * @static
+         * @param {RobotProto.IUserStopMatchRes} message UserStopMatchRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserStopMatchRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserStopMatchRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserStopMatchRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserStopMatchRes} UserStopMatchRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserStopMatchRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserStopMatchRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserStopMatchRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserStopMatchRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserStopMatchRes} UserStopMatchRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserStopMatchRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserStopMatchRes message.
+         * @function verify
+         * @memberof RobotProto.UserStopMatchRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserStopMatchRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserStopMatchRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserStopMatchRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserStopMatchRes} UserStopMatchRes
+         */
+        UserStopMatchRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserStopMatchRes)
+                return object;
+            var message = new $root.RobotProto.UserStopMatchRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserStopMatchRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserStopMatchRes
+         * @static
+         * @param {RobotProto.UserStopMatchRes} message UserStopMatchRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserStopMatchRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this UserStopMatchRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserStopMatchRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserStopMatchRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserStopMatchRes;
+    })();
+
+    RobotProto.UserGameInfoReq = (function() {
+
+        /**
+         * Properties of a UserGameInfoReq.
+         * @memberof RobotProto
+         * @interface IUserGameInfoReq
+         */
+
+        /**
+         * Constructs a new UserGameInfoReq.
+         * @memberof RobotProto
+         * @classdesc Represents a UserGameInfoReq.
+         * @implements IUserGameInfoReq
+         * @constructor
+         * @param {RobotProto.IUserGameInfoReq=} [properties] Properties to set
+         */
+        function UserGameInfoReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new UserGameInfoReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserGameInfoReq
+         * @static
+         * @param {RobotProto.IUserGameInfoReq=} [properties] Properties to set
+         * @returns {RobotProto.UserGameInfoReq} UserGameInfoReq instance
+         */
+        UserGameInfoReq.create = function create(properties) {
+            return new UserGameInfoReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserGameInfoReq message. Does not implicitly {@link RobotProto.UserGameInfoReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserGameInfoReq
+         * @static
+         * @param {RobotProto.IUserGameInfoReq} message UserGameInfoReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserGameInfoReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserGameInfoReq message, length delimited. Does not implicitly {@link RobotProto.UserGameInfoReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserGameInfoReq
+         * @static
+         * @param {RobotProto.IUserGameInfoReq} message UserGameInfoReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserGameInfoReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserGameInfoReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserGameInfoReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserGameInfoReq} UserGameInfoReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserGameInfoReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserGameInfoReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserGameInfoReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserGameInfoReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserGameInfoReq} UserGameInfoReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserGameInfoReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserGameInfoReq message.
+         * @function verify
+         * @memberof RobotProto.UserGameInfoReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserGameInfoReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserGameInfoReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserGameInfoReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserGameInfoReq} UserGameInfoReq
+         */
+        UserGameInfoReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserGameInfoReq)
+                return object;
+            return new $root.RobotProto.UserGameInfoReq();
+        };
+
+        /**
+         * Creates a plain object from a UserGameInfoReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserGameInfoReq
+         * @static
+         * @param {RobotProto.UserGameInfoReq} message UserGameInfoReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserGameInfoReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this UserGameInfoReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserGameInfoReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserGameInfoReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserGameInfoReq;
+    })();
+
+    RobotProto.UserGameInfoRes = (function() {
+
+        /**
+         * Properties of a UserGameInfoRes.
+         * @memberof RobotProto
+         * @interface IUserGameInfoRes
+         * @property {number} status UserGameInfoRes status
+         * @property {string|null} [userinfostring] UserGameInfoRes userinfostring
+         */
+
+        /**
+         * Constructs a new UserGameInfoRes.
+         * @memberof RobotProto
+         * @classdesc Represents a UserGameInfoRes.
+         * @implements IUserGameInfoRes
+         * @constructor
+         * @param {RobotProto.IUserGameInfoRes=} [properties] Properties to set
+         */
+        function UserGameInfoRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserGameInfoRes status.
+         * @member {number} status
+         * @memberof RobotProto.UserGameInfoRes
+         * @instance
+         */
+        UserGameInfoRes.prototype.status = 0;
+
+        /**
+         * UserGameInfoRes userinfostring.
+         * @member {string} userinfostring
+         * @memberof RobotProto.UserGameInfoRes
+         * @instance
+         */
+        UserGameInfoRes.prototype.userinfostring = "";
+
+        /**
+         * Creates a new UserGameInfoRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserGameInfoRes
+         * @static
+         * @param {RobotProto.IUserGameInfoRes=} [properties] Properties to set
+         * @returns {RobotProto.UserGameInfoRes} UserGameInfoRes instance
+         */
+        UserGameInfoRes.create = function create(properties) {
+            return new UserGameInfoRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserGameInfoRes message. Does not implicitly {@link RobotProto.UserGameInfoRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserGameInfoRes
+         * @static
+         * @param {RobotProto.IUserGameInfoRes} message UserGameInfoRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserGameInfoRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.userinfostring != null && message.hasOwnProperty("userinfostring"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.userinfostring);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserGameInfoRes message, length delimited. Does not implicitly {@link RobotProto.UserGameInfoRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserGameInfoRes
+         * @static
+         * @param {RobotProto.IUserGameInfoRes} message UserGameInfoRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserGameInfoRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserGameInfoRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserGameInfoRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserGameInfoRes} UserGameInfoRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserGameInfoRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserGameInfoRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.userinfostring = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserGameInfoRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserGameInfoRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserGameInfoRes} UserGameInfoRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserGameInfoRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserGameInfoRes message.
+         * @function verify
+         * @memberof RobotProto.UserGameInfoRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserGameInfoRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.userinfostring != null && message.hasOwnProperty("userinfostring"))
+                if (!$util.isString(message.userinfostring))
+                    return "userinfostring: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserGameInfoRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserGameInfoRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserGameInfoRes} UserGameInfoRes
+         */
+        UserGameInfoRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserGameInfoRes)
+                return object;
+            var message = new $root.RobotProto.UserGameInfoRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.userinfostring != null)
+                message.userinfostring = String(object.userinfostring);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserGameInfoRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserGameInfoRes
+         * @static
+         * @param {RobotProto.UserGameInfoRes} message UserGameInfoRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserGameInfoRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.userinfostring = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.userinfostring != null && message.hasOwnProperty("userinfostring"))
+                object.userinfostring = message.userinfostring;
+            return object;
+        };
+
+        /**
+         * Converts this UserGameInfoRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserGameInfoRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserGameInfoRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserGameInfoRes;
+    })();
+
+    RobotProto.UserBallInfoReq = (function() {
+
+        /**
+         * Properties of a UserBallInfoReq.
+         * @memberof RobotProto
+         * @interface IUserBallInfoReq
+         */
+
+        /**
+         * Constructs a new UserBallInfoReq.
+         * @memberof RobotProto
+         * @classdesc Represents a UserBallInfoReq.
+         * @implements IUserBallInfoReq
+         * @constructor
+         * @param {RobotProto.IUserBallInfoReq=} [properties] Properties to set
+         */
+        function UserBallInfoReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new UserBallInfoReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserBallInfoReq
+         * @static
+         * @param {RobotProto.IUserBallInfoReq=} [properties] Properties to set
+         * @returns {RobotProto.UserBallInfoReq} UserBallInfoReq instance
+         */
+        UserBallInfoReq.create = function create(properties) {
+            return new UserBallInfoReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserBallInfoReq message. Does not implicitly {@link RobotProto.UserBallInfoReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserBallInfoReq
+         * @static
+         * @param {RobotProto.IUserBallInfoReq} message UserBallInfoReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserBallInfoReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserBallInfoReq message, length delimited. Does not implicitly {@link RobotProto.UserBallInfoReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserBallInfoReq
+         * @static
+         * @param {RobotProto.IUserBallInfoReq} message UserBallInfoReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserBallInfoReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserBallInfoReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserBallInfoReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserBallInfoReq} UserBallInfoReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserBallInfoReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserBallInfoReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserBallInfoReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserBallInfoReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserBallInfoReq} UserBallInfoReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserBallInfoReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserBallInfoReq message.
+         * @function verify
+         * @memberof RobotProto.UserBallInfoReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserBallInfoReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserBallInfoReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserBallInfoReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserBallInfoReq} UserBallInfoReq
+         */
+        UserBallInfoReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserBallInfoReq)
+                return object;
+            return new $root.RobotProto.UserBallInfoReq();
+        };
+
+        /**
+         * Creates a plain object from a UserBallInfoReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserBallInfoReq
+         * @static
+         * @param {RobotProto.UserBallInfoReq} message UserBallInfoReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserBallInfoReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this UserBallInfoReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserBallInfoReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserBallInfoReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserBallInfoReq;
+    })();
+
+    RobotProto.UserBallInfoRes = (function() {
+
+        /**
+         * Properties of a UserBallInfoRes.
+         * @memberof RobotProto
+         * @interface IUserBallInfoRes
+         * @property {number} status UserBallInfoRes status
+         * @property {string|null} [userballinfostring] UserBallInfoRes userballinfostring
+         */
+
+        /**
+         * Constructs a new UserBallInfoRes.
+         * @memberof RobotProto
+         * @classdesc Represents a UserBallInfoRes.
+         * @implements IUserBallInfoRes
+         * @constructor
+         * @param {RobotProto.IUserBallInfoRes=} [properties] Properties to set
+         */
+        function UserBallInfoRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserBallInfoRes status.
+         * @member {number} status
+         * @memberof RobotProto.UserBallInfoRes
+         * @instance
+         */
+        UserBallInfoRes.prototype.status = 0;
+
+        /**
+         * UserBallInfoRes userballinfostring.
+         * @member {string} userballinfostring
+         * @memberof RobotProto.UserBallInfoRes
+         * @instance
+         */
+        UserBallInfoRes.prototype.userballinfostring = "";
+
+        /**
+         * Creates a new UserBallInfoRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserBallInfoRes
+         * @static
+         * @param {RobotProto.IUserBallInfoRes=} [properties] Properties to set
+         * @returns {RobotProto.UserBallInfoRes} UserBallInfoRes instance
+         */
+        UserBallInfoRes.create = function create(properties) {
+            return new UserBallInfoRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserBallInfoRes message. Does not implicitly {@link RobotProto.UserBallInfoRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserBallInfoRes
+         * @static
+         * @param {RobotProto.IUserBallInfoRes} message UserBallInfoRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserBallInfoRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.userballinfostring != null && message.hasOwnProperty("userballinfostring"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.userballinfostring);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserBallInfoRes message, length delimited. Does not implicitly {@link RobotProto.UserBallInfoRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserBallInfoRes
+         * @static
+         * @param {RobotProto.IUserBallInfoRes} message UserBallInfoRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserBallInfoRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserBallInfoRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserBallInfoRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserBallInfoRes} UserBallInfoRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserBallInfoRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserBallInfoRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.userballinfostring = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserBallInfoRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserBallInfoRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserBallInfoRes} UserBallInfoRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserBallInfoRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserBallInfoRes message.
+         * @function verify
+         * @memberof RobotProto.UserBallInfoRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserBallInfoRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.userballinfostring != null && message.hasOwnProperty("userballinfostring"))
+                if (!$util.isString(message.userballinfostring))
+                    return "userballinfostring: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserBallInfoRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserBallInfoRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserBallInfoRes} UserBallInfoRes
+         */
+        UserBallInfoRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserBallInfoRes)
+                return object;
+            var message = new $root.RobotProto.UserBallInfoRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.userballinfostring != null)
+                message.userballinfostring = String(object.userballinfostring);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserBallInfoRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserBallInfoRes
+         * @static
+         * @param {RobotProto.UserBallInfoRes} message UserBallInfoRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserBallInfoRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.userballinfostring = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.userballinfostring != null && message.hasOwnProperty("userballinfostring"))
+                object.userballinfostring = message.userballinfostring;
+            return object;
+        };
+
+        /**
+         * Converts this UserBallInfoRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserBallInfoRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserBallInfoRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserBallInfoRes;
+    })();
+
+    RobotProto.UpdateUserBallReq = (function() {
+
+        /**
+         * Properties of an UpdateUserBallReq.
+         * @memberof RobotProto
+         * @interface IUpdateUserBallReq
+         * @property {number} updatetype UpdateUserBallReq updatetype
+         * @property {number} level UpdateUserBallReq level
+         * @property {number} count UpdateUserBallReq count
+         */
+
+        /**
+         * Constructs a new UpdateUserBallReq.
+         * @memberof RobotProto
+         * @classdesc Represents an UpdateUserBallReq.
+         * @implements IUpdateUserBallReq
+         * @constructor
+         * @param {RobotProto.IUpdateUserBallReq=} [properties] Properties to set
+         */
+        function UpdateUserBallReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UpdateUserBallReq updatetype.
+         * @member {number} updatetype
+         * @memberof RobotProto.UpdateUserBallReq
+         * @instance
+         */
+        UpdateUserBallReq.prototype.updatetype = 0;
+
+        /**
+         * UpdateUserBallReq level.
+         * @member {number} level
+         * @memberof RobotProto.UpdateUserBallReq
+         * @instance
+         */
+        UpdateUserBallReq.prototype.level = 0;
+
+        /**
+         * UpdateUserBallReq count.
+         * @member {number} count
+         * @memberof RobotProto.UpdateUserBallReq
+         * @instance
+         */
+        UpdateUserBallReq.prototype.count = 0;
+
+        /**
+         * Creates a new UpdateUserBallReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UpdateUserBallReq
+         * @static
+         * @param {RobotProto.IUpdateUserBallReq=} [properties] Properties to set
+         * @returns {RobotProto.UpdateUserBallReq} UpdateUserBallReq instance
+         */
+        UpdateUserBallReq.create = function create(properties) {
+            return new UpdateUserBallReq(properties);
+        };
+
+        /**
+         * Encodes the specified UpdateUserBallReq message. Does not implicitly {@link RobotProto.UpdateUserBallReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UpdateUserBallReq
+         * @static
+         * @param {RobotProto.IUpdateUserBallReq} message UpdateUserBallReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UpdateUserBallReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.updatetype);
+            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.level);
+            writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.count);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UpdateUserBallReq message, length delimited. Does not implicitly {@link RobotProto.UpdateUserBallReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UpdateUserBallReq
+         * @static
+         * @param {RobotProto.IUpdateUserBallReq} message UpdateUserBallReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UpdateUserBallReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an UpdateUserBallReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UpdateUserBallReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UpdateUserBallReq} UpdateUserBallReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UpdateUserBallReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UpdateUserBallReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.updatetype = reader.sint32();
+                    break;
+                case 2:
+                    message.level = reader.sint32();
+                    break;
+                case 3:
+                    message.count = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("updatetype"))
+                throw $util.ProtocolError("missing required 'updatetype'", { instance: message });
+            if (!message.hasOwnProperty("level"))
+                throw $util.ProtocolError("missing required 'level'", { instance: message });
+            if (!message.hasOwnProperty("count"))
+                throw $util.ProtocolError("missing required 'count'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes an UpdateUserBallReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UpdateUserBallReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UpdateUserBallReq} UpdateUserBallReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UpdateUserBallReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an UpdateUserBallReq message.
+         * @function verify
+         * @memberof RobotProto.UpdateUserBallReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UpdateUserBallReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.updatetype))
+                return "updatetype: integer expected";
+            if (!$util.isInteger(message.level))
+                return "level: integer expected";
+            if (!$util.isInteger(message.count))
+                return "count: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates an UpdateUserBallReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UpdateUserBallReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UpdateUserBallReq} UpdateUserBallReq
+         */
+        UpdateUserBallReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UpdateUserBallReq)
+                return object;
+            var message = new $root.RobotProto.UpdateUserBallReq();
+            if (object.updatetype != null)
+                message.updatetype = object.updatetype | 0;
+            if (object.level != null)
+                message.level = object.level | 0;
+            if (object.count != null)
+                message.count = object.count | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an UpdateUserBallReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UpdateUserBallReq
+         * @static
+         * @param {RobotProto.UpdateUserBallReq} message UpdateUserBallReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UpdateUserBallReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.updatetype = 0;
+                object.level = 0;
+                object.count = 0;
+            }
+            if (message.updatetype != null && message.hasOwnProperty("updatetype"))
+                object.updatetype = message.updatetype;
+            if (message.level != null && message.hasOwnProperty("level"))
+                object.level = message.level;
+            if (message.count != null && message.hasOwnProperty("count"))
+                object.count = message.count;
+            return object;
+        };
+
+        /**
+         * Converts this UpdateUserBallReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UpdateUserBallReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UpdateUserBallReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UpdateUserBallReq;
+    })();
+
+    RobotProto.UpdateUserBallRes = (function() {
+
+        /**
+         * Properties of an UpdateUserBallRes.
+         * @memberof RobotProto
+         * @interface IUpdateUserBallRes
+         * @property {number} status UpdateUserBallRes status
+         * @property {string|null} [userballinfostring] UpdateUserBallRes userballinfostring
+         * @property {string|null} [resultinfo] UpdateUserBallRes resultinfo
+         */
+
+        /**
+         * Constructs a new UpdateUserBallRes.
+         * @memberof RobotProto
+         * @classdesc Represents an UpdateUserBallRes.
+         * @implements IUpdateUserBallRes
+         * @constructor
+         * @param {RobotProto.IUpdateUserBallRes=} [properties] Properties to set
+         */
+        function UpdateUserBallRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UpdateUserBallRes status.
+         * @member {number} status
+         * @memberof RobotProto.UpdateUserBallRes
+         * @instance
+         */
+        UpdateUserBallRes.prototype.status = 0;
+
+        /**
+         * UpdateUserBallRes userballinfostring.
+         * @member {string} userballinfostring
+         * @memberof RobotProto.UpdateUserBallRes
+         * @instance
+         */
+        UpdateUserBallRes.prototype.userballinfostring = "";
+
+        /**
+         * UpdateUserBallRes resultinfo.
+         * @member {string} resultinfo
+         * @memberof RobotProto.UpdateUserBallRes
+         * @instance
+         */
+        UpdateUserBallRes.prototype.resultinfo = "";
+
+        /**
+         * Creates a new UpdateUserBallRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UpdateUserBallRes
+         * @static
+         * @param {RobotProto.IUpdateUserBallRes=} [properties] Properties to set
+         * @returns {RobotProto.UpdateUserBallRes} UpdateUserBallRes instance
+         */
+        UpdateUserBallRes.create = function create(properties) {
+            return new UpdateUserBallRes(properties);
+        };
+
+        /**
+         * Encodes the specified UpdateUserBallRes message. Does not implicitly {@link RobotProto.UpdateUserBallRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UpdateUserBallRes
+         * @static
+         * @param {RobotProto.IUpdateUserBallRes} message UpdateUserBallRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UpdateUserBallRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.userballinfostring != null && message.hasOwnProperty("userballinfostring"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.userballinfostring);
+            if (message.resultinfo != null && message.hasOwnProperty("resultinfo"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.resultinfo);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UpdateUserBallRes message, length delimited. Does not implicitly {@link RobotProto.UpdateUserBallRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UpdateUserBallRes
+         * @static
+         * @param {RobotProto.IUpdateUserBallRes} message UpdateUserBallRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UpdateUserBallRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an UpdateUserBallRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UpdateUserBallRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UpdateUserBallRes} UpdateUserBallRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UpdateUserBallRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UpdateUserBallRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.userballinfostring = reader.string();
+                    break;
+                case 3:
+                    message.resultinfo = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes an UpdateUserBallRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UpdateUserBallRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UpdateUserBallRes} UpdateUserBallRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UpdateUserBallRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an UpdateUserBallRes message.
+         * @function verify
+         * @memberof RobotProto.UpdateUserBallRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UpdateUserBallRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.userballinfostring != null && message.hasOwnProperty("userballinfostring"))
+                if (!$util.isString(message.userballinfostring))
+                    return "userballinfostring: string expected";
+            if (message.resultinfo != null && message.hasOwnProperty("resultinfo"))
+                if (!$util.isString(message.resultinfo))
+                    return "resultinfo: string expected";
+            return null;
+        };
+
+        /**
+         * Creates an UpdateUserBallRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UpdateUserBallRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UpdateUserBallRes} UpdateUserBallRes
+         */
+        UpdateUserBallRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UpdateUserBallRes)
+                return object;
+            var message = new $root.RobotProto.UpdateUserBallRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.userballinfostring != null)
+                message.userballinfostring = String(object.userballinfostring);
+            if (object.resultinfo != null)
+                message.resultinfo = String(object.resultinfo);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an UpdateUserBallRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UpdateUserBallRes
+         * @static
+         * @param {RobotProto.UpdateUserBallRes} message UpdateUserBallRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UpdateUserBallRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.userballinfostring = "";
+                object.resultinfo = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.userballinfostring != null && message.hasOwnProperty("userballinfostring"))
+                object.userballinfostring = message.userballinfostring;
+            if (message.resultinfo != null && message.hasOwnProperty("resultinfo"))
+                object.resultinfo = message.resultinfo;
+            return object;
+        };
+
+        /**
+         * Converts this UpdateUserBallRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UpdateUserBallRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UpdateUserBallRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UpdateUserBallRes;
+    })();
+
+    RobotProto.OneStoreProp = (function() {
+
+        /**
+         * Properties of an OneStoreProp.
+         * @memberof RobotProto
+         * @interface IOneStoreProp
+         * @property {number} propsvrindex OneStoreProp propsvrindex
+         * @property {number} propid OneStoreProp propid
+         * @property {number} propcount OneStoreProp propcount
+         * @property {number} propprice OneStoreProp propprice
+         * @property {string} propinfo OneStoreProp propinfo
+         */
+
+        /**
+         * Constructs a new OneStoreProp.
+         * @memberof RobotProto
+         * @classdesc Represents an OneStoreProp.
+         * @implements IOneStoreProp
+         * @constructor
+         * @param {RobotProto.IOneStoreProp=} [properties] Properties to set
+         */
+        function OneStoreProp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * OneStoreProp propsvrindex.
+         * @member {number} propsvrindex
+         * @memberof RobotProto.OneStoreProp
+         * @instance
+         */
+        OneStoreProp.prototype.propsvrindex = 0;
+
+        /**
+         * OneStoreProp propid.
+         * @member {number} propid
+         * @memberof RobotProto.OneStoreProp
+         * @instance
+         */
+        OneStoreProp.prototype.propid = 0;
+
+        /**
+         * OneStoreProp propcount.
+         * @member {number} propcount
+         * @memberof RobotProto.OneStoreProp
+         * @instance
+         */
+        OneStoreProp.prototype.propcount = 0;
+
+        /**
+         * OneStoreProp propprice.
+         * @member {number} propprice
+         * @memberof RobotProto.OneStoreProp
+         * @instance
+         */
+        OneStoreProp.prototype.propprice = 0;
+
+        /**
+         * OneStoreProp propinfo.
+         * @member {string} propinfo
+         * @memberof RobotProto.OneStoreProp
+         * @instance
+         */
+        OneStoreProp.prototype.propinfo = "";
+
+        /**
+         * Creates a new OneStoreProp instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.OneStoreProp
+         * @static
+         * @param {RobotProto.IOneStoreProp=} [properties] Properties to set
+         * @returns {RobotProto.OneStoreProp} OneStoreProp instance
+         */
+        OneStoreProp.create = function create(properties) {
+            return new OneStoreProp(properties);
+        };
+
+        /**
+         * Encodes the specified OneStoreProp message. Does not implicitly {@link RobotProto.OneStoreProp.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.OneStoreProp
+         * @static
+         * @param {RobotProto.IOneStoreProp} message OneStoreProp message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OneStoreProp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.propsvrindex);
+            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propid);
+            writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.propcount);
+            writer.uint32(/* id 4, wireType 0 =*/32).sint32(message.propprice);
+            writer.uint32(/* id 5, wireType 2 =*/42).string(message.propinfo);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified OneStoreProp message, length delimited. Does not implicitly {@link RobotProto.OneStoreProp.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.OneStoreProp
+         * @static
+         * @param {RobotProto.IOneStoreProp} message OneStoreProp message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        OneStoreProp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an OneStoreProp message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.OneStoreProp
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.OneStoreProp} OneStoreProp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OneStoreProp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.OneStoreProp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.propsvrindex = reader.sint32();
+                    break;
+                case 2:
+                    message.propid = reader.sint32();
+                    break;
+                case 3:
+                    message.propcount = reader.sint32();
+                    break;
+                case 4:
+                    message.propprice = reader.sint32();
+                    break;
+                case 5:
+                    message.propinfo = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("propsvrindex"))
+                throw $util.ProtocolError("missing required 'propsvrindex'", { instance: message });
+            if (!message.hasOwnProperty("propid"))
+                throw $util.ProtocolError("missing required 'propid'", { instance: message });
+            if (!message.hasOwnProperty("propcount"))
+                throw $util.ProtocolError("missing required 'propcount'", { instance: message });
+            if (!message.hasOwnProperty("propprice"))
+                throw $util.ProtocolError("missing required 'propprice'", { instance: message });
+            if (!message.hasOwnProperty("propinfo"))
+                throw $util.ProtocolError("missing required 'propinfo'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes an OneStoreProp message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.OneStoreProp
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.OneStoreProp} OneStoreProp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        OneStoreProp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an OneStoreProp message.
+         * @function verify
+         * @memberof RobotProto.OneStoreProp
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        OneStoreProp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.propsvrindex))
+                return "propsvrindex: integer expected";
+            if (!$util.isInteger(message.propid))
+                return "propid: integer expected";
+            if (!$util.isInteger(message.propcount))
+                return "propcount: integer expected";
+            if (!$util.isInteger(message.propprice))
+                return "propprice: integer expected";
+            if (!$util.isString(message.propinfo))
+                return "propinfo: string expected";
+            return null;
+        };
+
+        /**
+         * Creates an OneStoreProp message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.OneStoreProp
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.OneStoreProp} OneStoreProp
+         */
+        OneStoreProp.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.OneStoreProp)
+                return object;
+            var message = new $root.RobotProto.OneStoreProp();
+            if (object.propsvrindex != null)
+                message.propsvrindex = object.propsvrindex | 0;
+            if (object.propid != null)
+                message.propid = object.propid | 0;
+            if (object.propcount != null)
+                message.propcount = object.propcount | 0;
+            if (object.propprice != null)
+                message.propprice = object.propprice | 0;
+            if (object.propinfo != null)
+                message.propinfo = String(object.propinfo);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an OneStoreProp message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.OneStoreProp
+         * @static
+         * @param {RobotProto.OneStoreProp} message OneStoreProp
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        OneStoreProp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.propsvrindex = 0;
+                object.propid = 0;
+                object.propcount = 0;
+                object.propprice = 0;
+                object.propinfo = "";
+            }
+            if (message.propsvrindex != null && message.hasOwnProperty("propsvrindex"))
+                object.propsvrindex = message.propsvrindex;
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                object.propid = message.propid;
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                object.propcount = message.propcount;
+            if (message.propprice != null && message.hasOwnProperty("propprice"))
+                object.propprice = message.propprice;
+            if (message.propinfo != null && message.hasOwnProperty("propinfo"))
+                object.propinfo = message.propinfo;
+            return object;
+        };
+
+        /**
+         * Converts this OneStoreProp to JSON.
+         * @function toJSON
+         * @memberof RobotProto.OneStoreProp
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        OneStoreProp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return OneStoreProp;
+    })();
+
+    RobotProto.StoreListReq = (function() {
+
+        /**
+         * Properties of a StoreListReq.
+         * @memberof RobotProto
+         * @interface IStoreListReq
+         */
+
+        /**
+         * Constructs a new StoreListReq.
+         * @memberof RobotProto
+         * @classdesc Represents a StoreListReq.
+         * @implements IStoreListReq
+         * @constructor
+         * @param {RobotProto.IStoreListReq=} [properties] Properties to set
+         */
+        function StoreListReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new StoreListReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.StoreListReq
+         * @static
+         * @param {RobotProto.IStoreListReq=} [properties] Properties to set
+         * @returns {RobotProto.StoreListReq} StoreListReq instance
+         */
+        StoreListReq.create = function create(properties) {
+            return new StoreListReq(properties);
+        };
+
+        /**
+         * Encodes the specified StoreListReq message. Does not implicitly {@link RobotProto.StoreListReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.StoreListReq
+         * @static
+         * @param {RobotProto.IStoreListReq} message StoreListReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        StoreListReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified StoreListReq message, length delimited. Does not implicitly {@link RobotProto.StoreListReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.StoreListReq
+         * @static
+         * @param {RobotProto.IStoreListReq} message StoreListReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        StoreListReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a StoreListReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.StoreListReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.StoreListReq} StoreListReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        StoreListReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.StoreListReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a StoreListReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.StoreListReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.StoreListReq} StoreListReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        StoreListReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a StoreListReq message.
+         * @function verify
+         * @memberof RobotProto.StoreListReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        StoreListReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a StoreListReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.StoreListReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.StoreListReq} StoreListReq
+         */
+        StoreListReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.StoreListReq)
+                return object;
+            return new $root.RobotProto.StoreListReq();
+        };
+
+        /**
+         * Creates a plain object from a StoreListReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.StoreListReq
+         * @static
+         * @param {RobotProto.StoreListReq} message StoreListReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        StoreListReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this StoreListReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.StoreListReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        StoreListReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return StoreListReq;
+    })();
+
+    RobotProto.StoreListRes = (function() {
+
+        /**
+         * Properties of a StoreListRes.
+         * @memberof RobotProto
+         * @interface IStoreListRes
+         * @property {number} status StoreListRes status
+         * @property {Array.<RobotProto.IOneStoreProp>|null} [storeprops] StoreListRes storeprops
+         */
+
+        /**
+         * Constructs a new StoreListRes.
+         * @memberof RobotProto
+         * @classdesc Represents a StoreListRes.
+         * @implements IStoreListRes
+         * @constructor
+         * @param {RobotProto.IStoreListRes=} [properties] Properties to set
+         */
+        function StoreListRes(properties) {
+            this.storeprops = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * StoreListRes status.
+         * @member {number} status
+         * @memberof RobotProto.StoreListRes
+         * @instance
+         */
+        StoreListRes.prototype.status = 0;
+
+        /**
+         * StoreListRes storeprops.
+         * @member {Array.<RobotProto.IOneStoreProp>} storeprops
+         * @memberof RobotProto.StoreListRes
+         * @instance
+         */
+        StoreListRes.prototype.storeprops = $util.emptyArray;
+
+        /**
+         * Creates a new StoreListRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.StoreListRes
+         * @static
+         * @param {RobotProto.IStoreListRes=} [properties] Properties to set
+         * @returns {RobotProto.StoreListRes} StoreListRes instance
+         */
+        StoreListRes.create = function create(properties) {
+            return new StoreListRes(properties);
+        };
+
+        /**
+         * Encodes the specified StoreListRes message. Does not implicitly {@link RobotProto.StoreListRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.StoreListRes
+         * @static
+         * @param {RobotProto.IStoreListRes} message StoreListRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        StoreListRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.storeprops != null && message.storeprops.length)
+                for (var i = 0; i < message.storeprops.length; ++i)
+                    $root.RobotProto.OneStoreProp.encode(message.storeprops[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified StoreListRes message, length delimited. Does not implicitly {@link RobotProto.StoreListRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.StoreListRes
+         * @static
+         * @param {RobotProto.IStoreListRes} message StoreListRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        StoreListRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a StoreListRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.StoreListRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.StoreListRes} StoreListRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        StoreListRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.StoreListRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    if (!(message.storeprops && message.storeprops.length))
+                        message.storeprops = [];
+                    message.storeprops.push($root.RobotProto.OneStoreProp.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a StoreListRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.StoreListRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.StoreListRes} StoreListRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        StoreListRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a StoreListRes message.
+         * @function verify
+         * @memberof RobotProto.StoreListRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        StoreListRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.storeprops != null && message.hasOwnProperty("storeprops")) {
+                if (!Array.isArray(message.storeprops))
+                    return "storeprops: array expected";
+                for (var i = 0; i < message.storeprops.length; ++i) {
+                    var error = $root.RobotProto.OneStoreProp.verify(message.storeprops[i]);
+                    if (error)
+                        return "storeprops." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a StoreListRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.StoreListRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.StoreListRes} StoreListRes
+         */
+        StoreListRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.StoreListRes)
+                return object;
+            var message = new $root.RobotProto.StoreListRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.storeprops) {
+                if (!Array.isArray(object.storeprops))
+                    throw TypeError(".RobotProto.StoreListRes.storeprops: array expected");
+                message.storeprops = [];
+                for (var i = 0; i < object.storeprops.length; ++i) {
+                    if (typeof object.storeprops[i] !== "object")
+                        throw TypeError(".RobotProto.StoreListRes.storeprops: object expected");
+                    message.storeprops[i] = $root.RobotProto.OneStoreProp.fromObject(object.storeprops[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a StoreListRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.StoreListRes
+         * @static
+         * @param {RobotProto.StoreListRes} message StoreListRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        StoreListRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.storeprops = [];
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.storeprops && message.storeprops.length) {
+                object.storeprops = [];
+                for (var j = 0; j < message.storeprops.length; ++j)
+                    object.storeprops[j] = $root.RobotProto.OneStoreProp.toObject(message.storeprops[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this StoreListRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.StoreListRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        StoreListRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return StoreListRes;
+    })();
+
+    RobotProto.BuyThingsReq = (function() {
+
+        /**
+         * Properties of a BuyThingsReq.
+         * @memberof RobotProto
+         * @interface IBuyThingsReq
+         * @property {number} propsvrindex BuyThingsReq propsvrindex
+         * @property {number} propid BuyThingsReq propid
+         * @property {number} propcount BuyThingsReq propcount
+         * @property {number} propprice BuyThingsReq propprice
+         * @property {string} propinfo BuyThingsReq propinfo
+         */
+
+        /**
+         * Constructs a new BuyThingsReq.
+         * @memberof RobotProto
+         * @classdesc Represents a BuyThingsReq.
+         * @implements IBuyThingsReq
+         * @constructor
+         * @param {RobotProto.IBuyThingsReq=} [properties] Properties to set
+         */
+        function BuyThingsReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BuyThingsReq propsvrindex.
+         * @member {number} propsvrindex
+         * @memberof RobotProto.BuyThingsReq
+         * @instance
+         */
+        BuyThingsReq.prototype.propsvrindex = 0;
+
+        /**
+         * BuyThingsReq propid.
+         * @member {number} propid
+         * @memberof RobotProto.BuyThingsReq
+         * @instance
+         */
+        BuyThingsReq.prototype.propid = 0;
+
+        /**
+         * BuyThingsReq propcount.
+         * @member {number} propcount
+         * @memberof RobotProto.BuyThingsReq
+         * @instance
+         */
+        BuyThingsReq.prototype.propcount = 0;
+
+        /**
+         * BuyThingsReq propprice.
+         * @member {number} propprice
+         * @memberof RobotProto.BuyThingsReq
+         * @instance
+         */
+        BuyThingsReq.prototype.propprice = 0;
+
+        /**
+         * BuyThingsReq propinfo.
+         * @member {string} propinfo
+         * @memberof RobotProto.BuyThingsReq
+         * @instance
+         */
+        BuyThingsReq.prototype.propinfo = "";
+
+        /**
+         * Creates a new BuyThingsReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.BuyThingsReq
+         * @static
+         * @param {RobotProto.IBuyThingsReq=} [properties] Properties to set
+         * @returns {RobotProto.BuyThingsReq} BuyThingsReq instance
+         */
+        BuyThingsReq.create = function create(properties) {
+            return new BuyThingsReq(properties);
+        };
+
+        /**
+         * Encodes the specified BuyThingsReq message. Does not implicitly {@link RobotProto.BuyThingsReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.BuyThingsReq
+         * @static
+         * @param {RobotProto.IBuyThingsReq} message BuyThingsReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BuyThingsReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.propsvrindex);
+            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propid);
+            writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.propcount);
+            writer.uint32(/* id 4, wireType 0 =*/32).sint32(message.propprice);
+            writer.uint32(/* id 5, wireType 2 =*/42).string(message.propinfo);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BuyThingsReq message, length delimited. Does not implicitly {@link RobotProto.BuyThingsReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.BuyThingsReq
+         * @static
+         * @param {RobotProto.IBuyThingsReq} message BuyThingsReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BuyThingsReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BuyThingsReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.BuyThingsReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.BuyThingsReq} BuyThingsReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BuyThingsReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.BuyThingsReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.propsvrindex = reader.sint32();
+                    break;
+                case 2:
+                    message.propid = reader.sint32();
+                    break;
+                case 3:
+                    message.propcount = reader.sint32();
+                    break;
+                case 4:
+                    message.propprice = reader.sint32();
+                    break;
+                case 5:
+                    message.propinfo = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("propsvrindex"))
+                throw $util.ProtocolError("missing required 'propsvrindex'", { instance: message });
+            if (!message.hasOwnProperty("propid"))
+                throw $util.ProtocolError("missing required 'propid'", { instance: message });
+            if (!message.hasOwnProperty("propcount"))
+                throw $util.ProtocolError("missing required 'propcount'", { instance: message });
+            if (!message.hasOwnProperty("propprice"))
+                throw $util.ProtocolError("missing required 'propprice'", { instance: message });
+            if (!message.hasOwnProperty("propinfo"))
+                throw $util.ProtocolError("missing required 'propinfo'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a BuyThingsReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.BuyThingsReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.BuyThingsReq} BuyThingsReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BuyThingsReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BuyThingsReq message.
+         * @function verify
+         * @memberof RobotProto.BuyThingsReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BuyThingsReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.propsvrindex))
+                return "propsvrindex: integer expected";
+            if (!$util.isInteger(message.propid))
+                return "propid: integer expected";
+            if (!$util.isInteger(message.propcount))
+                return "propcount: integer expected";
+            if (!$util.isInteger(message.propprice))
+                return "propprice: integer expected";
+            if (!$util.isString(message.propinfo))
+                return "propinfo: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a BuyThingsReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.BuyThingsReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.BuyThingsReq} BuyThingsReq
+         */
+        BuyThingsReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.BuyThingsReq)
+                return object;
+            var message = new $root.RobotProto.BuyThingsReq();
+            if (object.propsvrindex != null)
+                message.propsvrindex = object.propsvrindex | 0;
+            if (object.propid != null)
+                message.propid = object.propid | 0;
+            if (object.propcount != null)
+                message.propcount = object.propcount | 0;
+            if (object.propprice != null)
+                message.propprice = object.propprice | 0;
+            if (object.propinfo != null)
+                message.propinfo = String(object.propinfo);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BuyThingsReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.BuyThingsReq
+         * @static
+         * @param {RobotProto.BuyThingsReq} message BuyThingsReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BuyThingsReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.propsvrindex = 0;
+                object.propid = 0;
+                object.propcount = 0;
+                object.propprice = 0;
+                object.propinfo = "";
+            }
+            if (message.propsvrindex != null && message.hasOwnProperty("propsvrindex"))
+                object.propsvrindex = message.propsvrindex;
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                object.propid = message.propid;
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                object.propcount = message.propcount;
+            if (message.propprice != null && message.hasOwnProperty("propprice"))
+                object.propprice = message.propprice;
+            if (message.propinfo != null && message.hasOwnProperty("propinfo"))
+                object.propinfo = message.propinfo;
+            return object;
+        };
+
+        /**
+         * Converts this BuyThingsReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.BuyThingsReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BuyThingsReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BuyThingsReq;
+    })();
+
+    RobotProto.BuyThingsRes = (function() {
+
+        /**
+         * Properties of a BuyThingsRes.
+         * @memberof RobotProto
+         * @interface IBuyThingsRes
+         * @property {number} status BuyThingsRes status
+         * @property {number|null} [propsvrindex] BuyThingsRes propsvrindex
+         * @property {number|null} [propid] BuyThingsRes propid
+         * @property {number|null} [propcount] BuyThingsRes propcount
+         * @property {number|null} [propprice] BuyThingsRes propprice
+         * @property {string|null} [propinfo] BuyThingsRes propinfo
+         */
+
+        /**
+         * Constructs a new BuyThingsRes.
+         * @memberof RobotProto
+         * @classdesc Represents a BuyThingsRes.
+         * @implements IBuyThingsRes
+         * @constructor
+         * @param {RobotProto.IBuyThingsRes=} [properties] Properties to set
+         */
+        function BuyThingsRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * BuyThingsRes status.
+         * @member {number} status
+         * @memberof RobotProto.BuyThingsRes
+         * @instance
+         */
+        BuyThingsRes.prototype.status = 0;
+
+        /**
+         * BuyThingsRes propsvrindex.
+         * @member {number} propsvrindex
+         * @memberof RobotProto.BuyThingsRes
+         * @instance
+         */
+        BuyThingsRes.prototype.propsvrindex = 0;
+
+        /**
+         * BuyThingsRes propid.
+         * @member {number} propid
+         * @memberof RobotProto.BuyThingsRes
+         * @instance
+         */
+        BuyThingsRes.prototype.propid = 0;
+
+        /**
+         * BuyThingsRes propcount.
+         * @member {number} propcount
+         * @memberof RobotProto.BuyThingsRes
+         * @instance
+         */
+        BuyThingsRes.prototype.propcount = 0;
+
+        /**
+         * BuyThingsRes propprice.
+         * @member {number} propprice
+         * @memberof RobotProto.BuyThingsRes
+         * @instance
+         */
+        BuyThingsRes.prototype.propprice = 0;
+
+        /**
+         * BuyThingsRes propinfo.
+         * @member {string} propinfo
+         * @memberof RobotProto.BuyThingsRes
+         * @instance
+         */
+        BuyThingsRes.prototype.propinfo = "";
+
+        /**
+         * Creates a new BuyThingsRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.BuyThingsRes
+         * @static
+         * @param {RobotProto.IBuyThingsRes=} [properties] Properties to set
+         * @returns {RobotProto.BuyThingsRes} BuyThingsRes instance
+         */
+        BuyThingsRes.create = function create(properties) {
+            return new BuyThingsRes(properties);
+        };
+
+        /**
+         * Encodes the specified BuyThingsRes message. Does not implicitly {@link RobotProto.BuyThingsRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.BuyThingsRes
+         * @static
+         * @param {RobotProto.IBuyThingsRes} message BuyThingsRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BuyThingsRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.propsvrindex != null && message.hasOwnProperty("propsvrindex"))
+                writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propsvrindex);
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.propid);
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                writer.uint32(/* id 4, wireType 0 =*/32).sint32(message.propcount);
+            if (message.propprice != null && message.hasOwnProperty("propprice"))
+                writer.uint32(/* id 5, wireType 0 =*/40).sint32(message.propprice);
+            if (message.propinfo != null && message.hasOwnProperty("propinfo"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.propinfo);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified BuyThingsRes message, length delimited. Does not implicitly {@link RobotProto.BuyThingsRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.BuyThingsRes
+         * @static
+         * @param {RobotProto.IBuyThingsRes} message BuyThingsRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        BuyThingsRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a BuyThingsRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.BuyThingsRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.BuyThingsRes} BuyThingsRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BuyThingsRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.BuyThingsRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.propsvrindex = reader.sint32();
+                    break;
+                case 3:
+                    message.propid = reader.sint32();
+                    break;
+                case 4:
+                    message.propcount = reader.sint32();
+                    break;
+                case 5:
+                    message.propprice = reader.sint32();
+                    break;
+                case 6:
+                    message.propinfo = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a BuyThingsRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.BuyThingsRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.BuyThingsRes} BuyThingsRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        BuyThingsRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a BuyThingsRes message.
+         * @function verify
+         * @memberof RobotProto.BuyThingsRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        BuyThingsRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.propsvrindex != null && message.hasOwnProperty("propsvrindex"))
+                if (!$util.isInteger(message.propsvrindex))
+                    return "propsvrindex: integer expected";
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                if (!$util.isInteger(message.propid))
+                    return "propid: integer expected";
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                if (!$util.isInteger(message.propcount))
+                    return "propcount: integer expected";
+            if (message.propprice != null && message.hasOwnProperty("propprice"))
+                if (!$util.isInteger(message.propprice))
+                    return "propprice: integer expected";
+            if (message.propinfo != null && message.hasOwnProperty("propinfo"))
+                if (!$util.isString(message.propinfo))
+                    return "propinfo: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a BuyThingsRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.BuyThingsRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.BuyThingsRes} BuyThingsRes
+         */
+        BuyThingsRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.BuyThingsRes)
+                return object;
+            var message = new $root.RobotProto.BuyThingsRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.propsvrindex != null)
+                message.propsvrindex = object.propsvrindex | 0;
+            if (object.propid != null)
+                message.propid = object.propid | 0;
+            if (object.propcount != null)
+                message.propcount = object.propcount | 0;
+            if (object.propprice != null)
+                message.propprice = object.propprice | 0;
+            if (object.propinfo != null)
+                message.propinfo = String(object.propinfo);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a BuyThingsRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.BuyThingsRes
+         * @static
+         * @param {RobotProto.BuyThingsRes} message BuyThingsRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        BuyThingsRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.propsvrindex = 0;
+                object.propid = 0;
+                object.propcount = 0;
+                object.propprice = 0;
+                object.propinfo = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.propsvrindex != null && message.hasOwnProperty("propsvrindex"))
+                object.propsvrindex = message.propsvrindex;
+            if (message.propid != null && message.hasOwnProperty("propid"))
+                object.propid = message.propid;
+            if (message.propcount != null && message.hasOwnProperty("propcount"))
+                object.propcount = message.propcount;
+            if (message.propprice != null && message.hasOwnProperty("propprice"))
+                object.propprice = message.propprice;
+            if (message.propinfo != null && message.hasOwnProperty("propinfo"))
+                object.propinfo = message.propinfo;
+            return object;
+        };
+
+        /**
+         * Converts this BuyThingsRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.BuyThingsRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        BuyThingsRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BuyThingsRes;
+    })();
+
+    RobotProto.UseHoodleBallReq = (function() {
+
+        /**
+         * Properties of a UseHoodleBallReq.
+         * @memberof RobotProto
+         * @interface IUseHoodleBallReq
+         * @property {number} balllevel UseHoodleBallReq balllevel
+         */
+
+        /**
+         * Constructs a new UseHoodleBallReq.
+         * @memberof RobotProto
+         * @classdesc Represents a UseHoodleBallReq.
+         * @implements IUseHoodleBallReq
+         * @constructor
+         * @param {RobotProto.IUseHoodleBallReq=} [properties] Properties to set
+         */
+        function UseHoodleBallReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UseHoodleBallReq balllevel.
+         * @member {number} balllevel
+         * @memberof RobotProto.UseHoodleBallReq
+         * @instance
+         */
+        UseHoodleBallReq.prototype.balllevel = 0;
+
+        /**
+         * Creates a new UseHoodleBallReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UseHoodleBallReq
+         * @static
+         * @param {RobotProto.IUseHoodleBallReq=} [properties] Properties to set
+         * @returns {RobotProto.UseHoodleBallReq} UseHoodleBallReq instance
+         */
+        UseHoodleBallReq.create = function create(properties) {
+            return new UseHoodleBallReq(properties);
+        };
+
+        /**
+         * Encodes the specified UseHoodleBallReq message. Does not implicitly {@link RobotProto.UseHoodleBallReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UseHoodleBallReq
+         * @static
+         * @param {RobotProto.IUseHoodleBallReq} message UseHoodleBallReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UseHoodleBallReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.balllevel);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UseHoodleBallReq message, length delimited. Does not implicitly {@link RobotProto.UseHoodleBallReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UseHoodleBallReq
+         * @static
+         * @param {RobotProto.IUseHoodleBallReq} message UseHoodleBallReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UseHoodleBallReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UseHoodleBallReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UseHoodleBallReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UseHoodleBallReq} UseHoodleBallReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UseHoodleBallReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UseHoodleBallReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.balllevel = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("balllevel"))
+                throw $util.ProtocolError("missing required 'balllevel'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UseHoodleBallReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UseHoodleBallReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UseHoodleBallReq} UseHoodleBallReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UseHoodleBallReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UseHoodleBallReq message.
+         * @function verify
+         * @memberof RobotProto.UseHoodleBallReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UseHoodleBallReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.balllevel))
+                return "balllevel: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UseHoodleBallReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UseHoodleBallReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UseHoodleBallReq} UseHoodleBallReq
+         */
+        UseHoodleBallReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UseHoodleBallReq)
+                return object;
+            var message = new $root.RobotProto.UseHoodleBallReq();
+            if (object.balllevel != null)
+                message.balllevel = object.balllevel | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UseHoodleBallReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UseHoodleBallReq
+         * @static
+         * @param {RobotProto.UseHoodleBallReq} message UseHoodleBallReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UseHoodleBallReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.balllevel = 0;
+            if (message.balllevel != null && message.hasOwnProperty("balllevel"))
+                object.balllevel = message.balllevel;
+            return object;
+        };
+
+        /**
+         * Converts this UseHoodleBallReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UseHoodleBallReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UseHoodleBallReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UseHoodleBallReq;
+    })();
+
+    RobotProto.UseHoodleBallRes = (function() {
+
+        /**
+         * Properties of a UseHoodleBallRes.
+         * @memberof RobotProto
+         * @interface IUseHoodleBallRes
+         * @property {number} status UseHoodleBallRes status
+         * @property {number|null} [balllevel] UseHoodleBallRes balllevel
+         */
+
+        /**
+         * Constructs a new UseHoodleBallRes.
+         * @memberof RobotProto
+         * @classdesc Represents a UseHoodleBallRes.
+         * @implements IUseHoodleBallRes
+         * @constructor
+         * @param {RobotProto.IUseHoodleBallRes=} [properties] Properties to set
+         */
+        function UseHoodleBallRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UseHoodleBallRes status.
+         * @member {number} status
+         * @memberof RobotProto.UseHoodleBallRes
+         * @instance
+         */
+        UseHoodleBallRes.prototype.status = 0;
+
+        /**
+         * UseHoodleBallRes balllevel.
+         * @member {number} balllevel
+         * @memberof RobotProto.UseHoodleBallRes
+         * @instance
+         */
+        UseHoodleBallRes.prototype.balllevel = 0;
+
+        /**
+         * Creates a new UseHoodleBallRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UseHoodleBallRes
+         * @static
+         * @param {RobotProto.IUseHoodleBallRes=} [properties] Properties to set
+         * @returns {RobotProto.UseHoodleBallRes} UseHoodleBallRes instance
+         */
+        UseHoodleBallRes.create = function create(properties) {
+            return new UseHoodleBallRes(properties);
+        };
+
+        /**
+         * Encodes the specified UseHoodleBallRes message. Does not implicitly {@link RobotProto.UseHoodleBallRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UseHoodleBallRes
+         * @static
+         * @param {RobotProto.IUseHoodleBallRes} message UseHoodleBallRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UseHoodleBallRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.balllevel != null && message.hasOwnProperty("balllevel"))
+                writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.balllevel);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UseHoodleBallRes message, length delimited. Does not implicitly {@link RobotProto.UseHoodleBallRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UseHoodleBallRes
+         * @static
+         * @param {RobotProto.IUseHoodleBallRes} message UseHoodleBallRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UseHoodleBallRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UseHoodleBallRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UseHoodleBallRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UseHoodleBallRes} UseHoodleBallRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UseHoodleBallRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UseHoodleBallRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.balllevel = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UseHoodleBallRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UseHoodleBallRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UseHoodleBallRes} UseHoodleBallRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UseHoodleBallRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UseHoodleBallRes message.
+         * @function verify
+         * @memberof RobotProto.UseHoodleBallRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UseHoodleBallRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.balllevel != null && message.hasOwnProperty("balllevel"))
+                if (!$util.isInteger(message.balllevel))
+                    return "balllevel: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UseHoodleBallRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UseHoodleBallRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UseHoodleBallRes} UseHoodleBallRes
+         */
+        UseHoodleBallRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UseHoodleBallRes)
+                return object;
+            var message = new $root.RobotProto.UseHoodleBallRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.balllevel != null)
+                message.balllevel = object.balllevel | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UseHoodleBallRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UseHoodleBallRes
+         * @static
+         * @param {RobotProto.UseHoodleBallRes} message UseHoodleBallRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UseHoodleBallRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.balllevel = 0;
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.balllevel != null && message.hasOwnProperty("balllevel"))
+                object.balllevel = message.balllevel;
+            return object;
+        };
+
+        /**
+         * Converts this UseHoodleBallRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UseHoodleBallRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UseHoodleBallRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UseHoodleBallRes;
+    })();
+
+    RobotProto.UserConfigReq = (function() {
+
+        /**
+         * Properties of a UserConfigReq.
+         * @memberof RobotProto
+         * @interface IUserConfigReq
+         */
+
+        /**
+         * Constructs a new UserConfigReq.
+         * @memberof RobotProto
+         * @classdesc Represents a UserConfigReq.
+         * @implements IUserConfigReq
+         * @constructor
+         * @param {RobotProto.IUserConfigReq=} [properties] Properties to set
+         */
+        function UserConfigReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new UserConfigReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserConfigReq
+         * @static
+         * @param {RobotProto.IUserConfigReq=} [properties] Properties to set
+         * @returns {RobotProto.UserConfigReq} UserConfigReq instance
+         */
+        UserConfigReq.create = function create(properties) {
+            return new UserConfigReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserConfigReq message. Does not implicitly {@link RobotProto.UserConfigReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserConfigReq
+         * @static
+         * @param {RobotProto.IUserConfigReq} message UserConfigReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserConfigReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserConfigReq message, length delimited. Does not implicitly {@link RobotProto.UserConfigReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserConfigReq
+         * @static
+         * @param {RobotProto.IUserConfigReq} message UserConfigReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserConfigReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserConfigReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserConfigReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserConfigReq} UserConfigReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserConfigReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserConfigReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserConfigReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserConfigReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserConfigReq} UserConfigReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserConfigReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserConfigReq message.
+         * @function verify
+         * @memberof RobotProto.UserConfigReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserConfigReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserConfigReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserConfigReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserConfigReq} UserConfigReq
+         */
+        UserConfigReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserConfigReq)
+                return object;
+            return new $root.RobotProto.UserConfigReq();
+        };
+
+        /**
+         * Creates a plain object from a UserConfigReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserConfigReq
+         * @static
+         * @param {RobotProto.UserConfigReq} message UserConfigReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserConfigReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this UserConfigReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserConfigReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserConfigReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserConfigReq;
+    })();
+
+    RobotProto.UserConfigRes = (function() {
+
+        /**
+         * Properties of a UserConfigRes.
+         * @memberof RobotProto
+         * @interface IUserConfigRes
+         * @property {number} status UserConfigRes status
+         * @property {string|null} [userconfigstring] UserConfigRes userconfigstring
+         */
+
+        /**
+         * Constructs a new UserConfigRes.
+         * @memberof RobotProto
+         * @classdesc Represents a UserConfigRes.
+         * @implements IUserConfigRes
+         * @constructor
+         * @param {RobotProto.IUserConfigRes=} [properties] Properties to set
+         */
+        function UserConfigRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserConfigRes status.
+         * @member {number} status
+         * @memberof RobotProto.UserConfigRes
+         * @instance
+         */
+        UserConfigRes.prototype.status = 0;
+
+        /**
+         * UserConfigRes userconfigstring.
+         * @member {string} userconfigstring
+         * @memberof RobotProto.UserConfigRes
+         * @instance
+         */
+        UserConfigRes.prototype.userconfigstring = "";
+
+        /**
+         * Creates a new UserConfigRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserConfigRes
+         * @static
+         * @param {RobotProto.IUserConfigRes=} [properties] Properties to set
+         * @returns {RobotProto.UserConfigRes} UserConfigRes instance
+         */
+        UserConfigRes.create = function create(properties) {
+            return new UserConfigRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserConfigRes message. Does not implicitly {@link RobotProto.UserConfigRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserConfigRes
+         * @static
+         * @param {RobotProto.IUserConfigRes} message UserConfigRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserConfigRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.userconfigstring != null && message.hasOwnProperty("userconfigstring"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.userconfigstring);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserConfigRes message, length delimited. Does not implicitly {@link RobotProto.UserConfigRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserConfigRes
+         * @static
+         * @param {RobotProto.IUserConfigRes} message UserConfigRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserConfigRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserConfigRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserConfigRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserConfigRes} UserConfigRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserConfigRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserConfigRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.userconfigstring = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserConfigRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserConfigRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserConfigRes} UserConfigRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserConfigRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserConfigRes message.
+         * @function verify
+         * @memberof RobotProto.UserConfigRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserConfigRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.userconfigstring != null && message.hasOwnProperty("userconfigstring"))
+                if (!$util.isString(message.userconfigstring))
+                    return "userconfigstring: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserConfigRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserConfigRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserConfigRes} UserConfigRes
+         */
+        UserConfigRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserConfigRes)
+                return object;
+            var message = new $root.RobotProto.UserConfigRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.userconfigstring != null)
+                message.userconfigstring = String(object.userconfigstring);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserConfigRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserConfigRes
+         * @static
+         * @param {RobotProto.UserConfigRes} message UserConfigRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserConfigRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.userconfigstring = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.userconfigstring != null && message.hasOwnProperty("userconfigstring"))
+                object.userconfigstring = message.userconfigstring;
+            return object;
+        };
+
+        /**
+         * Converts this UserConfigRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserConfigRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserConfigRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserConfigRes;
+    })();
+
+    RobotProto.UserEmojReq = (function() {
+
+        /**
+         * Properties of a UserEmojReq.
+         * @memberof RobotProto
+         * @interface IUserEmojReq
+         * @property {string} emojconfig UserEmojReq emojconfig
+         */
+
+        /**
+         * Constructs a new UserEmojReq.
+         * @memberof RobotProto
+         * @classdesc Represents a UserEmojReq.
+         * @implements IUserEmojReq
+         * @constructor
+         * @param {RobotProto.IUserEmojReq=} [properties] Properties to set
+         */
+        function UserEmojReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserEmojReq emojconfig.
+         * @member {string} emojconfig
+         * @memberof RobotProto.UserEmojReq
+         * @instance
+         */
+        UserEmojReq.prototype.emojconfig = "";
+
+        /**
+         * Creates a new UserEmojReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserEmojReq
+         * @static
+         * @param {RobotProto.IUserEmojReq=} [properties] Properties to set
+         * @returns {RobotProto.UserEmojReq} UserEmojReq instance
+         */
+        UserEmojReq.create = function create(properties) {
+            return new UserEmojReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserEmojReq message. Does not implicitly {@link RobotProto.UserEmojReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserEmojReq
+         * @static
+         * @param {RobotProto.IUserEmojReq} message UserEmojReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserEmojReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.emojconfig);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserEmojReq message, length delimited. Does not implicitly {@link RobotProto.UserEmojReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserEmojReq
+         * @static
+         * @param {RobotProto.IUserEmojReq} message UserEmojReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserEmojReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserEmojReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserEmojReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserEmojReq} UserEmojReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserEmojReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserEmojReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.emojconfig = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("emojconfig"))
+                throw $util.ProtocolError("missing required 'emojconfig'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserEmojReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserEmojReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserEmojReq} UserEmojReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserEmojReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserEmojReq message.
+         * @function verify
+         * @memberof RobotProto.UserEmojReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserEmojReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isString(message.emojconfig))
+                return "emojconfig: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserEmojReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserEmojReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserEmojReq} UserEmojReq
+         */
+        UserEmojReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserEmojReq)
+                return object;
+            var message = new $root.RobotProto.UserEmojReq();
+            if (object.emojconfig != null)
+                message.emojconfig = String(object.emojconfig);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserEmojReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserEmojReq
+         * @static
+         * @param {RobotProto.UserEmojReq} message UserEmojReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserEmojReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.emojconfig = "";
+            if (message.emojconfig != null && message.hasOwnProperty("emojconfig"))
+                object.emojconfig = message.emojconfig;
+            return object;
+        };
+
+        /**
+         * Converts this UserEmojReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserEmojReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserEmojReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserEmojReq;
+    })();
+
+    RobotProto.UserEmojRes = (function() {
+
+        /**
+         * Properties of a UserEmojRes.
+         * @memberof RobotProto
+         * @interface IUserEmojRes
+         * @property {number} status UserEmojRes status
+         * @property {string|null} [emojconfig] UserEmojRes emojconfig
+         */
+
+        /**
+         * Constructs a new UserEmojRes.
+         * @memberof RobotProto
+         * @classdesc Represents a UserEmojRes.
+         * @implements IUserEmojRes
+         * @constructor
+         * @param {RobotProto.IUserEmojRes=} [properties] Properties to set
+         */
+        function UserEmojRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserEmojRes status.
+         * @member {number} status
+         * @memberof RobotProto.UserEmojRes
+         * @instance
+         */
+        UserEmojRes.prototype.status = 0;
+
+        /**
+         * UserEmojRes emojconfig.
+         * @member {string} emojconfig
+         * @memberof RobotProto.UserEmojRes
+         * @instance
+         */
+        UserEmojRes.prototype.emojconfig = "";
+
+        /**
+         * Creates a new UserEmojRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserEmojRes
+         * @static
+         * @param {RobotProto.IUserEmojRes=} [properties] Properties to set
+         * @returns {RobotProto.UserEmojRes} UserEmojRes instance
+         */
+        UserEmojRes.create = function create(properties) {
+            return new UserEmojRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserEmojRes message. Does not implicitly {@link RobotProto.UserEmojRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserEmojRes
+         * @static
+         * @param {RobotProto.IUserEmojRes} message UserEmojRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserEmojRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.emojconfig != null && message.hasOwnProperty("emojconfig"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.emojconfig);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserEmojRes message, length delimited. Does not implicitly {@link RobotProto.UserEmojRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserEmojRes
+         * @static
+         * @param {RobotProto.IUserEmojRes} message UserEmojRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserEmojRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserEmojRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserEmojRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserEmojRes} UserEmojRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserEmojRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserEmojRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.emojconfig = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserEmojRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserEmojRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserEmojRes} UserEmojRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserEmojRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserEmojRes message.
+         * @function verify
+         * @memberof RobotProto.UserEmojRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserEmojRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.emojconfig != null && message.hasOwnProperty("emojconfig"))
+                if (!$util.isString(message.emojconfig))
+                    return "emojconfig: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserEmojRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserEmojRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserEmojRes} UserEmojRes
+         */
+        UserEmojRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserEmojRes)
+                return object;
+            var message = new $root.RobotProto.UserEmojRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.emojconfig != null)
+                message.emojconfig = String(object.emojconfig);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserEmojRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserEmojRes
+         * @static
+         * @param {RobotProto.UserEmojRes} message UserEmojRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserEmojRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.emojconfig = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.emojconfig != null && message.hasOwnProperty("emojconfig"))
+                object.emojconfig = message.emojconfig;
+            return object;
+        };
+
+        /**
+         * Converts this UserEmojRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserEmojRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserEmojRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserEmojRes;
+    })();
+
+    RobotProto.UserPlayAgainReq = (function() {
+
+        /**
+         * Properties of a UserPlayAgainReq.
+         * @memberof RobotProto
+         * @interface IUserPlayAgainReq
+         * @property {Array.<number>|null} [otheruids] UserPlayAgainReq otheruids
+         */
+
+        /**
+         * Constructs a new UserPlayAgainReq.
+         * @memberof RobotProto
+         * @classdesc Represents a UserPlayAgainReq.
+         * @implements IUserPlayAgainReq
+         * @constructor
+         * @param {RobotProto.IUserPlayAgainReq=} [properties] Properties to set
+         */
+        function UserPlayAgainReq(properties) {
+            this.otheruids = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserPlayAgainReq otheruids.
+         * @member {Array.<number>} otheruids
+         * @memberof RobotProto.UserPlayAgainReq
+         * @instance
+         */
+        UserPlayAgainReq.prototype.otheruids = $util.emptyArray;
+
+        /**
+         * Creates a new UserPlayAgainReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserPlayAgainReq
+         * @static
+         * @param {RobotProto.IUserPlayAgainReq=} [properties] Properties to set
+         * @returns {RobotProto.UserPlayAgainReq} UserPlayAgainReq instance
+         */
+        UserPlayAgainReq.create = function create(properties) {
+            return new UserPlayAgainReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainReq message. Does not implicitly {@link RobotProto.UserPlayAgainReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserPlayAgainReq
+         * @static
+         * @param {RobotProto.IUserPlayAgainReq} message UserPlayAgainReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.otheruids != null && message.otheruids.length) {
+                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                for (var i = 0; i < message.otheruids.length; ++i)
+                    writer.sint32(message.otheruids[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainReq message, length delimited. Does not implicitly {@link RobotProto.UserPlayAgainReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserPlayAgainReq
+         * @static
+         * @param {RobotProto.IUserPlayAgainReq} message UserPlayAgainReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserPlayAgainReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserPlayAgainReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserPlayAgainReq} UserPlayAgainReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserPlayAgainReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.otheruids && message.otheruids.length))
+                        message.otheruids = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.otheruids.push(reader.sint32());
+                    } else
+                        message.otheruids.push(reader.sint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserPlayAgainReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserPlayAgainReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserPlayAgainReq} UserPlayAgainReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserPlayAgainReq message.
+         * @function verify
+         * @memberof RobotProto.UserPlayAgainReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserPlayAgainReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.otheruids != null && message.hasOwnProperty("otheruids")) {
+                if (!Array.isArray(message.otheruids))
+                    return "otheruids: array expected";
+                for (var i = 0; i < message.otheruids.length; ++i)
+                    if (!$util.isInteger(message.otheruids[i]))
+                        return "otheruids: integer[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates a UserPlayAgainReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserPlayAgainReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserPlayAgainReq} UserPlayAgainReq
+         */
+        UserPlayAgainReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserPlayAgainReq)
+                return object;
+            var message = new $root.RobotProto.UserPlayAgainReq();
+            if (object.otheruids) {
+                if (!Array.isArray(object.otheruids))
+                    throw TypeError(".RobotProto.UserPlayAgainReq.otheruids: array expected");
+                message.otheruids = [];
+                for (var i = 0; i < object.otheruids.length; ++i)
+                    message.otheruids[i] = object.otheruids[i] | 0;
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserPlayAgainReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserPlayAgainReq
+         * @static
+         * @param {RobotProto.UserPlayAgainReq} message UserPlayAgainReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserPlayAgainReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.otheruids = [];
+            if (message.otheruids && message.otheruids.length) {
+                object.otheruids = [];
+                for (var j = 0; j < message.otheruids.length; ++j)
+                    object.otheruids[j] = message.otheruids[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this UserPlayAgainReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserPlayAgainReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserPlayAgainReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserPlayAgainReq;
+    })();
+
+    RobotProto.UserPlayAgainRes = (function() {
+
+        /**
+         * Properties of a UserPlayAgainRes.
+         * @memberof RobotProto
+         * @interface IUserPlayAgainRes
+         * @property {number} status UserPlayAgainRes status
+         * @property {number|null} [responsecode] UserPlayAgainRes responsecode
+         */
+
+        /**
+         * Constructs a new UserPlayAgainRes.
+         * @memberof RobotProto
+         * @classdesc Represents a UserPlayAgainRes.
+         * @implements IUserPlayAgainRes
+         * @constructor
+         * @param {RobotProto.IUserPlayAgainRes=} [properties] Properties to set
+         */
+        function UserPlayAgainRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserPlayAgainRes status.
+         * @member {number} status
+         * @memberof RobotProto.UserPlayAgainRes
+         * @instance
+         */
+        UserPlayAgainRes.prototype.status = 0;
+
+        /**
+         * UserPlayAgainRes responsecode.
+         * @member {number} responsecode
+         * @memberof RobotProto.UserPlayAgainRes
+         * @instance
+         */
+        UserPlayAgainRes.prototype.responsecode = 0;
+
+        /**
+         * Creates a new UserPlayAgainRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserPlayAgainRes
+         * @static
+         * @param {RobotProto.IUserPlayAgainRes=} [properties] Properties to set
+         * @returns {RobotProto.UserPlayAgainRes} UserPlayAgainRes instance
+         */
+        UserPlayAgainRes.create = function create(properties) {
+            return new UserPlayAgainRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainRes message. Does not implicitly {@link RobotProto.UserPlayAgainRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserPlayAgainRes
+         * @static
+         * @param {RobotProto.IUserPlayAgainRes} message UserPlayAgainRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.responsecode != null && message.hasOwnProperty("responsecode"))
+                writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.responsecode);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainRes message, length delimited. Does not implicitly {@link RobotProto.UserPlayAgainRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserPlayAgainRes
+         * @static
+         * @param {RobotProto.IUserPlayAgainRes} message UserPlayAgainRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserPlayAgainRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserPlayAgainRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserPlayAgainRes} UserPlayAgainRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserPlayAgainRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.responsecode = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserPlayAgainRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserPlayAgainRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserPlayAgainRes} UserPlayAgainRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserPlayAgainRes message.
+         * @function verify
+         * @memberof RobotProto.UserPlayAgainRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserPlayAgainRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.responsecode != null && message.hasOwnProperty("responsecode"))
+                if (!$util.isInteger(message.responsecode))
+                    return "responsecode: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserPlayAgainRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserPlayAgainRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserPlayAgainRes} UserPlayAgainRes
+         */
+        UserPlayAgainRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserPlayAgainRes)
+                return object;
+            var message = new $root.RobotProto.UserPlayAgainRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.responsecode != null)
+                message.responsecode = object.responsecode | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserPlayAgainRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserPlayAgainRes
+         * @static
+         * @param {RobotProto.UserPlayAgainRes} message UserPlayAgainRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserPlayAgainRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.responsecode = 0;
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.responsecode != null && message.hasOwnProperty("responsecode"))
+                object.responsecode = message.responsecode;
+            return object;
+        };
+
+        /**
+         * Converts this UserPlayAgainRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserPlayAgainRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserPlayAgainRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserPlayAgainRes;
+    })();
+
+    RobotProto.UserPlayAgainAnswerReq = (function() {
+
+        /**
+         * Properties of a UserPlayAgainAnswerReq.
+         * @memberof RobotProto
+         * @interface IUserPlayAgainAnswerReq
+         * @property {number} requseruid UserPlayAgainAnswerReq requseruid
+         * @property {number} responsecode UserPlayAgainAnswerReq responsecode
+         */
+
+        /**
+         * Constructs a new UserPlayAgainAnswerReq.
+         * @memberof RobotProto
+         * @classdesc Represents a UserPlayAgainAnswerReq.
+         * @implements IUserPlayAgainAnswerReq
+         * @constructor
+         * @param {RobotProto.IUserPlayAgainAnswerReq=} [properties] Properties to set
+         */
+        function UserPlayAgainAnswerReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserPlayAgainAnswerReq requseruid.
+         * @member {number} requseruid
+         * @memberof RobotProto.UserPlayAgainAnswerReq
+         * @instance
+         */
+        UserPlayAgainAnswerReq.prototype.requseruid = 0;
+
+        /**
+         * UserPlayAgainAnswerReq responsecode.
+         * @member {number} responsecode
+         * @memberof RobotProto.UserPlayAgainAnswerReq
+         * @instance
+         */
+        UserPlayAgainAnswerReq.prototype.responsecode = 0;
+
+        /**
+         * Creates a new UserPlayAgainAnswerReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {RobotProto.IUserPlayAgainAnswerReq=} [properties] Properties to set
+         * @returns {RobotProto.UserPlayAgainAnswerReq} UserPlayAgainAnswerReq instance
+         */
+        UserPlayAgainAnswerReq.create = function create(properties) {
+            return new UserPlayAgainAnswerReq(properties);
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainAnswerReq message. Does not implicitly {@link RobotProto.UserPlayAgainAnswerReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {RobotProto.IUserPlayAgainAnswerReq} message UserPlayAgainAnswerReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainAnswerReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.requseruid);
+            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.responsecode);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainAnswerReq message, length delimited. Does not implicitly {@link RobotProto.UserPlayAgainAnswerReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {RobotProto.IUserPlayAgainAnswerReq} message UserPlayAgainAnswerReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainAnswerReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserPlayAgainAnswerReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserPlayAgainAnswerReq} UserPlayAgainAnswerReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainAnswerReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserPlayAgainAnswerReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.requseruid = reader.sint32();
+                    break;
+                case 2:
+                    message.responsecode = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("requseruid"))
+                throw $util.ProtocolError("missing required 'requseruid'", { instance: message });
+            if (!message.hasOwnProperty("responsecode"))
+                throw $util.ProtocolError("missing required 'responsecode'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserPlayAgainAnswerReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserPlayAgainAnswerReq} UserPlayAgainAnswerReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainAnswerReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserPlayAgainAnswerReq message.
+         * @function verify
+         * @memberof RobotProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserPlayAgainAnswerReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.requseruid))
+                return "requseruid: integer expected";
+            if (!$util.isInteger(message.responsecode))
+                return "responsecode: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserPlayAgainAnswerReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserPlayAgainAnswerReq} UserPlayAgainAnswerReq
+         */
+        UserPlayAgainAnswerReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserPlayAgainAnswerReq)
+                return object;
+            var message = new $root.RobotProto.UserPlayAgainAnswerReq();
+            if (object.requseruid != null)
+                message.requseruid = object.requseruid | 0;
+            if (object.responsecode != null)
+                message.responsecode = object.responsecode | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserPlayAgainAnswerReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserPlayAgainAnswerReq
+         * @static
+         * @param {RobotProto.UserPlayAgainAnswerReq} message UserPlayAgainAnswerReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserPlayAgainAnswerReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.requseruid = 0;
+                object.responsecode = 0;
+            }
+            if (message.requseruid != null && message.hasOwnProperty("requseruid"))
+                object.requseruid = message.requseruid;
+            if (message.responsecode != null && message.hasOwnProperty("responsecode"))
+                object.responsecode = message.responsecode;
+            return object;
+        };
+
+        /**
+         * Converts this UserPlayAgainAnswerReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserPlayAgainAnswerReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserPlayAgainAnswerReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserPlayAgainAnswerReq;
+    })();
+
+    RobotProto.UserPlayAgainAnswerRes = (function() {
+
+        /**
+         * Properties of a UserPlayAgainAnswerRes.
+         * @memberof RobotProto
+         * @interface IUserPlayAgainAnswerRes
+         * @property {number} status UserPlayAgainAnswerRes status
+         * @property {string|null} [ansconfig] UserPlayAgainAnswerRes ansconfig
+         */
+
+        /**
+         * Constructs a new UserPlayAgainAnswerRes.
+         * @memberof RobotProto
+         * @classdesc Represents a UserPlayAgainAnswerRes.
+         * @implements IUserPlayAgainAnswerRes
+         * @constructor
+         * @param {RobotProto.IUserPlayAgainAnswerRes=} [properties] Properties to set
+         */
+        function UserPlayAgainAnswerRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserPlayAgainAnswerRes status.
+         * @member {number} status
+         * @memberof RobotProto.UserPlayAgainAnswerRes
+         * @instance
+         */
+        UserPlayAgainAnswerRes.prototype.status = 0;
+
+        /**
+         * UserPlayAgainAnswerRes ansconfig.
+         * @member {string} ansconfig
+         * @memberof RobotProto.UserPlayAgainAnswerRes
+         * @instance
+         */
+        UserPlayAgainAnswerRes.prototype.ansconfig = "";
+
+        /**
+         * Creates a new UserPlayAgainAnswerRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {RobotProto.IUserPlayAgainAnswerRes=} [properties] Properties to set
+         * @returns {RobotProto.UserPlayAgainAnswerRes} UserPlayAgainAnswerRes instance
+         */
+        UserPlayAgainAnswerRes.create = function create(properties) {
+            return new UserPlayAgainAnswerRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainAnswerRes message. Does not implicitly {@link RobotProto.UserPlayAgainAnswerRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {RobotProto.IUserPlayAgainAnswerRes} message UserPlayAgainAnswerRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainAnswerRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.ansconfig != null && message.hasOwnProperty("ansconfig"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.ansconfig);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainAnswerRes message, length delimited. Does not implicitly {@link RobotProto.UserPlayAgainAnswerRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {RobotProto.IUserPlayAgainAnswerRes} message UserPlayAgainAnswerRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainAnswerRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserPlayAgainAnswerRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserPlayAgainAnswerRes} UserPlayAgainAnswerRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainAnswerRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserPlayAgainAnswerRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.ansconfig = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserPlayAgainAnswerRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserPlayAgainAnswerRes} UserPlayAgainAnswerRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainAnswerRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserPlayAgainAnswerRes message.
+         * @function verify
+         * @memberof RobotProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserPlayAgainAnswerRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.ansconfig != null && message.hasOwnProperty("ansconfig"))
+                if (!$util.isString(message.ansconfig))
+                    return "ansconfig: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserPlayAgainAnswerRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserPlayAgainAnswerRes} UserPlayAgainAnswerRes
+         */
+        UserPlayAgainAnswerRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserPlayAgainAnswerRes)
+                return object;
+            var message = new $root.RobotProto.UserPlayAgainAnswerRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.ansconfig != null)
+                message.ansconfig = String(object.ansconfig);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserPlayAgainAnswerRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserPlayAgainAnswerRes
+         * @static
+         * @param {RobotProto.UserPlayAgainAnswerRes} message UserPlayAgainAnswerRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserPlayAgainAnswerRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.ansconfig = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.ansconfig != null && message.hasOwnProperty("ansconfig"))
+                object.ansconfig = message.ansconfig;
+            return object;
+        };
+
+        /**
+         * Converts this UserPlayAgainAnswerRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserPlayAgainAnswerRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserPlayAgainAnswerRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserPlayAgainAnswerRes;
+    })();
+
+    RobotProto.UserPlayAgainStartRes = (function() {
+
+        /**
+         * Properties of a UserPlayAgainStartRes.
+         * @memberof RobotProto
+         * @interface IUserPlayAgainStartRes
+         * @property {number} status UserPlayAgainStartRes status
+         */
+
+        /**
+         * Constructs a new UserPlayAgainStartRes.
+         * @memberof RobotProto
+         * @classdesc Represents a UserPlayAgainStartRes.
+         * @implements IUserPlayAgainStartRes
+         * @constructor
+         * @param {RobotProto.IUserPlayAgainStartRes=} [properties] Properties to set
+         */
+        function UserPlayAgainStartRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserPlayAgainStartRes status.
+         * @member {number} status
+         * @memberof RobotProto.UserPlayAgainStartRes
+         * @instance
+         */
+        UserPlayAgainStartRes.prototype.status = 0;
+
+        /**
+         * Creates a new UserPlayAgainStartRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.UserPlayAgainStartRes
+         * @static
+         * @param {RobotProto.IUserPlayAgainStartRes=} [properties] Properties to set
+         * @returns {RobotProto.UserPlayAgainStartRes} UserPlayAgainStartRes instance
+         */
+        UserPlayAgainStartRes.create = function create(properties) {
+            return new UserPlayAgainStartRes(properties);
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainStartRes message. Does not implicitly {@link RobotProto.UserPlayAgainStartRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.UserPlayAgainStartRes
+         * @static
+         * @param {RobotProto.IUserPlayAgainStartRes} message UserPlayAgainStartRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainStartRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserPlayAgainStartRes message, length delimited. Does not implicitly {@link RobotProto.UserPlayAgainStartRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.UserPlayAgainStartRes
+         * @static
+         * @param {RobotProto.IUserPlayAgainStartRes} message UserPlayAgainStartRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserPlayAgainStartRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserPlayAgainStartRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.UserPlayAgainStartRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.UserPlayAgainStartRes} UserPlayAgainStartRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainStartRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.UserPlayAgainStartRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a UserPlayAgainStartRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.UserPlayAgainStartRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.UserPlayAgainStartRes} UserPlayAgainStartRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserPlayAgainStartRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserPlayAgainStartRes message.
+         * @function verify
+         * @memberof RobotProto.UserPlayAgainStartRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserPlayAgainStartRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            return null;
+        };
+
+        /**
+         * Creates a UserPlayAgainStartRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.UserPlayAgainStartRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.UserPlayAgainStartRes} UserPlayAgainStartRes
+         */
+        UserPlayAgainStartRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.UserPlayAgainStartRes)
+                return object;
+            var message = new $root.RobotProto.UserPlayAgainStartRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserPlayAgainStartRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.UserPlayAgainStartRes
+         * @static
+         * @param {RobotProto.UserPlayAgainStartRes} message UserPlayAgainStartRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserPlayAgainStartRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.status = 0;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            return object;
+        };
+
+        /**
+         * Converts this UserPlayAgainStartRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.UserPlayAgainStartRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserPlayAgainStartRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserPlayAgainStartRes;
+    })();
+
+    RobotProto.RoomListConfigReq = (function() {
+
+        /**
+         * Properties of a RoomListConfigReq.
+         * @memberof RobotProto
+         * @interface IRoomListConfigReq
+         */
+
+        /**
+         * Constructs a new RoomListConfigReq.
+         * @memberof RobotProto
+         * @classdesc Represents a RoomListConfigReq.
+         * @implements IRoomListConfigReq
+         * @constructor
+         * @param {RobotProto.IRoomListConfigReq=} [properties] Properties to set
+         */
+        function RoomListConfigReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new RoomListConfigReq instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.RoomListConfigReq
+         * @static
+         * @param {RobotProto.IRoomListConfigReq=} [properties] Properties to set
+         * @returns {RobotProto.RoomListConfigReq} RoomListConfigReq instance
+         */
+        RoomListConfigReq.create = function create(properties) {
+            return new RoomListConfigReq(properties);
+        };
+
+        /**
+         * Encodes the specified RoomListConfigReq message. Does not implicitly {@link RobotProto.RoomListConfigReq.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.RoomListConfigReq
+         * @static
+         * @param {RobotProto.IRoomListConfigReq} message RoomListConfigReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomListConfigReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified RoomListConfigReq message, length delimited. Does not implicitly {@link RobotProto.RoomListConfigReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.RoomListConfigReq
+         * @static
+         * @param {RobotProto.IRoomListConfigReq} message RoomListConfigReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomListConfigReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a RoomListConfigReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.RoomListConfigReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.RoomListConfigReq} RoomListConfigReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomListConfigReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.RoomListConfigReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a RoomListConfigReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.RoomListConfigReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.RoomListConfigReq} RoomListConfigReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomListConfigReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a RoomListConfigReq message.
+         * @function verify
+         * @memberof RobotProto.RoomListConfigReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        RoomListConfigReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a RoomListConfigReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.RoomListConfigReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.RoomListConfigReq} RoomListConfigReq
+         */
+        RoomListConfigReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.RoomListConfigReq)
+                return object;
+            return new $root.RobotProto.RoomListConfigReq();
+        };
+
+        /**
+         * Creates a plain object from a RoomListConfigReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.RoomListConfigReq
+         * @static
+         * @param {RobotProto.RoomListConfigReq} message RoomListConfigReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        RoomListConfigReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this RoomListConfigReq to JSON.
+         * @function toJSON
+         * @memberof RobotProto.RoomListConfigReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        RoomListConfigReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RoomListConfigReq;
+    })();
+
+    RobotProto.RoomListConfigRes = (function() {
+
+        /**
+         * Properties of a RoomListConfigRes.
+         * @memberof RobotProto
+         * @interface IRoomListConfigRes
+         * @property {number} status RoomListConfigRes status
+         * @property {string|null} [config] RoomListConfigRes config
+         */
+
+        /**
+         * Constructs a new RoomListConfigRes.
+         * @memberof RobotProto
+         * @classdesc Represents a RoomListConfigRes.
+         * @implements IRoomListConfigRes
+         * @constructor
+         * @param {RobotProto.IRoomListConfigRes=} [properties] Properties to set
+         */
+        function RoomListConfigRes(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * RoomListConfigRes status.
+         * @member {number} status
+         * @memberof RobotProto.RoomListConfigRes
+         * @instance
+         */
+        RoomListConfigRes.prototype.status = 0;
+
+        /**
+         * RoomListConfigRes config.
+         * @member {string} config
+         * @memberof RobotProto.RoomListConfigRes
+         * @instance
+         */
+        RoomListConfigRes.prototype.config = "";
+
+        /**
+         * Creates a new RoomListConfigRes instance using the specified properties.
+         * @function create
+         * @memberof RobotProto.RoomListConfigRes
+         * @static
+         * @param {RobotProto.IRoomListConfigRes=} [properties] Properties to set
+         * @returns {RobotProto.RoomListConfigRes} RoomListConfigRes instance
+         */
+        RoomListConfigRes.create = function create(properties) {
+            return new RoomListConfigRes(properties);
+        };
+
+        /**
+         * Encodes the specified RoomListConfigRes message. Does not implicitly {@link RobotProto.RoomListConfigRes.verify|verify} messages.
+         * @function encode
+         * @memberof RobotProto.RoomListConfigRes
+         * @static
+         * @param {RobotProto.IRoomListConfigRes} message RoomListConfigRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomListConfigRes.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+            if (message.config != null && message.hasOwnProperty("config"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.config);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified RoomListConfigRes message, length delimited. Does not implicitly {@link RobotProto.RoomListConfigRes.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof RobotProto.RoomListConfigRes
+         * @static
+         * @param {RobotProto.IRoomListConfigRes} message RoomListConfigRes message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RoomListConfigRes.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a RoomListConfigRes message from the specified reader or buffer.
+         * @function decode
+         * @memberof RobotProto.RoomListConfigRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {RobotProto.RoomListConfigRes} RoomListConfigRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomListConfigRes.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.RobotProto.RoomListConfigRes();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.status = reader.sint32();
+                    break;
+                case 2:
+                    message.config = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            if (!message.hasOwnProperty("status"))
+                throw $util.ProtocolError("missing required 'status'", { instance: message });
+            return message;
+        };
+
+        /**
+         * Decodes a RoomListConfigRes message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof RobotProto.RoomListConfigRes
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {RobotProto.RoomListConfigRes} RoomListConfigRes
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RoomListConfigRes.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a RoomListConfigRes message.
+         * @function verify
+         * @memberof RobotProto.RoomListConfigRes
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        RoomListConfigRes.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (!$util.isInteger(message.status))
+                return "status: integer expected";
+            if (message.config != null && message.hasOwnProperty("config"))
+                if (!$util.isString(message.config))
+                    return "config: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a RoomListConfigRes message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof RobotProto.RoomListConfigRes
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {RobotProto.RoomListConfigRes} RoomListConfigRes
+         */
+        RoomListConfigRes.fromObject = function fromObject(object) {
+            if (object instanceof $root.RobotProto.RoomListConfigRes)
+                return object;
+            var message = new $root.RobotProto.RoomListConfigRes();
+            if (object.status != null)
+                message.status = object.status | 0;
+            if (object.config != null)
+                message.config = String(object.config);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a RoomListConfigRes message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof RobotProto.RoomListConfigRes
+         * @static
+         * @param {RobotProto.RoomListConfigRes} message RoomListConfigRes
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        RoomListConfigRes.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.status = 0;
+                object.config = "";
+            }
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.config != null && message.hasOwnProperty("config"))
+                object.config = message.config;
+            return object;
+        };
+
+        /**
+         * Converts this RoomListConfigRes to JSON.
+         * @function toJSON
+         * @memberof RobotProto.RoomListConfigRes
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        RoomListConfigRes.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RoomListConfigRes;
+    })();
+
+    return RobotProto;
 })();
 
 module.exports = $root;

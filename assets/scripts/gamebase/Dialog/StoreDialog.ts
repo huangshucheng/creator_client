@@ -12,6 +12,7 @@ import UserInfo from '../../framework/common/UserInfo';
 import { Stype } from '../../framework/protocol/Stype';
 import StringUtil from '../../framework/utils/StringUtil';
 import CommonDialog from './CommonDialog';
+import { AudioManager } from '../../framework/manager/AudioManager';
 
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
@@ -193,6 +194,7 @@ export default class StoreDialog extends UIDialog {
                 )
             }
         }
+        AudioManager.getInstance().playBtnClick();
 
     }
 

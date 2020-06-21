@@ -9,6 +9,7 @@ import { Stype } from '../../framework/protocol/Stype';
 import DialogManager from '../../framework/manager/DialogManager';
 import StringUtil from '../../framework/utils/StringUtil';
 import CommonDialog from './CommonDialog';
+import { AudioManager } from '../../framework/manager/AudioManager';
 
 let BALL_NAME_KEY_STR = "ball_name_level_"
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
@@ -240,5 +241,6 @@ export default class BallListDialog extends UIDialog {
                 )
             }
         }
+        AudioManager.getInstance().playBtnClick();
     }
 }

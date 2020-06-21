@@ -1,4 +1,5 @@
 import { ResourceManager } from '../manager/ResourceManager';
+import { AudioManager } from '../manager/AudioManager';
 
 let resMgr = ResourceManager.getInstance();
 
@@ -73,6 +74,8 @@ export default class UIFunction {
                         obj.isBtnClick = false
                     }
                 }, 1)
+                AudioManager.getInstance().playEffect("btn_pop.wav");
+                // AudioManager.getInstance().playEffect("btn_click.wav");
                 callback.call(obj, component)
             }
         }

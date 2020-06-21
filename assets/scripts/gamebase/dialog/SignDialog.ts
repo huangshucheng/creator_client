@@ -9,6 +9,7 @@ import { Cmd } from '../../framework/protocol/SystemProto';
 import DialogManager from '../../framework/manager/DialogManager';
 import CellManager from '../../framework/manager/CellManager';
 import { Cell } from '../../framework/cell/Cell';
+import { AudioManager } from '../../framework/manager/AudioManager';
 
 const { ccclass, property } = cc._decorator;
 
@@ -183,5 +184,6 @@ export default class SignDialog extends UIDialog {
                 }
             }
         }
+        AudioManager.getInstance().playBtnClick();
     }
 }

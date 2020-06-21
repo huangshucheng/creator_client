@@ -5,6 +5,7 @@ import { Stype } from '../../framework/protocol/Stype';
 import CellManager from '../../framework/manager/CellManager';
 import DialogManager from '../../framework/manager/DialogManager';
 import { Cell } from '../../framework/cell/Cell';
+import { AudioManager } from '../../framework/manager/AudioManager';
 
 const { ccclass, property } = cc._decorator;
 
@@ -106,6 +107,7 @@ export default class JoinRoomDialog extends UIDialog {
             CellManager.getInstance().addCellCallBack(cell, this.on_event_join_room_cell.bind(this));
         }
         this._text_index++;
+        AudioManager.getInstance().playBtnClick();
     }
     
     on_event_join_room_cell(cell:Cell, type:number, data:any){

@@ -2,8 +2,11 @@ import UIController from '../../../framework/uibase/UIController';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import GameHoodleConfig from '../../../framework/config/GameHoodleConfig';
-import Http from '../../../framework/utils/Http';
-import GameAppConfig from '../../../framework/config/GameAppConfig';
+import PlatForm from '../../../framework/config/PlatForm';
+import RewardDialog from '../../dialog/RewardDialog';
+import UserInfo from '../../../framework/common/UserInfo';
+import LobbySendSystem from './sendMsg/LobbySendSystem';
+import { AudioManager } from '../../../framework/manager/AudioManager';
 
 const {ccclass, property} = cc._decorator;
 
@@ -26,6 +29,7 @@ export default class LobbySceneTouchEvent extends UIController {
         this.add_click_event(this.view["KW_BTN_STORE"], this.on_click_store.bind(this))
         this.add_click_event(this.view["KW_BTN_BALL_LIST"], this.on_click_ball_list.bind(this))
         this.add_click_event(this.view["KW_BTN_SIGN"], this.on_click_sign.bind(this))
+        this.add_click_event(this.view["KW_BTN_SHARE"], this.on_click_share.bind(this))
         //带参数的点击事件
         // this.add_click_evenet_with_data(this.view["KW_BTN_BALL"], "on_click_ball_dialog_data",[1,2,3,5]) // test
     }
@@ -68,6 +72,7 @@ export default class LobbySceneTouchEvent extends UIController {
         if (roomlevel){
             LobbySendGameHoodleMsg.send_user_match(roomlevel);
         }
+        AudioManager.getInstance().playBtnClick();
     }
     
     on_click_match_stop(sender: cc.Component){
@@ -96,6 +101,36 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_sign(sender: cc.Component){
         DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogSign", "SignDialog");
+        //test
+        // let config = {level:6}
+        // LobbySendSystem.send_add_uchip(GameHoodleConfig.KW_PROP_ID_COIN, 50);
+        // LobbySendSystem.send_add_uchip(GameHoodleConfig.KW_PROP_ID_BALL, 1, JSON.stringify(config));
     }
 
+    on_click_share(sender:cc.Component){
+        console.log("hcc>>on_click_share....");
+        LobbySendSystem.send_share();
+        let share_img_path = cc.url.raw("resources/textures/shareimg/ball_games_hare_img.png")
+        console.log("hcc>>share_img_path: ", share_img_path);
+        if (!share_img_path || share_img_path == "") {
+            return;
+        }
+
+        let shareInfo = {
+            title: UserInfo.get_unick() + "请你一起来玩弹珠,赶紧来吧!",
+            imageUrl: share_img_path,
+            query: "",
+            success: function (res: any) {
+            },
+            fail: function (res: any) {
+            },
+            complete: function () {
+            },
+        }
+
+        if (!PlatForm.isWeChatGame()) {
+            return;
+        }
+        wx.shareAppMessage(shareInfo)
+    }
 }

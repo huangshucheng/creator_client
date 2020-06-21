@@ -10,6 +10,8 @@ class GameHoodleConfig {
         COMPOSE_TYPE: 1,    //合成,三个一合成
         GIVE_TYPE: 2,       //赠送
     }
+    static KW_PROP_ID_BALL = 10001;    //弹珠道具ID
+    static KW_PROP_ID_COIN = 10002;    //金币道具ID
 }
 
 export default GameHoodleConfig;

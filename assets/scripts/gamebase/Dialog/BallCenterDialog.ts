@@ -11,6 +11,7 @@ import GameHoodleConfig from '../../framework/config/GameHoodleConfig';
 import { Stype } from '../../framework/protocol/Stype';
 import StringUtil from '../../framework/utils/StringUtil';
 import CommonDialog from './CommonDialog';
+import { AudioManager } from '../../framework/manager/AudioManager';
 
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
@@ -315,6 +316,7 @@ export default class BallCenterDialog extends UIDialog {
                 DialogManager.getInstance().show_weak_hint("最多只能合成" + GameHoodleConfig.BALL_COMPOSE_COUNT + "个弹珠!");
             }
         }
+        AudioManager.getInstance().playBtnClick();
     }
 
     on_click_ball_unselect(event:cc.Event, data:any){
@@ -350,6 +352,7 @@ export default class BallCenterDialog extends UIDialog {
                 }
             },0)
         }
+        AudioManager.getInstance().playBtnClick();
     }
 
     show_compose_result(result_string:string){

@@ -7,6 +7,7 @@ import { PlayerPower , BallState} from '../../../common/State';
 import DialogManager from "../../../../framework/manager/DialogManager";
 import HoodleBallManager from './HoodleBallManager';
 import GameHoodleConfig from "../../../../framework/config/GameHoodleConfig";
+import HoodleBallCtrl from "./HoodleBallCtrl";
 
 const AIM_LINE_MAX_LENGTH = 1440;
 // const AIM_LINE_MAX_LENGTH = 2000;
@@ -124,7 +125,7 @@ export default class gameHoodleTouchEvent extends UIController {
         let nodepos = gameTableNode.convertToNodeSpaceAR(location)
         let ball = this.get_self_ball();
         if(ball){
-            let script = ball.getComponent("HoodleBallCtrl")
+            let script:HoodleBallCtrl = ball.getComponent("HoodleBallCtrl")
             if(script){
                 let shootPower = this.get_shoot_pwer();
                 script.shoot_at(location,shootPower);

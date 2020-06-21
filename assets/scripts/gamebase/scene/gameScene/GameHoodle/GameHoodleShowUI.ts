@@ -176,7 +176,7 @@ export default class GameHoodleShowUI extends UIController {
         this.set_power_percent(per);
     }
 
-    async show_total_result(body:any){
+    show_total_result(body:any){
         let show_text = "";
         if (body) {
             let scores = body.scores;
@@ -195,12 +195,13 @@ export default class GameHoodleShowUI extends UIController {
                     }
                     let score_str = score > 0 ? ("+" + score) : score;
                     let gold_str = gold > 0 ? ("+" + gold) : gold;
-                    show_text = show_text + uname + ": 分数 " + score_str + "   " + "金币:" + gold_str + "\n";
+                    // show_text = show_text + uname + ": 分数 " + score_str + "   " + "金币:" + gold_str + "\n";
+                    show_text = show_text + uname + "金币:" + gold_str + "\n";
                 }
 
             }
         }
-        let resNode:cc.Node = await DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogGameResult", "GameResultDialog");
+        let resNode:cc.Node = DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogGameResult", "GameResultDialog");
         if (resNode) {
             let script: GameResultDialog = resNode.getComponent("GameResultDialog");
             if (script) {

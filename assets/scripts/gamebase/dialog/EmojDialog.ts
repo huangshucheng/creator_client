@@ -7,6 +7,7 @@ import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import { Stype } from '../../framework/protocol/Stype';
 import StringUtil from '../../framework/utils/StringUtil';
+import { AudioManager } from '../../framework/manager/AudioManager';
 
 let EMOJ_COUNT = 35;
 let EMOJ_KEY_STR = "games/emoj/face_%d.png"
@@ -117,5 +118,6 @@ export default class EmojDialog extends UIDialog {
         console.log("on_click_emoj_select index: " , index)
         GameSendGameHoodleMsg.send_use_emoj(index);
         this.close();
+        AudioManager.getInstance().playBtnClick();
     }
 }

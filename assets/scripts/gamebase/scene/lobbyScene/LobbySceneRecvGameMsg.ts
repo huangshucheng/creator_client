@@ -131,7 +131,7 @@ export default class LobbySceneRecvGameMsg extends UIController {
         }
     }
 
-    async on_event_match(body:any){
+    on_event_match(body:any){
         if (body){
             let status = body.status
             if(status == Response.OK){
@@ -153,7 +153,7 @@ export default class LobbySceneRecvGameMsg extends UIController {
                             script.show_math_user_info(userinfo);
                         }
                     }else{
-                        let resNode:cc.Node = await DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogMatch","MatchDialog");
+                        let resNode:cc.Node = DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogMatch","MatchDialog");
                         if(resNode && cc.isValid(resNode)){
                             let script:MatchDialog = resNode.getComponent("MatchDialog");
                             if(script){

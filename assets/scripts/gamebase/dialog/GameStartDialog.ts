@@ -18,6 +18,7 @@ export default class GameStartDialog extends UIDialog {
     initUI(){
         let gameStartText = this.view["KW_TEXT_GAME_START"];
         if (gameStartText){
+            this.set_string(gameStartText,"游戏开始");
             gameStartText.stopAllActions();
             gameStartText.setScale(0);
             let scaleTo = cc.scaleTo(0.2, 1).easing(cc.easeBackOut());
