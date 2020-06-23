@@ -3,6 +3,9 @@ import UserInfo from '../../../framework/common/UserInfo';
 import HotUpdateNew from '../../../framework/hotfix/HotUpdateNew';
 import StringUtil from '../../../framework/utils/StringUtil';
 import Response from '../../../framework/protocol/Response';
+import PlatForm from '../../../framework/config/PlatForm';
+import LSDefine from '../../../framework/config/LSDefine';
+import Storage from '../../../framework/utils/Storage';
 
 // let HEAD_PATH = "lobby/rectheader/1";
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
@@ -24,7 +27,8 @@ export default class LobbySceneShowUI extends UIController {
     show_user_info(){
         let user_info_bg = this.view["IMG_USER_INFO_BG"]
         if(user_info_bg){
-            this.set_string(this.view['TEXT_USER_NAME'],UserInfo.get_unick()) 
+            let unick = this.is_guest_login_wechat_game() ? (UserInfo.get_unick() + "(点头像授权)") : UserInfo.get_unick();
+            this.set_string(this.view['TEXT_USER_NAME'],unick);
             // this.set_string(this.view['TEXT_USER_NAME'],UserInfo.get_uname()); //TODO 暂时先显示玩家账号
             this.set_string(this.view['TEXT_USER_ID'],UserInfo.get_numberid());
             let ufaceImg = StringUtil.format(BALL_TEXTURE_KEY_STR, UserInfo.get_uface());
@@ -66,6 +70,16 @@ export default class LobbySceneShowUI extends UIController {
         } else {
             this.set_visible(this.view["BTN_BACK_ROOM"], false);
             this.set_visible(this.view["BTN_CREATE_ROOM"], true);
+        }
+    }
+
+    is_guest_login_wechat_game() {
+        if (!PlatForm.isWeChatGame()) {
+            return false;
+        }
+        let loginType = Storage.get(LSDefine.USER_LOGIN_TYPE);
+        if (loginType == LSDefine.LOGIN_TYPE_GUEST) {
+            return true;
         }
     }
 }

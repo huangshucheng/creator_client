@@ -495,7 +495,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 184.72,
+      "width": 105,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -543,8 +543,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "名字:小玩家",
-    "_N$string": "名字:小玩家",
+    "_string": "小玩家",
+    "_N$string": "小玩家",
     "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -598,7 +598,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 161.52,
+      "width": 116.79,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -646,8 +646,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "ID:000000",
-    "_N$string": "ID:000000",
+    "_string": "000000",
+    "_N$string": "000000",
     "_fontSize": 35,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -874,13 +874,13 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 86.671,
-      "y": 2.311,
+      "x": 59.09,
+      "y": -1.286,
       "z": 0
     },
     "_scale": {
