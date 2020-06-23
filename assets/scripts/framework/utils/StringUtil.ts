@@ -1,7 +1,7 @@
 export default class StringUtil {
     
     static random_string(len: number): string{
-        var $chars: string = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; 
+        var $chars: string = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz1234567'; 
         var maxPos: number = $chars.length;
     　　var str: string = '';
     　　for (let i = 0; i < len; i++) {

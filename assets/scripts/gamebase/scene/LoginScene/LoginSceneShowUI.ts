@@ -24,8 +24,8 @@ export default class LoginSceneShowUI extends UIController {
             this.set_posX(this.view["KW_BTN_WX_LOGIN"],0);
         }
 
-        //显示微信小游戏登录按钮
-        WeChatLogin.create_authorize_btn(this.view["KW_BTN_WX_LOGIN"]);
+        //显示微信小游戏登录按钮(这里不直接请求授权，微信风控禁止一进游戏就请求授权)
+        // WeChatLogin.create_authorize_btn(this.view["KW_BTN_WX_LOGIN"]);
     }
 
     show_version() {

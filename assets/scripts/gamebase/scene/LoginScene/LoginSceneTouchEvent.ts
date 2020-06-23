@@ -86,9 +86,8 @@ export default class LoginSceneTouchEvent extends UIController {
         if (!PlatForm.isWeChatGame()) {
             return;
         }
-        WeChatLogin.do_wechat_auth_login();
-        //test
-        // this.test_async_fun();
+        DialogManager.getInstance().show_loading_dialog();
+        WeChatLogin.do_wechat_auth_login2();
     }
 
     //test

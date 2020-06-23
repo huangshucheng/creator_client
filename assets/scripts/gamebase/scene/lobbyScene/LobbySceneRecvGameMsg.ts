@@ -12,6 +12,7 @@ import { Stype } from '../../../framework/protocol/Stype';
 import GameSendGameHoodleMsg from '../gameScene/sendMsg/GameSendGameHoodle';
 import CommonDialog from '../../dialog/CommonDialog';
 import MatchDialog from '../../dialog/MatchDialog';
+import LobbySendAuthMsg from './sendMsg/LobbySendAuthMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -58,6 +59,7 @@ export default class LobbySceneRecvGameMsg extends UIController {
     on_event_login_logic(body:any){
         if (body){
             if (body.status == Response.OK){
+                LobbySendAuthMsg.send_get_center_info();
                 LobbySendGameHoodleMsg.send_get_room_status();
                 LobbySendGameHoodleMsg.send_get_ugame_info();
                 LobbySendGameHoodleMsg.send_get_uball_info();

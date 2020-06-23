@@ -36,6 +36,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
         this._cmd_handler_map = {
             [Cmd.eUnameLoginRes]: this.on_event_uname_login,
             [Cmd.eGuestLoginRes]: this.on_event_guest_login,
+            [Cmd.eWeChatLoginRes]: this.on_event_wechat_login,
             [Cmd.eWeChatSessionLoginRes]: this.on_event_wechat_session_login,
             [Cmd.eGetUserCenterInfoRes]: this.on_event_center_info,
             [Cmd.eLoginOutRes]: this.on_event_login_out,
@@ -108,6 +109,21 @@ export default class LobbySceneRecvAuthMsg extends UIController {
             DialogManager.getInstance().show_weak_hint("玩家重新登录成功!")
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + body.status)
+        }
+    }
+
+    on_event_wechat_login(body: any) {
+        if (body.status == Response.OK) {
+            LobbySendGameHoodleMsg.send_login_logic();
+            try {
+                let resbody = JSON.parse(body.userlogininfo)
+                Storage.set(LSDefine.USER_LOGIN_WECHAT_SESSION, resbody.unionid);
+                Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_WECHAT);
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            DialogManager.getInstance().show_weak_hint("登录失败! " + body.status);
         }
     }
 

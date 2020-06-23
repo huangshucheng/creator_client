@@ -101,6 +101,8 @@ declare namespace wx {
     //获取设置信息
     export function getSetting(object: any);
 
+    export function openSetting(object: any);
+
     //显示模态窗口
     export function showModal(object: any);
 
@@ -121,6 +123,8 @@ declare namespace wx {
 
     //微信视屏广告
     export function createRewardedVideoAd(object: any);
+
+    export function showToast(obj:any);
 }
 
 /**

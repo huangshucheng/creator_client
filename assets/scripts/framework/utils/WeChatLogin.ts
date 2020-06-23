@@ -1,17 +1,57 @@
 import LoginSendAuthMsg from "../../gamebase/scene/LoginScene/sendMsg/LoginSendAuthMsg";
 import PlatForm from '../config/PlatForm';
 import DialogManager from '../manager/DialogManager';
+import LSDefine from "../config/LSDefine";
+import StringUtil from "./StringUtil";
+import Storage from './Storage';
+import EventManager from "../manager/EventManager";
+import EventDefine from "../config/EventDefine";
 
 class WeChatLogin {
     //授权，获取玩家信息，在微信小游戏上已经失效
     static _auth_btn:any = null;
 
+    //没授权：游客登录，在游戏内再授权
+    //授权了：用微信信息登录
+    static do_wechat_auth_login2(){
+        if (!PlatForm.isWeChatGame()) {
+            return;
+        }
+
+        let yk_login_func = function() {
+            let guestkey: string = Storage.get(LSDefine.USER_LOGIN_GUEST_KEY)
+            if (!guestkey) {
+                guestkey = StringUtil.random_string(32)
+                console.log("guest login reborn: " + guestkey + " ,len: " + guestkey.length)
+            }
+
+            if (guestkey.length != 32) {
+                return
+            }
+            LoginSendAuthMsg.send_guest_login(guestkey);
+        }
+        wx.getSetting({
+            success(res:any){
+                if (!res.authSetting['scope.userInfo']) { //没授权,游客登录
+                    yk_login_func();
+                    console.log("hcc>> not auth, guest login");
+                }else{//授权了,请求微信信息unionid登录
+                    WeChatLogin.get_wechat_user_info_and_login();
+                    console.log("hcc>> already auth, wechat login");
+                }
+            },
+            fail(){
+            },
+        })
+    }
+
+    //用代码去授权，微信库已经不支持，改用createUserInfoButton形式
     static do_wechat_auth_login() {
         if(!PlatForm.isWeChatGame()){
             return;
         }
         wx.getSetting({
-            success(res) {
+            success(res:any) {
                 if (!res.authSetting['scope.userInfo']) { //没授权
                     wx.authorize({ //去授权 TODO  新玩家授权失败
                         scope: 'scope.userInfo',
@@ -19,17 +59,17 @@ class WeChatLogin {
                             WeChatLogin.get_wechat_user_info_and_login();
                         },
                         fail() {//授权失败
-                            wx.showModal({
-                                title: '提示',
-                                content: '《弹珠王者》是一款在线对战游戏，需要您的用户信息登录游戏~',
-                                // showCancel: false,
-                                success(res) {
-                                    if (res.confirm) {
-                                        WeChatLogin.do_wechat_auth_login()
-                                    } else if (res.cancel) {
-                                    }
-                                }
-                            })
+                            // wx.showModal({
+                            //     title: '提示',
+                            //     content: '《弹珠王者》是一款在线对战游戏，需要您的用户信息登录游戏~',
+                            //     // showCancel: false,
+                            //     success(res:any) {
+                            //         if (res.confirm) {
+                            //             WeChatLogin.do_wechat_auth_login()
+                            //         } else if (res.cancel) {
+                            //         }
+                            //     }
+                            // })
                         },
                     })
                 } else {//已经授权过了
@@ -56,8 +96,8 @@ class WeChatLogin {
                             let login_code = login_res.code;
                             //发起登录请求
                             let wechatuserinfo = JSON.stringify(userinfo_res);
-                            // console.log("hcc>>login_code: ", login_code)
-                            // console.log("hcc>>wechatuserinfo: ", wechatuserinfo)
+                            console.log("hcc>>login_code: ", login_code)
+                            console.log("hcc>>wechatuserinfo: ", wechatuserinfo)
                             LoginSendAuthMsg.send_wechat_login(login_code, wechatuserinfo);
                         } else {
                             console.log('hcc>>login failed！', login_res.errMsg)
@@ -140,6 +180,7 @@ class WeChatLogin {
         })
 
         WeChatLogin._auth_btn.onTap((uinfo:any) => {
+            EventManager.emit(EventDefine.EVENT_CLICK_WECHAT_AUTH);
             if (uinfo.userInfo) {
                 console.log("hcc>>wxLogin auth success, uinfo:" , uinfo.userInfo);
                 DialogManager.getInstance().show_loading_dialog();
@@ -147,6 +188,7 @@ class WeChatLogin {
             }else{
                 console.log("hcc>>wxLogin auth fail");
                 // wx.showToast({ title: "授权失败" });
+                /*
                 wx.showModal({
                     title: '提示',
                     content: '《弹珠王者》是一款在线对战游戏，需要您的用户信息登录游戏~',
@@ -157,13 +199,15 @@ class WeChatLogin {
                         }
                     }
                 })
+                */
             }
         });
     }
 
     static hide_auth_btn(){
         if(WeChatLogin._auth_btn){
-            WeChatLogin._auth_btn.hide();
+            WeChatLogin._auth_btn.hide(); //隐藏
+            // WeChatLogin._auth_btn.destroy(); //删除
         }
     }
 
