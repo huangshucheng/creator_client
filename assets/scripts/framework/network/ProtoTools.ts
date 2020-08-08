@@ -2,8 +2,6 @@ import StringUtil from '../utils/StringUtil';
 import DataViewUtil from '../utils/DataViewUtil';
 import ProtoCmd from '../protocol/ProtoCmd';
 
-let protobufMsg = require("../protocol/protobufMsg")
-
 class ProtoTools {
     static HEADER_SIZE: number = 10;
 
@@ -125,65 +123,38 @@ class ProtoTools {
 
     //解码protobuf
     static decode_protobuf_cmd(cmd_buf:DataView, buf_len:number){
+        if(buf_len < ProtoTools.HEADER_SIZE){
+            return {};
+        }
         let cmd:any = {};
         cmd.stype 		= ProtoTools.read_int16(cmd_buf, 0);
         cmd.ctype 		= ProtoTools.read_int16(cmd_buf, 2);
         cmd.utag 		= ProtoTools.read_int32(cmd_buf, 4);
         cmd.proto_type 	= ProtoTools.read_int16(cmd_buf,8)
-        if (buf_len > ProtoTools.HEADER_SIZE) {
-            let bodyBuf 	= ProtoTools.read_uint8_array(cmd_buf, ProtoTools.HEADER_SIZE, buf_len - ProtoTools.HEADER_SIZE);
-            let styp_name 	= ProtoCmd.getProtoName(cmd.stype)
-            let cmd_name 	= ProtoCmd.getCmdName(cmd.stype, cmd.ctype)
-            if (!styp_name || !cmd_name){
-                console.error("decode_protobuf stype_name or cmd_name null");
-                return cmd;
-            }
-
-            if (!protobufMsg[styp_name]) {
-                console.error("decode_protobuf stype_name null");
-                return cmd;
-            }
-
-            let msgType = protobufMsg[styp_name][cmd_name]
-            if(!msgType){
-                console.error("decode_protobuf msgType is null");
-                return cmd;
-            }
-            let decodeMsg = null;
-            try {
-                decodeMsg = msgType.decode(new Uint8Array(bodyBuf))
-            }
-            catch(e) {
-                console.error(e)
-                return cmd;
-            }
-            cmd.body = decodeMsg;
+        let msgType = ProtoCmd.getProtoMsg(cmd.stype , cmd.ctype );
+        if(!msgType){
+            console.error("decode_protobuf msgType is null");
+            return cmd;
         }
+        let decodeMsg = null;
+        try {
+            let bodyBuf = ProtoTools.read_uint8_array(cmd_buf, ProtoTools.HEADER_SIZE, buf_len - ProtoTools.HEADER_SIZE);
+            decodeMsg = msgType.decode(new Uint8Array(bodyBuf))
+        }
+        catch(e) {
+            console.error(e)
+            return cmd;
+        }
+        cmd.body = decodeMsg;
         return cmd;
     }
 
     static encode_protobuf_cmd(stype:number, ctype:number, proto_type:number, body:any){
-        let styp_name 	= ProtoCmd.getProtoName(stype)
-        let cmd_name 	= ProtoCmd.getCmdName(stype, ctype)
-        if (!styp_name || !cmd_name){
-            console.error("encode_protobuf stype_name or cmd_name null");
-            return null;
+        let msgType = ProtoCmd.getProtoMsg(stype, ctype);
+        if (!msgType) {
+            return;
         }
-        
-        if (!protobufMsg[styp_name]) {
-            console.error("encode_protobuf stype_name null");
-            return null;
-        }
-
-        let msgType = protobufMsg[styp_name][cmd_name]
-        if(!msgType){
-            console.error("encode_protobuf msgType is null");
-            return null;
-        }
-
-        if(!body){
-            body = {}
-        }
+        if(!body){ body = {}}
 
         let error = msgType.verify(body)
         if(error){

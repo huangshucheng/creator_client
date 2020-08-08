@@ -2,7 +2,7 @@ import UIDialog from '../../framework/uibase/UIDialog';
 import LobbyScene from '../scene/lobbyScene/LobbyScene';
 import SceneManager from '../../framework/manager/SceneManager';
 import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
-import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
+import { CmdName, Cmd } from '../../framework/protocol/protofile/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import RoomData from '../common/RoomData';
 import { Stype } from '../../framework/protocol/Stype';
@@ -57,7 +57,6 @@ export default class SettingDialog extends UIDialog {
         this.add_click_event(this.view["KW_BTN_CLOSE"],this.on_click_close.bind(this))
         this.add_click_event(this.view["KW_BTN_EXIT"],this.on_click_back.bind(this))
         this.add_click_event(this.view["KW_BTN_DESSOLVE"],this.on_click_dessolve.bind(this))
-
         this.add_slide_event(this.view["SLIDER_EFFECT"], this.effectSliderCallback.bind(this));
         this.add_slide_event(this.view["SLIDER_MUSIC"], this.musicSliderCallback.bind(this));
     }

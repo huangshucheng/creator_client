@@ -1,5 +1,5 @@
 import UIController from '../../../framework/uibase/UIController';
-import { Cmd, CmdName } from "../../../framework/protocol/GameHoodleProto";
+import { Cmd, CmdName } from "../../../framework/protocol/protofile/GameHoodleProto";
 import Response from '../../../framework/protocol/Response';
 import SceneManager from '../../../framework/manager/SceneManager';
 import DialogManager from '../../../framework/manager/DialogManager';
@@ -28,25 +28,25 @@ export default class GameSceneRecvGameMsg extends UIController {
 
     add_cmd_handler_map(){
         this._cmd_handler_map = {
-            [Cmd.eLoginLogicRes]: this.on_event_login_logic,
-            [Cmd.eDessolveRes]: this.on_event_dessolve,
-            [Cmd.eExitRoomRes]: this.on_event_exit_room,
-            [Cmd.eCheckLinkGameRes]: this.on_event_check_link,
-            [Cmd.eUserInfoRes]: this.on_event_user_info,
-            [Cmd.eGameRuleRes]: this.on_event_game_rule,
-            [Cmd.eRoomIdRes]: this.on_event_room_id,
-            [Cmd.ePlayCountRes]: this.on_event_play_count,
-            [Cmd.eUserReadyRes]: this.on_event_user_ready,
-            [Cmd.eGameStartRes]: this.on_event_game_start,
-            [Cmd.eGameEndRes]: this.on_event_game_end,
-            [Cmd.eUserOfflineRes]: this.on_event_user_offline,
-            [Cmd.ePlayerScoreRes]: this.on_event_player_score,
-            [Cmd.eGameResultRes]: this.on_event_game_result,
-            [Cmd.eTotalGameResultRes]: this.on_event_game_total_result,
-            [Cmd.eUserEmojRes]: this.on_event_emoj,
-            [Cmd.eUserPlayAgainRes]: this.on_event_play_again,
-            [Cmd.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer,
-            [Cmd.eUserPlayAgainStartRes]: this.on_event_play_again_start,
+            [Cmd.eLoginLogicRes]: this.on_event_login_logic.bind(this),
+            [Cmd.eDessolveRes]: this.on_event_dessolve.bind(this),
+            [Cmd.eExitRoomRes]: this.on_event_exit_room.bind(this),
+            [Cmd.eCheckLinkGameRes]: this.on_event_check_link.bind(this),
+            [Cmd.eUserInfoRes]: this.on_event_user_info.bind(this),
+            [Cmd.eGameRuleRes]: this.on_event_game_rule.bind(this),
+            [Cmd.eRoomIdRes]: this.on_event_room_id.bind(this),
+            [Cmd.ePlayCountRes]: this.on_event_play_count.bind(this),
+            [Cmd.eUserReadyRes]: this.on_event_user_ready.bind(this),
+            [Cmd.eGameStartRes]: this.on_event_game_start.bind(this),
+            [Cmd.eGameEndRes]: this.on_event_game_end.bind(this),
+            [Cmd.eUserOfflineRes]: this.on_event_user_offline.bind(this),
+            [Cmd.ePlayerScoreRes]: this.on_event_player_score.bind(this),
+            [Cmd.eGameResultRes]: this.on_event_game_result.bind(this),
+            [Cmd.eTotalGameResultRes]: this.on_event_game_total_result.bind(this),
+            [Cmd.eUserEmojRes]: this.on_event_emoj.bind(this),
+            [Cmd.eUserPlayAgainRes]: this.on_event_play_again.bind(this),
+            [Cmd.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer.bind(this),
+            [Cmd.eUserPlayAgainStartRes]: this.on_event_play_again_start.bind(this),
         }
     }
 

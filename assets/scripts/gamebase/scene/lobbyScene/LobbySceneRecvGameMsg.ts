@@ -1,5 +1,5 @@
 import UIController from '../../../framework/uibase/UIController';
-import { Cmd, CmdName } from "../../../framework/protocol/GameHoodleProto";
+import { Cmd, CmdName } from "../../../framework/protocol/protofile/GameHoodleProto";
 import Response from '../../../framework/protocol/Response';
 import SceneManager from '../../../framework/manager/SceneManager';
 import UserInfo from '../../../framework/common/UserInfo';
@@ -30,20 +30,20 @@ export default class LobbySceneRecvGameMsg extends UIController {
 
     add_cmd_handler_map(){
         this._cmd_handler_map = {
-            [Cmd.eLoginLogicRes]: this.on_event_login_logic,
-            [Cmd.eCreateRoomRes]: this.on_event_create_room,
-            [Cmd.eJoinRoomRes]: this.on_event_join_room,
-            [Cmd.eExitRoomRes]: this.on_event_exit_room,
-            [Cmd.eDessolveRes]: this.on_event_dessolve_room,
-            [Cmd.eGetRoomStatusRes]: this.on_event_get_room_status,
-            [Cmd.eBackRoomRes]: this.on_event_back_room,
-            [Cmd.eUserMatchRes]: this.on_event_match,
-            [Cmd.eUserStopMatchRes]: this.on_event_match_stop,
-            [Cmd.eUserGameInfoRes]: this.on_event_ugame_info,
-            [Cmd.eUserConfigRes]: this.on_event_ugame_config_info,
-            [Cmd.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer,
-            [Cmd.eUserPlayAgainStartRes]: this.on_event_play_again_start,
-            [Cmd.eRoomListConfigRes]: this.on_event_room_config,
+            [Cmd.eLoginLogicRes]: this.on_event_login_logic.bind(this),
+            [Cmd.eCreateRoomRes]: this.on_event_create_room.bind(this),
+            [Cmd.eJoinRoomRes]: this.on_event_join_room.bind(this),
+            [Cmd.eExitRoomRes]: this.on_event_exit_room.bind(this),
+            [Cmd.eDessolveRes]: this.on_event_dessolve_room.bind(this),
+            [Cmd.eGetRoomStatusRes]: this.on_event_get_room_status.bind(this),
+            [Cmd.eBackRoomRes]: this.on_event_back_room.bind(this),
+            [Cmd.eUserMatchRes]: this.on_event_match.bind(this),
+            [Cmd.eUserStopMatchRes]: this.on_event_match_stop.bind(this),
+            [Cmd.eUserGameInfoRes]: this.on_event_ugame_info.bind(this),
+            [Cmd.eUserConfigRes]: this.on_event_ugame_config_info.bind(this),
+            [Cmd.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer.bind(this),
+            [Cmd.eUserPlayAgainStartRes]: this.on_event_play_again_start.bind(this),
+            [Cmd.eRoomListConfigRes]: this.on_event_room_config.bind(this),
         }
     }
 

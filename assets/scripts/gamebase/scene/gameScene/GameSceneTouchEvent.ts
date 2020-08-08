@@ -20,13 +20,13 @@ export default class GameSceneTouchEvent extends UIController {
     }
 
     add_button_event_listener(){
-        this.add_click_event(this.view["BTN_SETTING"],this.on_click_setting)
-        this.add_click_event(this.view["BTN_SETTING_2"],this.on_click_setting2)
-        this.add_click_event(this.view["KW_BTN_READY"],this.on_click_ready)
-        this.add_click_event(this.view["KW_BTN_BACK_LOBBY"], this.on_click_back_lobby)
-        this.add_click_event(this.view["KW_BTN_PLAY_AGAIN"], this.on_click_play_again)
-        this.add_click_event(this.view["KW_BTN_SHARE"], this.on_click_share)
-        this.add_click_event(this.view["KW_BTN_EMOj"], this.on_click_emoj)
+        this.add_click_event(this.view["BTN_SETTING"],this.on_click_setting.bind(this))
+        this.add_click_event(this.view["BTN_SETTING_2"],this.on_click_setting2.bind(this))
+        this.add_click_event(this.view["KW_BTN_READY"],this.on_click_ready.bind(this))
+        this.add_click_event(this.view["KW_BTN_BACK_LOBBY"], this.on_click_back_lobby.bind(this))
+        this.add_click_event(this.view["KW_BTN_PLAY_AGAIN"], this.on_click_play_again.bind(this))
+        this.add_click_event(this.view["KW_BTN_SHARE"], this.on_click_share.bind(this))
+        this.add_click_event(this.view["KW_BTN_EMOj"], this.on_click_emoj.bind(this))
     }
 
     on_click_setting(sender:cc.Component){

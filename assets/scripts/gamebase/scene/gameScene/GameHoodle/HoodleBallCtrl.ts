@@ -8,9 +8,9 @@ import Player from '../../../common/Player';
 import StringUtil from "../../../../framework/utils/StringUtil";
 import { AudioManager } from "../../../../framework/manager/AudioManager";
 
-let SHOOT_DISTANCE          = 380;
-let SHOOT_POWER             = 50.0;
-let BALL_STOP_SPEED_SQR     = 100;  //判定小球停下来的速度平方
+let SHOOT_DISTANCE          = 250;     //距离系数
+let SHOOT_POWER             = 100.0;   //力量：0-100
+let BALL_STOP_SPEED_SQR     = 100;      //判定小球停下来的速度平方
 let EMOJ_KEY_STR = "games/emoj/face_%d.png";
 
 const {ccclass, property} = cc._decorator;

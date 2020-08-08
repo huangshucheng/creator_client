@@ -1,4 +1,5 @@
 export let protoName: string = "AuthProto"
+export let protoNameMsg: string = "AuthProtoMsg"
 
 export enum Cmd {
 	INVALED = 0,

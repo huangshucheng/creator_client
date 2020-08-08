@@ -1,6 +1,6 @@
 import UIController from '../../../framework/uibase/UIController';
 import EventManager from '../../../framework/manager/EventManager';
-import { Cmd, CmdName } from "../../../framework/protocol/AuthProto";
+import { Cmd, CmdName } from "../../../framework/protocol/protofile/AuthProto";
 import Response from '../../../framework/protocol/Response';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LoginScene from '../LoginScene/LoginScene';
@@ -27,15 +27,15 @@ export default class GameSceneRecvAuthMsg extends UIController {
     }
 
     add_event_dispatcher(){
-        EventManager.on(EventDefine.EVENT_NET_CONNECTED, this, this.on_net_connected);
+        EventManager.on(EventDefine.EVENT_NET_CONNECTED, this, this.on_net_connected.bind(this));
     }
 
     add_cmd_handler_map(){
         this._cmd_handler_map = {
-            [Cmd.eUnameLoginRes]: this.on_event_uname_login,
-            [Cmd.eGuestLoginRes]: this.on_event_guest_login,
-            [Cmd.eWeChatSessionLoginRes]: this.on_event_wechat_session_login,
-            [Cmd.eReloginRes]: this.on_event_relogin,
+            [Cmd.eUnameLoginRes]: this.on_event_uname_login.bind(this),
+            [Cmd.eGuestLoginRes]: this.on_event_guest_login.bind(this),
+            [Cmd.eWeChatSessionLoginRes]: this.on_event_wechat_session_login.bind(this),
+            [Cmd.eReloginRes]: this.on_event_relogin.bind(this),
         }
     }
     

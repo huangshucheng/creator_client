@@ -1,4 +1,5 @@
 export let protoName: string = "GameHoodleProto"
+export let protoNameMsg: string = "GameHoodleProtoMsg"
 
 export enum Cmd {
 	

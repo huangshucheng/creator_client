@@ -1,7 +1,7 @@
 import UIController from '../../../framework/uibase/UIController';
 import Response from '../../../framework/protocol/Response';
 import { Stype } from '../../../framework/protocol/Stype';
-import { Cmd } from '../../../framework/protocol/GameHoodleProto';
+import { Cmd } from '../../../framework/protocol/protofile/GameHoodleProto';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LobbyScene from '../lobbyScene/LobbyScene';
 import DialogManager from '../../../framework/manager/DialogManager';
@@ -22,7 +22,7 @@ export default class LoginSceneRecvGameMsg extends UIController {
 
     add_cmd_handler_map(){
         this._cmd_handler_map = {
-            [Cmd.eLoginLogicRes]: this.on_event_login_logic,
+            [Cmd.eLoginLogicRes]: this.on_event_login_logic.bind(this),
         }
     }
 

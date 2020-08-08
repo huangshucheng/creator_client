@@ -1,5 +1,5 @@
 import { Stype } from '../../framework/protocol/Stype';
-import { Cmd } from '../../framework/protocol/AuthProto';
+import { Cmd } from '../../framework/protocol/protofile/AuthProto';
 
 import CellBase = require('../../framework/cell/CellBase');
 import DialogManager from '../../framework/manager/DialogManager';

@@ -1,7 +1,7 @@
 //匹配界面
 import UIDialog from '../../framework/uibase/UIDialog';
 import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
-import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
+import { CmdName, Cmd } from '../../framework/protocol/protofile/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import StringUtil from '../../framework/utils/StringUtil';
@@ -26,8 +26,8 @@ export default class MatchDialog extends UIDialog {
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [Cmd.eUserMatchRes]: this.on_event_match,
-            [Cmd.eUserStopMatchRes]: this.on_event_match_stop,
+            [Cmd.eUserMatchRes]: this.on_event_match.bind(this),
+            [Cmd.eUserStopMatchRes]: this.on_event_match_stop.bind(this),
         }
     }
 

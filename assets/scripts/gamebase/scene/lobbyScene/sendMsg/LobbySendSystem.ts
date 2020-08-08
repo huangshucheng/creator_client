@@ -1,6 +1,6 @@
 import NetWork from '../../../../framework/network/NetWork';
 import { Stype } from '../../../../framework/protocol/Stype';
-import { Cmd } from '../../../../framework/protocol/SystemProto';
+import { Cmd } from '../../../../framework/protocol/protofile/SystemProto';
 import CellManager from '../../../../framework/manager/CellManager';
 import Response from '../../../../framework/protocol/Response';
 import DialogManager from '../../../../framework/manager/DialogManager';

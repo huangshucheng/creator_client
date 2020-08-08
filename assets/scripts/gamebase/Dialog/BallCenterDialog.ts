@@ -1,7 +1,7 @@
 //弹珠合成界面
 
 import UIDialog from '../../framework/uibase/UIDialog';
-import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
+import { CmdName, Cmd } from '../../framework/protocol/protofile/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
@@ -37,8 +37,8 @@ export default class BallCenterDialog extends UIDialog {
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [Cmd.eUserBallInfoRes]: this.on_event_user_ball_info,
-            [Cmd.eUpdateUserBallRes]: this.on_event_update_user_ball_info,
+            [Cmd.eUserBallInfoRes]: this.on_event_user_ball_info.bind(this),
+            [Cmd.eUpdateUserBallRes]: this.on_event_update_user_ball_info.bind(this),
         }
     }
 

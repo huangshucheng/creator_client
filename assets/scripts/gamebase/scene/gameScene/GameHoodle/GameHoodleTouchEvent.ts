@@ -9,8 +9,7 @@ import HoodleBallManager from './HoodleBallManager';
 import GameHoodleConfig from "../../../../framework/config/GameHoodleConfig";
 import HoodleBallCtrl from "./HoodleBallCtrl";
 
-const AIM_LINE_MAX_LENGTH = 1440;
-// const AIM_LINE_MAX_LENGTH = 2000;
+const AIM_LINE_MAX_LENGTH = 2500;
 
 const {ccclass, property} = cc._decorator;
 
@@ -29,10 +28,10 @@ export default class gameHoodleTouchEvent extends UIController {
 
     start () {
         if(this._graphic_line){
-            this._graphic_line.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
-            this._graphic_line.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
-            this._graphic_line.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
-            this._graphic_line.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
+            this._graphic_line.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart.bind(this), this);
+            this._graphic_line.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove.bind(this), this);
+            this._graphic_line.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd.bind(this), this);
+            this._graphic_line.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd.bind(this), this);
         }
     }
 

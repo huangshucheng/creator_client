@@ -1,4 +1,5 @@
 export let protoName: string = "SystemProto"
+export let protoNameMsg: string = "SystemProtoMsg"
 
 export enum Cmd {
 	INVALED = 0,

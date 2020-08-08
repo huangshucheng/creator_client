@@ -5,7 +5,7 @@ import Response from '../../framework/protocol/Response';
 import UserInfo from '../../framework/common/UserInfo';
 import { Stype } from '../../framework/protocol/Stype';
 import LobbySendSystem from '../scene/lobbyScene/sendMsg/LobbySendSystem';
-import { Cmd } from '../../framework/protocol/SystemProto';
+import { Cmd } from '../../framework/protocol/protofile/SystemProto';
 import DialogManager from '../../framework/manager/DialogManager';
 import CellManager from '../../framework/manager/CellManager';
 import { Cell } from '../../framework/cell/Cell';
@@ -29,8 +29,8 @@ export default class SignDialog extends UIDialog {
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [Cmd.eLoginRewardConfigRes]: this.on_event_reward_info,
-            [Cmd.eLoginRewardSignRes]: this.on_event_sign_res,
+            [Cmd.eLoginRewardConfigRes]: this.on_event_reward_info.bind(this),
+            [Cmd.eLoginRewardSignRes]: this.on_event_sign_res.bind(this),
         }
     }
 

@@ -1,7 +1,7 @@
 //我的弹珠页面
 
 import UIDialog from '../../framework/uibase/UIDialog';
-import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
+import { CmdName, Cmd } from '../../framework/protocol/protofile/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
@@ -36,9 +36,9 @@ export default class BallListDialog extends UIDialog {
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [Cmd.eUserBallInfoRes]: this.on_event_user_ball_info,
-            [Cmd.eUserConfigRes]: this.on_event_user_config,
-            [Cmd.eUseHoodleBallRes]: this.on_event_use_hoodleball,
+            [Cmd.eUserBallInfoRes]: this.on_event_user_ball_info.bind(this),
+            [Cmd.eUserConfigRes]: this.on_event_user_config.bind(this),
+            [Cmd.eUseHoodleBallRes]: this.on_event_use_hoodleball.bind(this),
         }
     }
 

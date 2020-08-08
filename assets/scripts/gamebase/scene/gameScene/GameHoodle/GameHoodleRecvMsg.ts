@@ -1,6 +1,6 @@
 //游戏消息
 import UIController from "../../../../framework/uibase/UIController";
-import { Cmd, CmdName } from "../../../../framework/protocol/GameHoodleProto";
+import { Cmd, CmdName } from "../../../../framework/protocol/protofile/GameHoodleProto";
 import GameHoodleData from './GameHoodleData';
 import Response from '../../../../framework/protocol/Response';
 import RoomData from '../../../common/RoomData';
@@ -26,15 +26,15 @@ export default class GameHoodleRecvMsg extends UIController {
     
     add_cmd_handler_map(){
         this._cmd_handler_map = {
-            [Cmd.eGameStartRes]: this.on_event_game_start,
-            [Cmd.ePlayerFirstBallPosRes]: this.on_event_first_ball_pos,
-            [Cmd.ePlayerPowerRes]: this.on_event_player_power,
-            [Cmd.ePlayerShootRes]: this.on_event_player_shoot,
-            [Cmd.ePlayerBallPosRes]: this.on_event_ball_pos,
-            [Cmd.ePlayerIsShootedRes]: this.on_event_player_is_shooted,
-            [Cmd.eGameResultRes]: this.on_event_game_result,
-            [Cmd.eTotalGameResultRes]: this.on_event_game_total_result,
-            [Cmd.eUserEmojRes]: this.on_event_emoj,
+            [Cmd.eGameStartRes]: this.on_event_game_start.bind(this),
+            [Cmd.ePlayerFirstBallPosRes]: this.on_event_first_ball_pos.bind(this),
+            [Cmd.ePlayerPowerRes]: this.on_event_player_power.bind(this),
+            [Cmd.ePlayerShootRes]: this.on_event_player_shoot.bind(this),
+            [Cmd.ePlayerBallPosRes]: this.on_event_ball_pos.bind(this),
+            [Cmd.ePlayerIsShootedRes]: this.on_event_player_is_shooted.bind(this),
+            [Cmd.eGameResultRes]: this.on_event_game_result.bind(this),
+            [Cmd.eTotalGameResultRes]: this.on_event_game_total_result.bind(this),
+            [Cmd.eUserEmojRes]: this.on_event_emoj.bind(this),
         }
     }
 

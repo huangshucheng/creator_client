@@ -1,6 +1,6 @@
 import NetWork from '../../../../framework/network/NetWork';
 import { Stype } from '../../../../framework/protocol/Stype';
-import { Cmd } from '../../../../framework/protocol/GameHoodleProto';
+import { Cmd } from '../../../../framework/protocol/protofile/GameHoodleProto';
 import CellManager from '../../../../framework/manager/CellManager';
 
 export default class LobbySendGameHoodleMsg {

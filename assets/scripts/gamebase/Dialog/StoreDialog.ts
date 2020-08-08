@@ -1,7 +1,7 @@
 //商城界面
 
 import UIDialog from '../../framework/uibase/UIDialog';
-import { CmdName, Cmd } from '../../framework/protocol/GameHoodleProto';
+import { CmdName, Cmd } from '../../framework/protocol/protofile/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
@@ -34,9 +34,9 @@ export default class StoreDialog extends UIDialog {
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [Cmd.eStoreListRes]: this.on_event_store_list,
-            [Cmd.eBuyThingsRes]: this.on_event_buy_things,
-            [Cmd.eUserGameInfoRes]: this.on_event_ugame_info,
+            [Cmd.eStoreListRes]: this.on_event_store_list.bind(this),
+            [Cmd.eBuyThingsRes]: this.on_event_buy_things.bind(this),
+            [Cmd.eUserGameInfoRes]: this.on_event_ugame_info.bind(this),
         }
     }
 

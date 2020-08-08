@@ -1,6 +1,6 @@
 import NetWork from '../../../../framework/network/NetWork';
 import { Stype } from '../../../../framework/protocol/Stype';
-import { Cmd } from "../../../../framework/protocol/AuthProto";
+import { Cmd } from "../../../../framework/protocol/protofile/AuthProto";
 
 export default class LobbySendAuthMsg {
     

@@ -3,7 +3,7 @@ import { Stype } from '../../framework/protocol/Stype';
 import CellBase = require('../../framework/cell/CellBase');
 import DialogManager from '../../framework/manager/DialogManager';
 import { Cell } from '../../framework/cell/Cell';
-import { Cmd } from '../../framework/protocol/GameHoodleProto';
+import { Cmd } from '../../framework/protocol/protofile/GameHoodleProto';
 
 class CellGetUserProp extends CellBase {
 
