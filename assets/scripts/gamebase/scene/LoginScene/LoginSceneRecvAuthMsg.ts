@@ -1,12 +1,12 @@
 import UIController from '../../../framework/uibase/UIController';
-import { Cmd, CmdName } from "../../../framework/protocol/protofile/AuthProto";
 import Response from '../../../framework/protocol/Response';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbySendGameHoodleMsg from '../lobbyScene/sendMsg/LobbySendGameHoodle';
 import WeChatLogin from '../../../framework/utils/WeChatLogin';
-import { Stype } from '../../../framework/protocol/Stype';
+import Stype from '../../../framework/protocol/Stype';
+import AuthProto from '../../../framework/protocol/protofile/AuthProto';
 
 const {ccclass, property} = cc._decorator;
 
@@ -27,15 +27,15 @@ export default class LoginSceneRecvAuthMsg extends UIController {
 
     add_cmd_handler_map(){
         this._cmd_handler_map = {
-            [Cmd.eUnameLoginRes]: this.on_event_uname_login.bind(this),
-            [Cmd.eGuestLoginRes]: this.on_event_guest_login.bind(this),
-            [Cmd.eWeChatLoginRes]: this.on_event_wechat_login.bind(this),
-            [Cmd.eUnameRegistRes]: this.on_event_uname_regist.bind(this),
+            [AuthProto.XY_ID.RES_UNAMELOGIN]: this.on_event_uname_login.bind(this),
+            [AuthProto.XY_ID.RES_GUESTLOGIN]: this.on_event_guest_login.bind(this),
+            [AuthProto.XY_ID.RES_WECHATLOGIN]: this.on_event_wechat_login.bind(this),
+            [AuthProto.XY_ID.RES_UNAMEREGIST]: this.on_event_uname_regist.bind(this),
         }
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.Auth) {
+        if (stype !== Stype.S_TYPE.Auth) {
             return;
         }
 
@@ -48,7 +48,7 @@ export default class LoginSceneRecvAuthMsg extends UIController {
         console.log("guestlogin udata: ", body)
         if (body.status == Response.OK){
             try {
-                let resbody = JSON.parse(body.userlogininfo)
+                let resbody = JSON.parse(body.logininfo)
                 Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
                 Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,resbody.guest_key)
             } catch (error) {
@@ -65,7 +65,7 @@ export default class LoginSceneRecvAuthMsg extends UIController {
         console.log("unamelogin udata: ", body)
         if (body.status == Response.OK){
             try {
-                let resbody = JSON.parse(body.userlogininfo)
+                let resbody = JSON.parse(body.logininfo)
                 Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
                 Storage.set(LSDefine.USER_LOGIN_MSG,{uname: resbody.uname, upwd: resbody.upwd})
             } catch (error) {

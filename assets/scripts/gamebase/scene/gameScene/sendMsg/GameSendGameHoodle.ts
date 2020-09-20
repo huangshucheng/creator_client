@@ -1,41 +1,41 @@
 import NetWork from '../../../../framework/network/NetWork';
-import { Stype } from '../../../../framework/protocol/Stype';
-import { Cmd } from '../../../../framework/protocol/protofile/GameHoodleProto';
 import GameHoodleConfig from '../../../../framework/config/GameHoodleConfig';
 import ArrayUtil from '../../../../framework/utils/ArrayUtil';
+import Stype from '../../../../framework/protocol/Stype';
+import GameHoodleProto from '../../../../framework/protocol/protofile/GameHoodleProto';
 
 export default class GameSendGameHoodleMsg {
     
     static send(ctype:number, body?:any){
-        NetWork.getInstance().send_msg(Stype.GameHoodle,ctype,body)
+        NetWork.getInstance().send_msg(Stype.S_TYPE.GameHoodle,ctype,body)
     }
 
     static send_check_link_game(){
-        GameSendGameHoodleMsg.send(Cmd.eCheckLinkGameReq);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eCheckLinkGameReq);
     }
 
     static send_login_logic(){
-        GameSendGameHoodleMsg.send(Cmd.eLoginLogicReq);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eLoginLogicReq);
     }
 
     static send_exit_room(){
-        GameSendGameHoodleMsg.send(Cmd.eExitRoomReq);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eExitRoomReq);
     }
 
     static send_dessolve_room(){
-        GameSendGameHoodleMsg.send(Cmd.eDessolveReq);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eDessolveReq);
     }
 
     static send_back_room(){
-        GameSendGameHoodleMsg.send(Cmd.eBackRoomReq);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eBackRoomReq);
     }
 
     static send_user_ready(){
-        GameSendGameHoodleMsg.send(Cmd.eUserReadyReq)
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserReadyReq)
     }
 
     static send_get_player_ball_info() {
-        GameSendGameHoodleMsg.send(Cmd.eUserBallInfoReq);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserBallInfoReq);
     }
 
     static send_ball_compose(level: number, count?: number) {
@@ -47,18 +47,18 @@ export default class GameSendGameHoodleMsg {
             level: level,
             count: count,
         }
-        GameSendGameHoodleMsg.send(Cmd.eUpdateUserBallReq, body);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUpdateUserBallReq, body);
     }
 
     static send_store_list_req(){
-        GameSendGameHoodleMsg.send(Cmd.eStoreListReq);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eStoreListReq);
     }
 
     static send_buy_product(productinfo:any){
         if(!productinfo || ArrayUtil.GetArrayLen(productinfo) <= 0){
             return;
         }
-        GameSendGameHoodleMsg.send(Cmd.eBuyThingsReq, productinfo);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eBuyThingsReq, productinfo);
     }
 
     ////////////////////////
@@ -73,7 +73,7 @@ export default class GameSendGameHoodleMsg {
             posy:String(posy),
             shootpower:Number(shootpower),
         }
-        GameSendGameHoodleMsg.send(Cmd.ePlayerShootReq,body);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.ePlayerShootReq,body);
     }
 
     //玩家位置发送到服务端，保持各个玩家位置同步
@@ -90,7 +90,7 @@ export default class GameSendGameHoodleMsg {
         let body = {
             positions: posArray,
         }
-        GameSendGameHoodleMsg.send(Cmd.ePlayerBallPosReq,body);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.ePlayerBallPosReq,body);
     }
 
     //客户端发送玩家被击中
@@ -99,11 +99,11 @@ export default class GameSendGameHoodleMsg {
             srcseatid: src_seatid,
             desseatid: des_seatid,
         }
-        GameSendGameHoodleMsg.send(Cmd.ePlayerIsShootedReq,body);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.ePlayerIsShootedReq,body);
     }
 
     static send_get_user_config(){
-        GameSendGameHoodleMsg.send(Cmd.eUserConfigReq);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserConfigReq);
     }
 
     static send_use_ball(balllevel:number){
@@ -113,21 +113,21 @@ export default class GameSendGameHoodleMsg {
         let body = {
             balllevel: balllevel,
         }
-        GameSendGameHoodleMsg.send(Cmd.eUseHoodleBallReq,body);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUseHoodleBallReq,body);
     }
 
     static send_use_emoj(emojIndex:number) {
         let body = {
             emojconfig: String(emojIndex),
         }
-        GameSendGameHoodleMsg.send(Cmd.eUserEmojReq, body);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserEmojReq, body);
     }
 
     static send_play_again(uids:Array<number>){
         let body = {
             otheruids: uids,
         }
-        GameSendGameHoodleMsg.send(Cmd.eUserPlayAgainReq,body);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserPlayAgainReq,body);
     }
 
     static send_play_again_answer(requseruid:number,rescode:number){
@@ -135,6 +135,6 @@ export default class GameSendGameHoodleMsg {
             requseruid: requseruid,
             responsecode: rescode,
         }
-        GameSendGameHoodleMsg.send(Cmd.eUserPlayAgainAnswerReq,body);
+        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserPlayAgainAnswerReq,body);
     }
 }

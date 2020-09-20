@@ -5,9 +5,9 @@ import { CmdName, Cmd } from '../../framework/protocol/protofile/GameHoodleProto
 import Response from '../../framework/protocol/Response';
 import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
-import { Stype } from '../../framework/protocol/Stype';
 import StringUtil from '../../framework/utils/StringUtil';
 import { AudioManager } from '../../framework/manager/AudioManager';
+import Stype from '../../framework/protocol/Stype';
 
 let EMOJ_COUNT = 35;
 let EMOJ_KEY_STR = "games/emoj/face_%d.png"
@@ -35,7 +35,7 @@ export default class EmojDialog extends UIDialog {
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any){
-        if (stype !== Stype.GameHoodle) {
+        if (stype !== Stype.S_TYPE.GameHoodle) {
             return;
         }
 

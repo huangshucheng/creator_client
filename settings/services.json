@@ -82,6 +82,63 @@
 			"not_service": false
 		},
 		{
+			"service_id": "306",
+			"service_name": "App Linking",
+			"service_icon": "https://download.cocos.com/CocosUdc/client/dae922b126/18aa097c89c654a5ff38b468435c14ef.png",
+			"service_desc": "App Linking是一种无论应用是否已经安装都可以按照所需方式工作的跨平台链接，创建App Linking后将链接地址多渠道分发，用户点击链接后即可跳转到链接指定的内容，有长链接和短链接之分。",
+			"service_title": "跨平台深度链接直达应用内内容，推动应用增长。",
+			"service_guide_url": "https://docs.cocos.com/creator/manual/zh/cocos-service/agc-applinking.html",
+			"service_sample_url": "https://github.com/CocosService/HUAWEIDemo",
+			"service_dev_url": "https://account.cocos.com/serviceConsole/jump?client_id=306&app_id=<app_id>&language=zh",
+			"service_type": "3",
+			"service_type_zh": "公司和个人游戏",
+			"support_platform": [
+				"Android"
+			],
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agcapplinking/0.5.4_1.3.2.zip",
+			"package_version_desc": "<p><strong>更新日期：</strong> 2020/09/17<br />\n<strong>更新说明：</strong><br />\n增加 HUAWEI AppLinking 服务的支持<br />\n",
+			"service_component_name": "service-agcapplinking",
+			"package_versions": [
+				"0.5.4_1.3.2",
+				"0.5.2_1.3.2"
+			],
+			"build_platform": [],
+			"require_verify": 0,
+			"service_price": "",
+			"service_protocol": "游戏首次开启该服务时，Cocos会后台通知服务方为游戏开通服务并初始化参数，服务方根据需要可能会获取您的Cocos账户信息，包括账户基本资料、游戏基本资料、账户余额等，点击确认开通按钮即视为您同意该服务访问您的账户信息，详见<a href='http://auth.cocos.com/CocosServiceAgreement.html'>《Cocos用户服务协议》</a>和<a href='http://auth.cocos.com/PrivacyPolicy.html'>《Cocos隐私政策》</a>",
+			"service_group": "HUAWEI AppGallery Connect",
+			"not_service": false
+		},
+		{
+			"service_id": "307",
+			"service_name": "应用内消息",
+			"service_icon": "https://download.cocos.com/CocosUdc/client/dae922b126/247b4be6edf2b84b9f3b40e5ffc4cad6.png",
+			"service_desc": "应用内消息服务（App Messaging），实现用户使用应用时，向活跃用户发送有针对性的消息来鼓励用户使用应用的关键功能，从而吸引这些用户。例如，通过应用内消息，您可以鼓励用户订阅、给出某个关卡的通过提示，或者推荐某个餐厅活动。",
+			"service_title": "基于用户使用情境发送上下文相关消息，增强用户粘性。",
+			"service_guide_url": "https://docs.cocos.com/creator/manual/zh/cocos-service/agc-appmsg.html",
+			"service_sample_url": "https://github.com/CocosService/HUAWEIDemo",
+			"service_dev_url": "https://account.cocos.com/serviceConsole/jump?client_id=307&app_id=<app_id>&language=zh",
+			"service_type": "3",
+			"service_type_zh": "公司和个人游戏",
+			"support_platform": [
+				"Android"
+			],
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agcappmessaging/0.5.3_1.4.0.zip",
+			"package_version_desc": "<p><strong>更新日期：</strong> 2020/09/17<br />\n<strong>更新说明：</strong><br />\n增加 HUAWEI 应用内消息服务服务的支持<br />\n",
+			"service_component_name": "service-agcappmessaging",
+			"package_versions": [
+				"0.5.3_1.4.0",
+				"0.5.3_1.4.0",
+				"0.5.2_1.4.0"
+			],
+			"build_platform": [],
+			"require_verify": 0,
+			"service_price": "",
+			"service_protocol": "游戏首次开启该服务时，Cocos会后台通知服务方为游戏开通服务并初始化参数，服务方根据需要可能会获取您的Cocos账户信息，包括账户基本资料、游戏基本资料、账户余额等，点击确认开通按钮即视为您同意该服务访问您的账户信息，详见<a href='http://auth.cocos.com/CocosServiceAgreement.html'>《Cocos用户服务协议》</a>和<a href='http://auth.cocos.com/PrivacyPolicy.html'>《Cocos隐私政策》</a>",
+			"service_group": "HUAWEI AppGallery Connect",
+			"not_service": false
+		},
+		{
 			"service_id": "308",
 			"service_name": "远程配置",
 			"service_icon": "https://download.cocos.com/CocosUdc/client/dae922b126/9f811bd45dcb002108c3eda59c24d00e.png",
@@ -176,10 +233,11 @@
 			"support_platform": [
 				"Android"
 			],
-			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-sdkhub/0.6.2_0.1.0.zip",
-			"package_version_desc": "<p><strong>更新日期：</strong> 2020/08/12<br />\n<strong>更新说明：</strong><br />\n简化SDKHub API 接口调用流程，在不支持的平台使用空实现接口，仅返回 null 或者空字符串<br />\n",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-sdkhub/0.6.4_0.1.1.zip",
+			"package_version_desc": "<p><strong>更新日期：</strong> 2020/09/15<br />\n<strong>更新说明：</strong><br />\n修复 BUG<br />\n",
 			"service_component_name": "service-sdkhub",
 			"package_versions": [
+				"0.6.4_0.1.1",
 				"0.6.2_0.1.0",
 				"0.6.1_0.1.0"
 			],

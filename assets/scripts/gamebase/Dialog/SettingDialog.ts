@@ -5,8 +5,8 @@ import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoo
 import { CmdName, Cmd } from '../../framework/protocol/protofile/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import RoomData from '../common/RoomData';
-import { Stype } from '../../framework/protocol/Stype';
 import { AudioManager } from '../../framework/manager/AudioManager';
+import Stype from '../../framework/protocol/Stype';
 
 const { ccclass, property } = cc._decorator;
 
@@ -44,7 +44,7 @@ export default class SettingDialog extends UIDialog {
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
-         if (stype !== Stype.GameHoodle) {
+         if (stype !== Stype.S_TYPE.GameHoodle) {
             return;
         }
 

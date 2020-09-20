@@ -1,8 +1,8 @@
 
 import { Cell } from '../../framework/cell/Cell';
-import { Stype } from '../../framework/protocol/Stype';
 import ArrayUtil from '../utils/ArrayUtil';
 import ProtoCmd from '../protocol/ProtoCmd';
+import Stype from '../protocol/Stype';
 
 //Cell模板类
 class CellBase extends Cell {
@@ -12,12 +12,12 @@ class CellBase extends Cell {
             timeOutTime = 5;
         }
 
-        if (!ArrayUtil.ValueOf(Stype, stype)) {
+        if (!ArrayUtil.ValueOf(Stype.S_TYPE, stype)) {
             return false;
         }
-        if (!ArrayUtil.ValueOf(ProtoCmd.StypeProtos[stype].Cmd, ctype)) {
-            return false;
-        }
+        // if (!ArrayUtil.ValueOf(ProtoCmd.StypeProtos[stype].Cmd, ctype)) {
+        //     return false;
+        // }
 
         if (!super.start(data, stype, ctype, timeOutTime)) {
             return false;

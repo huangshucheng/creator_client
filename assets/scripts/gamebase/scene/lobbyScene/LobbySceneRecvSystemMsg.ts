@@ -1,10 +1,10 @@
 import UIController from '../../../framework/uibase/UIController';
 import Response from '../../../framework/protocol/Response';
 import DialogManager from '../../../framework/manager/DialogManager';
-import { Stype } from '../../../framework/protocol/Stype';
-import { Cmd } from '../../../framework/protocol/protofile/SystemProto';
 import RewardDialog from '../../dialog/RewardDialog';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
+import Stype from '../../../framework/protocol/Stype';
+import SystemProto from '../../../framework/protocol/protofile/SystemProto';
 
 const {ccclass, property} = cc._decorator;
 
@@ -25,12 +25,12 @@ export default class LobbySceneRecvSystemMsg extends UIController {
     
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [Cmd.eUserShareRes]: this.on_event_share_res.bind(this),
+            [SystemProto.XY_ID.RES_USERSHARE]: this.on_event_share_res.bind(this),
         }
     }
     
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.GameSystem) {
+        if (stype !== Stype.S_TYPE.System) {
             return;
         }
 

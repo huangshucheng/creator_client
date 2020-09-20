@@ -1,6 +1,4 @@
 import NetWork from '../../../../framework/network/NetWork';
-import { Stype } from '../../../../framework/protocol/Stype';
-import { Cmd } from '../../../../framework/protocol/protofile/SystemProto';
 import CellManager from '../../../../framework/manager/CellManager';
 import Response from '../../../../framework/protocol/Response';
 import DialogManager from '../../../../framework/manager/DialogManager';
@@ -8,6 +6,8 @@ import GameHoodleConfig from '../../../../framework/config/GameHoodleConfig';
 import StringUtil from '../../../../framework/utils/StringUtil';
 import LobbySendGameHoodleMsg from './LobbySendGameHoodle';
 import UIFunction from '../../../../framework/common/UIFunciton';
+import Stype from '../../../../framework/protocol/Stype';
+import SystemProto from '../../../../framework/protocol/protofile/SystemProto';
 
 let BALL_TEXTURE_KEY_STR = "textures/games/balls/ball_level_%s.png"
 let COIN_TEXTURE_KEY_STR = "textures/lobby/lobby_coin.png";
@@ -15,12 +15,12 @@ let COIN_TEXTURE_KEY_STR = "textures/lobby/lobby_coin.png";
 export default class LobbySendSystem {
 
     static send(ctype: number, body?: any) {
-        NetWork.getInstance().send_msg(Stype.GameSystem, ctype, body)
+        NetWork.getInstance().send_msg(Stype.S_TYPE.System, ctype, body)
     }
 
     //请求登录奖励
     static send_get_reward_info() {
-        LobbySendSystem.send(Cmd.eLoginRewardConfigReq);
+        LobbySendSystem.send(SystemProto.XY_ID.REQ_LOGINREWARDCONFIG);
     }
 
     //发送签到
@@ -36,7 +36,7 @@ export default class LobbySendSystem {
 
     //发送分享
     static send_share(){
-        LobbySendSystem.send(Cmd.eUserShareReq);
+        LobbySendSystem.send(SystemProto.XY_ID.REQ_USERSHARE);
     }
 
     //增加玩家道具

@@ -1,6 +1,5 @@
 import UIController from '../../../framework/uibase/UIController';
 import EventManager from '../../../framework/manager/EventManager';
-import { Cmd, CmdName } from "../../../framework/protocol/protofile/AuthProto";
 import Response from '../../../framework/protocol/Response';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LoginScene from '../LoginScene/LoginScene';
@@ -9,8 +8,9 @@ import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
 import EventDefine from '../../../framework/config/EventDefine';
 import LobbySendGameHoodleMsg from '../lobbyScene/sendMsg/LobbySendGameHoodle';
-import { Stype } from '../../../framework/protocol/Stype';
 import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
+import Stype from '../../../framework/protocol/Stype';
+import AuthProto from '../../../framework/protocol/protofile/AuthProto';
 
 const {ccclass, property} = cc._decorator;
 
@@ -32,15 +32,15 @@ export default class GameSceneRecvAuthMsg extends UIController {
 
     add_cmd_handler_map(){
         this._cmd_handler_map = {
-            [Cmd.eUnameLoginRes]: this.on_event_uname_login.bind(this),
-            [Cmd.eGuestLoginRes]: this.on_event_guest_login.bind(this),
-            [Cmd.eWeChatSessionLoginRes]: this.on_event_wechat_session_login.bind(this),
-            [Cmd.eReloginRes]: this.on_event_relogin.bind(this),
+            [AuthProto.XY_ID.RES_UNAMELOGIN]: this.on_event_uname_login.bind(this),
+            [AuthProto.XY_ID.RES_GUESTLOGIN]: this.on_event_guest_login.bind(this),
+            [AuthProto.XY_ID.REQ_WECHATSESSIONLOGIN]: this.on_event_wechat_session_login.bind(this),
+            [AuthProto.XY_ID.PUSH_RELOGIN]: this.on_event_relogin.bind(this),
         }
     }
     
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.Auth) {
+        if (stype !== Stype.S_TYPE.Auth) {
             return;
         }
 

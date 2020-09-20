@@ -1,13 +1,13 @@
 //游戏消息
 import UIController from "../../../../framework/uibase/UIController";
-import { Cmd, CmdName } from "../../../../framework/protocol/protofile/GameHoodleProto";
 import GameHoodleData from './GameHoodleData';
 import Response from '../../../../framework/protocol/Response';
 import RoomData from '../../../common/RoomData';
 import { PlayerPower } from '../../../common/State';
 import HoodleBallManager from './HoodleBallManager';
 import DialogManager from '../../../../framework/manager/DialogManager';
-import { Stype } from '../../../../framework/protocol/Stype';
+import Stype from '../../../../framework/protocol/Stype';
+import GameHoodleProto from "../../../../framework/protocol/protofile/GameHoodleProto";
 
 const {ccclass, property} = cc._decorator;
 
@@ -26,20 +26,20 @@ export default class GameHoodleRecvMsg extends UIController {
     
     add_cmd_handler_map(){
         this._cmd_handler_map = {
-            [Cmd.eGameStartRes]: this.on_event_game_start.bind(this),
-            [Cmd.ePlayerFirstBallPosRes]: this.on_event_first_ball_pos.bind(this),
-            [Cmd.ePlayerPowerRes]: this.on_event_player_power.bind(this),
-            [Cmd.ePlayerShootRes]: this.on_event_player_shoot.bind(this),
-            [Cmd.ePlayerBallPosRes]: this.on_event_ball_pos.bind(this),
-            [Cmd.ePlayerIsShootedRes]: this.on_event_player_is_shooted.bind(this),
-            [Cmd.eGameResultRes]: this.on_event_game_result.bind(this),
-            [Cmd.eTotalGameResultRes]: this.on_event_game_total_result.bind(this),
-            [Cmd.eUserEmojRes]: this.on_event_emoj.bind(this),
+            [GameHoodleProto.XY_ID.eGameStartRes]: this.on_event_game_start.bind(this),
+            [GameHoodleProto.XY_ID.ePlayerFirstBallPosRes]: this.on_event_first_ball_pos.bind(this),
+            [GameHoodleProto.XY_ID.ePlayerPowerRes]: this.on_event_player_power.bind(this),
+            [GameHoodleProto.XY_ID.ePlayerShootRes]: this.on_event_player_shoot.bind(this),
+            [GameHoodleProto.XY_ID.ePlayerBallPosRes]: this.on_event_ball_pos.bind(this),
+            [GameHoodleProto.XY_ID.ePlayerIsShootedRes]: this.on_event_player_is_shooted.bind(this),
+            [GameHoodleProto.XY_ID.eGameResultRes]: this.on_event_game_result.bind(this),
+            [GameHoodleProto.XY_ID.eTotalGameResultRes]: this.on_event_game_total_result.bind(this),
+            [GameHoodleProto.XY_ID.eUserEmojRes]: this.on_event_emoj.bind(this),
         }
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.GameHoodle) {
+        if (stype !== Stype.S_TYPE.GameHoodle) {
             return;
         }
         if (this._cmd_handler_map[ctype]) {

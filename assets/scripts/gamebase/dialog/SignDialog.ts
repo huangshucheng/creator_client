@@ -3,13 +3,13 @@
 import UIDialog from '../../framework/uibase/UIDialog';
 import Response from '../../framework/protocol/Response';
 import UserInfo from '../../framework/common/UserInfo';
-import { Stype } from '../../framework/protocol/Stype';
 import LobbySendSystem from '../scene/lobbyScene/sendMsg/LobbySendSystem';
 import { Cmd } from '../../framework/protocol/protofile/SystemProto';
 import DialogManager from '../../framework/manager/DialogManager';
 import CellManager from '../../framework/manager/CellManager';
 import { Cell } from '../../framework/cell/Cell';
 import { AudioManager } from '../../framework/manager/AudioManager';
+import Stype from '../../framework/protocol/Stype';
 
 const { ccclass, property } = cc._decorator;
 
@@ -35,7 +35,7 @@ export default class SignDialog extends UIDialog {
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.GameSystem) {
+        if (stype !== Stype.S_TYPE.GameHoodle) {
             return;
         }
 

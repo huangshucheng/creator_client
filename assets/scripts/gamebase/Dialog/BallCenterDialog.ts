@@ -8,10 +8,10 @@ import { ResourceManager } from '../../framework/manager/ResourceManager';
 import ArrayUtil from '../../framework/utils/ArrayUtil';
 import DialogManager from '../../framework/manager/DialogManager';
 import GameHoodleConfig from '../../framework/config/GameHoodleConfig';
-import { Stype } from '../../framework/protocol/Stype';
 import StringUtil from '../../framework/utils/StringUtil';
 import CommonDialog from './CommonDialog';
 import { AudioManager } from '../../framework/manager/AudioManager';
+import Stype from '../../framework/protocol/Stype';
 
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
@@ -43,7 +43,7 @@ export default class BallCenterDialog extends UIDialog {
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any){
-        if (stype !== Stype.GameHoodle) {
+        if (stype !== Stype.S_TYPE.GameHoodle) {
             return;
         }
 

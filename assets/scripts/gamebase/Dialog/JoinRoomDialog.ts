@@ -1,11 +1,11 @@
 import UIDialog from '../../framework/uibase/UIDialog';
 import StringUtil from '../../framework/utils/StringUtil';
 import Response from '../../framework/protocol/Response';
-import { Stype } from '../../framework/protocol/Stype';
 import CellManager from '../../framework/manager/CellManager';
 import DialogManager from '../../framework/manager/DialogManager';
 import { Cell } from '../../framework/cell/Cell';
 import { AudioManager } from '../../framework/manager/AudioManager';
+import Stype from '../../framework/protocol/Stype';
 
 const { ccclass, property } = cc._decorator;
 
@@ -32,7 +32,7 @@ export default class JoinRoomDialog extends UIDialog {
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.GameHoodle) {
+        if (stype !== Stype.S_TYPE.GameHoodle) {
             return;
         }
         if (this._cmd_handler_map[ctype]) {

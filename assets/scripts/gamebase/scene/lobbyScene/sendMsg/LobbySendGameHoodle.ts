@@ -1,17 +1,17 @@
 import NetWork from '../../../../framework/network/NetWork';
-import { Stype } from '../../../../framework/protocol/Stype';
-import { Cmd } from '../../../../framework/protocol/protofile/GameHoodleProto';
 import CellManager from '../../../../framework/manager/CellManager';
+import Stype from '../../../../framework/protocol/Stype';
+import GameHoodleProto from '../../../../framework/protocol/protofile/GameHoodleProto';
 
 export default class LobbySendGameHoodleMsg {
     
     static send(ctype:number, body?:any){
-        NetWork.getInstance().send_msg(Stype.GameHoodle,ctype,body)
+        NetWork.getInstance().send_msg(Stype.S_TYPE.GameHoodle,ctype,body)
     }
 
     //登录游戏服务
     static send_login_logic(){
-        // LobbySendGameHoodleMsg.send(Cmd.eLoginLogicReq);
+        // LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eLoginLogicReq);
         CellManager.getInstance().start("CellLoginLogic", null, 5);
     }
 
@@ -30,27 +30,27 @@ export default class LobbySendGameHoodleMsg {
             return;
         }
         console.log("hcc>>send_join_room: " , roomid);
-        LobbySendGameHoodleMsg.send(Cmd.eJoinRoomReq, {roomid: roomid});
+        LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eJoinRoomReq, {roomid: roomid});
     }
 
     //退出房间
     static send_exit_room(){
-        LobbySendGameHoodleMsg.send(Cmd.eExitRoomReq);
+        LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eExitRoomReq);
     }
 
     //解散房间
     static send_dessolve_room(){
-        LobbySendGameHoodleMsg.send(Cmd.eDessolveReq);
+        LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eDessolveReq);
     }
 
     //是否创建了房间
     static send_get_room_status(){
-        LobbySendGameHoodleMsg.send(Cmd.eGetRoomStatusReq);
+        LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eGetRoomStatusReq);
     }
 
     //游戏服务信息
     static send_get_ugame_info(){
-        LobbySendGameHoodleMsg.send(Cmd.eUserGameInfoReq);
+        LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserGameInfoReq);
     }
 
     //返回房间
@@ -66,12 +66,12 @@ export default class LobbySendGameHoodleMsg {
 
     //玩家取消匹配
     static send_user_stop_match(){
-        LobbySendGameHoodleMsg.send(Cmd.eUserStopMatchReq);
+        LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserStopMatchReq);
     }
 
     //获取小球信息
     static send_get_uball_info(){
-        LobbySendGameHoodleMsg.send(Cmd.eUserBallInfoReq)
+        LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserBallInfoReq)
     }
 
     //合成，销售小球
@@ -84,12 +84,12 @@ export default class LobbySendGameHoodleMsg {
             level: level,
             count: count,
         }
-        LobbySendGameHoodleMsg.send(Cmd.eUpdateUserBallReq,body);
+        LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUpdateUserBallReq,body);
     }
 
     //获取小球信息
     static send_get_room_list_config() {
-        LobbySendGameHoodleMsg.send(Cmd.eRoomListConfigReq);
+        LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eRoomListConfigReq);
     }
 
 }

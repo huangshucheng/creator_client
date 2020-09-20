@@ -1,11 +1,11 @@
 import NetWork from '../../../../framework/network/NetWork';
-import { Stype } from '../../../../framework/protocol/Stype';
 import CellManager from '../../../../framework/manager/CellManager';
+import Stype from '../../../../framework/protocol/Stype';
 
 export default class LoginSendAuthMsg {
     
     static send(ctype:number, body:any){
-        NetWork.getInstance().send_msg(Stype.Auth,ctype,body)
+        NetWork.getInstance().send_msg(Stype.S_TYPE.Auth,ctype,body)
     }
 
     static send_guest_login(guest_key:string){

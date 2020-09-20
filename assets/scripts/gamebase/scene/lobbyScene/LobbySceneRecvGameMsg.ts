@@ -1,5 +1,4 @@
 import UIController from '../../../framework/uibase/UIController';
-import { Cmd, CmdName } from "../../../framework/protocol/protofile/GameHoodleProto";
 import Response from '../../../framework/protocol/Response';
 import SceneManager from '../../../framework/manager/SceneManager';
 import UserInfo from '../../../framework/common/UserInfo';
@@ -8,11 +7,12 @@ import DialogManager from '../../../framework/manager/DialogManager';
 import LobbyScene from './LobbyScene';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import RoomData from '../../common/RoomData';
-import { Stype } from '../../../framework/protocol/Stype';
 import GameSendGameHoodleMsg from '../gameScene/sendMsg/GameSendGameHoodle';
 import CommonDialog from '../../dialog/CommonDialog';
 import MatchDialog from '../../dialog/MatchDialog';
 import LobbySendAuthMsg from './sendMsg/LobbySendAuthMsg';
+import Stype from '../../../framework/protocol/Stype';
+import GameHoodleProto from '../../../framework/protocol/protofile/GameHoodleProto';
 
 const {ccclass, property} = cc._decorator;
 
@@ -30,25 +30,25 @@ export default class LobbySceneRecvGameMsg extends UIController {
 
     add_cmd_handler_map(){
         this._cmd_handler_map = {
-            [Cmd.eLoginLogicRes]: this.on_event_login_logic.bind(this),
-            [Cmd.eCreateRoomRes]: this.on_event_create_room.bind(this),
-            [Cmd.eJoinRoomRes]: this.on_event_join_room.bind(this),
-            [Cmd.eExitRoomRes]: this.on_event_exit_room.bind(this),
-            [Cmd.eDessolveRes]: this.on_event_dessolve_room.bind(this),
-            [Cmd.eGetRoomStatusRes]: this.on_event_get_room_status.bind(this),
-            [Cmd.eBackRoomRes]: this.on_event_back_room.bind(this),
-            [Cmd.eUserMatchRes]: this.on_event_match.bind(this),
-            [Cmd.eUserStopMatchRes]: this.on_event_match_stop.bind(this),
-            [Cmd.eUserGameInfoRes]: this.on_event_ugame_info.bind(this),
-            [Cmd.eUserConfigRes]: this.on_event_ugame_config_info.bind(this),
-            [Cmd.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer.bind(this),
-            [Cmd.eUserPlayAgainStartRes]: this.on_event_play_again_start.bind(this),
-            [Cmd.eRoomListConfigRes]: this.on_event_room_config.bind(this),
+            [GameHoodleProto.XY_ID.eLoginLogicRes]: this.on_event_login_logic.bind(this),
+            [GameHoodleProto.XY_ID.eCreateRoomRes]: this.on_event_create_room.bind(this),
+            [GameHoodleProto.XY_ID.eJoinRoomRes]: this.on_event_join_room.bind(this),
+            [GameHoodleProto.XY_ID.eExitRoomRes]: this.on_event_exit_room.bind(this),
+            [GameHoodleProto.XY_ID.eDessolveRes]: this.on_event_dessolve_room.bind(this),
+            [GameHoodleProto.XY_ID.eGetRoomStatusRes]: this.on_event_get_room_status.bind(this),
+            [GameHoodleProto.XY_ID.eBackRoomRes]: this.on_event_back_room.bind(this),
+            [GameHoodleProto.XY_ID.eUserMatchRes]: this.on_event_match.bind(this),
+            [GameHoodleProto.XY_ID.eUserStopMatchRes]: this.on_event_match_stop.bind(this),
+            [GameHoodleProto.XY_ID.eUserGameInfoRes]: this.on_event_ugame_info.bind(this),
+            [GameHoodleProto.XY_ID.eUserConfigRes]: this.on_event_ugame_config_info.bind(this),
+            [GameHoodleProto.XY_ID.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer.bind(this),
+            [GameHoodleProto.XY_ID.eUserPlayAgainStartRes]: this.on_event_play_again_start.bind(this),
+            [GameHoodleProto.XY_ID.eRoomListConfigRes]: this.on_event_room_config.bind(this),
         }
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.GameHoodle) {
+        if (stype !== Stype.S_TYPE.GameHoodle) {
             return;
         }
         if (this._cmd_handler_map[ctype]) {

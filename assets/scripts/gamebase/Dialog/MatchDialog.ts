@@ -5,8 +5,7 @@ import { CmdName, Cmd } from '../../framework/protocol/protofile/GameHoodleProto
 import Response from '../../framework/protocol/Response';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import StringUtil from '../../framework/utils/StringUtil';
-import { Stype } from '../../framework/protocol/Stype';
-
+import Stype from '../../framework/protocol/Stype';
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
 const { ccclass, property } = cc._decorator;
@@ -32,7 +31,7 @@ export default class MatchDialog extends UIDialog {
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.GameHoodle) {
+        if (stype !== Stype.S_TYPE.GameHoodle) {
             return;
         }
 

@@ -3,9 +3,9 @@ import ProtoTools from './ProtoTools';
 import ProtoManater from '../manager/ProtoManager';
 import EventManager from '../manager/EventManager';
 import ProtoCmd from '../protocol/ProtoCmd';
-import { Stype,StypeName } from '../protocol/Stype';
 import EventDefine from '../config/EventDefine';
 import GameAppConfig from '../config/GameAppConfig';
+import Stype from '../protocol/Stype';
 
 export interface ISocketDelegate {
     on_socket_open(): void;
@@ -44,7 +44,7 @@ export class SocketDelegate implements ISocketDelegate {
 
         console.log("\n\n###########################>>>recvstart")
         if (cmd_name){
-            console.log("Svr=", StypeName[decode_cmd.stype], ",xyname=", cmd_name, ",xyid=" + decode_cmd.ctype);
+            console.log("Svr=", Stype.S_NAME[decode_cmd.stype], " ,XY_NAME=", cmd_name, " ,XY_ID=" + decode_cmd.ctype);
             let cmdbody = ""
             try {
                 cmdbody = JSON.stringify(decode_cmd.body)    

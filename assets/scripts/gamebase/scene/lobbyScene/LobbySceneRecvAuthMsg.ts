@@ -1,6 +1,5 @@
 import UIController from '../../../framework/uibase/UIController';
 import EventManager from '../../../framework/manager/EventManager';
-import { Cmd, CmdName } from "../../../framework/protocol/protofile/AuthProto";
 import Response from '../../../framework/protocol/Response';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LoginScene from '../LoginScene/LoginScene';
@@ -11,8 +10,9 @@ import DialogManager from '../../../framework/manager/DialogManager';
 import EventDefine from '../../../framework/config/EventDefine';
 import LobbySendAuthMsg from './sendMsg/LobbySendAuthMsg';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
-import { Stype } from '../../../framework/protocol/Stype';
 import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
+import Stype from '../../../framework/protocol/Stype';
+import AuthProto from '../../../framework/protocol/protofile/AuthProto';
 
 const {ccclass, property} = cc._decorator;
 
@@ -34,18 +34,18 @@ export default class LobbySceneRecvAuthMsg extends UIController {
     
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [Cmd.eUnameLoginRes]: this.on_event_uname_login.bind(this),
-            [Cmd.eGuestLoginRes]: this.on_event_guest_login.bind(this),
-            [Cmd.eWeChatLoginRes]: this.on_event_wechat_login.bind(this),
-            [Cmd.eWeChatSessionLoginRes]: this.on_event_wechat_session_login.bind(this),
-            [Cmd.eGetUserCenterInfoRes]: this.on_event_center_info.bind(this),
-            [Cmd.eLoginOutRes]: this.on_event_login_out.bind(this),
-            [Cmd.eReloginRes]: this.on_event_relogin.bind(this),
+            [AuthProto.XY_ID.RES_UNAMELOGIN]: this.on_event_uname_login.bind(this),
+            [AuthProto.XY_ID.RES_GUESTLOGIN]: this.on_event_guest_login.bind(this),
+            [AuthProto.XY_ID.RES_WECHATLOGIN]: this.on_event_wechat_login.bind(this),
+            [AuthProto.XY_ID.RES_WECHATSESSIONLOGIN]: this.on_event_wechat_session_login.bind(this),
+            [AuthProto.XY_ID.RES_USERCENTERINFO]: this.on_event_center_info.bind(this),
+            [AuthProto.XY_ID.RES_LOGINOUT]: this.on_event_login_out.bind(this),
+            [AuthProto.XY_ID.PUSH_RELOGIN]: this.on_event_relogin.bind(this),
         }
     }
     
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.Auth) {
+        if (stype !== Stype.S_TYPE.Auth) {
             return;
         }
 
@@ -145,7 +145,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
 
     on_event_center_info(body:any){
         if (body){
-            let udataStr = body.usercenterinfostring
+            let udataStr = body.usercenterinfo
             if(udataStr){
                 UserInfo.set_uinfo(udataStr)
                 this.do_on_view("LobbySceneShowUI","show_user_info");

@@ -1,10 +1,10 @@
 import UIController from '../../../framework/uibase/UIController';
 import Response from '../../../framework/protocol/Response';
-import { Stype } from '../../../framework/protocol/Stype';
-import { Cmd } from '../../../framework/protocol/protofile/GameHoodleProto';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LobbyScene from '../lobbyScene/LobbyScene';
 import DialogManager from '../../../framework/manager/DialogManager';
+import Stype from '../../../framework/protocol/Stype';
+import GameHoodleProto from '../../../framework/protocol/protofile/GameHoodleProto';
 
 const {ccclass, property} = cc._decorator;
 
@@ -22,12 +22,12 @@ export default class LoginSceneRecvGameMsg extends UIController {
 
     add_cmd_handler_map(){
         this._cmd_handler_map = {
-            [Cmd.eLoginLogicRes]: this.on_event_login_logic.bind(this),
+            [GameHoodleProto.XY_ID.eLoginLogicRes]: this.on_event_login_logic.bind(this),
         }
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.GameHoodle) {
+        if (stype !== Stype.S_TYPE.GameHoodle) {
             return;
         }
 

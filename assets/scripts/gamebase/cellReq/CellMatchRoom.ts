@@ -1,21 +1,21 @@
-import { Stype } from '../../framework/protocol/Stype';
-import { Cmd } from '../../framework/protocol/protofile/GameHoodleProto';
 import CellBase = require('../../framework/cell/CellBase');
 import DialogManager from '../../framework/manager/DialogManager';
 import { Cell } from '../../framework/cell/Cell';
+import Stype from '../../framework/protocol/Stype';
+import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
 
 class CellMatchRoom extends CellBase {
 
     start(body:any, timeOutTime:number): boolean {
         DialogManager.getInstance().show_loading_dialog();
-        if (!super.start(body, Stype.GameHoodle, Cmd.eUserMatchReq, timeOutTime)) {
+        if (!super.start(body, Stype.S_TYPE.GameHoodle, GameHoodleProto.XY_ID.eUserMatchReq, timeOutTime)) {
             return false;
         }
         return true;
     }
 
     onMsgReceive(stype:number, ctype:number, body:any) {
-        if (stype != Stype.GameHoodle || ctype != Cmd.eUserMatchRes){
+        if (stype != Stype.S_TYPE.GameHoodle || ctype != GameHoodleProto.XY_ID.eUserMatchRes){
             return;
         }
         this.success(body);

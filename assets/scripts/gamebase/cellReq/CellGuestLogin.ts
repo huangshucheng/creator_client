@@ -1,22 +1,21 @@
-import { Stype } from '../../framework/protocol/Stype';
-import { Cmd } from '../../framework/protocol/protofile/AuthProto';
-
 import CellBase = require('../../framework/cell/CellBase');
 import DialogManager from '../../framework/manager/DialogManager';
 import { Cell } from '../../framework/cell/Cell';
+import Stype from '../../framework/protocol/Stype';
+import AuthProto from '../../framework/protocol/protofile/AuthProto';
 
 class CellGuestLogin extends CellBase {
 
     start(body:any, timeOutTime:number): boolean {
         DialogManager.getInstance().show_loading_dialog();
-        if (!super.start(body, Stype.Auth, Cmd.eGuestLoginReq, timeOutTime)) {
+        if (!super.start(body, Stype.S_TYPE.Auth, AuthProto.XY_ID.REQ_GUESTLOGIN, timeOutTime)) {
             return false;
         }
         return true;
     }
 
     onMsgReceive(stype:number, ctype:number, body:any) {
-        if (stype != Stype.Auth || ctype != Cmd.eGuestLoginRes){
+        if (stype != Stype.S_TYPE.Auth || ctype != AuthProto.XY_ID.RES_GUESTLOGIN){
             return;
         }
         this.success(body);

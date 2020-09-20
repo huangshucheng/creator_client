@@ -9,1688 +9,1768 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.SystemProto = (function() {
+$root.system = (function() {
 
     /**
-     * Namespace SystemProto.
-     * @exports SystemProto
+     * Namespace system.
+     * @exports system
      * @namespace
      */
-    var SystemProto = {};
+    var system = {};
 
-    /**
-     * Cmd enum.
-     * @name SystemProto.Cmd
-     * @enum {string}
-     * @property {number} INVALED=0 INVALED value
-     * @property {number} eLoginRewardConfigReq=1 eLoginRewardConfigReq value
-     * @property {number} eLoginRewardConfigRes=2 eLoginRewardConfigRes value
-     * @property {number} eLoginRewardSignReq=3 eLoginRewardSignReq value
-     * @property {number} eLoginRewardSignRes=4 eLoginRewardSignRes value
-     * @property {number} eUserShareReq=5 eUserShareReq value
-     * @property {number} eUserShareRes=6 eUserShareRes value
-     * @property {number} eUserAddChipReq=7 eUserAddChipReq value
-     * @property {number} eUserAddChipRes=8 eUserAddChipRes value
-     */
-    SystemProto.Cmd = (function() {
-        var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "INVALED"] = 0;
-        values[valuesById[1] = "eLoginRewardConfigReq"] = 1;
-        values[valuesById[2] = "eLoginRewardConfigRes"] = 2;
-        values[valuesById[3] = "eLoginRewardSignReq"] = 3;
-        values[valuesById[4] = "eLoginRewardSignRes"] = 4;
-        values[valuesById[5] = "eUserShareReq"] = 5;
-        values[valuesById[6] = "eUserShareRes"] = 6;
-        values[valuesById[7] = "eUserAddChipReq"] = 7;
-        values[valuesById[8] = "eUserAddChipRes"] = 8;
-        return values;
-    })();
-
-    SystemProto.LoginRewardConfigReq = (function() {
+    system.client = (function() {
 
         /**
-         * Properties of a LoginRewardConfigReq.
-         * @memberof SystemProto
-         * @interface ILoginRewardConfigReq
+         * Namespace client.
+         * @memberof system
+         * @namespace
          */
+        var client = {};
 
-        /**
-         * Constructs a new LoginRewardConfigReq.
-         * @memberof SystemProto
-         * @classdesc Represents a LoginRewardConfigReq.
-         * @implements ILoginRewardConfigReq
-         * @constructor
-         * @param {SystemProto.ILoginRewardConfigReq=} [properties] Properties to set
-         */
-        function LoginRewardConfigReq(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
+        client.proto = (function() {
 
-        /**
-         * Creates a new LoginRewardConfigReq instance using the specified properties.
-         * @function create
-         * @memberof SystemProto.LoginRewardConfigReq
-         * @static
-         * @param {SystemProto.ILoginRewardConfigReq=} [properties] Properties to set
-         * @returns {SystemProto.LoginRewardConfigReq} LoginRewardConfigReq instance
-         */
-        LoginRewardConfigReq.create = function create(properties) {
-            return new LoginRewardConfigReq(properties);
-        };
+            /**
+             * Namespace proto.
+             * @memberof system.client
+             * @namespace
+             */
+            var proto = {};
 
-        /**
-         * Encodes the specified LoginRewardConfigReq message. Does not implicitly {@link SystemProto.LoginRewardConfigReq.verify|verify} messages.
-         * @function encode
-         * @memberof SystemProto.LoginRewardConfigReq
-         * @static
-         * @param {SystemProto.ILoginRewardConfigReq} message LoginRewardConfigReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LoginRewardConfigReq.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
+            /**
+             * XY_ID enum.
+             * @name system.client.proto.XY_ID
+             * @enum {string}
+             * @property {number} INVALED=0 INVALED value
+             * @property {number} REQ_LOGINREWARDCONFIG=101 REQ_LOGINREWARDCONFIG value
+             * @property {number} RES_LOGINREWARDCONFIG=102 RES_LOGINREWARDCONFIG value
+             * @property {number} REQ_LOGINREWARDSIGN=103 REQ_LOGINREWARDSIGN value
+             * @property {number} RES_LOGINREWARDSIGN=104 RES_LOGINREWARDSIGN value
+             * @property {number} REQ_USERSHARE=105 REQ_USERSHARE value
+             * @property {number} RES_USERSHARE=106 RES_USERSHARE value
+             * @property {number} REQ_USERADDCHIP=107 REQ_USERADDCHIP value
+             * @property {number} RES_USERADDCHIP=108 RES_USERADDCHIP value
+             */
+            proto.XY_ID = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "INVALED"] = 0;
+                values[valuesById[101] = "REQ_LOGINREWARDCONFIG"] = 101;
+                values[valuesById[102] = "RES_LOGINREWARDCONFIG"] = 102;
+                values[valuesById[103] = "REQ_LOGINREWARDSIGN"] = 103;
+                values[valuesById[104] = "RES_LOGINREWARDSIGN"] = 104;
+                values[valuesById[105] = "REQ_USERSHARE"] = 105;
+                values[valuesById[106] = "RES_USERSHARE"] = 106;
+                values[valuesById[107] = "REQ_USERADDCHIP"] = 107;
+                values[valuesById[108] = "RES_USERADDCHIP"] = 108;
+                return values;
+            })();
 
-        /**
-         * Encodes the specified LoginRewardConfigReq message, length delimited. Does not implicitly {@link SystemProto.LoginRewardConfigReq.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof SystemProto.LoginRewardConfigReq
-         * @static
-         * @param {SystemProto.ILoginRewardConfigReq} message LoginRewardConfigReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LoginRewardConfigReq.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
+            proto.reqLoginRewardConfig = (function() {
 
-        /**
-         * Decodes a LoginRewardConfigReq message from the specified reader or buffer.
-         * @function decode
-         * @memberof SystemProto.LoginRewardConfigReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {SystemProto.LoginRewardConfigReq} LoginRewardConfigReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LoginRewardConfigReq.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SystemProto.LoginRewardConfigReq();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                /**
+                 * Properties of a reqLoginRewardConfig.
+                 * @memberof system.client.proto
+                 * @interface IreqLoginRewardConfig
+                 */
+
+                /**
+                 * Constructs a new reqLoginRewardConfig.
+                 * @memberof system.client.proto
+                 * @classdesc Represents a reqLoginRewardConfig.
+                 * @implements IreqLoginRewardConfig
+                 * @constructor
+                 * @param {system.client.proto.IreqLoginRewardConfig=} [properties] Properties to set
+                 */
+                function reqLoginRewardConfig(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
                 }
-            }
-            return message;
-        };
 
-        /**
-         * Decodes a LoginRewardConfigReq message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof SystemProto.LoginRewardConfigReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {SystemProto.LoginRewardConfigReq} LoginRewardConfigReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LoginRewardConfigReq.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
+                /**
+                 * Creates a new reqLoginRewardConfig instance using the specified properties.
+                 * @function create
+                 * @memberof system.client.proto.reqLoginRewardConfig
+                 * @static
+                 * @param {system.client.proto.IreqLoginRewardConfig=} [properties] Properties to set
+                 * @returns {system.client.proto.reqLoginRewardConfig} reqLoginRewardConfig instance
+                 */
+                reqLoginRewardConfig.create = function create(properties) {
+                    return new reqLoginRewardConfig(properties);
+                };
 
-        /**
-         * Verifies a LoginRewardConfigReq message.
-         * @function verify
-         * @memberof SystemProto.LoginRewardConfigReq
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        LoginRewardConfigReq.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
+                /**
+                 * Encodes the specified reqLoginRewardConfig message. Does not implicitly {@link system.client.proto.reqLoginRewardConfig.verify|verify} messages.
+                 * @function encode
+                 * @memberof system.client.proto.reqLoginRewardConfig
+                 * @static
+                 * @param {system.client.proto.IreqLoginRewardConfig} message reqLoginRewardConfig message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                reqLoginRewardConfig.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    return writer;
+                };
 
-        /**
-         * Creates a LoginRewardConfigReq message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof SystemProto.LoginRewardConfigReq
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {SystemProto.LoginRewardConfigReq} LoginRewardConfigReq
-         */
-        LoginRewardConfigReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.SystemProto.LoginRewardConfigReq)
-                return object;
-            return new $root.SystemProto.LoginRewardConfigReq();
-        };
+                /**
+                 * Encodes the specified reqLoginRewardConfig message, length delimited. Does not implicitly {@link system.client.proto.reqLoginRewardConfig.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof system.client.proto.reqLoginRewardConfig
+                 * @static
+                 * @param {system.client.proto.IreqLoginRewardConfig} message reqLoginRewardConfig message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                reqLoginRewardConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
 
-        /**
-         * Creates a plain object from a LoginRewardConfigReq message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof SystemProto.LoginRewardConfigReq
-         * @static
-         * @param {SystemProto.LoginRewardConfigReq} message LoginRewardConfigReq
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        LoginRewardConfigReq.toObject = function toObject() {
-            return {};
-        };
+                /**
+                 * Decodes a reqLoginRewardConfig message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof system.client.proto.reqLoginRewardConfig
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {system.client.proto.reqLoginRewardConfig} reqLoginRewardConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                reqLoginRewardConfig.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.system.client.proto.reqLoginRewardConfig();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
 
-        /**
-         * Converts this LoginRewardConfigReq to JSON.
-         * @function toJSON
-         * @memberof SystemProto.LoginRewardConfigReq
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        LoginRewardConfigReq.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
+                /**
+                 * Decodes a reqLoginRewardConfig message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof system.client.proto.reqLoginRewardConfig
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {system.client.proto.reqLoginRewardConfig} reqLoginRewardConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                reqLoginRewardConfig.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
 
-        return LoginRewardConfigReq;
-    })();
+                /**
+                 * Verifies a reqLoginRewardConfig message.
+                 * @function verify
+                 * @memberof system.client.proto.reqLoginRewardConfig
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                reqLoginRewardConfig.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    return null;
+                };
 
-    SystemProto.LoginRewardConfigRes = (function() {
+                /**
+                 * Creates a reqLoginRewardConfig message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof system.client.proto.reqLoginRewardConfig
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {system.client.proto.reqLoginRewardConfig} reqLoginRewardConfig
+                 */
+                reqLoginRewardConfig.fromObject = function fromObject(object) {
+                    if (object instanceof $root.system.client.proto.reqLoginRewardConfig)
+                        return object;
+                    return new $root.system.client.proto.reqLoginRewardConfig();
+                };
 
-        /**
-         * Properties of a LoginRewardConfigRes.
-         * @memberof SystemProto
-         * @interface ILoginRewardConfigRes
-         * @property {number} status LoginRewardConfigRes status
-         * @property {number|null} [signdays] LoginRewardConfigRes signdays
-         * @property {boolean|null} [istodaysign] LoginRewardConfigRes istodaysign
-         * @property {string|null} [config] LoginRewardConfigRes config
-         */
+                /**
+                 * Creates a plain object from a reqLoginRewardConfig message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof system.client.proto.reqLoginRewardConfig
+                 * @static
+                 * @param {system.client.proto.reqLoginRewardConfig} message reqLoginRewardConfig
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                reqLoginRewardConfig.toObject = function toObject() {
+                    return {};
+                };
 
-        /**
-         * Constructs a new LoginRewardConfigRes.
-         * @memberof SystemProto
-         * @classdesc Represents a LoginRewardConfigRes.
-         * @implements ILoginRewardConfigRes
-         * @constructor
-         * @param {SystemProto.ILoginRewardConfigRes=} [properties] Properties to set
-         */
-        function LoginRewardConfigRes(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
+                /**
+                 * Converts this reqLoginRewardConfig to JSON.
+                 * @function toJSON
+                 * @memberof system.client.proto.reqLoginRewardConfig
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                reqLoginRewardConfig.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
 
-        /**
-         * LoginRewardConfigRes status.
-         * @member {number} status
-         * @memberof SystemProto.LoginRewardConfigRes
-         * @instance
-         */
-        LoginRewardConfigRes.prototype.status = 0;
+                return reqLoginRewardConfig;
+            })();
 
-        /**
-         * LoginRewardConfigRes signdays.
-         * @member {number} signdays
-         * @memberof SystemProto.LoginRewardConfigRes
-         * @instance
-         */
-        LoginRewardConfigRes.prototype.signdays = 0;
+            proto.ResLoginRewardConfig = (function() {
 
-        /**
-         * LoginRewardConfigRes istodaysign.
-         * @member {boolean} istodaysign
-         * @memberof SystemProto.LoginRewardConfigRes
-         * @instance
-         */
-        LoginRewardConfigRes.prototype.istodaysign = false;
+                /**
+                 * Properties of a ResLoginRewardConfig.
+                 * @memberof system.client.proto
+                 * @interface IResLoginRewardConfig
+                 * @property {number} status ResLoginRewardConfig status
+                 * @property {number|null} [signdays] ResLoginRewardConfig signdays
+                 * @property {boolean|null} [istodaysign] ResLoginRewardConfig istodaysign
+                 * @property {string|null} [config] ResLoginRewardConfig config
+                 */
 
-        /**
-         * LoginRewardConfigRes config.
-         * @member {string} config
-         * @memberof SystemProto.LoginRewardConfigRes
-         * @instance
-         */
-        LoginRewardConfigRes.prototype.config = "";
-
-        /**
-         * Creates a new LoginRewardConfigRes instance using the specified properties.
-         * @function create
-         * @memberof SystemProto.LoginRewardConfigRes
-         * @static
-         * @param {SystemProto.ILoginRewardConfigRes=} [properties] Properties to set
-         * @returns {SystemProto.LoginRewardConfigRes} LoginRewardConfigRes instance
-         */
-        LoginRewardConfigRes.create = function create(properties) {
-            return new LoginRewardConfigRes(properties);
-        };
-
-        /**
-         * Encodes the specified LoginRewardConfigRes message. Does not implicitly {@link SystemProto.LoginRewardConfigRes.verify|verify} messages.
-         * @function encode
-         * @memberof SystemProto.LoginRewardConfigRes
-         * @static
-         * @param {SystemProto.ILoginRewardConfigRes} message LoginRewardConfigRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LoginRewardConfigRes.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
-            if (message.signdays != null && message.hasOwnProperty("signdays"))
-                writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.signdays);
-            if (message.istodaysign != null && message.hasOwnProperty("istodaysign"))
-                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.istodaysign);
-            if (message.config != null && message.hasOwnProperty("config"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.config);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified LoginRewardConfigRes message, length delimited. Does not implicitly {@link SystemProto.LoginRewardConfigRes.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof SystemProto.LoginRewardConfigRes
-         * @static
-         * @param {SystemProto.ILoginRewardConfigRes} message LoginRewardConfigRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LoginRewardConfigRes.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a LoginRewardConfigRes message from the specified reader or buffer.
-         * @function decode
-         * @memberof SystemProto.LoginRewardConfigRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {SystemProto.LoginRewardConfigRes} LoginRewardConfigRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LoginRewardConfigRes.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SystemProto.LoginRewardConfigRes();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.status = reader.sint32();
-                    break;
-                case 2:
-                    message.signdays = reader.sint32();
-                    break;
-                case 3:
-                    message.istodaysign = reader.bool();
-                    break;
-                case 4:
-                    message.config = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                /**
+                 * Constructs a new ResLoginRewardConfig.
+                 * @memberof system.client.proto
+                 * @classdesc Represents a ResLoginRewardConfig.
+                 * @implements IResLoginRewardConfig
+                 * @constructor
+                 * @param {system.client.proto.IResLoginRewardConfig=} [properties] Properties to set
+                 */
+                function ResLoginRewardConfig(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
                 }
-            }
-            if (!message.hasOwnProperty("status"))
-                throw $util.ProtocolError("missing required 'status'", { instance: message });
-            return message;
-        };
 
-        /**
-         * Decodes a LoginRewardConfigRes message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof SystemProto.LoginRewardConfigRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {SystemProto.LoginRewardConfigRes} LoginRewardConfigRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LoginRewardConfigRes.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
+                /**
+                 * ResLoginRewardConfig status.
+                 * @member {number} status
+                 * @memberof system.client.proto.ResLoginRewardConfig
+                 * @instance
+                 */
+                ResLoginRewardConfig.prototype.status = 0;
 
-        /**
-         * Verifies a LoginRewardConfigRes message.
-         * @function verify
-         * @memberof SystemProto.LoginRewardConfigRes
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        LoginRewardConfigRes.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isInteger(message.status))
-                return "status: integer expected";
-            if (message.signdays != null && message.hasOwnProperty("signdays"))
-                if (!$util.isInteger(message.signdays))
-                    return "signdays: integer expected";
-            if (message.istodaysign != null && message.hasOwnProperty("istodaysign"))
-                if (typeof message.istodaysign !== "boolean")
-                    return "istodaysign: boolean expected";
-            if (message.config != null && message.hasOwnProperty("config"))
-                if (!$util.isString(message.config))
-                    return "config: string expected";
-            return null;
-        };
+                /**
+                 * ResLoginRewardConfig signdays.
+                 * @member {number} signdays
+                 * @memberof system.client.proto.ResLoginRewardConfig
+                 * @instance
+                 */
+                ResLoginRewardConfig.prototype.signdays = 0;
 
-        /**
-         * Creates a LoginRewardConfigRes message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof SystemProto.LoginRewardConfigRes
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {SystemProto.LoginRewardConfigRes} LoginRewardConfigRes
-         */
-        LoginRewardConfigRes.fromObject = function fromObject(object) {
-            if (object instanceof $root.SystemProto.LoginRewardConfigRes)
-                return object;
-            var message = new $root.SystemProto.LoginRewardConfigRes();
-            if (object.status != null)
-                message.status = object.status | 0;
-            if (object.signdays != null)
-                message.signdays = object.signdays | 0;
-            if (object.istodaysign != null)
-                message.istodaysign = Boolean(object.istodaysign);
-            if (object.config != null)
-                message.config = String(object.config);
-            return message;
-        };
+                /**
+                 * ResLoginRewardConfig istodaysign.
+                 * @member {boolean} istodaysign
+                 * @memberof system.client.proto.ResLoginRewardConfig
+                 * @instance
+                 */
+                ResLoginRewardConfig.prototype.istodaysign = false;
 
-        /**
-         * Creates a plain object from a LoginRewardConfigRes message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof SystemProto.LoginRewardConfigRes
-         * @static
-         * @param {SystemProto.LoginRewardConfigRes} message LoginRewardConfigRes
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        LoginRewardConfigRes.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.status = 0;
-                object.signdays = 0;
-                object.istodaysign = false;
-                object.config = "";
-            }
-            if (message.status != null && message.hasOwnProperty("status"))
-                object.status = message.status;
-            if (message.signdays != null && message.hasOwnProperty("signdays"))
-                object.signdays = message.signdays;
-            if (message.istodaysign != null && message.hasOwnProperty("istodaysign"))
-                object.istodaysign = message.istodaysign;
-            if (message.config != null && message.hasOwnProperty("config"))
-                object.config = message.config;
-            return object;
-        };
+                /**
+                 * ResLoginRewardConfig config.
+                 * @member {string} config
+                 * @memberof system.client.proto.ResLoginRewardConfig
+                 * @instance
+                 */
+                ResLoginRewardConfig.prototype.config = "";
 
-        /**
-         * Converts this LoginRewardConfigRes to JSON.
-         * @function toJSON
-         * @memberof SystemProto.LoginRewardConfigRes
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        LoginRewardConfigRes.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
+                /**
+                 * Creates a new ResLoginRewardConfig instance using the specified properties.
+                 * @function create
+                 * @memberof system.client.proto.ResLoginRewardConfig
+                 * @static
+                 * @param {system.client.proto.IResLoginRewardConfig=} [properties] Properties to set
+                 * @returns {system.client.proto.ResLoginRewardConfig} ResLoginRewardConfig instance
+                 */
+                ResLoginRewardConfig.create = function create(properties) {
+                    return new ResLoginRewardConfig(properties);
+                };
 
-        return LoginRewardConfigRes;
-    })();
+                /**
+                 * Encodes the specified ResLoginRewardConfig message. Does not implicitly {@link system.client.proto.ResLoginRewardConfig.verify|verify} messages.
+                 * @function encode
+                 * @memberof system.client.proto.ResLoginRewardConfig
+                 * @static
+                 * @param {system.client.proto.IResLoginRewardConfig} message ResLoginRewardConfig message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResLoginRewardConfig.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+                    if (message.signdays != null && message.hasOwnProperty("signdays"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.signdays);
+                    if (message.istodaysign != null && message.hasOwnProperty("istodaysign"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).bool(message.istodaysign);
+                    if (message.config != null && message.hasOwnProperty("config"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.config);
+                    return writer;
+                };
 
-    SystemProto.LoginRewardSignReq = (function() {
+                /**
+                 * Encodes the specified ResLoginRewardConfig message, length delimited. Does not implicitly {@link system.client.proto.ResLoginRewardConfig.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof system.client.proto.ResLoginRewardConfig
+                 * @static
+                 * @param {system.client.proto.IResLoginRewardConfig} message ResLoginRewardConfig message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResLoginRewardConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
 
-        /**
-         * Properties of a LoginRewardSignReq.
-         * @memberof SystemProto
-         * @interface ILoginRewardSignReq
-         * @property {number} signofday LoginRewardSignReq signofday
-         */
+                /**
+                 * Decodes a ResLoginRewardConfig message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof system.client.proto.ResLoginRewardConfig
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {system.client.proto.ResLoginRewardConfig} ResLoginRewardConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResLoginRewardConfig.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.system.client.proto.ResLoginRewardConfig();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.status = reader.sint32();
+                            break;
+                        case 2:
+                            message.signdays = reader.sint32();
+                            break;
+                        case 3:
+                            message.istodaysign = reader.bool();
+                            break;
+                        case 4:
+                            message.config = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    if (!message.hasOwnProperty("status"))
+                        throw $util.ProtocolError("missing required 'status'", { instance: message });
+                    return message;
+                };
 
-        /**
-         * Constructs a new LoginRewardSignReq.
-         * @memberof SystemProto
-         * @classdesc Represents a LoginRewardSignReq.
-         * @implements ILoginRewardSignReq
-         * @constructor
-         * @param {SystemProto.ILoginRewardSignReq=} [properties] Properties to set
-         */
-        function LoginRewardSignReq(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
+                /**
+                 * Decodes a ResLoginRewardConfig message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof system.client.proto.ResLoginRewardConfig
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {system.client.proto.ResLoginRewardConfig} ResLoginRewardConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResLoginRewardConfig.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
 
-        /**
-         * LoginRewardSignReq signofday.
-         * @member {number} signofday
-         * @memberof SystemProto.LoginRewardSignReq
-         * @instance
-         */
-        LoginRewardSignReq.prototype.signofday = 0;
+                /**
+                 * Verifies a ResLoginRewardConfig message.
+                 * @function verify
+                 * @memberof system.client.proto.ResLoginRewardConfig
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResLoginRewardConfig.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (!$util.isInteger(message.status))
+                        return "status: integer expected";
+                    if (message.signdays != null && message.hasOwnProperty("signdays"))
+                        if (!$util.isInteger(message.signdays))
+                            return "signdays: integer expected";
+                    if (message.istodaysign != null && message.hasOwnProperty("istodaysign"))
+                        if (typeof message.istodaysign !== "boolean")
+                            return "istodaysign: boolean expected";
+                    if (message.config != null && message.hasOwnProperty("config"))
+                        if (!$util.isString(message.config))
+                            return "config: string expected";
+                    return null;
+                };
 
-        /**
-         * Creates a new LoginRewardSignReq instance using the specified properties.
-         * @function create
-         * @memberof SystemProto.LoginRewardSignReq
-         * @static
-         * @param {SystemProto.ILoginRewardSignReq=} [properties] Properties to set
-         * @returns {SystemProto.LoginRewardSignReq} LoginRewardSignReq instance
-         */
-        LoginRewardSignReq.create = function create(properties) {
-            return new LoginRewardSignReq(properties);
-        };
+                /**
+                 * Creates a ResLoginRewardConfig message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof system.client.proto.ResLoginRewardConfig
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {system.client.proto.ResLoginRewardConfig} ResLoginRewardConfig
+                 */
+                ResLoginRewardConfig.fromObject = function fromObject(object) {
+                    if (object instanceof $root.system.client.proto.ResLoginRewardConfig)
+                        return object;
+                    var message = new $root.system.client.proto.ResLoginRewardConfig();
+                    if (object.status != null)
+                        message.status = object.status | 0;
+                    if (object.signdays != null)
+                        message.signdays = object.signdays | 0;
+                    if (object.istodaysign != null)
+                        message.istodaysign = Boolean(object.istodaysign);
+                    if (object.config != null)
+                        message.config = String(object.config);
+                    return message;
+                };
 
-        /**
-         * Encodes the specified LoginRewardSignReq message. Does not implicitly {@link SystemProto.LoginRewardSignReq.verify|verify} messages.
-         * @function encode
-         * @memberof SystemProto.LoginRewardSignReq
-         * @static
-         * @param {SystemProto.ILoginRewardSignReq} message LoginRewardSignReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LoginRewardSignReq.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.signofday);
-            return writer;
-        };
+                /**
+                 * Creates a plain object from a ResLoginRewardConfig message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof system.client.proto.ResLoginRewardConfig
+                 * @static
+                 * @param {system.client.proto.ResLoginRewardConfig} message ResLoginRewardConfig
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResLoginRewardConfig.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.status = 0;
+                        object.signdays = 0;
+                        object.istodaysign = false;
+                        object.config = "";
+                    }
+                    if (message.status != null && message.hasOwnProperty("status"))
+                        object.status = message.status;
+                    if (message.signdays != null && message.hasOwnProperty("signdays"))
+                        object.signdays = message.signdays;
+                    if (message.istodaysign != null && message.hasOwnProperty("istodaysign"))
+                        object.istodaysign = message.istodaysign;
+                    if (message.config != null && message.hasOwnProperty("config"))
+                        object.config = message.config;
+                    return object;
+                };
 
-        /**
-         * Encodes the specified LoginRewardSignReq message, length delimited. Does not implicitly {@link SystemProto.LoginRewardSignReq.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof SystemProto.LoginRewardSignReq
-         * @static
-         * @param {SystemProto.ILoginRewardSignReq} message LoginRewardSignReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LoginRewardSignReq.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
+                /**
+                 * Converts this ResLoginRewardConfig to JSON.
+                 * @function toJSON
+                 * @memberof system.client.proto.ResLoginRewardConfig
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResLoginRewardConfig.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
 
-        /**
-         * Decodes a LoginRewardSignReq message from the specified reader or buffer.
-         * @function decode
-         * @memberof SystemProto.LoginRewardSignReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {SystemProto.LoginRewardSignReq} LoginRewardSignReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LoginRewardSignReq.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SystemProto.LoginRewardSignReq();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.signofday = reader.sint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                /**
+                 * STATUS enum.
+                 * @name system.client.proto.ResLoginRewardConfig.STATUS
+                 * @enum {string}
+                 * @property {number} SUCCESS=0 SUCCESS value
+                 * @property {number} FAILED=1 FAILED value
+                 */
+                ResLoginRewardConfig.STATUS = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "SUCCESS"] = 0;
+                    values[valuesById[1] = "FAILED"] = 1;
+                    return values;
+                })();
+
+                return ResLoginRewardConfig;
+            })();
+
+            proto.ReqLoginRewardSign = (function() {
+
+                /**
+                 * Properties of a ReqLoginRewardSign.
+                 * @memberof system.client.proto
+                 * @interface IReqLoginRewardSign
+                 * @property {number} signofday ReqLoginRewardSign signofday
+                 */
+
+                /**
+                 * Constructs a new ReqLoginRewardSign.
+                 * @memberof system.client.proto
+                 * @classdesc Represents a ReqLoginRewardSign.
+                 * @implements IReqLoginRewardSign
+                 * @constructor
+                 * @param {system.client.proto.IReqLoginRewardSign=} [properties] Properties to set
+                 */
+                function ReqLoginRewardSign(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
                 }
-            }
-            if (!message.hasOwnProperty("signofday"))
-                throw $util.ProtocolError("missing required 'signofday'", { instance: message });
-            return message;
-        };
 
-        /**
-         * Decodes a LoginRewardSignReq message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof SystemProto.LoginRewardSignReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {SystemProto.LoginRewardSignReq} LoginRewardSignReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LoginRewardSignReq.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
+                /**
+                 * ReqLoginRewardSign signofday.
+                 * @member {number} signofday
+                 * @memberof system.client.proto.ReqLoginRewardSign
+                 * @instance
+                 */
+                ReqLoginRewardSign.prototype.signofday = 0;
 
-        /**
-         * Verifies a LoginRewardSignReq message.
-         * @function verify
-         * @memberof SystemProto.LoginRewardSignReq
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        LoginRewardSignReq.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isInteger(message.signofday))
-                return "signofday: integer expected";
-            return null;
-        };
+                /**
+                 * Creates a new ReqLoginRewardSign instance using the specified properties.
+                 * @function create
+                 * @memberof system.client.proto.ReqLoginRewardSign
+                 * @static
+                 * @param {system.client.proto.IReqLoginRewardSign=} [properties] Properties to set
+                 * @returns {system.client.proto.ReqLoginRewardSign} ReqLoginRewardSign instance
+                 */
+                ReqLoginRewardSign.create = function create(properties) {
+                    return new ReqLoginRewardSign(properties);
+                };
 
-        /**
-         * Creates a LoginRewardSignReq message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof SystemProto.LoginRewardSignReq
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {SystemProto.LoginRewardSignReq} LoginRewardSignReq
-         */
-        LoginRewardSignReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.SystemProto.LoginRewardSignReq)
-                return object;
-            var message = new $root.SystemProto.LoginRewardSignReq();
-            if (object.signofday != null)
-                message.signofday = object.signofday | 0;
-            return message;
-        };
+                /**
+                 * Encodes the specified ReqLoginRewardSign message. Does not implicitly {@link system.client.proto.ReqLoginRewardSign.verify|verify} messages.
+                 * @function encode
+                 * @memberof system.client.proto.ReqLoginRewardSign
+                 * @static
+                 * @param {system.client.proto.IReqLoginRewardSign} message ReqLoginRewardSign message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ReqLoginRewardSign.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.signofday);
+                    return writer;
+                };
 
-        /**
-         * Creates a plain object from a LoginRewardSignReq message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof SystemProto.LoginRewardSignReq
-         * @static
-         * @param {SystemProto.LoginRewardSignReq} message LoginRewardSignReq
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        LoginRewardSignReq.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.signofday = 0;
-            if (message.signofday != null && message.hasOwnProperty("signofday"))
-                object.signofday = message.signofday;
-            return object;
-        };
+                /**
+                 * Encodes the specified ReqLoginRewardSign message, length delimited. Does not implicitly {@link system.client.proto.ReqLoginRewardSign.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof system.client.proto.ReqLoginRewardSign
+                 * @static
+                 * @param {system.client.proto.IReqLoginRewardSign} message ReqLoginRewardSign message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ReqLoginRewardSign.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
 
-        /**
-         * Converts this LoginRewardSignReq to JSON.
-         * @function toJSON
-         * @memberof SystemProto.LoginRewardSignReq
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        LoginRewardSignReq.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
+                /**
+                 * Decodes a ReqLoginRewardSign message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof system.client.proto.ReqLoginRewardSign
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {system.client.proto.ReqLoginRewardSign} ReqLoginRewardSign
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ReqLoginRewardSign.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.system.client.proto.ReqLoginRewardSign();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.signofday = reader.sint32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    if (!message.hasOwnProperty("signofday"))
+                        throw $util.ProtocolError("missing required 'signofday'", { instance: message });
+                    return message;
+                };
 
-        return LoginRewardSignReq;
-    })();
+                /**
+                 * Decodes a ReqLoginRewardSign message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof system.client.proto.ReqLoginRewardSign
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {system.client.proto.ReqLoginRewardSign} ReqLoginRewardSign
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ReqLoginRewardSign.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
 
-    SystemProto.LoginRewardSignRes = (function() {
+                /**
+                 * Verifies a ReqLoginRewardSign message.
+                 * @function verify
+                 * @memberof system.client.proto.ReqLoginRewardSign
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ReqLoginRewardSign.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (!$util.isInteger(message.signofday))
+                        return "signofday: integer expected";
+                    return null;
+                };
 
-        /**
-         * Properties of a LoginRewardSignRes.
-         * @memberof SystemProto
-         * @interface ILoginRewardSignRes
-         * @property {number} status LoginRewardSignRes status
-         * @property {string|null} [rewardconfig] LoginRewardSignRes rewardconfig
-         */
+                /**
+                 * Creates a ReqLoginRewardSign message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof system.client.proto.ReqLoginRewardSign
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {system.client.proto.ReqLoginRewardSign} ReqLoginRewardSign
+                 */
+                ReqLoginRewardSign.fromObject = function fromObject(object) {
+                    if (object instanceof $root.system.client.proto.ReqLoginRewardSign)
+                        return object;
+                    var message = new $root.system.client.proto.ReqLoginRewardSign();
+                    if (object.signofday != null)
+                        message.signofday = object.signofday | 0;
+                    return message;
+                };
 
-        /**
-         * Constructs a new LoginRewardSignRes.
-         * @memberof SystemProto
-         * @classdesc Represents a LoginRewardSignRes.
-         * @implements ILoginRewardSignRes
-         * @constructor
-         * @param {SystemProto.ILoginRewardSignRes=} [properties] Properties to set
-         */
-        function LoginRewardSignRes(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
+                /**
+                 * Creates a plain object from a ReqLoginRewardSign message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof system.client.proto.ReqLoginRewardSign
+                 * @static
+                 * @param {system.client.proto.ReqLoginRewardSign} message ReqLoginRewardSign
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ReqLoginRewardSign.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.signofday = 0;
+                    if (message.signofday != null && message.hasOwnProperty("signofday"))
+                        object.signofday = message.signofday;
+                    return object;
+                };
 
-        /**
-         * LoginRewardSignRes status.
-         * @member {number} status
-         * @memberof SystemProto.LoginRewardSignRes
-         * @instance
-         */
-        LoginRewardSignRes.prototype.status = 0;
+                /**
+                 * Converts this ReqLoginRewardSign to JSON.
+                 * @function toJSON
+                 * @memberof system.client.proto.ReqLoginRewardSign
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ReqLoginRewardSign.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
 
-        /**
-         * LoginRewardSignRes rewardconfig.
-         * @member {string} rewardconfig
-         * @memberof SystemProto.LoginRewardSignRes
-         * @instance
-         */
-        LoginRewardSignRes.prototype.rewardconfig = "";
+                return ReqLoginRewardSign;
+            })();
 
-        /**
-         * Creates a new LoginRewardSignRes instance using the specified properties.
-         * @function create
-         * @memberof SystemProto.LoginRewardSignRes
-         * @static
-         * @param {SystemProto.ILoginRewardSignRes=} [properties] Properties to set
-         * @returns {SystemProto.LoginRewardSignRes} LoginRewardSignRes instance
-         */
-        LoginRewardSignRes.create = function create(properties) {
-            return new LoginRewardSignRes(properties);
-        };
+            proto.ResLoginRewardSign = (function() {
 
-        /**
-         * Encodes the specified LoginRewardSignRes message. Does not implicitly {@link SystemProto.LoginRewardSignRes.verify|verify} messages.
-         * @function encode
-         * @memberof SystemProto.LoginRewardSignRes
-         * @static
-         * @param {SystemProto.ILoginRewardSignRes} message LoginRewardSignRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LoginRewardSignRes.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
-            if (message.rewardconfig != null && message.hasOwnProperty("rewardconfig"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.rewardconfig);
-            return writer;
-        };
+                /**
+                 * Properties of a ResLoginRewardSign.
+                 * @memberof system.client.proto
+                 * @interface IResLoginRewardSign
+                 * @property {number} status ResLoginRewardSign status
+                 * @property {string|null} [rewardconfig] ResLoginRewardSign rewardconfig
+                 */
 
-        /**
-         * Encodes the specified LoginRewardSignRes message, length delimited. Does not implicitly {@link SystemProto.LoginRewardSignRes.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof SystemProto.LoginRewardSignRes
-         * @static
-         * @param {SystemProto.ILoginRewardSignRes} message LoginRewardSignRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        LoginRewardSignRes.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a LoginRewardSignRes message from the specified reader or buffer.
-         * @function decode
-         * @memberof SystemProto.LoginRewardSignRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {SystemProto.LoginRewardSignRes} LoginRewardSignRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LoginRewardSignRes.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SystemProto.LoginRewardSignRes();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.status = reader.sint32();
-                    break;
-                case 2:
-                    message.rewardconfig = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                /**
+                 * Constructs a new ResLoginRewardSign.
+                 * @memberof system.client.proto
+                 * @classdesc Represents a ResLoginRewardSign.
+                 * @implements IResLoginRewardSign
+                 * @constructor
+                 * @param {system.client.proto.IResLoginRewardSign=} [properties] Properties to set
+                 */
+                function ResLoginRewardSign(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
                 }
-            }
-            if (!message.hasOwnProperty("status"))
-                throw $util.ProtocolError("missing required 'status'", { instance: message });
-            return message;
-        };
 
-        /**
-         * Decodes a LoginRewardSignRes message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof SystemProto.LoginRewardSignRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {SystemProto.LoginRewardSignRes} LoginRewardSignRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        LoginRewardSignRes.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
+                /**
+                 * ResLoginRewardSign status.
+                 * @member {number} status
+                 * @memberof system.client.proto.ResLoginRewardSign
+                 * @instance
+                 */
+                ResLoginRewardSign.prototype.status = 0;
 
-        /**
-         * Verifies a LoginRewardSignRes message.
-         * @function verify
-         * @memberof SystemProto.LoginRewardSignRes
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        LoginRewardSignRes.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isInteger(message.status))
-                return "status: integer expected";
-            if (message.rewardconfig != null && message.hasOwnProperty("rewardconfig"))
-                if (!$util.isString(message.rewardconfig))
-                    return "rewardconfig: string expected";
-            return null;
-        };
+                /**
+                 * ResLoginRewardSign rewardconfig.
+                 * @member {string} rewardconfig
+                 * @memberof system.client.proto.ResLoginRewardSign
+                 * @instance
+                 */
+                ResLoginRewardSign.prototype.rewardconfig = "";
 
-        /**
-         * Creates a LoginRewardSignRes message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof SystemProto.LoginRewardSignRes
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {SystemProto.LoginRewardSignRes} LoginRewardSignRes
-         */
-        LoginRewardSignRes.fromObject = function fromObject(object) {
-            if (object instanceof $root.SystemProto.LoginRewardSignRes)
-                return object;
-            var message = new $root.SystemProto.LoginRewardSignRes();
-            if (object.status != null)
-                message.status = object.status | 0;
-            if (object.rewardconfig != null)
-                message.rewardconfig = String(object.rewardconfig);
-            return message;
-        };
+                /**
+                 * Creates a new ResLoginRewardSign instance using the specified properties.
+                 * @function create
+                 * @memberof system.client.proto.ResLoginRewardSign
+                 * @static
+                 * @param {system.client.proto.IResLoginRewardSign=} [properties] Properties to set
+                 * @returns {system.client.proto.ResLoginRewardSign} ResLoginRewardSign instance
+                 */
+                ResLoginRewardSign.create = function create(properties) {
+                    return new ResLoginRewardSign(properties);
+                };
 
-        /**
-         * Creates a plain object from a LoginRewardSignRes message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof SystemProto.LoginRewardSignRes
-         * @static
-         * @param {SystemProto.LoginRewardSignRes} message LoginRewardSignRes
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        LoginRewardSignRes.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.status = 0;
-                object.rewardconfig = "";
-            }
-            if (message.status != null && message.hasOwnProperty("status"))
-                object.status = message.status;
-            if (message.rewardconfig != null && message.hasOwnProperty("rewardconfig"))
-                object.rewardconfig = message.rewardconfig;
-            return object;
-        };
+                /**
+                 * Encodes the specified ResLoginRewardSign message. Does not implicitly {@link system.client.proto.ResLoginRewardSign.verify|verify} messages.
+                 * @function encode
+                 * @memberof system.client.proto.ResLoginRewardSign
+                 * @static
+                 * @param {system.client.proto.IResLoginRewardSign} message ResLoginRewardSign message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResLoginRewardSign.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+                    if (message.rewardconfig != null && message.hasOwnProperty("rewardconfig"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.rewardconfig);
+                    return writer;
+                };
 
-        /**
-         * Converts this LoginRewardSignRes to JSON.
-         * @function toJSON
-         * @memberof SystemProto.LoginRewardSignRes
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        LoginRewardSignRes.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
+                /**
+                 * Encodes the specified ResLoginRewardSign message, length delimited. Does not implicitly {@link system.client.proto.ResLoginRewardSign.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof system.client.proto.ResLoginRewardSign
+                 * @static
+                 * @param {system.client.proto.IResLoginRewardSign} message ResLoginRewardSign message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResLoginRewardSign.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
 
-        return LoginRewardSignRes;
-    })();
+                /**
+                 * Decodes a ResLoginRewardSign message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof system.client.proto.ResLoginRewardSign
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {system.client.proto.ResLoginRewardSign} ResLoginRewardSign
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResLoginRewardSign.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.system.client.proto.ResLoginRewardSign();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.status = reader.sint32();
+                            break;
+                        case 2:
+                            message.rewardconfig = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    if (!message.hasOwnProperty("status"))
+                        throw $util.ProtocolError("missing required 'status'", { instance: message });
+                    return message;
+                };
 
-    SystemProto.UserShareReq = (function() {
+                /**
+                 * Decodes a ResLoginRewardSign message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof system.client.proto.ResLoginRewardSign
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {system.client.proto.ResLoginRewardSign} ResLoginRewardSign
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResLoginRewardSign.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
 
-        /**
-         * Properties of a UserShareReq.
-         * @memberof SystemProto
-         * @interface IUserShareReq
-         */
+                /**
+                 * Verifies a ResLoginRewardSign message.
+                 * @function verify
+                 * @memberof system.client.proto.ResLoginRewardSign
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResLoginRewardSign.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (!$util.isInteger(message.status))
+                        return "status: integer expected";
+                    if (message.rewardconfig != null && message.hasOwnProperty("rewardconfig"))
+                        if (!$util.isString(message.rewardconfig))
+                            return "rewardconfig: string expected";
+                    return null;
+                };
 
-        /**
-         * Constructs a new UserShareReq.
-         * @memberof SystemProto
-         * @classdesc Represents a UserShareReq.
-         * @implements IUserShareReq
-         * @constructor
-         * @param {SystemProto.IUserShareReq=} [properties] Properties to set
-         */
-        function UserShareReq(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
+                /**
+                 * Creates a ResLoginRewardSign message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof system.client.proto.ResLoginRewardSign
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {system.client.proto.ResLoginRewardSign} ResLoginRewardSign
+                 */
+                ResLoginRewardSign.fromObject = function fromObject(object) {
+                    if (object instanceof $root.system.client.proto.ResLoginRewardSign)
+                        return object;
+                    var message = new $root.system.client.proto.ResLoginRewardSign();
+                    if (object.status != null)
+                        message.status = object.status | 0;
+                    if (object.rewardconfig != null)
+                        message.rewardconfig = String(object.rewardconfig);
+                    return message;
+                };
 
-        /**
-         * Creates a new UserShareReq instance using the specified properties.
-         * @function create
-         * @memberof SystemProto.UserShareReq
-         * @static
-         * @param {SystemProto.IUserShareReq=} [properties] Properties to set
-         * @returns {SystemProto.UserShareReq} UserShareReq instance
-         */
-        UserShareReq.create = function create(properties) {
-            return new UserShareReq(properties);
-        };
+                /**
+                 * Creates a plain object from a ResLoginRewardSign message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof system.client.proto.ResLoginRewardSign
+                 * @static
+                 * @param {system.client.proto.ResLoginRewardSign} message ResLoginRewardSign
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResLoginRewardSign.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.status = 0;
+                        object.rewardconfig = "";
+                    }
+                    if (message.status != null && message.hasOwnProperty("status"))
+                        object.status = message.status;
+                    if (message.rewardconfig != null && message.hasOwnProperty("rewardconfig"))
+                        object.rewardconfig = message.rewardconfig;
+                    return object;
+                };
 
-        /**
-         * Encodes the specified UserShareReq message. Does not implicitly {@link SystemProto.UserShareReq.verify|verify} messages.
-         * @function encode
-         * @memberof SystemProto.UserShareReq
-         * @static
-         * @param {SystemProto.IUserShareReq} message UserShareReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        UserShareReq.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
+                /**
+                 * Converts this ResLoginRewardSign to JSON.
+                 * @function toJSON
+                 * @memberof system.client.proto.ResLoginRewardSign
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResLoginRewardSign.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
 
-        /**
-         * Encodes the specified UserShareReq message, length delimited. Does not implicitly {@link SystemProto.UserShareReq.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof SystemProto.UserShareReq
-         * @static
-         * @param {SystemProto.IUserShareReq} message UserShareReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        UserShareReq.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
+                /**
+                 * STATUS enum.
+                 * @name system.client.proto.ResLoginRewardSign.STATUS
+                 * @enum {string}
+                 * @property {number} SUCCESS=0 SUCCESS value
+                 * @property {number} FAILED=1 FAILED value
+                 */
+                ResLoginRewardSign.STATUS = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "SUCCESS"] = 0;
+                    values[valuesById[1] = "FAILED"] = 1;
+                    return values;
+                })();
 
-        /**
-         * Decodes a UserShareReq message from the specified reader or buffer.
-         * @function decode
-         * @memberof SystemProto.UserShareReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {SystemProto.UserShareReq} UserShareReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        UserShareReq.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SystemProto.UserShareReq();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                return ResLoginRewardSign;
+            })();
+
+            proto.ReqUserShare = (function() {
+
+                /**
+                 * Properties of a ReqUserShare.
+                 * @memberof system.client.proto
+                 * @interface IReqUserShare
+                 */
+
+                /**
+                 * Constructs a new ReqUserShare.
+                 * @memberof system.client.proto
+                 * @classdesc Represents a ReqUserShare.
+                 * @implements IReqUserShare
+                 * @constructor
+                 * @param {system.client.proto.IReqUserShare=} [properties] Properties to set
+                 */
+                function ReqUserShare(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
                 }
-            }
-            return message;
-        };
 
-        /**
-         * Decodes a UserShareReq message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof SystemProto.UserShareReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {SystemProto.UserShareReq} UserShareReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        UserShareReq.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
+                /**
+                 * Creates a new ReqUserShare instance using the specified properties.
+                 * @function create
+                 * @memberof system.client.proto.ReqUserShare
+                 * @static
+                 * @param {system.client.proto.IReqUserShare=} [properties] Properties to set
+                 * @returns {system.client.proto.ReqUserShare} ReqUserShare instance
+                 */
+                ReqUserShare.create = function create(properties) {
+                    return new ReqUserShare(properties);
+                };
 
-        /**
-         * Verifies a UserShareReq message.
-         * @function verify
-         * @memberof SystemProto.UserShareReq
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        UserShareReq.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
+                /**
+                 * Encodes the specified ReqUserShare message. Does not implicitly {@link system.client.proto.ReqUserShare.verify|verify} messages.
+                 * @function encode
+                 * @memberof system.client.proto.ReqUserShare
+                 * @static
+                 * @param {system.client.proto.IReqUserShare} message ReqUserShare message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ReqUserShare.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    return writer;
+                };
 
-        /**
-         * Creates a UserShareReq message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof SystemProto.UserShareReq
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {SystemProto.UserShareReq} UserShareReq
-         */
-        UserShareReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.SystemProto.UserShareReq)
-                return object;
-            return new $root.SystemProto.UserShareReq();
-        };
+                /**
+                 * Encodes the specified ReqUserShare message, length delimited. Does not implicitly {@link system.client.proto.ReqUserShare.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof system.client.proto.ReqUserShare
+                 * @static
+                 * @param {system.client.proto.IReqUserShare} message ReqUserShare message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ReqUserShare.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
 
-        /**
-         * Creates a plain object from a UserShareReq message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof SystemProto.UserShareReq
-         * @static
-         * @param {SystemProto.UserShareReq} message UserShareReq
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        UserShareReq.toObject = function toObject() {
-            return {};
-        };
+                /**
+                 * Decodes a ReqUserShare message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof system.client.proto.ReqUserShare
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {system.client.proto.ReqUserShare} ReqUserShare
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ReqUserShare.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.system.client.proto.ReqUserShare();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
 
-        /**
-         * Converts this UserShareReq to JSON.
-         * @function toJSON
-         * @memberof SystemProto.UserShareReq
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        UserShareReq.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
+                /**
+                 * Decodes a ReqUserShare message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof system.client.proto.ReqUserShare
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {system.client.proto.ReqUserShare} ReqUserShare
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ReqUserShare.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
 
-        return UserShareReq;
-    })();
+                /**
+                 * Verifies a ReqUserShare message.
+                 * @function verify
+                 * @memberof system.client.proto.ReqUserShare
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ReqUserShare.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    return null;
+                };
 
-    SystemProto.UserShareRes = (function() {
+                /**
+                 * Creates a ReqUserShare message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof system.client.proto.ReqUserShare
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {system.client.proto.ReqUserShare} ReqUserShare
+                 */
+                ReqUserShare.fromObject = function fromObject(object) {
+                    if (object instanceof $root.system.client.proto.ReqUserShare)
+                        return object;
+                    return new $root.system.client.proto.ReqUserShare();
+                };
 
-        /**
-         * Properties of a UserShareRes.
-         * @memberof SystemProto
-         * @interface IUserShareRes
-         * @property {number} status UserShareRes status
-         */
+                /**
+                 * Creates a plain object from a ReqUserShare message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof system.client.proto.ReqUserShare
+                 * @static
+                 * @param {system.client.proto.ReqUserShare} message ReqUserShare
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ReqUserShare.toObject = function toObject() {
+                    return {};
+                };
 
-        /**
-         * Constructs a new UserShareRes.
-         * @memberof SystemProto
-         * @classdesc Represents a UserShareRes.
-         * @implements IUserShareRes
-         * @constructor
-         * @param {SystemProto.IUserShareRes=} [properties] Properties to set
-         */
-        function UserShareRes(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
+                /**
+                 * Converts this ReqUserShare to JSON.
+                 * @function toJSON
+                 * @memberof system.client.proto.ReqUserShare
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ReqUserShare.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
 
-        /**
-         * UserShareRes status.
-         * @member {number} status
-         * @memberof SystemProto.UserShareRes
-         * @instance
-         */
-        UserShareRes.prototype.status = 0;
+                return ReqUserShare;
+            })();
 
-        /**
-         * Creates a new UserShareRes instance using the specified properties.
-         * @function create
-         * @memberof SystemProto.UserShareRes
-         * @static
-         * @param {SystemProto.IUserShareRes=} [properties] Properties to set
-         * @returns {SystemProto.UserShareRes} UserShareRes instance
-         */
-        UserShareRes.create = function create(properties) {
-            return new UserShareRes(properties);
-        };
+            proto.ResUserShare = (function() {
 
-        /**
-         * Encodes the specified UserShareRes message. Does not implicitly {@link SystemProto.UserShareRes.verify|verify} messages.
-         * @function encode
-         * @memberof SystemProto.UserShareRes
-         * @static
-         * @param {SystemProto.IUserShareRes} message UserShareRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        UserShareRes.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
-            return writer;
-        };
+                /**
+                 * Properties of a ResUserShare.
+                 * @memberof system.client.proto
+                 * @interface IResUserShare
+                 * @property {number} status ResUserShare status
+                 */
 
-        /**
-         * Encodes the specified UserShareRes message, length delimited. Does not implicitly {@link SystemProto.UserShareRes.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof SystemProto.UserShareRes
-         * @static
-         * @param {SystemProto.IUserShareRes} message UserShareRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        UserShareRes.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a UserShareRes message from the specified reader or buffer.
-         * @function decode
-         * @memberof SystemProto.UserShareRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {SystemProto.UserShareRes} UserShareRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        UserShareRes.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SystemProto.UserShareRes();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.status = reader.sint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                /**
+                 * Constructs a new ResUserShare.
+                 * @memberof system.client.proto
+                 * @classdesc Represents a ResUserShare.
+                 * @implements IResUserShare
+                 * @constructor
+                 * @param {system.client.proto.IResUserShare=} [properties] Properties to set
+                 */
+                function ResUserShare(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
                 }
-            }
-            if (!message.hasOwnProperty("status"))
-                throw $util.ProtocolError("missing required 'status'", { instance: message });
-            return message;
-        };
 
-        /**
-         * Decodes a UserShareRes message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof SystemProto.UserShareRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {SystemProto.UserShareRes} UserShareRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        UserShareRes.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
+                /**
+                 * ResUserShare status.
+                 * @member {number} status
+                 * @memberof system.client.proto.ResUserShare
+                 * @instance
+                 */
+                ResUserShare.prototype.status = 0;
 
-        /**
-         * Verifies a UserShareRes message.
-         * @function verify
-         * @memberof SystemProto.UserShareRes
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        UserShareRes.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isInteger(message.status))
-                return "status: integer expected";
-            return null;
-        };
+                /**
+                 * Creates a new ResUserShare instance using the specified properties.
+                 * @function create
+                 * @memberof system.client.proto.ResUserShare
+                 * @static
+                 * @param {system.client.proto.IResUserShare=} [properties] Properties to set
+                 * @returns {system.client.proto.ResUserShare} ResUserShare instance
+                 */
+                ResUserShare.create = function create(properties) {
+                    return new ResUserShare(properties);
+                };
 
-        /**
-         * Creates a UserShareRes message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof SystemProto.UserShareRes
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {SystemProto.UserShareRes} UserShareRes
-         */
-        UserShareRes.fromObject = function fromObject(object) {
-            if (object instanceof $root.SystemProto.UserShareRes)
-                return object;
-            var message = new $root.SystemProto.UserShareRes();
-            if (object.status != null)
-                message.status = object.status | 0;
-            return message;
-        };
+                /**
+                 * Encodes the specified ResUserShare message. Does not implicitly {@link system.client.proto.ResUserShare.verify|verify} messages.
+                 * @function encode
+                 * @memberof system.client.proto.ResUserShare
+                 * @static
+                 * @param {system.client.proto.IResUserShare} message ResUserShare message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResUserShare.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+                    return writer;
+                };
 
-        /**
-         * Creates a plain object from a UserShareRes message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof SystemProto.UserShareRes
-         * @static
-         * @param {SystemProto.UserShareRes} message UserShareRes
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        UserShareRes.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.status = 0;
-            if (message.status != null && message.hasOwnProperty("status"))
-                object.status = message.status;
-            return object;
-        };
+                /**
+                 * Encodes the specified ResUserShare message, length delimited. Does not implicitly {@link system.client.proto.ResUserShare.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof system.client.proto.ResUserShare
+                 * @static
+                 * @param {system.client.proto.IResUserShare} message ResUserShare message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResUserShare.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
 
-        /**
-         * Converts this UserShareRes to JSON.
-         * @function toJSON
-         * @memberof SystemProto.UserShareRes
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        UserShareRes.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
+                /**
+                 * Decodes a ResUserShare message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof system.client.proto.ResUserShare
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {system.client.proto.ResUserShare} ResUserShare
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResUserShare.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.system.client.proto.ResUserShare();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.status = reader.sint32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    if (!message.hasOwnProperty("status"))
+                        throw $util.ProtocolError("missing required 'status'", { instance: message });
+                    return message;
+                };
 
-        return UserShareRes;
-    })();
+                /**
+                 * Decodes a ResUserShare message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof system.client.proto.ResUserShare
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {system.client.proto.ResUserShare} ResUserShare
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResUserShare.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
 
-    SystemProto.UserAddChipReq = (function() {
+                /**
+                 * Verifies a ResUserShare message.
+                 * @function verify
+                 * @memberof system.client.proto.ResUserShare
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResUserShare.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (!$util.isInteger(message.status))
+                        return "status: integer expected";
+                    return null;
+                };
 
-        /**
-         * Properties of a UserAddChipReq.
-         * @memberof SystemProto
-         * @interface IUserAddChipReq
-         * @property {number} propid UserAddChipReq propid
-         * @property {number} propcount UserAddChipReq propcount
-         * @property {string|null} [config] UserAddChipReq config
-         */
+                /**
+                 * Creates a ResUserShare message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof system.client.proto.ResUserShare
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {system.client.proto.ResUserShare} ResUserShare
+                 */
+                ResUserShare.fromObject = function fromObject(object) {
+                    if (object instanceof $root.system.client.proto.ResUserShare)
+                        return object;
+                    var message = new $root.system.client.proto.ResUserShare();
+                    if (object.status != null)
+                        message.status = object.status | 0;
+                    return message;
+                };
 
-        /**
-         * Constructs a new UserAddChipReq.
-         * @memberof SystemProto
-         * @classdesc Represents a UserAddChipReq.
-         * @implements IUserAddChipReq
-         * @constructor
-         * @param {SystemProto.IUserAddChipReq=} [properties] Properties to set
-         */
-        function UserAddChipReq(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
+                /**
+                 * Creates a plain object from a ResUserShare message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof system.client.proto.ResUserShare
+                 * @static
+                 * @param {system.client.proto.ResUserShare} message ResUserShare
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResUserShare.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.status = 0;
+                    if (message.status != null && message.hasOwnProperty("status"))
+                        object.status = message.status;
+                    return object;
+                };
 
-        /**
-         * UserAddChipReq propid.
-         * @member {number} propid
-         * @memberof SystemProto.UserAddChipReq
-         * @instance
-         */
-        UserAddChipReq.prototype.propid = 0;
+                /**
+                 * Converts this ResUserShare to JSON.
+                 * @function toJSON
+                 * @memberof system.client.proto.ResUserShare
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResUserShare.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
 
-        /**
-         * UserAddChipReq propcount.
-         * @member {number} propcount
-         * @memberof SystemProto.UserAddChipReq
-         * @instance
-         */
-        UserAddChipReq.prototype.propcount = 0;
+                /**
+                 * STATUS enum.
+                 * @name system.client.proto.ResUserShare.STATUS
+                 * @enum {string}
+                 * @property {number} SUCCESS=0 SUCCESS value
+                 * @property {number} FAILED=1 FAILED value
+                 */
+                ResUserShare.STATUS = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "SUCCESS"] = 0;
+                    values[valuesById[1] = "FAILED"] = 1;
+                    return values;
+                })();
 
-        /**
-         * UserAddChipReq config.
-         * @member {string} config
-         * @memberof SystemProto.UserAddChipReq
-         * @instance
-         */
-        UserAddChipReq.prototype.config = "";
+                return ResUserShare;
+            })();
 
-        /**
-         * Creates a new UserAddChipReq instance using the specified properties.
-         * @function create
-         * @memberof SystemProto.UserAddChipReq
-         * @static
-         * @param {SystemProto.IUserAddChipReq=} [properties] Properties to set
-         * @returns {SystemProto.UserAddChipReq} UserAddChipReq instance
-         */
-        UserAddChipReq.create = function create(properties) {
-            return new UserAddChipReq(properties);
-        };
+            proto.ReqUserAddChip = (function() {
 
-        /**
-         * Encodes the specified UserAddChipReq message. Does not implicitly {@link SystemProto.UserAddChipReq.verify|verify} messages.
-         * @function encode
-         * @memberof SystemProto.UserAddChipReq
-         * @static
-         * @param {SystemProto.IUserAddChipReq} message UserAddChipReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        UserAddChipReq.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.propid);
-            writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propcount);
-            if (message.config != null && message.hasOwnProperty("config"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.config);
-            return writer;
-        };
+                /**
+                 * Properties of a ReqUserAddChip.
+                 * @memberof system.client.proto
+                 * @interface IReqUserAddChip
+                 * @property {number} propid ReqUserAddChip propid
+                 * @property {number} propcount ReqUserAddChip propcount
+                 * @property {string|null} [config] ReqUserAddChip config
+                 */
 
-        /**
-         * Encodes the specified UserAddChipReq message, length delimited. Does not implicitly {@link SystemProto.UserAddChipReq.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof SystemProto.UserAddChipReq
-         * @static
-         * @param {SystemProto.IUserAddChipReq} message UserAddChipReq message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        UserAddChipReq.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a UserAddChipReq message from the specified reader or buffer.
-         * @function decode
-         * @memberof SystemProto.UserAddChipReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {SystemProto.UserAddChipReq} UserAddChipReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        UserAddChipReq.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SystemProto.UserAddChipReq();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.propid = reader.sint32();
-                    break;
-                case 2:
-                    message.propcount = reader.sint32();
-                    break;
-                case 3:
-                    message.config = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                /**
+                 * Constructs a new ReqUserAddChip.
+                 * @memberof system.client.proto
+                 * @classdesc Represents a ReqUserAddChip.
+                 * @implements IReqUserAddChip
+                 * @constructor
+                 * @param {system.client.proto.IReqUserAddChip=} [properties] Properties to set
+                 */
+                function ReqUserAddChip(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
                 }
-            }
-            if (!message.hasOwnProperty("propid"))
-                throw $util.ProtocolError("missing required 'propid'", { instance: message });
-            if (!message.hasOwnProperty("propcount"))
-                throw $util.ProtocolError("missing required 'propcount'", { instance: message });
-            return message;
-        };
 
-        /**
-         * Decodes a UserAddChipReq message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof SystemProto.UserAddChipReq
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {SystemProto.UserAddChipReq} UserAddChipReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        UserAddChipReq.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
+                /**
+                 * ReqUserAddChip propid.
+                 * @member {number} propid
+                 * @memberof system.client.proto.ReqUserAddChip
+                 * @instance
+                 */
+                ReqUserAddChip.prototype.propid = 0;
 
-        /**
-         * Verifies a UserAddChipReq message.
-         * @function verify
-         * @memberof SystemProto.UserAddChipReq
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        UserAddChipReq.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isInteger(message.propid))
-                return "propid: integer expected";
-            if (!$util.isInteger(message.propcount))
-                return "propcount: integer expected";
-            if (message.config != null && message.hasOwnProperty("config"))
-                if (!$util.isString(message.config))
-                    return "config: string expected";
-            return null;
-        };
+                /**
+                 * ReqUserAddChip propcount.
+                 * @member {number} propcount
+                 * @memberof system.client.proto.ReqUserAddChip
+                 * @instance
+                 */
+                ReqUserAddChip.prototype.propcount = 0;
 
-        /**
-         * Creates a UserAddChipReq message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof SystemProto.UserAddChipReq
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {SystemProto.UserAddChipReq} UserAddChipReq
-         */
-        UserAddChipReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.SystemProto.UserAddChipReq)
-                return object;
-            var message = new $root.SystemProto.UserAddChipReq();
-            if (object.propid != null)
-                message.propid = object.propid | 0;
-            if (object.propcount != null)
-                message.propcount = object.propcount | 0;
-            if (object.config != null)
-                message.config = String(object.config);
-            return message;
-        };
+                /**
+                 * ReqUserAddChip config.
+                 * @member {string} config
+                 * @memberof system.client.proto.ReqUserAddChip
+                 * @instance
+                 */
+                ReqUserAddChip.prototype.config = "";
 
-        /**
-         * Creates a plain object from a UserAddChipReq message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof SystemProto.UserAddChipReq
-         * @static
-         * @param {SystemProto.UserAddChipReq} message UserAddChipReq
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        UserAddChipReq.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.propid = 0;
-                object.propcount = 0;
-                object.config = "";
-            }
-            if (message.propid != null && message.hasOwnProperty("propid"))
-                object.propid = message.propid;
-            if (message.propcount != null && message.hasOwnProperty("propcount"))
-                object.propcount = message.propcount;
-            if (message.config != null && message.hasOwnProperty("config"))
-                object.config = message.config;
-            return object;
-        };
+                /**
+                 * Creates a new ReqUserAddChip instance using the specified properties.
+                 * @function create
+                 * @memberof system.client.proto.ReqUserAddChip
+                 * @static
+                 * @param {system.client.proto.IReqUserAddChip=} [properties] Properties to set
+                 * @returns {system.client.proto.ReqUserAddChip} ReqUserAddChip instance
+                 */
+                ReqUserAddChip.create = function create(properties) {
+                    return new ReqUserAddChip(properties);
+                };
 
-        /**
-         * Converts this UserAddChipReq to JSON.
-         * @function toJSON
-         * @memberof SystemProto.UserAddChipReq
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        UserAddChipReq.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
+                /**
+                 * Encodes the specified ReqUserAddChip message. Does not implicitly {@link system.client.proto.ReqUserAddChip.verify|verify} messages.
+                 * @function encode
+                 * @memberof system.client.proto.ReqUserAddChip
+                 * @static
+                 * @param {system.client.proto.IReqUserAddChip} message ReqUserAddChip message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ReqUserAddChip.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.propid);
+                    writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propcount);
+                    if (message.config != null && message.hasOwnProperty("config"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.config);
+                    return writer;
+                };
 
-        return UserAddChipReq;
-    })();
+                /**
+                 * Encodes the specified ReqUserAddChip message, length delimited. Does not implicitly {@link system.client.proto.ReqUserAddChip.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof system.client.proto.ReqUserAddChip
+                 * @static
+                 * @param {system.client.proto.IReqUserAddChip} message ReqUserAddChip message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ReqUserAddChip.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
 
-    SystemProto.UserAddChipRes = (function() {
+                /**
+                 * Decodes a ReqUserAddChip message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof system.client.proto.ReqUserAddChip
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {system.client.proto.ReqUserAddChip} ReqUserAddChip
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ReqUserAddChip.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.system.client.proto.ReqUserAddChip();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.propid = reader.sint32();
+                            break;
+                        case 2:
+                            message.propcount = reader.sint32();
+                            break;
+                        case 3:
+                            message.config = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    if (!message.hasOwnProperty("propid"))
+                        throw $util.ProtocolError("missing required 'propid'", { instance: message });
+                    if (!message.hasOwnProperty("propcount"))
+                        throw $util.ProtocolError("missing required 'propcount'", { instance: message });
+                    return message;
+                };
 
-        /**
-         * Properties of a UserAddChipRes.
-         * @memberof SystemProto
-         * @interface IUserAddChipRes
-         * @property {number} status UserAddChipRes status
-         * @property {number|null} [propid] UserAddChipRes propid
-         * @property {number|null} [propcount] UserAddChipRes propcount
-         * @property {string|null} [config] UserAddChipRes config
-         */
+                /**
+                 * Decodes a ReqUserAddChip message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof system.client.proto.ReqUserAddChip
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {system.client.proto.ReqUserAddChip} ReqUserAddChip
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ReqUserAddChip.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
 
-        /**
-         * Constructs a new UserAddChipRes.
-         * @memberof SystemProto
-         * @classdesc Represents a UserAddChipRes.
-         * @implements IUserAddChipRes
-         * @constructor
-         * @param {SystemProto.IUserAddChipRes=} [properties] Properties to set
-         */
-        function UserAddChipRes(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
+                /**
+                 * Verifies a ReqUserAddChip message.
+                 * @function verify
+                 * @memberof system.client.proto.ReqUserAddChip
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ReqUserAddChip.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (!$util.isInteger(message.propid))
+                        return "propid: integer expected";
+                    if (!$util.isInteger(message.propcount))
+                        return "propcount: integer expected";
+                    if (message.config != null && message.hasOwnProperty("config"))
+                        if (!$util.isString(message.config))
+                            return "config: string expected";
+                    return null;
+                };
 
-        /**
-         * UserAddChipRes status.
-         * @member {number} status
-         * @memberof SystemProto.UserAddChipRes
-         * @instance
-         */
-        UserAddChipRes.prototype.status = 0;
+                /**
+                 * Creates a ReqUserAddChip message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof system.client.proto.ReqUserAddChip
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {system.client.proto.ReqUserAddChip} ReqUserAddChip
+                 */
+                ReqUserAddChip.fromObject = function fromObject(object) {
+                    if (object instanceof $root.system.client.proto.ReqUserAddChip)
+                        return object;
+                    var message = new $root.system.client.proto.ReqUserAddChip();
+                    if (object.propid != null)
+                        message.propid = object.propid | 0;
+                    if (object.propcount != null)
+                        message.propcount = object.propcount | 0;
+                    if (object.config != null)
+                        message.config = String(object.config);
+                    return message;
+                };
 
-        /**
-         * UserAddChipRes propid.
-         * @member {number} propid
-         * @memberof SystemProto.UserAddChipRes
-         * @instance
-         */
-        UserAddChipRes.prototype.propid = 0;
+                /**
+                 * Creates a plain object from a ReqUserAddChip message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof system.client.proto.ReqUserAddChip
+                 * @static
+                 * @param {system.client.proto.ReqUserAddChip} message ReqUserAddChip
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ReqUserAddChip.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.propid = 0;
+                        object.propcount = 0;
+                        object.config = "";
+                    }
+                    if (message.propid != null && message.hasOwnProperty("propid"))
+                        object.propid = message.propid;
+                    if (message.propcount != null && message.hasOwnProperty("propcount"))
+                        object.propcount = message.propcount;
+                    if (message.config != null && message.hasOwnProperty("config"))
+                        object.config = message.config;
+                    return object;
+                };
 
-        /**
-         * UserAddChipRes propcount.
-         * @member {number} propcount
-         * @memberof SystemProto.UserAddChipRes
-         * @instance
-         */
-        UserAddChipRes.prototype.propcount = 0;
+                /**
+                 * Converts this ReqUserAddChip to JSON.
+                 * @function toJSON
+                 * @memberof system.client.proto.ReqUserAddChip
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ReqUserAddChip.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
 
-        /**
-         * UserAddChipRes config.
-         * @member {string} config
-         * @memberof SystemProto.UserAddChipRes
-         * @instance
-         */
-        UserAddChipRes.prototype.config = "";
+                return ReqUserAddChip;
+            })();
 
-        /**
-         * Creates a new UserAddChipRes instance using the specified properties.
-         * @function create
-         * @memberof SystemProto.UserAddChipRes
-         * @static
-         * @param {SystemProto.IUserAddChipRes=} [properties] Properties to set
-         * @returns {SystemProto.UserAddChipRes} UserAddChipRes instance
-         */
-        UserAddChipRes.create = function create(properties) {
-            return new UserAddChipRes(properties);
-        };
+            proto.ResUserAddChip = (function() {
 
-        /**
-         * Encodes the specified UserAddChipRes message. Does not implicitly {@link SystemProto.UserAddChipRes.verify|verify} messages.
-         * @function encode
-         * @memberof SystemProto.UserAddChipRes
-         * @static
-         * @param {SystemProto.IUserAddChipRes} message UserAddChipRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        UserAddChipRes.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
-            if (message.propid != null && message.hasOwnProperty("propid"))
-                writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propid);
-            if (message.propcount != null && message.hasOwnProperty("propcount"))
-                writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.propcount);
-            if (message.config != null && message.hasOwnProperty("config"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.config);
-            return writer;
-        };
+                /**
+                 * Properties of a ResUserAddChip.
+                 * @memberof system.client.proto
+                 * @interface IResUserAddChip
+                 * @property {number} status ResUserAddChip status
+                 * @property {number|null} [propid] ResUserAddChip propid
+                 * @property {number|null} [propcount] ResUserAddChip propcount
+                 * @property {string|null} [config] ResUserAddChip config
+                 */
 
-        /**
-         * Encodes the specified UserAddChipRes message, length delimited. Does not implicitly {@link SystemProto.UserAddChipRes.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof SystemProto.UserAddChipRes
-         * @static
-         * @param {SystemProto.IUserAddChipRes} message UserAddChipRes message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        UserAddChipRes.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a UserAddChipRes message from the specified reader or buffer.
-         * @function decode
-         * @memberof SystemProto.UserAddChipRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {SystemProto.UserAddChipRes} UserAddChipRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        UserAddChipRes.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SystemProto.UserAddChipRes();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.status = reader.sint32();
-                    break;
-                case 2:
-                    message.propid = reader.sint32();
-                    break;
-                case 3:
-                    message.propcount = reader.sint32();
-                    break;
-                case 4:
-                    message.config = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
+                /**
+                 * Constructs a new ResUserAddChip.
+                 * @memberof system.client.proto
+                 * @classdesc Represents a ResUserAddChip.
+                 * @implements IResUserAddChip
+                 * @constructor
+                 * @param {system.client.proto.IResUserAddChip=} [properties] Properties to set
+                 */
+                function ResUserAddChip(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
                 }
-            }
-            if (!message.hasOwnProperty("status"))
-                throw $util.ProtocolError("missing required 'status'", { instance: message });
-            return message;
-        };
 
-        /**
-         * Decodes a UserAddChipRes message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof SystemProto.UserAddChipRes
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {SystemProto.UserAddChipRes} UserAddChipRes
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        UserAddChipRes.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
+                /**
+                 * ResUserAddChip status.
+                 * @member {number} status
+                 * @memberof system.client.proto.ResUserAddChip
+                 * @instance
+                 */
+                ResUserAddChip.prototype.status = 0;
 
-        /**
-         * Verifies a UserAddChipRes message.
-         * @function verify
-         * @memberof SystemProto.UserAddChipRes
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        UserAddChipRes.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (!$util.isInteger(message.status))
-                return "status: integer expected";
-            if (message.propid != null && message.hasOwnProperty("propid"))
-                if (!$util.isInteger(message.propid))
-                    return "propid: integer expected";
-            if (message.propcount != null && message.hasOwnProperty("propcount"))
-                if (!$util.isInteger(message.propcount))
-                    return "propcount: integer expected";
-            if (message.config != null && message.hasOwnProperty("config"))
-                if (!$util.isString(message.config))
-                    return "config: string expected";
-            return null;
-        };
+                /**
+                 * ResUserAddChip propid.
+                 * @member {number} propid
+                 * @memberof system.client.proto.ResUserAddChip
+                 * @instance
+                 */
+                ResUserAddChip.prototype.propid = 0;
 
-        /**
-         * Creates a UserAddChipRes message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof SystemProto.UserAddChipRes
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {SystemProto.UserAddChipRes} UserAddChipRes
-         */
-        UserAddChipRes.fromObject = function fromObject(object) {
-            if (object instanceof $root.SystemProto.UserAddChipRes)
-                return object;
-            var message = new $root.SystemProto.UserAddChipRes();
-            if (object.status != null)
-                message.status = object.status | 0;
-            if (object.propid != null)
-                message.propid = object.propid | 0;
-            if (object.propcount != null)
-                message.propcount = object.propcount | 0;
-            if (object.config != null)
-                message.config = String(object.config);
-            return message;
-        };
+                /**
+                 * ResUserAddChip propcount.
+                 * @member {number} propcount
+                 * @memberof system.client.proto.ResUserAddChip
+                 * @instance
+                 */
+                ResUserAddChip.prototype.propcount = 0;
 
-        /**
-         * Creates a plain object from a UserAddChipRes message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof SystemProto.UserAddChipRes
-         * @static
-         * @param {SystemProto.UserAddChipRes} message UserAddChipRes
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        UserAddChipRes.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.status = 0;
-                object.propid = 0;
-                object.propcount = 0;
-                object.config = "";
-            }
-            if (message.status != null && message.hasOwnProperty("status"))
-                object.status = message.status;
-            if (message.propid != null && message.hasOwnProperty("propid"))
-                object.propid = message.propid;
-            if (message.propcount != null && message.hasOwnProperty("propcount"))
-                object.propcount = message.propcount;
-            if (message.config != null && message.hasOwnProperty("config"))
-                object.config = message.config;
-            return object;
-        };
+                /**
+                 * ResUserAddChip config.
+                 * @member {string} config
+                 * @memberof system.client.proto.ResUserAddChip
+                 * @instance
+                 */
+                ResUserAddChip.prototype.config = "";
 
-        /**
-         * Converts this UserAddChipRes to JSON.
-         * @function toJSON
-         * @memberof SystemProto.UserAddChipRes
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        UserAddChipRes.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
+                /**
+                 * Creates a new ResUserAddChip instance using the specified properties.
+                 * @function create
+                 * @memberof system.client.proto.ResUserAddChip
+                 * @static
+                 * @param {system.client.proto.IResUserAddChip=} [properties] Properties to set
+                 * @returns {system.client.proto.ResUserAddChip} ResUserAddChip instance
+                 */
+                ResUserAddChip.create = function create(properties) {
+                    return new ResUserAddChip(properties);
+                };
 
-        return UserAddChipRes;
+                /**
+                 * Encodes the specified ResUserAddChip message. Does not implicitly {@link system.client.proto.ResUserAddChip.verify|verify} messages.
+                 * @function encode
+                 * @memberof system.client.proto.ResUserAddChip
+                 * @static
+                 * @param {system.client.proto.IResUserAddChip} message ResUserAddChip message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResUserAddChip.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+                    if (message.propid != null && message.hasOwnProperty("propid"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.propid);
+                    if (message.propcount != null && message.hasOwnProperty("propcount"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).sint32(message.propcount);
+                    if (message.config != null && message.hasOwnProperty("config"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.config);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ResUserAddChip message, length delimited. Does not implicitly {@link system.client.proto.ResUserAddChip.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof system.client.proto.ResUserAddChip
+                 * @static
+                 * @param {system.client.proto.IResUserAddChip} message ResUserAddChip message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResUserAddChip.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ResUserAddChip message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof system.client.proto.ResUserAddChip
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {system.client.proto.ResUserAddChip} ResUserAddChip
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResUserAddChip.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.system.client.proto.ResUserAddChip();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.status = reader.sint32();
+                            break;
+                        case 2:
+                            message.propid = reader.sint32();
+                            break;
+                        case 3:
+                            message.propcount = reader.sint32();
+                            break;
+                        case 4:
+                            message.config = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    if (!message.hasOwnProperty("status"))
+                        throw $util.ProtocolError("missing required 'status'", { instance: message });
+                    return message;
+                };
+
+                /**
+                 * Decodes a ResUserAddChip message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof system.client.proto.ResUserAddChip
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {system.client.proto.ResUserAddChip} ResUserAddChip
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResUserAddChip.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ResUserAddChip message.
+                 * @function verify
+                 * @memberof system.client.proto.ResUserAddChip
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResUserAddChip.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (!$util.isInteger(message.status))
+                        return "status: integer expected";
+                    if (message.propid != null && message.hasOwnProperty("propid"))
+                        if (!$util.isInteger(message.propid))
+                            return "propid: integer expected";
+                    if (message.propcount != null && message.hasOwnProperty("propcount"))
+                        if (!$util.isInteger(message.propcount))
+                            return "propcount: integer expected";
+                    if (message.config != null && message.hasOwnProperty("config"))
+                        if (!$util.isString(message.config))
+                            return "config: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a ResUserAddChip message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof system.client.proto.ResUserAddChip
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {system.client.proto.ResUserAddChip} ResUserAddChip
+                 */
+                ResUserAddChip.fromObject = function fromObject(object) {
+                    if (object instanceof $root.system.client.proto.ResUserAddChip)
+                        return object;
+                    var message = new $root.system.client.proto.ResUserAddChip();
+                    if (object.status != null)
+                        message.status = object.status | 0;
+                    if (object.propid != null)
+                        message.propid = object.propid | 0;
+                    if (object.propcount != null)
+                        message.propcount = object.propcount | 0;
+                    if (object.config != null)
+                        message.config = String(object.config);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ResUserAddChip message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof system.client.proto.ResUserAddChip
+                 * @static
+                 * @param {system.client.proto.ResUserAddChip} message ResUserAddChip
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResUserAddChip.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.status = 0;
+                        object.propid = 0;
+                        object.propcount = 0;
+                        object.config = "";
+                    }
+                    if (message.status != null && message.hasOwnProperty("status"))
+                        object.status = message.status;
+                    if (message.propid != null && message.hasOwnProperty("propid"))
+                        object.propid = message.propid;
+                    if (message.propcount != null && message.hasOwnProperty("propcount"))
+                        object.propcount = message.propcount;
+                    if (message.config != null && message.hasOwnProperty("config"))
+                        object.config = message.config;
+                    return object;
+                };
+
+                /**
+                 * Converts this ResUserAddChip to JSON.
+                 * @function toJSON
+                 * @memberof system.client.proto.ResUserAddChip
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResUserAddChip.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                /**
+                 * STATUS enum.
+                 * @name system.client.proto.ResUserAddChip.STATUS
+                 * @enum {string}
+                 * @property {number} SUCCESS=0 SUCCESS value
+                 * @property {number} FAILED=1 FAILED value
+                 */
+                ResUserAddChip.STATUS = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "SUCCESS"] = 0;
+                    values[valuesById[1] = "FAILED"] = 1;
+                    return values;
+                })();
+
+                return ResUserAddChip;
+            })();
+
+            return proto;
+        })();
+
+        return client;
     })();
 
-    return SystemProto;
+    return system;
 })();
 
 module.exports = $root;
