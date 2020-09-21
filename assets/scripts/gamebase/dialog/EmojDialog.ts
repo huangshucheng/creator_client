@@ -1,7 +1,6 @@
 //我的弹珠页面
 
 import UIDialog from '../../framework/uibase/UIDialog';
-import { CmdName, Cmd } from '../../framework/protocol/protofile/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
 import { ResourceManager } from '../../framework/manager/ResourceManager';

@@ -708,7 +708,7 @@ $root.auth = (function() {
                  * @memberof auth.client.proto
                  * @interface IResUnameLogin
                  * @property {number} status ResUnameLogin status
-                 * @property {number} uid ResUnameLogin uid
+                 * @property {number|null} [uid] ResUnameLogin uid
                  * @property {string|null} [logininfo] ResUnameLogin logininfo
                  */
 
@@ -776,7 +776,8 @@ $root.auth = (function() {
                     if (!writer)
                         writer = $Writer.create();
                     writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
-                    writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.uid);
+                    if (message.uid != null && message.hasOwnProperty("uid"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.uid);
                     if (message.logininfo != null && message.hasOwnProperty("logininfo"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.logininfo);
                     return writer;
@@ -829,8 +830,6 @@ $root.auth = (function() {
                     }
                     if (!message.hasOwnProperty("status"))
                         throw $util.ProtocolError("missing required 'status'", { instance: message });
-                    if (!message.hasOwnProperty("uid"))
-                        throw $util.ProtocolError("missing required 'uid'", { instance: message });
                     return message;
                 };
 
@@ -863,8 +862,9 @@ $root.auth = (function() {
                         return "object expected";
                     if (!$util.isInteger(message.status))
                         return "status: integer expected";
-                    if (!$util.isInteger(message.uid))
-                        return "uid: integer expected";
+                    if (message.uid != null && message.hasOwnProperty("uid"))
+                        if (!$util.isInteger(message.uid))
+                            return "uid: integer expected";
                     if (message.logininfo != null && message.hasOwnProperty("logininfo"))
                         if (!$util.isString(message.logininfo))
                             return "logininfo: string expected";
@@ -1141,7 +1141,7 @@ $root.auth = (function() {
                  * @memberof auth.client.proto
                  * @interface IResGuestLogin
                  * @property {number} status ResGuestLogin status
-                 * @property {number} uid ResGuestLogin uid
+                 * @property {number|null} [uid] ResGuestLogin uid
                  * @property {string|null} [logininfo] ResGuestLogin logininfo
                  */
 
@@ -1209,7 +1209,8 @@ $root.auth = (function() {
                     if (!writer)
                         writer = $Writer.create();
                     writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
-                    writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.uid);
+                    if (message.uid != null && message.hasOwnProperty("uid"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).sint32(message.uid);
                     if (message.logininfo != null && message.hasOwnProperty("logininfo"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.logininfo);
                     return writer;
@@ -1262,8 +1263,6 @@ $root.auth = (function() {
                     }
                     if (!message.hasOwnProperty("status"))
                         throw $util.ProtocolError("missing required 'status'", { instance: message });
-                    if (!message.hasOwnProperty("uid"))
-                        throw $util.ProtocolError("missing required 'uid'", { instance: message });
                     return message;
                 };
 
@@ -1296,8 +1295,9 @@ $root.auth = (function() {
                         return "object expected";
                     if (!$util.isInteger(message.status))
                         return "status: integer expected";
-                    if (!$util.isInteger(message.uid))
-                        return "uid: integer expected";
+                    if (message.uid != null && message.hasOwnProperty("uid"))
+                        if (!$util.isInteger(message.uid))
+                            return "uid: integer expected";
                     if (message.logininfo != null && message.hasOwnProperty("logininfo"))
                         if (!$util.isString(message.logininfo))
                             return "logininfo: string expected";

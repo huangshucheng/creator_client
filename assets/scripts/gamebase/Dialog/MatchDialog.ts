@@ -1,11 +1,11 @@
 //匹配界面
 import UIDialog from '../../framework/uibase/UIDialog';
 import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
-import { CmdName, Cmd } from '../../framework/protocol/protofile/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import StringUtil from '../../framework/utils/StringUtil';
 import Stype from '../../framework/protocol/Stype';
+import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
 const { ccclass, property } = cc._decorator;
@@ -25,8 +25,8 @@ export default class MatchDialog extends UIDialog {
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [Cmd.eUserMatchRes]: this.on_event_match.bind(this),
-            [Cmd.eUserStopMatchRes]: this.on_event_match_stop.bind(this),
+            [GameHoodleProto.XY_ID.eUserMatchRes]: this.on_event_match.bind(this),
+            [GameHoodleProto.XY_ID.eUserStopMatchRes]: this.on_event_match_stop.bind(this),
         }
     }
 

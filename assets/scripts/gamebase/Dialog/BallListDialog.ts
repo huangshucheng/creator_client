@@ -1,7 +1,6 @@
 //我的弹珠页面
 
 import UIDialog from '../../framework/uibase/UIDialog';
-import { CmdName, Cmd } from '../../framework/protocol/protofile/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
@@ -10,6 +9,7 @@ import StringUtil from '../../framework/utils/StringUtil';
 import CommonDialog from './CommonDialog';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
+import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
 
 let BALL_NAME_KEY_STR = "ball_name_level_"
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
@@ -36,9 +36,9 @@ export default class BallListDialog extends UIDialog {
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [Cmd.eUserBallInfoRes]: this.on_event_user_ball_info.bind(this),
-            [Cmd.eUserConfigRes]: this.on_event_user_config.bind(this),
-            [Cmd.eUseHoodleBallRes]: this.on_event_use_hoodleball.bind(this),
+            [GameHoodleProto.XY_ID.eUserBallInfoRes]: this.on_event_user_ball_info.bind(this),
+            [GameHoodleProto.XY_ID.eUserConfigRes]: this.on_event_user_config.bind(this),
+            [GameHoodleProto.XY_ID.eUseHoodleBallRes]: this.on_event_use_hoodleball.bind(this),
         }
     }
 

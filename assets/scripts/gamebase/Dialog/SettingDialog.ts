@@ -2,11 +2,11 @@ import UIDialog from '../../framework/uibase/UIDialog';
 import LobbyScene from '../scene/lobbyScene/LobbyScene';
 import SceneManager from '../../framework/manager/SceneManager';
 import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
-import { CmdName, Cmd } from '../../framework/protocol/protofile/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import RoomData from '../common/RoomData';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
+import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
 
 const { ccclass, property } = cc._decorator;
 
@@ -39,7 +39,7 @@ export default class SettingDialog extends UIDialog {
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [Cmd.eJoinRoomRes]: this.on_event_exit_room,
+            [GameHoodleProto.XY_ID.eJoinRoomRes]: this.on_event_exit_room,
         }
     }
 

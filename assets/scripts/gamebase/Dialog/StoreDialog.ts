@@ -1,7 +1,6 @@
 //商城界面
 
 import UIDialog from '../../framework/uibase/UIDialog';
-import { CmdName, Cmd } from '../../framework/protocol/protofile/GameHoodleProto';
 import Response from '../../framework/protocol/Response';
 import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
@@ -13,6 +12,7 @@ import StringUtil from '../../framework/utils/StringUtil';
 import CommonDialog from './CommonDialog';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
+import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
 
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
@@ -34,9 +34,9 @@ export default class StoreDialog extends UIDialog {
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [Cmd.eStoreListRes]: this.on_event_store_list.bind(this),
-            [Cmd.eBuyThingsRes]: this.on_event_buy_things.bind(this),
-            [Cmd.eUserGameInfoRes]: this.on_event_ugame_info.bind(this),
+            [GameHoodleProto.XY_ID.eStoreListRes]: this.on_event_store_list.bind(this),
+            [GameHoodleProto.XY_ID.eBuyThingsRes]: this.on_event_buy_things.bind(this),
+            [GameHoodleProto.XY_ID.eUserGameInfoRes]: this.on_event_ugame_info.bind(this),
         }
     }
 
