@@ -10,7 +10,7 @@ export default class LobbySceneCtrl extends UIController {
         this.add_script("LobbySceneInit");
         this.add_script("LobbySceneTouchEvent");
         this.add_script("LobbySceneRecvAuthMsg");
-        this.add_script("LobbySceneRecvGameMsg");
+        this.add_script("LobbySceneRecvMsg");
         this.add_script("LobbySceneRecvSystemMsg");
         this.add_script("LobbySceneShowUI");
     }

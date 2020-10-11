@@ -32,7 +32,7 @@ export default class JoinRoomDialog extends UIDialog {
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.S_TYPE.GameHoodle) {
+        if (stype !== Stype.S_TYPE.Lobby) {
             return;
         }
         if (this._cmd_handler_map[ctype]) {

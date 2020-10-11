@@ -11,6 +11,7 @@ import LSDefine from '../../../framework/config/LSDefine';
 import Storage from '../../../framework/utils/Storage';
 import CommonDialog from '../../dialog/CommonDialog';
 import WeChatLogin from '../../../framework/utils/WeChatLogin';
+import LobbySendMsg from './sendMsg/LobbySendMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -55,8 +56,8 @@ export default class LobbySceneTouchEvent extends UIController {
         }
 
         let ruleStr = JSON.stringify(GameHoodleConfig.BOX_GAME_RULE);
-        LobbySendGameHoodleMsg.send_create_room(ruleStr);
-        LobbySendGameHoodleMsg.send_get_room_status();
+        LobbySendMsg.send_create_room(ruleStr);
+        LobbySendMsg.send_get_room_status();
     }
 
     on_click_login_logic(sender:cc.Component){
@@ -79,8 +80,8 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_back_room(sender: cc.Component){
-        LobbySendGameHoodleMsg.send_get_room_status();
-        LobbySendGameHoodleMsg.send_back_room();
+        LobbySendMsg.send_get_room_status();
+        LobbySendMsg.send_back_room();
     }
 
     on_click_match_room_with_data(event: cc.Event, customEventData: any){
@@ -91,13 +92,13 @@ export default class LobbySceneTouchEvent extends UIController {
         console.log("on_click_match_room_with_data" , customEventData);
         let roomlevel = customEventData.roomlevel;
         if (roomlevel){
-            LobbySendGameHoodleMsg.send_user_match(roomlevel);
+            // LobbySendGameHoodleMsg.send_user_match(roomlevel);
         }
         AudioManager.getInstance().playBtnClick();
     }
     
     on_click_match_stop(sender: cc.Component){
-        LobbySendGameHoodleMsg.send_user_stop_match();
+        // LobbySendGameHoodleMsg.send_user_stop_match();
     }
 
     on_click_ball_compose(sender: cc.Component){
@@ -130,6 +131,7 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_share(sender:cc.Component){
         console.log("hcc>>on_click_share....");
+        /*
         LobbySendSystem.send_share();
         let share_img_path = cc.url.raw("resources/textures/shareimg/ball_games_hare_img.png")
         console.log("hcc>>share_img_path: ", share_img_path);
@@ -153,6 +155,8 @@ export default class LobbySceneTouchEvent extends UIController {
             return;
         }
         wx.shareAppMessage(shareInfo)
+        */
+        LobbySendMsg.send_get_room_status();
     }
 
     is_guest_login_wechat_game(){

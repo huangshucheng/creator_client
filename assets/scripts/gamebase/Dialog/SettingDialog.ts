@@ -1,12 +1,12 @@
 import UIDialog from '../../framework/uibase/UIDialog';
 import LobbyScene from '../scene/lobbyScene/LobbyScene';
 import SceneManager from '../../framework/manager/SceneManager';
-import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
 import Response from '../../framework/protocol/Response';
 import RoomData from '../common/RoomData';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
-import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
+import LobbySendMsg from '../scene/lobbyScene/sendMsg/LobbySendMsg';
+import LobbyProto from '../../framework/protocol/protofile/LobbyProto';
 
 const { ccclass, property } = cc._decorator;
 
@@ -22,10 +22,10 @@ export default class SettingDialog extends UIDialog {
         this.add_protocol_delegate();
         this.set_can_touch_background(true);
 
-        if (RoomData.getInstance().get_is_self_host() == false) {
-            this.set_visible(this.view["KW_BTN_DESSOLVE"],false);
-            this.set_posX(this.view["KW_BTN_EXIT"],0);
-        }
+        // if (RoomData.getInstance().get_is_self_host() == false) {
+        //     this.set_visible(this.view["KW_BTN_DESSOLVE"],false);
+        //     this.set_posX(this.view["KW_BTN_EXIT"],0);
+        // }
 
         let effSlider: cc.Slider = this.view["SLIDER_EFFECT"].getComponent(cc.Slider);
         let musSlider: cc.Slider = this.view["SLIDER_MUSIC"].getComponent(cc.Slider);
@@ -39,12 +39,12 @@ export default class SettingDialog extends UIDialog {
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [GameHoodleProto.XY_ID.eJoinRoomRes]: this.on_event_exit_room,
+            [LobbyProto.XY_ID.RES_EXITROOM]: this.on_event_exit_room,
         }
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
-         if (stype !== Stype.S_TYPE.GameHoodle) {
+         if (stype !== Stype.S_TYPE.Lobby) {
             return;
         }
 
@@ -78,14 +78,14 @@ export default class SettingDialog extends UIDialog {
     }
 
     on_click_back(sender: cc.Component){
-        LobbySendGameHoodleMsg.send_exit_room();
+        LobbySendMsg.send_exit_room();
         this.close()
         SceneManager.getInstance().enter_scene_asyc(new LobbyScene());
         RoomData.getInstance().clear_room_data();
     }
 
     on_click_dessolve(sender:cc.Component){
-        LobbySendGameHoodleMsg.send_dessolve_room();
+        LobbySendMsg.send_dessolve_room();
         this.close();
     }
 

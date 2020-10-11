@@ -1,4 +1,4 @@
-import LoginSendAuthMsg from "../../gamebase/scene/LoginScene/sendMsg/LoginSendAuthMsg";
+import LoginSendAuthMsg from "../../gamebase/scene/loginScene/sendMsg/LoginSendAuthMsg";
 import PlatForm from '../config/PlatForm';
 import DialogManager from '../manager/DialogManager';
 import LSDefine from "../config/LSDefine";

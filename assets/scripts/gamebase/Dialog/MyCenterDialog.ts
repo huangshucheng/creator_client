@@ -1,7 +1,7 @@
 import UIDialog from '../../framework/uibase/UIDialog';
 import LobbySceneSendAuthMsg from '../scene/lobbyScene/sendMsg/LobbySendAuthMsg';
 import SceneManager from '../../framework/manager/SceneManager';
-import LoginScene from '../scene/LoginScene/LoginScene';
+import LoginScene from '../scene/loginScene/LoginScene';
 import UserInfo from '../../framework/common/UserInfo';
 
 const { ccclass, property } = cc._decorator;

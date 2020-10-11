@@ -2,7 +2,7 @@ import UIController from '../../../framework/uibase/UIController';
 import EventManager from '../../../framework/manager/EventManager';
 import Response from '../../../framework/protocol/Response';
 import SceneManager from '../../../framework/manager/SceneManager';
-import LoginScene from '../LoginScene/LoginScene';
+import LoginScene from '../loginScene/LoginScene';
 import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 import UserInfo from '../../../framework/common/UserInfo';
@@ -10,7 +10,7 @@ import DialogManager from '../../../framework/manager/DialogManager';
 import EventDefine from '../../../framework/config/EventDefine';
 import LobbySendAuthMsg from './sendMsg/LobbySendAuthMsg';
 import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
-import LoginSendAuthMsg from '../LoginScene/sendMsg/LoginSendAuthMsg';
+import LoginSendAuthMsg from '../loginScene/sendMsg/LoginSendAuthMsg';
 import Stype from '../../../framework/protocol/Stype';
 import AuthProto from '../../../framework/protocol/protofile/AuthProto';
 

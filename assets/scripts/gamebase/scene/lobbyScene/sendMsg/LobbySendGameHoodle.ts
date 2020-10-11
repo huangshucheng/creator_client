@@ -11,7 +11,6 @@ export default class LobbySendGameHoodleMsg {
 
     //登录游戏服务
     static send_login_logic(){
-        // LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eLoginLogicReq);
         CellManager.getInstance().start("CellLoginLogic", null, 5);
     }
 
@@ -48,14 +47,14 @@ export default class LobbySendGameHoodleMsg {
         LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eGetRoomStatusReq);
     }
 
-    //游戏服务信息
-    static send_get_ugame_info(){
-        LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserGameInfoReq);
-    }
-
     //返回房间
     static send_back_room(){
         CellManager.getInstance().start("CellBackRoom", null, 5);
+    }
+
+    //游戏服务信息
+    static send_get_ugame_info(){
+        LobbySendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserGameInfoReq);
     }
 
     //玩家匹配

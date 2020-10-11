@@ -10,7 +10,7 @@ export default class LoginSceneCtrl extends UIController {
         this.add_script("LoginSceneInit")
         this.add_script("LoginSceneTouchEvent")
         this.add_script("LoginSceneRecvAuthMsg")
-        this.add_script("LoginSceneRecvGameMsg")
+        this.add_script("LoginSceneRecvLobbyMsg")
         this.add_script("LoginSceneShowUI")
     }
 

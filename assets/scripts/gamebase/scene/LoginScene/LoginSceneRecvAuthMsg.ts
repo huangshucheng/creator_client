@@ -7,6 +7,7 @@ import LobbySendGameHoodleMsg from '../lobbyScene/sendMsg/LobbySendGameHoodle';
 import WeChatLogin from '../../../framework/utils/WeChatLogin';
 import Stype from '../../../framework/protocol/Stype';
 import AuthProto from '../../../framework/protocol/protofile/AuthProto';
+import LobbySendMsg from '../lobbyScene/sendMsg/LobbySendMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -55,7 +56,7 @@ export default class LoginSceneRecvAuthMsg extends UIController {
                 console.error(error)
             }
             console.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
-            LobbySendGameHoodleMsg.send_login_logic();
+            LobbySendMsg.send_login_lobby();
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + body.status)
         }
@@ -72,7 +73,7 @@ export default class LoginSceneRecvAuthMsg extends UIController {
                 console.error(error)
             }
             console.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG) )
-            LobbySendGameHoodleMsg.send_login_logic();
+            LobbySendMsg.send_login_lobby();
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + body.status)
         }
@@ -88,7 +89,7 @@ export default class LoginSceneRecvAuthMsg extends UIController {
     on_event_wechat_login(body:any){
         if (body.status == Response.OK) {
             WeChatLogin.hide_auth_btn();
-            LobbySendGameHoodleMsg.send_login_logic();
+            LobbySendMsg.send_login_lobby();
             try {
                 let resbody = JSON.parse(body.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_WECHAT_SESSION, resbody.unionid);

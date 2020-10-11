@@ -15,9 +15,6 @@ class CellBase extends Cell {
         if (!ArrayUtil.ValueOf(Stype.S_TYPE, stype)) {
             return false;
         }
-        // if (!ArrayUtil.ValueOf(ProtoCmd.StypeProtos[stype].Cmd, ctype)) {
-        //     return false;
-        // }
 
         if (!super.start(data, stype, ctype, timeOutTime)) {
             return false;

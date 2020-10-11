@@ -4,12 +4,12 @@ import SceneManager from '../../../framework/manager/SceneManager';
 import LobbyScene from '../lobbyScene/LobbyScene';
 import DialogManager from '../../../framework/manager/DialogManager';
 import Stype from '../../../framework/protocol/Stype';
-import GameHoodleProto from '../../../framework/protocol/protofile/GameHoodleProto';
+import LobbyProto from '../../../framework/protocol/protofile/LobbyProto';
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class LoginSceneRecvGameMsg extends UIController {
+export default class LoginSceneRecvLobbyMsg extends UIController {
 
     onLoad() {
         super.onLoad()
@@ -22,12 +22,12 @@ export default class LoginSceneRecvGameMsg extends UIController {
 
     add_cmd_handler_map(){
         this._cmd_handler_map = {
-            [GameHoodleProto.XY_ID.eLoginLogicRes]: this.on_event_login_logic.bind(this),
+            [LobbyProto.XY_ID.RES_LOGINLOBBY]: this.on_event_login_lobby.bind(this),
         }
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.S_TYPE.GameHoodle) {
+        if (stype !== Stype.S_TYPE.Lobby) {
             return;
         }
 
@@ -36,7 +36,7 @@ export default class LoginSceneRecvGameMsg extends UIController {
         }
     }
 
-    on_event_login_logic(body: any) {
+    on_event_login_lobby(body: any) {
         if (body) {
             if (body.status == Response.OK) {
                 DialogManager.getInstance().show_weak_hint("登录游戏服务成功!");

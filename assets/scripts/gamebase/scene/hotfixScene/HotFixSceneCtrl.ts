@@ -1,7 +1,7 @@
 import UIController from '../../../framework/uibase/UIController';
 import { ResourceManager } from '../../../framework/manager/ResourceManager';
 import SceneManager from '../../../framework/manager/SceneManager';
-import LoginScene from '../LoginScene/LoginScene';
+import LoginScene from '../loginScene/LoginScene';
 import HotUpdateNew from '../../../framework/hotfix/HotUpdateNew';
 import PlatForm from '../../../framework/config/PlatForm';
 import DialogManager from '../../../framework/manager/DialogManager';

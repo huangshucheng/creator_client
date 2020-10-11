@@ -12,12 +12,13 @@ import CommonDialog from '../../dialog/CommonDialog';
 import MatchDialog from '../../dialog/MatchDialog';
 import LobbySendAuthMsg from './sendMsg/LobbySendAuthMsg';
 import Stype from '../../../framework/protocol/Stype';
-import GameHoodleProto from '../../../framework/protocol/protofile/GameHoodleProto';
+import LobbyProto from '../../../framework/protocol/protofile/LobbyProto';
+import LobbySendMsg from './sendMsg/LobbySendMsg';
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class LobbySceneRecvGameMsg extends UIController {
+export default class LobbySceneRecvMsg extends UIController {
 
     onLoad () {
         super.onLoad()
@@ -30,25 +31,27 @@ export default class LobbySceneRecvGameMsg extends UIController {
 
     add_cmd_handler_map(){
         this._cmd_handler_map = {
-            [GameHoodleProto.XY_ID.eLoginLogicRes]: this.on_event_login_logic.bind(this),
-            [GameHoodleProto.XY_ID.eCreateRoomRes]: this.on_event_create_room.bind(this),
-            [GameHoodleProto.XY_ID.eJoinRoomRes]: this.on_event_join_room.bind(this),
-            [GameHoodleProto.XY_ID.eExitRoomRes]: this.on_event_exit_room.bind(this),
-            [GameHoodleProto.XY_ID.eDessolveRes]: this.on_event_dessolve_room.bind(this),
-            [GameHoodleProto.XY_ID.eGetRoomStatusRes]: this.on_event_get_room_status.bind(this),
-            [GameHoodleProto.XY_ID.eBackRoomRes]: this.on_event_back_room.bind(this),
-            [GameHoodleProto.XY_ID.eUserMatchRes]: this.on_event_match.bind(this),
-            [GameHoodleProto.XY_ID.eUserStopMatchRes]: this.on_event_match_stop.bind(this),
-            [GameHoodleProto.XY_ID.eUserGameInfoRes]: this.on_event_ugame_info.bind(this),
-            [GameHoodleProto.XY_ID.eUserConfigRes]: this.on_event_ugame_config_info.bind(this),
-            [GameHoodleProto.XY_ID.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer.bind(this),
-            [GameHoodleProto.XY_ID.eUserPlayAgainStartRes]: this.on_event_play_again_start.bind(this),
-            [GameHoodleProto.XY_ID.eRoomListConfigRes]: this.on_event_room_config.bind(this),
+            [LobbyProto.XY_ID.RES_LOGINLOBBY]: this.on_event_login_lobby.bind(this),
+            [LobbyProto.XY_ID.RES_CERATEROOM]: this.on_event_create_room.bind(this),
+            [LobbyProto.XY_ID.RES_JOINROOM]: this.on_event_join_room.bind(this),
+            [LobbyProto.XY_ID.RES_EXITROOM]: this.on_event_exit_room.bind(this),
+            [LobbyProto.XY_ID.RES_DESSOLVEROOM]: this.on_event_dessolve_room.bind(this),
+            [LobbyProto.XY_ID.RES_ROOMSTATUS]: this.on_event_get_room_status.bind(this),
+            [LobbyProto.XY_ID.RES_BACKROOM]: this.on_event_back_room.bind(this),
+            
+            //----------------------
+            // [GameHoodleProto.XY_ID.eUserMatchRes]: this.on_event_match.bind(this),
+            // [GameHoodleProto.XY_ID.eUserStopMatchRes]: this.on_event_match_stop.bind(this),
+            // [GameHoodleProto.XY_ID.eUserGameInfoRes]: this.on_event_ugame_info.bind(this),
+            // [GameHoodleProto.XY_ID.eUserConfigRes]: this.on_event_ugame_config_info.bind(this),
+            // [GameHoodleProto.XY_ID.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer.bind(this),
+            // [GameHoodleProto.XY_ID.eUserPlayAgainStartRes]: this.on_event_play_again_start.bind(this),
+            // [GameHoodleProto.XY_ID.eRoomListConfigRes]: this.on_event_room_config.bind(this),
         }
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.S_TYPE.GameHoodle) {
+        if (stype !== Stype.S_TYPE.Lobby) {
             return;
         }
         if (this._cmd_handler_map[ctype]) {
@@ -56,20 +59,20 @@ export default class LobbySceneRecvGameMsg extends UIController {
         }
     }
 
-    on_event_login_logic(body:any){
+    on_event_login_lobby(body:any){
         if (body){
             if (body.status == Response.OK){
                 LobbySendAuthMsg.send_get_center_info();
-                LobbySendGameHoodleMsg.send_get_room_status();
-                LobbySendGameHoodleMsg.send_get_ugame_info();
-                LobbySendGameHoodleMsg.send_get_uball_info();
-                LobbySendGameHoodleMsg.send_get_room_list_config();
-                DialogManager.getInstance().show_weak_hint("登录游戏服务成功!")
+                LobbySendMsg.send_get_room_status();
+                // LobbySendGameHoodleMsg.send_get_ugame_info();
+                // LobbySendGameHoodleMsg.send_get_uball_info();
+                // LobbySendGameHoodleMsg.send_get_room_list_config();
+                DialogManager.getInstance().show_weak_hint("登录大厅成功!")
 
                 //登录逻辑服务成功,如果是通过分享进来的,通过分享的房间号，自动去加入房间
                 let roomid = RoomData.getInstance().get_share_roomid();
                 if (roomid != "") {
-                    LobbySendGameHoodleMsg.send_join_room(String(roomid));
+                    // LobbySendGameHoodleMsg.send_join_room(String(roomid));
                 }
             }
         }

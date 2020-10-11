@@ -11,11 +11,12 @@ import GameScene from './GameScene';
 import CommonDialog from '../../dialog/CommonDialog';
 import Stype from '../../../framework/protocol/Stype';
 import GameHoodleProto from '../../../framework/protocol/protofile/GameHoodleProto';
+import LobbyProto from '../../../framework/protocol/protofile/LobbyProto';
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class GameSceneRecvGameMsg extends UIController {
+export default class GameSceneRecvLobbyMsg extends UIController {
 
     onLoad () {
         super.onLoad()
@@ -28,30 +29,31 @@ export default class GameSceneRecvGameMsg extends UIController {
 
     add_cmd_handler_map(){
         this._cmd_handler_map = {
-            [GameHoodleProto.XY_ID.eLoginLogicRes]: this.on_event_login_logic.bind(this),
-            [GameHoodleProto.XY_ID.eDessolveRes]: this.on_event_dessolve.bind(this),
-            [GameHoodleProto.XY_ID.eExitRoomRes]: this.on_event_exit_room.bind(this),
-            [GameHoodleProto.XY_ID.eCheckLinkGameRes]: this.on_event_check_link.bind(this),
-            [GameHoodleProto.XY_ID.eUserInfoRes]: this.on_event_user_info.bind(this),
-            [GameHoodleProto.XY_ID.eGameRuleRes]: this.on_event_game_rule.bind(this),
-            [GameHoodleProto.XY_ID.eRoomIdRes]: this.on_event_room_id.bind(this),
-            [GameHoodleProto.XY_ID.ePlayCountRes]: this.on_event_play_count.bind(this),
-            [GameHoodleProto.XY_ID.eUserReadyRes]: this.on_event_user_ready.bind(this),
-            [GameHoodleProto.XY_ID.eGameStartRes]: this.on_event_game_start.bind(this),
-            [GameHoodleProto.XY_ID.eGameEndRes]: this.on_event_game_end.bind(this),
-            [GameHoodleProto.XY_ID.eUserOfflineRes]: this.on_event_user_offline.bind(this),
-            [GameHoodleProto.XY_ID.ePlayerScoreRes]: this.on_event_player_score.bind(this),
-            [GameHoodleProto.XY_ID.eGameResultRes]: this.on_event_game_result.bind(this),
-            [GameHoodleProto.XY_ID.eTotalGameResultRes]: this.on_event_game_total_result.bind(this),
-            [GameHoodleProto.XY_ID.eUserEmojRes]: this.on_event_emoj.bind(this),
-            [GameHoodleProto.XY_ID.eUserPlayAgainRes]: this.on_event_play_again.bind(this),
-            [GameHoodleProto.XY_ID.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer.bind(this),
-            [GameHoodleProto.XY_ID.eUserPlayAgainStartRes]: this.on_event_play_again_start.bind(this),
+            [LobbyProto.XY_ID.RES_LOGINLOBBY]: this.on_event_login_lobby.bind(this),
+            [LobbyProto.XY_ID.RES_DESSOLVEROOM]: this.on_event_dessolve.bind(this),
+            [LobbyProto.XY_ID.RES_EXITROOM]: this.on_event_exit_room.bind(this),
+
+            // [GameHoodleProto.XY_ID.eCheckLinkGameRes]: this.on_event_check_link.bind(this),
+            // [GameHoodleProto.XY_ID.eUserInfoRes]: this.on_event_user_info.bind(this),
+            // [GameHoodleProto.XY_ID.eGameRuleRes]: this.on_event_game_rule.bind(this),
+            // [GameHoodleProto.XY_ID.eRoomIdRes]: this.on_event_room_id.bind(this),
+            // [GameHoodleProto.XY_ID.ePlayCountRes]: this.on_event_play_count.bind(this),
+            // [GameHoodleProto.XY_ID.eUserReadyRes]: this.on_event_user_ready.bind(this),
+            // [GameHoodleProto.XY_ID.eGameStartRes]: this.on_event_game_start.bind(this),
+            // [GameHoodleProto.XY_ID.eGameEndRes]: this.on_event_game_end.bind(this),
+            // [GameHoodleProto.XY_ID.eUserOfflineRes]: this.on_event_user_offline.bind(this),
+            // [GameHoodleProto.XY_ID.ePlayerScoreRes]: this.on_event_player_score.bind(this),
+            // [GameHoodleProto.XY_ID.eGameResultRes]: this.on_event_game_result.bind(this),
+            // [GameHoodleProto.XY_ID.eTotalGameResultRes]: this.on_event_game_total_result.bind(this),
+            // [GameHoodleProto.XY_ID.eUserEmojRes]: this.on_event_emoj.bind(this),
+            // [GameHoodleProto.XY_ID.eUserPlayAgainRes]: this.on_event_play_again.bind(this),
+            // [GameHoodleProto.XY_ID.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer.bind(this),
+            // [GameHoodleProto.XY_ID.eUserPlayAgainStartRes]: this.on_event_play_again_start.bind(this),
         }
     }
 
     on_recv_server_message(stype: number, ctype: number, body: any) {
-        if (stype !== Stype.S_TYPE.GameHoodle) {
+        if (stype !== Stype.S_TYPE.Lobby) {
             return;
         }
         if (this._cmd_handler_map[ctype]) {
@@ -60,7 +62,7 @@ export default class GameSceneRecvGameMsg extends UIController {
     }
     ///////////////////////////////////////
     ///////////////////////////////////////
-    on_event_login_logic(body:any){
+    on_event_login_lobby(body:any){
         if (body.status == Response.OK) {
             GameSendGameHoodleMsg.send_check_link_game();
         }
