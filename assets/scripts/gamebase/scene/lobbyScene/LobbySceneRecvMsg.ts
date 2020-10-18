@@ -82,7 +82,7 @@ export default class LobbySceneRecvMsg extends UIController {
         if (body){
             let status = body.status
             if(status == Response.OK){
-                SceneManager.getInstance().enter_scene_asyc(new GameScene())
+                LobbySendGameHoodleMsg.send_login_logic();
             }else{
                 DialogManager.getInstance().show_weak_hint("对局创建失败!")
             }
@@ -93,7 +93,7 @@ export default class LobbySceneRecvMsg extends UIController {
         if (body){
             let status = body.status
             if(status == Response.OK){
-                SceneManager.getInstance().enter_scene_asyc(new GameScene())
+                LobbySendGameHoodleMsg.send_login_logic();
             }else{
                 DialogManager.getInstance().show_weak_hint("加入对局失败!")
             }
@@ -131,7 +131,7 @@ export default class LobbySceneRecvMsg extends UIController {
         if (body){
             let status = body.status
             if(status == Response.OK){
-                SceneManager.getInstance().enter_scene_asyc(new GameScene())
+                LobbySendGameHoodleMsg.send_login_logic();
             }
         }
     }

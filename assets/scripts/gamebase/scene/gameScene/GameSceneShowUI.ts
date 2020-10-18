@@ -66,8 +66,12 @@ export default class GameSceneShowUI extends UIController {
         this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.unick)
         // this.set_string(info_node.getChildByName("KW_TEXT_NAME"),infoObj.uname) //TODO 暂时先显示玩家账号
         this.set_string(info_node.getChildByName("KW_TEXT_GOLD"),infoObj.uchip) //金币
-        let ufaceImg = StringUtil.format(BALL_TEXTURE_KEY_STR, infoObj.userconfig.user_ball_level);
-        this.set_sprite_asyc(info_node.getChildByName("KW_IMG_HEAD"),ufaceImg) // 头像
+        infoObj.userconfig = infoObj.userconfig ? infoObj.userconfig : {};
+        let balllevel = infoObj.userconfig.user_ball_level 
+        if(balllevel){
+            let ufaceImg = StringUtil.format(BALL_TEXTURE_KEY_STR, balllevel);
+            this.set_sprite_asyc(info_node.getChildByName("KW_IMG_HEAD"),ufaceImg) // 头像
+        }
         console.log("hcc>>GameSceneShowUI>>show_one_user_info")
         this.set_visible(info_node.getChildByName("KW_IMG_OFFINLE"), infoObj.isoffline)
         this.set_visible(info_node.getChildByName("KW_IMG_MASTER"), infoObj.ishost == true) // 房主

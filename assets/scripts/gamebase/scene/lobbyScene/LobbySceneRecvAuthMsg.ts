@@ -13,6 +13,7 @@ import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import LoginSendAuthMsg from '../loginScene/sendMsg/LoginSendAuthMsg';
 import Stype from '../../../framework/protocol/Stype';
 import AuthProto from '../../../framework/protocol/protofile/AuthProto';
+import LobbySendMsg from './sendMsg/LobbySendMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -86,7 +87,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
                 console.error(error)
             }
             console.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
-            LobbySendGameHoodleMsg.send_login_logic()
+            LobbySendMsg.send_login_lobby();
             LobbySendAuthMsg.send_get_center_info();
             DialogManager.getInstance().show_weak_hint("游客重新登录成功!")
         }else{
@@ -104,7 +105,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
                 console.error(error)
             }
             console.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG))
-            LobbySendGameHoodleMsg.send_login_logic()
+            LobbySendMsg.send_login_lobby();
             LobbySendAuthMsg.send_get_center_info();
             DialogManager.getInstance().show_weak_hint("玩家重新登录成功!")
         }else{
@@ -114,7 +115,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
 
     on_event_wechat_login(body: any) {
         if (body.status == Response.OK) {
-            LobbySendGameHoodleMsg.send_login_logic();
+            LobbySendMsg.send_login_lobby();
             try {
                 let resbody = JSON.parse(body.userlogininfo)
                 Storage.set(LSDefine.USER_LOGIN_WECHAT_SESSION, resbody.unionid);
@@ -137,7 +138,7 @@ export default class LobbySceneRecvAuthMsg extends UIController {
             } catch (error) {
                 console.log(error);
             }
-            LobbySendGameHoodleMsg.send_login_logic()
+            LobbySendMsg.send_login_lobby();
         } else {
             DialogManager.getInstance().show_weak_hint("微信重新登录失败! " + body.status)
         }

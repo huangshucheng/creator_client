@@ -42,7 +42,7 @@ export class SocketDelegate implements ISocketDelegate {
         }
         let cmd_name = ProtoCmd.getCmdName(decode_cmd.stype, decode_cmd.ctype)
 
-        console.log("\n\n###########################>>>recvstart")
+        console.log("\n###########################>>>recvstart")
         if (cmd_name){
             console.log("Svr=", Stype.S_NAME[decode_cmd.stype], " ,XY_NAME=", cmd_name, " ,XY_ID=" + decode_cmd.ctype);
             let cmdbody = ""
@@ -50,9 +50,9 @@ export class SocketDelegate implements ISocketDelegate {
                 cmdbody = JSON.stringify(decode_cmd.body)    
             } catch (error) {
             }
-            console.log(cmdbody)
+            console.log("body:",cmdbody)
         }
-        console.log("###########################>>>recvend\n\n")
+        console.log("###########################>>>recvend\n")
 
         this._protocolCallBackList.forEach(element => {
             if (element.callBack) {

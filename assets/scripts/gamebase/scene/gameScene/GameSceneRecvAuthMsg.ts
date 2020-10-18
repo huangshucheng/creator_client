@@ -11,6 +11,7 @@ import LobbySendGameHoodleMsg from '../lobbyScene/sendMsg/LobbySendGameHoodle';
 import LoginSendAuthMsg from '../loginScene/sendMsg/LoginSendAuthMsg';
 import Stype from '../../../framework/protocol/Stype';
 import AuthProto from '../../../framework/protocol/protofile/AuthProto';
+import LobbySendMsg from '../lobbyScene/sendMsg/LobbySendMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -80,7 +81,7 @@ export default class GameSceneRecvAuthMsg extends UIController {
                 console.error(error)
             }
             console.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
-            LobbySendGameHoodleMsg.send_login_logic()
+            LobbySendMsg.send_login_lobby();
             DialogManager.getInstance().show_weak_hint("游客重新登录成功!")
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + body.status)
@@ -98,7 +99,7 @@ export default class GameSceneRecvAuthMsg extends UIController {
                 console.error(error)
             }
             console.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG))
-            LobbySendGameHoodleMsg.send_login_logic()
+            LobbySendMsg.send_login_lobby();
             DialogManager.getInstance().show_weak_hint("玩家重新登录成功!")
         }else{
             DialogManager.getInstance().show_weak_hint("登录失败! " + body.status)
@@ -115,7 +116,7 @@ export default class GameSceneRecvAuthMsg extends UIController {
             } catch (error) {
                 console.log(error);
             }
-            LobbySendGameHoodleMsg.send_login_logic()
+            LobbySendMsg.send_login_lobby();
         } else {
             DialogManager.getInstance().show_weak_hint("微信重新登录失败! " + body.status)
         }
