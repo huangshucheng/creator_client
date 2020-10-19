@@ -88,6 +88,9 @@ export default class HoodleBallCtrl extends UIController {
 
     // 头像
     public set_img_face(ballLevel: number){
+        if(ballLevel == null || ballLevel == undefined){
+            return;
+        }
         let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
         let ballNameStr = StringUtil.format(BALL_TEXTURE_KEY_STR, ballLevel);
         this.set_sprite_asyc(this.view["KW_IMG_HEAD"], ballNameStr)

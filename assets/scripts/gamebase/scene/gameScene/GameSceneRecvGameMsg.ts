@@ -30,19 +30,19 @@ export default class GameSceneRecvGameMsg extends UIController {
             [GameHoodleProto.XY_ID.ePlayCountRes]: this.on_event_play_count.bind(this),
             [GameHoodleProto.XY_ID.eUserInfoRes]: this.on_event_user_info.bind(this),
             [GameHoodleProto.XY_ID.eUserEmojRes]: this.on_event_emoj.bind(this),
+            [GameHoodleProto.XY_ID.eUserReadyRes]: this.on_event_user_ready.bind(this),
 
-            // [GameHoodleProto.XY_ID.eCheckLinkGameRes]: this.on_event_check_link.bind(this),
-            // [GameHoodleProto.XY_ID.eGameRuleRes]: this.on_event_game_rule.bind(this),
-            // [GameHoodleProto.XY_ID.eUserReadyRes]: this.on_event_user_ready.bind(this),
-            // [GameHoodleProto.XY_ID.eGameStartRes]: this.on_event_game_start.bind(this),
-            // [GameHoodleProto.XY_ID.eGameEndRes]: this.on_event_game_end.bind(this),
-            // [GameHoodleProto.XY_ID.eUserOfflineRes]: this.on_event_user_offline.bind(this),
-            // [GameHoodleProto.XY_ID.ePlayerScoreRes]: this.on_event_player_score.bind(this),
-            // [GameHoodleProto.XY_ID.eGameResultRes]: this.on_event_game_result.bind(this),
-            // [GameHoodleProto.XY_ID.eTotalGameResultRes]: this.on_event_game_total_result.bind(this),
-            // [GameHoodleProto.XY_ID.eUserPlayAgainRes]: this.on_event_play_again.bind(this),
-            // [GameHoodleProto.XY_ID.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer.bind(this),
-            // [GameHoodleProto.XY_ID.eUserPlayAgainStartRes]: this.on_event_play_again_start.bind(this),
+            [GameHoodleProto.XY_ID.eUserOfflineRes]: this.on_event_user_offline.bind(this),
+            [GameHoodleProto.XY_ID.eCheckLinkGameRes]: this.on_event_check_link.bind(this),
+            [GameHoodleProto.XY_ID.eGameRuleRes]: this.on_event_game_rule.bind(this),
+            [GameHoodleProto.XY_ID.eGameStartRes]: this.on_event_game_start.bind(this),
+            [GameHoodleProto.XY_ID.eGameEndRes]: this.on_event_game_end.bind(this),
+            [GameHoodleProto.XY_ID.ePlayerScoreRes]: this.on_event_player_score.bind(this),
+            [GameHoodleProto.XY_ID.eGameResultRes]: this.on_event_game_result.bind(this),
+            [GameHoodleProto.XY_ID.eTotalGameResultRes]: this.on_event_game_total_result.bind(this),
+            [GameHoodleProto.XY_ID.eUserPlayAgainRes]: this.on_event_play_again.bind(this),
+            [GameHoodleProto.XY_ID.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer.bind(this),
+            [GameHoodleProto.XY_ID.eUserPlayAgainStartRes]: this.on_event_play_again_start.bind(this),
         }
     }
 
@@ -228,4 +228,13 @@ export default class GameSceneRecvGameMsg extends UIController {
             SceneManager.getInstance().enter_scene_asyc(new GameScene());
         }
     }
+
+    on_event_check_link(body:any){
+        
+    }
+
+    on_event_game_rule(body:any){
+
+    }
+    
 }

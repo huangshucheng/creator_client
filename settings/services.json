@@ -14,10 +14,11 @@
 			"support_platform": [
 				"Android"
 			],
-			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agcapms/0.5.1_1.3.1.zip",
-			"package_version_desc": "<p><strong>更新日期：</strong> 2020/08/28<br />\n<strong>更新说明：</strong><br />\n新增华为 AGC APMS 服务集成<br />\n",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agcapms/0.5.2_1.3.1.300.zip",
+			"package_version_desc": "<p><strong>更新日期：</strong> 2020/10/19<br />\n<strong>更新说明：</strong><br />\n修复某些接口调用失败或崩溃的问题。<br />\n",
 			"service_component_name": "service-agcapms",
 			"package_versions": [
+				"0.5.2_1.3.1.300",
 				"0.5.1_1.3.1"
 			],
 			"build_platform": [],
@@ -41,10 +42,11 @@
 			"support_platform": [
 				"Android"
 			],
-			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agcauth/0.5.1_1.3.1.zip",
-			"package_version_desc": "<p><strong>更新日期：</strong> 2020/08/28<br />\n<strong>更新说明：</strong><br />\n新增华为 AGC 认证服务集成<br />\n",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agcauth/0.5.2_1.4.1.300.zip",
+			"package_version_desc": "<p><strong>更新日期：</strong> 2020/10/19<br />\n<strong>更新说明：</strong><br />\n更新 SDK 1.4.1.300，新增若干接口。<br />\n",
 			"service_component_name": "service-agcauth",
 			"package_versions": [
+				"0.5.2_1.4.1.300",
 				"0.5.1_1.3.1"
 			],
 			"build_platform": [],
@@ -68,10 +70,11 @@
 			"support_platform": [
 				"Android"
 			],
-			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agccrash/0.5.3_1.3.2.zip",
-			"package_version_desc": "<p><strong>更新日期：</strong> 2020/08/28<br />\n<strong>更新说明：</strong><br />\n1.增加 HUAWEI 崩溃服务的支持<br />\n",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agccrash/0.5.5_1.4.1.300.zip",
+			"package_version_desc": "<p><strong>更新日期：</strong> 2020/10/19<br />\n<strong>更新说明：</strong><br />\n修复一些 bug<br />\n",
 			"service_component_name": "service-agccrash",
 			"package_versions": [
+				"0.5.5_1.4.1.300",
 				"0.5.3_1.3.2"
 			],
 			"build_platform": [],
@@ -95,10 +98,11 @@
 			"support_platform": [
 				"Android"
 			],
-			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agcapplinking/0.5.4_1.3.2.zip",
-			"package_version_desc": "<p><strong>更新日期：</strong> 2020/09/17<br />\n<strong>更新说明：</strong><br />\n增加 HUAWEI AppLinking 服务的支持<br />\n",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agcapplinking/0.5.7_1.4.1.300.zip",
+			"package_version_desc": "<p><strong>更新日期：</strong> 2020/10/19<br />\n<strong>更新说明：</strong><br />\n修复一些 bug<br />\n",
 			"service_component_name": "service-agcapplinking",
 			"package_versions": [
+				"0.5.7_1.4.1.300",
 				"0.5.4_1.3.2",
 				"0.5.2_1.3.2"
 			],
@@ -152,10 +156,11 @@
 			"support_platform": [
 				"Android"
 			],
-			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agcremoteconfig/0.5.0_1.4.0.zip",
-			"package_version_desc": "<p><strong>更新日期：</strong> 2020/08/28<br />\n<strong>更新说明：</strong><br />\n新增华为 AGC 远程配置服务集成<br />\n",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agcremoteconfig/0.5.1_1.4.1.300.zip",
+			"package_version_desc": "<p><strong>更新日期：</strong> 2020/10/19<br />\n<strong>更新说明：</strong><br />\n更新 SDK 1.4.1.300，添加本地配置入口。<br />\n",
 			"service_component_name": "service-agcremoteconfig",
 			"package_versions": [
+				"0.5.1_1.4.1.300",
 				"0.5.0_1.4.0"
 			],
 			"build_platform": [],

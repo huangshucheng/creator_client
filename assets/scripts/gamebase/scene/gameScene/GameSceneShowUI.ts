@@ -68,7 +68,7 @@ export default class GameSceneShowUI extends UIController {
         this.set_string(info_node.getChildByName("KW_TEXT_GOLD"),infoObj.uchip) //金币
         infoObj.userconfig = infoObj.userconfig ? infoObj.userconfig : {};
         let balllevel = infoObj.userconfig.user_ball_level 
-        if(balllevel){
+        if(balllevel && balllevel != ""){
             let ufaceImg = StringUtil.format(BALL_TEXTURE_KEY_STR, balllevel);
             this.set_sprite_asyc(info_node.getChildByName("KW_IMG_HEAD"),ufaceImg) // 头像
         }

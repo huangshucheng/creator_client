@@ -56,6 +56,7 @@ export default class LobbySceneTouchEvent extends UIController {
         }
 
         let ruleStr = JSON.stringify(GameHoodleConfig.BOX_GAME_RULE);
+        // let ruleStr = JSON.stringify({playCount:4});
         LobbySendMsg.send_create_room(ruleStr);
         LobbySendMsg.send_get_room_status();
     }
