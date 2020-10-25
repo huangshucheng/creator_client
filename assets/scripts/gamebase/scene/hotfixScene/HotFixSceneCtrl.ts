@@ -6,7 +6,6 @@ import HotUpdateNew from '../../../framework/hotfix/HotUpdateNew';
 import PlatForm from '../../../framework/config/PlatForm';
 import DialogManager from '../../../framework/manager/DialogManager';
 import NetWork from '../../../framework/network/NetWork';
-import CommonDialog from '../../dialog/CommonDialog';
 
 const {ccclass, property} = cc._decorator;
 
@@ -64,9 +63,9 @@ export default class HotFixSceneCtrl extends UIController {
                     if (isSuccess) {
                         _this.set_string(_this.view["KW_TEXT_PROGRESS_TIP"], "热更新完成!")
                         if (PlatForm.isAndroidNative() || PlatForm.isIOSNative() || PlatForm.isWin32()) {
-                            let resNode: cc.Node = DialogManager.getInstance().show_common_dialog();
+                            let resNode: cc.Node = DialogManager.getInstance().show_common_layer();
                             if (resNode) {
-                                let script: CommonDialog = resNode.getComponent("CommonDialog");
+                                let script = resNode.getComponent("CommonDialog");
                                 if (script) {
                                     script.set_content_text("更新完成,请重启!");
                                     script.set_btn_callback(

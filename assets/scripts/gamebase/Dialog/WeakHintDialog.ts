@@ -1,12 +1,17 @@
 import DialogManager from '../../framework/manager/DialogManager';
 import UIController from '../../framework/uibase/UIController';
+import UIFunction from '../../framework/common/UIFunciton';
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class WeakHintDialog extends UIController {
+class WeakHintDialog extends UIController {
 
     _data: string = "";
+
+    static show_layer() {
+        return UIFunction.getInstance().add_prefab_to_scene("ui_prefabs/dialog/DialogWeakHint", "WeakHintDialog")
+    }
 
     onLoad(){
         super.onLoad()
@@ -39,3 +44,5 @@ export default class WeakHintDialog extends UIController {
     }
 
 }
+
+export = WeakHintDialog;

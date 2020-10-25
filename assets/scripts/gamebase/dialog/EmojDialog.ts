@@ -7,6 +7,7 @@ import { ResourceManager } from '../../framework/manager/ResourceManager';
 import StringUtil from '../../framework/utils/StringUtil';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
+import UIFunction from '../../framework/common/UIFunciton';
 
 let EMOJ_COUNT = 35;
 let EMOJ_KEY_STR = "games/emoj/face_%d.png"
@@ -14,9 +15,13 @@ let EMOJ_KEY_STR = "games/emoj/face_%d.png"
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class EmojDialog extends UIDialog {
+class EmojDialog extends UIDialog {
 
     _ball_info_str = "";
+
+    static show_layer() {
+        return UIFunction.getInstance().add_prefab_to_scene("ui_prefabs/dialog/DialogEmoj", "EmojDialog")
+    }
 
     onLoad(){
         super.onLoad()
@@ -120,3 +125,5 @@ export default class EmojDialog extends UIDialog {
         AudioManager.getInstance().playBtnClick();
     }
 }
+
+export = EmojDialog;

@@ -16,7 +16,7 @@ export default class LobbySceneInit extends UIController {
     
     start () {
         LobbySendAuthMsg.send_get_center_info();
-        // LobbySendGameHoodleMsg.send_get_ugame_info();
+        LobbySendMsg.send_get_ugame_info();
         LobbySendMsg.send_get_room_status();
         // LobbySendGameHoodleMsg.send_get_room_list_config();
         RoomData.getInstance().clear_room_data();

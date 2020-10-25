@@ -1,10 +1,9 @@
 import UIController from '../../../framework/uibase/UIController';
 import Response from '../../../framework/protocol/Response';
 import DialogManager from '../../../framework/manager/DialogManager';
-import RewardDialog from '../../dialog/RewardDialog';
-import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import Stype from '../../../framework/protocol/Stype';
 import SystemProto from '../../../framework/protocol/protofile/SystemProto';
+import LobbySendMsg from './sendMsg/LobbySendMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -40,12 +39,12 @@ export default class LobbySceneRecvSystemMsg extends UIController {
     }
 
     on_event_share_res(body:any){
-        if(body && body.status == Response.OK){
+        if(body && body.status == Response.SUCCESS){
             DialogManager.getInstance().show_weak_hint("分享成功！");
-            LobbySendGameHoodleMsg.send_get_ugame_info();
-            let dialog = DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogReward", "RewardDialog");
+            LobbySendMsg.send_get_ugame_info();
+            let dialog = DialogManager.getInstance().show_poplayer("RewardDialog");
             if (dialog) {
-                let script: RewardDialog = dialog.getComponent("RewardDialog");
+                let script = dialog.getComponent("RewardDialog");
                 if (script) {
                     let item = script.add_item();
                     if (item) {

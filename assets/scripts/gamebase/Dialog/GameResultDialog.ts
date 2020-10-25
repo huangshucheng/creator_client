@@ -1,9 +1,14 @@
 import UIDialog from '../../framework/uibase/UIDialog';
+import UIFunction from '../../framework/common/UIFunciton';
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class GameResultDialog extends UIDialog {
+class GameResultDialog extends UIDialog {
+
+    static show_layer() {
+        return UIFunction.getInstance().add_prefab_to_scene("ui_prefabs/dialog/DialogGameResult", "GameResultDialog")
+    }
 
     onLoad(){
         super.onLoad()
@@ -48,3 +53,5 @@ export default class GameResultDialog extends UIDialog {
     }
 
 }
+
+export = GameResultDialog;

@@ -9,16 +9,18 @@ export default class LobbyProto {
         RES_LOGINLOBBY : 20002,
         REQ_CERATEROOM : 20003,
         RES_CERATEROOM : 20004,
-        REQ_JOINROOM: 20005,
-        RES_JOINROOM: 20006,
-        REQ_EXITROOM: 20007,
-        RES_EXITROOM: 20008,
-        REQ_BACKROOM: 20009,
-        RES_BACKROOM: 20010,
-        REQ_DESSOLVEROOM: 20011,
-        RES_DESSOLVEROOM: 20012,
-        REQ_ROOMSTATUS: 20013,
-        RES_ROOMSTATUS: 20014,
+        REQ_JOINROOM : 20005,
+        RES_JOINROOM : 20006,
+        REQ_EXITROOM : 20007,
+        RES_EXITROOM : 20008,
+        REQ_BACKROOM : 20009,
+        RES_BACKROOM : 20010,
+        REQ_DESSOLVEROOM : 20011,
+        RES_DESSOLVEROOM : 20012,
+        REQ_ROOMSTATUS : 20013,
+        RES_ROOMSTATUS : 20014,
+        REQ_GAMEINFO : 20015,
+        RES_GAMEINFO : 20016,
     }
 
     public static XY_NAME = {
@@ -43,6 +45,9 @@ export default class LobbyProto {
 
         [LobbyProto.XY_ID.REQ_ROOMSTATUS]: "ReqRoomStatus",
         [LobbyProto.XY_ID.RES_ROOMSTATUS]: "ResRoomStatus",
+
+        [LobbyProto.XY_ID.REQ_GAMEINFO]: "ReqGameInfo",
+        [LobbyProto.XY_ID.RES_GAMEINFO]: "ResGameInfo",
     }
 
 }

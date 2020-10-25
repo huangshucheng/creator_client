@@ -1,9 +1,6 @@
 import UIController from '../../../framework/uibase/UIController';
 import Response from '../../../framework/protocol/Response';
-import Storage from '../../../framework/utils/Storage';
-import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
-import LobbySendGameHoodleMsg from '../lobbyScene/sendMsg/LobbySendGameHoodle';
 import WeChatLogin from '../../../framework/utils/WeChatLogin';
 import Stype from '../../../framework/protocol/Stype';
 import AuthProto from '../../../framework/protocol/protofile/AuthProto';
@@ -47,58 +44,30 @@ export default class LoginSceneRecvAuthMsg extends UIController {
 
     on_event_guest_login(body:any){
         console.log("guestlogin udata: ", body)
-        if (body.status == Response.OK){
-            try {
-                let resbody = JSON.parse(body.logininfo)
-                Storage.set(LSDefine.USER_LOGIN_TYPE,LSDefine.LOGIN_TYPE_GUEST)
-                Storage.set(LSDefine.USER_LOGIN_GUEST_KEY,resbody.guest_key)
-            } catch (error) {
-                console.error(error)
-            }
-            console.log("on_event_guest_login: key: " , Storage.get(LSDefine.USER_LOGIN_GUEST_KEY))
+        if (body.status == Response.SUCCESS){
             LobbySendMsg.send_login_lobby();
-        }else{
-            DialogManager.getInstance().show_weak_hint("登录失败! " + body.status)
         }
     }
 
     on_event_uname_login(body:any){
         console.log("unamelogin udata: ", body)
-        if (body.status == Response.OK){
-            try {
-                let resbody = JSON.parse(body.logininfo)
-                Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_UNAME)
-                Storage.set(LSDefine.USER_LOGIN_MSG,{uname: resbody.uname, upwd: resbody.upwd})
-            } catch (error) {
-                console.error(error)
-            }
-            console.log("on_event_uname_login: " , Storage.get(LSDefine.USER_LOGIN_MSG) )
+        if (body.status == Response.SUCCESS){
             LobbySendMsg.send_login_lobby();
-        }else{
-            DialogManager.getInstance().show_weak_hint("登录失败! " + body.status)
         }
     }
 
     on_event_uname_regist(body:any){
-        if (body.status == Response.OK){
+        if (body.status == Response.SUCCESS){
             DialogManager.getInstance().show_weak_hint("注册成功!")
         }else{
             DialogManager.getInstance().show_weak_hint("注册失败! " + body.status)
         }
     }
+
     on_event_wechat_login(body:any){
-        if (body.status == Response.OK) {
+        if (body.status == Response.SUCCESS) {
             WeChatLogin.hide_auth_btn();
             LobbySendMsg.send_login_lobby();
-            try {
-                let resbody = JSON.parse(body.userlogininfo)
-                Storage.set(LSDefine.USER_LOGIN_WECHAT_SESSION, resbody.unionid);
-                Storage.set(LSDefine.USER_LOGIN_TYPE, LSDefine.LOGIN_TYPE_WECHAT);
-            } catch (error) {
-                console.log(error);
-            }
-        }else{
-            DialogManager.getInstance().show_weak_hint("登录失败! " + body.status)
         }
     }
 }

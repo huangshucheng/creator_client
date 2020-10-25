@@ -8,19 +8,23 @@ import ArrayUtil from '../../framework/utils/ArrayUtil';
 import DialogManager from '../../framework/manager/DialogManager';
 import GameHoodleConfig from '../../framework/config/GameHoodleConfig';
 import StringUtil from '../../framework/utils/StringUtil';
-import CommonDialog from './CommonDialog';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
 import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
+import UIFunction from '../../framework/common/UIFunciton';
 
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class BallCenterDialog extends UIDialog {
+class BallCenterDialog extends UIDialog {
 
     _ball_info_str = "";
+
+    static show_layer() {
+        return UIFunction.getInstance().add_prefab_to_scene("ui_prefabs/dialog/DialogBallCenter", "BallCenterDialog")
+    }
 
     onLoad(){
         super.onLoad()
@@ -30,15 +34,15 @@ export default class BallCenterDialog extends UIDialog {
         super.start()
         this.initUI();
         this.add_protocol_delegate();
-        GameSendGameHoodleMsg.send_get_player_ball_info();
+        // GameSendGameHoodleMsg.send_get_player_ball_info();
         //test
         // this.show_ball_test();
     }
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [GameHoodleProto.XY_ID.eUserBallInfoRes]: this.on_event_user_ball_info.bind(this),
-            [GameHoodleProto.XY_ID.eUpdateUserBallRes]: this.on_event_update_user_ball_info.bind(this),
+            // [GameHoodleProto.XY_ID.eUserBallInfoRes]: this.on_event_user_ball_info.bind(this),
+            // [GameHoodleProto.XY_ID.eUpdateUserBallRes]: this.on_event_update_user_ball_info.bind(this),
         }
     }
 
@@ -83,18 +87,18 @@ export default class BallCenterDialog extends UIDialog {
             let level = compose_info[0];
             let _this = this;
             if (ischeck){
-                GameSendGameHoodleMsg.send_ball_compose(Number(level));
+                // GameSendGameHoodleMsg.send_ball_compose(Number(level));
             }else{
-                let resNode: cc.Node = DialogManager.getInstance().show_common_dialog(2);
+                let resNode: cc.Node = DialogManager.getInstance().show_common_layer(2);
                 if (resNode) {
-                    let script: CommonDialog = resNode.getComponent("CommonDialog");
+                    let script = resNode.getComponent("CommonDialog");
                     if (script) {
                         let showTextStr = "确定将" + count + "个" + level + "级弹珠合成一个" + (Number(level) + 1) + "级弹珠吗?"
                         script.set_content_text(showTextStr);
                         script.set_btn_callback(
-                            function () { GameSendGameHoodleMsg.send_ball_compose(Number(level)); },
-                            function () {  _this.show_user_ball_info(_this._ball_info_str)},
-                            function () { },
+                            // function () { GameSendGameHoodleMsg.send_ball_compose(Number(level)); },
+                            // function () {  _this.show_user_ball_info(_this._ball_info_str)},
+                            // function () { },
                         )
                     }
                 }
@@ -162,7 +166,7 @@ export default class BallCenterDialog extends UIDialog {
     on_event_user_ball_info(body:any){
         if (body){
             let status = body.status
-            if(status == Response.OK){
+            if(status == Response.SUCCESS){
                 this._ball_info_str = body.userballinfostring;
                 this.show_user_ball_info(body.userballinfostring);
             }
@@ -172,7 +176,7 @@ export default class BallCenterDialog extends UIDialog {
     on_event_update_user_ball_info(body: any){
         if(body){
             let status = body.status
-            if(status == Response.OK){
+            if (status == Response.SUCCESS){
                 this._ball_info_str = body.userballinfostring;
                 this.show_user_ball_info(body.userballinfostring);
                 this.show_compose_result(body.resultinfo);
@@ -365,7 +369,7 @@ export default class BallCenterDialog extends UIDialog {
         if (resultObj){
             let compose_level = resultObj.level;
             if (compose_level){
-                let dialog =  DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogReward", "RewardDialog");
+                let dialog = DialogManager.getInstance().show_poplayer("RewardDialog");
                 if (dialog){
                     let script = dialog.getComponent("RewardDialog");
                     if (script){
@@ -381,3 +385,5 @@ export default class BallCenterDialog extends UIDialog {
         }
     }
 }
+
+export = BallCenterDialog;

@@ -85,7 +85,7 @@ export default class GameHoodleRecvMsg extends UIController {
                 }
                 GameHoodleData.getInstance().set_power(seatid, power);
                 let ball: cc.Node = HoodleBallManager.getInstance().get_ball(seatid);
-                if(ball){
+                if(ball && cc.isValid(ball)){
                     let script = ball.getComponent("HoodleBallCtrl");
                     if(script){
                         script.set_shoot_power_ui(power);
@@ -100,7 +100,7 @@ export default class GameHoodleRecvMsg extends UIController {
     //玩家射击
     on_event_player_shoot(body: any){
         if (body){
-            if (body.status == Response.OK){
+            if (body.status == Response.SUCCESS){
                 let seatid = body.seatid;
                 let dirx = Number(body.posx);
                 let diry = Number(body.posy);
@@ -119,7 +119,7 @@ export default class GameHoodleRecvMsg extends UIController {
     //同步小球位置
     on_event_ball_pos(body: any){
         if(body){
-            if (body.status == Response.OK){
+            if (body.status == Response.SUCCESS){
                 let positions = body.positions;
                 for(let key in positions){
                     let posinfo = positions[key];
@@ -135,7 +135,7 @@ export default class GameHoodleRecvMsg extends UIController {
     //玩家被击中
     on_event_player_is_shooted(body: any){
         if(body){
-            if(body.status == Response.OK){
+            if(body.status == Response.SUCCESS){
                 this.do_on_view("GameHoodleShowUI", "show_ball_shooted_animation", body.desseatid);
             }
         }
@@ -153,7 +153,7 @@ export default class GameHoodleRecvMsg extends UIController {
     }
 
     on_event_emoj(body: any){
-        if (body && body.status == Response.OK) {
+        if (body && body.status == Response.SUCCESS) {
             this.do_on_view("GameHoodleShowUI", "show_emoj", body);
         }
     }

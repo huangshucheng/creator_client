@@ -52,4 +52,9 @@ export default class LobbySendMsg {
         CellManager.getInstance().start("CellBackRoom", null, 5);
     }
 
+    //游戏服务信息
+    static send_get_ugame_info(){
+        LobbySendMsg.send(LobbyProto.XY_ID.REQ_GAMEINFO);
+    }
+
 }

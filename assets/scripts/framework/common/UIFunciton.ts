@@ -314,6 +314,9 @@ export default class UIFunction {
     }
     //
     add_to_node(parent: cc.Node, prefab: cc.Prefab, scriptName?: string): cc.Node {
+        if (!cc.isValid(parent)){
+            return;
+        }
         if (prefab) {
             var item = cc.instantiate(prefab);
             if (item) {

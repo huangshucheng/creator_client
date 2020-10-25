@@ -3,11 +3,16 @@ import LobbySceneSendAuthMsg from '../scene/lobbyScene/sendMsg/LobbySendAuthMsg'
 import SceneManager from '../../framework/manager/SceneManager';
 import LoginScene from '../scene/loginScene/LoginScene';
 import UserInfo from '../../framework/common/UserInfo';
+import UIFunction from '../../framework/common/UIFunciton';
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class MyCenterDialog extends UIDialog {
+class MyCenterDialog extends UIDialog {
+
+    static show_layer() {
+        return UIFunction.getInstance().add_prefab_to_scene("ui_prefabs/dialog/DialogMyCenter", "MyCenterDialog")
+    }
 
     onLoad(){
         super.onLoad()
@@ -39,5 +44,6 @@ export default class MyCenterDialog extends UIDialog {
         SceneManager.getInstance().enter_scene_asyc(new LoginScene())
         this.close()
     }
-
 }
+
+export = MyCenterDialog;

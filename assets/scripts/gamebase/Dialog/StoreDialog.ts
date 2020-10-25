@@ -9,17 +9,22 @@ import DialogManager from '../../framework/manager/DialogManager';
 import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
 import UserInfo from '../../framework/common/UserInfo';
 import StringUtil from '../../framework/utils/StringUtil';
-import CommonDialog from './CommonDialog';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
 import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
+import LobbySendMsg from '../scene/lobbyScene/sendMsg/LobbySendMsg';
+import UIFunction from '../../framework/common/UIFunciton';
 
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class StoreDialog extends UIDialog {
+class StoreDialog extends UIDialog {
+
+    static show_layer() {
+        return UIFunction.getInstance().add_prefab_to_scene("ui_prefabs/dialog/DialogStore", "StoreDialog")
+    }
 
     onLoad(){
         super.onLoad()
@@ -29,14 +34,14 @@ export default class StoreDialog extends UIDialog {
         super.start();
         this.initUI();
         this.add_protocol_delegate();
-        GameSendGameHoodleMsg.send_store_list_req();
+        // GameSendGameHoodleMsg.send_store_list_req();
     }
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [GameHoodleProto.XY_ID.eStoreListRes]: this.on_event_store_list.bind(this),
-            [GameHoodleProto.XY_ID.eBuyThingsRes]: this.on_event_buy_things.bind(this),
-            [GameHoodleProto.XY_ID.eUserGameInfoRes]: this.on_event_ugame_info.bind(this),
+            // [GameHoodleProto.XY_ID.eStoreListRes]: this.on_event_store_list.bind(this),
+            // [GameHoodleProto.XY_ID.eBuyThingsRes]: this.on_event_buy_things.bind(this),
+            // [GameHoodleProto.XY_ID.eUserGameInfoRes]: this.on_event_ugame_info.bind(this),
         }
     }
 
@@ -74,7 +79,7 @@ export default class StoreDialog extends UIDialog {
         let udata = body;
         if (udata) {
             let status = udata.status
-            if (status == Response.OK) {
+            if (status == Response.SUCCESS) {
                 this.show_store_product_info(udata.storeprops);
             }
         }
@@ -84,9 +89,9 @@ export default class StoreDialog extends UIDialog {
         let udata = body;
         if (udata) {
             let status = udata.status
-            if (status == Response.OK) {
+            if (status == Response.SUCCESS) {
                 //刷新金币
-                LobbySendGameHoodleMsg.send_get_ugame_info();
+                LobbySendMsg.send_get_ugame_info();
                 DialogManager.getInstance().show_weak_hint("购买成功!")
             }
             else{
@@ -101,7 +106,7 @@ export default class StoreDialog extends UIDialog {
         console.log("on_event_ugame_info", udata)
         if (udata) {
             let status = udata.status
-            if (status == Response.OK) {
+            if (status == Response.SUCCESS) {
                 let ugame_info = JSON.parse(udata.userinfostring);
                 let uchip = ugame_info.uchip;
                 this.set_string(this.view["KW_TEXT_MY_CHIP"], "我的金币：" + String(uchip));
@@ -184,13 +189,13 @@ export default class StoreDialog extends UIDialog {
         }
         let level_obj = JSON.parse(data.propinfo);
         let showTextStr = "确定将购买" + data.propcount + "个" + level_obj.level + "级弹珠吗?" + "需要" + data.propprice + "金币哦!"
-        let resNode: cc.Node = DialogManager.getInstance().show_common_dialog();
+        let resNode: cc.Node = DialogManager.getInstance().show_common_layer();
         if (resNode) {
-            let script: CommonDialog = resNode.getComponent("CommonDialog");
+            let script = resNode.getComponent("CommonDialog");
             if (script) {
                 script.set_content_text(showTextStr);
                 script.set_btn_callback(
-                    function () { GameSendGameHoodleMsg.send_buy_product(req_body); },
+                    // function () { GameSendGameHoodleMsg.send_buy_product(req_body); },
                 )
             }
         }
@@ -199,3 +204,5 @@ export default class StoreDialog extends UIDialog {
     }
 
 }
+
+export = StoreDialog;

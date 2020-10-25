@@ -1,8 +1,6 @@
 import UIController from '../../../framework/uibase/UIController';
 import Response from '../../../framework/protocol/Response';
 import DialogManager from '../../../framework/manager/DialogManager';
-import RewardDialog from '../../dialog/RewardDialog';
-import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import Stype from '../../../framework/protocol/Stype';
 import GameHoodleProto from '../../../framework/protocol/protofile/GameHoodleProto';
 import SceneManager from '../../../framework/manager/SceneManager';
@@ -42,7 +40,7 @@ export default class LobbySceneRecvGameMsg extends UIController {
     }
 
     on_event_login_game_logic(body: any) {
-        if (body && body.status == Response.OK) {
+        if (body && body.status == Response.SUCCESS) {
             SceneManager.getInstance().enter_scene_asyc(new GameScene());
         } else {
             DialogManager.getInstance().show_weak_hint("login game logic server failed");

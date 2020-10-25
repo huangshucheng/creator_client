@@ -25,6 +25,7 @@ export default class LoginSceneTouchEvent extends UIController {
         this.add_click_event(this.view["KW_BTN_CLOSE"],this.on_click_regist_close.bind(this))
         this.add_click_event(this.view["KW_BTN_REGIST"], this.on_click_regist.bind(this))
         this.add_click_event(this.view["KW_BTN_WX_LOGIN"], this.on_click_wx_login.bind(this))
+        this.add_click_event(this.view["KW_BTN_TEST_LOGIN"], this.on_click_tst_login.bind(this))
     }
 
     on_click_guest_login(sender:cc.Component){
@@ -86,7 +87,7 @@ export default class LoginSceneTouchEvent extends UIController {
         if (!PlatForm.isWeChatGame()) {
             return;
         }
-        DialogManager.getInstance().show_loading_dialog();
+        DialogManager.getInstance().show_loading_layer();
         WeChatLogin.do_wechat_auth_login2();
     }
 
@@ -102,6 +103,10 @@ export default class LoginSceneTouchEvent extends UIController {
         let ret = await Http.getInstance().get(weburl);
         console.log("ret: ", ret);
         return ret;
+    }
+
+    on_click_tst_login(sender: cc.Component){
+        DialogManager.getInstance().show_poplayer("LoginTestDialog")
     }
 
 }

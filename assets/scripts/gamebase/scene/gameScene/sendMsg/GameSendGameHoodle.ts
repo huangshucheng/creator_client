@@ -18,47 +18,8 @@ export default class GameSendGameHoodleMsg {
         GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eLoginLogicReq);
     }
 
-    static send_exit_room(){
-        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eExitRoomReq);
-    }
-
-    static send_dessolve_room(){
-        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eDessolveReq);
-    }
-
-    static send_back_room(){
-        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eBackRoomReq);
-    }
-
     static send_user_ready(){
         GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserReadyReq)
-    }
-
-    static send_get_player_ball_info() {
-        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserBallInfoReq);
-    }
-
-    static send_ball_compose(level: number, count?: number) {
-        if (!count) {
-            count = 1;
-        }
-        let body = {
-            updatetype: GameHoodleConfig.BALL_UPDATE_TYPE.COMPOSE_TYPE,
-            level: level,
-            count: count,
-        }
-        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUpdateUserBallReq, body);
-    }
-
-    static send_store_list_req(){
-        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eStoreListReq);
-    }
-
-    static send_buy_product(productinfo:any){
-        if(!productinfo || ArrayUtil.GetArrayLen(productinfo) <= 0){
-            return;
-        }
-        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eBuyThingsReq, productinfo);
     }
 
     ////////////////////////
@@ -102,19 +63,6 @@ export default class GameSendGameHoodleMsg {
         GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.ePlayerIsShootedReq,body);
     }
 
-    static send_get_user_config(){
-        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserConfigReq);
-    }
-
-    static send_use_ball(balllevel:number){
-        if(balllevel <= 0){
-            return;
-        }
-        let body = {
-            balllevel: balllevel,
-        }
-        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUseHoodleBallReq,body);
-    }
 
     static send_use_emoj(emojIndex:number) {
         let body = {
@@ -123,18 +71,4 @@ export default class GameSendGameHoodleMsg {
         GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserEmojReq, body);
     }
 
-    static send_play_again(uids:Array<number>){
-        let body = {
-            otheruids: uids,
-        }
-        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserPlayAgainReq,body);
-    }
-
-    static send_play_again_answer(requseruid:number,rescode:number){
-        let body = {
-            requseruid: requseruid,
-            responsecode: rescode,
-        }
-        GameSendGameHoodleMsg.send(GameHoodleProto.XY_ID.eUserPlayAgainAnswerReq,body);
-    }
 }

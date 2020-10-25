@@ -20,7 +20,7 @@ export default class UIDialog extends UIController {
     }
 
     close() {
-        DialogManager.getInstance().remove_dialog_from_map(this.node)
+        DialogManager.getInstance().remove_layer_from_map(this.node)
         if(this.node){
             this.node.destroy();
         }
@@ -45,4 +45,5 @@ export default class UIDialog extends UIController {
         }
         this.close();
     }
+ 
 }

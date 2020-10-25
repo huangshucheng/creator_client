@@ -1,9 +1,10 @@
 import UIDialog from '../../framework/uibase/UIDialog';
+import UIFunction from '../../framework/common/UIFunciton';
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class CommonDialog extends UIDialog {
+class CommonDialog extends UIDialog {
     
     _btnNum: number             = 1;
     _content: string            = "";
@@ -12,6 +13,10 @@ export default class CommonDialog extends UIDialog {
     _leftBtnCallback: Function  = null;
     _rightBtnCallback: Function = null;
     _closeBtnCallback: Function = null;
+
+    static show_layer() {
+        return UIFunction.getInstance().add_prefab_to_scene("ui_prefabs/dialog/DialogCommon", "CommonDialog")
+    }
 
     onLoad(){
         super.onLoad()
@@ -85,3 +90,5 @@ export default class CommonDialog extends UIDialog {
     }
 
 }
+
+export = CommonDialog;

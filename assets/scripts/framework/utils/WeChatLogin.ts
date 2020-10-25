@@ -83,7 +83,7 @@ class WeChatLogin {
     //获取玩家微信信息，直接登录
     static get_wechat_user_info_and_login() {
         if (!PlatForm.isWeChatGame()) {
-            DialogManager.getInstance().close_loading_dialog();
+            DialogManager.getInstance().close_loading_layer();
             return;
         }
         //微信登录
@@ -91,7 +91,7 @@ class WeChatLogin {
             success(login_res:any) {
                 wx.getUserInfo({
                     success(userinfo_res:any) {
-                        DialogManager.getInstance().close_loading_dialog();
+                        DialogManager.getInstance().close_loading_layer();
                         if (login_res.code) {
                             let login_code = login_res.code;
                             //发起登录请求
@@ -105,7 +105,7 @@ class WeChatLogin {
                     },
                     fail(userinfo_res: any) {
                         console.log("hcc>>wx.getUserInfo>>fail", userinfo_res);
-                        DialogManager.getInstance().close_loading_dialog();
+                        DialogManager.getInstance().close_loading_layer();
                     }
                 })
             },
@@ -183,7 +183,7 @@ class WeChatLogin {
             EventManager.emit(EventDefine.EVENT_CLICK_WECHAT_AUTH);
             if (uinfo.userInfo) {
                 console.log("hcc>>wxLogin auth success, uinfo:" , uinfo.userInfo);
-                DialogManager.getInstance().show_loading_dialog();
+                DialogManager.getInstance().show_loading_layer();
                 WeChatLogin.get_wechat_user_info_and_login();
             }else{
                 console.log("hcc>>wxLogin auth fail");

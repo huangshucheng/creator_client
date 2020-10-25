@@ -6,14 +6,19 @@ import DialogManager from '../../framework/manager/DialogManager';
 import { Cell } from '../../framework/cell/Cell';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
+import UIFunction from '../../framework/common/UIFunciton';
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class JoinRoomDialog extends UIDialog {
+class JoinRoomDialog extends UIDialog {
 
     _text_index = 1;
     KW_TOTAL_ROOM_NUM_COUNT = 6;
+
+    static show_layer() {
+        return UIFunction.getInstance().add_prefab_to_scene("ui_prefabs/dialog/DialogJoinRoom", "JoinRoomDialog")
+    }
 
     onLoad(){
         super.onLoad()
@@ -113,10 +118,10 @@ export default class JoinRoomDialog extends UIDialog {
     on_event_join_room_cell(cell:Cell, type:number, data:any){
         console.log("hcc>>on_event_join_room_cell flag:", type, ",data: ", data);
         console.log("hcc>>on_event_join_room_cell message: ", cell.getMessage());
-        DialogManager.getInstance().close_loading_dialog();
+        DialogManager.getInstance().close_loading_layer();
         if (type == Cell.TYPE.SUCCESS) {
             if(data){
-                if(data.status == Response.OK){
+                if (data.status == Response.SUCCESS){
                     this.close();
                 }
             }
@@ -126,3 +131,5 @@ export default class JoinRoomDialog extends UIDialog {
 
     }
 }
+
+export = JoinRoomDialog;

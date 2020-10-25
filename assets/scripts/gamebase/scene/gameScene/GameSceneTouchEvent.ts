@@ -6,9 +6,7 @@ import LobbyScene from '../lobbyScene/LobbyScene';
 import PlatForm from '../../../framework/config/PlatForm';
 import RoomData from '../../common/RoomData';
 import Player from '../../common/Player';
-import GameScene from './GameScene';
 import UserInfo from '../../../framework/common/UserInfo';
-import CommonDialog from '../../dialog/CommonDialog';
 
 const {ccclass, property} = cc._decorator;
 
@@ -30,20 +28,11 @@ export default class GameSceneTouchEvent extends UIController {
     }
 
     on_click_setting(sender:cc.Component){
-        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogSetting","SettingDialog")
+        DialogManager.getInstance().show_poplayer("SettingDialog")
         
     }
 
     on_click_setting2(sender:cc.Component){
-        // let resNode:any = DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogGameResult","GameResultDialog");
-        // if(resNode){
-        //     let script = resNode.getComponent("GameResultDialog");
-        //     if (script){
-        //         script.set_title_text("恭喜恭喜")
-        //         script.set_reward_text("获得猪一头！")
-        //         script.set_score_text("text1111:+1\n" + "test2222:-1");
-        //     }
-        // }
     }
 
     on_click_ready(sender: cc.Component){
@@ -92,7 +81,7 @@ export default class GameSceneTouchEvent extends UIController {
     }
 
     on_click_emoj(sender: cc.Component){
-        DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogEmoj", "EmojDialog");
+        DialogManager.getInstance().show_poplayer("EmojDialog");
         //test
         // SceneManager.getInstance().enter_scene_asyc(new GameScene())
     }
@@ -107,14 +96,14 @@ export default class GameSceneTouchEvent extends UIController {
             }
         }
         console.log("hcc>>on_click_play_again uids: " , uidSet);
-        let resNode: cc.Node = DialogManager.getInstance().show_common_dialog(2);
+        let resNode: cc.Node = DialogManager.getInstance().show_common_layer(2);
         if (resNode) {
-            let script: CommonDialog = resNode.getComponent("CommonDialog");
+            let script = resNode.getComponent("CommonDialog");
             if (script) {
                 script.set_content_text("确定再邀请该玩家再来一次对局吗!");
                 script.set_can_touch_background(true);
                 script.set_btn_callback(
-                    function () { GameSendGameHoodleMsg.send_play_again(uidSet); },
+                    // function () { GameSendGameHoodleMsg.send_play_again(uidSet); },
                 )
             }
         }

@@ -6,7 +6,6 @@ import Player from '../../../common/Player';
 import HoodleBallManager from "./HoodleBallManager";
 import GameHoodleConfig from "../../../../framework/config/GameHoodleConfig";
 import DialogManager from "../../../../framework/manager/DialogManager";
-import GameResultDialog from "../../../dialog/GameResultDialog";
 
 let PROGRESS_SPEED = 0.02
 
@@ -201,9 +200,9 @@ export default class GameHoodleShowUI extends UIController {
 
             }
         }
-        let resNode:cc.Node = DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogGameResult", "GameResultDialog");
+        let resNode: cc.Node = DialogManager.getInstance().show_poplayer("GameResultDialog");
         if (resNode) {
-            let script: GameResultDialog = resNode.getComponent("GameResultDialog");
+            let script = resNode.getComponent("GameResultDialog");
             if (script) {
                 script.set_title_text("结束")
                 script.set_reward_text("")

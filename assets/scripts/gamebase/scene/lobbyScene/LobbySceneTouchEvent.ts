@@ -1,16 +1,10 @@
 import UIController from '../../../framework/uibase/UIController';
 import DialogManager from '../../../framework/manager/DialogManager';
-import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import GameHoodleConfig from '../../../framework/config/GameHoodleConfig';
 import PlatForm from '../../../framework/config/PlatForm';
-import RewardDialog from '../../dialog/RewardDialog';
-import UserInfo from '../../../framework/common/UserInfo';
-import LobbySendSystem from './sendMsg/LobbySendSystem';
 import { AudioManager } from '../../../framework/manager/AudioManager';
 import LSDefine from '../../../framework/config/LSDefine';
 import Storage from '../../../framework/utils/Storage';
-import CommonDialog from '../../dialog/CommonDialog';
-import WeChatLogin from '../../../framework/utils/WeChatLogin';
 import LobbySendMsg from './sendMsg/LobbySendMsg';
 
 const {ccclass, property} = cc._decorator;
@@ -46,12 +40,12 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_set(sender:cc.Component) {
-        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogMyCenter","MyCenterDialog")
+        DialogManager.getInstance().show_poplayer("MyCenterDialog");
     }
 
     on_click_create_room(sender:cc.Component){
         if (this.is_guest_login_wechat_game()){
-            DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogAuth", "AuthDialog");
+            DialogManager.getInstance().show_poplayer("AuthDialog");
             return;
         }
 
@@ -66,18 +60,18 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_join_room(sender: cc.Component){
         if (this.is_guest_login_wechat_game()){
-            DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogAuth", "AuthDialog");
+            DialogManager.getInstance().show_poplayer("AuthDialog");
             return;
         }
-        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogJoinRoom","JoinRoomDialog")
+        DialogManager.getInstance().show_poplayer("JoinRoomDialog")
     }
 
     on_click_head(sender: cc.Component){
         if (this.is_guest_login_wechat_game()) {
-            DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogAuth", "AuthDialog");
+            DialogManager.getInstance().show_poplayer("AuthDialog");
             return;
         }
-        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogMyCenter","MyCenterDialog")
+        DialogManager.getInstance().show_poplayer("MyCenterDialog")
     }
 
     on_click_back_room(sender: cc.Component){
@@ -87,7 +81,7 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_match_room_with_data(event: cc.Event, customEventData: any){
         if (this.is_guest_login_wechat_game()) {
-            DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogAuth", "AuthDialog");
+            DialogManager.getInstance().show_poplayer("AuthDialog");
             return;
         }
         console.log("on_click_match_room_with_data" , customEventData);
@@ -103,15 +97,15 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_ball_compose(sender: cc.Component){
-        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogBallCenter","BallCenterDialog")
+        DialogManager.getInstance().show_poplayer("BallCenterDialog")
     }
 
     on_click_store(sender: cc.Component){
-        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogStore", "StoreDialog")
+        DialogManager.getInstance().show_poplayer("StoreDialog")
     }
 
     on_click_ball_list(sender:cc.Component){
-        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogBallList", "BallListDialog")
+        DialogManager.getInstance().show_poplayer("BallListDialog")
     }
 
     add_room_list_click(confobj:any){
@@ -123,11 +117,6 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_sign(sender: cc.Component){
-        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogSign", "SignDialog");
-        //test
-        // let config = {level:6}
-        // LobbySendSystem.send_add_uchip(GameHoodleConfig.KW_PROP_ID_COIN, 50);
-        // LobbySendSystem.send_add_uchip(GameHoodleConfig.KW_PROP_ID_BALL, 1, JSON.stringify(config));
     }
 
     on_click_share(sender:cc.Component){
@@ -157,7 +146,8 @@ export default class LobbySceneTouchEvent extends UIController {
         }
         wx.shareAppMessage(shareInfo)
         */
-        LobbySendMsg.send_get_room_status();
+        // LobbySendMsg.send_get_room_status();
+        //test
     }
 
     is_guest_login_wechat_game(){

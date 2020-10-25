@@ -166,7 +166,7 @@ export default class GameSceneShowUI extends UIController {
     }
 
     show_game_start_ani(){
-        DialogManager.getInstance().show_dialog_async("ui_prefabs/dialog/DialogGameStart", "GameStartDialog");
+        DialogManager.getInstance().show_poplayer("GameStartDialog");
     }
 
     show_game_rule(gamerule:string){

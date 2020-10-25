@@ -7,11 +7,16 @@ import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
 import LobbySendMsg from '../scene/lobbyScene/sendMsg/LobbySendMsg';
 import LobbyProto from '../../framework/protocol/protofile/LobbyProto';
+import UIFunction from '../../framework/common/UIFunciton';
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class SettingDialog extends UIDialog {
+class SettingDialog extends UIDialog {
+
+    static show_layer() {
+        return UIFunction.getInstance().add_prefab_to_scene("ui_prefabs/dialog/DialogSetting", "SettingDialog")
+    }
 
     onLoad(){
         super.onLoad()
@@ -94,10 +99,12 @@ export default class SettingDialog extends UIDialog {
         let udata =  body;
         if(udata){
             let status = udata.status
-            if(status == Response.OK){
+            if(status == Response.SUCCESS){
                 this.close()
             }
         }
     }
 
 }
+
+export = SettingDialog;

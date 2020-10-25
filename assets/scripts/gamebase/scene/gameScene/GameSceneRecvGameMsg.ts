@@ -4,9 +4,7 @@ import SceneManager from '../../../framework/manager/SceneManager';
 import DialogManager from '../../../framework/manager/DialogManager';
 import RoomData from '../../common/RoomData';
 import { UserState } from '../../common/State';
-import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
 import GameScene from './GameScene';
-import CommonDialog from '../../dialog/CommonDialog';
 import Stype from '../../../framework/protocol/Stype';
 import GameHoodleProto from '../../../framework/protocol/protofile/GameHoodleProto';
 
@@ -40,9 +38,9 @@ export default class GameSceneRecvGameMsg extends UIController {
             [GameHoodleProto.XY_ID.ePlayerScoreRes]: this.on_event_player_score.bind(this),
             [GameHoodleProto.XY_ID.eGameResultRes]: this.on_event_game_result.bind(this),
             [GameHoodleProto.XY_ID.eTotalGameResultRes]: this.on_event_game_total_result.bind(this),
-            [GameHoodleProto.XY_ID.eUserPlayAgainRes]: this.on_event_play_again.bind(this),
-            [GameHoodleProto.XY_ID.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer.bind(this),
-            [GameHoodleProto.XY_ID.eUserPlayAgainStartRes]: this.on_event_play_again_start.bind(this),
+            // [GameHoodleProto.XY_ID.eUserPlayAgainRes]: this.on_event_play_again.bind(this),
+            // [GameHoodleProto.XY_ID.eUserPlayAgainAnswerRes]: this.on_event_play_again_answer.bind(this),
+            // [GameHoodleProto.XY_ID.eUserPlayAgainStartRes]: this.on_event_play_again_start.bind(this),
         }
     }
 
@@ -120,7 +118,7 @@ export default class GameSceneRecvGameMsg extends UIController {
             let status = body.status;
             let seatid = body.seatid;
             let userstate = body.userstate;
-            if (status == Response.OK) {
+            if (status == Response.SUCCESS) {
                 let player = RoomData.getInstance().get_player(seatid);
                 if (player) {
                     player.set_user_state(UserState.Ready);
@@ -157,7 +155,7 @@ export default class GameSceneRecvGameMsg extends UIController {
     }
 
     on_event_emoj(body: any) {
-        if (body && body.status == Response.OK) {
+        if (body && body.status == Response.SUCCESS) {
             let emojconfig = body.emojconfig;
             let configObj = JSON.parse(emojconfig);
             this.do_on_view("GameSceneShowUI", "show_emoj", Number(configObj.seatid), Number(configObj.emojconfig));
@@ -166,12 +164,12 @@ export default class GameSceneRecvGameMsg extends UIController {
 
     //请求再次对局,返回
     on_event_play_again(body: any) {
-        if (body && body.status == Response.OK) {
-            if (body.responsecode == Response.OK) {
+        if (body && body.status == Response.SUCCESS) {
+            if (body.responsecode == Response.SUCCESS) {
                 //玩家答应了，再次对局
-                let resNode: cc.Node = DialogManager.getInstance().show_common_dialog();
+                let resNode: cc.Node = DialogManager.getInstance().show_common_layer();
                 if (resNode) {
-                    let script: CommonDialog = resNode.getComponent("CommonDialog");
+                    let script = resNode.getComponent("CommonDialog");
                     if (script) {
                         script.set_content_text("邀请玩家成功!");
                         script.set_can_touch_background(true);
@@ -180,9 +178,9 @@ export default class GameSceneRecvGameMsg extends UIController {
 
             } else {
                 if (body.responsecode) {
-                    let resNode: cc.Node = DialogManager.getInstance().show_common_dialog();
+                    let resNode: cc.Node = DialogManager.getInstance().show_common_layer();
                     if (resNode) {
-                        let script: CommonDialog = resNode.getComponent("CommonDialog");
+                        let script = resNode.getComponent("CommonDialog");
                         if (script) {
                             script.set_content_text("玩家拒绝了您的邀请!");
                             script.set_can_touch_background(true);
@@ -199,20 +197,20 @@ export default class GameSceneRecvGameMsg extends UIController {
 
     //收到别的玩家的对局邀请
     on_event_play_again_answer(body: any) {
-        if (body && body.status == Response.OK) {
+        if (body && body.status == Response.SUCCESS) {
             let config = JSON.parse(body.ansconfig);
             let requserunick = config.requserunick;
             let requseruid = config.requseruid;
             let showStr = "玩家【" + requserunick + "】邀请你再次对局，是否答应？"
-            let resNode: cc.Node = DialogManager.getInstance().show_common_dialog(2);
+            let resNode: cc.Node = DialogManager.getInstance().show_common_layer(2);
             if (resNode) {
-                let script: CommonDialog = resNode.getComponent("CommonDialog");
+                let script = resNode.getComponent("CommonDialog");
                 if (script) {
                     script.set_content_text(showStr);
                     script.set_btn_callback(
-                        function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.OK); },
-                        function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.INVALID_PARAMS); },
-                        function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.INVALID_PARAMS); },
+                        // function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.SUCCESS); },
+                        // function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.ERROR_1); },
+                        // function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.ERROR_1); },
                     )
                 }
             }
@@ -224,7 +222,7 @@ export default class GameSceneRecvGameMsg extends UIController {
 
     //再次对局
     on_event_play_again_start(body: any) {
-        if (body && body.status == Response.OK) {
+        if (body && body.status == Response.SUCCESS) {
             SceneManager.getInstance().enter_scene_asyc(new GameScene());
         }
     }

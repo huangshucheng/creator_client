@@ -4,10 +4,10 @@ import Response from '../../../../framework/protocol/Response';
 import DialogManager from '../../../../framework/manager/DialogManager';
 import GameHoodleConfig from '../../../../framework/config/GameHoodleConfig';
 import StringUtil from '../../../../framework/utils/StringUtil';
-import LobbySendGameHoodleMsg from './LobbySendGameHoodle';
 import UIFunction from '../../../../framework/common/UIFunciton';
 import Stype from '../../../../framework/protocol/Stype';
 import SystemProto from '../../../../framework/protocol/protofile/SystemProto';
+import LobbySendMsg from './LobbySendMsg';
 
 let BALL_TEXTURE_KEY_STR = "textures/games/balls/ball_level_%s.png"
 let COIN_TEXTURE_KEY_STR = "textures/lobby/lobby_coin.png";
@@ -52,7 +52,7 @@ export default class LobbySendSystem {
         let cell = CellManager.getInstance().start("CellAddUchip", req_body,5);
         CellManager.getInstance().addCellCallBack(cell,function(stype:number, ctype:number, body:any) {
             if (body) {
-                if (body.status == Response.OK) {
+                if (body.status == Response.SUCCESS) {
                     let res_propid = body.propid;
                     let res_propcount = body.propcount;
                     let res_config = body.config;
@@ -77,7 +77,7 @@ export default class LobbySendSystem {
 
                     ////show reward
                     if (showImg && showTipStr){
-                        let dialog = DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogReward", "RewardDialog");
+                        let dialog = DialogManager.getInstance().show_poplayer("RewardDialog");
                         if (dialog) {
                             let script = dialog.getComponent("RewardDialog");
                             if (script) {
@@ -90,7 +90,7 @@ export default class LobbySendSystem {
                             }
                         }
                     }
-                    LobbySendGameHoodleMsg.send_get_ugame_info();
+                    LobbySendMsg.send_get_ugame_info();
                 }else{
                     DialogManager.getInstance().show_weak_hint("增加失败!");
                 }

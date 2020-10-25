@@ -10,11 +10,16 @@ import { Cell } from '../../framework/cell/Cell';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
 import SystemProto from '../../framework/protocol/protofile/SystemProto';
+import UIFunction from '../../framework/common/UIFunciton';
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class SignDialog extends UIDialog {
+class SignDialog extends UIDialog {
+
+    static show_layer() {
+        return UIFunction.getInstance().add_prefab_to_scene("ui_prefabs/dialog/DialogSign", "SignDialog")
+    }
 
     onLoad(){
         super.onLoad()
@@ -66,7 +71,7 @@ export default class SignDialog extends UIDialog {
         console.log("on_event_reward_info", body)
         if (body) {
             let status = body.status
-            if (status == Response.OK) {
+            if (status == Response.SUCCESS) {
                 this.show_reward_info(body);
             }
         }
@@ -76,7 +81,7 @@ export default class SignDialog extends UIDialog {
     on_event_ugame_info(cell: Cell, type: number, body: any) {
         // console.log("on_event_ugame_info111111111111111 " , body);
         if (body) {
-            if (body.status == Response.OK) {
+            if (body.status == Response.SUCCESS) {
                 let ugame_info = JSON.parse(body.userinfostring);
                 let uchip = ugame_info.uchip;
                 this.set_string(this.view["KW_TEXT_MY_CHIP"], "我的金币：" + String(uchip));
@@ -87,7 +92,7 @@ export default class SignDialog extends UIDialog {
     on_event_sign_res(body:any){
         if(body){
             let status = body.status;
-            if (status == Response.OK){
+            if (status == Response.SUCCESS){
                 LobbySendSystem.send_get_reward_info();
                 DialogManager.getInstance().show_weak_hint("签到成功");
                 let cell = CellManager.getInstance().start("CellGetUserProp",null,5);
@@ -98,7 +103,7 @@ export default class SignDialog extends UIDialog {
                     let rewardObj = JSON.parse(rewardconfig);
                     let propid = rewardObj.propid;
                     let propcount = rewardObj.propcount;
-                    let dialog = DialogManager.getInstance().show_dialog("ui_prefabs/dialog/DialogReward", "RewardDialog");
+                    let dialog = DialogManager.getInstance().show_poplayer("RewardDialog");
                     if (dialog) {
                         let script = dialog.getComponent("RewardDialog");
                         if (script) {
@@ -187,3 +192,5 @@ export default class SignDialog extends UIDialog {
         AudioManager.getInstance().playBtnClick();
     }
 }
+
+export = SignDialog;

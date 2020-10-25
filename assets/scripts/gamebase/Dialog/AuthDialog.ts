@@ -1,12 +1,19 @@
+//微信授权页面
+
 import UIDialog from '../../framework/uibase/UIDialog';
 import WeChatLogin from '../../framework/utils/WeChatLogin';
 import EventManager from '../../framework/manager/EventManager';
 import EventDefine from '../../framework/config/EventDefine';
+import UIFunction from '../../framework/common/UIFunciton';
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class GameResultDialog extends UIDialog {
+class AuthDialog extends UIDialog {
+
+    static show_layer() {
+        return UIFunction.getInstance().add_prefab_to_scene("ui_prefabs/dialog/DialogAuth", "AuthDialog")
+    }
 
     onLoad(){
         super.onLoad()
@@ -14,7 +21,6 @@ export default class GameResultDialog extends UIDialog {
 
     start () {
         super.start();
-        let _this = this;
         WeChatLogin.create_authorize_btn(this.view["KW_BTN_AUTH"]);
     }
 
@@ -48,3 +54,5 @@ export default class GameResultDialog extends UIDialog {
     }
 
 }
+
+export = AuthDialog;

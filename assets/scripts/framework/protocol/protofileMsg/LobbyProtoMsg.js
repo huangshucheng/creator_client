@@ -55,6 +55,8 @@ $root.lobby = (function() {
              * @property {number} RES_DESSOLVEROOM=20012 RES_DESSOLVEROOM value
              * @property {number} REQ_ROOMSTATUS=20013 REQ_ROOMSTATUS value
              * @property {number} RES_ROOMSTATUS=20014 RES_ROOMSTATUS value
+             * @property {number} REQ_GAMEINFO=20015 REQ_GAMEINFO value
+             * @property {number} RES_GAMEINFO=20016 RES_GAMEINFO value
              */
             proto.XY_ID = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
@@ -73,6 +75,8 @@ $root.lobby = (function() {
                 values[valuesById[20012] = "RES_DESSOLVEROOM"] = 20012;
                 values[valuesById[20013] = "REQ_ROOMSTATUS"] = 20013;
                 values[valuesById[20014] = "RES_ROOMSTATUS"] = 20014;
+                values[valuesById[20015] = "REQ_GAMEINFO"] = 20015;
+                values[valuesById[20016] = "RES_GAMEINFO"] = 20016;
                 return values;
             })();
 
@@ -2705,6 +2709,376 @@ $root.lobby = (function() {
                 })();
 
                 return ResRoomStatus;
+            })();
+
+            proto.ReqGameInfo = (function() {
+
+                /**
+                 * Properties of a ReqGameInfo.
+                 * @memberof lobby.client.proto
+                 * @interface IReqGameInfo
+                 */
+
+                /**
+                 * Constructs a new ReqGameInfo.
+                 * @memberof lobby.client.proto
+                 * @classdesc Represents a ReqGameInfo.
+                 * @implements IReqGameInfo
+                 * @constructor
+                 * @param {lobby.client.proto.IReqGameInfo=} [properties] Properties to set
+                 */
+                function ReqGameInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * Creates a new ReqGameInfo instance using the specified properties.
+                 * @function create
+                 * @memberof lobby.client.proto.ReqGameInfo
+                 * @static
+                 * @param {lobby.client.proto.IReqGameInfo=} [properties] Properties to set
+                 * @returns {lobby.client.proto.ReqGameInfo} ReqGameInfo instance
+                 */
+                ReqGameInfo.create = function create(properties) {
+                    return new ReqGameInfo(properties);
+                };
+
+                /**
+                 * Encodes the specified ReqGameInfo message. Does not implicitly {@link lobby.client.proto.ReqGameInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof lobby.client.proto.ReqGameInfo
+                 * @static
+                 * @param {lobby.client.proto.IReqGameInfo} message ReqGameInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ReqGameInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ReqGameInfo message, length delimited. Does not implicitly {@link lobby.client.proto.ReqGameInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof lobby.client.proto.ReqGameInfo
+                 * @static
+                 * @param {lobby.client.proto.IReqGameInfo} message ReqGameInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ReqGameInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ReqGameInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof lobby.client.proto.ReqGameInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {lobby.client.proto.ReqGameInfo} ReqGameInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ReqGameInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.lobby.client.proto.ReqGameInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+
+                /**
+                 * Decodes a ReqGameInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof lobby.client.proto.ReqGameInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {lobby.client.proto.ReqGameInfo} ReqGameInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ReqGameInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ReqGameInfo message.
+                 * @function verify
+                 * @memberof lobby.client.proto.ReqGameInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ReqGameInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a ReqGameInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof lobby.client.proto.ReqGameInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {lobby.client.proto.ReqGameInfo} ReqGameInfo
+                 */
+                ReqGameInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.lobby.client.proto.ReqGameInfo)
+                        return object;
+                    return new $root.lobby.client.proto.ReqGameInfo();
+                };
+
+                /**
+                 * Creates a plain object from a ReqGameInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof lobby.client.proto.ReqGameInfo
+                 * @static
+                 * @param {lobby.client.proto.ReqGameInfo} message ReqGameInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ReqGameInfo.toObject = function toObject() {
+                    return {};
+                };
+
+                /**
+                 * Converts this ReqGameInfo to JSON.
+                 * @function toJSON
+                 * @memberof lobby.client.proto.ReqGameInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ReqGameInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return ReqGameInfo;
+            })();
+
+            proto.ResGameInfo = (function() {
+
+                /**
+                 * Properties of a ResGameInfo.
+                 * @memberof lobby.client.proto
+                 * @interface IResGameInfo
+                 * @property {number} status ResGameInfo status
+                 * @property {string|null} [userinfostring] ResGameInfo userinfostring
+                 */
+
+                /**
+                 * Constructs a new ResGameInfo.
+                 * @memberof lobby.client.proto
+                 * @classdesc Represents a ResGameInfo.
+                 * @implements IResGameInfo
+                 * @constructor
+                 * @param {lobby.client.proto.IResGameInfo=} [properties] Properties to set
+                 */
+                function ResGameInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+
+                /**
+                 * ResGameInfo status.
+                 * @member {number} status
+                 * @memberof lobby.client.proto.ResGameInfo
+                 * @instance
+                 */
+                ResGameInfo.prototype.status = 0;
+
+                /**
+                 * ResGameInfo userinfostring.
+                 * @member {string} userinfostring
+                 * @memberof lobby.client.proto.ResGameInfo
+                 * @instance
+                 */
+                ResGameInfo.prototype.userinfostring = "";
+
+                /**
+                 * Creates a new ResGameInfo instance using the specified properties.
+                 * @function create
+                 * @memberof lobby.client.proto.ResGameInfo
+                 * @static
+                 * @param {lobby.client.proto.IResGameInfo=} [properties] Properties to set
+                 * @returns {lobby.client.proto.ResGameInfo} ResGameInfo instance
+                 */
+                ResGameInfo.create = function create(properties) {
+                    return new ResGameInfo(properties);
+                };
+
+                /**
+                 * Encodes the specified ResGameInfo message. Does not implicitly {@link lobby.client.proto.ResGameInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof lobby.client.proto.ResGameInfo
+                 * @static
+                 * @param {lobby.client.proto.IResGameInfo} message ResGameInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResGameInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    writer.uint32(/* id 1, wireType 0 =*/8).sint32(message.status);
+                    if (message.userinfostring != null && message.hasOwnProperty("userinfostring"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.userinfostring);
+                    return writer;
+                };
+
+                /**
+                 * Encodes the specified ResGameInfo message, length delimited. Does not implicitly {@link lobby.client.proto.ResGameInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof lobby.client.proto.ResGameInfo
+                 * @static
+                 * @param {lobby.client.proto.IResGameInfo} message ResGameInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResGameInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+
+                /**
+                 * Decodes a ResGameInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof lobby.client.proto.ResGameInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {lobby.client.proto.ResGameInfo} ResGameInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResGameInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.lobby.client.proto.ResGameInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.status = reader.sint32();
+                            break;
+                        case 2:
+                            message.userinfostring = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    if (!message.hasOwnProperty("status"))
+                        throw $util.ProtocolError("missing required 'status'", { instance: message });
+                    return message;
+                };
+
+                /**
+                 * Decodes a ResGameInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof lobby.client.proto.ResGameInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {lobby.client.proto.ResGameInfo} ResGameInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResGameInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+
+                /**
+                 * Verifies a ResGameInfo message.
+                 * @function verify
+                 * @memberof lobby.client.proto.ResGameInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResGameInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (!$util.isInteger(message.status))
+                        return "status: integer expected";
+                    if (message.userinfostring != null && message.hasOwnProperty("userinfostring"))
+                        if (!$util.isString(message.userinfostring))
+                            return "userinfostring: string expected";
+                    return null;
+                };
+
+                /**
+                 * Creates a ResGameInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof lobby.client.proto.ResGameInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {lobby.client.proto.ResGameInfo} ResGameInfo
+                 */
+                ResGameInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.lobby.client.proto.ResGameInfo)
+                        return object;
+                    var message = new $root.lobby.client.proto.ResGameInfo();
+                    if (object.status != null)
+                        message.status = object.status | 0;
+                    if (object.userinfostring != null)
+                        message.userinfostring = String(object.userinfostring);
+                    return message;
+                };
+
+                /**
+                 * Creates a plain object from a ResGameInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof lobby.client.proto.ResGameInfo
+                 * @static
+                 * @param {lobby.client.proto.ResGameInfo} message ResGameInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResGameInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.status = 0;
+                        object.userinfostring = "";
+                    }
+                    if (message.status != null && message.hasOwnProperty("status"))
+                        object.status = message.status;
+                    if (message.userinfostring != null && message.hasOwnProperty("userinfostring"))
+                        object.userinfostring = message.userinfostring;
+                    return object;
+                };
+
+                /**
+                 * Converts this ResGameInfo to JSON.
+                 * @function toJSON
+                 * @memberof lobby.client.proto.ResGameInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResGameInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+
+                return ResGameInfo;
             })();
 
             return proto;

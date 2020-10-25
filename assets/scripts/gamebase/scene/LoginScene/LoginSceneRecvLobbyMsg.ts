@@ -38,8 +38,8 @@ export default class LoginSceneRecvLobbyMsg extends UIController {
 
     on_event_login_lobby(body: any) {
         if (body) {
-            if (body.status == Response.OK) {
-                DialogManager.getInstance().show_weak_hint("登录游戏服务成功!");
+            if (body.status == Response.SUCCESS) {
+                DialogManager.getInstance().show_weak_hint("登录大厅成功!");
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene());
             }
         }

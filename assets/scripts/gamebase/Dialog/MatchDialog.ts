@@ -6,12 +6,17 @@ import { ResourceManager } from '../../framework/manager/ResourceManager';
 import StringUtil from '../../framework/utils/StringUtil';
 import Stype from '../../framework/protocol/Stype';
 import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
+import UIFunction from '../../framework/common/UIFunciton';
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class MatchDialog extends UIDialog {
+class MatchDialog extends UIDialog {
+
+    static show_layer() {
+        return UIFunction.getInstance().add_prefab_to_scene("ui_prefabs/dialog/DialogMatch", "MatchDialog")
+    }
 
     onLoad(){
         super.onLoad()
@@ -25,8 +30,8 @@ export default class MatchDialog extends UIDialog {
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [GameHoodleProto.XY_ID.eUserMatchRes]: this.on_event_match.bind(this),
-            [GameHoodleProto.XY_ID.eUserStopMatchRes]: this.on_event_match_stop.bind(this),
+            // [GameHoodleProto.XY_ID.eUserMatchRes]: this.on_event_match.bind(this),
+            // [GameHoodleProto.XY_ID.eUserStopMatchRes]: this.on_event_match_stop.bind(this),
         }
     }
 
@@ -45,7 +50,7 @@ export default class MatchDialog extends UIDialog {
     }
 
     on_click_cancel(sender: cc.Component){
-        LobbySendGameHoodleMsg.send_user_stop_match();
+        // LobbySendGameHoodleMsg.send_user_stop_match();
         this.close();
     }
 
@@ -90,7 +95,7 @@ export default class MatchDialog extends UIDialog {
         console.log("on_event_match_stop",udata)
         if(udata){
             let status = udata.status
-            if(status == Response.OK){
+            if (status == Response.SUCCESS){
                 this.close();
             }
         }
@@ -100,7 +105,7 @@ export default class MatchDialog extends UIDialog {
         let udata = body;
         if (udata) {
             let status = udata.status
-            if (status == Response.OK) {
+            if (status == Response.SUCCESS) {
                 let matchsuccess = udata.matchsuccess;
                 if (matchsuccess == true) {
                     this.set_string(this.view["KW_TEXT_TIP"],"匹配完成!");
@@ -112,7 +117,7 @@ export default class MatchDialog extends UIDialog {
                 }else{
                     this.set_string(this.view["KW_TEXT_TIP"], "请稍候，正在匹配中");
                 }
-            } else if (status == Response.NOT_YOUR_TURN) {
+            } else if (status == Response.ERROR_1) {
                 this.set_string(this.view["KW_TEXT_TIP"], "请稍等候，正在匹配中");
             }
         }
@@ -141,3 +146,5 @@ export default class MatchDialog extends UIDialog {
     }
 
 }
+
+export = MatchDialog;

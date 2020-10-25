@@ -1,7 +1,6 @@
 import UIController from '../../../framework/uibase/UIController';
 import GameAppConfig from '../../../framework/config/GameAppConfig';
 import HotUpdateNew from '../../../framework/hotfix/HotUpdateNew';
-import WeChatLogin from '../../../framework/utils/WeChatLogin';
 import PlatForm from '../../../framework/config/PlatForm';
 
 const {ccclass, property} = cc._decorator;

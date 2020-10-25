@@ -6,10 +6,10 @@ import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import DialogManager from '../../framework/manager/DialogManager';
 import StringUtil from '../../framework/utils/StringUtil';
-import CommonDialog from './CommonDialog';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
 import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
+import UIFunction from '../../framework/common/UIFunciton';
 
 let BALL_NAME_KEY_STR = "ball_name_level_"
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
@@ -17,10 +17,14 @@ let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class BallListDialog extends UIDialog {
+class BallListDialog extends UIDialog {
 
     _ball_info_str = "";
     _cur_user_ball_level = "1";
+
+    static show_layer() {
+        return UIFunction.getInstance().add_prefab_to_scene("ui_prefabs/dialog/DialogBallList", "BallListDialog")
+    }
 
     onLoad(){
         super.onLoad()
@@ -30,15 +34,15 @@ export default class BallListDialog extends UIDialog {
         super.start()
         this.initUI();
         this.add_protocol_delegate();
-        GameSendGameHoodleMsg.send_get_player_ball_info();
-        GameSendGameHoodleMsg.send_get_user_config();
+        // GameSendGameHoodleMsg.send_get_player_ball_info();
+        // GameSendGameHoodleMsg.send_get_user_config();
     }
 
     add_cmd_handler_map() {
         this._cmd_handler_map = {
-            [GameHoodleProto.XY_ID.eUserBallInfoRes]: this.on_event_user_ball_info.bind(this),
-            [GameHoodleProto.XY_ID.eUserConfigRes]: this.on_event_user_config.bind(this),
-            [GameHoodleProto.XY_ID.eUseHoodleBallRes]: this.on_event_use_hoodleball.bind(this),
+            // [GameHoodleProto.XY_ID.eUserBallInfoRes]: this.on_event_user_ball_info.bind(this),
+            // [GameHoodleProto.XY_ID.eUserConfigRes]: this.on_event_user_config.bind(this),
+            // [GameHoodleProto.XY_ID.eUseHoodleBallRes]: this.on_event_use_hoodleball.bind(this),
         }
     }
 
@@ -80,7 +84,7 @@ export default class BallListDialog extends UIDialog {
         let udata =  body;
         if(udata){
             let status = udata.status
-            if(status == Response.OK){
+            if(status == Response.SUCCESS){
                 this._ball_info_str = udata.userballinfostring;
                 this.show_user_ball_info(udata.userballinfostring);
             }
@@ -90,7 +94,7 @@ export default class BallListDialog extends UIDialog {
     on_event_user_config(body:any){
         if(body){
             let status = body.status;
-            if(status == Response.OK){
+            if (status == Response.SUCCESS){
                 let userconfigsobj = JSON.parse(body.userconfigstring);
                 let user_ball_level = userconfigsobj["user_ball_level"];
                 this._cur_user_ball_level = user_ball_level;
@@ -104,13 +108,13 @@ export default class BallListDialog extends UIDialog {
     on_event_use_hoodleball(body:any){
         if (body) {
             let status = body.status;
-            if (status == Response.OK) {
+            if (status == Response.SUCCESS) {
                 let user_ball_level = body.balllevel;
                 if (user_ball_level) {
                     this.show_user_ball_info(this._ball_info_str)
                     this.show_cur_use_ball(user_ball_level);
                     this._cur_user_ball_level = user_ball_level;
-                    GameSendGameHoodleMsg.send_get_user_config();
+                    // GameSendGameHoodleMsg.send_get_user_config();
                     DialogManager.getInstance().show_weak_hint("使用成功!");
                 }
             }else{
@@ -222,9 +226,9 @@ export default class BallListDialog extends UIDialog {
         }
         let level = Number(data.level);
         let _this = this;
-        let resNode: cc.Node = DialogManager.getInstance().show_common_dialog();
+        let resNode: cc.Node = DialogManager.getInstance().show_common_layer();
         if (resNode) {
-            let script: CommonDialog = resNode.getComponent("CommonDialog");
+            let script = resNode.getComponent("CommonDialog");
             if (script) {
                 let showTextStr = "确定使用（" + level + "）级弹珠吗？"
                 script.set_content_text(showTextStr);
@@ -234,7 +238,7 @@ export default class BallListDialog extends UIDialog {
                             DialogManager.getInstance().show_weak_hint("当前已经使用该等级!");
                             return
                         }
-                        GameSendGameHoodleMsg.send_use_ball(level);
+                        // GameSendGameHoodleMsg.send_use_ball(level);
                      },
                     function () { },
                     function () { },
@@ -244,3 +248,5 @@ export default class BallListDialog extends UIDialog {
         AudioManager.getInstance().playBtnClick();
     }
 }
+
+export = BallListDialog;

@@ -64,7 +64,7 @@ export default class LobbySceneShowUI extends UIController {
     }
 
     show_room_status(status:number){
-        if (status == Response.OK) {
+        if (status == Response.SUCCESS) {
             this.set_visible(this.view["BTN_BACK_ROOM"], true);
             this.set_visible(this.view["BTN_CREATE_ROOM"], false);
         } else {

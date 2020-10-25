@@ -40,14 +40,14 @@ export default class GameSceneRecvLobbyMsg extends UIController {
     }
     
     on_event_login_lobby(body:any){
-        if (body.status == Response.OK) {
+        if (body.status == Response.SUCCESS) {
             GameSendGameHoodleMsg.send_check_link_game();
         }
     }
 
     on_event_dessolve(body:any){
         if (body){
-            if (body.status == Response.OK){
+            if (body.status == Response.SUCCESS){
                 DialogManager.getInstance().show_weak_hint("对局已解散!")
                 SceneManager.getInstance().enter_scene_asyc(new LobbyScene())
                 RoomData.getInstance().clear_room_data();

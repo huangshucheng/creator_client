@@ -1,7 +1,4 @@
 import Queue from '../utils/Queue';
-import UIFunction from '../common/UIFunciton';
-import WeakHintDialog from '../../gamebase/dialog/WeakHintDialog';
-import CommonDialog from '../../gamebase/dialog/CommonDialog';
 
 enum DialogZorder {
     dialog = 10,
@@ -17,26 +14,20 @@ export default class DialogManager{
         return DialogManager.instance;
     }
 
-    async show_dialog_async(path: string, scriptName: string){
-        let resNode:cc.Node = await UIFunction.getInstance().add_prefab_to_scene_async(path, scriptName);
-        if (resNode){
-            resNode.zIndex = DialogZorder.dialog;
-            this._popMap[scriptName] = resNode;
-            return resNode;
-        }
-    }
-
-    show_dialog(path: string, scriptName: string): cc.Node {
-        let node = UIFunction.getInstance().add_prefab_to_scene(path, scriptName)
-        if (node) {
-            this._popMap[scriptName] = node
-            node.zIndex = DialogZorder.dialog;
-            return node;
+    show_poplayer(className:string):cc.Node{
+        let obj = require(className);
+        if(obj && obj.show_layer){
+            let resNode: cc.Node = obj.show_layer();
+            if (resNode) {
+                resNode.zIndex = DialogZorder.dialog;
+                this._popMap[className] = resNode;
+                return resNode;
+            }
         }
         return null;
     }
 
-    close_dialog(className: string) {
+    close_layer(className: string) {
         let node = this._popMap[className]
         if (node && cc.isValid(node)) {
             node.destroy()
@@ -44,11 +35,11 @@ export default class DialogManager{
         }
     }
 
-    get_dialog(className: string): cc.Node {
+    get_layer(className: string): cc.Node {
         return this._popMap[className] || null;
     }
 
-    clear_dialog() {
+    clear_layer() {
         for (let key in this._popMap) {
             if(cc.isValid(this._popMap[key])){
                 this._popMap[key].destroy()
@@ -57,12 +48,12 @@ export default class DialogManager{
         this._popMap = {}
     }
     
-    remove_dialog_from_map(node: cc.Node) {
+    remove_layer_from_map(node: cc.Node) {
         let removeKey = null;
         for (let key in this._popMap) {
             if(cc.isValid(this._popMap[key])){
                 if(node == this._popMap[key]){
-                    removeKey = this._popMap[key]
+                    removeKey = key;
                 }
             }
         }
@@ -82,18 +73,18 @@ export default class DialogManager{
         this._weakhint.dequeue()
     }
 
-    async show_weak_hint(str: string) {
-        let resNode:cc.Node = await this.show_dialog_async("ui_prefabs/dialog/DialogWeakHint", "WeakHintDialog");
+    show_weak_hint(str: string) {
+        let resNode:cc.Node = this.show_poplayer("WeakHintDialog");
         if (resNode){
             if (resNode && cc.isValid(resNode)){
-                let component: WeakHintDialog = resNode.getComponent("WeakHintDialog")
+                let component = resNode.getComponent("WeakHintDialog")
                 if(component && cc.isValid(component) && component.show){
                     component.show(str)
                 }
                 this._weakhint.forEach((key, value) => {
                     let hint: cc.Node = value;
                     if(cc.isValid(hint)){
-                        let component: WeakHintDialog = hint.getComponent("WeakHintDialog")
+                        let component = hint.getComponent("WeakHintDialog")
                         if(component && cc.isValid(component) && component.move){
                             component.move()
                         }
@@ -104,15 +95,15 @@ export default class DialogManager{
         }
     }
 
-    show_common_dialog(btnNum?: number){
+    show_common_layer(btnNum?: number){
         if(!btnNum){
             btnNum = 1;
         }
-        this.close_dialog("CommonDialog");
-        let resNode:cc.Node = this.show_dialog("ui_prefabs/dialog/DialogCommon", "CommonDialog");
+        this.close_layer("CommonDialog");
+        let resNode:cc.Node = this.show_poplayer("CommonDialog");
         if (resNode){
             if(cc.isValid(resNode)){
-                let component: CommonDialog =  resNode.getComponent("CommonDialog")
+                let component =  resNode.getComponent("CommonDialog")
                 if(component && cc.isValid(component)){
                     if (component.set_btn_num){
                         component.set_btn_num(btnNum)
@@ -123,13 +114,13 @@ export default class DialogManager{
         }
     }
 
-    show_loading_dialog(){
-        this.close_dialog("LoadingDialog");
-        this.show_dialog("ui_prefabs/dialog/DialogLoading", "LoadingDialog")
+    show_loading_layer(){
+        this.close_layer("LoadingDialog");
+        this.show_poplayer("LoadingDialog")
     }
 
-    close_loading_dialog(){
-        this.close_dialog("LoadingDialog");
+    close_loading_layer(){
+        this.close_layer("LoadingDialog");
     }
 
 }
