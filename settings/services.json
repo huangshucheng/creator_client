@@ -271,10 +271,11 @@
 				"iOS",
 				"HTML5"
 			],
-			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-tcb/0.6.2_1.6.1.zip",
-			"package_version_desc": "<p>更新日志:<br />\n新增 TCB 服务集成<br />\n",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-tcb/0.7.0_1.3.3.zip",
+			"package_version_desc": "<p><strong>更新日期：</strong> 2020/10/26<br />\n<strong>更新说明：</strong><br />\n1、<b>tcb-js-sdk</b> 已经废弃，现已替换为 <b>@cloudbase/js-sdk</b> v1.3.3<br />\n2、插件中的 TCB SDK 替换后，部分接口有改动。用户升级时，请参考迁移指南: <a href=\"https://docs.cloudbase.net/api-reference/webv2/migrating.html\"><font color='#dddddd'>https://docs.cloudbase.net/api-reference/webv2/migrating.html</font></a><br />\n3、新增对字节跳动平台的支持<br />\n",
 			"service_component_name": "service-tcb",
 			"package_versions": [
+				"0.7.0_1.3.3",
 				"0.6.2_1.6.1"
 			],
 			"build_platform": [],
@@ -357,10 +358,11 @@
 				"iOS",
 				"HTML5"
 			],
-			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-analytics/1.2.9_2.2.0.zip",
-			"package_version_desc": "<p><strong>更新日期：</strong> 2020/07/06<br />\n<strong>更新说明：</strong><br />\n1.修复网络重试导致的性能损耗问题。<br />\n2.更新 SDK 版本。<br />\n",
+			"package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-analytics/1.3.5_2.2.1.zip",
+			"package_version_desc": "<p><strong>更新日期：</strong> 2020/10/27<br />\n<strong>更新说明：</strong><br />\n1.新增渠道选择功能。<br />\n2.新增对字节跳动平台的支持。<br />\n3.新增对 HUAWEI AppGallery Connect 平台的支持。<br />\n4.更新 Analytics SDK 到 v2.2.1。<br />\n",
 			"service_component_name": "service-analytics",
 			"package_versions": [
+				"1.3.5_2.2.1",
 				"1.2.9_2.2.0",
 				"1.2.8_2.1.3",
 				"1.2.7_2.1.2",

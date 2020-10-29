@@ -1,11 +1,15 @@
 import UIController from "../UIController";
 import RichDebug from "./RichDebug";
 import DialogManager from '../../manager/DialogManager';
+import UIFunction from "../../common/UIFunciton";
+
+let LAYER_CLASS_NAME = "RichDebugMainLayer";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class RichDebugControl extends UIController {
+export default class RichDebugMainLayer extends UIController {
+
     _frameCount = 0;
     _time = 0;
     lbt_error = null;
@@ -13,17 +17,40 @@ export default class RichDebugControl extends UIController {
     lbt_warn = null;
     lbt_fps = null;
 
+    static async show_layer() {
+        if (cc.director.getScene().getChildByName(LAYER_CLASS_NAME)) {
+            console.log("已经存在一个debug-main")
+            return
+        }
+        let node = await UIFunction.getInstance().add_prefab_to_scene_async("ui_prefabs/debug/RichDebugMain", LAYER_CLASS_NAME);
+        if (node) {
+            node.name = LAYER_CLASS_NAME;
+            node.zIndex = 499
+            node.parent = null
+            cc.game.addPersistRootNode(node)
+            node.x = node.width / 2;
+            node.y = node.height / 2;
+        }
+    }
+
+    static hide_layer(){
+        let node = cc.director.getScene().getChildByName(LAYER_CLASS_NAME);
+        if (node) {
+            node.destroy();
+        }
+    }
+
     onLoad(){
         super.onLoad();
+    }
+
+    start(){
+        super.start();
         this.lbt_error = this.view["lbt_error"]
         this.lbt_fail = this.view["lbt_fail"]
         this.lbt_warn = this.view["lbt_warn"]
         this.lbt_fps = this.view["lbt_fps"]
         this.initUI()
-    }
-
-    start(){
-        super.start();
     }
 
     //按钮点击事件
@@ -32,8 +59,8 @@ export default class RichDebugControl extends UIController {
     }
 
     on_click_debug(sender:cc.Component){
-        if (!DialogManager.getInstance().get_layer("RichDebugLog")){
-            DialogManager.getInstance().show_poplayer("RichDebugLog");
+        if (!DialogManager.getInstance().get_layer("RichDebugLogLayer")){
+            DialogManager.getInstance().show_poplayer("RichDebugLogLayer");
         }
     }
 

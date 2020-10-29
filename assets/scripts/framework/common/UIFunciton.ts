@@ -167,6 +167,18 @@ export default class UIFunction {
         label.string = String(str);
     }
 
+    set_rich_string(target:cc.Node, str:string){
+        if (!this.node_exist(target)) {
+            return
+        }
+        let label = target.getComponent(cc.RichText)
+        if (!label) {
+            return;
+        }
+        str = str == null ? "" : str;
+        label.string = String(str);
+    }
+
     get_string(target: cc.Node){
         if (!this.node_exist(target)){
             return

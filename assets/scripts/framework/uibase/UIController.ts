@@ -129,6 +129,10 @@ export default abstract class UIController extends cc.Component {
         UIFunction.getInstance().set_string(target, str)
     }
 
+    set_rich_string(target:cc.Node, str:string){
+        UIFunction.getInstance().set_rich_string(target, str)
+    }
+
     get_string(target: cc.Node){
         return UIFunction.getInstance().get_string(target);
     }

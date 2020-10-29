@@ -1,7 +1,8 @@
-import UIFunction from '../../common/UIFunciton';
+import RichDebugMainLayer from './RichDebugMainLayer';
+import RichLogData from './RichLogData';
 
 export default class RichDebug {
-    static logs:Array<any> = [];
+    static UPDATE_DEBUG_INFO_KEY = "add_debug_info";
 
     static debugInfo = {
         warns: 0,//警告
@@ -9,36 +10,20 @@ export default class RichDebug {
     };
 
     static async show_debug(){
-        if (cc.director.getScene().getChildByName("debug")) {
-            console.log("已经存在一个debug-main")
-            return
-        }
-        let node = await UIFunction.getInstance().add_prefab_to_scene_async("ui_prefabs/debug/RichDebugMain", "RichDebugControl");
-        if(node){
-            node.name = "debug";
-            node.zIndex = 499
-            node.parent = null
-            cc.game.addPersistRootNode(node)
-            // node.x = (-cc.winSize.width / 2) + node.width;
-            // node.y = (-cc.winSize.height / 2) + node.height;
-            node.x = node.width / 2;
-            node.y = node.height / 2;
-        }
+        RichDebugMainLayer.show_layer();
     }
 
     static hide_debug(){
-        let node = cc.director.getScene().getChildByName("debug");
-        if (node) {
-            node.destroy();
-        }
+        RichDebugMainLayer.hide_layer();
     }
 
-    static pushLog(data:any) {
-        RichDebug.logs.push(data);
-        cc.game.emit("add-debug-info", data);
-        if (RichDebug.logs.length > 1000) {//最大保存1000条信息
-            RichDebug.logs.shift();
-        }
+    static get_log_data(){
+        return RichLogData.getInstance().get_log();
+    }
+
+    static push_log(data:any) {
+        RichLogData.getInstance().push_log(data);
+        cc.game.emit(RichDebug.UPDATE_DEBUG_INFO_KEY,data);
     }
 
     static log(type:string, args:any) {
@@ -50,9 +35,11 @@ export default class RichDebug {
                 RichDebug.debugInfo.errors++;
                 break;
         }
-        args.unshift(new Date().toLocaleTimeString());
-        let data = { type: type, value: args.join(" ") };
-        RichDebug.pushLog(data);
+
+        // let timestr = new Date().toLocaleTimeString("chinese", { hour12: false })
+        // args.unshift(timestr + ": "); //前面增加时间显示
+        let data = { type: type, value: args.join("") };
+        RichDebug.push_log(data);
     }
 }
 
@@ -94,7 +81,7 @@ if (!CC_EDITOR) {
             _console.error.apply(this, Array.prototype.slice.call(arguments, 0));
         };
     }
-
+    /*
     let _cc = {
         log: cc.log,
         warn: cc.warn,
@@ -127,4 +114,5 @@ if (!CC_EDITOR) {
         RichDebug.log("error", stacks);
         // return true;   //错误不会console浏览器上,如需要，可将这样注释
     };
+    */
 }

@@ -25,7 +25,7 @@ export default class TableView extends cc.ScrollView {
     scrollEvents = [];
 
     // 新增
-    @property(cc.Prefab)
+    // @property(cc.Prefab)
     _cell: cc.Prefab = null;
     @property({ type: cc.Prefab, tooltip: '渲染节点' })
     get cell() { return this._cell; }
@@ -41,7 +41,7 @@ export default class TableView extends cc.ScrollView {
     get scrollModel() { return this.horizontal ? ScrollModel.Horizontal : ScrollModel.Vertical; }
     set scrollModel(value) {
         if (!CC_EDITOR) {
-            console.error('[TableView] 不允许动态修改scrollModel');
+            cc.error('[TableView] 不允许动态修改scrollModel');
             return;
         }
         if (value === ScrollModel.Horizontal) {
@@ -161,7 +161,7 @@ export default class TableView extends cc.ScrollView {
         if (typeof num === 'number' && num >= 0) {
             this.cellCount = num;
         } else {
-            console.error('[TableView] setCellCount 参数错误');
+            cc.error('[TableView] setCellCount 参数错误');
         }
     }
 
@@ -172,6 +172,7 @@ export default class TableView extends cc.ScrollView {
     setCellData(data: any) {
         if (typeof data !== 'undefined') {
             this.cellData = data;
+            // cc.log("hcc>>setCellData>> len: ", this.cellData ? this.cellData.length : "0");
         }
     }
 
@@ -230,13 +231,13 @@ export default class TableView extends cc.ScrollView {
     init(num: number, data?: any) {
         if (CC_DEBUG) {
             if (!this.content) {
-                return console.error('[TableView] 请指定content');
+                return cc.error('[TableView] 请指定content');
             }
             if (!this.cell) {
-                return console.error('[TableView] 请指定cell');
+                return cc.error('[TableView] 请指定cell');
             }
             if (!this.getViewCell()) {
-                return console.error('[TableView] 请在cell中添加继承自<TableViewCell>的自定义组件');
+                return cc.error('[TableView] 请在cell中添加继承自<TableViewCell>的自定义组件');
             }
         }
         this.clear();
@@ -376,6 +377,8 @@ export default class TableView extends cc.ScrollView {
                 const com = cell.getComponent('TableViewCell');
                 if (cell.tvIndex >= 0) com.uninit();
                 com.init(index, this.cellData, this);
+                // cc.log("hcc>>initCell>> cellDataLen: " , this.cellData.length);
+                // cc.log("hcc>>initCell>> cellData: " , this.cellData);
             }
             cell.tvIndex = index;
             cell._tvIndex = index;
@@ -411,7 +414,7 @@ export default class TableView extends cc.ScrollView {
     private getDefaultCellSize(): cc.Size {
         if (this.cell) {
             if (CC_DEBUG && this.cell.data.getComponent(cc.Widget)) {
-                console.warn('[TableView] cell根节点中存在cc.Widget，可能无法正确获取Size');
+                cc.warn('[TableView] cell根节点中存在cc.Widget，可能无法正确获取Size');
             }
             return this.cell.data.getContentSize();
         }
@@ -644,7 +647,7 @@ export default class TableView extends cc.ScrollView {
 
     scrollToIndex(index?: number, timeInSecond?: number, attenuated?: boolean) {
         // todo
-        console.log('[TableView] scrollToIndex')
+        cc.log('[TableView] scrollToIndex')
     }
 
     getPerScrollOffset() {
