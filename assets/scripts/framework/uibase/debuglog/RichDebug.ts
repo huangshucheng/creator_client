@@ -1,13 +1,9 @@
 import RichDebugMainLayer from './RichDebugMainLayer';
 import RichLogData from './RichLogData';
+import PlatForm from '../../config/PlatForm';
 
 export default class RichDebug {
     static UPDATE_DEBUG_INFO_KEY = "add_debug_info";
-
-    static debugInfo = {
-        warns: 0,//警告
-        errors: 0,//错误
-    };
 
     static async show_debug(){
         RichDebugMainLayer.show_layer();
@@ -21,18 +17,31 @@ export default class RichDebug {
         return RichLogData.getInstance().get_log();
     }
 
+    static clear_log_data(){
+        RichLogData.getInstance().clear_log();
+        cc.game.emit(RichDebug.UPDATE_DEBUG_INFO_KEY);
+    }
+
     static push_log(data:any) {
         RichLogData.getInstance().push_log(data);
         cc.game.emit(RichDebug.UPDATE_DEBUG_INFO_KEY,data);
     }
 
+    static get_debuginfo(){
+        return RichLogData.getInstance().debugInfo;
+    }
+
+    //args: 数组，内容是字符串
     static log(type:string, args:any) {
+        if (typeof (args) != "object"){
+            return
+        }
         switch (type) {
             case "warn":
-                RichDebug.debugInfo.warns++;
+                RichLogData.getInstance().debugInfo.warns++;
                 break;
             case "error":
-                RichDebug.debugInfo.errors++;
+                RichLogData.getInstance().debugInfo.errors++;
                 break;
         }
 
@@ -45,7 +54,7 @@ export default class RichDebug {
 
 if (!CC_EDITOR) {
     if (typeof console != "undefined" && console) {
-        var _console = {
+        let _console = {
             log: console.log,
             warn: console.warn,
             debug: console.debug,
@@ -81,6 +90,8 @@ if (!CC_EDITOR) {
             _console.error.apply(this, Array.prototype.slice.call(arguments, 0));
         };
     }
+
+    //cc.log不做处理
     /*
     let _cc = {
         log: cc.log,
@@ -104,15 +115,40 @@ if (!CC_EDITOR) {
         // 调用原方法输出
         _cc.error.apply(this, Array.prototype.slice.call(arguments, 0));
     };
-
-    window.onerror = function (msg, url, line, col, error) {
-        var stacks = [];
-        if (error && error.stack) {
-            //如果浏览器有堆栈信息，直接使用
-            stacks.push(error.stack.toString());
-        }
-        RichDebug.log("error", stacks);
-        // return true;   //错误不会console浏览器上,如需要，可将这样注释
-    };
     */
+
+    if(PlatForm.isWeChatGame()){//微信小游戏
+        wx.onError(function(error:any){
+            try {
+                let errStr = JSON.stringify(error) || "";
+                RichDebug.log("error", ["【error:】" + errStr]);
+            } catch (error) {
+            }
+        })
+    }else if(PlatForm.isNative()){ //原生平台
+        window.__errorHandler = function (file: string, line: string, message: string, stack: string) {
+            // cc.log("file:", file);
+            // cc.log("line:", line);
+            // cc.log("message:", message);
+            // cc.log("stack:", stack , typeof(stack));
+            RichDebug.log("error", ["【errorMessage:】" + message]);
+            RichDebug.log("error", ["【file:】" + file]);
+            RichDebug.log("error", ["【line:】" + line]);
+            RichDebug.log("error", ["【stack:】" + stack]);
+            console.error("【error:】", message, stack);
+        };
+    }else{//浏览器或者其他平台
+        window.onerror = function (errorMessage: string, file: string, line: number, colon: number, stack_obj: any) {
+            // cc.log("errorMessage:", errorMessage);
+            // cc.log("file:", file);
+            // cc.log("line:", line);
+            // cc.log("colon:", colon);
+            // cc.log("stack:", stack_obj, typeof (stack_obj));
+            RichDebug.log("error", ["【errorMessage:】" + errorMessage]);
+            RichDebug.log("error", ["【file:】" + file]);
+            RichDebug.log("error", ["【line:】" + line]);
+            RichDebug.log("error", ["【stack:】" + stack_obj.stack || ""]);
+            console.error("【error:】", errorMessage, stack_obj.stack);
+        };
+    }
 }

@@ -1,6 +1,7 @@
 import UIFunction from '../../common/UIFunciton';
 import UIDialog from "../UIDialog";
 import RichDebug from './RichDebug';
+import PlatForm from '../../config/PlatForm';
 
 const { ccclass, property } = cc._decorator;
 
@@ -9,7 +10,7 @@ class RichDebugLogLayer extends UIDialog {
 
     _min: number = 0;
     _max: number = 0;
-    _perLoad: number = 25; //每次加载多少条进来，而不是一次全部加载
+    _perLoad: number = 50; //每次加载多少条进来，而不是一次全部加载
     _table_view: cc.ScrollView = null;
     _cellPool:cc.NodePool = null;
 
@@ -39,19 +40,13 @@ class RichDebugLogLayer extends UIDialog {
         super.start();
         this.initUI();
         cc.game.on(RichDebug.UPDATE_DEBUG_INFO_KEY, this.update_debug_log_info.bind(this), this);
-
-        /*
-        //test
-        for (let index = 0; index < 22; index++) {
-            let obj = { type: "log", value: "hccccteststst  " + index }
-            RichDebug.push_log(obj);
-        }
-        */
         this.init_logs();
     }
 
     add_button_event_listener(){
         this.add_click_event(this.view["btn_close"], this.on_click_close.bind(this));
+        this.add_click_event(this.view["btn_clear"], this.on_click_clear.bind(this));
+        this.add_click_event(this.view["btn_copy"], this.on_click_copy.bind(this));
         this.add_check_click(this.view["toggle_frame"], this.on_toggle_click.bind(this));
     }
 
@@ -59,9 +54,18 @@ class RichDebugLogLayer extends UIDialog {
         let scrollviewNode = this.view["scroll_log"]
         if (scrollviewNode){
             this._table_view = scrollviewNode.getComponent(cc.ScrollView);
+            if (this._table_view) {
+                this._table_view.inertia = true;
+                // this._table_view.node.on('scroll-to-top', this.onScrollToTop.bind(this), this);
+                this._table_view.node.on('scroll-to-bottom', this.onScrollToBottom.bind(this), this);
+                this._table_view.scrollEvents.splice(0);
 
-            this._table_view.node.on('scroll-to-top', this.onScrollToTop.bind(this), this);
-            this._table_view.node.on('scroll-to-bottom', this.onScrollToBottom.bind(this), this);
+                let scrollViewEventHandler = new cc.Component.EventHandler();
+                scrollViewEventHandler.target = this.node; //这个 node 节点是你的事件处理代码组件所属的节点
+                scrollViewEventHandler.component = "RichDebugLogLayer";//这个是代码文件名
+                scrollViewEventHandler.handler = "on_scrll_to_top";
+                this._table_view.scrollEvents.push(scrollViewEventHandler);
+            }
         }
 
         UIFunction.getInstance().set_checked(this.view["toggle_frame"], !cc.debug.isDisplayStats());
@@ -78,15 +82,47 @@ class RichDebugLogLayer extends UIDialog {
         return cellNode;
     }
 
-    onScrollToTop(){
-        if (this._min == 1) return;
-        let logs = RichDebug.get_log_data();
-        let max = this._min
-        this._min = this._min - this._perLoad > 1 ? this._min - this._perLoad : 1;
-        for (let idx = this._min; idx <= max; idx++) {
-            let data = logs[idx - 1];
-            this.add_log(data, idx);
+    on_scrll_to_top(scrollview:cc.ScrollView, eventType:cc.ScrollView.EventType, customEventData:any){
+        // let etype = {
+        //     [0]:"SCROLL_TO_TOP",
+        //     [1]:"SCROLL_TO_BOTTOM",
+        //     [2]:"SCROLL_TO_LEFT",
+        //     [3]:"SCROLL_TO_RIGHT",
+        //     [4]:"SCROLLING",
+        //     [5]:"BOUNCE_TOP",
+        //     [6]:"BOUNCE_BOTTOM",
+        //     [7]:"BOUNCE_LEFT",
+        //     [8]:"BOUNCE_RIGHT",
+        //     [9]:"SCROLL_ENDED",
+        //     [10]:"TOUCH_UP",
+        //     [11]:"AUTOSCROLL_ENDED_WITH_THRESHOLD",
+        //     [12]:"SCROLL_BEGAN",
+        // }	
+        // cc.log("hcc>>>>scrolltype: ", etype[eventType]);
+        if(eventType == cc.ScrollView.EventType.BOUNCE_TOP){
+            if (this._min == 1) return;
+            let logs = RichDebug.get_log_data();
+            let max = this._min
+            this._min = this._min - this._perLoad > 1 ? this._min - this._perLoad : 1;
+            for (let idx = this._min; idx <= max; idx++) {
+                let data = logs[idx - 1];
+                this.add_log(data, idx);
+            }
+            if (this._table_view){
+                this._table_view.scrollToTop();
+            }
         }
+    }
+
+    onScrollToTop(scollview:any){
+    //     if (this._min == 1) return;
+    //     let logs = RichDebug.get_log_data();
+    //     let max = this._min
+    //     this._min = this._min - this._perLoad > 1 ? this._min - this._perLoad : 1;
+    //     for (let idx = this._min; idx <= max; idx++) {
+    //         let data = logs[idx - 1];
+    //         this.add_log(data, idx);
+    //     }
     }
 
     onScrollToBottom(){
@@ -105,11 +141,52 @@ class RichDebugLogLayer extends UIDialog {
         }
     }
 
+    on_click_clear(sender:cc.Component){
+        RichDebug.clear_log_data();
+    }
+
+    on_click_copy(sender:cc.Component){
+        if (PlatForm.isWeChatGame()) {
+            let log_data = RichDebug.get_log_data();
+            let copy_str = "";
+            if (log_data.length > 0){
+                log_data.forEach(v=> {
+                    copy_str = copy_str + (String(v.value) || "") + "\n";
+                });
+            }
+            wx.setClipboardData({
+                data:copy_str,
+            });
+        }
+    }
+
     update_debug_log_info(data:any){
         if(data){
             this._max++;
             this.add_log(data, this._max);
+        }else{
+            let logs = RichDebug.get_log_data();
+            let len = logs.length;
+            if(len <= 0 ){
+                this._max = 0;
+                this._min = 0;
+                if (this._table_view){
+                    this._table_view.content.removeAllChildren();
+                }
+            }
         }
+        this.delay_scroll_to_bottom();
+    }
+
+    delay_scroll_to_bottom(){
+        if (this._table_view) {
+            let delay = cc.delayTime(0.1);
+            let callFunc = cc.callFunc(function () {
+                this._table_view.scrollToBottom();
+            }.bind(this));
+            this._table_view.node.runAction(cc.sequence(delay, callFunc));
+        }
+        cc.log("hcccccc>>delay_scroll_to_bottom");
     }
 
     init_logs() {
@@ -120,13 +197,7 @@ class RichDebugLogLayer extends UIDialog {
             let data = logs[idx - 1];
             this.add_log(data, idx);
         }
-        if (this._table_view){
-            let delay = cc.delayTime(0.1);
-            let callFunc = cc.callFunc(function () {
-                this._table_view.scrollToBottom();
-            }.bind(this));
-            this._table_view.node.runAction(cc.sequence(delay, callFunc));
-        }
+        this.delay_scroll_to_bottom();
     }
 
     add_log(data:any, zIndex:number){
@@ -153,16 +224,18 @@ class RichDebugLogLayer extends UIDialog {
                 break;
         }
         
-        let cellNode = this.get_cell();
+        let cellNode:cc.Node = this.get_cell();
         if (this._table_view && cellNode){
             cellNode.zIndex = zIndex;
-            let richText:cc.Node = this.seek_child_by_name(cellNode,"RichLabel");
-            if(color) richText.color = color;
-            this.set_rich_string(richText,data_value);
-            this._table_view.content.addChild(cellNode);
-
-            if (zIndex < this._max) {
-                this._table_view.content.sortAllChildren();
+            let richText = cellNode.getComponent(cc.Label);
+            if(richText){
+                if(color) richText.node.color = color;
+                richText.string = data_value;
+                this._table_view.content.addChild(cellNode);
+    
+                if (zIndex < this._max) {
+                    this._table_view.content.sortAllChildren();
+                }
             }
         }
     }

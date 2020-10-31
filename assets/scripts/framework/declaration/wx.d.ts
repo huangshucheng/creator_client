@@ -124,7 +124,23 @@ declare namespace wx {
     //微信视屏广告
     export function createRewardedVideoAd(object: any);
 
+    //显示提示
     export function showToast(obj:any);
+
+    //错误监听
+    export function onError(callback: Function):void;
+
+    //设置剪贴板内容
+    /**
+     * data :string
+     * success :function
+     * fail: function
+     * complete: functioni
+     */
+    export function setClipboardData(object:any);
+
+    //获取剪贴板内容
+    export function getClipboardData():any;
 }
 
 /**
