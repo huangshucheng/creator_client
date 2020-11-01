@@ -1,13 +1,12 @@
 //我的弹珠页面
 
 import UIDialog from '../../framework/uibase/UIDialog';
-import Response from '../../framework/protocol/Response';
-import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import StringUtil from '../../framework/utils/StringUtil';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
 import UIFunction from '../../framework/common/UIFunciton';
+import SendGameMsg from '../sendMsg/SendGameMsg';
 
 let EMOJ_COUNT = 35;
 let EMOJ_KEY_STR = "games/emoj/face_%d.png"
@@ -120,7 +119,7 @@ class EmojDialog extends UIDialog {
         }
         let index = Number(data.index);
         console.log("on_click_emoj_select index: " , index)
-        GameSendGameHoodleMsg.send_use_emoj(index);
+        SendGameMsg.send_use_emoj(index);
         this.close();
         AudioManager.getInstance().playBtnClick();
     }

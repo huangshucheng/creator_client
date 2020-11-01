@@ -1,11 +1,9 @@
 //匹配界面
 import UIDialog from '../../framework/uibase/UIDialog';
-import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
 import Response from '../../framework/protocol/Response';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import StringUtil from '../../framework/utils/StringUtil';
 import Stype from '../../framework/protocol/Stype';
-import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
 import UIFunction from '../../framework/common/UIFunciton';
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
 

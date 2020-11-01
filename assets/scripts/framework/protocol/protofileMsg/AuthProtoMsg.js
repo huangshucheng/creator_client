@@ -472,22 +472,6 @@ $root.auth = (function() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
-                /**
-                 * STATUS enum.
-                 * @name auth.client.proto.ResUnameRegist.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED_ALREADY_EXIST=1 FAILED_ALREADY_EXIST value
-                 * @property {number} FAILED_UNAME_PWD_INVALID=2 FAILED_UNAME_PWD_INVALID value
-                 */
-                ResUnameRegist.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED_ALREADY_EXIST"] = 1;
-                    values[valuesById[2] = "FAILED_UNAME_PWD_INVALID"] = 2;
-                    return values;
-                })();
-
                 return ResUnameRegist;
             })();
 
@@ -930,20 +914,6 @@ $root.auth = (function() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
-                /**
-                 * STATUS enum.
-                 * @name auth.client.proto.ResUnameLogin.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED_UNAME_PWD_INVALID=1 FAILED_UNAME_PWD_INVALID value
-                 */
-                ResUnameLogin.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED_UNAME_PWD_INVALID"] = 1;
-                    return values;
-                })();
-
                 return ResUnameLogin;
             })();
 
@@ -1362,20 +1332,6 @@ $root.auth = (function() {
                 ResGuestLogin.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
-
-                /**
-                 * STATUS enum.
-                 * @name auth.client.proto.ResGuestLogin.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED_PWD_INVALID=1 FAILED_PWD_INVALID value
-                 */
-                ResGuestLogin.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED_PWD_INVALID"] = 1;
-                    return values;
-                })();
 
                 return ResGuestLogin;
             })();
@@ -1819,20 +1775,6 @@ $root.auth = (function() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
-                /**
-                 * STATUS enum.
-                 * @name auth.client.proto.ResWeChatLogin.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResWeChatLogin.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
-
                 return ResWeChatLogin;
             })();
 
@@ -2252,20 +2194,6 @@ $root.auth = (function() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
-                /**
-                 * STATUS enum.
-                 * @name auth.client.proto.ResWeChatSessionLogin.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResWeChatSessionLogin.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
-
                 return ResWeChatSessionLogin;
             })();
 
@@ -2612,20 +2540,6 @@ $root.auth = (function() {
                 ResLoginOut.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
-
-                /**
-                 * STATUS enum.
-                 * @name auth.client.proto.ResLoginOut.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResLoginOut.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
 
                 return ResLoginOut;
             })();
@@ -3156,20 +3070,6 @@ $root.auth = (function() {
                 ResUserCenterInfo.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
-
-                /**
-                 * STATUS enum.
-                 * @name auth.client.proto.ResUserCenterInfo.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResUserCenterInfo.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
 
                 return ResUserCenterInfo;
             })();

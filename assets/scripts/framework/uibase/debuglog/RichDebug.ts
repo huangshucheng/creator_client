@@ -68,25 +68,19 @@ if (!CC_EDITOR) {
             _console.info.apply(this, Array.prototype.slice.call(arguments, 0));
         };
         console.log = function (...args) {
-            // 做自己的处理
             RichDebug.log("log", args);
-            // 调用原方法输出
             _console.log.apply(this, Array.prototype.slice.call(arguments, 0));
         };
         console.warn = function (...args) {
             RichDebug.log("warn", args);
-            // 调用原方法输出
             _console.warn.apply(this, Array.prototype.slice.call(arguments, 0));
         };
         console.debug = function (...args) {
-            // 做自己的处理
             RichDebug.log("debug", args);
-            // 调用原方法输出
             _console.debug.apply(this, Array.prototype.slice.call(arguments, 0));
         };
         console.error = function (...args) {
             RichDebug.log("error", args);
-            // 调用原方法输出
             _console.error.apply(this, Array.prototype.slice.call(arguments, 0));
         };
     }

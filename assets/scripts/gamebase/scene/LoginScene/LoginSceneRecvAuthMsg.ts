@@ -4,7 +4,7 @@ import DialogManager from '../../../framework/manager/DialogManager';
 import WeChatLogin from '../../../framework/utils/WeChatLogin';
 import Stype from '../../../framework/protocol/Stype';
 import AuthProto from '../../../framework/protocol/protofile/AuthProto';
-import LobbySendMsg from '../lobbyScene/sendMsg/LobbySendMsg';
+import SendLobbyMsg from '../../sendMsg/SendLobbyMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -45,14 +45,14 @@ export default class LoginSceneRecvAuthMsg extends UIController {
     on_event_guest_login(body:any){
         console.log("guestlogin udata: ", body)
         if (body.status == Response.SUCCESS){
-            LobbySendMsg.send_login_lobby();
+            SendLobbyMsg.send_login_lobby();
         }
     }
 
     on_event_uname_login(body:any){
         console.log("unamelogin udata: ", body)
         if (body.status == Response.SUCCESS){
-            LobbySendMsg.send_login_lobby();
+            SendLobbyMsg.send_login_lobby();
         }
     }
 
@@ -67,7 +67,7 @@ export default class LoginSceneRecvAuthMsg extends UIController {
     on_event_wechat_login(body:any){
         if (body.status == Response.SUCCESS) {
             WeChatLogin.hide_auth_btn();
-            LobbySendMsg.send_login_lobby();
+            SendLobbyMsg.send_login_lobby();
         }
     }
 }

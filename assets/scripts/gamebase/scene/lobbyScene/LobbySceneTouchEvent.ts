@@ -5,7 +5,8 @@ import PlatForm from '../../../framework/config/PlatForm';
 import { AudioManager } from '../../../framework/manager/AudioManager';
 import LSDefine from '../../../framework/config/LSDefine';
 import Storage from '../../../framework/utils/Storage';
-import LobbySendMsg from './sendMsg/LobbySendMsg';
+import SendLobbyMsg from '../../sendMsg/SendLobbyMsg';
+import UserInfo from '../../../framework/common/UserInfo';
 
 const {ccclass, property} = cc._decorator;
 
@@ -51,8 +52,8 @@ export default class LobbySceneTouchEvent extends UIController {
 
         let ruleStr = JSON.stringify(GameHoodleConfig.BOX_GAME_RULE);
         // let ruleStr = JSON.stringify({playCount:4});
-        LobbySendMsg.send_create_room(ruleStr);
-        LobbySendMsg.send_get_room_status();
+        SendLobbyMsg.send_create_room(ruleStr);
+        SendLobbyMsg.send_get_room_status();
     }
 
     on_click_login_logic(sender:cc.Component){
@@ -75,8 +76,8 @@ export default class LobbySceneTouchEvent extends UIController {
     }
 
     on_click_back_room(sender: cc.Component){
-        LobbySendMsg.send_get_room_status();
-        LobbySendMsg.send_back_room();
+        SendLobbyMsg.send_get_room_status();
+        SendLobbyMsg.send_back_room();
     }
 
     on_click_match_room_with_data(event: cc.Event, customEventData: any){
@@ -121,8 +122,7 @@ export default class LobbySceneTouchEvent extends UIController {
 
     on_click_share(sender:cc.Component){
         console.log("hcc>>on_click_share....");
-        /*
-        LobbySendSystem.send_share();
+        // SendSystem.send_share();
         let share_img_path = cc.url.raw("resources/textures/shareimg/ball_games_hare_img.png")
         console.log("hcc>>share_img_path: ", share_img_path);
         if (!share_img_path || share_img_path == "") {
@@ -145,9 +145,6 @@ export default class LobbySceneTouchEvent extends UIController {
             return;
         }
         wx.shareAppMessage(shareInfo)
-        */
-        // LobbySendMsg.send_get_room_status();
-        //test
     }
 
     is_guest_login_wechat_game(){

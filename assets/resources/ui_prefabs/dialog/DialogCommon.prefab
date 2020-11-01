@@ -394,7 +394,7 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
+      "r": 255,
       "g": 0,
       "b": 0,
       "a": 255
@@ -412,7 +412,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -1.109,
-      "y": 294.8,
+      "y": 269.156,
       "z": 0
     },
     "_scale": {
@@ -478,7 +478,7 @@
     "_alignFlags": 1,
     "_left": 0,
     "_right": 0,
-    "_top": -7.560000000000002,
+    "_top": 18.084000000000003,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -1406,8 +1406,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -1,
-      "y": -23.199999999999974,
+      "x": 0,
+      "y": 18.48,
       "z": 0
     },
     "_scale": {
@@ -1471,8 +1471,8 @@
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 40,
-    "_left": 49,
-    "_right": 51,
+    "_left": 50,
+    "_right": 50,
     "_top": 216.541,
     "_bottom": 0,
     "_verticalCenter": 0,

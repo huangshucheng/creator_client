@@ -48,6 +48,10 @@ export default class PlatForm {
         }
         return false;
     }
+    //是否浏览器
+    static isWebBrowser(){
+        return cc.sys.isBrowser;
+    }
 
     // 获得当前域名
     static getCurDomain() {

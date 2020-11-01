@@ -4,9 +4,9 @@ import SceneManager from '../../../framework/manager/SceneManager';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbyScene from '../lobbyScene/LobbyScene';
 import RoomData from '../../common/RoomData';
-import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
 import Stype from '../../../framework/protocol/Stype';
 import LobbyProto from '../../../framework/protocol/protofile/LobbyProto';
+import SendGameMsg from '../../sendMsg/SendGameMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -41,7 +41,7 @@ export default class GameSceneRecvLobbyMsg extends UIController {
     
     on_event_login_lobby(body:any){
         if (body.status == Response.SUCCESS) {
-            GameSendGameHoodleMsg.send_check_link_game();
+            SendGameMsg.send_check_link_game();
         }
     }
 

@@ -1,7 +1,7 @@
 //小球控制器
 import UIController from "../../../../framework/uibase/UIController";
 import { PlayerPower, BallState } from '../../../common/State';
-import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
+import SendGameMsg from '../../../sendMsg/SendGameMsg';
 import GameHoodleData from './GameHoodleData';
 import RoomData from '../../../common/RoomData';
 import Player from '../../../common/Player';
@@ -197,7 +197,7 @@ export default class HoodleBallCtrl extends UIController {
 
         //发送服务端，玩家碰撞信息
         if(src_seatid != -1 && des_seatid != -1){
-            GameSendGameHoodleMsg.send_player_is_shooted(src_seatid, des_seatid);
+            SendGameMsg.send_player_is_shooted(src_seatid, des_seatid);
         }
 
         //是否显示拖尾
@@ -268,7 +268,7 @@ export default class HoodleBallCtrl extends UIController {
                     posy:String(this.node.getPosition().y),
                 };
                 posArray.push(posInfo);
-                GameSendGameHoodleMsg.send_all_player_ball_pos(posArray);
+                SendGameMsg.send_all_player_ball_pos(posArray);
             }
         }
         //设置状态

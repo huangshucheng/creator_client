@@ -5,18 +5,17 @@ export default class SystemProto {
 
 	public static XY_ID = {
 		INVALED: 0,
+		REQ_LOGINREWARDCONFIG: 101, //登录奖励列表（签到）
+		RES_LOGINREWARDCONFIG: 102,
 
-		REQ_LOGINREWARDCONFIG				: 101,    //登录奖励列表（签到）
-		RES_LOGINREWARDCONFIG				: 102,
+		REQ_LOGINREWARDSIGN: 103, //玩家签到
+		RES_LOGINREWARDSIGN: 104,
 
-		REQ_LOGINREWARDSIGN					: 103,    // 玩家签到
-		RES_LOGINREWARDSIGN					: 104,
+		REQ_USERSHARE: 105, //分享记录        
+		RES_USERSHARE: 106,
 
-		REQ_USERSHARE						: 105,    // 分享记录        
-		RES_USERSHARE						: 106,
-
-		REQ_USERADDCHIP						: 107,    // 增加道具
-		RES_USERADDCHIP						: 108,
+		REQ_USERADDCHIP: 107, //增加道具
+		RES_USERADDCHIP: 108,
 	}
 
 	public static XY_NAME = {

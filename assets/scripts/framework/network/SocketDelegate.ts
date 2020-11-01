@@ -1,5 +1,4 @@
 import { WSocket, ISocket, SocketState } from './Socket';
-import ProtoTools from './ProtoTools';
 import ProtoManater from '../manager/ProtoManager';
 import EventManager from '../manager/EventManager';
 import ProtoCmd from '../protocol/ProtoCmd';

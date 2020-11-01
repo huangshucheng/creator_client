@@ -2,13 +2,11 @@
 
 import UIDialog from '../../framework/uibase/UIDialog';
 import Response from '../../framework/protocol/Response';
-import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import DialogManager from '../../framework/manager/DialogManager';
 import StringUtil from '../../framework/utils/StringUtil';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
-import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
 import UIFunction from '../../framework/common/UIFunciton';
 
 let BALL_NAME_KEY_STR = "ball_name_level_"
@@ -34,8 +32,8 @@ class BallListDialog extends UIDialog {
         super.start()
         this.initUI();
         this.add_protocol_delegate();
-        // GameSendGameHoodleMsg.send_get_player_ball_info();
-        // GameSendGameHoodleMsg.send_get_user_config();
+        // SendGameMsg.send_get_player_ball_info();
+        // SendGameMsg.send_get_user_config();
     }
 
     add_cmd_handler_map() {
@@ -114,7 +112,7 @@ class BallListDialog extends UIDialog {
                     this.show_user_ball_info(this._ball_info_str)
                     this.show_cur_use_ball(user_ball_level);
                     this._cur_user_ball_level = user_ball_level;
-                    // GameSendGameHoodleMsg.send_get_user_config();
+                    // SendGameMsg.send_get_user_config();
                     DialogManager.getInstance().show_weak_hint("使用成功!");
                 }
             }else{
@@ -238,7 +236,7 @@ class BallListDialog extends UIDialog {
                             DialogManager.getInstance().show_weak_hint("当前已经使用该等级!");
                             return
                         }
-                        // GameSendGameHoodleMsg.send_use_ball(level);
+                        // SendGameMsg.send_use_ball(level);
                      },
                     function () { },
                     function () { },

@@ -3,7 +3,7 @@ import Response from '../../../framework/protocol/Response';
 import DialogManager from '../../../framework/manager/DialogManager';
 import Stype from '../../../framework/protocol/Stype';
 import SystemProto from '../../../framework/protocol/protofile/SystemProto';
-import LobbySendMsg from './sendMsg/LobbySendMsg';
+import SendLobbyMsg from '../../sendMsg/SendLobbyMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -41,7 +41,7 @@ export default class LobbySceneRecvSystemMsg extends UIController {
     on_event_share_res(body:any){
         if(body && body.status == Response.SUCCESS){
             DialogManager.getInstance().show_weak_hint("分享成功！");
-            LobbySendMsg.send_get_ugame_info();
+            SendLobbyMsg.send_get_ugame_info();
             let dialog = DialogManager.getInstance().show_poplayer("RewardDialog");
             if (dialog) {
                 let script = dialog.getComponent("RewardDialog");

@@ -5,7 +5,7 @@ import ArrayUtil from '../../framework/utils/ArrayUtil';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
 import GameAppConfig from '../../framework/config/GameAppConfig';
-import LoginSendAuthMsg from '../scene/loginScene/sendMsg/LoginSendAuthMsg';
+import SendAuthMsg from '../sendMsg/SendAuthMsg';
 import UIFunction from '../../framework/common/UIFunciton';
 
 const { ccclass, property } = cc._decorator;
@@ -124,7 +124,7 @@ class LoginTestDialog extends UIDialog {
         }
         console.log("hcc>>click: " , data);
         for(let key in data){
-            LoginSendAuthMsg.send_uname_login(key,data[key]);
+            SendAuthMsg.send_uname_login(key,data[key]);
         }
         AudioManager.getInstance().playBtnClick();
         this.close();

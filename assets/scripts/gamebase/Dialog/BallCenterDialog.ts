@@ -2,7 +2,6 @@
 
 import UIDialog from '../../framework/uibase/UIDialog';
 import Response from '../../framework/protocol/Response';
-import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import ArrayUtil from '../../framework/utils/ArrayUtil';
 import DialogManager from '../../framework/manager/DialogManager';
@@ -10,7 +9,6 @@ import GameHoodleConfig from '../../framework/config/GameHoodleConfig';
 import StringUtil from '../../framework/utils/StringUtil';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
-import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
 import UIFunction from '../../framework/common/UIFunciton';
 
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
@@ -34,7 +32,7 @@ class BallCenterDialog extends UIDialog {
         super.start()
         this.initUI();
         this.add_protocol_delegate();
-        // GameSendGameHoodleMsg.send_get_player_ball_info();
+        // SendGameMsg.send_get_player_ball_info();
         //test
         // this.show_ball_test();
     }
@@ -87,7 +85,7 @@ class BallCenterDialog extends UIDialog {
             let level = compose_info[0];
             let _this = this;
             if (ischeck){
-                // GameSendGameHoodleMsg.send_ball_compose(Number(level));
+                // SendGameMsg.send_ball_compose(Number(level));
             }else{
                 let resNode: cc.Node = DialogManager.getInstance().show_common_layer(2);
                 if (resNode) {
@@ -96,7 +94,7 @@ class BallCenterDialog extends UIDialog {
                         let showTextStr = "确定将" + count + "个" + level + "级弹珠合成一个" + (Number(level) + 1) + "级弹珠吗?"
                         script.set_content_text(showTextStr);
                         script.set_btn_callback(
-                            // function () { GameSendGameHoodleMsg.send_ball_compose(Number(level)); },
+                            // function () { SendGameMsg.send_ball_compose(Number(level)); },
                             // function () {  _this.show_user_ball_info(_this._ball_info_str)},
                             // function () { },
                         )

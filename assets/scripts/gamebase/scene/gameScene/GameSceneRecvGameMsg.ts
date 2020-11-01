@@ -34,7 +34,6 @@ export default class GameSceneRecvGameMsg extends UIController {
             [GameHoodleProto.XY_ID.eCheckLinkGameRes]: this.on_event_check_link.bind(this),
             [GameHoodleProto.XY_ID.eGameRuleRes]: this.on_event_game_rule.bind(this),
             [GameHoodleProto.XY_ID.eGameStartRes]: this.on_event_game_start.bind(this),
-            [GameHoodleProto.XY_ID.eGameEndRes]: this.on_event_game_end.bind(this),
             [GameHoodleProto.XY_ID.ePlayerScoreRes]: this.on_event_player_score.bind(this),
             [GameHoodleProto.XY_ID.eGameResultRes]: this.on_event_game_result.bind(this),
             [GameHoodleProto.XY_ID.eTotalGameResultRes]: this.on_event_game_total_result.bind(this),
@@ -133,10 +132,6 @@ export default class GameSceneRecvGameMsg extends UIController {
         this.do_on_view("GameSceneShowUI", "show_game_start_ani");
     }
 
-    on_event_game_end(body: any) {
-        console.log("on_event_game_end", body)
-    }
-
     on_event_game_result(body: any) {
         this.set_visible(this.view["KW_BTN_READY"], false);
         this.scheduleOnce(function () {
@@ -208,9 +203,9 @@ export default class GameSceneRecvGameMsg extends UIController {
                 if (script) {
                     script.set_content_text(showStr);
                     script.set_btn_callback(
-                        // function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.SUCCESS); },
-                        // function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.ERROR_1); },
-                        // function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.ERROR_1); },
+                        // function () { SendGameMsg.send_play_again_answer(requseruid, Response.SUCCESS); },
+                        // function () { SendGameMsg.send_play_again_answer(requseruid, Response.ERROR_1); },
+                        // function () { SendGameMsg.send_play_again_answer(requseruid, Response.ERROR_1); },
                     )
                 }
             }

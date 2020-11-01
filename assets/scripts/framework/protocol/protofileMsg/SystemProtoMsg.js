@@ -475,20 +475,6 @@ $root.system = (function() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
-                /**
-                 * STATUS enum.
-                 * @name system.client.proto.ResLoginRewardConfig.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResLoginRewardConfig.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
-
                 return ResLoginRewardConfig;
             })();
 
@@ -886,20 +872,6 @@ $root.system = (function() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
-                /**
-                 * STATUS enum.
-                 * @name system.client.proto.ResLoginRewardSign.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResLoginRewardSign.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
-
                 return ResLoginRewardSign;
             })();
 
@@ -1246,20 +1218,6 @@ $root.system = (function() {
                 ResUserShare.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
-
-                /**
-                 * STATUS enum.
-                 * @name system.client.proto.ResUserShare.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResUserShare.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
 
                 return ResUserShare;
             })();
@@ -1746,20 +1704,6 @@ $root.system = (function() {
                 ResUserAddChip.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
-
-                /**
-                 * STATUS enum.
-                 * @name system.client.proto.ResUserAddChip.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResUserAddChip.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
 
                 return ResUserAddChip;
             })();

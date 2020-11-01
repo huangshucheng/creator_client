@@ -1,9 +1,8 @@
 import UIController from '../../../framework/uibase/UIController';
-import LobbySendAuthMsg from './sendMsg/LobbySendAuthMsg';
-import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
 import WeChatLogin from '../../../framework/utils/WeChatLogin';
 import RoomData from '../../common/RoomData';
-import LobbySendMsg from './sendMsg/LobbySendMsg';
+import SendLobbyMsg from '../../sendMsg/SendLobbyMsg';
+import SendAuthMsg from '../../sendMsg/SendAuthMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -15,10 +14,9 @@ export default class LobbySceneInit extends UIController {
     }
     
     start () {
-        LobbySendAuthMsg.send_get_center_info();
-        LobbySendMsg.send_get_ugame_info();
-        LobbySendMsg.send_get_room_status();
-        // LobbySendGameHoodleMsg.send_get_room_list_config();
+        SendAuthMsg.send_get_center_info();
+        SendLobbyMsg.send_get_ugame_info();
+        SendLobbyMsg.send_get_room_status();
         RoomData.getInstance().clear_room_data();
         WeChatLogin.hide_auth_btn();
 

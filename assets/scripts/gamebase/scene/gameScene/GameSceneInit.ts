@@ -1,6 +1,6 @@
 import UIController from '../../../framework/uibase/UIController';
-import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
 import RoomData from '../../common/RoomData';
+import SendGameMsg from '../../sendMsg/SendGameMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -12,7 +12,7 @@ export default class GameSceneInit extends UIController {
     }
 
     start () {
-        GameSendGameHoodleMsg.send_check_link_game();
+        SendGameMsg.send_check_link_game();
         RoomData.getInstance().set_share_roomid("");
     }
     

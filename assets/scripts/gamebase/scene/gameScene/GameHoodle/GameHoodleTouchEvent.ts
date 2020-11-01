@@ -2,12 +2,12 @@
 import UIController from "../../../../framework/uibase/UIController";
 import RoomData from '../../../common/RoomData';
 import GameHoodleData from './GameHoodleData';
-import GameSendGameHoodleMsg from '../sendMsg/GameSendGameHoodle';
 import { PlayerPower , BallState} from '../../../common/State';
 import DialogManager from "../../../../framework/manager/DialogManager";
 import HoodleBallManager from './HoodleBallManager';
 import GameHoodleConfig from "../../../../framework/config/GameHoodleConfig";
 import HoodleBallCtrl from "./HoodleBallCtrl";
+import SendGameMsg from '../../../sendMsg/SendGameMsg';
 
 const AIM_LINE_MAX_LENGTH = 2500;
 
@@ -129,7 +129,7 @@ export default class gameHoodleTouchEvent extends UIController {
                 let shootPower = this.get_shoot_pwer();
                 script.shoot_at(location,shootPower);
                 //计算成百分比
-                GameSendGameHoodleMsg.send_player_shoot(RoomData.getInstance().get_self_seatid(),nodepos.x, nodepos.y,shootPower);
+                SendGameMsg.send_player_shoot(RoomData.getInstance().get_self_seatid(),nodepos.x, nodepos.y,shootPower);
             }
         }
     }

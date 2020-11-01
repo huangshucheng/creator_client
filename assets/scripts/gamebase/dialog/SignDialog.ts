@@ -3,7 +3,7 @@
 import UIDialog from '../../framework/uibase/UIDialog';
 import Response from '../../framework/protocol/Response';
 import UserInfo from '../../framework/common/UserInfo';
-import LobbySendSystem from '../scene/lobbyScene/sendMsg/LobbySendSystem';
+import SendSystem from '../sendMsg/SendSystem';
 import DialogManager from '../../framework/manager/DialogManager';
 import CellManager from '../../framework/manager/CellManager';
 import { Cell } from '../../framework/cell/Cell';
@@ -29,7 +29,7 @@ class SignDialog extends UIDialog {
         super.start();
         this.initUI();
         this.add_protocol_delegate();
-        LobbySendSystem.send_get_reward_info();
+        SendSystem.send_get_reward_info();
     }
 
     add_cmd_handler_map() {
@@ -93,7 +93,7 @@ class SignDialog extends UIDialog {
         if(body){
             let status = body.status;
             if (status == Response.SUCCESS){
-                LobbySendSystem.send_get_reward_info();
+                SendSystem.send_get_reward_info();
                 DialogManager.getInstance().show_weak_hint("签到成功");
                 let cell = CellManager.getInstance().start("CellGetUserProp",null,5);
                 CellManager.getInstance().addCellCallBack(cell,this.on_event_ugame_info.bind(this));
@@ -180,7 +180,7 @@ class SignDialog extends UIDialog {
     on_click_sign(event: cc.Event, data: any){
         if(data){
             if(data.canget == true){
-                LobbySendSystem.send_sign_req(data.day);
+                SendSystem.send_sign_req(data.day);
             }else{
                 if(data.isget == true){
                     DialogManager.getInstance().show_weak_hint("不能重复签到哦！");

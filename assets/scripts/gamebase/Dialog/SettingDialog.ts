@@ -5,7 +5,7 @@ import Response from '../../framework/protocol/Response';
 import RoomData from '../common/RoomData';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
-import LobbySendMsg from '../scene/lobbyScene/sendMsg/LobbySendMsg';
+import SendLobbyMsg from '../sendMsg/SendLobbyMsg';
 import LobbyProto from '../../framework/protocol/protofile/LobbyProto';
 import UIFunction from '../../framework/common/UIFunciton';
 
@@ -83,14 +83,14 @@ class SettingDialog extends UIDialog {
     }
 
     on_click_back(sender: cc.Component){
-        LobbySendMsg.send_exit_room();
+        SendLobbyMsg.send_exit_room();
         this.close()
         SceneManager.getInstance().enter_scene_asyc(new LobbyScene());
         RoomData.getInstance().clear_room_data();
     }
 
     on_click_dessolve(sender:cc.Component){
-        LobbySendMsg.send_dessolve_room();
+        SendLobbyMsg.send_dessolve_room();
         this.close();
     }
 

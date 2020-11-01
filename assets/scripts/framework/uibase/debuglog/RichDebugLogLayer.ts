@@ -1,7 +1,8 @@
 import UIFunction from '../../common/UIFunciton';
 import UIDialog from "../UIDialog";
 import RichDebug from './RichDebug';
-import PlatForm from '../../config/PlatForm';
+import DialogManager from '../../manager/DialogManager';
+import { SDKAdapter } from '../../utils/SDKAdapter';
 
 const { ccclass, property } = cc._decorator;
 
@@ -83,22 +84,6 @@ class RichDebugLogLayer extends UIDialog {
     }
 
     on_scrll_to_top(scrollview:cc.ScrollView, eventType:cc.ScrollView.EventType, customEventData:any){
-        // let etype = {
-        //     [0]:"SCROLL_TO_TOP",
-        //     [1]:"SCROLL_TO_BOTTOM",
-        //     [2]:"SCROLL_TO_LEFT",
-        //     [3]:"SCROLL_TO_RIGHT",
-        //     [4]:"SCROLLING",
-        //     [5]:"BOUNCE_TOP",
-        //     [6]:"BOUNCE_BOTTOM",
-        //     [7]:"BOUNCE_LEFT",
-        //     [8]:"BOUNCE_RIGHT",
-        //     [9]:"SCROLL_ENDED",
-        //     [10]:"TOUCH_UP",
-        //     [11]:"AUTOSCROLL_ENDED_WITH_THRESHOLD",
-        //     [12]:"SCROLL_BEGAN",
-        // }	
-        // cc.log("hcc>>>>scrolltype: ", etype[eventType]);
         if(eventType == cc.ScrollView.EventType.BOUNCE_TOP){
             if (this._min == 1) return;
             let logs = RichDebug.get_log_data();
@@ -146,18 +131,21 @@ class RichDebugLogLayer extends UIDialog {
     }
 
     on_click_copy(sender:cc.Component){
-        if (PlatForm.isWeChatGame()) {
-            let log_data = RichDebug.get_log_data();
-            let copy_str = "";
-            if (log_data.length > 0){
-                log_data.forEach(v=> {
-                    copy_str = copy_str + (String(v.value) || "") + "\n";
-                });
-            }
-            wx.setClipboardData({
-                data:copy_str,
+        let copy_str = "";
+        let log_data = RichDebug.get_log_data();
+        if (log_data.length > 0){
+            log_data.forEach(v=> {
+                copy_str = copy_str + (String(v.value) || "") + "\n";
             });
         }
+
+        SDKAdapter.copyStringToClipboard(copy_str,function(success:boolean) {
+            if(success){
+                DialogManager.getInstance().show_weak_hint("复制成功!");
+            }else{
+                DialogManager.getInstance().show_weak_hint("复制失败!");
+            }
+        });
     }
 
     update_debug_log_info(data:any){

@@ -1,9 +1,9 @@
 import UIDialog from '../../framework/uibase/UIDialog';
-import LobbySceneSendAuthMsg from '../scene/lobbyScene/sendMsg/LobbySendAuthMsg';
 import SceneManager from '../../framework/manager/SceneManager';
 import LoginScene from '../scene/loginScene/LoginScene';
 import UserInfo from '../../framework/common/UserInfo';
 import UIFunction from '../../framework/common/UIFunciton';
+import SendAuthMsg from '../sendMsg/SendAuthMsg';
 
 const { ccclass, property } = cc._decorator;
 
@@ -40,7 +40,7 @@ class MyCenterDialog extends UIDialog {
     }
 
     on_click_exit(sender: cc.Component){
-        LobbySceneSendAuthMsg.send_login_out()
+        SendAuthMsg.send_login_out()
         SceneManager.getInstance().enter_scene_asyc(new LoginScene())
         this.close()
     }

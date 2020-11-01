@@ -1,4 +1,4 @@
-import LoginSendAuthMsg from "../../gamebase/scene/loginScene/sendMsg/LoginSendAuthMsg";
+import SendAuthMsg from "../../gamebase/sendMsg/SendAuthMsg";
 import PlatForm from '../config/PlatForm';
 import DialogManager from '../manager/DialogManager';
 import LSDefine from "../config/LSDefine";
@@ -28,7 +28,7 @@ class WeChatLogin {
             if (guestkey.length != 32) {
                 return
             }
-            LoginSendAuthMsg.send_guest_login(guestkey);
+            SendAuthMsg.send_guest_login(guestkey);
         }
         wx.getSetting({
             success(res:any){
@@ -98,7 +98,7 @@ class WeChatLogin {
                             let wechatuserinfo = JSON.stringify(userinfo_res);
                             console.log("hcc>>login_code: ", login_code)
                             console.log("hcc>>wechatuserinfo: ", wechatuserinfo)
-                            LoginSendAuthMsg.send_wechat_login(login_code, wechatuserinfo);
+                            SendAuthMsg.send_wechat_login(login_code, wechatuserinfo);
                         } else {
                             console.log('hcc>>login failed！', login_res.errMsg)
                         }

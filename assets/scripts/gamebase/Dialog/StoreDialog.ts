@@ -2,17 +2,14 @@
 
 import UIDialog from '../../framework/uibase/UIDialog';
 import Response from '../../framework/protocol/Response';
-import GameSendGameHoodleMsg from '../scene/gameScene/sendMsg/GameSendGameHoodle';
 import { ResourceManager } from '../../framework/manager/ResourceManager';
 import ArrayUtil from '../../framework/utils/ArrayUtil';
 import DialogManager from '../../framework/manager/DialogManager';
-import LobbySendGameHoodleMsg from '../scene/lobbyScene/sendMsg/LobbySendGameHoodle';
 import UserInfo from '../../framework/common/UserInfo';
 import StringUtil from '../../framework/utils/StringUtil';
 import { AudioManager } from '../../framework/manager/AudioManager';
 import Stype from '../../framework/protocol/Stype';
-import GameHoodleProto from '../../framework/protocol/protofile/GameHoodleProto';
-import LobbySendMsg from '../scene/lobbyScene/sendMsg/LobbySendMsg';
+import SendLobbyMsg from '../sendMsg/SendLobbyMsg';
 import UIFunction from '../../framework/common/UIFunciton';
 
 let BALL_TEXTURE_KEY_STR = "games/balls/ball_level_%s.png"
@@ -34,7 +31,7 @@ class StoreDialog extends UIDialog {
         super.start();
         this.initUI();
         this.add_protocol_delegate();
-        // GameSendGameHoodleMsg.send_store_list_req();
+        // SendGameMsg.send_store_list_req();
     }
 
     add_cmd_handler_map() {
@@ -91,7 +88,7 @@ class StoreDialog extends UIDialog {
             let status = udata.status
             if (status == Response.SUCCESS) {
                 //刷新金币
-                LobbySendMsg.send_get_ugame_info();
+                SendLobbyMsg.send_get_ugame_info();
                 DialogManager.getInstance().show_weak_hint("购买成功!")
             }
             else{
@@ -195,7 +192,7 @@ class StoreDialog extends UIDialog {
             if (script) {
                 script.set_content_text(showTextStr);
                 script.set_btn_callback(
-                    // function () { GameSendGameHoodleMsg.send_buy_product(req_body); },
+                    // function () { SendGameMsg.send_buy_product(req_body); },
                 )
             }
         }

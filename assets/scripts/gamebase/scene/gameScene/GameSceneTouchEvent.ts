@@ -1,12 +1,12 @@
 import UIController from '../../../framework/uibase/UIController';
 import DialogManager from '../../../framework/manager/DialogManager';
-import GameSendGameHoodleMsg from './sendMsg/GameSendGameHoodle';
 import SceneManager from '../../../framework/manager/SceneManager';
 import LobbyScene from '../lobbyScene/LobbyScene';
 import PlatForm from '../../../framework/config/PlatForm';
 import RoomData from '../../common/RoomData';
 import Player from '../../common/Player';
 import UserInfo from '../../../framework/common/UserInfo';
+import SendGameMsg from '../../sendMsg/SendGameMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -36,7 +36,7 @@ export default class GameSceneTouchEvent extends UIController {
     }
 
     on_click_ready(sender: cc.Component){
-        GameSendGameHoodleMsg.send_user_ready()
+        SendGameMsg.send_user_ready()
     }
 
     on_click_back_lobby(sender: cc.Component){
@@ -103,7 +103,7 @@ export default class GameSceneTouchEvent extends UIController {
                 script.set_content_text("确定再邀请该玩家再来一次对局吗!");
                 script.set_can_touch_background(true);
                 script.set_btn_callback(
-                    // function () { GameSendGameHoodleMsg.send_play_again(uidSet); },
+                    // function () { SendGameMsg.send_play_again(uidSet); },
                 )
             }
         }

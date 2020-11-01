@@ -5,12 +5,12 @@ import UserInfo from '../../../framework/common/UserInfo';
 import GameScene from '../gameScene/GameScene';
 import DialogManager from '../../../framework/manager/DialogManager';
 import LobbyScene from './LobbyScene';
-import LobbySendGameHoodleMsg from './sendMsg/LobbySendGameHoodle';
+import LobbySendGameHoodleMsg from '../../sendMsg/SendGameMsg';
 import RoomData from '../../common/RoomData';
-import LobbySendAuthMsg from './sendMsg/LobbySendAuthMsg';
 import Stype from '../../../framework/protocol/Stype';
 import LobbyProto from '../../../framework/protocol/protofile/LobbyProto';
-import LobbySendMsg from './sendMsg/LobbySendMsg';
+import SendLobbyMsg from '../../sendMsg/SendLobbyMsg';
+import SendAuthMsg from '../../sendMsg/SendAuthMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -59,9 +59,9 @@ export default class LobbySceneRecvMsg extends UIController {
     on_event_login_lobby(body:any){
         if (body){
             if (body.status == Response.SUCCESS){
-                LobbySendAuthMsg.send_get_center_info();
-                LobbySendMsg.send_get_room_status();
-                LobbySendMsg.send_get_ugame_info();
+                SendAuthMsg.send_get_center_info();
+                SendLobbyMsg.send_get_room_status();
+                SendLobbyMsg.send_get_ugame_info();
                 // LobbySendGameHoodleMsg.send_get_uball_info();
                 // LobbySendGameHoodleMsg.send_get_room_list_config();
                 DialogManager.getInstance().show_weak_hint("登录大厅成功!")
@@ -190,7 +190,7 @@ export default class LobbySceneRecvMsg extends UIController {
                 let ugame_info = JSON.parse(body.userinfostring);
                 UserInfo.set_ugame_info(ugame_info);
                 this.do_on_view("LobbySceneShowUI", "show_user_info");
-                // GameSendGameHoodleMsg.send_get_user_config();
+                // SendGameMsg.send_get_user_config();
             }
         }
     }
@@ -224,9 +224,9 @@ export default class LobbySceneRecvMsg extends UIController {
                 if (script) {
                     script.set_content_text(showStr);
                     script.set_btn_callback(
-                        // function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.SUCCESS); },
-                        // function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.ERROR_1); },
-                        // function () { GameSendGameHoodleMsg.send_play_again_answer(requseruid, Response.ERROR_1); },
+                        // function () { SendGameMsg.send_play_again_answer(requseruid, Response.SUCCESS); },
+                        // function () { SendGameMsg.send_play_again_answer(requseruid, Response.ERROR_1); },
+                        // function () { SendGameMsg.send_play_again_answer(requseruid, Response.ERROR_1); },
                     )
                 }
             }

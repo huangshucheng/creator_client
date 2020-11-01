@@ -451,20 +451,6 @@ $root.lobby = (function() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
-                /**
-                 * STATUS enum.
-                 * @name lobby.client.proto.ResLoginLobby.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResLoginLobby.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
-
                 return ResLoginLobby;
             })();
 
@@ -838,20 +824,6 @@ $root.lobby = (function() {
                 ResCreateRoom.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
-
-                /**
-                 * STATUS enum.
-                 * @name lobby.client.proto.ResCreateRoom.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResCreateRoom.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
 
                 return ResCreateRoom;
             })();
@@ -1227,20 +1199,6 @@ $root.lobby = (function() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
-                /**
-                 * STATUS enum.
-                 * @name lobby.client.proto.ResJoinRoom.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResJoinRoom.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
-
                 return ResJoinRoom;
             })();
 
@@ -1611,20 +1569,6 @@ $root.lobby = (function() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
-                /**
-                 * STATUS enum.
-                 * @name lobby.client.proto.ResExitRoom.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResExitRoom.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
-
                 return ResExitRoom;
             })();
 
@@ -1971,20 +1915,6 @@ $root.lobby = (function() {
                 ResBackRoom.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
-
-                /**
-                 * STATUS enum.
-                 * @name lobby.client.proto.ResBackRoom.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResBackRoom.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
 
                 return ResBackRoom;
             })();
@@ -2333,20 +2263,6 @@ $root.lobby = (function() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
 
-                /**
-                 * STATUS enum.
-                 * @name lobby.client.proto.ResDessolveRoom.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResDessolveRoom.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
-
                 return ResDessolveRoom;
             })();
 
@@ -2693,20 +2609,6 @@ $root.lobby = (function() {
                 ResRoomStatus.prototype.toJSON = function toJSON() {
                     return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                 };
-
-                /**
-                 * STATUS enum.
-                 * @name lobby.client.proto.ResRoomStatus.STATUS
-                 * @enum {string}
-                 * @property {number} SUCCESS=0 SUCCESS value
-                 * @property {number} FAILED=1 FAILED value
-                 */
-                ResRoomStatus.STATUS = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "SUCCESS"] = 0;
-                    values[valuesById[1] = "FAILED"] = 1;
-                    return values;
-                })();
 
                 return ResRoomStatus;
             })();

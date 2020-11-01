@@ -3,7 +3,7 @@ var Response = {
 	ERROR_1: -1,
 	ERROR_2: -2,
 	ERROR_3: -3,
-	ERROR_4: -4,
+	ERROR_4: -4, 
 	ERROR_5: -5,
 	ERROR_6: -6,
 	ERROR_7: -7,

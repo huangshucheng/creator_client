@@ -5,29 +5,28 @@ export default class AuthProto {
 
 	public static XY_ID = {
 		INVALED : 0,
+		REQ_UNAMEREGIST: 10001, //用户名密码注册
+		RES_UNAMEREGIST: 10002,
 
-		REQ_UNAMEREGIST             : 10001,    // 用户名密码注册
-		RES_UNAMEREGIST             : 10002,
+		REQ_UNAMELOGIN: 10003, //用户名密码登陆
+		RES_UNAMELOGIN: 10004,
 
-		REQ_UNAMELOGIN              : 10003,    // 用户名密码登陆
-		RES_UNAMELOGIN              : 10004,
+		REQ_GUESTLOGIN: 10005, //游客登陆        
+		RES_GUESTLOGIN: 10006,
 
-		REQ_GUESTLOGIN              : 10005,    // 游客登陆        
-		RES_GUESTLOGIN              : 10006,
+		REQ_WECHATLOGIN: 10007, //微信登录
+		RES_WECHATLOGIN: 10008,
 
-		REQ_WECHATLOGIN             : 10007,    // 微信登录
-		RES_WECHATLOGIN             : 10008,
+		REQ_WECHATSESSIONLOGIN: 10009,//微信session登录
+		RES_WECHATSESSIONLOGIN: 10010,
 
-		REQ_WECHATSESSIONLOGIN      : 10009,    // 微信session登录
-		RES_WECHATSESSIONLOGIN      : 10010,
+		REQ_LOGINOUT: 10011, //退出登录
+		RES_LOGINOUT: 10012,
 
-		REQ_LOGINOUT                : 10011,    // 退出登录
-		RES_LOGINOUT                : 10012,
+		PUSH_RELOGIN: 10013, //被重复登录
 
-		PUSH_RELOGIN                : 10013,    // 被重复登录
-
-		REQ_USERCENTERINFO          : 10014,    // 获取玩家信息
-		RES_USERCENTERINFO          : 10015,
+		REQ_USERCENTERINFO: 10014, //获取玩家信息
+		RES_USERCENTERINFO: 10015,
 	}
 
 	public static XY_NAME = {

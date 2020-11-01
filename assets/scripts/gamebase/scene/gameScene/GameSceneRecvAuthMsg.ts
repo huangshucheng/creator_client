@@ -7,10 +7,10 @@ import Storage from '../../../framework/utils/Storage';
 import LSDefine from '../../../framework/config/LSDefine';
 import DialogManager from '../../../framework/manager/DialogManager';
 import EventDefine from '../../../framework/config/EventDefine';
-import LoginSendAuthMsg from '../loginScene/sendMsg/LoginSendAuthMsg';
+import SendAuthMsg from '../../sendMsg/SendAuthMsg';
 import Stype from '../../../framework/protocol/Stype';
 import AuthProto from '../../../framework/protocol/protofile/AuthProto';
-import LobbySendMsg from '../lobbyScene/sendMsg/LobbySendMsg';
+import SendLobbyMsg from '../../sendMsg/SendLobbyMsg';
 
 const {ccclass, property} = cc._decorator;
 
@@ -55,37 +55,37 @@ export default class GameSceneRecvAuthMsg extends UIController {
         if(loginType == LSDefine.LOGIN_TYPE_UNAME){
             let loginObj = Storage.get(LSDefine.USER_LOGIN_MSG)
             if (loginObj){
-                LoginSendAuthMsg.send_uname_login(loginObj.uname, loginObj.upwd);
+                SendAuthMsg.send_uname_login(loginObj.uname, loginObj.upwd);
             }
         }else if(loginType == LSDefine.LOGIN_TYPE_GUEST){
            let guestkey = Storage.get(LSDefine.USER_LOGIN_GUEST_KEY)
            if(guestkey){
-               LoginSendAuthMsg.send_guest_login(guestkey);
+               SendAuthMsg.send_guest_login(guestkey);
            }
         } else if (loginType == LSDefine.LOGIN_TYPE_WECHAT) {
             let wechatsessionkey = Storage.get(LSDefine.USER_LOGIN_WECHAT_SESSION);
             //重新用微信session登录
-            LoginSendAuthMsg.send_wechat_session_login(wechatsessionkey);
+            SendAuthMsg.send_wechat_session_login(wechatsessionkey);
         }
     }
 
     on_event_guest_login(body:any){
         if (body.status == Response.SUCCESS){
-            LobbySendMsg.send_login_lobby();
+            SendLobbyMsg.send_login_lobby();
             DialogManager.getInstance().show_weak_hint("游客重新登录成功!")
         }
     }
 
     on_event_uname_login(body:any){
         if (body.status == Response.SUCCESS){
-            LobbySendMsg.send_login_lobby();
+            SendLobbyMsg.send_login_lobby();
             DialogManager.getInstance().show_weak_hint("玩家重新登录成功!")
         }
     }
 
     on_event_wechat_session_login(body:any) {
         if (body.status == Response.SUCCESS) {
-            LobbySendMsg.send_login_lobby();
+            SendLobbyMsg.send_login_lobby();
         }
     }
 
